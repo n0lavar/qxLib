@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::details::assert_comparison&lt; left_t, right_t, operation_t &gt; Class Template Reference</title>
+<title>qxLib: qx::details::assert_comparison&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classqx_1_1details_1_1assert__comparison-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::details::assert_comparison&lt; left_t, right_t, operation_t &gt; Class Template Reference</div>  </div>
+<div class="title">qx::details::assert_comparison&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -80,25 +80,25 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a56573623d6f0dce2c972b97bbda12a9a"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#a56573623d6f0dce2c972b97bbda12a9a">assert_comparison</a> (left_t &amp;&amp;<a class="el" href="classqx_1_1details_1_1assert__comparison.html#abae30460ce6a2e3b241eb6f39e137737">left</a>, right_t &amp;&amp;<a class="el" href="classqx_1_1details_1_1assert__comparison.html#a96840aae6f97b885635ce8473c3f4b40">right</a>) noexcept(std::is_nothrow_constructible_v&lt; left_t, left_t &amp;&amp; &gt; &amp;&amp;std::is_nothrow_constructible_v&lt; right_t, right_t &amp;&amp; &gt;)</td></tr>
-<tr class="memdesc:a56573623d6f0dce2c972b97bbda12a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct comparison object from two operands.  <a href="classqx_1_1details_1_1assert__comparison.html#a56573623d6f0dce2c972b97bbda12a9a">More...</a><br /></td></tr>
-<tr class="separator:a56573623d6f0dce2c972b97bbda12a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0013ca786a1f905af4053f006b3e32f6"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#a0013ca786a1f905af4053f006b3e32f6">result</a> () const noexcept(noexcept(operation_t {}(<a class="el" href="classqx_1_1details_1_1assert__comparison.html#abae30460ce6a2e3b241eb6f39e137737">left</a>(), <a class="el" href="classqx_1_1details_1_1assert__comparison.html#a96840aae6f97b885635ce8473c3f4b40">right</a>())))</td></tr>
-<tr class="memdesc:a0013ca786a1f905af4053f006b3e32f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate comparison.  <a href="classqx_1_1details_1_1assert__comparison.html#a0013ca786a1f905af4053f006b3e32f6">More...</a><br /></td></tr>
-<tr class="separator:a0013ca786a1f905af4053f006b3e32f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcb7ca085170323597da52d5aff81e79"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#afcb7ca085170323597da52d5aff81e79">operator bool</a> () const noexcept(noexcept(<a class="el" href="classqx_1_1details_1_1assert__comparison.html#a0013ca786a1f905af4053f006b3e32f6">result</a>()))</td></tr>
-<tr class="memdesc:afcb7ca085170323597da52d5aff81e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert comparison object to bool.  <a href="classqx_1_1details_1_1assert__comparison.html#afcb7ca085170323597da52d5aff81e79">More...</a><br /></td></tr>
-<tr class="separator:afcb7ca085170323597da52d5aff81e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abae30460ce6a2e3b241eb6f39e137737"><td class="memItemLeft" align="right" valign="top">constexpr const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#abae30460ce6a2e3b241eb6f39e137737">left</a> () const noexcept</td></tr>
-<tr class="memdesc:abae30460ce6a2e3b241eb6f39e137737"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get left operand.  <a href="classqx_1_1details_1_1assert__comparison.html#abae30460ce6a2e3b241eb6f39e137737">More...</a><br /></td></tr>
-<tr class="separator:abae30460ce6a2e3b241eb6f39e137737"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96840aae6f97b885635ce8473c3f4b40"><td class="memItemLeft" align="right" valign="top">constexpr const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#a96840aae6f97b885635ce8473c3f4b40">right</a> () const noexcept</td></tr>
-<tr class="memdesc:a96840aae6f97b885635ce8473c3f4b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get right operand.  <a href="classqx_1_1details_1_1assert__comparison.html#a96840aae6f97b885635ce8473c3f4b40">More...</a><br /></td></tr>
-<tr class="separator:a96840aae6f97b885635ce8473c3f4b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd2ccc1189d4e98ccfc52cba6b85ddf9"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#afd2ccc1189d4e98ccfc52cba6b85ddf9">assert_comparison</a> (left_t &amp;&amp;<a class="el" href="classqx_1_1details_1_1assert__comparison.html#a0746433f4c472e740ac4607350635e02">left</a>, right_t &amp;&amp;<a class="el" href="classqx_1_1details_1_1assert__comparison.html#a2393a6533ad88d09372c8bce8d38f37d">right</a>) noexcept(std::is_nothrow_constructible_v&lt; left_t, left_t &amp;&amp; &gt; &amp;&amp;std::is_nothrow_constructible_v&lt; right_t, right_t &amp;&amp; &gt;)</td></tr>
+<tr class="memdesc:afd2ccc1189d4e98ccfc52cba6b85ddf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct comparison object from two operands.  <a href="classqx_1_1details_1_1assert__comparison.html#afd2ccc1189d4e98ccfc52cba6b85ddf9">More...</a><br /></td></tr>
+<tr class="separator:afd2ccc1189d4e98ccfc52cba6b85ddf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6f20b3d387a578f6d2e600c704e14a5"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#af6f20b3d387a578f6d2e600c704e14a5">result</a> () const noexcept(noexcept(operation_t {}(<a class="el" href="classqx_1_1details_1_1assert__comparison.html#a0746433f4c472e740ac4607350635e02">left</a>(), <a class="el" href="classqx_1_1details_1_1assert__comparison.html#a2393a6533ad88d09372c8bce8d38f37d">right</a>())))</td></tr>
+<tr class="memdesc:af6f20b3d387a578f6d2e600c704e14a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate comparison.  <a href="classqx_1_1details_1_1assert__comparison.html#af6f20b3d387a578f6d2e600c704e14a5">More...</a><br /></td></tr>
+<tr class="separator:af6f20b3d387a578f6d2e600c704e14a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99baebbb0227be1d3b3fb834a98e83d1"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#a99baebbb0227be1d3b3fb834a98e83d1">operator bool</a> () const noexcept(noexcept(<a class="el" href="classqx_1_1details_1_1assert__comparison.html#af6f20b3d387a578f6d2e600c704e14a5">result</a>()))</td></tr>
+<tr class="memdesc:a99baebbb0227be1d3b3fb834a98e83d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert comparison object to bool.  <a href="classqx_1_1details_1_1assert__comparison.html#a99baebbb0227be1d3b3fb834a98e83d1">More...</a><br /></td></tr>
+<tr class="separator:a99baebbb0227be1d3b3fb834a98e83d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0746433f4c472e740ac4607350635e02"><td class="memItemLeft" align="right" valign="top">constexpr const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#a0746433f4c472e740ac4607350635e02">left</a> () const noexcept</td></tr>
+<tr class="memdesc:a0746433f4c472e740ac4607350635e02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get left operand.  <a href="classqx_1_1details_1_1assert__comparison.html#a0746433f4c472e740ac4607350635e02">More...</a><br /></td></tr>
+<tr class="separator:a0746433f4c472e740ac4607350635e02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2393a6533ad88d09372c8bce8d38f37d"><td class="memItemLeft" align="right" valign="top">constexpr const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html#a2393a6533ad88d09372c8bce8d38f37d">right</a> () const noexcept</td></tr>
+<tr class="memdesc:a2393a6533ad88d09372c8bce8d38f37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get right operand.  <a href="classqx_1_1details_1_1assert__comparison.html#a2393a6533ad88d09372c8bce8d38f37d">More...</a><br /></td></tr>
+<tr class="separator:a2393a6533ad88d09372c8bce8d38f37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;class left_t, class right_t, class operation_t&gt;<br />
-class qx::details::assert_comparison&lt; left_t, right_t, operation_t &gt;</h3>
+<div class="textblock"><h3>template&lt;class left_t, class right_t, class operation_t, bool bLeftIsLvalue, bool bRightIsLvalue&gt;<br />
+class qx::details::assert_comparison&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt;</h3>
 
 <p>Lightweight assertion comparison object that preserves compared operand values for diagnostics. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -106,27 +106,29 @@ class qx::details::assert_comparison&lt; left_t, right_t, operation_t &gt;</h3>
     <tr><td class="paramname">left_t</td><td>- left operand type </td></tr>
     <tr><td class="paramname">right_t</td><td>- right operand type </td></tr>
     <tr><td class="paramname">operation_t</td><td>- operation type, must be a specialization of std binary function (e.g. std::equal_to&lt;&gt;, std::less&lt;&gt;, etc.) </td></tr>
+    <tr><td class="paramname">bLeftIsLvalue</td><td>- whether the left operand was passed as an lvalue </td></tr>
+    <tr><td class="paramname">bRightIsLvalue</td><td>- whether the right operand was passed as an lvalue </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>19.05.2026 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8h_source.html#l00038">38</a> of file <a class="el" href="assert__compare_8h_source.html">assert_compare.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8h_source.html#l00040">40</a> of file <a class="el" href="assert__compare_8h_source.html">assert_compare.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a56573623d6f0dce2c972b97bbda12a9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56573623d6f0dce2c972b97bbda12a9a">&#9670;&nbsp;</a></span>assert_comparison()</h2>
+<a id="afd2ccc1189d4e98ccfc52cba6b85ddf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2ccc1189d4e98ccfc52cba6b85ddf9">&#9670;&nbsp;</a></span>assert_comparison()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class left_t , class right_t , class operation_t &gt; </div>
+template&lt;class left_t , class right_t , class operation_t , bool bLeftIsLvalue, bool bRightIsLvalue&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t &gt;::<a class="el" href="classqx_1_1details_1_1assert__comparison.html">assert_comparison</a> </td>
+          <td class="memname">constexpr <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt;::<a class="el" href="classqx_1_1details_1_1assert__comparison.html">assert_comparison</a> </td>
           <td>(</td>
           <td class="paramtype">left_t &amp;&amp;&#160;</td>
           <td class="paramname"><em>left</em>, </td>
@@ -159,24 +161,24 @@ template&lt;class left_t , class right_t , class operation_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00381">381</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00434">434</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="abae30460ce6a2e3b241eb6f39e137737"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abae30460ce6a2e3b241eb6f39e137737">&#9670;&nbsp;</a></span>left()</h2>
+<a id="a0746433f4c472e740ac4607350635e02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0746433f4c472e740ac4607350635e02">&#9670;&nbsp;</a></span>left()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class left_t , class right_t , class operation_t &gt; </div>
+template&lt;class left_t , class right_t , class operation_t , bool bLeftIsLvalue, bool bRightIsLvalue&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const auto &amp; <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t &gt;::left</td>
+          <td class="memname">constexpr const auto &amp; <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt;::left</td>
         </tr>
       </table>
   </td>
@@ -194,23 +196,23 @@ template&lt;class left_t , class right_t , class operation_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00402">402</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00457">457</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
-<a id="afcb7ca085170323597da52d5aff81e79"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afcb7ca085170323597da52d5aff81e79">&#9670;&nbsp;</a></span>operator bool()</h2>
+<a id="a99baebbb0227be1d3b3fb834a98e83d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99baebbb0227be1d3b3fb834a98e83d1">&#9670;&nbsp;</a></span>operator bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class left_t , class right_t , class operation_t &gt; </div>
+template&lt;class left_t , class right_t , class operation_t , bool bLeftIsLvalue, bool bRightIsLvalue&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t &gt;::operator bool</td>
+          <td class="memname">constexpr <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt;::operator bool</td>
         </tr>
       </table>
   </td>
@@ -228,23 +230,23 @@ template&lt;class left_t , class right_t , class operation_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00396">396</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00450">450</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
-<a id="a0013ca786a1f905af4053f006b3e32f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0013ca786a1f905af4053f006b3e32f6">&#9670;&nbsp;</a></span>result()</h2>
+<a id="af6f20b3d387a578f6d2e600c704e14a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6f20b3d387a578f6d2e600c704e14a5">&#9670;&nbsp;</a></span>result()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class left_t , class right_t , class operation_t &gt; </div>
+template&lt;class left_t , class right_t , class operation_t , bool bLeftIsLvalue, bool bRightIsLvalue&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t &gt;::result</td>
+          <td class="memname">constexpr bool <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt;::result</td>
         </tr>
       </table>
   </td>
@@ -262,23 +264,23 @@ template&lt;class left_t , class right_t , class operation_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00389">389</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00443">443</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
-<a id="a96840aae6f97b885635ce8473c3f4b40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96840aae6f97b885635ce8473c3f4b40">&#9670;&nbsp;</a></span>right()</h2>
+<a id="a2393a6533ad88d09372c8bce8d38f37d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2393a6533ad88d09372c8bce8d38f37d">&#9670;&nbsp;</a></span>right()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;class left_t , class right_t , class operation_t &gt; </div>
+template&lt;class left_t , class right_t , class operation_t , bool bLeftIsLvalue, bool bRightIsLvalue&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const auto &amp; <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t &gt;::right</td>
+          <td class="memname">constexpr const auto &amp; <a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison</a>&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt;::right</td>
         </tr>
       </table>
   </td>
@@ -296,7 +298,7 @@ template&lt;class left_t , class right_t , class operation_t &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00408">408</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00464">464</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>

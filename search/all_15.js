@@ -1,7 +1,7 @@
 var searchData=
 [
   ['validator_891',['validator',['../structqx_1_1predicates_1_1validator.html',1,'qx::predicates']]],
-  ['validator_3c_20details_3a_3aassert_5fcomparison_3c_20left_5ft_2c_20right_5ft_2c_20operation_5ft_20_3e_20_3e_892',['validator&lt; details::assert_comparison&lt; left_t, right_t, operation_t &gt; &gt;',['../structqx_1_1predicates_1_1validator_3_01details_1_1assert__comparison_3_01left__t_00_01right__t_00_01operation__t_01_4_01_4.html',1,'qx::predicates']]],
+  ['validator_3c_20details_3a_3aassert_5fcomparison_3c_20left_5ft_2c_20right_5ft_2c_20operation_5ft_2c_20bleftislvalue_2c_20brightislvalue_20_3e_20_3e_892',['validator&lt; details::assert_comparison&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt; &gt;',['../structqx_1_1predicates_1_1validator_3_01details_1_1assert__comparison_3_01left__t_00_01right__t_984c2f4bcbdb40b17b27d65e3e010d30.html',1,'qx::predicates']]],
   ['vector2d_893',['vector2d',['../classqx_1_1vector2d.html',1,'qx::vector2d&lt; T &gt;'],['../classqx_1_1vector2d.html#a0b04f36ec1744b87308410f06747c034',1,'qx::vector2d::vector2d(size_type rows, size_type cols, const_pointer pData=nullptr)'],['../classqx_1_1vector2d.html#ae936ffc5d8451139b7d717b6a1a39991',1,'qx::vector2d::vector2d(size_type rows, size_type cols, const_reference data)']]],
   ['vector2d_2eh_894',['vector2d.h',['../vector2d_8h.html',1,'']]],
   ['vector2d_2einl_895',['vector2d.inl',['../vector2d_8inl.html',1,'']]],

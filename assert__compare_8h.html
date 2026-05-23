@@ -84,38 +84,38 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison&lt; left_t, right_t, operation_t &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1assert__comparison.html">qx::details::assert_comparison&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight assertion comparison object that preserves compared operand values for diagnostics.  <a href="classqx_1_1details_1_1assert__comparison.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1predicates_1_1validator_3_01details_1_1assert__comparison_3_01left__t_00_01right__t_00_01operation__t_01_4_01_4.html">qx::predicates::validator&lt; details::assert_comparison&lt; left_t, right_t, operation_t &gt; &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1predicates_1_1validator_3_01details_1_1assert__comparison_3_01left__t_00_01right__t_984c2f4bcbdb40b17b27d65e3e010d30.html">qx::predicates::validator&lt; details::assert_comparison&lt; left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a153c6bd53390f031f1187eb61905240f"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
-<tr class="memitem:a153c6bd53390f031f1187eb61905240f"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a153c6bd53390f031f1187eb61905240f">qx::assert_eq</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::equal_to&lt;&gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
-<tr class="memdesc:a153c6bd53390f031f1187eb61905240f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two values for equality and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a153c6bd53390f031f1187eb61905240f">More...</a><br /></td></tr>
-<tr class="separator:a153c6bd53390f031f1187eb61905240f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e50eca56e12e8783e87329e43491ab6"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
-<tr class="memitem:a6e50eca56e12e8783e87329e43491ab6"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a6e50eca56e12e8783e87329e43491ab6">qx::assert_ne</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::not_equal_to&lt;&gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
-<tr class="memdesc:a6e50eca56e12e8783e87329e43491ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two values for inequality and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a6e50eca56e12e8783e87329e43491ab6">More...</a><br /></td></tr>
-<tr class="separator:a6e50eca56e12e8783e87329e43491ab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad707817c247e055b806bed5f6cdb3487"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
-<tr class="memitem:ad707817c247e055b806bed5f6cdb3487"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#ad707817c247e055b806bed5f6cdb3487">qx::assert_lt</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::less&lt;&gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
-<tr class="memdesc:ad707817c247e055b806bed5f6cdb3487"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare whether left value is less than right value and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#ad707817c247e055b806bed5f6cdb3487">More...</a><br /></td></tr>
-<tr class="separator:ad707817c247e055b806bed5f6cdb3487"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabaa5236f0799122f7f1d7528fa05dd9"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
-<tr class="memitem:aabaa5236f0799122f7f1d7528fa05dd9"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#aabaa5236f0799122f7f1d7528fa05dd9">qx::assert_le</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::less_equal&lt;&gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
-<tr class="memdesc:aabaa5236f0799122f7f1d7528fa05dd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare whether left value is less than or equal to right value and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#aabaa5236f0799122f7f1d7528fa05dd9">More...</a><br /></td></tr>
-<tr class="separator:aabaa5236f0799122f7f1d7528fa05dd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03d625e8a549f73ea0d29ffc5249da67"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
-<tr class="memitem:a03d625e8a549f73ea0d29ffc5249da67"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a03d625e8a549f73ea0d29ffc5249da67">qx::assert_gt</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::greater&lt;&gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
-<tr class="memdesc:a03d625e8a549f73ea0d29ffc5249da67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare whether left value is greater than right value and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a03d625e8a549f73ea0d29ffc5249da67">More...</a><br /></td></tr>
-<tr class="separator:a03d625e8a549f73ea0d29ffc5249da67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeae1990cf6ac35ca4115f01bf58bbe58"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
-<tr class="memitem:aeae1990cf6ac35ca4115f01bf58bbe58"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#aeae1990cf6ac35ca4115f01bf58bbe58">qx::assert_ge</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::greater_equal&lt;&gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
-<tr class="memdesc:aeae1990cf6ac35ca4115f01bf58bbe58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare whether left value is greater than or equal to right value and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#aeae1990cf6ac35ca4115f01bf58bbe58">More...</a><br /></td></tr>
-<tr class="separator:aeae1990cf6ac35ca4115f01bf58bbe58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8560301fe8856d6a5e3b4704dcd58e7f"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
+<tr class="memitem:a8560301fe8856d6a5e3b4704dcd58e7f"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a8560301fe8856d6a5e3b4704dcd58e7f">qx::assert_eq</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::equal_to&lt;&gt;, std::is_lvalue_reference_v&lt; left_t &gt;, std::is_lvalue_reference_v&lt; right_t &gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
+<tr class="memdesc:a8560301fe8856d6a5e3b4704dcd58e7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two values for equality and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a8560301fe8856d6a5e3b4704dcd58e7f">More...</a><br /></td></tr>
+<tr class="separator:a8560301fe8856d6a5e3b4704dcd58e7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78fc09d42189ca85164eca3a855f492a"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
+<tr class="memitem:a78fc09d42189ca85164eca3a855f492a"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a78fc09d42189ca85164eca3a855f492a">qx::assert_ne</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::not_equal_to&lt;&gt;, std::is_lvalue_reference_v&lt; left_t &gt;, std::is_lvalue_reference_v&lt; right_t &gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
+<tr class="memdesc:a78fc09d42189ca85164eca3a855f492a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare two values for inequality and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a78fc09d42189ca85164eca3a855f492a">More...</a><br /></td></tr>
+<tr class="separator:a78fc09d42189ca85164eca3a855f492a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a657827b341c800ef6c0d5f07b9e0a24c"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
+<tr class="memitem:a657827b341c800ef6c0d5f07b9e0a24c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a657827b341c800ef6c0d5f07b9e0a24c">qx::assert_lt</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::less&lt;&gt;, std::is_lvalue_reference_v&lt; left_t &gt;, std::is_lvalue_reference_v&lt; right_t &gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
+<tr class="memdesc:a657827b341c800ef6c0d5f07b9e0a24c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare whether left value is less than right value and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a657827b341c800ef6c0d5f07b9e0a24c">More...</a><br /></td></tr>
+<tr class="separator:a657827b341c800ef6c0d5f07b9e0a24c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a603333ca26b2bed881d6e9232b6afc4f"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
+<tr class="memitem:a603333ca26b2bed881d6e9232b6afc4f"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a603333ca26b2bed881d6e9232b6afc4f">qx::assert_le</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::less_equal&lt;&gt;, std::is_lvalue_reference_v&lt; left_t &gt;, std::is_lvalue_reference_v&lt; right_t &gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
+<tr class="memdesc:a603333ca26b2bed881d6e9232b6afc4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare whether left value is less than or equal to right value and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a603333ca26b2bed881d6e9232b6afc4f">More...</a><br /></td></tr>
+<tr class="separator:a603333ca26b2bed881d6e9232b6afc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a640d80ebbb7c76fc5a7cc32c6a0c366c"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
+<tr class="memitem:a640d80ebbb7c76fc5a7cc32c6a0c366c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a640d80ebbb7c76fc5a7cc32c6a0c366c">qx::assert_gt</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::greater&lt;&gt;, std::is_lvalue_reference_v&lt; left_t &gt;, std::is_lvalue_reference_v&lt; right_t &gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
+<tr class="memdesc:a640d80ebbb7c76fc5a7cc32c6a0c366c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare whether left value is greater than right value and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a640d80ebbb7c76fc5a7cc32c6a0c366c">More...</a><br /></td></tr>
+<tr class="separator:a640d80ebbb7c76fc5a7cc32c6a0c366c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08b7ba262f63a38864096a7dbcb54742"><td class="memTemplParams" colspan="2">template&lt;class left_t , class right_t &gt; </td></tr>
+<tr class="memitem:a08b7ba262f63a38864096a7dbcb54742"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="assert__compare_8h.html#a08b7ba262f63a38864096a7dbcb54742">qx::assert_ge</a> (left_t &amp;&amp;left, right_t &amp;&amp;right) noexcept(noexcept(details::assert_comparison&lt; left_t, right_t, std::greater_equal&lt;&gt;, std::is_lvalue_reference_v&lt; left_t &gt;, std::is_lvalue_reference_v&lt; right_t &gt;&gt;(std::forward&lt; left_t &gt;(left), std::forward&lt; right_t &gt;(right))))</td></tr>
+<tr class="memdesc:a08b7ba262f63a38864096a7dbcb54742"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare whether left value is greater than or equal to right value and preserve values for assertion diagnostics.  <a href="assert__compare_8h.html#a08b7ba262f63a38864096a7dbcb54742">More...</a><br /></td></tr>
+<tr class="separator:a08b7ba262f63a38864096a7dbcb54742"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -124,8 +124,8 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="assert__compare_8h_source.html">assert_compare.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a153c6bd53390f031f1187eb61905240f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a153c6bd53390f031f1187eb61905240f">&#9670;&nbsp;</a></span>assert_eq()</h2>
+<a id="a8560301fe8856d6a5e3b4704dcd58e7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8560301fe8856d6a5e3b4704dcd58e7f">&#9670;&nbsp;</a></span>assert_eq()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,12 +177,12 @@ template&lt;class left_t , class right_t &gt; </div>
 <div class="fragment"><div class="line"><a class="code" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(qx::assert_eq(nValue, nOther)); <span class="comment">// &quot;nValue [41] == nOther [42]&quot;</span></div>
 <div class="ttc" id="aasserts_8h_html_a72dff4b1cddb7b4567611c9ca21fe012"><div class="ttname"><a href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a></div><div class="ttdeci">#define QX_EXPECT(condition,...)</div><div class="ttdoc">Verifies that the condition is true.</div><div class="ttdef"><b>Definition:</b> <a href="asserts_8h_source.html#l00099">asserts.h:99</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00423">423</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00482">482</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
-<a id="aeae1990cf6ac35ca4115f01bf58bbe58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeae1990cf6ac35ca4115f01bf58bbe58">&#9670;&nbsp;</a></span>assert_ge()</h2>
+<a id="a08b7ba262f63a38864096a7dbcb54742"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08b7ba262f63a38864096a7dbcb54742">&#9670;&nbsp;</a></span>assert_ge()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,12 +233,12 @@ template&lt;class left_t , class right_t &gt; </div>
 </dl>
 <div class="fragment"><div class="line"><a class="code" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(qx::assert_ge(nValue, nOther)); <span class="comment">// &quot;nValue [41] &gt;= nOther [42]&quot;</span></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00476">476</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00567">567</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
-<a id="a03d625e8a549f73ea0d29ffc5249da67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a03d625e8a549f73ea0d29ffc5249da67">&#9670;&nbsp;</a></span>assert_gt()</h2>
+<a id="a640d80ebbb7c76fc5a7cc32c6a0c366c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a640d80ebbb7c76fc5a7cc32c6a0c366c">&#9670;&nbsp;</a></span>assert_gt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -289,12 +289,12 @@ template&lt;class left_t , class right_t &gt; </div>
 </dl>
 <div class="fragment"><div class="line"><a class="code" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(qx::assert_gt(nValue, nOther)); <span class="comment">// &quot;nValue [41] &gt; nOther [42]&quot;</span></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00465">465</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00550">550</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
-<a id="aabaa5236f0799122f7f1d7528fa05dd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabaa5236f0799122f7f1d7528fa05dd9">&#9670;&nbsp;</a></span>assert_le()</h2>
+<a id="a603333ca26b2bed881d6e9232b6afc4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a603333ca26b2bed881d6e9232b6afc4f">&#9670;&nbsp;</a></span>assert_le()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -345,12 +345,12 @@ template&lt;class left_t , class right_t &gt; </div>
 </dl>
 <div class="fragment"><div class="line"><a class="code" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(qx::assert_le(nOther, nValue)); <span class="comment">// &quot;nOther [42] &lt;= nValue [41]&quot;</span></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00454">454</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00533">533</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
-<a id="ad707817c247e055b806bed5f6cdb3487"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad707817c247e055b806bed5f6cdb3487">&#9670;&nbsp;</a></span>assert_lt()</h2>
+<a id="a657827b341c800ef6c0d5f07b9e0a24c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a657827b341c800ef6c0d5f07b9e0a24c">&#9670;&nbsp;</a></span>assert_lt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -401,12 +401,12 @@ template&lt;class left_t , class right_t &gt; </div>
 </dl>
 <div class="fragment"><div class="line"><a class="code" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(qx::assert_lt(nOther, nValue)); <span class="comment">// &quot;nOther [42] &lt; nValue [41]&quot;</span></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00445">445</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00516">516</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
-<a id="a6e50eca56e12e8783e87329e43491ab6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e50eca56e12e8783e87329e43491ab6">&#9670;&nbsp;</a></span>assert_ne()</h2>
+<a id="a78fc09d42189ca85164eca3a855f492a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78fc09d42189ca85164eca3a855f492a">&#9670;&nbsp;</a></span>assert_ne()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -457,7 +457,7 @@ template&lt;class left_t , class right_t &gt; </div>
 </dl>
 <div class="fragment"><div class="line"><a class="code" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(qx::assert_ne(nValue, nSame); <span class="comment">// &quot;nValue [41] != nSame [41]&quot;</span></div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00434">434</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="assert__compare_8inl_source.html#l00499">499</a> of file <a class="el" href="assert__compare_8inl_source.html">assert_compare.inl</a>.</p>
 
 </div>
 </div>
