@@ -704,3 +704,82 @@ TEST_F(assert_compare_tests_fixture, std_string)
     EXPECT_FALSE(QX_EXPECT(qx::assert_lt(sOther, sValue)));
     expect_condition(QXT("sOther [c] < sValue [b]"));
 }
+
+enum class assert_compare_state
+{
+    bounds_initialized,
+    input_geometry_loaded
+};
+
+template<class char_t>
+struct QX_FMT_NS::formatter<assert_compare_state, char_t> : qx::basic_formatter<char_t>
+{
+    template<class context_t>
+    constexpr auto format(assert_compare_state eState, context_t& ctx) const
+    {
+        switch (eState)
+        {
+        case assert_compare_state::bounds_initialized:
+            return QX_FMT_NS::format_to(
+                ctx.out(),
+                QX_STR_PREFIX(char_t, "{}"),
+                QX_STR_PREFIX(char_t, "assert_compare_state::bounds_initialized"));
+
+        case assert_compare_state::input_geometry_loaded:
+            return QX_FMT_NS::format_to(
+                ctx.out(),
+                QX_STR_PREFIX(char_t, "{}"),
+                QX_STR_PREFIX(char_t, "assert_compare_state::input_geometry_loaded"));
+        }
+
+        return ctx.out();
+    }
+};
+
+constexpr assert_compare_state assert_compare_state_value() noexcept
+{
+    return assert_compare_state::bounds_initialized;
+}
+
+TEST_F(assert_compare_tests_fixture, enum_lvalue_rvalue)
+{
+    constexpr assert_compare_state eState = assert_compare_state::bounds_initialized;
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(eState, assert_compare_state::input_geometry_loaded)));
+    expect_condition(
+        QXT("eState [assert_compare_state::bounds_initialized] >= assert_compare_state::input_geometry_loaded"));
+}
+
+TEST_F(assert_compare_tests_fixture, enum_lvalue_lvalue)
+{
+    constexpr assert_compare_state eState = assert_compare_state::bounds_initialized;
+    constexpr assert_compare_state eOther = assert_compare_state::input_geometry_loaded;
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(eState, eOther)));
+    expect_condition(QXT(
+        "eState [assert_compare_state::bounds_initialized] >= eOther [assert_compare_state::input_geometry_loaded]"));
+}
+
+TEST_F(assert_compare_tests_fixture, enum_rvalue_lvalue)
+{
+    constexpr assert_compare_state eState = assert_compare_state::input_geometry_loaded;
+
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(assert_compare_state::bounds_initialized, eState)));
+    expect_condition(
+        QXT("assert_compare_state::bounds_initialized >= eState [assert_compare_state::input_geometry_loaded]"));
+}
+
+TEST_F(assert_compare_tests_fixture, enum_rvalue_rvalue)
+{
+    EXPECT_FALSE(QX_EXPECT(
+        qx::assert_ge(assert_compare_state::bounds_initialized, assert_compare_state::input_geometry_loaded)));
+    expect_condition(QXT("assert_compare_state::bounds_initialized >= assert_compare_state::input_geometry_loaded"));
+}
+
+TEST_F(assert_compare_tests_fixture, enum_rvalue_expression)
+{
+    EXPECT_FALSE(QX_EXPECT(qx::assert_ge(assert_compare_state_value(), assert_compare_state::input_geometry_loaded)));
+    expect_condition(
+        QXT("assert_compare_state_value() [assert_compare_state::bounds_initialized] >= "
+            "assert_compare_state::input_geometry_loaded"));
+}

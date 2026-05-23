@@ -100,6 +100,11 @@ constexpr bool is_char(char_type ch) noexcept
            || ch >= QXT('A') && ch <= QXT('Z');
 }
 
+constexpr bool is_identifier_first_char(char_type ch) noexcept
+{
+    return ch == QXT('_') || ch >= QXT('a') && ch <= QXT('z') || ch >= QXT('A') && ch <= QXT('Z');
+}
+
 constexpr bool is_literal(string_view svExpression) noexcept
 {
     if (svExpression.empty())
@@ -159,9 +164,58 @@ constexpr bool is_temporary_value(string_view svExpression) noexcept
     return bQualified && nPos < svExpression.size() && svExpression[nPos] == QXT('(');
 }
 
+constexpr bool is_qualified_value(string_view svExpression) noexcept
+{
+    size_t nPos = 0;
+    if (svExpression.size() > 1 && svExpression[0] == QXT(':') && svExpression[1] == QXT(':'))
+        nPos = 2;
+
+    bool bQualified = nPos != 0;
+    while (nPos < svExpression.size())
+    {
+        if (!is_identifier_first_char(svExpression[nPos]))
+            return false;
+
+        while (nPos < svExpression.size() && is_char(svExpression[nPos]))
+            ++nPos;
+
+        if (nPos < svExpression.size() && svExpression[nPos] == QXT('<'))
+        {
+            i32 nAngleDepth = 1;
+            ++nPos;
+
+            while (nPos < svExpression.size() && nAngleDepth > 0)
+            {
+                if (svExpression[nPos] == QXT('<'))
+                    ++nAngleDepth;
+                else if (svExpression[nPos] == QXT('>'))
+                    --nAngleDepth;
+
+                ++nPos;
+            }
+
+            if (nAngleDepth != 0)
+                return false;
+        }
+
+        if (nPos == svExpression.size())
+            return bQualified;
+
+        if (nPos + 1 >= svExpression.size() || svExpression[nPos] != QXT(':') || svExpression[nPos + 1] != QXT(':'))
+        {
+            return false;
+        }
+
+        bQualified = true;
+        nPos += 2;
+    }
+
+    return false;
+}
+
 constexpr bool should_show_assert_expression_for_rvalue(string_view svExpression) noexcept
 {
-    return !is_literal(svExpression) && !is_temporary_value(svExpression);
+    return !is_literal(svExpression) && !is_temporary_value(svExpression) && !is_qualified_value(svExpression);
 }
 
 constexpr bool is_identifier_open_angle_char(char_type ch) noexcept
@@ -343,16 +397,6 @@ inline string make_assert_operand_string(string_view svExpression, const T& valu
     }
     else
     {
-        if (should_show_assert_expression_for_rvalue(svExpression))
-        {
-            string sResult;
-            append_assert_expression(sResult, svExpression);
-            sResult.append(QXT(" ["));
-            sResult.append(assert_value_to_string(value));
-            sResult.append(QXT("]"));
-            return sResult;
-        }
-
         return assert_value_to_string(value);
     }
 }
@@ -363,8 +407,15 @@ constexpr string_view get_assert_condition_string(const condition_t&) noexcept
     return svCondition.view();
 }
 
-template<string_literal svCondition, class left_t, class right_t, class operation_t>
-inline string get_assert_condition_string(const assert_comparison<left_t, right_t, operation_t>& condition) noexcept
+template<
+    string_literal svCondition,
+    class left_t,
+    class right_t,
+    class operation_t,
+    bool bLeftIsLvalue,
+    bool bRightIsLvalue>
+inline string get_assert_condition_string(
+    const assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>& condition) noexcept
 {
     constexpr auto split             = split_assert_arguments(svCondition.view());
     constexpr auto svLeftExpression  = split.first;
@@ -372,115 +423,161 @@ inline string get_assert_condition_string(const assert_comparison<left_t, right_
 
     return qx::format(
         QXT("{} {} {}"),
-        make_assert_operand_string<std::is_lvalue_reference_v<left_t>>(svLeftExpression, condition.left()),
+        make_assert_operand_string < bLeftIsLvalue
+            || should_show_assert_expression_for_rvalue(svLeftExpression) > (svLeftExpression, condition.left()),
         assert_operation_symbol<operation_t>::symbol(),
-        make_assert_operand_string<std::is_lvalue_reference_v<right_t>>(svRightExpression, condition.right()));
+        make_assert_operand_string < bRightIsLvalue
+            || should_show_assert_expression_for_rvalue(svRightExpression) > (svRightExpression, condition.right()));
 }
 
-template<class left_t, class right_t, class operation_t>
-constexpr assert_comparison<left_t, right_t, operation_t>::assert_comparison(left_t&& left, right_t&& right) noexcept(
-    std::is_nothrow_constructible_v<left_t, left_t&&> && std::is_nothrow_constructible_v<right_t, right_t&&>)
+template<class left_t, class right_t, class operation_t, bool bLeftIsLvalue, bool bRightIsLvalue>
+constexpr assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>::
+    assert_comparison(left_t&& left, right_t&& right) noexcept(
+        std::is_nothrow_constructible_v<left_t, left_t&&> && std::is_nothrow_constructible_v<right_t, right_t&&>)
     : m_Left(std::forward<left_t>(left))
     , m_Right(std::forward<right_t>(right))
 {
 }
 
-template<class left_t, class right_t, class operation_t>
-constexpr bool assert_comparison<left_t, right_t, operation_t>::result() const
+template<class left_t, class right_t, class operation_t, bool bLeftIsLvalue, bool bRightIsLvalue>
+constexpr bool assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>::result() const
     noexcept(noexcept(operation_t {}(left(), right())))
 {
     return operation_t {}(left(), right());
 }
 
-template<class left_t, class right_t, class operation_t>
-constexpr assert_comparison<left_t, right_t, operation_t>::operator bool() const noexcept(noexcept(result()))
+template<class left_t, class right_t, class operation_t, bool bLeftIsLvalue, bool bRightIsLvalue>
+constexpr assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>::operator bool() const
+    noexcept(noexcept(result()))
 {
     return result();
 }
 
-template<class left_t, class right_t, class operation_t>
-constexpr const auto& assert_comparison<left_t, right_t, operation_t>::left() const noexcept
+template<class left_t, class right_t, class operation_t, bool bLeftIsLvalue, bool bRightIsLvalue>
+constexpr const auto& assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>::left()
+    const noexcept
 {
     return m_Left;
 }
 
-template<class left_t, class right_t, class operation_t>
-constexpr const auto& assert_comparison<left_t, right_t, operation_t>::right() const noexcept
+template<class left_t, class right_t, class operation_t, bool bLeftIsLvalue, bool bRightIsLvalue>
+constexpr const auto& assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>::right()
+    const noexcept
 {
     return m_Right;
 }
 
 } // namespace details
 
-template<class left_t, class right_t, class operation_t>
-constexpr bool predicates::validator<details::assert_comparison<left_t, right_t, operation_t>>::is_valid(
-    const details::assert_comparison<left_t, right_t, operation_t>& value) noexcept(noexcept(value.result()))
+template<class left_t, class right_t, class operation_t, bool bLeftIsLvalue, bool bRightIsLvalue>
+constexpr bool predicates::
+    validator<details::assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>>::is_valid(
+        const details::assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>&
+            value) noexcept(noexcept(value.result()))
 {
     return value.result();
 }
 
 template<class left_t, class right_t>
 constexpr auto assert_eq(left_t&& left, right_t&& right) noexcept(
-    noexcept(details::assert_comparison<left_t, right_t, std::equal_to<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))))
+    noexcept(details::assert_comparison<
+             left_t,
+             right_t,
+             std::equal_to<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))))
 {
-    return details::assert_comparison<left_t, right_t, std::equal_to<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
+    return details::assert_comparison<
+        left_t,
+        right_t,
+        std::equal_to<>,
+        std::is_lvalue_reference_v<left_t>,
+        std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right));
 }
 
 template<class left_t, class right_t>
 constexpr auto assert_ne(left_t&& left, right_t&& right) noexcept(
-    noexcept(details::assert_comparison<left_t, right_t, std::not_equal_to<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))))
+    noexcept(details::assert_comparison<
+             left_t,
+             right_t,
+             std::not_equal_to<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))))
 {
-    return details::assert_comparison<left_t, right_t, std::not_equal_to<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
+    return details::assert_comparison<
+        left_t,
+        right_t,
+        std::not_equal_to<>,
+        std::is_lvalue_reference_v<left_t>,
+        std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right));
 }
 
 template<class left_t, class right_t>
-constexpr auto assert_lt(left_t&& left, right_t&& right) noexcept(noexcept(
-    details::assert_comparison<left_t, right_t, std::less<>>(std::forward<left_t>(left), std::forward<right_t>(right))))
+constexpr auto assert_lt(left_t&& left, right_t&& right) noexcept(
+    noexcept(details::assert_comparison<
+             left_t,
+             right_t,
+             std::less<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))))
 {
-    return details::assert_comparison<left_t, right_t, std::less<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
+    return details::assert_comparison<
+        left_t,
+        right_t,
+        std::less<>,
+        std::is_lvalue_reference_v<left_t>,
+        std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right));
 }
 
 template<class left_t, class right_t>
 constexpr auto assert_le(left_t&& left, right_t&& right) noexcept(
-    noexcept(details::assert_comparison<left_t, right_t, std::less_equal<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))))
+    noexcept(details::assert_comparison<
+             left_t,
+             right_t,
+             std::less_equal<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))))
 {
-    return details::assert_comparison<left_t, right_t, std::less_equal<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
+    return details::assert_comparison<
+        left_t,
+        right_t,
+        std::less_equal<>,
+        std::is_lvalue_reference_v<left_t>,
+        std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right));
 }
 
 template<class left_t, class right_t>
 constexpr auto assert_gt(left_t&& left, right_t&& right) noexcept(
-    noexcept(details::assert_comparison<left_t, right_t, std::greater<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))))
+    noexcept(details::assert_comparison<
+             left_t,
+             right_t,
+             std::greater<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))))
 {
-    return details::assert_comparison<left_t, right_t, std::greater<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
+    return details::assert_comparison<
+        left_t,
+        right_t,
+        std::greater<>,
+        std::is_lvalue_reference_v<left_t>,
+        std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right));
 }
 
 template<class left_t, class right_t>
 constexpr auto assert_ge(left_t&& left, right_t&& right) noexcept(
-    noexcept(details::assert_comparison<left_t, right_t, std::greater_equal<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))))
+    noexcept(details::assert_comparison<
+             left_t,
+             right_t,
+             std::greater_equal<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))))
 {
-    return details::assert_comparison<left_t, right_t, std::greater_equal<>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right));
+    return details::assert_comparison<
+        left_t,
+        right_t,
+        std::greater_equal<>,
+        std::is_lvalue_reference_v<left_t>,
+        std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right));
 }
 
 } // namespace qx
