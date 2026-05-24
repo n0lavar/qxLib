@@ -10,6 +10,8 @@
 
 #include <qx/memory/smart_ptr_ref_adapter.h>
 
+#include <concepts>
+
 namespace qx
 {
 
@@ -73,6 +75,10 @@ public:
 
     smart_ptr_ref_adapter(smart_ptr_ref_adapter&&) noexcept            = default;
     smart_ptr_ref_adapter& operator=(smart_ptr_ref_adapter&&) noexcept = default;
+
+    template<class U, class other_deleter_t>
+        requires std::constructible_from<std::unique_ptr<T, args_t...>, std::unique_ptr<U, other_deleter_t>&&>
+    smart_ptr_ref_adapter(smart_ptr_ref_adapter<std::unique_ptr, U, other_deleter_t>&& other) noexcept;
 
     void reset(smart_ptr_ref_adapter other) noexcept;
 

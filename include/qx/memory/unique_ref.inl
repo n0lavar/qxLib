@@ -30,6 +30,15 @@ namespace details
 {
 
 template<class T, class... args_t>
+template<class U, class other_deleter_t>
+    requires std::constructible_from<std::unique_ptr<T, args_t...>, std::unique_ptr<U, other_deleter_t>&&>
+smart_ptr_ref_adapter<std::unique_ptr, T, args_t...>::smart_ptr_ref_adapter(
+    smart_ptr_ref_adapter<std::unique_ptr, U, other_deleter_t>&& other) noexcept
+    : super(static_cast<std::unique_ptr<U, other_deleter_t>&&>(other))
+{
+}
+
+template<class T, class... args_t>
 void smart_ptr_ref_adapter<std::unique_ptr, T, args_t...>::reset(smart_ptr_ref_adapter other) noexcept
 {
     *this = std::move(other);

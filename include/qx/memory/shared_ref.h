@@ -10,6 +10,8 @@
 
 #include <qx/memory/smart_ptr_ref_adapter.h>
 
+#include <concepts>
+
 namespace qx
 {
 
@@ -36,9 +38,8 @@ shared_ref<T> make_shared_ref(constructor_args_t&&... args);
 namespace details
 {
 
-template<class T, class... args_t>
-class smart_ptr_ref_adapter<std::shared_ptr, T, args_t...>
-    : public overload_functions_smart_ptr_ref_adapter<std::shared_ptr, T, args_t...>
+template<class T>
+class smart_ptr_ref_adapter<std::shared_ptr, T> : public overload_functions_smart_ptr_ref_adapter<std::shared_ptr, T>
 {
     struct private_token
     {
@@ -48,7 +49,7 @@ class smart_ptr_ref_adapter<std::shared_ptr, T, args_t...>
     friend shared_ref<_T> qx::make_shared_ref(_constructor_args_t&&... args);
 
 public:
-    using super                 = overload_functions_smart_ptr_ref_adapter<std::shared_ptr, T, args_t...>;
+    using super                 = overload_functions_smart_ptr_ref_adapter<std::shared_ptr, T>;
     using original_pointer_type = typename super::original_pointer_type;
     using element_type          = typename super::element_type;
     using pointer               = typename super::pointer;
@@ -58,6 +59,10 @@ public:
     smart_ptr_ref_adapter& operator=(smart_ptr_ref_adapter&&) noexcept      = default;
     smart_ptr_ref_adapter(const smart_ptr_ref_adapter&) noexcept            = default;
     smart_ptr_ref_adapter& operator=(const smart_ptr_ref_adapter&) noexcept = default;
+
+    template<class U>
+        requires std::constructible_from<std::shared_ptr<T>, std::shared_ptr<U>&&>
+    smart_ptr_ref_adapter(smart_ptr_ref_adapter<std::shared_ptr, U>&& other) noexcept;
 
     void reset(smart_ptr_ref_adapter other) noexcept;
 

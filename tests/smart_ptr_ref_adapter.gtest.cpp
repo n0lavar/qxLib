@@ -11,7 +11,14 @@
 #include <qx/memory/shared_ref.h>
 #include <qx/memory/unique_ref.h>
 
-class test_class
+class test_class_interface
+{
+public:
+    virtual ~test_class_interface()             = default;
+    virtual const std::string& get_data() const = 0;
+};
+
+class test_class : public test_class_interface
 {
 public:
     test_class(std::string data) : m_Data(std::move(data))
@@ -19,12 +26,12 @@ public:
         ++m_ObjectsAlive;
     }
 
-    ~test_class()
+    virtual ~test_class() override
     {
         --m_ObjectsAlive;
     }
 
-    const std::string& get_data() const
+    virtual const std::string& get_data() const override
     {
         return m_Data;
     }
@@ -145,4 +152,30 @@ TEST(smart_ptr_ref_adapter, unique_ref_deleter)
 TEST(smart_ptr_ref_adapter, shared_ref)
 {
     test_pointer(create_shared_ref);
+}
+
+TEST(smart_ptr_ref_adapter, unique_ref_converting_move)
+{
+    EXPECT_EQ(test_class::get_objects_alive(), 0);
+
+    auto object1 = create_unique_ref("converting_move");
+    qx::unique_ref<test_class_interface> object2 = std::move(object1);
+    EXPECT_EQ(test_class::get_objects_alive(), 1);
+
+    qx::unique_ref<test_class_interface> object3(std::move(object2));
+    EXPECT_EQ(test_class::get_objects_alive(), 1);
+    EXPECT_FALSE(object3->get_data().empty());
+}
+
+TEST(smart_ptr_ref_adapter, shared_ref_converting_move)
+{
+    EXPECT_EQ(test_class::get_objects_alive(), 0);
+
+    auto object1 = create_shared_ref("converting_move");
+    qx::shared_ref<test_class_interface> object2 = std::move(object1);
+    EXPECT_EQ(test_class::get_objects_alive(), 1);
+
+    qx::shared_ref<test_class_interface> object3(std::move(object2));
+    EXPECT_EQ(test_class::get_objects_alive(), 1);
+    EXPECT_FALSE(object3->get_data().empty());
 }
