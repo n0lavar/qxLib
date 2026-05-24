@@ -25,7 +25,7 @@ var searchData=
   ['small_5fstring_5fallocation_5ftraits_3c_20wchar_5ft_2c_20usings_5fchar_5ftraits_5ft_20_3e_1137',['small_string_allocation_traits&lt; wchar_t, usings_char_traits_t &gt;',['../structqx_1_1string__traits_1_1small__string__allocation__traits_3_01wchar__t_00_01usings__char__traits__t_01_4.html',1,'qx::string_traits']]],
   ['smart_5fptr_5fref_5fadapter_1138',['smart_ptr_ref_adapter',['../classqx_1_1details_1_1smart__ptr__ref__adapter.html',1,'qx::details']]],
   ['smart_5fptr_5fref_5fadapter_3c_20error_5fcontext_5fstream_5fdata_20_3e_1139',['smart_ptr_ref_adapter&lt; error_context_stream_data &gt;',['../classqx_1_1details_1_1smart__ptr__ref__adapter.html',1,'qx::details']]],
-  ['smart_5fptr_5fref_5fadapter_3c_20std_3a_3ashared_5fptr_2c_20t_2c_20args_5ft_2e_2e_2e_20_3e_1140',['smart_ptr_ref_adapter&lt; std::shared_ptr, T, args_t... &gt;',['../classqx_1_1details_1_1smart__ptr__ref__adapter_3_01std_1_1shared__ptr_00_01_t_00_01args__t_8_8_8_01_4.html',1,'qx::details']]],
+  ['smart_5fptr_5fref_5fadapter_3c_20std_3a_3ashared_5fptr_2c_20t_20_3e_1140',['smart_ptr_ref_adapter&lt; std::shared_ptr, T &gt;',['../classqx_1_1details_1_1smart__ptr__ref__adapter_3_01std_1_1shared__ptr_00_01_t_01_4.html',1,'qx::details']]],
   ['smart_5fptr_5fref_5fadapter_3c_20std_3a_3aunique_5fptr_2c_20t_2c_20args_5ft_2e_2e_2e_20_3e_1141',['smart_ptr_ref_adapter&lt; std::unique_ptr, T, args_t... &gt;',['../classqx_1_1details_1_1smart__ptr__ref__adapter_3_01std_1_1unique__ptr_00_01_t_00_01args__t_8_8_8_01_4.html',1,'qx::details']]],
   ['specific_5fvariadic_5fargs_1142',['specific_variadic_args',['../structqx_1_1specific__variadic__args.html',1,'qx']]],
   ['state_1143',['state',['../classqx_1_1state.html',1,'qx']]],

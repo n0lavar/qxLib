@@ -15,6 +15,6 @@ var searchData=
   ['overlap_521',['overlap',['../classqx_1_1basic__rect.html#a7eabbac8eb32c80366ba2b0b8bfefa4f',1,'qx::basic_rect']]],
   ['overlaps_522',['overlaps',['../classqx_1_1basic__rect.html#ad0e84e881cd7856c0be47cde27baf0a9',1,'qx::basic_rect']]],
   ['overload_5ffunctions_5fsmart_5fptr_5fref_5fadapter_523',['overload_functions_smart_ptr_ref_adapter',['../classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html',1,'qx::details']]],
-  ['overload_5ffunctions_5fsmart_5fptr_5fref_5fadapter_3c_20std_3a_3ashared_5fptr_2c_20t_2c_20args_5ft_2e_2e_2e_20_3e_524',['overload_functions_smart_ptr_ref_adapter&lt; std::shared_ptr, T, args_t... &gt;',['../classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html',1,'qx::details']]],
+  ['overload_5ffunctions_5fsmart_5fptr_5fref_5fadapter_3c_20std_3a_3ashared_5fptr_2c_20t_20_3e_524',['overload_functions_smart_ptr_ref_adapter&lt; std::shared_ptr, T &gt;',['../classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html',1,'qx::details']]],
   ['overload_5ffunctions_5fsmart_5fptr_5fref_5fadapter_3c_20std_3a_3aunique_5fptr_2c_20t_2c_20args_5ft_2e_2e_2e_20_3e_525',['overload_functions_smart_ptr_ref_adapter&lt; std::unique_ptr, T, args_t... &gt;',['../classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html',1,'qx::details']]]
 ];
