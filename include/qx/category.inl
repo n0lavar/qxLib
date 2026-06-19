@@ -10,8 +10,8 @@
 namespace qx
 {
 
-constexpr category::category(string_view svName, const color& categoryColor) noexcept
-    : m_Color(categoryColor)
+constexpr category::category(string_view svName, std::optional<color> optCategoryColor) noexcept
+    : m_Color(optCategoryColor ? *optCategoryColor : color::from_hash(string_hash(svName)))
     , m_svName(svName)
 {
 }

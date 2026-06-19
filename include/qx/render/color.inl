@@ -384,6 +384,14 @@ inline std::optional<color> color::from_string(string_view svColorName) noexcept
     return optColor;
 }
 
+constexpr color color::from_hash(size_t nHash) noexcept
+{
+    return color(
+        static_cast<u8>(nHash >> 0 & 0xFF),
+        static_cast<u8>(nHash >> 8 & 0xFF),
+        static_cast<u8>(nHash >> 16 & 0xFF));
+}
+
 constexpr color color::empty() noexcept
 {
     return color(0, 0, 0, 0);

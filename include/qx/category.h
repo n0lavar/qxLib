@@ -8,17 +8,20 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_hash.h>
 #include <qx/containers/string/string_utils.h>
 #include <qx/macros/common.h>
 #include <qx/render/color.h>
 #include <qx/verbosity.h>
+
+#include <optional>
 
 /**
     @brief Define a category
     @param name - category name
     @param ...  - optional category color
 **/
-#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name(QXT(#name), ##__VA_ARGS__)
+#define QX_DEFINE_CATEGORY(name, ...) constexpr qx::category name = qx::category(QXT(#name), ##__VA_ARGS__)
 
 /**
     @brief Set the file category
@@ -57,8 +60,6 @@ namespace qx
 **/
 class category
 {
-    static constexpr auto kDefaultColor = color::white();
-
 public:
     constexpr category()                           = default;
     constexpr category(const category&)            = default;
@@ -70,10 +71,11 @@ public:
 
     /**
         @brief  category object constructor
-        @param  svName         - category name. For ex. CatRendering or CatWidgets
-        @param  categoryColor  - color to be used if supported
+        @param  svName           - category name. For ex. CatRendering or CatWidgets
+        @param  optCategoryColor - color to be used if supported.
+                                   If it isn't provided, a color generated from a name hash is used.
     **/
-    constexpr explicit category(string_view svName, const color& categoryColor = kDefaultColor) noexcept;
+    constexpr explicit category(string_view svName, std::optional<color> optCategoryColor = std::nullopt) noexcept;
 
     /**
         @brief  Create new category from this one with custom verbosity
@@ -103,7 +105,7 @@ public:
     constexpr verbosity get_verbosity() const noexcept;
 
 private:
-    color       m_Color = kDefaultColor;
+    color       m_Color;
     string_view m_svName;
     verbosity   m_Verbosity = QX_CONF_COMPILE_TIME_VERBOSITY;
 };

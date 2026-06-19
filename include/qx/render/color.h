@@ -174,11 +174,13 @@ namespace qx
 
 enum class color_name_type
 {
-    css_snake,  // {:s} alice_blue
-    css_pascal, // {:p} AliceBlue
-    hex_lower,  // {:x[a]} f0f8ff[ff]
-    hex_upper,  // {:X[a]} F0F8FF[FF]
-    rgb,        // {:r[a]} 240,248,255[,255]
+    //              | formatter | output example
+    // -------------|-----------|-------------------
+    css_snake,  //  | {:s}      | alice_blue
+    css_pascal, //  | {:p}      | AliceBlue
+    hex_lower,  //  | {:x[a]}   | f0f8ff[ff]
+    hex_upper,  //  | {:X[a]}   | F0F8FF[FF]
+    rgb,        //  | {:r[a]}   | 240,248,255[,255]
 };
 
 /**
@@ -479,6 +481,13 @@ public:
         @retval             - found color or nullopt
     **/
     static std::optional<color> from_string(string_view svColorName) noexcept;
+
+    /**
+        @brief  Generate a color unique for a hash value
+        @param  nHash - hash value
+        @retval       - generated color
+    **/
+    static constexpr color from_hash(size_t nHash) noexcept;
 
     /**
         @brief   Get empty color (0, 0, 0, 0)
