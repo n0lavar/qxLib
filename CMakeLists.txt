@@ -37,7 +37,12 @@ source_group(
 
 find_package(Threads REQUIRED)
 
-find_package(Boost 1.79)
+find_package(Boost)
+if(NOT Boost_FOUND)
+    set(Boost_ROOT "${CMAKE_CURRENT_LIST_DIR}/../external/boost")
+    find_package(Boost)
+endif()
+
 find_package(GLM)
 find_package(FMT)
 
