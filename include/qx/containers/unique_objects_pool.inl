@@ -3,7 +3,7 @@
     @file      unique_objects_pool.inl
     @author    Khrapov
     @date      11.02.2023
-    @copyright © Nick Khrapov, 2023. All right reserved.
+    @copyright (c) Nick Khrapov, 2023. All right reserved.
 
 **/
 

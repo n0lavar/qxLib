@@ -3,7 +3,7 @@
     @file      delegate.gtest.cpp
     @author    Khrapov
     @date      7.01.2024
-    @copyright © Nick Khrapov, 2024. All right reserved.
+    @copyright (c) Nick Khrapov, 2024. All right reserved.
 
 **/
 #include <common.h>

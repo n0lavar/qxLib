@@ -3,7 +3,7 @@
     @file      triangular_vector.h
     @author    Khrapov
     @date      23.02.2020
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

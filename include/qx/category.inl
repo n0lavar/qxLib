@@ -3,7 +3,7 @@
     @file      category.inl
     @author    Khrapov
     @date      2.01.2023
-    @copyright © Nick Khrapov, 2023. All right reserved.
+    @copyright (c) Nick Khrapov, 2023. All right reserved.
 
 **/
 

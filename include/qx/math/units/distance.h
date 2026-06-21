@@ -3,7 +3,7 @@
     @file      distance.h
     @author    Khrapov
     @date      24.09.2025
-    @copyright © Nick Khrapov, 2025. All right reserved.
+    @copyright (c) Nick Khrapov, 2025. All right reserved.
 
 **/
 #pragma once

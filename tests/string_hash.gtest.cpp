@@ -3,7 +3,7 @@
     @file      string_hash.gtest.cpp
     @author    Khrapov
     @date      17.04.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 #include <common.h>

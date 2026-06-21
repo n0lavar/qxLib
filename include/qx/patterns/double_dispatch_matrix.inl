@@ -3,7 +3,7 @@
     @file      double_dispatch_matrix.inl
     @author    Khrapov
     @date      17.01.2025
-    @copyright © Nick Khrapov, 2025. All right reserved.
+    @copyright (c) Nick Khrapov, 2025. All right reserved.
 
 **/
 

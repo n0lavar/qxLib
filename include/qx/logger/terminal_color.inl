@@ -3,7 +3,7 @@
     @file      terminal_color.inl
     @author    Khrapov
     @date      14.12.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 

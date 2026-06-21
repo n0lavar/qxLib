@@ -3,7 +3,7 @@
     @file      string_converters.inl
     @author    Khrapov
     @date      11.01.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 

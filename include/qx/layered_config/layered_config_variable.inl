@@ -3,7 +3,7 @@
     @file      layered_config_variable.inl
     @author    Khrapov
     @date      12.05.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 

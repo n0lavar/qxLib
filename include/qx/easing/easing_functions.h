@@ -10,7 +10,7 @@
                f(1.0) = 1.0 (with epsilon = qx::easing::eps<T>())
     @author    Khrapov
     @date      4.05.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

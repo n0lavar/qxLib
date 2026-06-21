@@ -3,7 +3,7 @@
     @file      iterate_several_containers.gtest.cpp
     @author    Khrapov
     @date      26.08.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 #include <common.h>

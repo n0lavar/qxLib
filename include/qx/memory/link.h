@@ -3,7 +3,7 @@
     @file      link.h
     @author    Khrapov
     @date      21.11.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

@@ -3,7 +3,7 @@
     @file      moving_average.gtest.cpp
     @author    Khrapov
     @date      1.06.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #include <common.h>

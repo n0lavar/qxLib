@@ -3,7 +3,7 @@
     @file      string_hash.inl
     @author    Khrapov
     @date      18.08.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 

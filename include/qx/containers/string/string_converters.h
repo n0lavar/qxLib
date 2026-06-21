@@ -3,7 +3,7 @@
     @file      string_converters.h
     @author    Khrapov
     @date      24.11.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

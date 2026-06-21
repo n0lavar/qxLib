@@ -3,7 +3,7 @@
     @file      logger_streams.bench.cpp
     @author    Khrapov
     @date      16.01.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 #include "benchmark/benchmark.h"

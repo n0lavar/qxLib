@@ -3,7 +3,7 @@
     @file      formatting.bench.cpp
     @author    Khrapov
     @date      11.03.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 #include <qx/containers/string/string.h>

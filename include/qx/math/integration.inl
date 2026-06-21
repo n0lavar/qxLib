@@ -3,7 +3,7 @@
     @file      integration.inl
     @author    Khrapov
     @date      29.04.2023
-    @copyright © Nick Khrapov, 2023. All right reserved.
+    @copyright (c) Nick Khrapov, 2023. All right reserved.
 
 **/
 

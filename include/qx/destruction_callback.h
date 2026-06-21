@@ -3,7 +3,7 @@
     @file      destruction_callback.h
     @author    Khrapov
     @date      12.12.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

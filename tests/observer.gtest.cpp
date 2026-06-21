@@ -3,7 +3,7 @@
     @file      observer.gtest.cpp
     @author    Khrapov
     @date      6.03.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #include <common.h>

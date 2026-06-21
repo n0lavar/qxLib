@@ -3,7 +3,7 @@
     @file      error_context.inl
     @author    Khrapov
     @date      10.02.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 

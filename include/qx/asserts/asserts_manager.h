@@ -3,7 +3,7 @@
     @file      asserts_manager.h
     @author    Khrapov
     @date      27.12.2025
-    @copyright © Nick Khrapov, 2025. All right reserved.
+    @copyright (c) Nick Khrapov, 2025. All right reserved.
 
 **/
 #pragma once

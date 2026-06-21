@@ -3,7 +3,7 @@
     @file      prime.gtest.cpp
     @author    Khrapov
     @date      7.08.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 #include <common.h>

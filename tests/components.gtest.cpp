@@ -3,7 +3,7 @@
     @file      components.gtest.cpp
     @author    Khrapov
     @date      7.03.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #define QX_CONF_USE_CHAR 1

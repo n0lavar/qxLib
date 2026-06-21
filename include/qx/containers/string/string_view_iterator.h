@@ -3,7 +3,7 @@
     @file      string_view_iterator.h
     @author    Khrapov
     @date      24.10.2023
-    @copyright © Nick Khrapov, 2023. All right reserved.
+    @copyright (c) Nick Khrapov, 2023. All right reserved.
 
 **/
 #pragma once

@@ -3,7 +3,7 @@
     @file      type_traits.h
     @author    Khrapov
     @data      10.09.2020
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

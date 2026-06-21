@@ -3,7 +3,7 @@
     @file      config.h
     @author    Khrapov
     @date      25.09.2020
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

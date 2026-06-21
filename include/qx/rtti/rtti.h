@@ -9,7 +9,7 @@
                https://github.com/qualab/xakep-RTTI (Vladimir Kerimov, qualab)
     @author    Khrapov
     @date      24.08.2020
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

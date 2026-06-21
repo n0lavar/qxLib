@@ -3,7 +3,7 @@
     @file      easing_element.gtest.cpp
     @author    Khrapov
     @date      11.05.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #include <common.h>

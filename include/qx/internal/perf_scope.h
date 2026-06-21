@@ -4,7 +4,7 @@
     @brief     Contains perf scope macros for profiler (for internal usage only, but user may override them)
     @author    Khrapov
     @date      22.12.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 #pragma once

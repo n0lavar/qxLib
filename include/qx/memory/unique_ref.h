@@ -3,7 +3,7 @@
     @file      unique_ref.h
     @author    Khrapov
     @date      25.05.2025
-    @copyright © Nick Khrapov, 2025. All right reserved.
+    @copyright (c) Nick Khrapov, 2025. All right reserved.
 
 **/
 #pragma once

@@ -3,7 +3,7 @@
     @file      generic_span.h
     @author    Khrapov
     @date      20.11.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 #pragma once

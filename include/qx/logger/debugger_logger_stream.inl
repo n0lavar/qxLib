@@ -3,7 +3,7 @@
     @file      debugger_logger_stream.inl
     @author    Khrapov
     @date      12.11.2023
-    @copyright © Nick Khrapov, 2023. All right reserved.
+    @copyright (c) Nick Khrapov, 2023. All right reserved.
 
 **/
 

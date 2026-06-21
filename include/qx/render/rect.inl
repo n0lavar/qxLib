@@ -3,7 +3,7 @@
     @file      rect.inl
     @author    Khrapov
     @date      12.11.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 

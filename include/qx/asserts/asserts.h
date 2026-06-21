@@ -3,7 +3,7 @@
     @file      asserts.h
     @author    Khrapov
     @date      27.12.2025
-    @copyright © Nick Khrapov, 2025. All right reserved.
+    @copyright (c) Nick Khrapov, 2025. All right reserved.
 
     @section qx_assert_table Assert Types Comparison Table
 

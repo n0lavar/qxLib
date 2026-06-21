@@ -3,7 +3,7 @@
     @file      threads_shared.inl
     @author    Khrapov
     @date      4.03.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 

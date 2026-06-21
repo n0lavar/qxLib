@@ -3,7 +3,7 @@
     @file      is_array_of_t.h
     @author    Khrapov
     @date      20.12.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 #pragma once

@@ -3,7 +3,7 @@
     @file      string_hash.h
     @author    Khrapov
     @date      13.11.2020
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

@@ -6,7 +6,7 @@
                of the class using its name or ID
     @author    Khrapov
     @date      9.09.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

@@ -3,7 +3,7 @@
     @file      float_compare.inl
     @author    Khrapov
     @date      25.09.2025
-    @copyright © Nick Khrapov, 2025. All right reserved.
+    @copyright (c) Nick Khrapov, 2025. All right reserved.
 
 **/
 

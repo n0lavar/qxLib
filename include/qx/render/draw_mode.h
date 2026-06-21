@@ -3,7 +3,7 @@
     @file      draw_mode.h
     @author    Khrapov
     @date      9.04.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

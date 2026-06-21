@@ -3,7 +3,7 @@
     @file      singleton.inl
     @author    Khrapov
     @date      19.09.2025
-    @copyright © Nick Khrapov, 2025. All right reserved.
+    @copyright (c) Nick Khrapov, 2025. All right reserved.
 
 **/
 

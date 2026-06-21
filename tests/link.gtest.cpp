@@ -3,7 +3,7 @@
     @file      link.gtest.cpp
     @author    Khrapov
     @date      18.07.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 

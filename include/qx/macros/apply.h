@@ -4,7 +4,7 @@
     @details   Initially taken from https://github.com/swansontec/map-macro
     @author    Khrapov
     @date      24.09.2023
-    @copyright © Nick Khrapov, 2023. All right reserved.
+    @copyright (c) Nick Khrapov, 2023. All right reserved.
 
 **/
 #pragma once

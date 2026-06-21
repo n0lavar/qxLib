@@ -3,7 +3,7 @@
     @file      recursive_lambda.h
     @author    Khrapov
     @date      3.08.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright (c) Nick Khrapov, 2022. All right reserved.
 
 **/
 #pragma once

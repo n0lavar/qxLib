@@ -3,7 +3,7 @@
     @file      format.gtest.cpp
     @author    Khrapov
     @date      28.03.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 #include <common.h>

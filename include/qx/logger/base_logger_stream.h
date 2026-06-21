@@ -3,7 +3,7 @@
     @file      base_logger_stream.h
     @author    Khrapov
     @date      28.07.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

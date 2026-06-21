@@ -3,7 +3,7 @@
     @file      format.h
     @author    Khrapov
     @date      27.03.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 #pragma once

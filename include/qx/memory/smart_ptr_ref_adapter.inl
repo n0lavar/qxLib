@@ -3,7 +3,7 @@
     @file      smart_ptr_ref_adapter.inl
     @author    Khrapov
     @date      25.05.2025
-    @copyright © Nick Khrapov, 2025. All right reserved.
+    @copyright (c) Nick Khrapov, 2025. All right reserved.
 
 **/
 

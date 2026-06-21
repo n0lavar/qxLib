@@ -3,7 +3,7 @@
     @file      container.h
     @author    Khrapov
     @date      8.08.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

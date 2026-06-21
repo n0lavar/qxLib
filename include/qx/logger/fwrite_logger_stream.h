@@ -3,7 +3,7 @@
     @file      fwrite_logger_stream.h
     @author    Khrapov
     @date      18.01.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 #pragma once

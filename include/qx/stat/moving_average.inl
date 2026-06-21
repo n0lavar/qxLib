@@ -3,7 +3,7 @@
     @file      moving_average.inl
     @author    Khrapov
     @date      20.08.2021
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 

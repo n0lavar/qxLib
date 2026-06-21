@@ -3,7 +3,7 @@
     @file      logger_formatters.inl
     @author    Khrapov
     @date      13.02.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
 
