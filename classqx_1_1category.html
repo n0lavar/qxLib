@@ -80,9 +80,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a17ea4679d87ad6a7cc60585bde22578d"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a17ea4679d87ad6a7cc60585bde22578d">category</a> (string_view svName, const <a class="el" href="classqx_1_1color.html">color</a> &amp;categoryColor=kDefaultColor) noexcept</td></tr>
-<tr class="memdesc:a17ea4679d87ad6a7cc60585bde22578d"><td class="mdescLeft">&#160;</td><td class="mdescRight">category object constructor  <a href="classqx_1_1category.html#a17ea4679d87ad6a7cc60585bde22578d">More...</a><br /></td></tr>
-<tr class="separator:a17ea4679d87ad6a7cc60585bde22578d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b78c21819181fe55ab08dcc15e24ca5"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a9b78c21819181fe55ab08dcc15e24ca5">category</a> (string_view svName, std::optional&lt; <a class="el" href="classqx_1_1color.html">color</a> &gt; optCategoryColor=std::nullopt) noexcept</td></tr>
+<tr class="memdesc:a9b78c21819181fe55ab08dcc15e24ca5"><td class="mdescLeft">&#160;</td><td class="mdescRight">category object constructor  <a href="classqx_1_1category.html#a9b78c21819181fe55ab08dcc15e24ca5">More...</a><br /></td></tr>
+<tr class="separator:a9b78c21819181fe55ab08dcc15e24ca5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classqx_1_1category.html">category</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">set_verbosity</a> (verbosity eVerbosity) const noexcept</td></tr>
 <tr class="memdesc:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create new category from this one with custom verbosity.  <a href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">More...</a><br /></td></tr>
 <tr class="separator:a1534af0fb56e2dbc91f6f05ba88b96be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,10 +101,10 @@ Public Member Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>5.12.2022 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="category_8h_source.html#l00058">58</a> of file <a class="el" href="category_8h_source.html">category.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="category_8h_source.html#l00061">61</a> of file <a class="el" href="category_8h_source.html">category.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a17ea4679d87ad6a7cc60585bde22578d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17ea4679d87ad6a7cc60585bde22578d">&#9670;&nbsp;</a></span>category()</h2>
+<a id="a9b78c21819181fe55ab08dcc15e24ca5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b78c21819181fe55ab08dcc15e24ca5">&#9670;&nbsp;</a></span>category()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -121,8 +121,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classqx_1_1color.html">color</a> &amp;&#160;</td>
-          <td class="paramname"><em>categoryColor</em> = <code>kDefaultColor</code>&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classqx_1_1color.html">color</a> &gt;&#160;</td>
+          <td class="paramname"><em>optCategoryColor</em> = <code>std::nullopt</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -141,7 +141,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">svName</td><td>- category name. For ex. CatRendering or CatWidgets </td></tr>
-    <tr><td class="paramname">categoryColor</td><td>- color to be used if supported </td></tr>
+    <tr><td class="paramname">optCategoryColor</td><td>- color to be used if supported. If it isn't provided, a color generated from a name hash is used. </td></tr>
   </table>
   </dd>
 </dl>

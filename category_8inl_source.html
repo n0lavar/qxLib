@@ -74,15 +74,15 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      category.inl</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @date      2.01.2023</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2023. All right reserved.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright (c) Nick Khrapov, 2023. All right reserved.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classqx_1_1category.html#a17ea4679d87ad6a7cc60585bde22578d">   13</a></span>&#160;constexpr category::category(string_view svName, <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; categoryColor) noexcept</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    : m_Color(categoryColor)</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classqx_1_1category.html#a9b78c21819181fe55ab08dcc15e24ca5">   13</a></span>&#160;constexpr category::category(string_view svName, std::optional&lt;color&gt; optCategoryColor) noexcept</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    : m_Color(optCategoryColor ? *optCategoryColor : <a class="code" href="classqx_1_1color.html#a6daf4069e4125b0b1eed933cb04d5e2d">color::from_hash</a>(<a class="code" href="classqx_1_1basic__string__hash.html">string_hash</a>(svName)))</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    , m_svName(svName)</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
@@ -110,12 +110,14 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00058">category.h:59</a></div></div>
+<div class="ttc" id="aclassqx_1_1basic__string__hash_html"><div class="ttname"><a href="classqx_1_1basic__string__hash.html">qx::basic_string_hash</a></div><div class="ttdoc">String hash object.</div><div class="ttdef"><b>Definition:</b> <a href="string__hash_8h_source.html#l00037">string_hash.h:38</a></div></div>
+<div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00061">category.h:62</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a0b2b93e7b142f4a34cf90ceaa304177f"><div class="ttname"><a href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">qx::category::get_name</a></div><div class="ttdeci">constexpr string_view get_name() const noexcept</div><div class="ttdoc">Get category name.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00026">category.inl:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a1534af0fb56e2dbc91f6f05ba88b96be"><div class="ttname"><a href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">qx::category::set_verbosity</a></div><div class="ttdeci">constexpr category set_verbosity(verbosity eVerbosity) const noexcept</div><div class="ttdoc">Create new category from this one with custom verbosity.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00019">category.inl:19</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a45f05eea5cdc8a8030b3233748bbcef2"><div class="ttname"><a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">qx::category::get_color</a></div><div class="ttdeci">constexpr const color &amp; get_color() const noexcept</div><div class="ttdoc">Get category color.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00031">category.inl:31</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a6dcb4e8efe067e7a397c89c916e8d722"><div class="ttname"><a href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">qx::category::get_verbosity</a></div><div class="ttdeci">constexpr verbosity get_verbosity() const noexcept</div><div class="ttdoc">Get category verbosity.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00036">category.inl:36</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00192">color.h:193</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00194">color.h:195</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a6daf4069e4125b0b1eed933cb04d5e2d"><div class="ttname"><a href="classqx_1_1color.html#a6daf4069e4125b0b1eed933cb04d5e2d">qx::color::from_hash</a></div><div class="ttdeci">static constexpr color from_hash(size_t nHash) noexcept</div><div class="ttdoc">Generate a color unique for a hash value.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00387">color.inl:387</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

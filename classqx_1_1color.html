@@ -208,6 +208,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a318805eba93a07abe904b37ae29fd531"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classqx_1_1color.html">color</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a318805eba93a07abe904b37ae29fd531">from_string</a> (string_view svColorName) noexcept</td></tr>
 <tr class="memdesc:a318805eba93a07abe904b37ae29fd531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Try to create color from string.  <a href="classqx_1_1color.html#a318805eba93a07abe904b37ae29fd531">More...</a><br /></td></tr>
 <tr class="separator:a318805eba93a07abe904b37ae29fd531"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6daf4069e4125b0b1eed933cb04d5e2d"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1color.html">color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a6daf4069e4125b0b1eed933cb04d5e2d">from_hash</a> (size_t nHash) noexcept</td></tr>
+<tr class="memdesc:a6daf4069e4125b0b1eed933cb04d5e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a color unique for a hash value.  <a href="classqx_1_1color.html#a6daf4069e4125b0b1eed933cb04d5e2d">More...</a><br /></td></tr>
+<tr class="separator:a6daf4069e4125b0b1eed933cb04d5e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76b77e9e9b1a324bac4b8df930358731"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1color.html">color</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">empty</a> () noexcept</td></tr>
 <tr class="memdesc:a76b77e9e9b1a324bac4b8df930358731"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get empty color (0, 0, 0, 0)  <a href="classqx_1_1color.html#a76b77e9e9b1a324bac4b8df930358731">More...</a><br /></td></tr>
 <tr class="separator:a76b77e9e9b1a324bac4b8df930358731"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,7 +223,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.04.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8h_source.html#l00192">192</a> of file <a class="el" href="color_8h_source.html">color.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8h_source.html#l00194">194</a> of file <a class="el" href="color_8h_source.html">color.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac4b3d1b317dabde61609482c013ce297"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac4b3d1b317dabde61609482c013ce297">&#9670;&nbsp;</a></span>color() <span class="overload">[1/5]</span></h2>
@@ -839,6 +842,48 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 </li>
 </ul>
+
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00395">395</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+
+</div>
+</div>
+<a id="a6daf4069e4125b0b1eed933cb04d5e2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6daf4069e4125b0b1eed933cb04d5e2d">&#9670;&nbsp;</a></span>from_hash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classqx_1_1color.html">color</a> qx::color::from_hash </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nHash</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Generate a color unique for a hash value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nHash</td><td>- hash value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>generated color </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00387">387</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
@@ -1534,7 +1579,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00392">392</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="color_8inl_source.html#l00400">400</a> of file <a class="el" href="color_8inl_source.html">color.inl</a>.</p>
 
 </div>
 </div>
