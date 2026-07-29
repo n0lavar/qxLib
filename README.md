@@ -1,10 +1,12 @@
 # qxLib
-[![Donate](https://img.shields.io/badge/Donate-8A2BE2)](https://revolut.me/n0lavar)
 [![codecov](https://codecov.io/gh/n0lavar/qxLib/branch/master/graph/badge.svg)](https://codecov.io/gh/n0lavar/qxLib)
 ![lines](https://sloc.xyz/github/n0lavar/qxLib?category=code)
 ![lines](https://sloc.xyz/github/n0lavar/qxLib?category=comments)
 ![lines](https://sloc.xyz/github/n0lavar/qxLib?category=effort)
 [![licence](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/n0lavar/qxLib/blob/master/LICENSE)
+
+[![Patreon](https://img.shields.io/badge/Patreon-F96854?logo=patreon&logoColor=white)](https://www.patreon.com/cw/n0lavar)
+[![BuyMeACoffee](https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-donate-yellow.svg)](https://buymeacoffee.com/n0lavar)
 
 The library contains various classes, functions and macros that can be useful when developing games and game engines.  
 The code is designed to be as performant, extensible and generic as possible. It follows the style of the standard library in terms of code style, use of iterators, traits, etc. The library is intended to extend the functionality of the standard library and not copy it.
@@ -22,7 +24,7 @@ Some examples:
 
 Feel free to suggest any improvements.
 
-## Status:
+## Status
 
 | Compiler<br />(uses the last machine,<br />see logs for a compiler version) | Debug | Release |
 | :---: | :---: | :---: |
@@ -30,7 +32,7 @@ Feel free to suggest any improvements.
 | GCC | ![ubuntu_gcc_debug](https://github.com/n0lavar/qxLib/workflows/ubuntu_gcc_debug/badge.svg)  | ![ubuntu_gcc_release](https://github.com/n0lavar/qxLib/workflows/ubuntu_gcc_release/badge.svg)  |
 | MSVC | ![windows_msvc_debug](https://github.com/n0lavar/qxLib/workflows/windows_msvc_debug/badge.svg) | ![windows_msvc_release](https://github.com/n0lavar/qxLib/workflows/windows_msvc_release/badge.svg) |
 
-## Dependencies:
+## Dependencies
 
 Required:
 + C++20
