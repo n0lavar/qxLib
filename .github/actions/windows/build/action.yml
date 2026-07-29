@@ -7,6 +7,8 @@ inputs:
     required: false
   build_type:
     required: true
+  msvc_runtime_library:
+    required: true
   BOOST_ROOT:
     required: true
 
@@ -21,6 +23,7 @@ runs:
           .. ^
           -DCMAKE_CXX_FLAGS="${{ inputs.cxx_flags }}" ^
           -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" ^
+          -DCMAKE_MSVC_RUNTIME_LIBRARY="${{ inputs.msvc_runtime_library }}" ^
           -DBOOST_ROOT=${{ inputs.BOOST_ROOT }} ^
           -DGENERATE_TESTS=1 ^
           -DGENERATE_BENCHMARKS=1
