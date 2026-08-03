@@ -185,13 +185,13 @@ $(function() {
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="classqx_1_1layered__config__variable__builder.html#a51263d64c71efa6367b45fe639c0f443">  115</a></span>&#160;<a class="code" href="classqx_1_1layered__config__variable.html">layered_config_variable&lt;T&gt;</a> <a class="code" href="classqx_1_1layered__config__variable__builder.html#a51263d64c71efa6367b45fe639c0f443">layered_config_variable_builder&lt;T&gt;::build</a>() noexcept</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="classqx_1_1layered__config__variable.html">layered_config_variable&lt;T&gt;</a> <a class="code" href="classqx_1_1layered__config__variable.html">layered_config_variable</a>;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="classqx_1_1layered__config__variable.html">layered_config_variable</a>.m_DefaultValue  = m_DefaultValue;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <a class="code" href="classqx_1_1layered__config__variable.html">layered_config_variable</a>.m_svRuntimeName = m_svRuntimeName;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <a class="code" href="classqx_1_1layered__config__variable.html">layered_config_variable&lt;T&gt;</a> layeredConfigVariable;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    layeredConfigVariable.m_DefaultValue  = m_DefaultValue;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    layeredConfigVariable.m_svRuntimeName = m_svRuntimeName;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    layered_configs_manager::get_instance().add_variable(m_svRuntimeName, std::move(m_Data), std::move(m_DefaultValue));</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classqx_1_1layered__config__variable.html">layered_config_variable</a>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">return</span> layeredConfigVariable;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;} <span class="comment">// namespace qx</span></div>
