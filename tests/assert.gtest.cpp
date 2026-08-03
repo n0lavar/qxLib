@@ -3,7 +3,7 @@
     @file      assert.gtest.cpp
     @author    Khrapov
     @date      29.10.2020
-    @copyright � Nick Khrapov, 2021. All right reserved.
+    @copyright (c) Nick Khrapov, 2021. All right reserved.
 
 **/
 #include <common.h>

@@ -114,13 +114,13 @@ consteval layered_config_variable_builder<T> layered_config_variable_builder<T>:
 template<class T>
 layered_config_variable<T> layered_config_variable_builder<T>::build() noexcept
 {
-    layered_config_variable<T> layered_config_variable;
-    layered_config_variable.m_DefaultValue  = m_DefaultValue;
-    layered_config_variable.m_svRuntimeName = m_svRuntimeName;
+    layered_config_variable<T> layeredConfigVariable;
+    layeredConfigVariable.m_DefaultValue  = m_DefaultValue;
+    layeredConfigVariable.m_svRuntimeName = m_svRuntimeName;
 
     layered_configs_manager::get_instance().add_variable(m_svRuntimeName, std::move(m_Data), std::move(m_DefaultValue));
 
-    return layered_config_variable;
+    return layeredConfigVariable;
 }
 
 } // namespace qx

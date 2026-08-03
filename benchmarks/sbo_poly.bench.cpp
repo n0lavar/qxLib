@@ -97,7 +97,15 @@ static std::array<char, nSize> generate_random_data(std::mt19937& randomEngine)
 namespace traits
 {
 
-struct unique_ptr_traits
+template<bool bRandomLocation>
+struct base_traits
+{
+    // Simulate random memory locations (fragmentation + shuffling)
+    static constexpr bool k_bRandomLocation = bRandomLocation;
+};
+
+template<bool bRandomLocation>
+struct unique_ptr_traits : base_traits<bRandomLocation>
 {
     using data_type = std::unique_ptr<base_test_class>;
 
@@ -112,7 +120,8 @@ struct unique_ptr_traits
     }
 };
 
-struct sbo_poly_traits
+template<bool bRandomLocation>
+struct sbo_poly_traits : base_traits<bRandomLocation>
 {
     using data_type = sbo_type;
 
@@ -132,7 +141,8 @@ struct sbo_poly_traits
 template<class data_traits_t>
 class data_vector_fixture : public benchmark::Fixture
 {
-    using data_type = typename data_traits_t::data_type;
+    using data_type                         = typename data_traits_t::data_type;
+    static constexpr bool k_bRandomLocation = data_traits_t::k_bRandomLocation;
 
 public:
     virtual void SetUp(::benchmark::State& state) override
@@ -142,27 +152,50 @@ public:
 
         // assume that in live scenarios we use an SBO size that way that most of the data is small
         constexpr double            fSmallProbability = 0.9;
-        std::bernoulli_distribution smallOrBig(fSmallProbability);
+        std::bernoulli_distribution IsSmall(fSmallProbability);
 
-        for (int i = 0; i < state.range(0); ++i)
+        constexpr double            fFakeDataProbability = 0.8;
+        std::bernoulli_distribution IsFake(fFakeDataProbability);
+
+        for (int i = 0; i < static_cast<int>(state.range(0)) * (1.0 + fFakeDataProbability); ++i)
         {
-            if (smallOrBig(randomEngine))
-                m_Data.emplace_back(data_traits_t::create_small(randomEngine));
+            QX_PUSH_SUPPRESS_ALL_WARNINGS();
+            std::vector<data_type>& container = [this, &IsFake, &randomEngine]() -> std::vector<data_type>&
+            {
+                if constexpr (k_bRandomLocation)
+                    if (IsFake(randomEngine))
+                        return m_FakeData;
+
+                return m_RealData;
+            }();
+            QX_POP_SUPPRESS_WARNINGS();
+
+            if (IsSmall(randomEngine))
+                container.emplace_back(data_traits_t::create_small(randomEngine));
             else
-                m_Data.emplace_back(data_traits_t::create_big(randomEngine));
+                container.emplace_back(data_traits_t::create_big(randomEngine));
+        }
+
+        if constexpr (k_bRandomLocation)
+        {
+            // shuffle the data to simulate random memory locations
+            std::shuffle(m_RealData.begin(), m_RealData.end(), randomEngine);
         }
     }
 
 protected:
-    std::vector<data_type> m_Data;
+    std::vector<data_type> m_FakeData;
+    std::vector<data_type> m_RealData;
 };
 
 BENCHMARK_TEMPLATE_METHOD_F(data_vector_fixture, bench)(benchmark::State& st)
 {
     for (auto _ : st)
-        for (auto& item : this->m_Data)
+        for (auto& item : this->m_RealData)
             benchmark::DoNotOptimize(item->get_hash());
 }
 
-BENCHMARK_TEMPLATE_INSTANTIATE_F(data_vector_fixture, bench, traits::unique_ptr_traits)->Arg(100000);
-BENCHMARK_TEMPLATE_INSTANTIATE_F(data_vector_fixture, bench, traits::sbo_poly_traits)->Arg(100000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(data_vector_fixture, bench, traits::unique_ptr_traits<false>)->Arg(100000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(data_vector_fixture, bench, traits::sbo_poly_traits<false>)->Arg(100000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(data_vector_fixture, bench, traits::unique_ptr_traits<true>)->Arg(100000);
+BENCHMARK_TEMPLATE_INSTANTIATE_F(data_vector_fixture, bench, traits::sbo_poly_traits<true>)->Arg(100000);
