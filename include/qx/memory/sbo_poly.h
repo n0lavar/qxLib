@@ -10,6 +10,8 @@
 
 #include <qx/memory/sbo_bytes.h>
 
+#include <exception>
+#include <new>
 #include <type_traits>
 
 namespace qx
@@ -18,7 +20,7 @@ namespace qx
 // Check that the derived type is suitable for storing in sbo_poly
 template<class T, class base_t>
 concept sbo_poly_assignable_c =
-    std::is_base_of_v<base_t, T> && std::is_move_constructible_v<T> && std::is_destructible_v<T>;
+    std::is_base_of_v<base_t, T> && std::is_nothrow_move_constructible_v<T> && std::is_nothrow_destructible_v<T>;
 
 // Check that the derived type fits into the SBO buffer
 template<class sbo_poly_t, sbo_poly_assignable_c<typename sbo_poly_t::base_type> derived_t>
@@ -54,13 +56,13 @@ constexpr bool sbo_poly_fittable_types_v = sbo_poly_fittable_types<sbo_poly_t, a
 
 **/
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 class sbo_poly
 {
     struct sbo_poly_traits
     {
         using size_type                                  = size_t;
-        static constexpr size_type nSBOSize              = nSBOSize_ - 2 * sizeof(void*);
+        static constexpr size_type nSBOSize              = nSBOSize_ - sizeof(void*);
         static constexpr bool      bShrinkToFitWhenSmall = true;
         static constexpr bool      bPreserveContents     = false;
         static constexpr size_type growth_strategy(size_type nOldCapacity) noexcept
@@ -73,6 +75,14 @@ public:
     using sbo_bytes_type = sbo_bytes<sbo_poly_traits>;
     using base_type      = base_t;
 
+private:
+    struct operations
+    {
+        base_t* (*Get)(sbo_bytes_type& object) noexcept;
+        void (*Move)(sbo_bytes_type& from, sbo_bytes_type& to) noexcept;
+        void (*Destroy)(sbo_bytes_type& object) noexcept;
+    };
+
 public:
     /**
         @brief  sbo_poly object constructor
@@ -80,7 +90,7 @@ public:
         @param  object    - an object to store
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
-    sbo_poly(derived_t object) noexcept;
+    sbo_poly(derived_t object);
 
     sbo_poly(sbo_poly&& other) noexcept;
     ~sbo_poly() noexcept;
@@ -92,7 +102,7 @@ public:
         @retval           - this object reference
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
-    sbo_poly& operator=(derived_t object) noexcept;
+    sbo_poly& operator=(derived_t object);
 
     sbo_poly& operator=(sbo_poly&& other) noexcept;
 
@@ -102,7 +112,7 @@ public:
         @param  object    - an object to store
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
-    void assign(derived_t object) noexcept;
+    void assign(derived_t object);
 
 
     base_t*       operator->() noexcept;
@@ -121,9 +131,17 @@ public:
     const base_t& get() const noexcept;
 
 private:
-    sbo_bytes_type m_Data;
-    void (*m_Assigner)(sbo_bytes_type& from, sbo_bytes_type& to) = nullptr;
-    void (*m_Deleter)(sbo_bytes_type& object)                    = nullptr;
+    /**
+        @brief  Get type operations table
+        @tparam derived_t - type inherited from base_t
+        @retval           - operations
+    **/
+    template<sbo_poly_assignable_c<base_t> derived_t>
+    static const operations& get_operations() noexcept;
+
+private:
+    sbo_bytes_type    m_Data;
+    const operations* m_Operations = nullptr;
 };
 
 } // namespace qx

@@ -11,52 +11,62 @@ namespace qx
 {
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
-sbo_poly<base_t, nSBOSize_>::sbo_poly(derived_t object) noexcept
+sbo_poly<base_t, nSBOSize_>::sbo_poly(derived_t object)
 {
     assign(std::move(object));
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 sbo_poly<base_t, nSBOSize_>::sbo_poly(sbo_poly&& other) noexcept
 {
     *this = std::move(other);
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 sbo_poly<base_t, nSBOSize_>::~sbo_poly() noexcept
 {
     // may be empty if an object was moved
-    if (m_Deleter)
-        m_Deleter(m_Data);
+    if (m_Operations)
+        m_Operations->Destroy(m_Data);
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
-sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(derived_t object) noexcept
+sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(derived_t object)
 {
     assign(std::move(object));
     return *this;
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(sbo_poly&& other) noexcept
 {
     if (this == &other)
         return *this;
 
-    if (m_Deleter)
-        m_Deleter(m_Data);
+    // destroy the current object
+
+    if (m_Operations)
+        m_Operations->Destroy(m_Data);
+
+    // required for exception safety if the move operation throws an exception
+    m_Operations = nullptr;
+
+    // move the other object to this one
+
+    if (!other.m_Operations)
+        return *this;
 
     if (other.m_Data.is_small())
     {
-        other.m_Assigner(other.m_Data, m_Data);
-        other.m_Deleter(other.m_Data);
+        other.m_Operations->Move(other.m_Data, m_Data);
+        other.m_Operations->Destroy(other.m_Data);
     }
     else
     {
@@ -64,60 +74,77 @@ sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(sbo_poly&& o
         m_Data = std::move(other.m_Data);
     }
 
-    m_Assigner       = other.m_Assigner;
-    m_Deleter        = other.m_Deleter;
-    other.m_Assigner = nullptr;
-    other.m_Deleter  = nullptr;
+    m_Operations       = other.m_Operations;
+    other.m_Operations = nullptr;
 
     return *this;
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
-void sbo_poly<base_t, nSBOSize_>::assign(derived_t object) noexcept
+void sbo_poly<base_t, nSBOSize_>::assign(derived_t object)
 {
-    if (m_Data.size() > 0)
-        get().~base_t();
+    if (m_Operations)
+        m_Operations->Destroy(m_Data);
 
-    m_Data.resize(sizeof(derived_t));
+    m_Operations = nullptr;
+
+    if (!m_Data.resize(sizeof(derived_t)))
+        throw std::bad_alloc();
+
     new (m_Data.data()) derived_t(std::move(object));
-
-    m_Assigner = [](sbo_bytes_type& from, sbo_bytes_type& to)
-    {
-        to.resize(sizeof(derived_t));
-        new (to.data()) derived_t(std::move(*reinterpret_cast<derived_t*>(from.data())));
-    };
-
-    m_Deleter = [](sbo_bytes_type& object)
-    {
-        reinterpret_cast<derived_t*>(object.data())->~derived_t();
-    };
+    m_Operations = &get_operations<derived_t>();
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
+template<sbo_poly_assignable_c<base_t> derived_t>
+const typename sbo_poly<base_t, nSBOSize_>::operations& sbo_poly<base_t, nSBOSize_>::get_operations() noexcept
+{
+    static constexpr operations table { [](sbo_bytes_type& object) noexcept -> base_t*
+                                        {
+                                            return static_cast<base_t*>(reinterpret_cast<derived_t*>(object.data()));
+                                        },
+                                        [](sbo_bytes_type& from, sbo_bytes_type& to) noexcept
+                                        {
+                                            if (!to.resize(sizeof(derived_t)))
+                                                std::terminate();
+
+                                            new (to.data())
+                                                derived_t(std::move(*reinterpret_cast<derived_t*>(from.data())));
+                                        },
+                                        [](sbo_bytes_type& object) noexcept
+                                        {
+                                            reinterpret_cast<derived_t*>(object.data())->~derived_t();
+                                        } };
+
+    return table;
+}
+
+template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > sizeof(void*))
 base_t* sbo_poly<base_t, nSBOSize_>::operator->() noexcept
 {
     return &get();
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 const base_t* sbo_poly<base_t, nSBOSize_>::operator->() const noexcept
 {
     return &get();
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 base_t& sbo_poly<base_t, nSBOSize_>::get() noexcept
 {
-    return *reinterpret_cast<base_t*>(m_Data.data());
+    return *m_Operations->Get(m_Data);
 }
 
 template<class base_t, size_t nSBOSize_>
-    requires(nSBOSize_ > 2 * sizeof(void*))
+    requires(nSBOSize_ > sizeof(void*))
 const base_t& sbo_poly<base_t, nSBOSize_>::get() const noexcept
 {
     return QX_CONST_CAST_THIS()->get();

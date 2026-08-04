@@ -28,7 +28,7 @@ public:
 };
 
 constexpr size_t k_nSmallDataSize = 32;
-constexpr size_t k_nSBOSize       = 128;
+constexpr size_t k_nSBOSize       = 64;
 constexpr size_t k_nBigDataSize   = 128;
 using sbo_type                    = qx::sbo_poly<base_test_class, k_nSBOSize>;
 

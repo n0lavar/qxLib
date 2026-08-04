@@ -118,6 +118,35 @@ private:
 };
 QX_STATIC_ASSERT_LT(sbo_type::sbo_bytes_type::nBufferSize, sizeof(derived_big));
 
+class other_base
+{
+public:
+    other_base()                        = default;
+    other_base(other_base&&)            = default;
+    other_base& operator=(other_base&&) = default;
+
+    other_base(const other_base&)            = delete;
+    other_base& operator=(const other_base&) = delete;
+
+    virtual ~other_base()              = default;
+    virtual int get_other_data() const = 0;
+};
+
+class multiple_derived
+    : public other_base
+    , public base
+{
+public:
+    multiple_derived(int nIntData, std::string sStringData) : base(nIntData, std::move(sStringData))
+    {
+    }
+
+    int get_other_data() const override
+    {
+        return 42;
+    }
+};
+
 constexpr int k_nSmallIntData = QX_LINE;
 
 static void check_small(const sbo_type& sbo, int nIntData)
@@ -226,4 +255,11 @@ TEST(sbo_poly, shuffle_mixed_sizes)
 
     for (const sbo_type& value : values)
         EXPECT_EQ(value->get_string_data(), std::to_string(value->get_int_data()));
+}
+
+TEST(sbo_poly, multiple_inheritance)
+{
+    constexpr int nIntData = 55;
+    sbo_type      value(multiple_derived(nIntData, std::to_string(nIntData)));
+    check_small(value, nIntData);
 }
