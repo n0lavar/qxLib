@@ -147,6 +147,9 @@ class data_vector_fixture : public benchmark::Fixture
 public:
     virtual void SetUp(::benchmark::State& state) override
     {
+        m_FakeData.clear();
+        m_RealData.clear();
+
         constexpr size_t nSeed = 0;
         std::mt19937     randomEngine(nSeed);
 
@@ -157,23 +160,18 @@ public:
         constexpr double            fFakeDataProbability = 0.8;
         std::bernoulli_distribution IsFake(fFakeDataProbability);
 
-        for (int i = 0; i < static_cast<int>(state.range(0)) * (1.0 + fFakeDataProbability); ++i)
+        for (int i = 0; i < state.range(0);)
         {
-            QX_PUSH_SUPPRESS_ALL_WARNINGS();
-            std::vector<data_type>& container = [this, &IsFake, &randomEngine]() -> std::vector<data_type>&
-            {
-                if constexpr (k_bRandomLocation)
-                    if (IsFake(randomEngine))
-                        return m_FakeData;
+            const bool bFake = k_bRandomLocation && IsFake(randomEngine);
 
-                return m_RealData;
-            }();
-            QX_POP_SUPPRESS_WARNINGS();
-
+            std::vector<data_type>& container = bFake ? m_FakeData : m_RealData;
             if (IsSmall(randomEngine))
                 container.emplace_back(data_traits_t::create_small(randomEngine));
             else
                 container.emplace_back(data_traits_t::create_big(randomEngine));
+
+            if (!bFake)
+                ++i;
         }
 
         if constexpr (k_bRandomLocation)
