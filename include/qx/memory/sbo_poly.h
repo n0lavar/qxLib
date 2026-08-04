@@ -11,6 +11,7 @@
 #include <qx/memory/sbo_bytes.h>
 
 #include <exception>
+#include <memory>
 #include <new>
 #include <type_traits>
 
@@ -26,7 +27,9 @@ concept sbo_poly_assignable_c =
 template<class sbo_poly_t, sbo_poly_assignable_c<typename sbo_poly_t::base_type> derived_t>
 struct sbo_poly_fittable_type
 {
-    static constexpr bool value = sizeof(derived_t) <= sbo_poly_t::sbo_bytes_type::nBufferSize;
+    static constexpr size_t nAlignmentPadding =
+        alignof(derived_t) <= alignof(typename sbo_poly_t::sbo_bytes_type) ? 0 : alignof(derived_t) - 1;
+    static constexpr bool value = sizeof(derived_t) + nAlignmentPadding <= sbo_poly_t::sbo_bytes_type::nBufferSize;
 };
 
 template<class sbo_poly_t, sbo_poly_assignable_c<typename sbo_poly_t::base_type> derived_t>
@@ -138,6 +141,23 @@ private:
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
     static const operations& get_operations() noexcept;
+
+    /**
+        @brief  Get the number of bytes required to store an object with proper alignment
+        @tparam derived_t - type inherited from base_t
+        @retval           - object size plus the worst-case alignment padding when required
+    **/
+    template<sbo_poly_assignable_c<base_t> derived_t>
+    static constexpr size_t get_storage_size() noexcept;
+
+    /**
+        @brief  Get a properly aligned pointer to an object in the storage
+        @tparam derived_t - type inherited from base_t
+        @param  data      - storage containing the object
+        @retval           - aligned pointer to the object
+    **/
+    template<sbo_poly_assignable_c<base_t> derived_t>
+    static derived_t* get_object(sbo_bytes_type& data) noexcept;
 
 private:
     sbo_bytes_type    m_Data;

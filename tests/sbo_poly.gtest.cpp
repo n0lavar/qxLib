@@ -10,6 +10,7 @@
 
 #include <qx/memory/sbo_poly.h>
 
+#include <cstdint>
 #include <random>
 
 //V_EXCLUDE_PATH *.gtest.cpp
@@ -147,6 +148,18 @@ public:
     }
 };
 
+class alignas(256) over_aligned_derived : public base
+{
+public:
+    over_aligned_derived(int nIntData, std::string sStringData) : base(nIntData, std::move(sStringData))
+    {
+    }
+
+    over_aligned_derived(over_aligned_derived&& other) noexcept : base(std::move(other))
+    {
+    }
+};
+
 constexpr int k_nSmallIntData = QX_LINE;
 
 static void check_small(const sbo_type& sbo, int nIntData)
@@ -262,4 +275,18 @@ TEST(sbo_poly, multiple_inheritance)
     constexpr int nIntData = 55;
     sbo_type      value(multiple_derived(nIntData, std::to_string(nIntData)));
     check_small(value, nIntData);
+}
+
+TEST(sbo_poly, over_aligned_type)
+{
+    constexpr int nIntData = 66;
+    sbo_type      value(over_aligned_derived(nIntData, std::to_string(nIntData)));
+
+    EXPECT_EQ(reinterpret_cast<uintptr_t>(&value.get()) % alignof(over_aligned_derived), 0);
+    check_small(value, nIntData);
+
+    sbo_type moved(create_small());
+    moved = std::move(value);
+    EXPECT_EQ(reinterpret_cast<uintptr_t>(&moved.get()) % alignof(over_aligned_derived), 0);
+    check_small(moved, nIntData);
 }

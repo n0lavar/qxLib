@@ -90,11 +90,32 @@ void sbo_poly<base_t, nSBOSize_>::assign(derived_t object)
 
     m_Operations = nullptr;
 
-    if (!m_Data.resize(sizeof(derived_t)))
+    if (!m_Data.resize(get_storage_size<derived_t>()))
         throw std::bad_alloc();
 
-    new (m_Data.data()) derived_t(std::move(object));
+    new (get_object<derived_t>(m_Data)) derived_t(std::move(object));
     m_Operations = &get_operations<derived_t>();
+}
+
+template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > sizeof(void*))
+template<sbo_poly_assignable_c<base_t> derived_t>
+constexpr size_t sbo_poly<base_t, nSBOSize_>::get_storage_size() noexcept
+{
+    if constexpr (alignof(derived_t) <= alignof(sbo_bytes_type))
+        return sizeof(derived_t);
+    else
+        return sizeof(derived_t) + alignof(derived_t) - 1;
+}
+
+template<class base_t, size_t nSBOSize_>
+    requires(nSBOSize_ > sizeof(void*))
+template<sbo_poly_assignable_c<base_t> derived_t>
+derived_t* sbo_poly<base_t, nSBOSize_>::get_object(sbo_bytes_type& data) noexcept
+{
+    void*  pObject = data.data();
+    size_t nSpace  = data.size();
+    return static_cast<derived_t*>(std::align(alignof(derived_t), sizeof(derived_t), pObject, nSpace));
 }
 
 template<class base_t, size_t nSBOSize_>
@@ -104,19 +125,19 @@ const typename sbo_poly<base_t, nSBOSize_>::operations& sbo_poly<base_t, nSBOSiz
 {
     static constexpr operations table { [](sbo_bytes_type& object) noexcept -> base_t*
                                         {
-                                            return static_cast<base_t*>(reinterpret_cast<derived_t*>(object.data()));
+                                            return static_cast<base_t*>(get_object<derived_t>(object));
                                         },
                                         [](sbo_bytes_type& from, sbo_bytes_type& to) noexcept
                                         {
-                                            if (!to.resize(sizeof(derived_t)))
+                                            if (!to.resize(get_storage_size<derived_t>()))
                                                 std::terminate();
 
-                                            new (to.data())
-                                                derived_t(std::move(*reinterpret_cast<derived_t*>(from.data())));
+                                            new (get_object<derived_t>(to))
+                                                derived_t(std::move(*get_object<derived_t>(from)));
                                         },
                                         [](sbo_bytes_type& object) noexcept
                                         {
-                                            reinterpret_cast<derived_t*>(object.data())->~derived_t();
+                                            get_object<derived_t>(object)->~derived_t();
                                         } };
 
     return table;
