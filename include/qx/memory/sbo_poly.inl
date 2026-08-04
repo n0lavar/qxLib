@@ -47,49 +47,27 @@ template<class base_t, size_t nSBOSize_>
     requires(nSBOSize_ > 2 * sizeof(void*))
 sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(sbo_poly&& other) noexcept
 {
-    if (!m_Data.is_small() && !other.m_Data.is_small())
+    if (this == &other)
+        return *this;
+
+    if (m_Deleter)
+        m_Deleter(m_Data);
+
+    if (other.m_Data.is_small())
     {
-        // both objects are big, it's safe to simply swap pointers
-        std::swap(m_Data, other.m_Data);
+        other.m_Assigner(other.m_Data, m_Data);
+        other.m_Deleter(other.m_Data);
     }
     else
     {
-        // one or both objects is small, we should call move constructors for them,
-        // because it isn't safe to use memmove for them.
-        // do it that way that we avoid allocations.
-
-        sbo_bytes<sbo_poly_traits> temp;
-
-        if (m_Data.is_small() && other.m_Data.is_small())
-        {
-            if (m_Assigner)
-                m_Assigner(m_Data, temp);
-
-            other.m_Assigner(other.m_Data, m_Data);
-
-            if (m_Assigner)
-                m_Assigner(temp, other.m_Data);
-        }
-        else if (m_Data.is_small())
-        {
-            if (m_Assigner)
-                m_Assigner(m_Data, temp);
-
-            other.m_Data = std::move(m_Data);
-
-            if (m_Assigner)
-                m_Assigner(temp, other.m_Data);
-        }
-        else
-        {
-            other.m_Assigner(other.m_Data, temp);
-            m_Data = std::move(other.m_Data);
-            other.m_Assigner(temp, m_Data);
-        }
+        // Heap-backed objects can transfer ownership without moving the object itself.
+        m_Data = std::move(other.m_Data);
     }
 
-    std::swap(m_Assigner, other.m_Assigner);
-    std::swap(m_Deleter, other.m_Deleter);
+    m_Assigner       = other.m_Assigner;
+    m_Deleter        = other.m_Deleter;
+    other.m_Assigner = nullptr;
+    other.m_Deleter  = nullptr;
 
     return *this;
 }

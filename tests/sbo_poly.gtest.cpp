@@ -10,6 +10,8 @@
 
 #include <qx/memory/sbo_poly.h>
 
+#include <random>
+
 //V_EXCLUDE_PATH *.gtest.cpp
 
 static int k_nObjectsCounter             = 0;
@@ -206,4 +208,22 @@ TEST(sbo_poly, move_big_to_big)
     sbo_type big2 = create_big(44);
     big2          = std::move(big1);
     check_big(big2, 33);
+}
+
+TEST(sbo_poly, shuffle_mixed_sizes)
+{
+    std::vector<sbo_type> values;
+    for (int i = 0; i < 100; ++i)
+    {
+        if (i % 2 == 0)
+            values.emplace_back(create_small(i));
+        else
+            values.emplace_back(create_big(i));
+    }
+
+    std::mt19937 randomEngine(0);
+    std::shuffle(values.begin(), values.end(), randomEngine);
+
+    for (const sbo_type& value : values)
+        EXPECT_EQ(value->get_string_data(), std::to_string(value->get_int_data()));
 }
