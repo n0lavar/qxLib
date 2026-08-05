@@ -13,9 +13,9 @@ namespace qx
 template<class base_t, size_t nSBOSize_>
     requires(nSBOSize_ > sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
-sbo_poly<base_t, nSBOSize_>::sbo_poly(derived_t object)
+sbo_poly<base_t, nSBOSize_>::sbo_poly(derived_t&& object)
 {
-    assign(std::move(object));
+    assign(std::forward<derived_t>(object));
 }
 
 template<class base_t, size_t nSBOSize_>
@@ -37,9 +37,9 @@ sbo_poly<base_t, nSBOSize_>::~sbo_poly() noexcept
 template<class base_t, size_t nSBOSize_>
     requires(nSBOSize_ > sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
-sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(derived_t object)
+sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(derived_t&& object)
 {
-    assign(std::move(object));
+    assign(std::forward<derived_t>(object));
     return *this;
 }
 
@@ -83,18 +83,20 @@ sbo_poly<base_t, nSBOSize_>& sbo_poly<base_t, nSBOSize_>::operator=(sbo_poly&& o
 template<class base_t, size_t nSBOSize_>
     requires(nSBOSize_ > sizeof(void*))
 template<sbo_poly_assignable_c<base_t> derived_t>
-void sbo_poly<base_t, nSBOSize_>::assign(derived_t object)
+void sbo_poly<base_t, nSBOSize_>::assign(derived_t&& object)
 {
+    using stored_t = std::remove_cvref_t<derived_t>;
+
     if (m_Operations)
         m_Operations->Destroy(m_Data);
 
     m_Operations = nullptr;
 
-    if (!m_Data.resize(get_storage_size<derived_t>()))
+    if (!m_Data.resize(get_storage_size<stored_t>()))
         throw std::bad_alloc();
 
-    new (get_object<derived_t>(m_Data)) derived_t(std::move(object));
-    m_Operations = &get_operations<derived_t>();
+    new (get_object<stored_t>(m_Data)) stored_t(std::forward<derived_t>(object));
+    m_Operations = &get_operations<stored_t>();
 }
 
 template<class base_t, size_t nSBOSize_>

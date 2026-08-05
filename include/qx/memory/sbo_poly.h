@@ -14,6 +14,7 @@
 #include <memory>
 #include <new>
 #include <type_traits>
+#include <utility>
 
 namespace qx
 {
@@ -21,7 +22,8 @@ namespace qx
 // Check that the derived type is suitable for storing in sbo_poly
 template<class T, class base_t>
 concept sbo_poly_assignable_c =
-    std::is_base_of_v<base_t, T> && std::is_nothrow_move_constructible_v<T> && std::is_nothrow_destructible_v<T>;
+    std::is_base_of_v<base_t, std::remove_cvref_t<T>> && std::is_nothrow_move_constructible_v<std::remove_cvref_t<T>>
+    && std::is_nothrow_destructible_v<std::remove_cvref_t<T>> && std::is_constructible_v<std::remove_cvref_t<T>, T&&>;
 
 // Check that the derived type fits into the SBO buffer
 template<class sbo_poly_t, sbo_poly_assignable_c<typename sbo_poly_t::base_type> derived_t>
@@ -93,7 +95,7 @@ public:
         @param  object    - an object to store
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
-    sbo_poly(derived_t object);
+    sbo_poly(derived_t&& object);
 
     sbo_poly(sbo_poly&& other) noexcept;
     ~sbo_poly() noexcept;
@@ -105,7 +107,7 @@ public:
         @retval           - this object reference
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
-    sbo_poly& operator=(derived_t object);
+    sbo_poly& operator=(derived_t&& object);
 
     sbo_poly& operator=(sbo_poly&& other) noexcept;
 
@@ -115,7 +117,7 @@ public:
         @param  object    - an object to store
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
-    void assign(derived_t object);
+    void assign(derived_t&& object);
 
 
     base_t*       operator->() noexcept;
