@@ -127,40 +127,39 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="structqx_1_1string__pool_1_1item.html">item</a> <a class="code" href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">acquire</a>();</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        @brief   Return a string back to the pool.</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @details If nIndex == nFreeString, it is ignored.</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">        @param   sValue - a string that does not necessarily have to be from this pool</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">        @param   nIndex - an index of previously acquired string</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1string__pool.html#a8b86796be2c2ef7a806969f6e851cff8">release</a>(<span class="keywordtype">string</span> sValue, <span class="keywordtype">int</span> nIndex);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">        @brief  Count trailing zeros for a non-zero 64-bit value</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">        @param  nBit - 64-bit value</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">        @retval      - number of trailing zeros</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> ctz64(<a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nBit) noexcept;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        @brief Prepare a string for pooling</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">        @param string - a string</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> normalize(<span class="keywordtype">string</span>&amp; <span class="keywordtype">string</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::array&lt;string, nSize&gt; m_Storage;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">// 1 = free, 0 = in use</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    std::array&lt;std::atomic&lt;u64&gt;, nBlocks&gt; m_FreeMask;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;};</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__pool_8inl.html">qx/containers/string/string_pool.inl</a>&gt;</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">        @brief Return a string back to the pool.</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">        @param item - an item object to release. </span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">               If nIndex == nFreeString, it is ignored. A string that isn&#39;t from this pool is acceptable.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1string__pool.html#a56132a1f76e7bd26d0bc87b6c9c9d871">release</a>(<a class="code" href="structqx_1_1string__pool_1_1item.html">item</a> <a class="code" href="structqx_1_1string__pool_1_1item.html">item</a>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">private</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @brief  Count trailing zeros for a non-zero 64-bit value</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">        @param  nBit - 64-bit value</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">        @retval      - number of trailing zeros</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">int</span> ctz64(<a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nBit) noexcept;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">        @brief Prepare a string for pooling</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">        @param string - a string</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> normalize(<span class="keywordtype">string</span>&amp; <span class="keywordtype">string</span>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    std::array&lt;string, nSize&gt; m_Storage;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">// 1 = free, 0 = in use</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    std::array&lt;std::atomic&lt;u64&gt;, nBlocks&gt; m_FreeMask;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="string__pool_8inl.html">qx/containers/string/string_pool.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1string__pool_html"><div class="ttname"><a href="classqx_1_1string__pool.html">qx::string_pool</a></div><div class="ttdoc">Fixed-size atomic string pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00033">string_pool.h:34</a></div></div>
+<div class="ttc" id="aclassqx_1_1string__pool_html_a56132a1f76e7bd26d0bc87b6c9c9d871"><div class="ttname"><a href="classqx_1_1string__pool.html#a56132a1f76e7bd26d0bc87b6c9c9d871">qx::string_pool::release</a></div><div class="ttdeci">void release(item item)</div><div class="ttdoc">Return a string back to the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00058">string_pool.inl:58</a></div></div>
 <div class="ttc" id="aclassqx_1_1string__pool_html_a87f8ea24bf5b483346b7ace1242e4209"><div class="ttname"><a href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">qx::string_pool::acquire</a></div><div class="ttdeci">item acquire()</div><div class="ttdoc">Acquire a string from the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00033">string_pool.inl:33</a></div></div>
-<div class="ttc" id="aclassqx_1_1string__pool_html_a8b86796be2c2ef7a806969f6e851cff8"><div class="ttname"><a href="classqx_1_1string__pool.html#a8b86796be2c2ef7a806969f6e851cff8">qx::string_pool::release</a></div><div class="ttdeci">void release(string sValue, int nIndex)</div><div class="ttdoc">Return a string back to the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00058">string_pool.inl:58</a></div></div>
 <div class="ttc" id="astring_8h_html"><div class="ttname"><a href="string_8h.html">string.h</a></div></div>
 <div class="ttc" id="astring__pool_8inl_html"><div class="ttname"><a href="string__pool_8inl.html">string_pool.inl</a></div></div>
 <div class="ttc" id="astructqx_1_1string__pool_1_1item_html"><div class="ttname"><a href="structqx_1_1string__pool_1_1item.html">qx::string_pool::item</a></div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00042">string_pool.h:43</a></div></div>

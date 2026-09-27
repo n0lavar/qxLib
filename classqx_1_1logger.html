@@ -111,9 +111,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">register_category</a> (string_view svCategoryName, <a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</td></tr>
 <tr class="memdesc:a0bce4c36d3ed33a8cbc848afc9715890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom rules for category.  <a href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">More...</a><br /></td></tr>
 <tr class="separator:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea5aaac2a4c792d209e33907e65d5409"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#aea5aaac2a4c792d209e33907e65d5409">set_default_formatter</a> (format_function_pointer pFormatter) noexcept</td></tr>
-<tr class="memdesc:aea5aaac2a4c792d209e33907e65d5409"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a function that will be used as the default formatter in case no formatter found in categories registered.  <a href="classqx_1_1logger.html#aea5aaac2a4c792d209e33907e65d5409">More...</a><br /></td></tr>
-<tr class="separator:aea5aaac2a4c792d209e33907e65d5409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe154a8d627ca7e7f7c5d4e839afb246"><td class="memItemLeft" align="right" valign="top">compile_pattern_result&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#afe154a8d627ca7e7f7c5d4e839afb246">set_default_pattern</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> sPattern) noexcept</td></tr>
+<tr class="memdesc:afe154a8d627ca7e7f7c5d4e839afb246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and set the default pattern for log messages.  <a href="classqx_1_1logger.html#afe154a8d627ca7e7f7c5d4e839afb246">More...</a><br /></td></tr>
+<tr class="separator:afe154a8d627ca7e7f7c5d4e839afb246"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c4de37c0788147d909d31ffa156e507"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a8c4de37c0788147d909d31ffa156e507">log_macro</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, <a class="el" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> message)</td></tr>
 <tr class="memdesc:a8c4de37c0788147d909d31ffa156e507"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main log function: log to all streams. For macro and internal usage.  <a href="classqx_1_1logger.html#a8c4de37c0788147d909d31ffa156e507">More...</a><br /></td></tr>
 <tr class="separator:a8c4de37c0788147d909d31ffa156e507"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -134,7 +134,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.01.2020 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00061">61</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8h_source.html#l00060">60</a> of file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4e45ab9c399be9eb0761171f441ab5ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e45ab9c399be9eb0761171f441ab5ea">&#9670;&nbsp;</a></span>add_stream()</h2>
@@ -176,7 +176,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00035">35</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00036">36</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -264,7 +264,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00187">187</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00186">186</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -305,7 +305,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00042">42</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00043">43</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -346,7 +346,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00049">49</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00050">50</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -381,7 +381,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00059">59</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00060">60</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -471,7 +471,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00087">87</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00093">93</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -518,7 +518,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00071">71</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00072">72</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -565,7 +565,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00076">76</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00077">77</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -605,12 +605,12 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00065">65</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00066">66</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
-<a id="aea5aaac2a4c792d209e33907e65d5409"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea5aaac2a4c792d209e33907e65d5409">&#9670;&nbsp;</a></span>set_default_formatter()</h2>
+<a id="afe154a8d627ca7e7f7c5d4e839afb246"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe154a8d627ca7e7f7c5d4e839afb246">&#9670;&nbsp;</a></span>set_default_pattern()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -619,10 +619,10 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void qx::logger::set_default_formatter </td>
+          <td class="memname">compile_pattern_result qx::logger::set_default_pattern </td>
           <td>(</td>
-          <td class="paramtype">format_function_pointer&#160;</td>
-          <td class="paramname"><em>pFormatter</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td>
+          <td class="paramname"><em>sPattern</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -633,15 +633,22 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
 </table>
 </div><div class="memdoc">
 
-<p>Set a function that will be used as the default formatter in case no formatter found in categories registered. </p>
+<p>Compile and set the default pattern for log messages. </p>
+<dl class="section warning"><dt>Warning</dt><dd>Not thread safe on purpose due to optimization reasons. Make sure you set it only once before any log line. </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pFormatter</td><td>- default formatter </td></tr>
+    <tr><td class="paramname">sPattern</td><td>- formatting pattern, see qx::logger_specifiers </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>compilation result. If != ok the pattern is unchanged. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00082">82</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00083">83</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
