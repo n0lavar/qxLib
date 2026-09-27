@@ -290,6 +290,14 @@ public:
     size_type reserve(size_type nCapacity) noexcept;
 
     /**
+        @brief   Resize string
+        @details If the new size is smaller, the string may be 
+        @param   nSymbols - new size (symbols without null terminator, not bytes)
+        @retval           - true if a memory allocation is successful
+    **/
+    bool resize(size_type nSymbols) noexcept;
+
+    /**
         @brief Fit allocated size to string's actual size
     **/
     void shrink_to_fit() noexcept;
@@ -1607,14 +1615,6 @@ public:
     explicit operator bool() const noexcept;
 
 private:
-    /**
-        @brief   Resize string
-        @details If new size is smaller, string will be truncated
-        @param   nSymbols - new size
-        @retval           - true if memory alloc is successful
-    **/
-    bool _resize(size_type nSymbols) noexcept;
-
     /**
         @brief  Common algorithm for trimming string to the left
         @tparam searcher_t - "searcher" type

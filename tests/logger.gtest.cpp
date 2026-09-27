@@ -707,23 +707,11 @@ TEST(logger_test, streams)
 
 void test_rotation(qx::log_file_policy eLogFilePolicy)
 {
-    static constexpr auto formatter = [](const qx::category&                   category,
-                                         qx::verbosity                         eVerbosity,
-                                         std::thread::id                       threadId,
-                                         std::chrono::system_clock::time_point messageTime,
-                                         qx::string_view                       svFile,
-                                         qx::string_view                       svFunction,
-                                         int                                   nLine,
-                                         qx::string                            sMessage)
-    {
-        return sMessage;
-    };
-
     auto reset_logger = [eLogFilePolicy]()
     {
         qx::logger& logger = qx::get_logger();
         logger.reset();
-        logger.set_default_formatter(formatter);
+        logger.set_default_pattern(QXT("{message}"));
         logger.add_stream(qx::file_logger_stream_mapping({ .eLogFilePolicy  = eLogFilePolicy,
                                                            .nMaxLogFiles    = 3,
                                                            .svLogsDirectory = k_svLogsDirectory,

@@ -9,9 +9,8 @@
 #pragma once
 
 #include <qx/containers/flags.h>
-#include <qx/containers/string/string_converters.h>
 #include <qx/logger/fwrite_logger_stream.h>
-#include <qx/logger/logger_formatters.h>
+#include <qx/logger/logger_specifiers.h>
 #include <qx/macros/details/macro_user_message.h>
 #include <qx/memory/sbo_poly.h>
 #include <qx/patterns/singleton.h>
@@ -70,24 +69,9 @@ public:
 #endif
         >;
 
-    // For best performance, do not allocate anything in this function and return the modified sMessage object.
-    // See default_formatter for an example.
-    using format_signature = string(
-        const category&,
-        verbosity,
-        std::thread::id,
-        std::chrono::system_clock::time_point,
-        string_view,
-        string_view,
-        int,
-        string);
-    using format_function_pointer = format_signature*;
-    using format_function         = std::function<format_signature>;
-
     struct category_data
     {
-        verbosity       eRuntimeVerbosity = verbosity::detailed;
-        format_function formatFunction;
+        verbosity eRuntimeVerbosity = verbosity::detailed;
     };
 
     using category_data_map  = std::unordered_map<string_view, category_data>;
@@ -160,10 +144,13 @@ public:
     void register_category(string_view svCategoryName, category_data data) noexcept;
 
     /**
-        @brief Set a function that will be used as the default formatter in case no formatter found in categories registered
-        @param pFormatter - default formatter
+        @brief   Compile and set the default pattern for log messages.
+        @warning Not thread safe on purpose due to optimization reasons.
+                 Make sure you set it only once before any log line.
+        @param   sPattern - formatting pattern, see qx::logger_specifiers
+        @retval           - compilation result. If != ok the pattern is unchanged.
     **/
-    void set_default_formatter(format_function_pointer pFormatter) noexcept;
+    compile_pattern_result set_default_pattern(string sPattern) noexcept;
 
     /**
         @brief   Main log function: log to all streams. For macro and internal usage.
@@ -231,8 +218,7 @@ private:
 
     logger_string_pool m_StringsPool;
 
-    std::atomic<format_function_pointer> m_DefaultFormatFunction = format_message_qx;
-    static_assert(std::atomic<format_function_pointer>::is_always_lock_free);
+    string m_sDefaultPattern;
 };
 
 QX_FLAGS_ENUM_CLASS(logger::message_necessity_type);

@@ -9,7 +9,6 @@
 #pragma once
 
 #include <qx/logger/base_logger_stream.h>
-#include <qx/logger/logger_formatters.h>
 
 #include <filesystem>
 

@@ -56,12 +56,11 @@ public:
     item acquire();
 
     /**
-        @brief   Return a string back to the pool.
-        @details If nIndex == nFreeString, it is ignored.
-        @param   sValue - a string that does not necessarily have to be from this pool
-        @param   nIndex - an index of previously acquired string
+        @brief Return a string back to the pool.
+        @param item - an item object to release. 
+               If nIndex == nFreeString, it is ignored. A string that isn't from this pool is acceptable.
     **/
-    void release(string sValue, int nIndex);
+    void release(item item);
 
 private:
     /**

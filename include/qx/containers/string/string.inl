@@ -57,14 +57,14 @@ inline basic_string<char_t, traits_t>::basic_string(const string_t& sAnother) no
 template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::assign(size_type nSymbols, value_type chSymbol) noexcept
 {
-    if (_resize(nSymbols))
+    if (resize(nSymbols))
         std::fill(begin(), end(), chSymbol);
 }
 
 template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::assign(const_pointer pszSource, size_type nSymbols) noexcept
 {
-    if (pszSource && _resize(nSymbols))
+    if (pszSource && resize(nSymbols))
         std::memmove(data(), pszSource, nSymbols * sizeof(value_type));
 }
 
@@ -101,7 +101,7 @@ inline void basic_string<char_t, traits_t>::assign(fwd_it_t itFirst, fwd_it_t it
         ++nPos;
     }
 
-    _resize(nPos);
+    resize(nPos);
 }
 
 template<class char_t, class traits_t>
@@ -206,6 +206,17 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 }
 
 template<class char_t, class traits_t>
+inline bool basic_string<char_t, traits_t>::resize(size_type nSymbols) noexcept
+{
+    // + 1: null terminator
+    const bool bRet = m_Data.resize((nSymbols > 0 ? nSymbols + 1 : 0) * sizeof(value_type));
+    if (bRet)
+        (*this)[nSymbols] = QX_CHAR_PREFIX(typename traits_t::value_type, '\0');
+
+    return bRet;
+}
+
+template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::shrink_to_fit() noexcept
 {
     m_Data.shrink_to_fit();
@@ -215,7 +226,7 @@ template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::free() noexcept
 {
     m_Data.free();
-    _resize(0);
+    resize(0);
 }
 
 template<class char_t, class traits_t>
@@ -412,7 +423,7 @@ inline void basic_string<char_t, traits_t>::append(const_pointer pszStr, size_ty
         const size_type nSize       = size();
         const size_type nSizeSource = nSymbols == npos ? traits_t::length(pszStr) : nSymbols;
 
-        if (_resize(nSize + nSizeSource))
+        if (resize(nSize + nSizeSource))
             std::memcpy(data() + nSize, pszStr, nSizeSource * sizeof(value_type));
     }
 }
@@ -464,7 +475,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
         const size_type nSize       = size();
         const size_type nSizeSource = nSymbols == npos ? traits_t::length(pszWhat) : nSymbols;
 
-        if (nSizeSource > 0 && _resize(nSize + nSizeSource))
+        if (nSizeSource > 0 && resize(nSize + nSizeSource))
         {
             std::memmove(data() + nPos + nSizeSource, data() + nPos, (nSize - nPos) * sizeof(value_type));
             std::memcpy(data() + nPos, pszWhat, nSizeSource * sizeof(value_type));
@@ -493,7 +504,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
             ++nWhatSize;
 
         size_type nStartSymbols = size();
-        if (nWhatSize > 0 && _resize(nStartSymbols + nWhatSize))
+        if (nWhatSize > 0 && resize(nStartSymbols + nWhatSize))
         {
             std::memmove(data() + nPos + nWhatSize, data() + nPos, (nStartSymbols - nPos) * sizeof(value_type));
 
@@ -578,7 +589,7 @@ template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::push_back(value_type chSymbol) noexcept
 {
     const size_t nStartSize = size();
-    _resize(nStartSize + 1);
+    resize(nStartSize + 1);
     (*this)[nStartSize] = chSymbol;
 }
 
@@ -603,7 +614,7 @@ inline void basic_string<char_t, traits_t>::erase(iterator itFirst, iterator itL
 
         if (static_cast<typename iterator::difference_type>(nStartSize) >= nCharsToErase)
         {
-            _resize(nStartSize - nCharsToErase);
+            resize(nStartSize - nCharsToErase);
         }
     }
 }
@@ -1198,7 +1209,7 @@ typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t
 
     std::memcpy(data() + nBegin, pszReplace, nReplaceSize * sizeof(value_type));
 
-    _resize(nNewSize);
+    resize(nNewSize);
 
     return nBegin + nReplaceSize;
 }
@@ -2270,17 +2281,6 @@ inline basic_string<char_t, traits_t>::operator bool() const noexcept
 }
 
 template<class char_t, class traits_t>
-inline bool basic_string<char_t, traits_t>::_resize(size_type nSymbols) noexcept
-{
-    // + 1: null terminator
-    const bool bRet = m_Data.resize((nSymbols > 0 ? nSymbols + 1 : 0) * sizeof(value_type));
-    if (bRet)
-        (*this)[nSymbols] = QX_CHAR_PREFIX(typename traits_t::value_type, '\0');
-
-    return bRet;
-}
-
-template<class char_t, class traits_t>
 template<class searcher_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::_trim_left(
     const searcher_t& searcher) noexcept
@@ -2338,7 +2338,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 
     std::memmove(data(), data() + nStartPos, nNewSize * sizeof(value_type));
 
-    _resize(nNewSize);
+    resize(nNewSize);
     return nSize - nNewSize;
 }
 
@@ -2719,7 +2719,7 @@ qx::details::istream<char_t>& operator>>(qx::details::istream<char_t>& is, qx::b
     auto try_push_back = [&str, &is, &ret_bit](char_t ch)
     {
         typename traits_t::size_type nCurrentSize = str.size();
-        if (str._resize(nCurrentSize + 1))
+        if (str.resize(nCurrentSize + 1))
         {
             str[nCurrentSize] = ch;
             return true;

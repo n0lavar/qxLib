@@ -80,7 +80,7 @@ public:
     /**
         @brief  Create new category from this one with custom verbosity
         @param  eVerbosity - category verbosity.
-                User code will use this category with top priority and perform compile time checks if possible
+                             User code will use this category with top priority and perform compile time checks if possible
         @retval            - new category
     **/
     constexpr category set_verbosity(verbosity eVerbosity) const noexcept;
@@ -129,3 +129,43 @@ struct file_category
 };
 
 } // namespace qx::details
+
+template<class char_t>
+struct QX_FMT_NS::formatter<qx::category, char_t>
+{
+    bool bLog = false;
+
+    template<class format_parse_context_t>
+    constexpr auto parse(format_parse_context_t& ctx)
+    {
+        auto it = ctx.begin();
+
+        // format for logs
+        if (it != ctx.end() && *it == QX_CHAR_PREFIX(char_t, 'l'))
+        {
+            ++it;
+            bLog = true;
+        }
+
+        if (it != ctx.end() && *it != QX_CHAR_PREFIX(char_t, '}'))
+            throw QX_FMT_NS::format_error("unknown spec");
+
+        return it;
+    }
+
+    template<class format_context_type>
+    constexpr auto format(const qx::category& value, format_context_type& ctx) const
+    {
+        if (bLog)
+        {
+            if (value != CatDefault)
+                return QX_FMT_NS::format_to(ctx.out(), QX_STR_PREFIX(char_t, "[{}]"), value.get_name());
+            else
+                return ctx.out();
+        }
+        else
+        {
+            return QX_FMT_NS::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), value.get_name());
+        }
+    }
+};

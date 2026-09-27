@@ -21,7 +21,7 @@ inline file_logger_stream_ofstream::file_logger_stream_ofstream(
         path,
         std::ios_base::binary
             | (streamConfig.eLogFilePolicy == log_file_policy::clear_then_upend ? std::ios_base::trunc
-                                                                                 : std::ios_base::app));
+                                                                                : std::ios_base::app));
 
     if (!m_File)
     {

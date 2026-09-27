@@ -82,9 +82,9 @@ private:
 template<class left_t, class right_t, class operation_t, bool bLeftIsLvalue, bool bRightIsLvalue>
 struct predicates::validator<details::assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>>
 {
-    static constexpr bool
-        is_valid(const details::assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>& value)
-            noexcept(noexcept(value.result()));
+    static constexpr bool is_valid(
+        const details::assert_comparison<left_t, right_t, operation_t, bLeftIsLvalue, bRightIsLvalue>&
+            value) noexcept(noexcept(value.result()));
 };
 
 /**
@@ -101,13 +101,11 @@ struct predicates::validator<details::assert_comparison<left_t, right_t, operati
 template<class left_t, class right_t>
 constexpr auto assert_eq(left_t&& left, right_t&& right) noexcept(
     noexcept(details::assert_comparison<
-        left_t,
-        right_t,
-        std::equal_to<>,
-        std::is_lvalue_reference_v<left_t>,
-        std::is_lvalue_reference_v<right_t>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))));
+             left_t,
+             right_t,
+             std::equal_to<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))));
 
 /**
     @brief   Compare two values for inequality and preserve values for assertion diagnostics.
@@ -123,13 +121,11 @@ constexpr auto assert_eq(left_t&& left, right_t&& right) noexcept(
 template<class left_t, class right_t>
 constexpr auto assert_ne(left_t&& left, right_t&& right) noexcept(
     noexcept(details::assert_comparison<
-        left_t,
-        right_t,
-        std::not_equal_to<>,
-        std::is_lvalue_reference_v<left_t>,
-        std::is_lvalue_reference_v<right_t>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))));
+             left_t,
+             right_t,
+             std::not_equal_to<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))));
 
 /**
     @brief   Compare whether left value is less than right value and preserve values for assertion diagnostics.
@@ -145,13 +141,11 @@ constexpr auto assert_ne(left_t&& left, right_t&& right) noexcept(
 template<class left_t, class right_t>
 constexpr auto assert_lt(left_t&& left, right_t&& right) noexcept(
     noexcept(details::assert_comparison<
-        left_t,
-        right_t,
-        std::less<>,
-        std::is_lvalue_reference_v<left_t>,
-        std::is_lvalue_reference_v<right_t>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))));
+             left_t,
+             right_t,
+             std::less<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))));
 
 /**
     @brief   Compare whether left value is less than or equal to right value and preserve values for assertion diagnostics.
@@ -167,13 +161,11 @@ constexpr auto assert_lt(left_t&& left, right_t&& right) noexcept(
 template<class left_t, class right_t>
 constexpr auto assert_le(left_t&& left, right_t&& right) noexcept(
     noexcept(details::assert_comparison<
-        left_t,
-        right_t,
-        std::less_equal<>,
-        std::is_lvalue_reference_v<left_t>,
-        std::is_lvalue_reference_v<right_t>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))));
+             left_t,
+             right_t,
+             std::less_equal<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))));
 
 /**
     @brief   Compare whether left value is greater than right value and preserve values for assertion diagnostics.
@@ -189,13 +181,11 @@ constexpr auto assert_le(left_t&& left, right_t&& right) noexcept(
 template<class left_t, class right_t>
 constexpr auto assert_gt(left_t&& left, right_t&& right) noexcept(
     noexcept(details::assert_comparison<
-        left_t,
-        right_t,
-        std::greater<>,
-        std::is_lvalue_reference_v<left_t>,
-        std::is_lvalue_reference_v<right_t>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))));
+             left_t,
+             right_t,
+             std::greater<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))));
 
 /**
     @brief   Compare whether left value is greater than or equal to right value and preserve values for assertion diagnostics.
@@ -211,13 +201,11 @@ constexpr auto assert_gt(left_t&& left, right_t&& right) noexcept(
 template<class left_t, class right_t>
 constexpr auto assert_ge(left_t&& left, right_t&& right) noexcept(
     noexcept(details::assert_comparison<
-        left_t,
-        right_t,
-        std::greater_equal<>,
-        std::is_lvalue_reference_v<left_t>,
-        std::is_lvalue_reference_v<right_t>>(
-        std::forward<left_t>(left),
-        std::forward<right_t>(right))));
+             left_t,
+             right_t,
+             std::greater_equal<>,
+             std::is_lvalue_reference_v<left_t>,
+             std::is_lvalue_reference_v<right_t>>(std::forward<left_t>(left), std::forward<right_t>(right))));
 
 } // namespace qx
 

@@ -158,7 +158,7 @@ TEST(smart_ptr_ref_adapter, unique_ref_converting_move)
 {
     EXPECT_EQ(test_class::get_objects_alive(), 0);
 
-    auto object1 = create_unique_ref("converting_move");
+    auto                                 object1 = create_unique_ref("converting_move");
     qx::unique_ref<test_class_interface> object2 = std::move(object1);
     EXPECT_EQ(test_class::get_objects_alive(), 1);
 
@@ -171,7 +171,7 @@ TEST(smart_ptr_ref_adapter, shared_ref_converting_move)
 {
     EXPECT_EQ(test_class::get_objects_alive(), 0);
 
-    auto object1 = create_shared_ref("converting_move");
+    auto                                 object1 = create_shared_ref("converting_move");
     qx::shared_ref<test_class_interface> object2 = std::move(object1);
     EXPECT_EQ(test_class::get_objects_alive(), 1);
 

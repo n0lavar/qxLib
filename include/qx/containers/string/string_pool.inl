@@ -55,19 +55,19 @@ typename string_pool<nSize>::item string_pool<nSize>::acquire()
 }
 
 template<size_t nSize>
-void string_pool<nSize>::release(string sValue, int nIndex)
+void string_pool<nSize>::release(item item)
 {
-    if (nIndex == nFreeString)
+    if (item.nIndex == nFreeString)
         return;
 
-    const size_t nSizeIndex = static_cast<size_t>(nIndex);
+    const size_t nSizeIndex = static_cast<size_t>(item.nIndex);
     if (nSizeIndex >= nSize)
         return;
 
-    normalize(sValue);
+    normalize(item.sValue);
 
     // Exclusive access is guaranteed by the occupancy bit
-    m_Storage[nSizeIndex] = std::move(sValue);
+    m_Storage[nSizeIndex] = std::move(item.sValue);
 
     const size_t nBlock  = nSizeIndex / bTotalBits;
     const size_t nOffset = nSizeIndex % bTotalBits;

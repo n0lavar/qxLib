@@ -23,6 +23,7 @@ static constexpr auto logger_stream_filter = [](const logger::logger_sbo& stream
 
 inline logger::logger() noexcept
 {
+    logger::reset();
     add_stream(fwrite_logger_stream());
 }
 
@@ -79,9 +80,14 @@ inline void logger::register_category(string_view svCategoryName, category_data 
     m_RegisteredCategories.emplace(svCategoryName, std::move(data));
 }
 
-inline void logger::set_default_formatter(format_function_pointer pFormatter) noexcept
+inline compile_pattern_result logger::set_default_pattern(string sPattern) noexcept
 {
-    m_DefaultFormatFunction = pFormatter;
+    const compile_pattern_result eResult = compile_pattern(sPattern);
+
+    if (eResult == compile_pattern_result::ok)
+        m_sDefaultPattern = std::move(sPattern);
+
+    return eResult;
 }
 
 inline void logger::log_macro(
@@ -94,48 +100,23 @@ inline void logger::log_macro(
     int                                   nLine,
     logger_string_pool::item              message)
 {
-    string sMessage = std::move(message.sValue);
-
     const flags<message_necessity_type> eMessageNecessity =
         get_message_necessity_type(category, eVerbosity, threadId, messageTime, svFile, svFunction, nLine);
+
     if (eMessageNecessity != message_necessity_type::not_required)
     {
-        bool bFormatted = false;
-        {
-            std::shared_lock _(m_RegisteredCategoriesMutex);
-            if (auto itRegisteredCategory = m_RegisteredCategories.find(category.get_name());
-                itRegisteredCategory != m_RegisteredCategories.end())
-            {
-                const category_data& data = itRegisteredCategory->second;
-                if (data.formatFunction)
-                {
-                    sMessage = data.formatFunction(
-                        category,
-                        eVerbosity,
-                        threadId,
-                        messageTime,
-                        svFile,
-                        svFunction,
-                        nLine,
-                        std::move(sMessage));
-
-                    bFormatted = true;
-                }
-            }
-        }
-
-        if (!bFormatted)
-        {
-            sMessage = m_DefaultFormatFunction.load()(
-                category,
-                eVerbosity,
-                threadId,
-                messageTime,
-                svFile,
-                svFunction,
-                nLine,
-                std::move(sMessage));
-        }
+        logger_string_pool::item finalLogMessage = m_StringsPool.acquire();
+        qx::format_log_specifiers(
+            finalLogMessage.sValue,
+            m_sDefaultPattern,
+            category,
+            eVerbosity,
+            threadId,
+            messageTime,
+            svFile,
+            svFunction,
+            nLine,
+            message.sValue);
 
         {
             std::shared_lock _(m_StreamsMutex);
@@ -151,13 +132,23 @@ inline void logger::log_macro(
                         svFunction,
                         nLine))
                 {
-                    stream->log(category, eVerbosity, threadId, messageTime, svFile, svFunction, nLine, sMessage);
+                    stream->log(
+                        category,
+                        eVerbosity,
+                        threadId,
+                        messageTime,
+                        svFile,
+                        svFunction,
+                        nLine,
+                        finalLogMessage.sValue);
                 }
             }
         }
+
+        m_StringsPool.release(std::move(finalLogMessage));
     }
 
-    m_StringsPool.release(std::move(sMessage), message.nIndex);
+    m_StringsPool.release(std::move(message));
 }
 
 inline void logger::flush()
@@ -181,7 +172,15 @@ inline void logger::reset() noexcept
         m_RegisteredCategories.clear();
     }
 
-    m_DefaultFormatFunction = format_message_qx;
+    /*
+        Default pattern for the logger. Some examples:
+
+        >   [08.01.2026_23:51:41] Time? Is it really that time again?
+        >   [08.01.2026_23:51:41][CatCore] Time? Is it really that time again?
+        >[W][08.01.2026_23:51:41] Time? Is it really that time again?
+        >[W][08.01.2026_23:51:41][CatCore] Time? Is it really that time again?
+    */
+    set_default_pattern(QXT("{verbosity:l}[{time:%d.%m.%Y_%H:%M:%S}]{category:l} {message}\n"));
 }
 
 inline flags<logger::message_necessity_type> logger::get_message_necessity_type(
