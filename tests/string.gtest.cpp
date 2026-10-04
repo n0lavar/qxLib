@@ -21,72 +21,107 @@
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);
 
+namespace
+{
+template<class T, class U>
+struct builder_hash : qx::string_traits::hash_traits<T, U>
+{
+    static constexpr u32 hash_seed() noexcept { return 42; }
+};
+
+template<class T>
+struct builder_usings : qx::string_traits::usings_traits<T>
+{
+    using size_type = unsigned int;
+};
+
+template<class T, class U>
+struct builder_length : qx::string_traits::length_traits<T, U>
+{
+    using selected_size_type = typename U::size_type;
+};
+
+// A concrete user policy with its own logic and no library base class.
+struct custom_allocation
+{
+    static constexpr size_t small_string_size() noexcept { return sizeof(size_t) * 16; }
+    static constexpr bool shrink_to_fit_when_small() noexcept { return true; }
+};
+
+template<class T>
+void check_traits_builder()
+{
+    namespace st = qx::string_traits;
+    static_assert(st::small_traits<T>::small_string_size() == 32 / sizeof(T));
+    static_assert(st::default_traits<T>::small_string_size() == 64 / sizeof(T));
+    static_assert(st::big_traits<T>::small_string_size() == 128 / sizeof(T));
+    static_assert(st::huge_traits<T>::small_string_size() == 256 / sizeof(T));
+
+    using custom = typename st::traits_builder<st::big_traits<T>>
+        ::template with_hash<builder_hash<T, st::usings_traits<T>>>
+        ::template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 32, true>>
+        ::type;
+    static_assert(custom::hash_seed() == 42);
+    static_assert(custom::small_string_size() == 32 / sizeof(T));
+    static_assert(custom::shrink_to_fit_when_small());
+
+    using rebuilt = typename st::traits_builder<custom>
+        ::template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 128, false>>
+        ::template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 256, false>>
+        ::type;
+    static_assert(rebuilt::hash_seed() == 42);
+    static_assert(rebuilt::small_string_size() == 256 / sizeof(T));
+    static_assert(!rebuilt::shrink_to_fit_when_small());
+
+    using rebound = typename st::traits_builder<custom>
+        ::template with_length<builder_length<T, builder_usings<T>>>
+        ::template with_usings<builder_usings<T>>
+        ::template with_allocation<st::allocation_traits<T, builder_usings<T>, 32, true>>
+        ::type;
+    static_assert(std::is_same_v<typename rebound::selected_size_type, unsigned int>);
+    static_assert(std::is_same_v<decltype(rebound::small_string_size()), unsigned int>);
+
+    using allocated = typename st::traits_builder<custom>
+        ::template with_allocation<custom_allocation>
+        ::type;
+    static_assert(std::is_base_of_v<custom_allocation, allocated>);
+    static_assert(allocated::small_string_size() == sizeof(size_t) * 16);
+    static_assert(allocated::shrink_to_fit_when_small());
+    static_assert(allocated::hash_seed() == 42);
+    qx::basic_string<T, allocated> str;
+    EXPECT_EQ(str.capacity(), custom_allocation::small_string_size() - 2 * sizeof(size_t) / sizeof(T) - 1);
+
+    using provided = typename st::traits_builder<allocated>
+        ::template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 128, false>>
+        ::type;
+    static_assert(provided::small_string_size() == 128 / sizeof(T));
+    static_assert(!provided::shrink_to_fit_when_small());
+    const T text[] = {T('a'), T('b'), T('c'), T(0)};
+    EXPECT_EQ(custom::length(text), 3u);
+    EXPECT_EQ(rebuilt::compare(text, text), 0);
+}
+} // namespace
+
+TEST(string_traits_builder, replaces_aspects)
+{
+    check_traits_builder<char>();
+    check_traits_builder<wchar_t>();
+}
+
 template<class string_traits_t>
 class test_qx_string : public ::testing::Test
 {
 };
 
 using implementations_type = ::testing::Types<
-    qx::string_traits::constructor<
-        qx::string_traits::usings_traits<char>,
-        qx::string_traits::hash_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::allocation_traits<char, qx::string_traits::usings_traits<char>, 64, false>,
-        qx::string_traits::test_char_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::format_string_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
-    qx::string_traits::constructor<
-        qx::string_traits::usings_traits<char>,
-        qx::string_traits::hash_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::allocation_traits<char, qx::string_traits::usings_traits<char>, 32, false>,
-        qx::string_traits::test_char_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::format_string_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
-    qx::string_traits::constructor<
-        qx::string_traits::usings_traits<char>,
-        qx::string_traits::hash_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::allocation_traits<char, qx::string_traits::usings_traits<char>, 256, false>,
-        qx::string_traits::test_char_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::transform_char_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::length_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::compare_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::format_string_traits<char, qx::string_traits::usings_traits<char>>,
-        qx::string_traits::format_traits<char, qx::string_traits::usings_traits<char>>>,
-    qx::string_traits::constructor<
-        qx::string_traits::usings_traits<wchar_t>,
-        qx::string_traits::hash_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::allocation_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>, 64, false>,
-        qx::string_traits::test_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::format_string_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>,
-    qx::string_traits::constructor<
-        qx::string_traits::usings_traits<wchar_t>,
-        qx::string_traits::hash_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::allocation_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>, 32, false>,
-        qx::string_traits::test_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::format_string_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>,
-    qx::string_traits::constructor<
-        qx::string_traits::usings_traits<wchar_t>,
-        qx::string_traits::hash_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::allocation_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>, 256, false>,
-        qx::string_traits::test_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::transform_char_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::length_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::compare_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::format_string_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>,
-        qx::string_traits::format_traits<wchar_t, qx::string_traits::usings_traits<wchar_t>>>>;
+    qx::string_traits::small_traits<char>,
+    qx::string_traits::default_traits<char>,
+    qx::string_traits::big_traits<char>,
+    qx::string_traits::huge_traits<char>,
+    qx::string_traits::small_traits<wchar_t>,
+    qx::string_traits::default_traits<wchar_t>,
+    qx::string_traits::big_traits<wchar_t>,
+    qx::string_traits::huge_traits<wchar_t>>;
 
 template<class char_t, class size_t>
 static size_t capacity_to_small_string_size(size_t nCapacity)

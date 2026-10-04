@@ -305,25 +305,180 @@ struct format_traits<wchar_t, usings_char_traits_t>
     }
 };
 
-template<class... args_t>
-struct constructor : public args_t...
+namespace details
+{
+
+template<
+    class value_t,
+    class usings_traits_t         = usings_traits<value_t>,
+    class hash_traits_t           = hash_traits<value_t, usings_traits_t>,
+    class allocation_traits_t     = allocation_traits<value_t, usings_traits_t, 64, false>,
+    class test_char_traits_t      = test_char_traits<value_t, usings_traits_t>,
+    class transform_char_traits_t = transform_char_traits<value_t, usings_traits_t>,
+    class length_traits_t         = length_traits<value_t, usings_traits_t>,
+    class compare_traits_t        = compare_traits<value_t, usings_traits_t>,
+    class format_string_traits_t  = format_string_traits<value_t, usings_traits_t>,
+    class format_traits_t         = format_traits<value_t, usings_traits_t>>
+struct builder
+{
+    template<class... args_t>
+    struct constructor : public args_t...
+    {
+    };
+
+    struct type
+        : constructor<
+              usings_traits_t,
+              hash_traits_t,
+              allocation_traits_t,
+              test_char_traits_t,
+              transform_char_traits_t,
+              length_traits_t,
+              compare_traits_t,
+              format_string_traits_t,
+              format_traits_t>
+    {
+        using builder_type = builder;
+    };
+
+    template<class trait_override_t>
+    using with_usings = builder<
+        value_t,
+        trait_override_t,
+        hash_traits_t,
+        allocation_traits_t,
+        test_char_traits_t,
+        transform_char_traits_t,
+        length_traits_t,
+        compare_traits_t,
+        format_string_traits_t,
+        format_traits_t>;
+
+    template<class trait_override_t>
+    using with_hash = builder<
+        value_t,
+        usings_traits_t,
+        trait_override_t,
+        allocation_traits_t,
+        test_char_traits_t,
+        transform_char_traits_t,
+        length_traits_t,
+        compare_traits_t,
+        format_string_traits_t,
+        format_traits_t>;
+
+    template<class trait_override_t>
+    using with_allocation = builder<
+        value_t,
+        usings_traits_t,
+        hash_traits_t,
+        trait_override_t,
+        test_char_traits_t,
+        transform_char_traits_t,
+        length_traits_t,
+        compare_traits_t,
+        format_string_traits_t,
+        format_traits_t>;
+
+    template<class trait_override_t>
+    using with_test_char = builder<
+        value_t,
+        usings_traits_t,
+        hash_traits_t,
+        allocation_traits_t,
+        trait_override_t,
+        transform_char_traits_t,
+        length_traits_t,
+        compare_traits_t,
+        format_string_traits_t,
+        format_traits_t>;
+
+    template<class trait_override_t>
+    using with_transform_char = builder<
+        value_t,
+        usings_traits_t,
+        hash_traits_t,
+        allocation_traits_t,
+        test_char_traits_t,
+        trait_override_t,
+        length_traits_t,
+        compare_traits_t,
+        format_string_traits_t,
+        format_traits_t>;
+
+    template<class trait_override_t>
+    using with_length = builder<
+        value_t,
+        usings_traits_t,
+        hash_traits_t,
+        allocation_traits_t,
+        test_char_traits_t,
+        transform_char_traits_t,
+        trait_override_t,
+        compare_traits_t,
+        format_string_traits_t,
+        format_traits_t>;
+
+    template<class trait_override_t>
+    using with_compare = builder<
+        value_t,
+        usings_traits_t,
+        hash_traits_t,
+        allocation_traits_t,
+        test_char_traits_t,
+        transform_char_traits_t,
+        length_traits_t,
+        trait_override_t,
+        format_string_traits_t,
+        format_traits_t>;
+
+    template<class trait_override_t>
+    using with_format_string = builder<
+        value_t,
+        usings_traits_t,
+        hash_traits_t,
+        allocation_traits_t,
+        test_char_traits_t,
+        transform_char_traits_t,
+        length_traits_t,
+        compare_traits_t,
+        trait_override_t,
+        format_traits_t>;
+
+    template<class trait_override_t>
+    using with_format = builder<
+        value_t,
+        usings_traits_t,
+        hash_traits_t,
+        allocation_traits_t,
+        test_char_traits_t,
+        transform_char_traits_t,
+        length_traits_t,
+        compare_traits_t,
+        format_string_traits_t,
+        trait_override_t>;
+};
+
+} // namespace details
+
+template<class value_t>
+using default_traits = typename details::builder<value_t>::type;
+
+template<class traits_t>
+struct traits_builder : traits_t::builder_type
 {
 };
 
-/**
-    @brief Common string traits type. User may use it with user-defined traits to override the required behaviour.
-    @tparam value_t - char type
-**/
 template<class value_t>
-using traits = constructor<
-    usings_traits<value_t>,
-    hash_traits<value_t, usings_traits<value_t>>,
-    allocation_traits<value_t, usings_traits<value_t>, 64, false>,
-    test_char_traits<value_t, usings_traits<value_t>>,
-    transform_char_traits<value_t, usings_traits<value_t>>,
-    length_traits<value_t, usings_traits<value_t>>,
-    compare_traits<value_t, usings_traits<value_t>>,
-    format_string_traits<value_t, usings_traits<value_t>>,
-    format_traits<value_t, usings_traits<value_t>>>;
+using small_traits = typename traits_builder<default_traits<value_t>>::template with_allocation<
+    allocation_traits<value_t, usings_traits<value_t>, 32, false>>::type;
+
+template<class value_t>
+using big_traits = typename traits_builder<default_traits<value_t>>::template with_allocation<
+    allocation_traits<value_t, usings_traits<value_t>, 128, false>>::type;
+
+template<class value_t>
+using huge_traits = typename traits_builder<default_traits<value_t>>::template with_allocation<
+    allocation_traits<value_t, usings_traits<value_t>, 256, false>>::type;
 
 } // namespace qx::string_traits

@@ -60,7 +60,7 @@ inline base_logger_stream::base_logger_stream(const config& streamConfig) noexce
 {
 }
 
-inline compile_pattern_result base_logger_stream::set_pattern(string sPattern) noexcept
+inline compile_pattern_result base_logger_stream::set_pattern(pattern_string_t sPattern) noexcept
 {
     const compile_pattern_result eResult = compile_pattern(sPattern);
 

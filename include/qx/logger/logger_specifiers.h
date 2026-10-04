@@ -70,13 +70,16 @@ enum class compile_pattern_result
     @brief   Compile an fmt pattern with named arguments into replacement fields
     @details This function is required because std format doesn't support named arguments.
              This function doesn't allocate.
+    @tparam  char_t   - char type (char, wchar_t, etc)
+    @tparam  traits_t - char traits. \see string_traits.h
     @param   sPattern - fmt pattern that must have only arguments from logger_specifiers.
                         One type may be absent or present multiple times.
                         You can use any format specifiers.
                         The result will be in the same string.
     @retval           - Compilation result. If != ok, sPattern is considered invalid.
 **/
-inline compile_pattern_result compile_pattern(string& sPattern) noexcept;
+template<class char_t, class traits_t>
+compile_pattern_result compile_pattern(basic_string<char_t, traits_t>& sPattern) noexcept;
 
 /**
     @brief  Format sStorage using qx::logger_specifiers

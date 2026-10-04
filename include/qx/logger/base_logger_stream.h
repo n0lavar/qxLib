@@ -48,6 +48,15 @@ public:
         verbosity eMinFlushVerbosity = verbosity::error;
     };
 
+    // maximize cache locality, taking into consideration wchar_t size and logger_sbo size
+    using pattern_string_t =
+#if QX_MSVC
+        big_string
+#else
+        huge_string
+#endif
+        ;
+
 public:
     /**
         @brief base_logger_stream object constructor
@@ -64,7 +73,7 @@ public:
         @param   sPattern - a pattern for the stream
         @retval           - pattern compilation result
     **/
-    compile_pattern_result set_pattern(string sPattern) noexcept;
+    compile_pattern_result set_pattern(pattern_string_t sPattern) noexcept;
 
     /**
         @brief  Get a message pattern if present
@@ -148,7 +157,8 @@ private:
     virtual void do_flush() = 0;
 
 private:
-    std::optional<string>                 m_optPattern;
+    // memory order: max packing (important for logger_sbo)
+    std::optional<pattern_string_t>       m_optPattern;
     std::unique_ptr<std::recursive_mutex> m_pMutex;
     verbosity                             m_eMinFlushVerbosity = verbosity::error;
     bool                                  m_bProtectLog        = true;

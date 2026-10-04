@@ -44,7 +44,8 @@ constexpr std::optional<logger_specifiers> get_log_specifier(string_view svName)
 
 } // namespace details
 
-inline compile_pattern_result compile_pattern(string& sPattern) noexcept
+template<class char_t, class traits_t>
+compile_pattern_result compile_pattern(basic_string<char_t, traits_t>& sPattern) noexcept
 {
     char_type* const pData = sPattern.data();
     const size_t     nSize = sPattern.size();

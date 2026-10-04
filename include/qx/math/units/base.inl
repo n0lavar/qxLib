@@ -116,7 +116,7 @@ std::optional<qx::unit<T, unit_t>> qx::unit_from_string(basic_string_view<char_t
                    [](basic_string_view<char_t> svValue)
                    {
                        size_t nToErase = 0;
-                       while (string_traits::traits<char_t>::is_space(svValue[nToErase]))
+                       while (string_traits::default_traits<char_t>::is_space(svValue[nToErase]))
                        {
                            ++nToErase;
                        }

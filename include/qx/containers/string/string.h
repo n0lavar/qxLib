@@ -23,7 +23,7 @@
 namespace qx
 {
 
-template<class char_t, class traits_t = string_traits::traits<char_t>>
+template<class char_t, class traits_t = string_traits::default_traits<char_t>>
 class basic_string;
 
 namespace details
@@ -1745,6 +1745,18 @@ private:
 using cstring = basic_string<char>;
 using wstring = basic_string<wchar_t>;
 using string  = basic_string<char_type>;
+
+using small_cstring = basic_string<char, string_traits::small_traits<char>>;
+using small_wstring = basic_string<wchar_t, string_traits::small_traits<wchar_t>>;
+using small_string  = basic_string<char_type, string_traits::small_traits<char_type>>;
+
+using big_cstring = basic_string<char, string_traits::big_traits<char>>;
+using big_wstring = basic_string<wchar_t, string_traits::big_traits<wchar_t>>;
+using big_string  = basic_string<char_type, string_traits::big_traits<char_type>>;
+
+using huge_cstring = basic_string<char, string_traits::huge_traits<char>>;
+using huge_wstring = basic_string<wchar_t, string_traits::huge_traits<wchar_t>>;
+using huge_string  = basic_string<char_type, string_traits::huge_traits<char_type>>;
 
 } // namespace qx
 

@@ -57,7 +57,7 @@ wstring format(const QX_FMT_NS::wformat_string<std::type_identity_t<args_t>...> 
     @param  value    - object to convert
     @retval          - qx::basic_string
 **/
-template<class T, class char_t = char_type, class traits_t = string_traits::traits<char_t>>
+template<class T, class char_t = char_type, class traits_t = string_traits::default_traits<char_t>>
 basic_string<char_t, traits_t> convert_to_string(const T& value) noexcept
 {
     return basic_string<char_t, traits_t>::static_format(QX_STR_PREFIX(char_t, "{}"), value);
