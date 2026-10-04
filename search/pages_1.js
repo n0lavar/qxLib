@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['qx_3a_3alayered_5fconfig_1857',['qx::layered_config',['../md_include_qx_layered_config__r_e_a_d_m_e.html',1,'']]],
-  ['qx_3a_3alogger_1858',['qx::logger',['../md_include_qx_logger__r_e_a_d_m_e.html',1,'']]]
+  ['qx_3a_3alayered_5fconfig_1846',['qx::layered_config',['../md_include_qx_layered_config__r_e_a_d_m_e.html',1,'']]],
+  ['qx_3a_3alogger_1847',['qx::logger',['../md_include_qx_logger__r_e_a_d_m_e.html',1,'']]]
 ];

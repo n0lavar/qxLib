@@ -76,9 +76,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aeabcfab4ea321fad40af5242badafa82"><td class="memItemLeft" align="right" valign="top">compile_pattern_result&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger__specifiers_8h.html#aeabcfab4ea321fad40af5242badafa82">qx::compile_pattern</a> (string &amp;sPattern) noexcept</td></tr>
-<tr class="memdesc:aeabcfab4ea321fad40af5242badafa82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile an fmt pattern with named arguments into replacement fields.  <a href="logger__specifiers_8h.html#aeabcfab4ea321fad40af5242badafa82">More...</a><br /></td></tr>
-<tr class="separator:aeabcfab4ea321fad40af5242badafa82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5e5ae72453bddba8b657fe657267db6"><td class="memTemplParams" colspan="2">template&lt;class char_t , class traits_t &gt; </td></tr>
+<tr class="memitem:ab5e5ae72453bddba8b657fe657267db6"><td class="memTemplItemLeft" align="right" valign="top">compile_pattern_result&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="logger__specifiers_8h.html#ab5e5ae72453bddba8b657fe657267db6">qx::compile_pattern</a> (basic_string&lt; char_t, traits_t &gt; &amp;sPattern) noexcept</td></tr>
+<tr class="memdesc:ab5e5ae72453bddba8b657fe657267db6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile an fmt pattern with named arguments into replacement fields.  <a href="logger__specifiers_8h.html#ab5e5ae72453bddba8b657fe657267db6">More...</a><br /></td></tr>
+<tr class="separator:ab5e5ae72453bddba8b657fe657267db6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8911f66d38926cfdae16d16194d272c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger__specifiers_8h.html#a8911f66d38926cfdae16d16194d272c6">qx::format_log_specifiers</a> (string &amp;sStorage, string_view svPattern, const category &amp;category, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage)</td></tr>
 <tr class="memdesc:a8911f66d38926cfdae16d16194d272c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format sStorage using qx::logger_specifiers.  <a href="logger__specifiers_8h.html#a8911f66d38926cfdae16d16194d272c6">More...</a><br /></td></tr>
 <tr class="separator:a8911f66d38926cfdae16d16194d272c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -90,11 +91,13 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="logger__specifiers_8inl_source.html">logger_specifiers.inl</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="aeabcfab4ea321fad40af5242badafa82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeabcfab4ea321fad40af5242badafa82">&#9670;&nbsp;</a></span>compile_pattern()</h2>
+<a id="ab5e5ae72453bddba8b657fe657267db6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5e5ae72453bddba8b657fe657267db6">&#9670;&nbsp;</a></span>compile_pattern()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;class char_t , class traits_t &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -102,20 +105,28 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">compile_pattern_result qx::compile_pattern </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">basic_string</a>&lt; char_t, traits_t &gt; &amp;&#160;</td>
           <td class="paramname"><em>sPattern</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Compile an fmt pattern with named arguments into replacement fields. </p>
-<p>This function is required because std format doesn't support named arguments. This function doesn't allocate. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>This function is required because std format doesn't support named arguments. This function doesn't allocate. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">char_t</td><td>- char type (char, wchar_t, etc) </td></tr>
+    <tr><td class="paramname">traits_t</td><td>- char traits. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="string__traits_8h.html">string_traits.h</a> </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sPattern</td><td>- fmt pattern that must have only arguments from logger_specifiers. One type may be absent or present multiple times. You can use any format specifiers. The result will be in the same string. </td></tr>
   </table>
@@ -128,7 +139,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger__specifiers_8inl_source.html#l00047">47</a> of file <a class="el" href="logger__specifiers_8inl_source.html">logger_specifiers.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger__specifiers_8inl_source.html#l00048">48</a> of file <a class="el" href="logger__specifiers_8inl_source.html">logger_specifiers.inl</a>.</p>
 
 </div>
 </div>
@@ -231,7 +242,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger__specifiers_8inl_source.html#l00177">177</a> of file <a class="el" href="logger__specifiers_8inl_source.html">logger_specifiers.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger__specifiers_8inl_source.html#l00178">178</a> of file <a class="el" href="logger__specifiers_8inl_source.html">logger_specifiers.inl</a>.</p>
 
 </div>
 </div>
