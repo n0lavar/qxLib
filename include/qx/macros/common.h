@@ -73,7 +73,8 @@
         };
     @endcode 
 **/
-#define QX_CALL_BEFORE_MAIN inline volatile qx::details::call_before_main_invoker QX_LINE_NAME(_stubCallBeforeMain)
+#define QX_CALL_BEFORE_MAIN \
+    inline volatile const qx::details::call_before_main_invoker QX_LINE_NAME(_stubCallBeforeMain)
 
 /**
     @brief Start a block with compiling optimisations disabled.
@@ -116,3 +117,8 @@
     @brief Forces an extra macro expansion step so that a macro result is fully resolved before being used as a function-like macro.
 **/
 #define QX_EXPAND(x) x
+
+/**
+    @brief Enables The Empty Base Class Optimization (EBCO) for a class
+**/
+#define QX_EMPTY_BASES _QX_EMPTY_BASES

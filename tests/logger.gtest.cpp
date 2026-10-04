@@ -50,6 +50,7 @@ QX_DEFINE_CATEGORY(CatLoggerTest);
 QX_DEFINE_CATEGORY(CatLoggerTestLogVerbosity);
 QX_DEFINE_CATEGORY(CatLoggerTestFileWide);
 QX_DEFINE_CATEGORY(CatErrorContextTest);
+QX_DEFINE_CATEGORY(CatCustomMessageTest);
 QX_SET_FILE_CATEGORY(CatLoggerTestFileWide);
 
 static_assert(qx::sbo_poly_fittable_types_v<
@@ -99,8 +100,8 @@ struct base_file : base_traits
 
     static qx::string get_content()
     {
-        qx::logger_singleton::get_instance().get_logger().flush();
-        qx::logger_singleton::get_instance().get_logger().reset();
+        qx::get_logger().flush();
+        qx::get_logger().reset();
 
         EXPECT_TRUE(std::filesystem::exists(get_log_file_name().c_str()));
 
@@ -128,7 +129,7 @@ struct ostream_default_buffer : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_ofstream(
+        qx::get_logger().add_stream(qx::file_logger_stream_ofstream(
             { .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
@@ -142,7 +143,7 @@ struct ostream : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
+        qx::get_logger().add_stream(
             qx::file_logger_stream_ofstream({ .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
                                               .svLogsDirectory = k_svLogsDirectory,
                                               .svFilePrefix    = k_svFilePrefix,
@@ -155,7 +156,7 @@ struct fopen_default_buffer : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_fopen(
+        qx::get_logger().add_stream(qx::file_logger_stream_fopen(
             { .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
@@ -169,7 +170,7 @@ struct fopen : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
+        qx::get_logger().add_stream(
             qx::file_logger_stream_fopen({ .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
                                            .svLogsDirectory = k_svLogsDirectory,
                                            .svFilePrefix    = k_svFilePrefix,
@@ -182,7 +183,7 @@ struct mapping_default_initial_size : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(qx::file_logger_stream_mapping(
+        qx::get_logger().add_stream(qx::file_logger_stream_mapping(
             { .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
               .svLogsDirectory = k_svLogsDirectory,
               .svFilePrefix    = k_svFilePrefix,
@@ -196,7 +197,7 @@ struct mapping : base_file
     static void set_up()
     {
         base_file::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
+        qx::get_logger().add_stream(
             qx::file_logger_stream_mapping({ .eLogFilePolicy  = qx::log_file_policy::clear_then_upend,
                                              .svLogsDirectory = k_svLogsDirectory,
                                              .svFilePrefix    = k_svFilePrefix,
@@ -349,8 +350,7 @@ struct cout : base_cout
 #endif
 
         base_cout::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::cout_logger_stream(qx::cout_logger_stream::config { {}, false, false }));
+        qx::get_logger().add_stream(qx::cout_logger_stream(qx::cout_logger_stream::config { {}, false, false }));
     }
 };
 
@@ -363,8 +363,7 @@ struct fwrite : base_cout
 #endif
 
         base_cout::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::fwrite_logger_stream(qx::fwrite_logger_stream::config()));
+        qx::get_logger().add_stream(qx::fwrite_logger_stream(qx::fwrite_logger_stream::config()));
     }
 };
 
@@ -383,7 +382,7 @@ struct cout_colors : base_cout
 #endif
 
         base_cout::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
+        qx::get_logger().add_stream(
             qx::cout_logger_stream(qx::cout_logger_stream::config { { .bUseColors = true }, false, false }));
     }
 };
@@ -407,8 +406,7 @@ struct fwrite_colors : base_cout
 #endif
 
         base_cout::set_up();
-        qx::logger_singleton::get_instance().get_logger().add_stream(
-            qx::fwrite_logger_stream(qx::fwrite_logger_stream::config({ .bUseColors = true })));
+        qx::get_logger().add_stream(qx::fwrite_logger_stream(qx::fwrite_logger_stream::config({ .bUseColors = true })));
     }
 };
 
@@ -807,6 +805,110 @@ TEST(logger_test, rotation_time_name)
 TEST(logger_test, rotation_time_name_keep_current)
 {
     test_rotation(qx::log_file_policy::time_name_keep_current);
+}
+
+class stub_stream : public qx::base_logger_stream
+{
+    QX_RTTI_CLASS(stub_stream, qx::base_logger_stream);
+
+public:
+    stub_stream(const qx::base_logger_stream::config& streamConfig) noexcept
+        : super_class_type(streamConfig)
+        , m_pMessages(std::make_shared<std::vector<qx::string>>())
+    {
+    }
+
+    std::shared_ptr<std::vector<qx::string>> get_messages() const noexcept
+    {
+        return m_pMessages;
+    }
+
+    virtual void do_log(
+        const qx::category&                   category,
+        qx::verbosity                         eVerbosity,
+        std::thread::id                       threadId,
+        std::chrono::system_clock::time_point messageTime,
+        qx::string_view                       svFile,
+        qx::string_view                       svFunction,
+        int                                   nLine,
+        qx::string_view                       svMessage) noexcept override
+    {
+        m_pMessages->emplace_back(svMessage);
+    }
+
+    virtual void do_flush() noexcept override
+    {
+    }
+
+private:
+    std::shared_ptr<std::vector<qx::string>> m_pMessages;
+};
+
+TEST(logger_test, stream_patterns)
+{
+    qx::get_logger().reset();
+    qx::compile_pattern_result default_pattern_compile_result =
+        qx::get_logger().set_default_pattern(QXT("{verbosity:l}{category:l} {message}"));
+    EXPECT_EQ(default_pattern_compile_result, qx::compile_pattern_result::ok);
+
+    stub_stream                              stub_stream_default(qx::base_logger_stream::config {});
+    std::shared_ptr<std::vector<qx::string>> messages_default = stub_stream_default.get_messages();
+    qx::get_logger().add_stream(std::move(stub_stream_default));
+
+    stub_stream                              stub_stream_custom(qx::base_logger_stream::config {});
+    std::shared_ptr<std::vector<qx::string>> messages_custom = stub_stream_custom.get_messages();
+    qx::compile_pattern_result custom_pattern_compile_result = stub_stream_custom.set_pattern(QXT("{message}"));
+    EXPECT_EQ(custom_pattern_compile_result, qx::compile_pattern_result::ok);
+    qx::get_logger().add_stream(std::move(stub_stream_custom));
+
+    QX_LOG(qx::verbosity::log, "message 1");
+    QX_LOG(qx::verbosity::important, "message 2");
+    QX_LOG(qx::verbosity::error, "message 3");
+
+    EXPECT_EQ(messages_default->size(), 3);
+    EXPECT_STREQ((*messages_default)[0].c_str(), QXT("   [CatLoggerTestFileWide] message 1"));
+    EXPECT_STREQ((*messages_default)[1].c_str(), QXT("[I][CatLoggerTestFileWide] message 2"));
+    EXPECT_STREQ((*messages_default)[2].c_str(), QXT("[E][CatLoggerTestFileWide] message 3"));
+
+    EXPECT_EQ(messages_custom->size(), 3);
+    EXPECT_STREQ((*messages_custom)[0].c_str(), QXT("message 1"));
+    EXPECT_STREQ((*messages_custom)[1].c_str(), QXT("message 2"));
+    EXPECT_STREQ((*messages_custom)[2].c_str(), QXT("message 3"));
+}
+
+TEST(logger_test, custom_category_message)
+{
+    qx::get_logger().reset();
+
+    stub_stream                              stub_stream(qx::base_logger_stream::config {});
+    std::shared_ptr<std::vector<qx::string>> messages = stub_stream.get_messages();
+    stub_stream.set_pattern(QXT("{message}"));
+    qx::get_logger().add_stream(std::move(stub_stream));
+
+    int some_counter = 0;
+    qx::get_logger().register_category(
+        CatCustomMessageTest,
+        qx::logger::category_data {
+            .FormatUserMessage = [&some_counter](
+                                     qx::logger::logger_string_pool::item message,
+                                     qx::logger::logger_string_pool& stringPool) -> qx::logger::logger_string_pool::item
+            {
+                qx::logger::logger_string_pool::item new_message = stringPool.acquire();
+                new_message.sValue.format(QXT("[{}] {}"), some_counter, message.sValue);
+                stringPool.release(std::move(message));
+                return new_message;
+            } });
+
+    QX_LOG_C(CatCustomMessageTest, qx::verbosity::log, "message 1");
+    ++some_counter;
+    QX_LOG_C(CatCustomMessageTest, qx::verbosity::log, "message 2");
+    ++some_counter;
+    QX_LOG_C(CatCustomMessageTest, qx::verbosity::log, "message 3");
+
+    EXPECT_EQ(messages->size(), 3);
+    EXPECT_STREQ((*messages)[0].c_str(), QXT("[0] message 1"));
+    EXPECT_STREQ((*messages)[1].c_str(), QXT("[1] message 2"));
+    EXPECT_STREQ((*messages)[2].c_str(), QXT("[2] message 3"));
 }
 
 TEST(logger_test, terminal_colors)

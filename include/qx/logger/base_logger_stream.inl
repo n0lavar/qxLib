@@ -55,9 +55,24 @@ struct get_cout</* class char_t = */ wchar_t>
 
 inline base_logger_stream::base_logger_stream(const config& streamConfig) noexcept
     : m_pMutex(std::make_unique<std::recursive_mutex>())
-    , m_bProtectLog(streamConfig.bProtectLog)
     , m_eMinFlushVerbosity(streamConfig.eMinFlushVerbosity)
+    , m_bProtectLog(streamConfig.bProtectLog)
 {
+}
+
+inline compile_pattern_result base_logger_stream::set_pattern(string sPattern) noexcept
+{
+    const compile_pattern_result eResult = compile_pattern(sPattern);
+
+    if (eResult == compile_pattern_result::ok)
+        m_optPattern = std::move(sPattern);
+
+    return eResult;
+}
+
+inline std::optional<string_view> base_logger_stream::get_pattern() const noexcept
+{
+    return m_optPattern ? std::optional<string_view>(*m_optPattern) : std::nullopt;
 }
 
 inline void base_logger_stream::log(

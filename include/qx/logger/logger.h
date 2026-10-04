@@ -10,7 +10,6 @@
 
 #include <qx/containers/flags.h>
 #include <qx/logger/fwrite_logger_stream.h>
-#include <qx/logger/logger_specifiers.h>
 #include <qx/macros/details/macro_user_message.h>
 #include <qx/memory/sbo_poly.h>
 #include <qx/patterns/singleton.h>
@@ -69,13 +68,26 @@ public:
 #endif
         >;
 
+    using logger_string_pool = string_pool<>;
+
     struct category_data
     {
         verbosity eRuntimeVerbosity = verbosity::detailed;
-    };
 
-    using category_data_map  = std::unordered_map<string_view, category_data>;
-    using logger_string_pool = string_pool<>;
+        // You can:
+        // 1. Modify `message` inplace and return this object, in this case you can ignore `stringPool`
+        // 2. Aquire a new string pool item, format its string and return this object.
+        //    In this case you must release the `message` object using `stringPool`.
+        // This helps to avoid additional allocations.
+        //
+        // When using this feature, keep in mind, that this function can be invoked from different threads.
+        //
+        // Also, try to keep the capture list as short as possible - ideally no more than two pointers.
+        // This improves cache locality.
+        std::function<logger_string_pool::item(logger_string_pool::item message, logger_string_pool& stringPool)>
+            FormatUserMessage;
+    };
+    using category_data_map = std::unordered_map<string_view, category_data>;
 
     enum class message_necessity_type
     {

@@ -66,3 +66,9 @@ private:
 	#define _QX_APPEND_VA_ARG_COUNT(prefix, ...) _QX_APPEND_VA_ARG_COUNT_INVOKE(_QX_PRIVATE_APPEND_VA_ARG_COUNT, (prefix, ##__VA_ARGS__, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0))
 #endif
 // clang-format on
+
+#if QX_MSVC
+    #define _QX_EMPTY_BASES __declspec(empty_bases)
+#else
+    #define _QX_EMPTY_BASES
+#endif

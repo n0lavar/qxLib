@@ -24,17 +24,17 @@ namespace qx
 
     @class   string_pool
     @brief   Fixed-size atomic string pool
-    @tparam  nSize - pool size
+    @tparam  nSize                - pool size
+    @tparam  bStringStartCapacity - start string capacity for each string
     @author  Khrapov
     @date    18.01.2026
 
 **/
-template<size_t nSize = 32>
+template<size_t nSize = 32, size_t bStringStartCapacity = 128>
 class string_pool
 {
-    static constexpr size_t bTotalBits           = 64; // bits in u64
-    static constexpr size_t nBlocks              = (nSize + bTotalBits - 1) / bTotalBits;
-    static constexpr size_t bStringStartCapacity = 128;
+    static constexpr size_t bTotalBits = 64; // bits in u64
+    static constexpr size_t nBlocks    = (nSize + bTotalBits - 1) / bTotalBits;
 
 public:
     static constexpr int nFreeString = -1;

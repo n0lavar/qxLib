@@ -11,6 +11,7 @@
 #include <qx/category.h>
 #include <qx/containers/string/string_converters.h>
 #include <qx/internal/perf_scope.h>
+#include <qx/logger/logger_specifiers.h>
 #include <qx/rtti/rtti.h>
 #include <qx/verbosity.h>
 
@@ -55,6 +56,21 @@ public:
     base_logger_stream(const config& streamConfig) noexcept;
 
     base_logger_stream(base_logger_stream&&) noexcept = default;
+
+    /**
+        @brief   Set a message pattern that will be used for this stream
+        @see     qx::logger_specifiers for details
+        @warning Not thread safe on purpose. Set it before you pass this stream to a logger!
+        @param   sPattern - a pattern for the stream
+        @retval           - pattern compilation result
+    **/
+    compile_pattern_result set_pattern(string sPattern) noexcept;
+
+    /**
+        @brief  Get a message pattern if present
+        @retval  - a pattern for the stream
+    **/
+    std::optional<string_view> get_pattern() const noexcept;
 
     /**
         @brief  Output to stream
@@ -132,9 +148,10 @@ private:
     virtual void do_flush() = 0;
 
 private:
+    std::optional<string>                 m_optPattern;
     std::unique_ptr<std::recursive_mutex> m_pMutex;
-    bool                                  m_bProtectLog        = true;
     verbosity                             m_eMinFlushVerbosity = verbosity::error;
+    bool                                  m_bProtectLog        = true;
 };
 
 } // namespace qx

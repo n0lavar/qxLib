@@ -10,8 +10,8 @@
 namespace qx
 {
 
-template<size_t nSize>
-string_pool<nSize>::string_pool()
+template<size_t nSize, size_t bStringStartCapacity>
+string_pool<nSize, bStringStartCapacity>::string_pool()
 {
     // Pre-create empty strings with reserved capacity 32
     for (string& s : m_Storage)
@@ -29,8 +29,8 @@ string_pool<nSize>::string_pool()
     }
 }
 
-template<size_t nSize>
-typename string_pool<nSize>::item string_pool<nSize>::acquire()
+template<size_t nSize, size_t bStringStartCapacity>
+typename string_pool<nSize, bStringStartCapacity>::item string_pool<nSize, bStringStartCapacity>::acquire()
 {
     for (size_t nBlock = 0; nBlock < m_FreeMask.size(); ++nBlock)
     {
@@ -54,8 +54,8 @@ typename string_pool<nSize>::item string_pool<nSize>::acquire()
     return item { string(), nFreeString };
 }
 
-template<size_t nSize>
-void string_pool<nSize>::release(item item)
+template<size_t nSize, size_t bStringStartCapacity>
+void string_pool<nSize, bStringStartCapacity>::release(item item)
 {
     if (item.nIndex == nFreeString)
         return;
@@ -77,8 +77,8 @@ void string_pool<nSize>::release(item item)
     m_FreeMask[nBlock].fetch_or(nBit, std::memory_order_release);
 }
 
-template<size_t nSize>
-int string_pool<nSize>::ctz64(u64 nBit) noexcept
+template<size_t nSize, size_t bStringStartCapacity>
+int string_pool<nSize, bStringStartCapacity>::ctz64(u64 nBit) noexcept
 {
 #if QX_GNU || QX_CLANG || QX_APPLE_CLANG
     return __builtin_ctzll(nBit);
@@ -93,8 +93,8 @@ int string_pool<nSize>::ctz64(u64 nBit) noexcept
 #endif
 }
 
-template<size_t nSize>
-void string_pool<nSize>::normalize(string& string)
+template<size_t nSize, size_t bStringStartCapacity>
+void string_pool<nSize, bStringStartCapacity>::normalize(string& string)
 {
     string.clear();
     string.reserve(bStringStartCapacity);

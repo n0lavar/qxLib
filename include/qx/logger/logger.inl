@@ -103,10 +103,24 @@ inline void logger::log_macro(
     const flags<message_necessity_type> eMessageNecessity =
         get_message_necessity_type(category, eVerbosity, threadId, messageTime, svFile, svFunction, nLine);
 
+    {
+        std::shared_lock _(m_RegisteredCategoriesMutex);
+        if (auto itRegisteredCategory = m_RegisteredCategories.find(category.get_name());
+            itRegisteredCategory != m_RegisteredCategories.end())
+        {
+            const category_data& data = itRegisteredCategory->second;
+            if (data.FormatUserMessage)
+            {
+                message = data.FormatUserMessage(std::move(message), m_StringsPool);
+            }
+        }
+    }
+
     if (eMessageNecessity != message_necessity_type::not_required)
     {
+        // assume most streams will not have their own pattern and pre-format with the default pattern
         logger_string_pool::item finalLogMessage = m_StringsPool.acquire();
-        qx::format_log_specifiers(
+        format_log_specifiers(
             finalLogMessage.sValue,
             m_sDefaultPattern,
             category,
@@ -132,6 +146,23 @@ inline void logger::log_macro(
                         svFunction,
                         nLine))
                 {
+                    std::optional<logger_string_pool::item> optStreamLogMessage;
+                    if (const std::optional<string_view> optPattern = stream->get_pattern())
+                    {
+                        optStreamLogMessage = m_StringsPool.acquire();
+                        format_log_specifiers(
+                            optStreamLogMessage->sValue,
+                            *optPattern,
+                            category,
+                            eVerbosity,
+                            threadId,
+                            messageTime,
+                            svFile,
+                            svFunction,
+                            nLine,
+                            message.sValue);
+                    }
+
                     stream->log(
                         category,
                         eVerbosity,
@@ -140,7 +171,10 @@ inline void logger::log_macro(
                         svFile,
                         svFunction,
                         nLine,
-                        finalLogMessage.sValue);
+                        optStreamLogMessage ? optStreamLogMessage->sValue : finalLogMessage.sValue);
+
+                    if (optStreamLogMessage)
+                        m_StringsPool.release(std::move(*optStreamLogMessage));
                 }
             }
         }

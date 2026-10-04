@@ -54,7 +54,7 @@ private:
 
 **/
 template<class naming_strategy_t = rtti_naming_strategy_class_name>
-class rtti_root : public rtti_pure_base
+class QX_EMPTY_BASES rtti_root : public rtti_pure_base
 {
     QX_COPYMOVABLE(rtti_root);
 
