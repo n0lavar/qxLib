@@ -81,8 +81,8 @@ $(function() {
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize&gt;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;string_pool&lt;nSize&gt;::string_pool()</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize, <span class="keywordtype">size_t</span> bStringStartCapacity&gt;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;string_pool&lt;nSize, bStringStartCapacity&gt;::string_pool()</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">// Pre-create empty strings with reserved capacity 32</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">string</span>&amp; s : m_Storage)</div>
@@ -100,8 +100,8 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">   33</a></span>&#160;<span class="keyword">typename</span> <a class="code" href="structqx_1_1string__pool_1_1item.html">string_pool&lt;nSize&gt;::item</a> <a class="code" href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">string_pool&lt;nSize&gt;::acquire</a>()</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize, <span class="keywordtype">size_t</span> bStringStartCapacity&gt;</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13">   33</a></span>&#160;<span class="keyword">typename</span> <a class="code" href="structqx_1_1string__pool_1_1item.html">string_pool&lt;nSize, bStringStartCapacity&gt;::item</a> <a class="code" href="classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13">string_pool&lt;nSize, bStringStartCapacity&gt;::acquire</a>()</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> nBlock = 0; nBlock &lt; m_FreeMask.size(); ++nBlock)</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
@@ -125,8 +125,8 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="structqx_1_1string__pool_1_1item.html">item</a> { <a class="code" href="classqx_1_1basic__string.html">string</a>(), nFreeString };</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize&gt;</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classqx_1_1string__pool.html#a56132a1f76e7bd26d0bc87b6c9c9d871">   58</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classqx_1_1string__pool.html#a56132a1f76e7bd26d0bc87b6c9c9d871">string_pool&lt;nSize&gt;::release</a>(<a class="code" href="structqx_1_1string__pool_1_1item.html">item</a> <a class="code" href="structqx_1_1string__pool_1_1item.html">item</a>)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize, <span class="keywordtype">size_t</span> bStringStartCapacity&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">   58</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">string_pool&lt;nSize, bStringStartCapacity&gt;::release</a>(<a class="code" href="structqx_1_1string__pool_1_1item.html">item</a> <a class="code" href="structqx_1_1string__pool_1_1item.html">item</a>)</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="structqx_1_1string__pool_1_1item.html">item</a>.nIndex == nFreeString)</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span>;</div>
@@ -148,8 +148,8 @@ $(function() {
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    m_FreeMask[nBlock].fetch_or(nBit, std::memory_order_release);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize&gt;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">int</span> <a class="code" href="classqx_1_1string__pool.html">string_pool&lt;nSize&gt;::ctz64</a>(<a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nBit) noexcept</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize, <span class="keywordtype">size_t</span> bStringStartCapacity&gt;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">int</span> <a class="code" href="classqx_1_1string__pool.html">string_pool&lt;nSize, bStringStartCapacity&gt;::ctz64</a>(<a class="code" href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a> nBit) noexcept</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#if QX_GNU || QX_CLANG || QX_APPLE_CLANG</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> __builtin_ctzll(nBit);</div>
@@ -164,8 +164,8 @@ $(function() {
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize&gt;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">void</span> string_pool&lt;nSize&gt;::normalize(<span class="keywordtype">string</span>&amp; <span class="keywordtype">string</span>)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">template</span>&lt;<span class="keywordtype">size_t</span> nSize, <span class="keywordtype">size_t</span> bStringStartCapacity&gt;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">void</span> string_pool&lt;nSize, bStringStartCapacity&gt;::normalize(<span class="keywordtype">string</span>&amp; <span class="keywordtype">string</span>)</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">string</span>.clear();</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">string</span>.reserve(bStringStartCapacity);</div>
@@ -173,9 +173,9 @@ $(function() {
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char_type &gt;</a></div></div>
-<div class="ttc" id="aclassqx_1_1string__pool_html"><div class="ttname"><a href="classqx_1_1string__pool.html">qx::string_pool</a></div><div class="ttdoc">Fixed-size atomic string pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00033">string_pool.h:34</a></div></div>
-<div class="ttc" id="aclassqx_1_1string__pool_html_a56132a1f76e7bd26d0bc87b6c9c9d871"><div class="ttname"><a href="classqx_1_1string__pool.html#a56132a1f76e7bd26d0bc87b6c9c9d871">qx::string_pool::release</a></div><div class="ttdeci">void release(item item)</div><div class="ttdoc">Return a string back to the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00058">string_pool.inl:58</a></div></div>
-<div class="ttc" id="aclassqx_1_1string__pool_html_a87f8ea24bf5b483346b7ace1242e4209"><div class="ttname"><a href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">qx::string_pool::acquire</a></div><div class="ttdeci">item acquire()</div><div class="ttdoc">Acquire a string from the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00033">string_pool.inl:33</a></div></div>
+<div class="ttc" id="aclassqx_1_1string__pool_html"><div class="ttname"><a href="classqx_1_1string__pool.html">qx::string_pool</a></div><div class="ttdoc">Fixed-size atomic string pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00034">string_pool.h:35</a></div></div>
+<div class="ttc" id="aclassqx_1_1string__pool_html_a17cf951060e0c58aca573881ec68ec13"><div class="ttname"><a href="classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13">qx::string_pool::acquire</a></div><div class="ttdeci">item acquire()</div><div class="ttdoc">Acquire a string from the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00033">string_pool.inl:33</a></div></div>
+<div class="ttc" id="aclassqx_1_1string__pool_html_a8e43e03042209f3b36cb4b2b8773c7e9"><div class="ttname"><a href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">qx::string_pool::release</a></div><div class="ttdeci">void release(item item)</div><div class="ttdoc">Return a string back to the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00058">string_pool.inl:58</a></div></div>
 <div class="ttc" id="astructqx_1_1string__pool_1_1item_html"><div class="ttname"><a href="structqx_1_1string__pool_1_1item.html">qx::string_pool::item</a></div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00042">string_pool.h:43</a></div></div>
 <div class="ttc" id="atypedefs_8h_html_a66e1d499241ccae9a18a20a1f4f0590d"><div class="ttname"><a href="typedefs_8h.html#a66e1d499241ccae9a18a20a1f4f0590d">u64</a></div><div class="ttdeci">std::uint64_t u64</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00024">typedefs.h:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

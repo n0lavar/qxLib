@@ -3,7 +3,7 @@ var searchData=
   ['a_2',['a',['../classqx_1_1color.html#a550e2e011573d8b7ff1a3a3e4cd2e78d',1,'qx::color']]],
   ['a_5fdec_3',['a_dec',['../classqx_1_1color.html#aa5594ec36ae6857163551f2b2ec5c77c',1,'qx::color']]],
   ['abs_4',['abs',['../math_2common_8h.html#ab465ef7b0d8760b14b3893514deeb8fd',1,'qx']]],
-  ['acquire_5',['acquire',['../classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209',1,'qx::string_pool']]],
+  ['acquire_5',['acquire',['../classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13',1,'qx::string_pool']]],
   ['add_6',['add',['../classqx_1_1components.html#adb0af9f2866a4797cfceedfa17dae590',1,'qx::components::add()'],['../classqx_1_1flags.html#a9f60eb813350475c17a270c40c1499f8',1,'qx::flags::add()'],['../classqx_1_1details_1_1string__to__color__converter.html#abc2edf2b2e7a228ae03b6b4a330bd5b9',1,'qx::details::string_to_color_converter::add()']]],
   ['add_2eh_7',['add.h',['../add_8h.html',1,'']]],
   ['add_5fcomponent_5fstatus_8',['add_component_status',['../classqx_1_1components.html#a676a9070ae562a34b2f808a55f0def78',1,'qx::components']]],

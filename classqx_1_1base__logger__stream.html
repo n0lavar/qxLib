@@ -108,6 +108,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acf3969720605254845d066bcb9faddeb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#acf3969720605254845d066bcb9faddeb">base_logger_stream</a> (const <a class="el" href="structqx_1_1base__logger__stream_1_1config.html">config</a> &amp;streamConfig) noexcept</td></tr>
 <tr class="memdesc:acf3969720605254845d066bcb9faddeb"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classqx_1_1base__logger__stream.html" title="Base class for logger streams.">base_logger_stream</a> object constructor  <a href="classqx_1_1base__logger__stream.html#acf3969720605254845d066bcb9faddeb">More...</a><br /></td></tr>
 <tr class="separator:acf3969720605254845d066bcb9faddeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb531ee547667a078c848c35e4648f6e"><td class="memItemLeft" align="right" valign="top">compile_pattern_result&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#aeb531ee547667a078c848c35e4648f6e">set_pattern</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> sPattern) noexcept</td></tr>
+<tr class="memdesc:aeb531ee547667a078c848c35e4648f6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a message pattern that will be used for this stream.  <a href="classqx_1_1base__logger__stream.html#aeb531ee547667a078c848c35e4648f6e">More...</a><br /></td></tr>
+<tr class="separator:aeb531ee547667a078c848c35e4648f6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ad932f31a74ad40b2fc28f1991808c4"><td class="memItemLeft" align="right" valign="top">std::optional&lt; string_view &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a8ad932f31a74ad40b2fc28f1991808c4">get_pattern</a> () const noexcept</td></tr>
+<tr class="memdesc:a8ad932f31a74ad40b2fc28f1991808c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a message pattern if present.  <a href="classqx_1_1base__logger__stream.html#a8ad932f31a74ad40b2fc28f1991808c4">More...</a><br /></td></tr>
+<tr class="separator:a8ad932f31a74ad40b2fc28f1991808c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae7796b4f64ac842ffa1a0a0832f56e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#aae7796b4f64ac842ffa1a0a0832f56e0">log</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage)</td></tr>
 <tr class="memdesc:aae7796b4f64ac842ffa1a0a0832f56e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output to stream.  <a href="classqx_1_1base__logger__stream.html#aae7796b4f64ac842ffa1a0a0832f56e0">More...</a><br /></td></tr>
 <tr class="separator:aae7796b4f64ac842ffa1a0a0832f56e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,7 +130,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00036">36</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8h_source.html#l00037">37</a> of file <a class="el" href="base__logger__stream_8h_source.html">base_logger_stream.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="acf3969720605254845d066bcb9faddeb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acf3969720605254845d066bcb9faddeb">&#9670;&nbsp;</a></span>base_logger_stream()</h2>
@@ -163,6 +169,41 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8ad932f31a74ad40b2fc28f1991808c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ad932f31a74ad40b2fc28f1991808c4">&#9670;&nbsp;</a></span>get_pattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; string_view &gt; qx::base_logger_stream::get_pattern </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get a message pattern if present. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>a pattern for the stream </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00073">73</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+
+</div>
+</div>
 <a id="aae7796b4f64ac842ffa1a0a0832f56e0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae7796b4f64ac842ffa1a0a0832f56e0">&#9670;&nbsp;</a></span>log()</h2>
 
@@ -254,7 +295,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00063">63</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00078">78</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>
@@ -342,7 +383,51 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00100">100</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00115">115</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
+
+</div>
+</div>
+<a id="aeb531ee547667a078c848c35e4648f6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb531ee547667a078c848c35e4648f6e">&#9670;&nbsp;</a></span>set_pattern()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">compile_pattern_result qx::base_logger_stream::set_pattern </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td>
+          <td class="paramname"><em>sPattern</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a message pattern that will be used for this stream. </p>
+<dl class="section see"><dt>See also</dt><dd>qx::logger_specifiers for details </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>Not thread safe on purpose. Set it before you pass this stream to a logger! </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sPattern</td><td>- a pattern for the stream </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>pattern compilation result </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="base__logger__stream_8inl_source.html#l00063">63</a> of file <a class="el" href="base__logger__stream_8inl_source.html">base_logger_stream.inl</a>.</p>
 
 </div>
 </div>

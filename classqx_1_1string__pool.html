@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>qxLib: qx::string_pool&lt; nSize &gt; Class Template Reference</title>
+<title>qxLib: qx::string_pool&lt; nSize, bStringStartCapacity &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,7 +70,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classqx_1_1string__pool-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">qx::string_pool&lt; nSize &gt; Class Template Reference</div>  </div>
+<div class="title">qx::string_pool&lt; nSize, bStringStartCapacity &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -86,39 +86,40 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a87f8ea24bf5b483346b7ace1242e4209"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1string__pool_1_1item.html">item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">acquire</a> ()</td></tr>
-<tr class="memdesc:a87f8ea24bf5b483346b7ace1242e4209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acquire a string from the pool.  <a href="classqx_1_1string__pool.html#a87f8ea24bf5b483346b7ace1242e4209">More...</a><br /></td></tr>
-<tr class="separator:a87f8ea24bf5b483346b7ace1242e4209"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56132a1f76e7bd26d0bc87b6c9c9d871"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__pool.html#a56132a1f76e7bd26d0bc87b6c9c9d871">release</a> (<a class="el" href="structqx_1_1string__pool_1_1item.html">item</a> <a class="el" href="structqx_1_1string__pool_1_1item.html">item</a>)</td></tr>
-<tr class="memdesc:a56132a1f76e7bd26d0bc87b6c9c9d871"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a string back to the pool.  <a href="classqx_1_1string__pool.html#a56132a1f76e7bd26d0bc87b6c9c9d871">More...</a><br /></td></tr>
-<tr class="separator:a56132a1f76e7bd26d0bc87b6c9c9d871"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17cf951060e0c58aca573881ec68ec13"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1string__pool_1_1item.html">item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13">acquire</a> ()</td></tr>
+<tr class="memdesc:a17cf951060e0c58aca573881ec68ec13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acquire a string from the pool.  <a href="classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13">More...</a><br /></td></tr>
+<tr class="separator:a17cf951060e0c58aca573881ec68ec13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e43e03042209f3b36cb4b2b8773c7e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">release</a> (<a class="el" href="structqx_1_1string__pool_1_1item.html">item</a> <a class="el" href="structqx_1_1string__pool_1_1item.html">item</a>)</td></tr>
+<tr class="memdesc:a8e43e03042209f3b36cb4b2b8773c7e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a string back to the pool.  <a href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">More...</a><br /></td></tr>
+<tr class="separator:a8e43e03042209f3b36cb4b2b8773c7e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><h3>template&lt;size_t nSize = 32&gt;<br />
-class qx::string_pool&lt; nSize &gt;</h3>
+<div class="textblock"><h3>template&lt;size_t nSize = 32, size_t bStringStartCapacity = 128&gt;<br />
+class qx::string_pool&lt; nSize, bStringStartCapacity &gt;</h3>
 
 <p>Fixed-size atomic string pool. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">nSize</td><td>- pool size </td></tr>
+    <tr><td class="paramname">bStringStartCapacity</td><td>- start string capacity for each string </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>18.01.2026 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string__pool_8h_source.html#l00033">33</a> of file <a class="el" href="string__pool_8h_source.html">string_pool.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__pool_8h_source.html#l00034">34</a> of file <a class="el" href="string__pool_8h_source.html">string_pool.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a87f8ea24bf5b483346b7ace1242e4209"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87f8ea24bf5b483346b7ace1242e4209">&#9670;&nbsp;</a></span>acquire()</h2>
+<a id="a17cf951060e0c58aca573881ec68ec13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17cf951060e0c58aca573881ec68ec13">&#9670;&nbsp;</a></span>acquire()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;size_t nSize&gt; </div>
+template&lt;size_t nSize, size_t bStringStartCapacity&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classqx_1_1string__pool.html">string_pool</a>&lt; nSize &gt;::<a class="el" href="structqx_1_1string__pool_1_1item.html">item</a> <a class="el" href="classqx_1_1string__pool.html">qx::string_pool</a>&lt; nSize &gt;::acquire</td>
+          <td class="memname"><a class="el" href="classqx_1_1string__pool.html">string_pool</a>&lt; nSize, bStringStartCapacity &gt;::<a class="el" href="structqx_1_1string__pool_1_1item.html">item</a> <a class="el" href="classqx_1_1string__pool.html">qx::string_pool</a>&lt; nSize, bStringStartCapacity &gt;::acquire</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -135,16 +136,16 @@ template&lt;size_t nSize&gt; </div>
 
 </div>
 </div>
-<a id="a56132a1f76e7bd26d0bc87b6c9c9d871"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56132a1f76e7bd26d0bc87b6c9c9d871">&#9670;&nbsp;</a></span>release()</h2>
+<a id="a8e43e03042209f3b36cb4b2b8773c7e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e43e03042209f3b36cb4b2b8773c7e9">&#9670;&nbsp;</a></span>release()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;size_t nSize&gt; </div>
+template&lt;size_t nSize, size_t bStringStartCapacity&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classqx_1_1string__pool.html">qx::string_pool</a>&lt; nSize &gt;::release </td>
+          <td class="memname">void <a class="el" href="classqx_1_1string__pool.html">qx::string_pool</a>&lt; nSize, bStringStartCapacity &gt;::release </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structqx_1_1string__pool_1_1item.html">item</a>&#160;</td>
           <td class="paramname"><em>item</em></td><td>)</td>

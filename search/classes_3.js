@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['debugger_5flogger_5fstream_999',['debugger_logger_stream',['../classqx_1_1debugger__logger__stream.html',1,'qx']]],
-  ['default_5fgeneric_5fspan_5ftraits_1000',['default_generic_span_traits',['../structqx_1_1default__generic__span__traits.html',1,'qx']]],
-  ['delegate_1001',['delegate',['../classqx_1_1delegate.html',1,'qx']]],
-  ['delegate_3c_20return_5ft_28_29_3e_1002',['delegate&lt; return_t()&gt;',['../classqx_1_1delegate_3_01return__t_07_08_4.html',1,'qx']]],
-  ['destruction_5fcallback_1003',['destruction_callback',['../classqx_1_1destruction__callback.html',1,'qx']]]
+  ['debugger_5flogger_5fstream_1001',['debugger_logger_stream',['../classqx_1_1debugger__logger__stream.html',1,'qx']]],
+  ['default_5fgeneric_5fspan_5ftraits_1002',['default_generic_span_traits',['../structqx_1_1default__generic__span__traits.html',1,'qx']]],
+  ['delegate_1003',['delegate',['../classqx_1_1delegate.html',1,'qx']]],
+  ['delegate_3c_20return_5ft_28_29_3e_1004',['delegate&lt; return_t()&gt;',['../classqx_1_1delegate_3_01return__t_07_08_4.html',1,'qx']]],
+  ['destruction_5fcallback_1005',['destruction_callback',['../classqx_1_1destruction__callback.html',1,'qx']]]
 ];
