@@ -17,7 +17,9 @@ Features:
 - Per-category settings: filtering and formatting:  
   Messages can be filtered on two levels: using compile-time or runtime verbosity.  
   - The first parameter is specified in each category using `set_verbosity()` (default value is `qx::verbosity::log`) and allows filtering a message before the program even runs. By setting the `QX_CONF_COMPILE_TIME_VERBOSITY` macro to `qx::verbosity::none`, you can completely remove all logging traces from the program, including string literals;
-  - Runtime verbosity can be set using `qx::logger::register_category` and is checked during execution. This is convenient for adjusting logging levels via a config. Here you can also set other settings for messages of a specific category, for example a custom formatting function.
+  - Runtime verbosity can be set using `qx::logger::register_category` and is checked during execution. A category can also supply `FormatUserMessage` to transform the user message before the logger or stream pattern is applied.
+- Message patterns:
+  `set_default_pattern()` defines the log line format; each stream can override it with `set_pattern()`. Streams without an override share the line formatted with the default pattern.
 - Logging levels:  
   ```
   enum class verbosity
@@ -68,6 +70,70 @@ class my_logger_stream : public qx::base_logger_stream
     virtual void do_flush() override;
 };
 logger.add_stream(my_logger_stream());
+```
+
+### Message formatting
+
+You can control how the logger transforms a message at each stage:
+
+1. Formatting in the logger macro;  
+The first stage uses the format string and format arguments passed to the macro.
+```cpp
+QX_SET_FILE_CATEGORY(CatMySystem);
+
+...
+
+QX_LOG(qx::verbosity::log, "The answer is {}", 42); // -> "The answer is 42"
+```
+Potential allocation (see Performance) and initial formatting are the only operations guaranteed to run on the calling thread; the rest can be deferred.
+
+2. A custom category formatter, if registered, transforms the message next (`CatMySystem` in this example).  
+To include shared system information in every message from a category, define a formatting callback once:
+```cpp
+qx::get_logger().register_category(CatMySystem,
+  {
+      .FormatUserMessage = [this](qx::logger::logger_string_pool::item message, qx::logger::logger_string_pool&)
+      {
+          message.sValue.append_format(QXT(" [{}]"), m_nWorldId);
+          return message;
+      }
+  });
+
+...
+
+QX_LOG(qx::verbosity::log, "The answer is {}", 42); // -> "The answer is 42 [7]"
+```
+
+3. All streams use the message from the previous stage, but each can format its output differently. Set a custom stream pattern:
+```cpp
+// Default logger pattern.
+qx::logger& logger = qx::get_logger();
+logger.set_default_pattern(QXT("{verbosity:l}[{time:%H:%M:%S}]{category:l} {message}\n"));
+
+// A file can include detailed context...
+qx::file_logger_stream_mapping fileStream { ... };
+fileStream.set_pattern(QXT("{verbosity:l}[{time:%H:%M:%S}]{category:l}[{file}::{line}::{function}] {message}\n"));
+logger.add_stream(std::move(fileStream));
+
+// ...while debugger output stays brief for quick troubleshooting.
+qx::debugger_logger_stream debuggerStream { ... };
+debuggerStream.set_pattern(QXT("{category:l} {message}\n"));
+logger.add_stream(std::move(debuggerStream));
+
+...
+
+QX_LOG(qx::verbosity::important, "The answer is {}", 42);
+// file     -> "[I][22:33:44][CatMySystem][main.cpp::main::67] The answer is 42 [3]"
+// debugger -> "[CatMySystem] The answer is 42 [3]"
+```
+
+This mechanism can also be used for JSON output.
+
+Available fields: `{category}`, `{verbosity}`, `{thread_id}`, `{time}`, `{file}`, `{function}`, `{line}`, `{message}`.
+
+The default pattern is:
+```cpp
+QXT("{verbosity:l}[{time:%d.%m.%Y_%H:%M:%S}]{category:l} {message}\n")
 ```
 
 ### Custom logger
@@ -245,4 +311,4 @@ The macro allows several important things:
 ### Why doesn't the library include separate threading, asynchronicity, etc. for the logger?
 
 Although this could significantly improve performance, I believe that every system should do only one thing, but do it well. Creating new threads or implementing your own asynchronous system is not what I want to focus on. The library is generally intended for use in various game engines, and they usually already have these systems.  
-The best solution in this case is to inherit from `qx::logger` as shown in the "Custom logger" section and override the `log` method. In my stress test (enabling all logs at `detailed` during multithreaded loading), I managed to reduce the total logger runtime from 44.17 seconds to 15.01 for 299731 log lines by moving everything except string formatting to a single thread.
+The best solution in this case is to inherit from `qx::logger` as shown in the "Custom logger" section and override the `log_macro` method. In my stress test (enabling all logs at `detailed` during multithreaded loading), I managed to reduce the total logger runtime from 44.17 seconds to 15.01 for 299731 log lines by moving everything except string formatting to a single thread.
