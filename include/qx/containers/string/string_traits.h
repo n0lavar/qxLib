@@ -63,96 +63,18 @@ struct hash_traits
 
 // ------------------------------------------------- allocation_traits -------------------------------------------------
 
-template<class value_t, class usings_char_traits_t>
-struct allocation_traits;
-
-template<class usings_char_traits_t>
-struct allocation_traits<char, usings_char_traits_t>
+template<class value_t, class usings_char_traits_t, size_t nSmallStringBytes, bool bShrinkToFitWhenSmall>
+    requires(nSmallStringBytes % sizeof(value_t) == 0)
+struct allocation_traits
 {
     static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
     {
-        return 64;
+        return nSmallStringBytes / sizeof(value_t);
     }
 
     static constexpr bool shrink_to_fit_when_small() noexcept
     {
-        return false;
-    }
-};
-
-template<class usings_char_traits_t>
-struct allocation_traits<wchar_t, usings_char_traits_t>
-{
-    static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
-    {
-#if QX_MSVC
-        // sizeof(wchar_t) == 2
-        return 32;
-#else
-        // sizeof(wchar_t) == 4
-        return 16;
-#endif
-    }
-
-    static constexpr bool shrink_to_fit_when_small() noexcept
-    {
-        return false;
-    }
-};
-
-template<class value_t, class usings_char_traits_t>
-struct small_string_allocation_traits;
-
-template<class usings_char_traits_t>
-struct small_string_allocation_traits<char, usings_char_traits_t> : public allocation_traits<char, usings_char_traits_t>
-{
-    static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
-    {
-        return 32;
-    }
-};
-
-template<class usings_char_traits_t>
-struct small_string_allocation_traits<wchar_t, usings_char_traits_t>
-    : public allocation_traits<wchar_t, usings_char_traits_t>
-{
-    static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
-    {
-#if QX_MSVC
-        // sizeof(wchar_t) == 2
-        return 16;
-#else
-        // sizeof(wchar_t) == 4
-        return 8;
-#endif
-    }
-};
-
-template<class value_t, class usings_char_traits_t>
-struct big_string_allocation_traits;
-
-template<class usings_char_traits_t>
-struct big_string_allocation_traits<char, usings_char_traits_t> : public allocation_traits<char, usings_char_traits_t>
-{
-    static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
-    {
-        return 256;
-    }
-};
-
-template<class usings_char_traits_t>
-struct big_string_allocation_traits<wchar_t, usings_char_traits_t>
-    : public allocation_traits<wchar_t, usings_char_traits_t>
-{
-    static constexpr typename usings_char_traits_t::size_type small_string_size() noexcept
-    {
-#if QX_MSVC
-        // sizeof(wchar_t) == 2
-        return 128;
-#else
-        // sizeof(wchar_t) == 4
-        return 64;
-#endif
+        return bShrinkToFitWhenSmall;
     }
 };
 
@@ -396,7 +318,7 @@ template<class value_t>
 using traits = constructor<
     usings_traits<value_t>,
     hash_traits<value_t, usings_traits<value_t>>,
-    allocation_traits<value_t, usings_traits<value_t>>,
+    allocation_traits<value_t, usings_traits<value_t>, 64, false>,
     test_char_traits<value_t, usings_traits<value_t>>,
     transform_char_traits<value_t, usings_traits<value_t>>,
     length_traits<value_t, usings_traits<value_t>>,
