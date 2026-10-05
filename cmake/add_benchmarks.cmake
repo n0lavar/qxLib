@@ -19,7 +19,11 @@ macro(add_benchmarks
 )
     option(GENERATE_BENCHMARKS "Generate benchmarks projects? Enabling this requires benchmark" OFF)
 
-    if (${GENERATE_BENCHMARKS})
+    if (GENERATE_BENCHMARKS)
+        find_package(benchmark REQUIRED CONFIG PATHS
+            "${EXTERNAL_FOLDER}/benchmark/build"
+            "${CMAKE_CURRENT_SOURCE_DIR}/../benchmark/build"
+        )
         file(GLOB_RECURSE BENCHMARKS_SRC_FILES "${_glob_recurse_pattern}")
 
         # from list of files we'll create benchmarks name.bench.cpp -> name

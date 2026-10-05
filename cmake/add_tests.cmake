@@ -46,7 +46,8 @@ macro(add_tests
     option(GENERATE_TESTS "Generate tests projects? Enabling this requires gtest" OFF)
     option(TEST_DEBUG_BREAKS "Should gtest hit a debug break when condition fails?" OFF)
 
-    if (${GENERATE_TESTS})
+    if (GENERATE_TESTS)
+        find_package(GTest REQUIRED MODULE)
         enable_testing()
         file(GLOB_RECURSE TEST_SRC_FILES "${_glob_recurse_pattern}")
 

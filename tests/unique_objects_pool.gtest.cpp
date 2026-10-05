@@ -8,8 +8,10 @@
 **/
 #include <common.h>
 
-#include <qx/containers/unique_objects_pool.h>
-#include <string>
+#if __has_include(<boost/multi_index_container.hpp>)
+
+    #include <qx/containers/unique_objects_pool.h>
+    #include <string>
 
 void test_pool(bool bAutoShrink)
 {
@@ -59,3 +61,5 @@ TEST(unique_objects_pool, main)
     test_pool(true);
     test_pool(false);
 }
+
+#endif

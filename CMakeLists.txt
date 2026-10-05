@@ -3,7 +3,9 @@ project(qxLib)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_DEBUG_POSTFIX d)
 
-cmake_policy(SET CMP0167 OLD)
+if(POLICY CMP0167)
+    cmake_policy(SET CMP0167 OLD)
+endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake/modules/" ${CMAKE_MODULE_PATH})
 if (NOT DEFINED EXTERNAL_FOLDER)
@@ -39,15 +41,13 @@ find_package(Threads REQUIRED)
 
 find_package(Boost)
 if(NOT Boost_FOUND)
-    set(Boost_ROOT "${CMAKE_CURRENT_LIST_DIR}/../external/boost")
+    set(Boost_ROOT "${EXTERNAL_FOLDER}/boost")
     find_package(Boost)
 endif()
 
-find_package(GLM)
+find_package(GLM REQUIRED)
 find_package(FMT)
 
-find_package(GTest MODULE)
-find_package(benchmark PATHS ../external/benchmark/build ../benchmark/build)
 
 add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS} ${PVSCONFIG_FILE})
 

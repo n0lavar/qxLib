@@ -26,26 +26,23 @@ endif(GTEST_ROOT_DIR)
 
 # locate header
 find_path(GTEST_INCLUDE_DIR "gtest/gtest.h" PATHS ${_GTEST_HEADER_SEARCH_DIRS})
+# Require a library as well as headers so configuration fails before linking.
+find_library(GTEST_LIBRARY_RELEASE NAMES gtest PATHS
+    "${GTEST_INCLUDE_DIR}/../../build/lib/Release"
+    "${GTEST_INCLUDE_DIR}/../lib"
+    "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu"
+)
+find_library(GTEST_LIBRARY_DEBUG NAMES gtestd gtest PATHS
+    "${GTEST_INCLUDE_DIR}/../../build/lib/Debug"
+    "${GTEST_INCLUDE_DIR}/../lib"
+    "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu"
+)
+include(SelectLibraryConfigurations)
+select_library_configurations(GTEST)
 include(FindPackageHandleStandardArgs)
-find_package_handle_standard_args(GTest DEFAULT_MSG GTEST_INCLUDE_DIR)
+find_package_handle_standard_args(GTest DEFAULT_MSG GTEST_INCLUDE_DIR GTEST_LIBRARY)
 
-if(GTEST_FOUND)
-	set(GTEST_INCLUDE_DIRS "${GTEST_INCLUDE_DIR}")
-    
-    if (WIN32)
-        set(GTEST_LIBRARIES
-            optimized   "${GTEST_INCLUDE_DIR}/../../build/lib/Release/gtest.lib"
-            debug       "${GTEST_INCLUDE_DIR}/../../build/lib/Debug/gtest.lib"
-        )    
-    elseif(APPLE) 
-        set(GTEST_LIBRARIES
-            optimized   "${GTEST_INCLUDE_DIR}/../lib/libgtest.a"
-            debug       "${GTEST_INCLUDE_DIR}/../lib/libgtest.a"
-        )   
-    else()
-        set(GTEST_LIBRARIES
-            optimized   "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu/libgtest.a"
-            debug       "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu/libgtest.a"
-        )    
-    endif()
-endif(GTEST_FOUND)
+if(GTest_FOUND)
+    set(GTEST_INCLUDE_DIRS "${GTEST_INCLUDE_DIR}")
+    set(GTEST_LIBRARIES "${GTEST_LIBRARY}")
+endif()
