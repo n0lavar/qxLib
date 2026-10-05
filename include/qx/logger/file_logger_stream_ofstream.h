@@ -39,7 +39,7 @@ public:
     **/
     file_logger_stream_ofstream(
         const config&             streamConfig = config(),
-        unit<size_t, units::data> bufferSize   = { 8192 * sizeof(char_type), units::data::bytes }) noexcept;
+        unit<size_t, units::data> bufferSize   = { 8192 * sizeof(char_type), units::data::bytes });
     file_logger_stream_ofstream(file_logger_stream_ofstream&&) noexcept = default;
 
     virtual ~file_logger_stream_ofstream() override;

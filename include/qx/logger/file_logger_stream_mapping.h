@@ -59,6 +59,7 @@ public:
         unit<size_t, units::data> initialMapSize = { 1, units::data::mebibytes }) noexcept;
 
     file_logger_stream_mapping(file_logger_stream_mapping&& other) noexcept;
+    file_logger_stream_mapping& operator=(file_logger_stream_mapping&&) = delete;
 
     virtual ~file_logger_stream_mapping() noexcept override;
 

@@ -41,6 +41,7 @@ public:
         const config&             streamConfig = config(),
         unit<size_t, units::data> bufferSize   = { 8192 * sizeof(char_type), units::data::bytes }) noexcept;
     file_logger_stream_fopen(file_logger_stream_fopen&& other) noexcept;
+    file_logger_stream_fopen& operator=(file_logger_stream_fopen&&) = delete;
 
     virtual ~file_logger_stream_fopen() override;
 
