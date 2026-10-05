@@ -346,13 +346,13 @@ void base_delegate<derived_t, return_t, args_t...>::add_function(
     {
         single_value_type first = std::get<single_value_type>(std::move(*m_optFunctions));
         container_type    container;
-        container.emplace(first.first, std::move(first.second));
-        container.emplace(key, std::move(function));
+        container.try_emplace(first.first, std::move(first.second));
+        container.try_emplace(key, std::move(function));
         m_optFunctions = std::move(container);
     }
     else
     {
-        std::get<container_type>(*m_optFunctions).emplace(key, std::move(function));
+        std::get<container_type>(*m_optFunctions).try_emplace(key, std::move(function));
     }
 }
 

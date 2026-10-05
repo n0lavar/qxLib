@@ -77,7 +77,7 @@ inline void logger::register_category(const category& category, category_data da
 inline void logger::register_category(string_view svCategoryName, category_data data) noexcept
 {
     std::unique_lock _(m_RegisteredCategoriesMutex);
-    m_RegisteredCategories.emplace(svCategoryName, std::move(data));
+    m_RegisteredCategories.try_emplace(svCategoryName, std::move(data));
 }
 
 inline compile_pattern_result logger::set_default_pattern(string sPattern) noexcept
