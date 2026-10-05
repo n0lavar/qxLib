@@ -37,6 +37,9 @@ static_assert(
 static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(\"a, b\", 42)")).first == QXT("\"a, b\""));
 static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(',', 42)")).first == QXT("','"));
 static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq((a, b), 42)")).first == QXT("(a, b)"));
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(a], 42)")).first.empty());
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq(a}, 42)")).first.empty());
+static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq([a), 42)")).first.empty());
 
 class assert_exit_tests_fixture : public ::testing::Test
 {

@@ -147,7 +147,7 @@ constexpr bool is_temporary_value(string_view svExpression) noexcept
 
     if (nPos < svExpression.size() && svExpression[nPos] == QXT('<'))
     {
-        i32 nAngleDepth = 1;
+        size_t nAngleDepth = 1;
         ++nPos;
 
         while (nPos < svExpression.size() && nAngleDepth > 0)
@@ -181,7 +181,7 @@ constexpr bool is_qualified_value(string_view svExpression) noexcept
 
         if (nPos < svExpression.size() && svExpression[nPos] == QXT('<'))
         {
-            i32 nAngleDepth = 1;
+            size_t nAngleDepth = 1;
             ++nPos;
 
             while (nPos < svExpression.size() && nAngleDepth > 0)
@@ -250,10 +250,10 @@ constexpr std::pair<string_view, string_view> split_assert_arguments(string_view
     if (nArgsBegin == string_view::npos)
         return {};
 
-    i32    nParenDepth   = 0;
-    i32    nBracketDepth = 0;
-    i32    nBraceDepth   = 0;
-    i32    nAngleDepth   = 0;
+    size_t nParenDepth   = 0;
+    size_t nBracketDepth = 0;
+    size_t nBraceDepth   = 0;
+    size_t nAngleDepth   = 0;
     size_t nCommaPos     = string_view::npos;
     size_t nArgsEnd      = string_view::npos;
     bool   bInString     = false;
@@ -306,6 +306,8 @@ constexpr std::pair<string_view, string_view> split_assert_arguments(string_view
             }
             else
             {
+                if (nParenDepth == 0)
+                    return {};
                 --nParenDepth;
             }
             break;
@@ -315,6 +317,8 @@ constexpr std::pair<string_view, string_view> split_assert_arguments(string_view
             break;
 
         case QXT(']'):
+            if (nBracketDepth == 0)
+                return {};
             --nBracketDepth;
             break;
 
@@ -323,6 +327,8 @@ constexpr std::pair<string_view, string_view> split_assert_arguments(string_view
             break;
 
         case QXT('}'):
+            if (nBraceDepth == 0)
+                return {};
             --nBraceDepth;
             break;
 

@@ -27,6 +27,12 @@ TYPED_TEST(test_format, format_function)
     EXPECT_STREQ(sResult.c_str(), QX_STR_PREFIX(TypeParam, "42"));
 }
 
+TYPED_TEST(test_format, escaped_braces)
+{
+    qx::basic_string<TypeParam> sResult = qx::format(QX_STR_PREFIX(TypeParam, "{{{}}}"), 42);
+    EXPECT_STREQ(sResult.c_str(), QX_STR_PREFIX(TypeParam, "{42}"));
+}
+
 TYPED_TEST(test_format, convert_to_string)
 {
     qx::basic_string<TypeParam> sResult = qx::convert_to_string<int, TypeParam>(42);

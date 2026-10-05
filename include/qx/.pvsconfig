@@ -12,3 +12,6 @@
 
 # Memsize type is used in the union.
 //-V117
+
+# Priority of the '&&' operation is higher than that of the '||' operation.
+//-V648

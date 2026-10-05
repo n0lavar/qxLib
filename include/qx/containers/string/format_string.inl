@@ -22,7 +22,7 @@ template<class char_t, class... args_t>
 template<class T>
 consteval const T& basic_format_string_strong_checks<char_t, args_t...>::parse_format_string(const T& value)
 {
-    int                       nBracesBalance  = 0;
+    size_t                    nBracesBalance  = 0;
     size_t                    nNumBracesPairs = 0;
     basic_string_view<char_t> svFormatString  = value;
 
@@ -47,14 +47,13 @@ consteval const T& basic_format_string_strong_checks<char_t, args_t...>::parse_f
             }
 
             ++nNumBracesPairs;
-            --nBracesBalance;
-
-            if (nBracesBalance < 0)
+            if (nBracesBalance == 0)
             {
                 throw std::format_error(
                     "Format string error: num of closing braces > num of opening braces at some point of the format "
                     "string");
             }
+            --nBracesBalance;
         }
     }
 
