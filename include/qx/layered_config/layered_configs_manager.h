@@ -32,8 +32,8 @@ struct layered_config_variable_data
     cstring_view svDescription;
     bool         bRequired = false;
 
-    std::optional<std::any> (*pStringToT)(cstring_view svData);
-    cstring (*pTToString)(const std::any& data);
+    std::optional<std::any> (*pStringToT)(cstring_view svData) = nullptr;
+    cstring (*pTToString)(const std::any& data) = nullptr;
     cstring_view svTypeName;
 };
 

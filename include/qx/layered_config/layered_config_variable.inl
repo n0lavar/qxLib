@@ -27,9 +27,9 @@ template<class T>
 consteval layered_config_variable_builder<T>::layered_config_variable_builder(
     cstring_view svRuntimeName,
     T            defaultValue) noexcept
+    : m_svRuntimeName(svRuntimeName)
+    , m_DefaultValue(std::move(defaultValue))
 {
-    m_svRuntimeName   = svRuntimeName;
-    m_DefaultValue    = std::move(defaultValue);
     m_Data.pStringToT = [](cstring_view svData) -> std::optional<std::any>
     {
         if constexpr (std::is_same_v<T, cstring_view>)
@@ -75,7 +75,7 @@ consteval layered_config_variable_builder<T> layered_config_variable_builder<T>:
 template<class T>
 consteval layered_config_variable_builder<T> layered_config_variable_builder<T>::command_line(
     cstring_view svFullName,
-    cstring_view svShortName) noexcept
+    cstring_view svShortName)
 {
     m_Data.svFullCommandLineName = svFullName;
     if (!m_Data.svFullCommandLineName.starts_with("--"))
