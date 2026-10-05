@@ -334,3 +334,22 @@ TYPED_TEST(test_layered_config_set_value, bool)
 {
     this->template test_layered_config_set_value_check_type<bool>(k_bDefaultBoolValue, true, k_svBoolRuntimeName);
 }
+
+TEST(layered_config, empty_or_invalid_args)
+{
+    auto& manager = qx::layered_configs_manager::get_instance();
+    char  sHelp[] = "--help";
+    char* argv[]  = { sHelp };
+
+    for (const int argc : { 0, -1 })
+    {
+        manager.set_args(argc, argv);
+        EXPECT_FALSE(manager.show_help());
+        EXPECT_TRUE(manager.parse());
+    }
+
+    manager.set_args(1, nullptr);
+    EXPECT_FALSE(manager.show_help());
+    EXPECT_TRUE(manager.parse());
+    manager.reset();
+}

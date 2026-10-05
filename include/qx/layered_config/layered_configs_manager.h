@@ -63,6 +63,7 @@ public:
     /**
         @brief   Set command line arguments.
         @details Should be called once at the beginning of the app before the first parse().
+                 Non-positive argc or null argv clears the command line arguments.
         @param   argc - number of command line arguments
         @param   argv - array of command line arguments
     **/

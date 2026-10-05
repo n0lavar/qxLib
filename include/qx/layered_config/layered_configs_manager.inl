@@ -34,7 +34,13 @@ inline void layered_configs_manager::set_app_description(cstring sAppDescription
 
 inline void layered_configs_manager::set_args(int argc, char* argv[]) noexcept
 {
-    m_Args = std::span(argv, argc);
+    if (argc <= 0 || argv == nullptr)
+    {
+        m_Args = {};
+        return;
+    }
+
+    m_Args = std::span(argv, static_cast<size_t>(argc));
 }
 
 inline bool layered_configs_manager::show_help() const noexcept
@@ -58,7 +64,7 @@ inline bool layered_configs_manager::show_help() const noexcept
     std::map<cstring_view, std::vector<data_with_runtime_name>> groups;
     for (const auto& [svRuntimeName, data] : m_VariableData)
     {
-        groups[data.svGroupName].push_back(data_with_runtime_name { { data }, svRuntimeName });
+        groups[data.svGroupName].emplace_back(data, svRuntimeName);
     }
 
     for (std::vector<data_with_runtime_name>& lines : groups | std::views::values)
