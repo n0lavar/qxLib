@@ -20,7 +20,7 @@ inline file_logger_stream_mapping::file_logger_stream_mapping(
 #if QX_WIN
     SYSTEM_INFO si {};
     GetSystemInfo(&si);
-    m_nGranularity = si.dwAllocationGranularity ? si.dwAllocationGranularity : 65536;
+    m_nGranularity = si.dwAllocationGranularity ? static_cast<size_t>(si.dwAllocationGranularity) : size_t { 65536 };
 
     m_hFile = CreateFileW(
         path.c_str(),
@@ -250,8 +250,9 @@ inline bool file_logger_stream_mapping::remap_to_capacity(size_t nNewCapacity) n
 #endif
 
 #if QX_WIN
-    DWORD hi = static_cast<DWORD>((nNewCapacity >> 32) & 0xFFFFFFFFu);
-    DWORD lo = static_cast<DWORD>(nNewCapacity & 0xFFFFFFFFu);
+    const u64   nMappingSize = static_cast<u64>(nNewCapacity);
+    const DWORD hi = static_cast<DWORD>(nMappingSize >> std::numeric_limits<DWORD>::digits);
+    const DWORD lo = static_cast<DWORD>(nMappingSize);
 
     m_hMap = CreateFileMappingW(m_hFile, nullptr, PAGE_READWRITE, hi, lo, nullptr);
     if (!m_hMap)

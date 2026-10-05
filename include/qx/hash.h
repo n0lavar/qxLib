@@ -36,7 +36,7 @@ constexpr size_t get_hash(const T& value) noexcept
 template<class T>
 constexpr void hash_combine(size_t& seed, const T& value) noexcept
 {
-    seed ^= get_hash(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    seed ^= get_hash(value) + size_t { 0x9e3779b9 } + (seed << 6) + (seed >> 2);
 }
 
 } // namespace qx

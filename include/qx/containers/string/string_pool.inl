@@ -44,7 +44,7 @@ typename string_pool<nSize, bStringStartCapacity>::item string_pool<nSize, bStri
             if (m_FreeMask[nBlock]
                     .compare_exchange_weak(nMask, nNewMask, std::memory_order_acquire, std::memory_order_relaxed))
             {
-                const size_t nIndex = nBlock * bTotalBits + ctz64(nBit);
+                const size_t nIndex = nBlock * bTotalBits + static_cast<size_t>(ctz64(nBit));
                 return item { std::move(m_Storage[nIndex]), static_cast<int>(nIndex) };
             }
         }

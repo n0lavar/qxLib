@@ -12,6 +12,8 @@
 #include <qx/math/units/data.h>
 #include <qx/windows.h>
 
+#include <limits>
+
 #if QX_CLANG || QX_APPLE_CLANG || QX_GNU
     #include <fcntl.h>
     #include <sys/mman.h>
