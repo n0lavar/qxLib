@@ -26,7 +26,10 @@ namespace
 template<class T, class U>
 struct builder_hash : qx::string_traits::hash_traits<T, U>
 {
-    static constexpr u32 hash_seed() noexcept { return 42; }
+    static constexpr u32 hash_seed() noexcept
+    {
+        return 42;
+    }
 };
 
 template<class T>
@@ -44,8 +47,14 @@ struct builder_length : qx::string_traits::length_traits<T, U>
 // A concrete user policy with its own logic and no library base class.
 struct custom_allocation
 {
-    static constexpr size_t small_string_size() noexcept { return sizeof(size_t) * 16; }
-    static constexpr bool shrink_to_fit_when_small() noexcept { return true; }
+    static constexpr size_t small_string_size() noexcept
+    {
+        return sizeof(size_t) * 16;
+    }
+    static constexpr bool shrink_to_fit_when_small() noexcept
+    {
+        return true;
+    }
 };
 
 template<class T>
@@ -57,33 +66,27 @@ void check_traits_builder()
     static_assert(st::big_traits<T>::small_string_size() == 128 / sizeof(T));
     static_assert(st::huge_traits<T>::small_string_size() == 256 / sizeof(T));
 
-    using custom = typename st::traits_builder<st::big_traits<T>>
-        ::template with_hash<builder_hash<T, st::usings_traits<T>>>
-        ::template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 32, true>>
-        ::type;
+    using custom =
+        typename st::traits_builder<st::big_traits<T>>::template with_hash<builder_hash<T, st::usings_traits<T>>>::
+            template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 32, true>>::type;
     static_assert(custom::hash_seed() == 42);
     static_assert(custom::small_string_size() == 32 / sizeof(T));
     static_assert(custom::shrink_to_fit_when_small());
 
-    using rebuilt = typename st::traits_builder<custom>
-        ::template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 128, false>>
-        ::template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 256, false>>
-        ::type;
+    using rebuilt = typename st::traits_builder<custom>::
+        template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 128, false>>::template with_allocation<
+            st::allocation_traits<T, st::usings_traits<T>, 256, false>>::type;
     static_assert(rebuilt::hash_seed() == 42);
     static_assert(rebuilt::small_string_size() == 256 / sizeof(T));
     static_assert(!rebuilt::shrink_to_fit_when_small());
 
-    using rebound = typename st::traits_builder<custom>
-        ::template with_length<builder_length<T, builder_usings<T>>>
-        ::template with_usings<builder_usings<T>>
-        ::template with_allocation<st::allocation_traits<T, builder_usings<T>, 32, true>>
-        ::type;
+    using rebound = typename st::traits_builder<custom>::template with_length<builder_length<T, builder_usings<T>>>::
+        template with_usings<builder_usings<T>>::template with_allocation<
+            st::allocation_traits<T, builder_usings<T>, 32, true>>::type;
     static_assert(std::is_same_v<typename rebound::selected_size_type, unsigned int>);
     static_assert(std::is_same_v<decltype(rebound::small_string_size()), unsigned int>);
 
-    using allocated = typename st::traits_builder<custom>
-        ::template with_allocation<custom_allocation>
-        ::type;
+    using allocated = typename st::traits_builder<custom>::template with_allocation<custom_allocation>::type;
     static_assert(std::is_base_of_v<custom_allocation, allocated>);
     static_assert(allocated::small_string_size() == sizeof(size_t) * 16);
     static_assert(allocated::shrink_to_fit_when_small());
@@ -91,12 +94,11 @@ void check_traits_builder()
     qx::basic_string<T, allocated> str;
     EXPECT_EQ(str.capacity(), custom_allocation::small_string_size() - 2 * sizeof(size_t) / sizeof(T) - 1);
 
-    using provided = typename st::traits_builder<allocated>
-        ::template with_allocation<st::allocation_traits<T, st::usings_traits<T>, 128, false>>
-        ::type;
+    using provided = typename st::traits_builder<allocated>::template with_allocation<
+        st::allocation_traits<T, st::usings_traits<T>, 128, false>>::type;
     static_assert(provided::small_string_size() == 128 / sizeof(T));
     static_assert(!provided::shrink_to_fit_when_small());
-    const T text[] = {T('a'), T('b'), T('c'), T(0)};
+    const T text[] = { T('a'), T('b'), T('c'), T(0) };
     EXPECT_EQ(custom::length(text), 3u);
     EXPECT_EQ(rebuilt::compare(text, text), 0);
 }

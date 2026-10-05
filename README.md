@@ -38,23 +38,23 @@ The library doesn't install these dependencies, only tries to find existing ones
 
 Required:
 + C++20
-+ glm
++ [glm](https://github.com/g-truc/glm.git)
 
 Optional:
 
-+ boost (qx::unique_objects_pool)
-+ fmt (qx::string formatting. by default it uses std::format, but fmt is way faster)
-+ googletest (if you want to run tests)
-+ google benchmark (if you want to run benchmarks)
++ [googletest](https://github.com/google/googletest.git) (if you want to run tests)
++ [google benchmark](https://github.com/google/benchmark.git) (if you want to run benchmarks)
++ [fmt](https://github.com/fmtlib/fmt.git) (`qx::string` formatting. by default it uses `std::format`, but `fmt` is way faster)
++ [boost](https://github.com/boostorg/boost.git) (`qx::unique_objects_pool` only)
   
 ## License
 
-qxLib is available under the MIT License. See LICENSE.txt.
+`qxLib` is available under the MIT License. See LICENSE.txt.
 
 
 ## Authors
 
-qxLib was mainly written and is maintained by Nick Khrapov  
+`qxLib` was mainly written and is maintained by Nick Khrapov  
 (nick.khrapov@gmail.com). See the git commit log for other authors.
 
 ## SAST Tools
