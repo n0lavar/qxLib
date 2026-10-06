@@ -2674,17 +2674,6 @@ struct std::hash<qx::basic_string<char_t, traits_t>>
     }
 };
 
-namespace std
-{
-
-template<class char_t, class traits_t>
-void swap(qx::basic_string<char_t, traits_t>& lhs, qx::basic_string<char_t, traits_t>& rhs) noexcept
-{
-    lhs.swap(rhs);
-}
-
-} // namespace std
-
 template<class char_t, class traits_t>
 struct QX_FMT_NS::formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatter<char_t>
 {

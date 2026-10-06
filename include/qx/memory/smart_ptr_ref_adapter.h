@@ -73,26 +73,13 @@ class smart_ptr_ref_adapter;
 
 } // namespace qx::details
 
-namespace std
-{
-
 template<template<class, class...> class pointer_t, class T, class... args_t>
-struct hash<qx::details::smart_ptr_ref_adapter<pointer_t, T, args_t...>>
+struct std::hash<qx::details::smart_ptr_ref_adapter<pointer_t, T, args_t...>>
 {
     size_t operator()(const qx::details::smart_ptr_ref_adapter<pointer_t, T, args_t...>& adaper) const noexcept
     {
         return hash<pointer_t<T, args_t...>>()(adaper);
     }
 };
-
-template<template<class, class...> class pointer_t, class T, class... args_t>
-void swap(
-    qx::details::smart_ptr_ref_adapter<pointer_t, T, args_t...>& lhs,
-    qx::details::smart_ptr_ref_adapter<pointer_t, T, args_t...>& rhs) noexcept
-{
-    lhs.swap(rhs);
-}
-
-} // namespace std
 
 #include <qx/memory/smart_ptr_ref_adapter.inl>
