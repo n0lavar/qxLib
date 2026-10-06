@@ -88,17 +88,17 @@ public:
         return svClassName == get_class_name();
     }
 
-    bool is(class_id id) const noexcept
+    bool is(const class_id& id) const noexcept
     {
         return id == get_class_id();
     }
 
-    virtual bool is_derived_from_id(class_id id) const noexcept
+    virtual bool is_derived_from_id(const class_id& id) const noexcept
     {
         return is_derived_from_id_static(id);
     }
 
-    static constexpr bool is_derived_from_id_static(class_id id) noexcept
+    static constexpr bool is_derived_from_id_static(const class_id& id) noexcept
     {
         return id == get_class_id_static();
     }
@@ -129,7 +129,7 @@ public:
 protected:
     virtual ~rtti_root() noexcept = default;
 
-    virtual bool _is_base_id(class_id idBase) const noexcept
+    virtual bool _is_base_id(const class_id& idBase) const noexcept
     {
         return idBase == get_class_id_static();
     }
@@ -169,11 +169,11 @@ public:                                                                         
         qx::tuple_utils::join_t<typename super_class_type::inheritance_tuple_type, this_class_type>;                \
                                                                                                                     \
 public:                                                                                                             \
-    static constexpr bool is_derived_from_id_static(qx::class_id id) noexcept                                       \
+    static constexpr bool is_derived_from_id_static(const qx::class_id& id) noexcept                                \
     {                                                                                                               \
         return id == get_class_id_static() || super_class_type::is_derived_from_id_static(id);                      \
     }                                                                                                               \
-    virtual bool is_derived_from_id(qx::class_id id) const noexcept override                                        \
+    virtual bool is_derived_from_id(const qx::class_id& id) const noexcept override                                 \
     {                                                                                                               \
         static_assert(std::is_same_v<std::remove_cvref_t<decltype(*this)>, this_class_type>);                       \
         return is_derived_from_id_static(id);                                                                       \
@@ -211,7 +211,7 @@ public:                                                                         
     }                                                                                                               \
                                                                                                                     \
 protected:                                                                                                          \
-    virtual bool _is_base_id(qx::class_id base_id) const noexcept override                                          \
+    virtual bool _is_base_id(const qx::class_id& base_id) const noexcept override                                   \
     {                                                                                                               \
         return base_id == super_class_type::get_class_id_static() || super_class_type::_is_base_id(base_id);        \
     }                                                                                                               \
