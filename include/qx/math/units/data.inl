@@ -102,15 +102,28 @@ constexpr auto qx::units::traits<qx::units::data>::get_suffixes() noexcept
 template<class T>
 constexpr i64 qx::units::details::to_bits(data eFrom, T value) noexcept
 {
+    double fBits;
     if (traits<data>::is_si(eFrom))
     {
-        return static_cast<i64>(
-            8.f * static_cast<double>(value) * pow(10, static_cast<int>(eFrom) - static_cast<int>(data::_first_si)));
+        fBits = 8.f * static_cast<double>(value) * pow(10, static_cast<int>(eFrom) - static_cast<int>(data::_first_si));
     }
     else
     {
-        return static_cast<i64>(static_cast<double>(value) * pow(2, static_cast<int>(eFrom)));
+        fBits = static_cast<double>(value) * pow(2, static_cast<int>(eFrom));
     }
+
+    // Saturate overflow and map NaN to zero before converting to i64.
+    if (fBits != fBits)
+        return 0;
+
+    // 2^63 is exact in double; i64::max rounds up to this exclusive bound.
+    constexpr double fLimit = 0x1p63;
+    if (fBits >= fLimit)
+        return std::numeric_limits<i64>::max();
+    if (fBits <= -fLimit)
+        return std::numeric_limits<i64>::min();
+
+    return static_cast<i64>(fBits);
 }
 
 template<class T>

@@ -748,6 +748,24 @@ TEST(data, normalize)
         qx::unit(1.5f, qx::units::data::gibibytes));
 }
 
+TEST(data, to_bits_saturates_invalid_values)
+{
+    using qx::units::data;
+    using qx::units::details::to_bits;
+    constexpr double fLimit = 0x1p63;
+    for (const auto from : { data::bits, data::kilobytes })
+    {
+        EXPECT_EQ(to_bits(from, std::numeric_limits<double>::quiet_NaN()), 0);
+        EXPECT_EQ(to_bits(from, std::numeric_limits<double>::infinity()), std::numeric_limits<i64>::max());
+        EXPECT_EQ(to_bits(from, -std::numeric_limits<double>::infinity()), std::numeric_limits<i64>::min());
+        EXPECT_EQ(to_bits(from, fLimit), std::numeric_limits<i64>::max());
+        EXPECT_EQ(to_bits(from, -fLimit), std::numeric_limits<i64>::min());
+    }
+    EXPECT_EQ(to_bits(data::bits, std::nextafter(fLimit, 0.0)), std::numeric_limits<i64>::max() - 1023);
+    EXPECT_EQ(to_bits(data::bits, -1.75), -1);
+    EXPECT_EQ(to_bits(data::kilobytes, 1.5), 12000);
+}
+
 TEST(data, format)
 {
     expect_equal(qx::convert_to_string(qx::unit(200.f, qx::units::data::bits)), QXT("200b"));

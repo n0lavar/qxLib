@@ -12,6 +12,7 @@
 #include <qx/math/units/base.h>
 
 #include <algorithm>
+#include <limits>
 
 namespace qx::units
 {

@@ -590,6 +590,23 @@ TEST(color, update_dec)
     EXPECT_EQ(color.a_dec(), 0);
 }
 
+TEST(color, decimal_conversion_invalid_channels)
+{
+    qx::color color;
+    color[0] = std::numeric_limits<float>::quiet_NaN();
+    color[1] = std::numeric_limits<float>::infinity();
+    color[2] = -std::numeric_limits<float>::infinity();
+    color[3] = 0.5f;
+    EXPECT_EQ(color.r_dec(), 0);
+    EXPECT_EQ(color.g_dec(), 255);
+    EXPECT_EQ(color.b_dec(), 0);
+    EXPECT_EQ(color.a_dec(), 127);
+    color[0] = 2.f;
+    color[1] = -2.f;
+    EXPECT_EQ(color.r_dec(), 255);
+    EXPECT_EQ(color.g_dec(), 0);
+}
+
 TEST(color, format)
 {
     qx::color color = qx::color::alice_blue();

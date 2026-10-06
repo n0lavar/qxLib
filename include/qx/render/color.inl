@@ -414,6 +414,13 @@ constexpr float color::dec_to_float(int nValue) noexcept
 
 constexpr int color::float_to_dec(float fValue) noexcept
 {
+    // Saturate to the channel range and map NaN to zero before converting.
+    if (!(fValue > 0.f))
+        return 0;
+
+    if (fValue >= 1.f)
+        return 255;
+
     return static_cast<int>(fValue * 255.f);
 }
 
