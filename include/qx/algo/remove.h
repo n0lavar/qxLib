@@ -19,7 +19,7 @@ namespace qx
     @tparam predicate_t - predicate type
     @param  itBegin     - the range of elements begin iterator
     @param  itEnd       - the range of elements end iterator
-    @param  predicate   - unary predicate which returns ​true if the element should be removed
+    @param  predicate   - unary predicate which returns true if the element should be removed
     @param  nStartIndex - we can't find out the index of itBegin so you should specify it
     @retval             - past-the-end iterator for the new range of values
 **/
@@ -43,7 +43,7 @@ fwd_it_t remove_if_i(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t& predic
     @tparam container_t - container type
     @tparam predicate_t - predicate type
     @param  container   - the range of elements
-    @param  predicate   - unary predicate which returns ​true if the element should be removed
+    @param  predicate   - unary predicate which returns true if the element should be removed
     @retval             - past-the-end iterator for the new range of values
 **/
 template<class container_t, class predicate_t>

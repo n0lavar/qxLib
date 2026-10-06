@@ -185,9 +185,7 @@ constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, cha
     if (nStartMarker != string_view_type::npos && svSignature.find(lambdaMarker, nStartMarker) == nStartMarker + 1)
         nStartMarker = string_view_type::npos;
 
-    return string_view_type(
-        svSignature.data(),
-        nStartMarker != string_view_type::npos ? nStartMarker : svSignature.size());
+    return svSignature.substr(0, nStartMarker);
 }
 
 template<class T, class char_t>
@@ -210,10 +208,10 @@ constexpr auto type_strings<T, char_t>::get_template_parameters()
             --nEnd;
 
         constexpr string_view_type classMarker = QX_STR_PREFIX(char_t, "class ");
-        if (string_view_type(svSignature.data() + nStart, nEnd - nStart).starts_with(classMarker))
+        if (svSignature.substr(nStart, nEnd - nStart).starts_with(classMarker))
             nStart += classMarker.size();
 
-        tokens[nToken] = string_view_type(svSignature.data() + nStart, nEnd + 1 - nStart);
+        tokens[nToken] = svSignature.substr(nStart, nEnd + 1 - nStart);
     };
 
     bool bLambda = false;
