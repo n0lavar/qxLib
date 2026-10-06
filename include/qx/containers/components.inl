@@ -42,7 +42,8 @@ constexpr flags<component_status> component_status_key::get_status_flags() const
     return m_eStatusFlags;
 }
 
-constexpr void component_status_key::set_status_flags(flags<component_status> eStatusFlags) noexcept
+// flags<component_status> stores a single int; keep passing it by value.
+constexpr void component_status_key::set_status_flags(flags<component_status> eStatusFlags) noexcept //-V813
 {
     m_eStatusFlags = eStatusFlags;
 }
