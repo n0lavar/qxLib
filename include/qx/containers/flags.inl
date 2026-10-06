@@ -19,13 +19,33 @@ constexpr void flags<enum_t>::reverse() noexcept
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::shift_left(size_t nShift) noexcept
 {
-    m_EnumFlags << nShift;
+    using bits_type = std::make_unsigned_t<underlying_type>;
+    using shift_type = std::make_unsigned_t<decltype(+m_EnumFlags)>;
+
+    if (nShift >= std::numeric_limits<bits_type>::digits)
+    {
+        m_EnumFlags = 0;
+        return;
+    }
+
+    m_EnumFlags = static_cast<underlying_type>(
+        static_cast<shift_type>(static_cast<bits_type>(m_EnumFlags)) << static_cast<unsigned>(nShift));
 }
 
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::shift_right(size_t nShift) noexcept
 {
-    m_EnumFlags >> nShift;
+    using bits_type = std::make_unsigned_t<underlying_type>;
+    using shift_type = std::make_unsigned_t<decltype(+m_EnumFlags)>;
+
+    if (nShift >= std::numeric_limits<bits_type>::digits)
+    {
+        m_EnumFlags = 0;
+        return;
+    }
+
+    m_EnumFlags = static_cast<underlying_type>(
+        static_cast<shift_type>(static_cast<bits_type>(m_EnumFlags)) >> static_cast<unsigned>(nShift));
 }
 
 template<enumeration_c enum_t>

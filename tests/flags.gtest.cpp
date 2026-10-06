@@ -63,6 +63,44 @@ TEST(flags, construction_and_comparisons)
     }
 }
 
+TEST(flags, shifts)
+{
+    const auto check = []<class integer_t>()
+    {
+        enum class bits : integer_t { first = 1 };
+        using unsigned_type = std::make_unsigned_t<integer_t>;
+        constexpr size_t nWidth = std::numeric_limits<unsigned_type>::digits;
+        constexpr qx::flags<bits> initial(bits::first);
+
+        static_assert((initial << 1).to_integer() == 2);
+        static_assert(((initial << 1) >> 1).to_integer() == 1);
+        static_assert((initial << nWidth).to_integer() == 0);
+        static_assert((initial >> nWidth).to_integer() == 0);
+
+        auto value = initial;
+        value.shift_left(1);
+        EXPECT_EQ(value.to_integer(), 2);
+        value.shift_right(1);
+        EXPECT_EQ(value, initial);
+        value <<= nWidth - 1;
+        EXPECT_EQ(static_cast<unsigned_type>(value.to_integer()), unsigned_type { 1 } << (nWidth - 1));
+        value >>= nWidth - 1;
+        EXPECT_EQ(value, initial);
+        EXPECT_EQ(initial.to_integer(), 1);
+        EXPECT_EQ((initial << 0), initial);
+        EXPECT_EQ((initial >> 0), initial);
+        EXPECT_EQ((initial << std::numeric_limits<size_t>::max()).to_integer(), 0);
+        EXPECT_EQ((initial >> std::numeric_limits<size_t>::max()).to_integer(), 0);
+    };
+
+    check.operator()<int8_t>();
+    check.operator()<uint8_t>();
+    check.operator()<int32_t>();
+    check.operator()<uint32_t>();
+    check.operator()<int64_t>();
+    check.operator()<uint64_t>();
+}
+
 TEST(flags, actions)
 {
     qx::flags<EFlags> flags;

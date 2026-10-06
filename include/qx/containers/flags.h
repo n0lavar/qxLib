@@ -13,6 +13,7 @@
 #include <qx/meta/type_traits.h>
 
 #include <limits>
+#include <type_traits>
 
 /**
     @def   QX_FLAGS_ENUM_CLASS
@@ -75,14 +76,16 @@ public:
     constexpr void reverse() noexcept;
 
     /**
-        @brief Shift bits to the left
-        @param nShift - num of positions to shift
+        @brief   Shift bits to the left
+        @details Shifts at or beyond the underlying bit width clear all flags.
+        @param   nShift - num of positions to shift
     **/
     constexpr void shift_left(size_t nShift) noexcept;
 
     /**
-        @brief Shift bits to the right
-        @param nShift - num of positions to shift
+        @brief   Shift bits to the right
+        @details Logical shift; shifts at or beyond the underlying bit width clear all flags.
+        @param   nShift - num of positions to shift
     **/
     constexpr void shift_right(size_t nShift) noexcept;
 
