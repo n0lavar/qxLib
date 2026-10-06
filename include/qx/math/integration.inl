@@ -10,10 +10,38 @@
 namespace qx
 {
 
+namespace details
+{
+
+template<class count_t>
+inline std::optional<count_t> integration_sample_count(double fExtent, size_t nSamplesPerUnit) noexcept
+{
+    if (!std::isfinite(fExtent) || nSamplesPerUnit == 0)
+        return std::nullopt;
+
+    const double fCount = std::ceil(std::abs(fExtent) * static_cast<double>(nSamplesPerUnit));
+
+    // A power of two is exact in double, unlike the largest size_t value.
+    const double fCountLimit = std::ldexp(1.0, std::numeric_limits<count_t>::digits);
+    if (!std::isfinite(fCount) || fCount >= fCountLimit)
+        return std::nullopt;
+
+    return static_cast<count_t>(fCount);
+}
+
+} // namespace details
+
 template<class function_2d_t>
 inline double integrate_rectangle_rule(const function_2d_t& func, double x0, double x1, size_t nIntervalsPer1)
+    noexcept(noexcept(static_cast<double>(func(0.0))))
 {
-    const size_t nIntervals = static_cast<size_t>(std::ceil((x1 - x0) * static_cast<double>(nIntervalsPer1)));
+    const auto optIntervals = details::integration_sample_count<size_t>(x1 - x0, nIntervalsPer1);
+    if (!optIntervals)
+        return std::numeric_limits<double>::quiet_NaN();
+
+    const size_t nIntervals = *optIntervals;
+    if (nIntervals == 0)
+        return 0.0;
 
     const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
     double       fTotalArea = 0.0;
@@ -30,8 +58,15 @@ inline double integrate_rectangle_rule(const function_2d_t& func, double x0, dou
 
 template<class function_2d_t>
 double integrate_trapezoid_rule(const function_2d_t& func, double x0, double x1, size_t nIntervalsPer1)
+    noexcept(noexcept(static_cast<double>(func(0.0))))
 {
-    const size_t nIntervals = static_cast<size_t>(std::ceil(static_cast<double>(nIntervalsPer1) * (x1 - x0)));
+    const auto optIntervals = details::integration_sample_count<size_t>(x1 - x0, nIntervalsPer1);
+    if (!optIntervals)
+        return std::numeric_limits<double>::quiet_NaN();
+
+    const size_t nIntervals = *optIntervals;
+    if (nIntervals == 0)
+        return 0.0;
 
     const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
     double       fTotalArea = 0.0;
@@ -53,9 +88,15 @@ double integrate_adaptive_midpoint(
     double               x1,
     double               fMaxSliceError,
     size_t               nIntervalsPer1,
-    size_t               nMaxRecursion)
+    size_t               nMaxRecursion) noexcept(noexcept(static_cast<double>(func(0.0))))
 {
-    const size_t nIntervals = static_cast<size_t>(std::ceil(static_cast<double>(nIntervalsPer1) * (x1 - x0)));
+    const auto optIntervals = details::integration_sample_count<size_t>(x1 - x0, nIntervalsPer1);
+    if (!optIntervals)
+        return std::numeric_limits<double>::quiet_NaN();
+
+    const size_t nIntervals = *optIntervals;
+    if (nIntervals == 0)
+        return 0.0;
 
     const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
     double       fTotalArea = 0.0;
@@ -108,17 +149,24 @@ double integrate_monte_carlo(
     const function_2d_t& funcIsInside,
     glm::dvec2           pos0,
     glm::dvec2           pos1,
-    size_t               nPointsPerOneSquare)
+    size_t               nPointsPerOneSquare) noexcept(noexcept(static_cast<int>(funcIsInside(0.0, 0.0))))
 {
     const double fArea        = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
-    const int    nTotalPoints = static_cast<int>(std::ceil(fArea * static_cast<double>(nPointsPerOneSquare)));
+
+    const auto optTotalPoints = details::integration_sample_count<int>(fArea, nPointsPerOneSquare);
+    if (!optTotalPoints)
+        return std::numeric_limits<double>::quiet_NaN();
+
+    const int nTotalPoints = *optTotalPoints;
+    if (nTotalPoints == 0)
+        return 0.0;
 
     int points_inside = 0;
 
     std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
 
-    std::uniform_real_distribution<double> x_dist(pos0.x, pos1.x);
-    std::uniform_real_distribution<double> y_dist(pos0.y, pos1.y);
+    std::uniform_real_distribution<double> x_dist(std::min(pos0.x, pos1.x), std::max(pos0.x, pos1.x));
+    std::uniform_real_distribution<double> y_dist(std::min(pos0.y, pos1.y), std::max(pos0.y, pos1.y));
 
     for (int i = 0; i < nTotalPoints; ++i)
     {
