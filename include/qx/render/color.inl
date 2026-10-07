@@ -399,7 +399,7 @@ constexpr color color::empty() noexcept
 
 constexpr size_t color::size() noexcept
 {
-    return 4;
+    return glm::vec4::length();
 }
 
 constexpr float color::clamp_value(float fValue) noexcept

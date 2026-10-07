@@ -35,7 +35,7 @@ public:
 
     // the final size of the whole sbo_bytes object, including internal data
     static constexpr size_type nSBOSize = traits_type::nSBOSize;
-    static_assert(nSBOSize >= 32);
+    static_assert(nSBOSize >= 32); //-V112
 
     // when the size changes so it becomes less or equal a buffer size, should we free a memory and move back to a buffer?
     static constexpr bool bShrinkToFitWhenSmall = traits_type::bShrinkToFitWhenSmall;
