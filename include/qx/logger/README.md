@@ -6,7 +6,7 @@ Features:
 - Categories and file categories:  
   Categories are used to structure code. Messages that share the same category belong to one logical block.  
   The system uses the concept of "file categories", which is also used in asserts and perf scopes. A category declared once at the top of a file...
-  ```
+  ```cpp
   QX_SET_FILE_CATEGORY(CatMySystem);
   ```
   ...is used by all `QX_LOG` in that file.  
@@ -21,7 +21,7 @@ Features:
 - Message patterns:
   `set_default_pattern()` defines the log line format; each stream can override it with `set_pattern()`. Streams without an override share the line formatted with the default pattern.
 - Logging levels:  
-  ```
+  ```cpp
   enum class verbosity
   {
       detailed,  // very frequently repeated messages, for example, on every update
@@ -47,8 +47,10 @@ Features:
 ## Usage
 
 Minimal working example:
-```
+```cpp
 #include <qx/logger/logger.h>
+
+...
 
 QX_LOG(qx::verbosity::log, "The answer is {}", 42);
 ```
@@ -57,13 +59,13 @@ This will create a default logger with a standard output stream and print the me
 ### Custom streams
 
 You can add new streams, for example to output to the IDE debug window or to a file.
-```
+```cpp
 qx::logger& logger = qx::get_logger();
-logger.add_stream(qx::debugger_logger_stream());
-logger.add_stream(qx::file_logger_stream_mapping());
+logger.add_stream(qx::debugger_logger_stream({ ... }));
+logger.add_stream(qx::file_logger_stream_mapping({ ... }));
 ```
 Or implement your own stream and add it the same way:
-```
+```cpp
 class my_logger_stream : public qx::base_logger_stream
 {
     virtual void do_log(...) override;
@@ -139,7 +141,7 @@ QXT("{verbosity:l}[{time:%d.%m.%Y_%H:%M:%S}]{category:l} {message}\n")
 ### Custom logger
 
 If streams define where messages go, the logger defines how they get there. By implementing your own logger, you can add additional filtering, formatting, or asynchronous execution.
-```
+```cpp
 class my_logger final
     : public qx::logger
     , public qx::singleton<my_logger>
