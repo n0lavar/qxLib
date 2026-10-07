@@ -56,7 +56,7 @@ constexpr std::array<T, LeftLength + RightLength> join_arrays(
     @retval      - array object
 **/
 template<std::size_t N, class T>
-constexpr std::array<T, N> span_to_array(const std::span<T, N>& span);
+constexpr std::array<T, N> span_to_array(std::span<T, N> span);
 
 /**
     @brief  Create a container by constructing each element from the corresponding

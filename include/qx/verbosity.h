@@ -65,7 +65,7 @@ struct QX_FMT_NS::formatter<qx::verbosity, char_t>
     }
 
     template<class format_context_type>
-    constexpr auto format(const qx::verbosity& value, format_context_type& ctx) const
+    constexpr auto format(qx::verbosity value, format_context_type& ctx) const
     {
         auto get_log_name = [value]() -> basic_string_view<char_t>
         {

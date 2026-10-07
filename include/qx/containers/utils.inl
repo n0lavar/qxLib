@@ -41,7 +41,7 @@ constexpr std::array<T, LeftLength + RightLength> join_arrays(
 }
 
 template<std::size_t N, class T>
-constexpr std::array<T, N> span_to_array(const std::span<T, N>& span)
+constexpr std::array<T, N> span_to_array(std::span<T, N> span)
 {
     std::array<T, N> array;
     std::copy(span.begin(), span.end(), array.begin());
