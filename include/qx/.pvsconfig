@@ -8,10 +8,10 @@
 //-V::OWASP
 
 # Memsize type is used in the struct/class.
-//-V122
+//-V::122
 
 # Memsize type is used in the union.
-//-V117
+//-V::117
 
 # Priority of the '&&' operation is higher than that of the '||' operation.
-//-V648
+//-V::648

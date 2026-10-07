@@ -24,8 +24,8 @@ template<class... args_t>
     requires format_acceptable_args_c<char, args_t...>
 // Passing by reference showed no consistent benefit in optimized benchmarks.
 cstring format(
-    const QX_FMT_NS::format_string<std::type_identity_t<args_t>...> sFormat,
-    args_t&&... args) noexcept //-V801
+    const QX_FMT_NS::format_string<std::type_identity_t<args_t>...> sFormat, //-V801
+    args_t&&... args) noexcept
 {
     // doesn't work for fmt for some reason
 #if QX_CONF_FMT_LIB == QX_FMT_LIB_STD
@@ -49,8 +49,8 @@ template<class... args_t>
     requires format_acceptable_args_c<wchar_t, args_t...>
 // Passing by reference showed no consistent benefit in optimized benchmarks.
 wstring format(
-    const QX_FMT_NS::wformat_string<std::type_identity_t<args_t>...> sFormat,
-    args_t&&... args) noexcept //-V801
+    const QX_FMT_NS::wformat_string<std::type_identity_t<args_t>...> sFormat, //-V801
+    args_t&&... args) noexcept
 {
     return wstring::static_format(sFormat, std::forward<args_t>(args)...);
 }
