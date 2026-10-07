@@ -106,7 +106,7 @@ $(function() {
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// the final size of the whole sbo_bytes object, including internal data</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">static</span> constexpr size_type nSBOSize = traits_type::nSBOSize;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    static_assert(nSBOSize &gt;= 32);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    static_assert(nSBOSize &gt;= 32); <span class="comment">//-V112</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">// when the size changes so it becomes less or equal a buffer size, should we free a memory and move back to a buffer?</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">bool</span> bShrinkToFitWhenSmall = traits_type::bShrinkToFitWhenSmall;</div>

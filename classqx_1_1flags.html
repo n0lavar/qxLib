@@ -163,13 +163,13 @@ class qx::flags&lt; enum_t &gt;</h3>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><a class="code" href="classqx_1_1flags.html">qx::flags&lt;EFlags&gt;</a> flags;</div>
-<div class="ttc" id="aclassqx_1_1flags_html"><div class="ttname"><a href="classqx_1_1flags.html">qx::flags</a></div><div class="ttdoc">Wrapper for enumerations to be used as a list of flags.</div><div class="ttdef"><b>Definition:</b> <a href="flags_8h_source.html#l00061">flags.h:62</a></div></div>
+<div class="ttc" id="aclassqx_1_1flags_html"><div class="ttname"><a href="classqx_1_1flags.html">qx::flags</a></div><div class="ttdoc">Wrapper for enumerations to be used as a list of flags.</div><div class="ttdef"><b>Definition:</b> <a href="flags_8h_source.html#l00063">flags.h:64</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="flags_8h_source.html#l00061">61</a> of file <a class="el" href="flags_8h_source.html">flags.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="flags_8h_source.html#l00063">63</a> of file <a class="el" href="flags_8h_source.html">flags.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad0ce43217fc43b81aa04f5142e1529b2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad0ce43217fc43b81aa04f5142e1529b2">&#9670;&nbsp;</a></span>flags()</h2>
@@ -205,7 +205,7 @@ template&lt;enumeration_c enum_t&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="flags_8inl_source.html#l00070">70</a> of file <a class="el" href="flags_8inl_source.html">flags.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="flags_8inl_source.html#l00088">88</a> of file <a class="el" href="flags_8inl_source.html">flags.inl</a>.</p>
 
 </div>
 </div>
@@ -746,7 +746,7 @@ template&lt;enumeration_c enum_t&gt; </div>
 </div><div class="memdoc">
 
 <p>Shift bits to the left. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Shifts at or beyond the underlying bit width clear all flags. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nShift</td><td>- num of positions to shift </td></tr>
   </table>
@@ -784,14 +784,14 @@ template&lt;enumeration_c enum_t&gt; </div>
 </div><div class="memdoc">
 
 <p>Shift bits to the right. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Logical shift; shifts at or beyond the underlying bit width clear all flags. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nShift</td><td>- num of positions to shift </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="flags_8inl_source.html#l00026">26</a> of file <a class="el" href="flags_8inl_source.html">flags.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="flags_8inl_source.html#l00035">35</a> of file <a class="el" href="flags_8inl_source.html">flags.inl</a>.</p>
 
 </div>
 </div>

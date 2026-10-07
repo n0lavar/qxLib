@@ -93,7 +93,7 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structqx_1_1basic__format__string__strong__checks.html#a89abcf0177a45360c41e9f12a06f6308">   23</a></span>&#160;consteval <span class="keyword">const</span> T&amp; <a class="code" href="structqx_1_1basic__format__string__strong__checks.html#a89abcf0177a45360c41e9f12a06f6308">basic_format_string_strong_checks&lt;char_t, args_t...&gt;::parse_format_string</a>(<span class="keyword">const</span> T&amp; value)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">int</span>                       nBracesBalance  = 0;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">size_t</span>                    nBracesBalance  = 0;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">size_t</span>                    nNumBracesPairs = 0;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    basic_string_view&lt;char_t&gt; svFormatString  = value;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
@@ -118,32 +118,31 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            }</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            ++nNumBracesPairs;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            --nBracesBalance;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">if</span> (nBracesBalance &lt; 0)</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <span class="keywordflow">throw</span> std::format_error(</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                    <span class="stringliteral">&quot;Format string error: num of closing braces &gt; num of opening braces at some point of the format &quot;</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    <span class="stringliteral">&quot;string&quot;</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            }</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">if</span> (nBracesBalance &gt; 0)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">throw</span> std::format_error(</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="stringliteral">&quot;Format string error: num of opening braces &gt; num of closing braces at the end of the format string&quot;</span>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>...(args_t) != nNumBracesPairs)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">throw</span> std::format_error(<span class="stringliteral">&quot;Format string error: num of args != num of braces pairs&quot;</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> value;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">if</span> (nBracesBalance == 0)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordflow">throw</span> std::format_error(</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    <span class="stringliteral">&quot;Format string error: num of closing braces &gt; num of opening braces at some point of the format &quot;</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    <span class="stringliteral">&quot;string&quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            --nBracesBalance;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> (nBracesBalance &gt; 0)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">throw</span> std::format_error(</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="stringliteral">&quot;Format string error: num of opening braces &gt; num of closing braces at the end of the format string&quot;</span>);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>...(args_t) != nNumBracesPairs)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">throw</span> std::format_error(<span class="stringliteral">&quot;Format string error: num of args != num of braces pairs&quot;</span>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> value;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="acoalesce_8h_html_af141b284fe289dd9243ddad3f90ddb19"><div class="ttname"><a href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">qx::requires</a></div><div class="ttdeci">requires(same_variadic_args_v&lt; args_t... &gt;) const expr auto coalesce(args_t &amp;&amp;... args)</div><div class="ttdoc">Coalesce function, C# a ?? b analogue.</div><div class="ttdef"><b>Definition:</b> <a href="coalesce_8inl_source.html#l00057">coalesce.inl:57</a></div></div>
-<div class="ttc" id="astring__utils_8h_html_a57911e62bb82593665bf09e4ea834904"><div class="ttname"><a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_t, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00255">string_utils.h:255</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_a57911e62bb82593665bf09e4ea834904"><div class="ttname"><a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a></div><div class="ttdeci">#define QX_CHAR_PREFIX(value_t, ch)</div><div class="ttdoc">Chose witch of prefixes add to char : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00256">string_utils.h:256</a></div></div>
 <div class="ttc" id="astructqx_1_1basic__format__string__strong__checks_html_a0305dbe05d14d28e04a95a3f27c69ba0"><div class="ttname"><a href="structqx_1_1basic__format__string__strong__checks.html#a0305dbe05d14d28e04a95a3f27c69ba0">qx::basic_format_string_strong_checks::basic_format_string_strong_checks</a></div><div class="ttdeci">requires std::convertible_to&lt; const T &amp;, qx::basic_string_view&lt; char_t &gt; &gt; consteval basic_format_string_strong_checks(const T &amp;value)</div><div class="ttdoc">basic_format_string object constructor</div><div class="ttdef"><b>Definition:</b> <a href="format__string_8inl_source.html#l00016">format_string.inl:16</a></div></div>
 <div class="ttc" id="astructqx_1_1basic__format__string__strong__checks_html_a89abcf0177a45360c41e9f12a06f6308"><div class="ttname"><a href="structqx_1_1basic__format__string__strong__checks.html#a89abcf0177a45360c41e9f12a06f6308">qx::basic_format_string_strong_checks::parse_format_string</a></div><div class="ttdeci">static consteval const T &amp; parse_format_string(const T &amp;value)</div><div class="ttdoc">Check braces balance and args num.</div><div class="ttdef"><b>Definition:</b> <a href="format__string_8inl_source.html#l00023">format_string.inl:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -70,7 +70,8 @@ $(function() {
 <p>Features:</p><ul>
 <li>Categories and file categories: <br  />
  Categories are used to structure code. Messages that share the same category belong to one logical block. <br  />
- The system uses the concept of "file categories", which is also used in asserts and perf scopes. A category declared once at the top of a file... <div class="fragment"><div class="line">QX_SET_FILE_CATEGORY(CatMySystem);</div>
+ The system uses the concept of "file categories", which is also used in asserts and perf scopes. A category declared once at the top of a file... <div class="fragment"><div class="line"><a class="code" href="category_8h.html#aa6ce57fc027b0e714c9b0b562fd6b0e3">QX_SET_FILE_CATEGORY</a>(CatMySystem);</div>
+<div class="ttc" id="acategory_8h_html_aa6ce57fc027b0e714c9b0b562fd6b0e3"><div class="ttname"><a href="category_8h.html#aa6ce57fc027b0e714c9b0b562fd6b0e3">QX_SET_FILE_CATEGORY</a></div><div class="ttdeci">#define QX_SET_FILE_CATEGORY(_category)</div><div class="ttdoc">Set the file category You can access this value via QX_GET_FILE_CATEGORY() This category will not be ...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00032">category.h:32</a></div></div>
 </div><!-- fragment --> ...is used by all <code>QX_LOG</code> in that file. <br  />
  If no category is specified, the default category <code>CatDefault</code> is used. <br  />
  You can also specify a category manually using <code>QX_LOG_C</code>, which will override the file category.</li>
@@ -85,16 +86,16 @@ $(function() {
 </li>
 <li>Message patterns: <code>set_default_pattern()</code> defines the log line format; each stream can override it with <code>set_pattern()</code>. Streams without an override share the line formatted with the default pattern.</li>
 <li>Logging levels: <br  />
- <div class="fragment"><div class="line">enum class verbosity</div>
+ <div class="fragment"><div class="line"><span class="keyword">enum class</span> verbosity</div>
 <div class="line">{</div>
-<div class="line">    detailed,  // very frequently repeated messages, for example, on every update</div>
-<div class="line">    verbose,   // messages you don&#39;t want to be displayed by default</div>
-<div class="line">    log,       // default level</div>
-<div class="line">    important, // same as log but highlighted if possible</div>
-<div class="line">    warning,   // not yet an error, but something to look out for</div>
-<div class="line">    error,     // an error after which it is possible to continue the program</div>
-<div class="line">    critical,  // an error that makes it impossible to continue the program</div>
-<div class="line">    none,      // message is not displayed</div>
+<div class="line">    detailed,  <span class="comment">// very frequently repeated messages, for example, on every update</span></div>
+<div class="line">    verbose,   <span class="comment">// messages you don&#39;t want to be displayed by default</span></div>
+<div class="line">    log,       <span class="comment">// default level</span></div>
+<div class="line">    important, <span class="comment">// same as log but highlighted if possible</span></div>
+<div class="line">    warning,   <span class="comment">// not yet an error, but something to look out for</span></div>
+<div class="line">    error,     <span class="comment">// an error after which it is possible to continue the program</span></div>
+<div class="line">    critical,  <span class="comment">// an error that makes it impossible to continue the program</span></div>
+<div class="line">    none,      <span class="comment">// message is not displayed</span></div>
 <div class="line">};</div>
 </div><!-- fragment --></li>
 <li>Performance: <br  />
@@ -114,21 +115,30 @@ $(function() {
 </ul>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Usage</h1>
-<p>Minimal working example: </p><div class="fragment"><div class="line">#include &lt;qx/logger/logger.h&gt;</div>
+<p>Minimal working example: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="logger_8h.html">qx/logger/logger.h</a>&gt;</span></div>
 <div class="line"> </div>
-<div class="line">QX_LOG(qx::verbosity::log, &quot;The answer is {}&quot;, 42);</div>
+<div class="line">...</div>
+<div class="line"> </div>
+<div class="line">QX_LOG(qx::verbosity::log, <span class="stringliteral">&quot;The answer is {}&quot;</span>, 42);</div>
+<div class="ttc" id="alogger_8h_html"><div class="ttname"><a href="logger_8h.html">logger.h</a></div></div>
 </div><!-- fragment --><p> This will create a default logger with a standard output stream and print the message to it.</p>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Custom streams</h2>
-<p>You can add new streams, for example to output to the IDE debug window or to a file. </p><div class="fragment"><div class="line">qx::logger&amp; logger = qx::get_logger();</div>
-<div class="line">logger.add_stream(qx::debugger_logger_stream());</div>
-<div class="line">logger.add_stream(qx::file_logger_stream_mapping());</div>
-</div><!-- fragment --><p> Or implement your own stream and add it the same way: </p><div class="fragment"><div class="line">class my_logger_stream : public qx::base_logger_stream</div>
+<p>You can add new streams, for example to output to the IDE debug window or to a file. </p><div class="fragment"><div class="line"><a class="code" href="classqx_1_1logger.html">qx::logger</a>&amp; logger = <a class="code" href="logger_8h.html#a3feb5ccf05cba22a551d6e4523139448">qx::get_logger</a>();</div>
+<div class="line">logger.<a class="code" href="classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea">add_stream</a>(<a class="code" href="classqx_1_1debugger__logger__stream.html">qx::debugger_logger_stream</a>({ ... }));</div>
+<div class="line">logger.<a class="code" href="classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea">add_stream</a>(<a class="code" href="classqx_1_1file__logger__stream__mapping.html">qx::file_logger_stream_mapping</a>({ ... }));</div>
+<div class="ttc" id="aclassqx_1_1debugger__logger__stream_html"><div class="ttname"><a href="classqx_1_1debugger__logger__stream.html">qx::debugger_logger_stream</a></div><div class="ttdoc">Logger stream for a debugger output (VS: output window)</div><div class="ttdef"><b>Definition:</b> <a href="debugger__logger__stream_8h_source.html#l00029">debugger_logger_stream.h:30</a></div></div>
+<div class="ttc" id="aclassqx_1_1file__logger__stream__mapping_html"><div class="ttname"><a href="classqx_1_1file__logger__stream__mapping.html">qx::file_logger_stream_mapping</a></div><div class="ttdoc">High-performance file logger based on memory-mapped I/O.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__mapping_8h_source.html#l00047">file_logger_stream_mapping.h:48</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html"><div class="ttname"><a href="classqx_1_1logger.html">qx::logger</a></div><div class="ttdoc">Logger class.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00059">logger.h:60</a></div></div>
+<div class="ttc" id="aclassqx_1_1logger_html_a4e45ab9c399be9eb0761171f441ab5ea"><div class="ttname"><a href="classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea">qx::logger::add_stream</a></div><div class="ttdeci">void add_stream(stream_t stream) noexcept</div><div class="ttdoc">Add an output stream to the logger.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00036">logger.inl:36</a></div></div>
+<div class="ttc" id="alogger_8h_html_a3feb5ccf05cba22a551d6e4523139448"><div class="ttname"><a href="logger_8h.html#a3feb5ccf05cba22a551d6e4523139448">qx::get_logger</a></div><div class="ttdeci">logger &amp; get_logger() noexcept</div><div class="ttdoc">Get the logger instance used in QX_LOG macros.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00265">logger.h:265</a></div></div>
+</div><!-- fragment --><p> Or implement your own stream and add it the same way: </p><div class="fragment"><div class="line"><span class="keyword">class </span>my_logger_stream : <span class="keyword">public</span> <a class="code" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div>
 <div class="line">{</div>
-<div class="line">    virtual void do_log(...) override;</div>
-<div class="line">    virtual void do_flush() override;</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> do_log(...) <span class="keyword">override</span>;</div>
+<div class="line">    <span class="keyword">virtual</span> <span class="keywordtype">void</span> do_flush() <span class="keyword">override</span>;</div>
 <div class="line">};</div>
-<div class="line">logger.add_stream(my_logger_stream());</div>
+<div class="line">logger.<a class="code" href="classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea">add_stream</a>(my_logger_stream());</div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></div><div class="ttdoc">Base class for logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8h_source.html#l00037">base_logger_stream.h:38</a></div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
 Message formatting</h2>
 <p>You can control how the logger transforms a message at each stage:</p>
@@ -139,7 +149,6 @@ Message formatting</h2>
 <div class="line">...</div>
 <div class="line"> </div>
 <div class="line">QX_LOG(qx::verbosity::log, <span class="stringliteral">&quot;The answer is {}&quot;</span>, 42); <span class="comment">// -&gt; &quot;The answer is 42&quot;</span></div>
-<div class="ttc" id="acategory_8h_html_aa6ce57fc027b0e714c9b0b562fd6b0e3"><div class="ttname"><a href="category_8h.html#aa6ce57fc027b0e714c9b0b562fd6b0e3">QX_SET_FILE_CATEGORY</a></div><div class="ttdeci">#define QX_SET_FILE_CATEGORY(_category)</div><div class="ttdoc">Set the file category You can access this value via QX_GET_FILE_CATEGORY() This category will not be ...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00032">category.h:32</a></div></div>
 </div><!-- fragment --> Potential allocation (see Performance) and initial formatting are the only operations guaranteed to run on the calling thread; the rest can be deferred.</li>
 <li>A custom category formatter, if registered, transforms the message next (<code>CatMySystem</code> in this example). <br  />
  To include shared system information in every message from a category, define a formatting callback once: <div class="fragment"><div class="line"><a class="code" href="logger_8h.html#a3feb5ccf05cba22a551d6e4523139448">qx::get_logger</a>().<a class="code" href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">register_category</a>(CatMySystem,</div>
@@ -156,7 +165,6 @@ Message formatting</h2>
 <div class="line">QX_LOG(qx::verbosity::log, <span class="stringliteral">&quot;The answer is {}&quot;</span>, 42); <span class="comment">// -&gt; &quot;The answer is 42 [7]&quot;</span></div>
 <div class="ttc" id="aclassqx_1_1logger_html_a69bf50445c759b9fdb1fde85b4796d16"><div class="ttname"><a href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">qx::logger::register_category</a></div><div class="ttdeci">void register_category(const category &amp;category, category_data data) noexcept</div><div class="ttdoc">Add custom rules for category.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00072">logger.inl:72</a></div></div>
 <div class="ttc" id="aclassqx_1_1string__pool_html"><div class="ttname"><a href="classqx_1_1string__pool.html">qx::string_pool</a></div><div class="ttdoc">Fixed-size atomic string pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00034">string_pool.h:35</a></div></div>
-<div class="ttc" id="alogger_8h_html_a3feb5ccf05cba22a551d6e4523139448"><div class="ttname"><a href="logger_8h.html#a3feb5ccf05cba22a551d6e4523139448">qx::get_logger</a></div><div class="ttdeci">logger &amp; get_logger() noexcept</div><div class="ttdoc">Get the logger instance used in QX_LOG macros.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00265">logger.h:265</a></div></div>
 <div class="ttc" id="astructqx_1_1string__pool_1_1item_html"><div class="ttname"><a href="structqx_1_1string__pool_1_1item.html">qx::string_pool::item</a></div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00042">string_pool.h:43</a></div></div>
 </div><!-- fragment --></li>
 <li>All streams use the message from the previous stage, but each can format its output differently. Set a custom stream pattern: <div class="fragment"><div class="line"><span class="comment">// Default logger pattern.</span></div>
@@ -179,10 +187,6 @@ Message formatting</h2>
 <div class="line"><span class="comment">// file     -&gt; &quot;[I][22:33:44][CatMySystem][main.cpp::main::67] The answer is 42 [3]&quot;</span></div>
 <div class="line"><span class="comment">// debugger -&gt; &quot;[CatMySystem] The answer is 42 [3]&quot;</span></div>
 <div class="ttc" id="aclassqx_1_1base__logger__stream_html_a9799d9ae38740085a9e037108c4d5bff"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a9799d9ae38740085a9e037108c4d5bff">qx::base_logger_stream::set_pattern</a></div><div class="ttdeci">compile_pattern_result set_pattern(pattern_string_t sPattern) noexcept</div><div class="ttdoc">Set a message pattern that will be used for this stream.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00063">base_logger_stream.inl:63</a></div></div>
-<div class="ttc" id="aclassqx_1_1debugger__logger__stream_html"><div class="ttname"><a href="classqx_1_1debugger__logger__stream.html">qx::debugger_logger_stream</a></div><div class="ttdoc">Logger stream for a debugger output (VS: output window)</div><div class="ttdef"><b>Definition:</b> <a href="debugger__logger__stream_8h_source.html#l00029">debugger_logger_stream.h:30</a></div></div>
-<div class="ttc" id="aclassqx_1_1file__logger__stream__mapping_html"><div class="ttname"><a href="classqx_1_1file__logger__stream__mapping.html">qx::file_logger_stream_mapping</a></div><div class="ttdoc">High-performance file logger based on memory-mapped I/O.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__mapping_8h_source.html#l00045">file_logger_stream_mapping.h:46</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html"><div class="ttname"><a href="classqx_1_1logger.html">qx::logger</a></div><div class="ttdoc">Logger class.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00059">logger.h:60</a></div></div>
-<div class="ttc" id="aclassqx_1_1logger_html_a4e45ab9c399be9eb0761171f441ab5ea"><div class="ttname"><a href="classqx_1_1logger.html#a4e45ab9c399be9eb0761171f441ab5ea">qx::logger::add_stream</a></div><div class="ttdeci">void add_stream(stream_t stream) noexcept</div><div class="ttdoc">Add an output stream to the logger.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00036">logger.inl:36</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_afe154a8d627ca7e7f7c5d4e839afb246"><div class="ttname"><a href="classqx_1_1logger.html#afe154a8d627ca7e7f7c5d4e839afb246">qx::logger::set_default_pattern</a></div><div class="ttdeci">compile_pattern_result set_default_pattern(string sPattern) noexcept</div><div class="ttdoc">Compile and set the default pattern for log messages.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00083">logger.inl:83</a></div></div>
 </div><!-- fragment --></li>
 </ol>
@@ -191,16 +195,16 @@ Message formatting</h2>
 <p>The default pattern is: </p><div class="fragment"><div class="line">QXT(<span class="stringliteral">&quot;{verbosity:l}[{time:%d.%m.%Y_%H:%M:%S}]{category:l} {message}\n&quot;</span>)</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md6"></a>
 Custom logger</h2>
-<p>If streams define where messages go, the logger defines how they get there. By implementing your own logger, you can add additional filtering, formatting, or asynchronous execution. </p><div class="fragment"><div class="line">class my_logger final</div>
-<div class="line">    : public qx::logger</div>
-<div class="line">    , public qx::singleton&lt;my_logger&gt;</div>
+<p>If streams define where messages go, the logger defines how they get there. By implementing your own logger, you can add additional filtering, formatting, or asynchronous execution. </p><div class="fragment"><div class="line"><span class="keyword">class </span>my_logger final</div>
+<div class="line">    : <span class="keyword">public</span> <a class="code" href="classqx_1_1logger.html">qx::logger</a></div>
+<div class="line">    , <span class="keyword">public</span> qx::singleton&lt;my_logger&gt;</div>
 <div class="line">{</div>
-<div class="line">    // custom logic...</div>
+<div class="line">    <span class="comment">// custom logic...</span></div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">my_logger&amp; logger = my_logger::get_instance();</div>
 <div class="line">logger.reset();</div>
-<div class="line">// set it up...</div>
+<div class="line"><span class="comment">// set it up...</span></div>
 <div class="line">qx::g_pGlobalLogger = &amp;logger;</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
 Stream performance comparison</h1>

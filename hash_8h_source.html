@@ -107,7 +107,7 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="hash_8h.html#ae2bff97fa387a756da0420981b14caa9">   37</a></span>&#160;constexpr <span class="keywordtype">void</span> <a class="code" href="hash_8h.html#ae2bff97fa387a756da0420981b14caa9">hash_combine</a>(<span class="keywordtype">size_t</span>&amp; seed, <span class="keyword">const</span> T&amp; value) noexcept</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    seed ^= <a class="code" href="hash_8h.html#a16720e0a9f752edc6efd3be88ce3a848">get_hash</a>(value) + 0x9e3779b9 + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    seed ^= <a class="code" href="hash_8h.html#a16720e0a9f752edc6efd3be88ce3a848">get_hash</a>(value) + <span class="keywordtype">size_t</span> { 0x9e3779b9 } + (seed &lt;&lt; 6) + (seed &gt;&gt; 2);</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;} <span class="comment">// namespace qx</span></div>

@@ -113,8 +113,8 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::function&lt;void(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, assert_type eAssertType)&gt; onExit =</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            [](<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, assert_type eAssertType)</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="comment">// Normal exit after fatal assertions to avoid the second report</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            std::exit(0);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="comment">// Configurable fatal-assertion handler exits normally to avoid a second report.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            std::exit(0); <span class="comment">//-V2014</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        };</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        std::function&lt;verbosity(assert_type eAssertType)&gt; getVerbosity = [](assert_type eAssertType)</div>

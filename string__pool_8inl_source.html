@@ -115,7 +115,7 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">if</span> (m_FreeMask[nBlock]</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                    .compare_exchange_weak(nMask, nNewMask, std::memory_order_acquire, std::memory_order_relaxed))</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">size_t</span> nIndex = nBlock * bTotalBits + ctz64(nBit);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">size_t</span> nIndex = nBlock * bTotalBits + <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(ctz64(nBit));</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="structqx_1_1string__pool_1_1item.html">item</a> { std::move(m_Storage[nIndex]), <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(nIndex) };</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            }</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>

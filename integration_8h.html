@@ -72,6 +72,10 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="recursive__lambda_8h_source.html">qx/recursive_lambda.h</a>&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
+<code>#include &lt;optional&gt;</code><br />
 <code>#include &lt;random&gt;</code><br />
 <code>#include &lt;glm/glm.hpp&gt;</code><br />
 <code>#include &lt;<a class="el" href="integration_8inl_source.html">qx/math/integration.inl</a>&gt;</code><br />
@@ -80,22 +84,22 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aa10e7f79d8b684767a945d0353d1ba2e"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
-<tr class="memitem:aa10e7f79d8b684767a945d0353d1ba2e"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#aa10e7f79d8b684767a945d0353d1ba2e">qx::integrate_rectangle_rule</a> (const function_2d_t &amp;func, double x0, double x1, size_t nIntervalsPer1=10)</td></tr>
-<tr class="memdesc:aa10e7f79d8b684767a945d0353d1ba2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using rectangle rule.  <a href="integration_8h.html#aa10e7f79d8b684767a945d0353d1ba2e">More...</a><br /></td></tr>
-<tr class="separator:aa10e7f79d8b684767a945d0353d1ba2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36c244f3b2d7d1e2daf09c167f197ffb"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
-<tr class="memitem:a36c244f3b2d7d1e2daf09c167f197ffb"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#a36c244f3b2d7d1e2daf09c167f197ffb">qx::integrate_trapezoid_rule</a> (const function_2d_t &amp;func, double x0, double x1, size_t nIntervalsPer1=10)</td></tr>
-<tr class="memdesc:a36c244f3b2d7d1e2daf09c167f197ffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using trapezoid rule.  <a href="integration_8h.html#a36c244f3b2d7d1e2daf09c167f197ffb">More...</a><br /></td></tr>
-<tr class="separator:a36c244f3b2d7d1e2daf09c167f197ffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb28484ebee4df395c50529fc1e1a783"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
-<tr class="memitem:acb28484ebee4df395c50529fc1e1a783"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#acb28484ebee4df395c50529fc1e1a783">qx::integrate_adaptive_midpoint</a> (const function_2d_t &amp;func, double x0, double x1, double fMaxSliceError, size_t nIntervalsPer1=10, size_t nMaxRecursion=300)</td></tr>
-<tr class="memdesc:acb28484ebee4df395c50529fc1e1a783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using adaptive midpoint.  <a href="integration_8h.html#acb28484ebee4df395c50529fc1e1a783">More...</a><br /></td></tr>
-<tr class="separator:acb28484ebee4df395c50529fc1e1a783"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af485291e29f2798ba4c6ed32902e3fa8"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
-<tr class="memitem:af485291e29f2798ba4c6ed32902e3fa8"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#af485291e29f2798ba4c6ed32902e3fa8">qx::integrate_monte_carlo</a> (const function_2d_t &amp;funcIsInside, glm::dvec2 pos0, glm::dvec2 pos1, size_t nPointsPerOneSquare=1000)</td></tr>
-<tr class="memdesc:af485291e29f2798ba4c6ed32902e3fa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using probabilistic algorithm Monte Carlo.  <a href="integration_8h.html#af485291e29f2798ba4c6ed32902e3fa8">More...</a><br /></td></tr>
-<tr class="separator:af485291e29f2798ba4c6ed32902e3fa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a626e48c33cfbac802c4eb90b8bd90ee4"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
+<tr class="memitem:a626e48c33cfbac802c4eb90b8bd90ee4"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#a626e48c33cfbac802c4eb90b8bd90ee4">qx::integrate_rectangle_rule</a> (const function_2d_t &amp;func, double x0, double x1, size_t nIntervalsPer1=10) noexcept(noexcept(static_cast&lt; double &gt;(func(0.0))))</td></tr>
+<tr class="memdesc:a626e48c33cfbac802c4eb90b8bd90ee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using rectangle rule.  <a href="integration_8h.html#a626e48c33cfbac802c4eb90b8bd90ee4">More...</a><br /></td></tr>
+<tr class="separator:a626e48c33cfbac802c4eb90b8bd90ee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa54d0c4e99bb23dc1096ba34b99e51ed"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
+<tr class="memitem:aa54d0c4e99bb23dc1096ba34b99e51ed"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#aa54d0c4e99bb23dc1096ba34b99e51ed">qx::integrate_trapezoid_rule</a> (const function_2d_t &amp;func, double x0, double x1, size_t nIntervalsPer1=10) noexcept(noexcept(static_cast&lt; double &gt;(func(0.0))))</td></tr>
+<tr class="memdesc:aa54d0c4e99bb23dc1096ba34b99e51ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using trapezoid rule.  <a href="integration_8h.html#aa54d0c4e99bb23dc1096ba34b99e51ed">More...</a><br /></td></tr>
+<tr class="separator:aa54d0c4e99bb23dc1096ba34b99e51ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9efaab8b78313d1faabfb0473fcc9df5"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
+<tr class="memitem:a9efaab8b78313d1faabfb0473fcc9df5"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#a9efaab8b78313d1faabfb0473fcc9df5">qx::integrate_adaptive_midpoint</a> (const function_2d_t &amp;func, double x0, double x1, double fMaxSliceError, size_t nIntervalsPer1=10, size_t nMaxRecursion=300) noexcept(noexcept(static_cast&lt; double &gt;(func(0.0))))</td></tr>
+<tr class="memdesc:a9efaab8b78313d1faabfb0473fcc9df5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using adaptive midpoint.  <a href="integration_8h.html#a9efaab8b78313d1faabfb0473fcc9df5">More...</a><br /></td></tr>
+<tr class="separator:a9efaab8b78313d1faabfb0473fcc9df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d4259e0dd432c9ac9c1969157d1691a"><td class="memTemplParams" colspan="2">template&lt;class function_2d_t &gt; </td></tr>
+<tr class="memitem:a3d4259e0dd432c9ac9c1969157d1691a"><td class="memTemplItemLeft" align="right" valign="top">double&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="integration_8h.html#a3d4259e0dd432c9ac9c1969157d1691a">qx::integrate_monte_carlo</a> (const function_2d_t &amp;funcIsInside, glm::dvec2 pos0, glm::dvec2 pos1, size_t nPointsPerOneSquare=1000) noexcept(noexcept(static_cast&lt; int &gt;(funcIsInside(0.0, 0.0))))</td></tr>
+<tr class="memdesc:a3d4259e0dd432c9ac9c1969157d1691a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integrate using probabilistic algorithm Monte Carlo.  <a href="integration_8h.html#a3d4259e0dd432c9ac9c1969157d1691a">More...</a><br /></td></tr>
+<tr class="separator:a3d4259e0dd432c9ac9c1969157d1691a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -104,8 +108,8 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="integration_8h_source.html">integration.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="acb28484ebee4df395c50529fc1e1a783"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb28484ebee4df395c50529fc1e1a783">&#9670;&nbsp;</a></span>integrate_adaptive_midpoint()</h2>
+<a id="a9efaab8b78313d1faabfb0473fcc9df5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9efaab8b78313d1faabfb0473fcc9df5">&#9670;&nbsp;</a></span>integrate_adaptive_midpoint()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,42 +163,36 @@ template&lt;class function_2d_t &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Integrate using adaptive midpoint. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Supports reversed bounds; noexcept depends on the callback. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">func</td><td>- target function </td></tr>
     <tr><td class="paramname">x0</td><td>- left border </td></tr>
     <tr><td class="paramname">x1</td><td>- right border </td></tr>
     <tr><td class="paramname">fMaxSliceError</td><td>- max error per one slice </td></tr>
     <tr><td class="paramname">nIntervalsPer1</td><td>- number of intervals per dx = 1 </td></tr>
-    <tr><td class="paramname">nMaxRecursion</td><td>- max recursion depth </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">function_2d_t</td><td>- function that takes double and returns double </td></tr>
+    <tr><td class="paramname">nMaxRecursion</td><td>- max recursion depth @tpara m function_2d_t - function that takes double and returns double </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>approximate integral </td></tr>
+    <tr><td class="paramname">-</td><td>approximate integral; 0 for zero extent; NaN for invalid bounds, zero density or sample count overflow </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00050">50</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00086">86</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
 
 </div>
 </div>
-<a id="af485291e29f2798ba4c6ed32902e3fa8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af485291e29f2798ba4c6ed32902e3fa8">&#9670;&nbsp;</a></span>integrate_monte_carlo()</h2>
+<a id="a3d4259e0dd432c9ac9c1969157d1691a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d4259e0dd432c9ac9c1969157d1691a">&#9670;&nbsp;</a></span>integrate_monte_carlo()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -236,13 +234,13 @@ template&lt;class function_2d_t &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Integrate using probabilistic algorithm Monte Carlo. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Supports reversed bounds; noexcept depends on the callback. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">funcIsInside</td><td>- func that returns 1 if point is inside shape with positive value 0 if point is not inside shape -1 if point is inside shape with negative value </td></tr>
     <tr><td class="paramname">pos0</td><td>- left down corner coordinates </td></tr>
@@ -259,17 +257,17 @@ template&lt;class function_2d_t &gt; </div>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>approximate integral </td></tr>
+    <tr><td class="paramname">-</td><td>approximate integral; 0 for zero area; NaN for invalid bounds, zero density or sample count overflow </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00107">107</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00149">149</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
 
 </div>
 </div>
-<a id="aa10e7f79d8b684767a945d0353d1ba2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa10e7f79d8b684767a945d0353d1ba2e">&#9670;&nbsp;</a></span>integrate_rectangle_rule()</h2>
+<a id="a626e48c33cfbac802c4eb90b8bd90ee4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a626e48c33cfbac802c4eb90b8bd90ee4">&#9670;&nbsp;</a></span>integrate_rectangle_rule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -311,40 +309,34 @@ template&lt;class function_2d_t &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Integrate using rectangle rule. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Supports reversed bounds; noexcept depends on the callback. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">func</td><td>- target function </td></tr>
     <tr><td class="paramname">x0</td><td>- left border </td></tr>
     <tr><td class="paramname">x1</td><td>- right border </td></tr>
-    <tr><td class="paramname">nIntervalsPer1</td><td>- number of intervals per dx = 1 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">function_2d_t</td><td>- function that takes double and returns double </td></tr>
+    <tr><td class="paramname">nIntervalsPer1</td><td>- number of intervals per dx = 1 @tpara m function_2d_t - function that takes double and returns double </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>approximate integral </td></tr>
+    <tr><td class="paramname">-</td><td>approximate integral; 0 for zero extent; NaN for invalid bounds, zero density or sample count overflow </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00014">14</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00036">36</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
 
 </div>
 </div>
-<a id="a36c244f3b2d7d1e2daf09c167f197ffb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36c244f3b2d7d1e2daf09c167f197ffb">&#9670;&nbsp;</a></span>integrate_trapezoid_rule()</h2>
+<a id="aa54d0c4e99bb23dc1096ba34b99e51ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa54d0c4e99bb23dc1096ba34b99e51ed">&#9670;&nbsp;</a></span>integrate_trapezoid_rule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -386,13 +378,13 @@ template&lt;class function_2d_t &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Integrate using trapezoid rule. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Supports reversed bounds; noexcept depends on the callback. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">func</td><td>- target function </td></tr>
     <tr><td class="paramname">x0</td><td>- left border </td></tr>
@@ -409,12 +401,12 @@ template&lt;class function_2d_t &gt; </div>
 </dl>
 <dl class="retval"><dt>Return values</dt><dd>
   <table class="retval">
-    <tr><td class="paramname">-</td><td>approximate integral </td></tr>
+    <tr><td class="paramname">-</td><td>approximate integral; 0 for zero extent; NaN for invalid bounds, zero density or sample count overflow </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00032">32</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="integration_8inl_source.html#l00061">61</a> of file <a class="el" href="integration_8inl_source.html">integration.inl</a>.</p>
 
 </div>
 </div>

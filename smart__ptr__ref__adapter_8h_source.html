@@ -144,29 +144,16 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;} <span class="comment">// namespace qx::details</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">namespace </span>std</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">class</span>, <span class="keyword">class</span>...&gt; <span class="keyword">class </span>pointer_t, <span class="keyword">class </span>T, <span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1details_1_1smart__ptr__ref__adapter_3_01pointer__t_00_01_t_00_01args__t_8_8_8_01_4_01_4.html">   80</a></span>&#160;<span class="keyword">struct </span>hash&lt;qx::details::smart_ptr_ref_adapter&lt;pointer_t, T, args_t...&gt;&gt;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1details_1_1smart__ptr__ref__adapter.html">qx::details::smart_ptr_ref_adapter&lt;pointer_t, T, args_t...&gt;</a>&amp; adaper) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> hash&lt;pointer_t&lt;T, args_t...&gt;&gt;()(adaper);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">class</span>, <span class="keyword">class</span>...&gt; <span class="keyword">class </span>pointer_t, <span class="keyword">class </span>T, <span class="keyword">class</span>... args_t&gt;</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">void</span> swap(</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="classqx_1_1details_1_1smart__ptr__ref__adapter.html">qx::details::smart_ptr_ref_adapter&lt;pointer_t, T, args_t...&gt;</a>&amp; lhs,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="classqx_1_1details_1_1smart__ptr__ref__adapter.html">qx::details::smart_ptr_ref_adapter&lt;pointer_t, T, args_t...&gt;</a>&amp; rhs) noexcept</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;{</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    lhs.swap(rhs);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;}</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;} <span class="comment">// namespace std</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="smart__ptr__ref__adapter_8inl.html">qx/memory/smart_ptr_ref_adapter.inl</a>&gt;</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">class</span>, <span class="keyword">class</span>...&gt; <span class="keyword">class </span>pointer_t, <span class="keyword">class </span>T, <span class="keyword">class</span>... args_t&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1details_1_1smart__ptr__ref__adapter_3_01pointer__t_00_01_t_00_01args__t_8_8_8_01_4_01_4.html">   77</a></span>&#160;<span class="keyword">struct </span>std::hash&lt;qx::details::smart_ptr_ref_adapter&lt;pointer_t, T, args_t...&gt;&gt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1details_1_1smart__ptr__ref__adapter.html">qx::details::smart_ptr_ref_adapter&lt;pointer_t, T, args_t...&gt;</a>&amp; adaper) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">return</span> hash&lt;pointer_t&lt;T, args_t...&gt;&gt;()(adaper);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;};</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="smart__ptr__ref__adapter_8inl.html">qx/memory/smart_ptr_ref_adapter.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1details_1_1base__smart__ptr__ref__adapter_html"><div class="ttname"><a href="classqx_1_1details_1_1base__smart__ptr__ref__adapter.html">qx::details::base_smart_ptr_ref_adapter</a></div><div class="ttdef"><b>Definition:</b> <a href="smart__ptr__ref__adapter_8h_source.html#l00017">smart_ptr_ref_adapter.h:18</a></div></div>
 <div class="ttc" id="aclassqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter_html"><div class="ttname"><a href="classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html">qx::details::overload_functions_smart_ptr_ref_adapter</a></div><div class="ttdef"><b>Definition:</b> <a href="smart__ptr__ref__adapter_8h_source.html#l00049">smart_ptr_ref_adapter.h:50</a></div></div>
 <div class="ttc" id="aclassqx_1_1details_1_1smart__ptr__ref__adapter_html"><div class="ttname"><a href="classqx_1_1details_1_1smart__ptr__ref__adapter.html">qx::details::smart_ptr_ref_adapter</a></div><div class="ttdef"><b>Definition:</b> <a href="smart__ptr__ref__adapter_8h_source.html#l00072">smart_ptr_ref_adapter.h:72</a></div></div>

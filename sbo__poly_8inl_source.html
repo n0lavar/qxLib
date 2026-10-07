@@ -202,8 +202,8 @@ $(function() {
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                                        },</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                                        [](sbo_bytes_type&amp; from, sbo_bytes_type&amp; to) noexcept</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                                        {</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                                            <span class="keywordflow">if</span> (!to.resize(get_storage_size&lt;derived_t&gt;()))</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                                                std::terminate();</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                                            <span class="comment">// Called only for inline objects; resizing to the same size cannot allocate.</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                                            to.resize(get_storage_size&lt;derived_t&gt;());</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                                            <span class="keyword">new</span> (get_object&lt;derived_t&gt;(to))</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                                                derived_t(std::move(*get_object&lt;derived_t&gt;(from)));</div>
