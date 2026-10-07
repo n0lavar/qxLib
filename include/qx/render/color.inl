@@ -421,7 +421,7 @@ constexpr int color::float_to_dec(float fValue) noexcept
     if (fValue >= 1.f)
         return 255;
 
-    return static_cast<int>(fValue * 255.f);
+    return static_cast<int>(fValue * 255.f); //-V2003
 }
 
 constexpr void color::assign_checked(const glm::vec4& other) noexcept

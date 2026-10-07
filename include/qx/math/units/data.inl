@@ -123,7 +123,7 @@ constexpr i64 qx::units::details::to_bits(data eFrom, T value) noexcept
     if (fBits <= -fLimit)
         return std::numeric_limits<i64>::min();
 
-    return static_cast<i64>(fBits);
+    return static_cast<i64>(fBits); //-V2003
 }
 
 template<class T>

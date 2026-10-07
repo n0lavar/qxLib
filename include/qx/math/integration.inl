@@ -19,7 +19,8 @@ inline std::optional<count_t> integration_sample_count(double fExtent, size_t nS
     if (!std::isfinite(fExtent) || nSamplesPerUnit == 0)
         return std::nullopt;
 
-    const double fCount = std::ceil(std::abs(fExtent) * static_cast<double>(nSamplesPerUnit));
+    // Floating-point arithmetic is required; validate the resulting count below.
+    const double fCount = std::ceil(std::abs(fExtent) * static_cast<double>(nSamplesPerUnit)); //-V203
 
     // A power of two is exact in double, unlike the largest size_t value.
     const double fCountLimit = std::ldexp(1.0, std::numeric_limits<count_t>::digits);
@@ -43,7 +44,7 @@ inline double integrate_rectangle_rule(const function_2d_t& func, double x0, dou
     if (nIntervals == 0)
         return 0.0;
 
-    const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
+    const double dx         = (x1 - x0) / static_cast<double>(nIntervals); //-V203
     double       fTotalArea = 0.0;
     double       x          = x0;
 
@@ -68,7 +69,7 @@ double integrate_trapezoid_rule(const function_2d_t& func, double x0, double x1,
     if (nIntervals == 0)
         return 0.0;
 
-    const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
+    const double dx         = (x1 - x0) / static_cast<double>(nIntervals); //-V203
     double       fTotalArea = 0.0;
     double       x          = x0;
 
@@ -98,7 +99,7 @@ double integrate_adaptive_midpoint(
     if (nIntervals == 0)
         return 0.0;
 
-    const double dx         = (x1 - x0) / static_cast<double>(nIntervals);
+    const double dx         = (x1 - x0) / static_cast<double>(nIntervals); //-V203
     double       fTotalArea = 0.0;
     double       x          = x0;
 
