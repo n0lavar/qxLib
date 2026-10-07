@@ -55,7 +55,7 @@ link<T>::lock_ptr::lock_ptr(std::shared_ptr<T> pShared) noexcept : m_pRaw(std::m
 
 template<class T>
 template<class U>
-link<T>::link(const std::weak_ptr<U>& pWeak) noexcept : m_pWeak(pWeak)
+link<T>::link(std::weak_ptr<U> pWeak) noexcept : m_pWeak(std::move(pWeak))
 {
 }
 

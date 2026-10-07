@@ -95,6 +95,30 @@ TEST(link, copy_and_null_assignment)
     Test6(pLink2);
 }
 
+TEST(link, converting_weak_pointer)
+{
+    struct derived : STest
+    {
+        derived() : STest(6) {}
+    };
+
+    auto pShared = std::make_shared<derived>();
+    std::weak_ptr<derived> pWeak = pShared;
+    qx::link<STest> copied(pWeak);
+    EXPECT_FALSE(pWeak.expired());
+    EXPECT_EQ(pWeak.lock().get(), pShared.get());
+    Test6(copied);
+
+    qx::link<STest> moved(std::move(pWeak));
+    EXPECT_TRUE(pWeak.expired());
+    Test6(moved);
+    EXPECT_EQ(pShared.use_count(), 1);
+
+    pShared.reset();
+    EXPECT_TRUE(copied.expired());
+    EXPECT_TRUE(moved.expired());
+}
+
 TEST(link, expiration)
 {
     std::shared_ptr<STest> pShared = std::make_shared<STest>(6);

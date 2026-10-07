@@ -107,7 +107,7 @@ public:
         @param  pWeak - weak object pointer
     **/
     template<class U>
-    link(const std::weak_ptr<U>& pWeak) noexcept;
+    link(std::weak_ptr<U> pWeak) noexcept;
 
     /**
         @brief link object constructor
