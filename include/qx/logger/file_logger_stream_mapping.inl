@@ -253,8 +253,8 @@ inline bool file_logger_stream_mapping::remap_to_capacity(size_t nNewCapacity) n
 
 #if QX_WIN
     const u64   nMappingSize = static_cast<u64>(nNewCapacity);
-    const DWORD hi = static_cast<DWORD>(nMappingSize >> std::numeric_limits<DWORD>::digits);
-    const DWORD lo = static_cast<DWORD>(nMappingSize);
+    const DWORD hi           = static_cast<DWORD>(nMappingSize >> std::numeric_limits<DWORD>::digits);
+    const DWORD lo           = static_cast<DWORD>(nMappingSize);
 
     m_hMap = CreateFileMappingW(m_hFile, nullptr, PAGE_READWRITE, hi, lo, nullptr);
     if (!m_hMap)

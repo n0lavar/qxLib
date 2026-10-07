@@ -87,9 +87,7 @@ public:
         @param  svFullName  - full name of command line argument
         @param  svShortName - short name of command line argument
     **/
-    consteval layered_config_variable_builder command_line(
-        cstring_view svFullName,
-        cstring_view svShortName = {});
+    consteval layered_config_variable_builder command_line(cstring_view svFullName, cstring_view svShortName = {});
 
     /**
         @brief   Set the group name for the variable.

@@ -11,10 +11,10 @@
 #include <qx/recursive_lambda.h>
 
 #include <algorithm>
-#include <random>
 #include <cmath>
 #include <limits>
 #include <optional>
+#include <random>
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <glm/glm.hpp>
@@ -35,8 +35,11 @@ namespace qx
                               NaN for invalid bounds, zero density or sample count overflow
 **/
 template<class function_2d_t>
-inline double integrate_rectangle_rule(const function_2d_t& func, double x0, double x1, size_t nIntervalsPer1 = 10)
-    noexcept(noexcept(static_cast<double>(func(0.0))));
+inline double integrate_rectangle_rule(
+    const function_2d_t& func,
+    double               x0,
+    double               x1,
+    size_t               nIntervalsPer1 = 10) noexcept(noexcept(static_cast<double>(func(0.0))));
 
 /**
     @brief   Integrate using trapezoid rule
@@ -50,8 +53,11 @@ inline double integrate_rectangle_rule(const function_2d_t& func, double x0, dou
                               NaN for invalid bounds, zero density or sample count overflow
 **/
 template<class function_2d_t>
-inline double integrate_trapezoid_rule(const function_2d_t& func, double x0, double x1, size_t nIntervalsPer1 = 10)
-    noexcept(noexcept(static_cast<double>(func(0.0))));
+inline double integrate_trapezoid_rule(
+    const function_2d_t& func,
+    double               x0,
+    double               x1,
+    size_t               nIntervalsPer1 = 10) noexcept(noexcept(static_cast<double>(func(0.0))));
 
 /**
     @brief  Integrate using adaptive midpoint

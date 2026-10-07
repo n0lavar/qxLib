@@ -2,6 +2,8 @@
 //V_EXCLUDE_PATH *\googletest\*
 //V_EXCLUDE_PATH *\benchmark\*
 //V_EXCLUDE_PATH *\glm\*
+//V_EXCLUDE_PATH *\fmt\*
+//V_EXCLUDE_PATH *\boost\*
 
 //-V::MISRA
 //-V::AUTOSAR

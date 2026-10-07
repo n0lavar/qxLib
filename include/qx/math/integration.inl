@@ -33,8 +33,8 @@ inline std::optional<count_t> integration_sample_count(double fExtent, size_t nS
 } // namespace details
 
 template<class function_2d_t>
-inline double integrate_rectangle_rule(const function_2d_t& func, double x0, double x1, size_t nIntervalsPer1)
-    noexcept(noexcept(static_cast<double>(func(0.0))))
+inline double integrate_rectangle_rule(const function_2d_t& func, double x0, double x1, size_t nIntervalsPer1) noexcept(
+    noexcept(static_cast<double>(func(0.0))))
 {
     const auto optIntervals = details::integration_sample_count<size_t>(x1 - x0, nIntervalsPer1);
     if (!optIntervals)
@@ -58,8 +58,8 @@ inline double integrate_rectangle_rule(const function_2d_t& func, double x0, dou
 }
 
 template<class function_2d_t>
-double integrate_trapezoid_rule(const function_2d_t& func, double x0, double x1, size_t nIntervalsPer1)
-    noexcept(noexcept(static_cast<double>(func(0.0))))
+double integrate_trapezoid_rule(const function_2d_t& func, double x0, double x1, size_t nIntervalsPer1) noexcept(
+    noexcept(static_cast<double>(func(0.0))))
 {
     const auto optIntervals = details::integration_sample_count<size_t>(x1 - x0, nIntervalsPer1);
     if (!optIntervals)
@@ -152,7 +152,7 @@ double integrate_monte_carlo(
     glm::dvec2           pos1,
     size_t               nPointsPerOneSquare) noexcept(noexcept(static_cast<int>(funcIsInside(0.0, 0.0))))
 {
-    const double fArea        = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
+    const double fArea = std::abs(pos1.x - pos0.x) * std::abs(pos1.y - pos0.y);
 
     const auto optTotalPoints = details::integration_sample_count<int>(fArea, nPointsPerOneSquare);
     if (!optTotalPoints)

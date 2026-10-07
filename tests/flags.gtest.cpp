@@ -67,9 +67,12 @@ TEST(flags, shifts)
 {
     const auto check = []<class integer_t>()
     {
-        enum class bits : integer_t { first = 1 };
-        using unsigned_type = std::make_unsigned_t<integer_t>;
-        constexpr size_t nWidth = std::numeric_limits<unsigned_type>::digits;
+        enum class bits : integer_t
+        {
+            first = 1
+        };
+        using unsigned_type              = std::make_unsigned_t<integer_t>;
+        constexpr size_t          nWidth = std::numeric_limits<unsigned_type>::digits;
         constexpr qx::flags<bits> initial(bits::first);
 
         static_assert((initial << 1).to_integer() == 2);
