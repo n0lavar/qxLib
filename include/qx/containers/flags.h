@@ -14,6 +14,7 @@
 
 #include <limits>
 #include <type_traits>
+#include <utility>
 
 /**
     @def   QX_FLAGS_ENUM_CLASS
