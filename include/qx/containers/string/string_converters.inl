@@ -120,9 +120,17 @@ inline void utf8_to_string(string& out, cstring_view utf8)
     #if QX_WIN
 
     // much faster on windows
-    const int nLength = MultiByteToWideChar(CP_UTF8, 0, utf8.data(), static_cast<int>(utf8.size()), nullptr, 0);
+    // Windows accepts only int-sized input; keep the empty-result failure policy.
+    if (!std::in_range<int>(utf8.size()))
+    {
+        out.clear();
+        return;
+    }
+
+    const int nInputLength = static_cast<int>(utf8.size()); //-V202
+    const int nLength = MultiByteToWideChar(CP_UTF8, 0, utf8.data(), nInputLength, nullptr, 0);
     out.assign(nLength, L'\n');
-    MultiByteToWideChar(CP_UTF8, 0, utf8.data(), static_cast<int>(utf8.size()), out.data(), nLength);
+    MultiByteToWideChar(CP_UTF8, 0, utf8.data(), nInputLength, out.data(), nLength);
 
     #else
 

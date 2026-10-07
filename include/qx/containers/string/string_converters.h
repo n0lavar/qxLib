@@ -17,6 +17,7 @@
 
 #include <codecvt>
 #include <locale>
+#include <utility>
 
 QX_DEFINE_CATEGORY(CatQxConverters);
 
