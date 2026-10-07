@@ -95,7 +95,8 @@ inline file_logger_stream_mapping::~file_logger_stream_mapping() noexcept
     if (m_pData)
     {
 #if QX_WIN
-        UnmapViewOfFile(m_pData);
+        // No extended unmapping flags are needed.
+        UnmapViewOfFile(m_pData); //-V2001
 #else
         ::munmap(m_pData, static_cast<size_t>(m_nCapacity));
 #endif
@@ -222,7 +223,8 @@ inline bool file_logger_stream_mapping::remap_to_capacity(size_t nNewCapacity) n
     if (m_pData)
     {
 #if QX_WIN
-        UnmapViewOfFile(m_pData);
+        // No extended unmapping flags are needed.
+        UnmapViewOfFile(m_pData); //-V2001
 #else
         ::munmap(m_pData, static_cast<size_t>(m_nCapacity));
 #endif
@@ -258,7 +260,8 @@ inline bool file_logger_stream_mapping::remap_to_capacity(size_t nNewCapacity) n
     if (!m_hMap)
         return false;
 
-    void* p = MapViewOfFile(m_hMap, FILE_MAP_ALL_ACCESS, 0, 0, nNewCapacity);
+    // Let the OS choose the address; MapViewOfFileEx with nullptr is equivalent.
+    void* p = MapViewOfFile(m_hMap, FILE_MAP_ALL_ACCESS, 0, 0, nNewCapacity); //-V2001
     if (!p)
         return false;
 #else
