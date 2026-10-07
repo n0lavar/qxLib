@@ -131,8 +131,8 @@ const typename sbo_poly<base_t, nSBOSize_>::operations& sbo_poly<base_t, nSBOSiz
                                         },
                                         [](sbo_bytes_type& from, sbo_bytes_type& to) noexcept
                                         {
-                                            if (!to.resize(get_storage_size<derived_t>()))
-                                                std::terminate();
+                                            // Called only for inline objects; resizing to the same size cannot allocate.
+                                            to.resize(get_storage_size<derived_t>());
 
                                             new (get_object<derived_t>(to))
                                                 derived_t(std::move(*get_object<derived_t>(from)));

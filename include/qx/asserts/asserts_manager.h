@@ -42,8 +42,8 @@ public:
         std::function<void(const category& category, assert_type eAssertType)> onExit =
             [](const category& category, assert_type eAssertType)
         {
-            // Normal exit after fatal assertions to avoid the second report
-            std::exit(0);
+            // Configurable fatal-assertion handler exits normally to avoid a second report.
+            std::exit(0); //-V2014
         };
 
         std::function<verbosity(assert_type eAssertType)> getVerbosity = [](assert_type eAssertType)
