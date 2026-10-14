@@ -102,8 +102,8 @@ $(function() {
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="struct_q_x___f_m_t___n_s_1_1formatter_3_01std_1_1variant_3_01args__t_8_8_8_01_4_00_01char__t_01_4.html">   31</a></span>&#160;<span class="keyword">struct </span>QX_FMT_NS::formatter&lt;std::variant&lt;args_t...&gt;, char_t&gt; : <a class="code" href="structqx_1_1basic__formatter.html">qx::basic_formatter</a>&lt;char_t&gt;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;{</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> context_t&gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    constexpr <span class="keyword">auto</span> format(<span class="keyword">const</span> std::variant&lt;args_t...&gt;&amp; variant, context_t&amp; ctx)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    constexpr <span class="keyword">auto</span> format(<span class="keyword">const</span> std::variant&lt;args_t...&gt;&amp; variant, context_t&amp; ctx) <span class="keyword">const</span> -&gt; decltype(ctx.out())</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    {</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">return</span> std::visit(</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            [&amp;ctx]&lt;<span class="keyword">class</span> T&gt;(<span class="keyword">const</span> T&amp; value)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            {</div>

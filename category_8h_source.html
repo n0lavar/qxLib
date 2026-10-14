@@ -225,8 +225,8 @@ $(function() {
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    }</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
 <div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> format_context_type&gt;</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    constexpr <span class="keyword">auto</span> format(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">qx::category</a>&amp; value, format_context_type&amp; ctx)<span class="keyword"> const</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="keyword">    </span>{</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    constexpr <span class="keyword">auto</span> format(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">qx::category</a>&amp; value, format_context_type&amp; ctx) <span class="keyword">const</span> -&gt; decltype(ctx.out())</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    {</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;        <span class="keywordflow">if</span> (bLog)</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;        {</div>
 <div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;            <span class="keywordflow">if</span> (value != CatDefault)</div>

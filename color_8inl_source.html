@@ -572,13 +572,13 @@ $(function() {
 <div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160; </div>
 <div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;        <span class="keywordflow">if</span> (optResult)</div>
 <div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;        {</div>
-<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;            <span class="keywordflow">return</span> std::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{}&quot;</span>), *optResult);</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160;            <span class="keywordflow">return</span> QX_FMT_NS::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{}&quot;</span>), *optResult);</div>
 <div class="line"><a name="l00505"></a><span class="lineno">  505</span>&#160;        }</div>
 <div class="line"><a name="l00506"></a><span class="lineno">  506</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00507"></a><span class="lineno">  507</span>&#160;        {</div>
 <div class="line"><a name="l00508"></a><span class="lineno">  508</span>&#160;            <span class="keywordflow">if</span> (eColorNameType == qx::color_name_type::rgb)</div>
 <div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;            {</div>
-<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;                <span class="keyword">auto</span> it = std::format_to(</div>
+<div class="line"><a name="l00510"></a><span class="lineno">  510</span>&#160;                <span class="keyword">auto</span> it = QX_FMT_NS::format_to(</div>
 <div class="line"><a name="l00511"></a><span class="lineno">  511</span>&#160;                    ctx.out(),</div>
 <div class="line"><a name="l00512"></a><span class="lineno">  512</span>&#160;                    <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{},{},{}&quot;</span>),</div>
 <div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;                    color.<a class="code" href="classqx_1_1color.html#a1fd1646aba373bb80c407d65df46b08e">r_dec</a>(),</div>
@@ -586,13 +586,13 @@ $(function() {
 <div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;                    color.<a class="code" href="classqx_1_1color.html#a6b007c290d0994a5d3d55d09fa935e5c">b_dec</a>());</div>
 <div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160; </div>
 <div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;                <span class="keywordflow">if</span> (bAddAlpha)</div>
-<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;                    it = std::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;,{}&quot;</span>), color.<a class="code" href="classqx_1_1color.html#aa5594ec36ae6857163551f2b2ec5c77c">a_dec</a>());</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;                    it = QX_FMT_NS::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;,{}&quot;</span>), color.<a class="code" href="classqx_1_1color.html#aa5594ec36ae6857163551f2b2ec5c77c">a_dec</a>());</div>
 <div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160; </div>
 <div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;                <span class="keywordflow">return</span> it;</div>
 <div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;            }</div>
 <div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (eColorNameType == qx::color_name_type::hex_lower)</div>
 <div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;            {</div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;                <span class="keyword">auto</span> it = std::format_to(</div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;                <span class="keyword">auto</span> it = QX_FMT_NS::format_to(</div>
 <div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;                    ctx.out(),</div>
 <div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;                    <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{:x}{:x}{:x}&quot;</span>),</div>
 <div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;                    color.<a class="code" href="classqx_1_1color.html#a1fd1646aba373bb80c407d65df46b08e">r_dec</a>(),</div>
@@ -600,14 +600,14 @@ $(function() {
 <div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;                    color.<a class="code" href="classqx_1_1color.html#a6b007c290d0994a5d3d55d09fa935e5c">b_dec</a>());</div>
 <div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160; </div>
 <div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;                <span class="keywordflow">if</span> (bAddAlpha)</div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;                    it = std::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{:x}&quot;</span>), color.<a class="code" href="classqx_1_1color.html#aa5594ec36ae6857163551f2b2ec5c77c">a_dec</a>());</div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;                    it = QX_FMT_NS::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{:x}&quot;</span>), color.<a class="code" href="classqx_1_1color.html#aa5594ec36ae6857163551f2b2ec5c77c">a_dec</a>());</div>
 <div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160; </div>
 <div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;                <span class="keywordflow">return</span> it;</div>
 <div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;            }</div>
 <div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;            <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;            {</div>
 <div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;                <span class="comment">// hex_upper as a fallback</span></div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;                <span class="keyword">auto</span> it = std::format_to(</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;                <span class="keyword">auto</span> it = QX_FMT_NS::format_to(</div>
 <div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;                    ctx.out(),</div>
 <div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;                    <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{:X}{:X}{:X}&quot;</span>),</div>
 <div class="line"><a name="l00542"></a><span class="lineno">  542</span>&#160;                    color.<a class="code" href="classqx_1_1color.html#a1fd1646aba373bb80c407d65df46b08e">r_dec</a>(),</div>
@@ -615,7 +615,7 @@ $(function() {
 <div class="line"><a name="l00544"></a><span class="lineno">  544</span>&#160;                    color.<a class="code" href="classqx_1_1color.html#a6b007c290d0994a5d3d55d09fa935e5c">b_dec</a>());</div>
 <div class="line"><a name="l00545"></a><span class="lineno">  545</span>&#160; </div>
 <div class="line"><a name="l00546"></a><span class="lineno">  546</span>&#160;                <span class="keywordflow">if</span> (bAddAlpha || !optColorNameType)</div>
-<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;                    it = std::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{:X}&quot;</span>), color.<a class="code" href="classqx_1_1color.html#aa5594ec36ae6857163551f2b2ec5c77c">a_dec</a>());</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;                    it = QX_FMT_NS::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{:X}&quot;</span>), color.<a class="code" href="classqx_1_1color.html#aa5594ec36ae6857163551f2b2ec5c77c">a_dec</a>());</div>
 <div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160; </div>
 <div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160;                <span class="keywordflow">return</span> it;</div>
 <div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;            }</div>

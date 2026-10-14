@@ -150,12 +150,43 @@ $(function() {
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">    #include &quot;fmt/xchar.h&quot;</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;QX_POP_SUPPRESS_WARNINGS();</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">    #define QX_FMT_NS fmt</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#elif QX_CONF_FMT_LIB == QX_FMT_LIB_STD</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">    #include &lt;format&gt;</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">    #define QX_FMT_NS std</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">    #error No fmt lib selected</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">    #define _QX_FMT_DISABLE_RANGE_FORMATTING(T)                                      \</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">        template&lt;class char_t&gt;                                                       \</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">        struct fmt::range_format_kind&lt;T, char_t&gt;                                     \</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">            : std::integral_constant&lt;fmt::range_format, fmt::range_format::disabled&gt; \</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">        {                                                                            \</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">        }</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">    #define _QX_FMT_DISABLE_TUPLE_FORMATTING(T)                       \</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">        template&lt;class char_t&gt;                                        \</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">        struct fmt::is_tuple_formattable&lt;T, char_t&gt; : std::false_type \</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">        {                                                             \</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">        }</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#elif QX_CONF_FMT_LIB == QX_FMT_LIB_STD</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">    #include &lt;format&gt;</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">    #define QX_FMT_NS std</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">    #define _QX_FMT_DISABLE_RANGE_FORMATTING(T) \</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">        template&lt;&gt;                              \</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">        inline constexpr std::range_format std::format_kind&lt;T&gt; = std::range_format::disabled</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">    #define _QX_FMT_DISABLE_TUPLE_FORMATTING(T)</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">    #error No fmt lib selected</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    @brief   Disable built-in range formatting for a type</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">    @details If T supports range formatting, this macro disables it.</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">             This is useful for types that are ranges but should not be formatted as such.</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    @param   T - type to disable range formatting for</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="string__setup_8h.html#a7e76155bbaae64f220f289a6498da74c">  110</a></span>&#160;<span class="preprocessor">#define QX_FMT_DISABLE_RANGE_FORMATTING(T) _QX_FMT_DISABLE_RANGE_FORMATTING(T)</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">    @brief   Disable built-in tuple formatting for a type</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">    @details If T supports tuple formatting, this macro disables it.</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">             This is useful for types that are tuples but should not be formatted as such.</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">    @param   T - type to disable tuple formatting for</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="string__setup_8h.html#a47dc29a63134d4ef862b04c80aa32b23">  118</a></span>&#160;<span class="preprocessor">#define QX_FMT_DISABLE_TUPLE_FORMATTING(T) _QX_FMT_DISABLE_TUPLE_FORMATTING(T)</span></div>
 <div class="ttc" id="aconfig_8h_html"><div class="ttname"><a href="config_8h.html">config.h</a></div></div>
 <div class="ttc" id="asuppress__warnings_8h_html"><div class="ttname"><a href="suppress__warnings_8h.html">suppress_warnings.h</a></div></div>
 <div class="ttc" id="atuple__utils_8h_html"><div class="ttname"><a href="tuple__utils_8h.html">tuple_utils.h</a></div><div class="ttdoc">Contains utils for working with std::tuple.</div></div>
