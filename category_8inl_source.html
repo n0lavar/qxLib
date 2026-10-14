@@ -89,8 +89,8 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">   19</a></span>&#160;constexpr <a class="code" href="classqx_1_1category.html">category</a> <a class="code" href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">category::set_verbosity</a>(verbosity eVerbosity) <span class="keyword">const</span> noexcept</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classqx_1_1category.html">category</a> category_    = *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    category_.m_Verbosity = eVerbosity;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classqx_1_1category.html">category</a> category_     = *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    category_.m_eVerbosity = eVerbosity;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">return</span> category_;</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
@@ -106,7 +106,7 @@ $(function() {
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">   36</a></span>&#160;constexpr verbosity <a class="code" href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">category::get_verbosity</a>() const noexcept</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> m_Verbosity;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> m_eVerbosity;</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;} <span class="comment">// namespace qx</span></div>
@@ -117,7 +117,7 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1category_html_a45f05eea5cdc8a8030b3233748bbcef2"><div class="ttname"><a href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">qx::category::get_color</a></div><div class="ttdeci">constexpr const color &amp; get_color() const noexcept</div><div class="ttdoc">Get category color.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00031">category.inl:31</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html_a6dcb4e8efe067e7a397c89c916e8d722"><div class="ttname"><a href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">qx::category::get_verbosity</a></div><div class="ttdeci">constexpr verbosity get_verbosity() const noexcept</div><div class="ttdoc">Get category verbosity.</div><div class="ttdef"><b>Definition:</b> <a href="category_8inl_source.html#l00036">category.inl:36</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00194">color.h:195</a></div></div>
-<div class="ttc" id="aclassqx_1_1color_html_a6daf4069e4125b0b1eed933cb04d5e2d"><div class="ttname"><a href="classqx_1_1color.html#a6daf4069e4125b0b1eed933cb04d5e2d">qx::color::from_hash</a></div><div class="ttdeci">static constexpr color from_hash(size_t nHash) noexcept</div><div class="ttdoc">Generate a color unique for a hash value.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00387">color.inl:387</a></div></div>
+<div class="ttc" id="aclassqx_1_1color_html_a6daf4069e4125b0b1eed933cb04d5e2d"><div class="ttname"><a href="classqx_1_1color.html#a6daf4069e4125b0b1eed933cb04d5e2d">qx::color::from_hash</a></div><div class="ttdeci">static constexpr color from_hash(size_t nHash) noexcept</div><div class="ttdoc">Generate a color unique for a hash value.</div><div class="ttdef"><b>Definition:</b> <a href="color_8inl_source.html#l00408">color.inl:408</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

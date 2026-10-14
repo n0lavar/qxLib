@@ -143,14 +143,14 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    constexpr <span class="keyword">auto</span> operator&lt;(<span class="keyword">const</span> <a class="code" href="classqx_1_1time__ordered__priority__key.html">time_ordered_priority_key</a>&amp; other) <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> std::atomic_size_t m_nIdCounter { 0 };</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">static</span> <span class="keyword">inline</span> std::atomic_size_t s_nIdCounter { 0 };</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a>                         m_ePriority = priority::normal;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">size_t</span>                           m_nId       = 0;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;};</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="classqx_1_1time__ordered__priority__key.html#a0c6090bcd581bcef64a3d32789bfbe5b">   80</a></span>&#160;<span class="keyword">inline</span> time_ordered_priority_key::time_ordered_priority_key(<a class="code" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority) noexcept</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    : m_ePriority(ePriority)</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    , m_nId(++m_nIdCounter)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    , m_nId(++s_nIdCounter)</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;{</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>

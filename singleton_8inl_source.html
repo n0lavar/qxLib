@@ -89,8 +89,8 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">inline</span> singletons_manager&amp; singletons_manager::get_instance() noexcept</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">static</span> singletons_manager instance;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">static</span> singletons_manager s_Instance;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">return</span> s_Instance;</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> singletons_manager::add(std::unique_ptr&lt;base_singleton&gt; pSingleton) noexcept</div>
@@ -107,21 +107,21 @@ $(function() {
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        std::is_final_v&lt;T&gt;,</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="stringliteral">&quot;T must be final in order qx::singleton to be safely used with multiple inheritance&quot;</span>);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">static</span> std::mutex instanceMutex;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::lock_guard   _(instanceMutex);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">static</span> std::mutex s_InstanceMutex;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::lock_guard   _(s_InstanceMutex);</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">static</span> T* pSavedInstance = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> (!pSavedInstance) [[unlikely]]</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">static</span> T* s_pSavedInstance = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> (!s_pSavedInstance) [[unlikely]]</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        (dependencies_t::get_instance(), ...);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        std::unique_ptr&lt;T&gt; pInstance = std::make_unique&lt;T&gt;();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        pInstance-&gt;init();</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        pSavedInstance = pInstance.get();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        s_pSavedInstance = pInstance.get();</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        singletons_manager::get_instance().add(std::move(pInstance));</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> *pSavedInstance;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> *s_pSavedInstance;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class </span>T, <span class="keyword">class</span>... dependencies_t&gt;</div>

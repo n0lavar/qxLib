@@ -121,13 +121,13 @@ $(function() {
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;{</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;concept is_iterator_arrow_operator_of_t_type = <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(range_t t) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;concept is_iterator_arrow_operator_of_t_type_c = <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(range_t t) {</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    { t.begin().operator-&gt;() } -&gt; std::convertible_to&lt;const T*&gt;;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    { t.end().operator-&gt;() } -&gt; std::convertible_to&lt;const T*&gt;;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;concept is_iterator_t_pointer = <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(range_t t) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;concept is_iterator_t_pointer_c = <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a>(range_t t) {</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    { t.begin() } -&gt; std::convertible_to&lt;const T*&gt;;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    { t.end() } -&gt; std::convertible_to&lt;const T*&gt;;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
@@ -136,7 +136,7 @@ $(function() {
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> range_t, <span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;concept range_of_t_c =</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    details::is_iterator_arrow_operator_of_t_type&lt;range_t, T&gt; || details::is_iterator_t_pointer&lt;range_t, T&gt;;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    details::is_iterator_arrow_operator_of_t_type_c&lt;range_t, T&gt; || details::is_iterator_t_pointer_c&lt;range_t, T&gt;;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keyword">namespace </span>details</div>

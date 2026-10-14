@@ -85,7 +85,7 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">template</span>&lt;sbo_poly_assignable_c&lt;base_logger_stream&gt; stream_t&gt;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">static</span> constexpr <span class="keyword">auto</span> logger_stream_filter = [](<span class="keyword">const</span> logger::logger_sbo&amp; stream)</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">static</span> constexpr <span class="keyword">auto</span> k_LoggerStreamFilter = [](<span class="keyword">const</span> logger::logger_sbo&amp; stream)</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">return</span> stream-&gt;is&lt;stream_t&gt;();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
@@ -113,14 +113,14 @@ $(function() {
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">template</span>&lt;sbo_poly_assignable_c&lt;base_logger_stream&gt; stream_t&gt;</div>
 <div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#a76c4dfc81cf06ba1d9a708ed38c46b8a">   43</a></span>&#160;<span class="keyword">inline</span> stream_t* <a class="code" href="classqx_1_1logger.html#a76c4dfc81cf06ba1d9a708ed38c46b8a">logger::get_stream</a>() noexcept</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">auto</span> it = std::ranges::find_if(m_Streams, details::logger_stream_filter&lt;stream_t&gt;);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keyword">auto</span> it = std::ranges::find_if(m_Streams, details::k_LoggerStreamFilter&lt;stream_t&gt;);</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> it != m_Streams.end() ? <span class="keyword">static_cast&lt;</span>stream_t*<span class="keyword">&gt;</span>(&amp;it-&gt;get()) : <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">template</span>&lt;sbo_poly_assignable_c&lt;base_logger_stream&gt; stream_t&gt;</div>
 <div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#a3cf7fd0c5791f386dff8e43da791bd6d">   50</a></span>&#160;<span class="keyword">inline</span> <span class="keyword">auto</span> <a class="code" href="classqx_1_1logger.html#a3cf7fd0c5791f386dff8e43da791bd6d">logger::get_streams</a>() noexcept</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> m_Streams | std::views::filter(details::logger_stream_filter&lt;stream_t&gt;)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">return</span> m_Streams | std::views::filter(details::k_LoggerStreamFilter&lt;stream_t&gt;)</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;           | std::views::transform(</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;               [](<a class="code" href="classsbo__poly.html">logger_sbo</a>&amp; stream)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;               {</div>
@@ -137,7 +137,7 @@ $(function() {
 <div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#a29752b59ca7b4475107fd3b9e4894ceb">   66</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code" href="classqx_1_1logger.html#a29752b59ca7b4475107fd3b9e4894ceb">logger::remove_streams</a>() noexcept</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::unique_lock _(m_StreamsMutex);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> std::erase_if(m_Streams, details::logger_stream_filter&lt;stream_t&gt;);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> std::erase_if(m_Streams, details::k_LoggerStreamFilter&lt;stream_t&gt;);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
 <div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">   72</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">logger::register_category</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, <a class="code" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</div>
@@ -190,7 +190,7 @@ $(function() {
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordflow">if</span> (eMessageNecessity != message_necessity_type::not_required)</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    {</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="comment">// assume most streams will not have their own pattern and pre-format with the default pattern</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> finalLogMessage = m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13">acquire</a>();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <a class="code" href="structqx_1_1string__pool_1_1item.html">logger_string_pool::item</a> finalLogMessage = m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a0f7892fe887b76175fc2c3e80090edfe">acquire</a>();</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <a class="code" href="logger__specifiers_8h.html#a8911f66d38926cfdae16d16194d272c6">format_log_specifiers</a>(</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            finalLogMessage.sValue,</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            m_sDefaultPattern,</div>
@@ -220,7 +220,7 @@ $(function() {
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                    std::optional&lt;logger_string_pool::item&gt; optStreamLogMessage;</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                    <span class="keywordflow">if</span> (<span class="keyword">const</span> std::optional&lt;string_view&gt; optPattern = stream-&gt;get_pattern())</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                    {</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                        optStreamLogMessage = m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13">acquire</a>();</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                        optStreamLogMessage = m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a0f7892fe887b76175fc2c3e80090edfe">acquire</a>();</div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                        <a class="code" href="logger__specifiers_8h.html#a8911f66d38926cfdae16d16194d272c6">format_log_specifiers</a>(</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                            optStreamLogMessage-&gt;sValue,</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                            *optPattern,</div>
@@ -245,15 +245,15 @@ $(function() {
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                        optStreamLogMessage ? optStreamLogMessage-&gt;sValue : finalLogMessage.sValue);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                    <span class="keywordflow">if</span> (optStreamLogMessage)</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                        m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">release</a>(std::move(*optStreamLogMessage));</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                        m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#afba0819d921ecb12acb892901de45af6">release</a>(std::move(*optStreamLogMessage));</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                }</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            }</div>
 <div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        }</div>
 <div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">release</a>(std::move(finalLogMessage));</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;        m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#afba0819d921ecb12acb892901de45af6">release</a>(std::move(finalLogMessage));</div>
 <div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    }</div>
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">release</a>(std::move(message));</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    m_StringsPool.<a class="code" href="classqx_1_1string__pool.html#afba0819d921ecb12acb892901de45af6">release</a>(std::move(message));</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;}</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
 <div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">  188</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">logger::flush</a>()</div>
@@ -355,8 +355,8 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1logger_html_af975c6169624a47a72ae8995161e140f"><div class="ttname"><a href="classqx_1_1logger.html#af975c6169624a47a72ae8995161e140f">qx::logger::flush</a></div><div class="ttdeci">virtual void flush()</div><div class="ttdoc">Flush all streams.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00188">logger.inl:188</a></div></div>
 <div class="ttc" id="aclassqx_1_1logger_html_afe154a8d627ca7e7f7c5d4e839afb246"><div class="ttname"><a href="classqx_1_1logger.html#afe154a8d627ca7e7f7c5d4e839afb246">qx::logger::set_default_pattern</a></div><div class="ttdeci">compile_pattern_result set_default_pattern(string sPattern) noexcept</div><div class="ttdoc">Compile and set the default pattern for log messages.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8inl_source.html#l00083">logger.inl:83</a></div></div>
 <div class="ttc" id="aclassqx_1_1string__pool_html"><div class="ttname"><a href="classqx_1_1string__pool.html">qx::string_pool</a></div><div class="ttdoc">Fixed-size atomic string pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8h_source.html#l00034">string_pool.h:35</a></div></div>
-<div class="ttc" id="aclassqx_1_1string__pool_html_a17cf951060e0c58aca573881ec68ec13"><div class="ttname"><a href="classqx_1_1string__pool.html#a17cf951060e0c58aca573881ec68ec13">qx::string_pool::acquire</a></div><div class="ttdeci">item acquire()</div><div class="ttdoc">Acquire a string from the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00033">string_pool.inl:33</a></div></div>
-<div class="ttc" id="aclassqx_1_1string__pool_html_a8e43e03042209f3b36cb4b2b8773c7e9"><div class="ttname"><a href="classqx_1_1string__pool.html#a8e43e03042209f3b36cb4b2b8773c7e9">qx::string_pool::release</a></div><div class="ttdeci">void release(item item)</div><div class="ttdoc">Return a string back to the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00058">string_pool.inl:58</a></div></div>
+<div class="ttc" id="aclassqx_1_1string__pool_html_a0f7892fe887b76175fc2c3e80090edfe"><div class="ttname"><a href="classqx_1_1string__pool.html#a0f7892fe887b76175fc2c3e80090edfe">qx::string_pool::acquire</a></div><div class="ttdeci">item acquire()</div><div class="ttdoc">Acquire a string from the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00033">string_pool.inl:33</a></div></div>
+<div class="ttc" id="aclassqx_1_1string__pool_html_afba0819d921ecb12acb892901de45af6"><div class="ttname"><a href="classqx_1_1string__pool.html#afba0819d921ecb12acb892901de45af6">qx::string_pool::release</a></div><div class="ttdeci">void release(item item)</div><div class="ttdoc">Return a string back to the pool.</div><div class="ttdef"><b>Definition:</b> <a href="string__pool_8inl_source.html#l00058">string_pool.inl:58</a></div></div>
 <div class="ttc" id="aclasssbo__poly_html"><div class="ttname"><a href="classsbo__poly.html">sbo_poly</a></div><div class="ttdoc">Small Buffer Object for polymorphic classes.</div></div>
 <div class="ttc" id="alogger__specifiers_8h_html_a8911f66d38926cfdae16d16194d272c6"><div class="ttname"><a href="logger__specifiers_8h.html#a8911f66d38926cfdae16d16194d272c6">qx::format_log_specifiers</a></div><div class="ttdeci">void format_log_specifiers(string &amp;sStorage, string_view svPattern, const category &amp;category, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage)</div><div class="ttdoc">Format sStorage using qx::logger_specifiers.</div><div class="ttdef"><b>Definition:</b> <a href="logger__specifiers_8inl_source.html#l00178">logger_specifiers.inl:178</a></div></div>
 <div class="ttc" id="alogger__specifiers_8h_html_ab5e5ae72453bddba8b657fe657267db6"><div class="ttname"><a href="logger__specifiers_8h.html#ab5e5ae72453bddba8b657fe657267db6">qx::compile_pattern</a></div><div class="ttdeci">compile_pattern_result compile_pattern(basic_string&lt; char_t, traits_t &gt; &amp;sPattern) noexcept</div><div class="ttdoc">Compile an fmt pattern with named arguments into replacement fields.</div><div class="ttdef"><b>Definition:</b> <a href="logger__specifiers_8inl_source.html#l00048">logger_specifiers.inl:48</a></div></div>

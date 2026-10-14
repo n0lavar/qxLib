@@ -66,13 +66,16 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="classqx_1_1rtti__root-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">qx::rtti_root&lt; naming_strategy_t &gt; Class Template Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>RTTI root class.  
+<p>Polymorphic base for qx class identity and inheritance queries.  
  <a href="classqx_1_1rtti__root.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="rtti_8h_source.html">rtti.h</a>&gt;</code></p>
@@ -95,14 +98,64 @@ Inheritance diagram for qx::rtti_root&lt; naming_strategy_t &gt;:</div>
 <area href="classqx_1_1fwrite__logger__stream.html" title="Logger stream based on std::fwrite output." alt="qx::fwrite_logger_stream" shape="rect" coords="868,224,1075,248"/>
   </map>
 </div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a0bbbcf2c8cf63b5c1107935cf9e77ef0"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a0bbbcf2c8cf63b5c1107935cf9e77ef0"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#a0bbbcf2c8cf63b5c1107935cf9e77ef0">is_derived_from</a> () const noexcept</td></tr>
+<tr class="memdesc:a0bbbcf2c8cf63b5c1107935cf9e77ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test exact identity or membership in the object's RTTI base chain.  <a href="classqx_1_1rtti__root.html#a0bbbcf2c8cf63b5c1107935cf9e77ef0">More...</a><br /></td></tr>
+<tr class="separator:a0bbbcf2c8cf63b5c1107935cf9e77ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c8b142423f7d12c09767f240c512e9a"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a3c8b142423f7d12c09767f240c512e9a"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#a3c8b142423f7d12c09767f240c512e9a">is</a> () const noexcept</td></tr>
+<tr class="memdesc:a3c8b142423f7d12c09767f240c512e9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare the object's dynamic class identifier with T's identifier.  <a href="classqx_1_1rtti__root.html#a3c8b142423f7d12c09767f240c512e9a">More...</a><br /></td></tr>
+<tr class="separator:a3c8b142423f7d12c09767f240c512e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70343227110396ffe559780d51d191f6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#a70343227110396ffe559780d51d191f6">is</a> (string_view svClassName) const noexcept</td></tr>
+<tr class="memdesc:a70343227110396ffe559780d51d191f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare against the class name selected by the naming strategy.  <a href="classqx_1_1rtti__root.html#a70343227110396ffe559780d51d191f6">More...</a><br /></td></tr>
+<tr class="separator:a70343227110396ffe559780d51d191f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41722c667c0ecb7e468a096d31cc77d9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#a41722c667c0ecb7e468a096d31cc77d9">is</a> (const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;id) const noexcept</td></tr>
+<tr class="memdesc:a41722c667c0ecb7e468a096d31cc77d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare against the object's dynamic class identifier.  <a href="classqx_1_1rtti__root.html#a41722c667c0ecb7e468a096d31cc77d9">More...</a><br /></td></tr>
+<tr class="separator:a41722c667c0ecb7e468a096d31cc77d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41a863c5dcdbc3e0e7d81fead67fcbff"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#a41a863c5dcdbc3e0e7d81fead67fcbff">is_derived_from_id</a> (const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;id) const noexcept</td></tr>
+<tr class="memdesc:a41a863c5dcdbc3e0e7d81fead67fcbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test an identifier against the object's dynamic RTTI hierarchy.  <a href="classqx_1_1rtti__root.html#a41a863c5dcdbc3e0e7d81fead67fcbff">More...</a><br /></td></tr>
+<tr class="separator:a41a863c5dcdbc3e0e7d81fead67fcbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af67333097d2d2e76af38b7674d9f9e68"><td class="memItemLeft" align="right" valign="top">virtual string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#af67333097d2d2e76af38b7674d9f9e68">get_class_name</a> () const noexcept</td></tr>
+<tr class="memdesc:af67333097d2d2e76af38b7674d9f9e68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the object's most-derived registered RTTI type.  <a href="classqx_1_1rtti__root.html#af67333097d2d2e76af38b7674d9f9e68">More...</a><br /></td></tr>
+<tr class="separator:af67333097d2d2e76af38b7674d9f9e68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8684c749612763e30d235dc262ba81b9"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classqx_1_1class__id.html">class_id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#a8684c749612763e30d235dc262ba81b9">get_class_id</a> () const noexcept</td></tr>
+<tr class="memdesc:a8684c749612763e30d235dc262ba81b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the identifier of the object's most-derived registered RTTI type.  <a href="classqx_1_1rtti__root.html#a8684c749612763e30d235dc262ba81b9">More...</a><br /></td></tr>
+<tr class="separator:a8684c749612763e30d235dc262ba81b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28be0f880df6bcda6a4582fb29d376de"><td class="memItemLeft" align="right" valign="top">virtual std::span&lt; const <a class="el" href="classqx_1_1class__id.html">class_id</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#a28be0f880df6bcda6a4582fb29d376de">get_inheritance_sequence</a> () const =0</td></tr>
+<tr class="memdesc:a28be0f880df6bcda6a4582fb29d376de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the registered inheritance chain in base-to-derived order.  <a href="classqx_1_1rtti__root.html#a28be0f880df6bcda6a4582fb29d376de">More...</a><br /></td></tr>
+<tr class="separator:a28be0f880df6bcda6a4582fb29d376de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:acdd17dc15fd6c49084ec845284c97573"><td class="memItemLeft" align="right" valign="top">static constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#acdd17dc15fd6c49084ec845284c97573">is_derived_from_id_static</a> (const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;id) noexcept</td></tr>
+<tr class="memdesc:acdd17dc15fd6c49084ec845284c97573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test an identifier against the declaring type's static RTTI hierarchy.  <a href="classqx_1_1rtti__root.html#acdd17dc15fd6c49084ec845284c97573">More...</a><br /></td></tr>
+<tr class="separator:acdd17dc15fd6c49084ec845284c97573"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9812af0876124c7b0d5e82e997f5d7f"><td class="memItemLeft" align="right" valign="top">static constexpr string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#aa9812af0876124c7b0d5e82e997f5d7f">get_class_name_static</a> () noexcept</td></tr>
+<tr class="memdesc:aa9812af0876124c7b0d5e82e997f5d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply the naming strategy to the declaring RTTI type's signature.  <a href="classqx_1_1rtti__root.html#aa9812af0876124c7b0d5e82e997f5d7f">More...</a><br /></td></tr>
+<tr class="separator:aa9812af0876124c7b0d5e82e997f5d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5716b5162635b8eabd0dcd276f0c0f3"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="classqx_1_1class__id.html">class_id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#ab5716b5162635b8eabd0dcd276f0c0f3">get_class_id_static</a> () noexcept</td></tr>
+<tr class="memdesc:ab5716b5162635b8eabd0dcd276f0c0f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create the declaring RTTI type's identifier from its type signature.  <a href="classqx_1_1rtti__root.html#ab5716b5162635b8eabd0dcd276f0c0f3">More...</a><br /></td></tr>
+<tr class="separator:ab5716b5162635b8eabd0dcd276f0c0f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ab5acc55580ddcf3a51ff5b3140301b2a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#ab5acc55580ddcf3a51ff5b3140301b2a">_is_base_id</a> (const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;idBase) const noexcept</td></tr>
+<tr class="memdesc:ab5acc55580ddcf3a51ff5b3140301b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse identifiers treated as bases by derived RTTI classes.  <a href="classqx_1_1rtti__root.html#ab5acc55580ddcf3a51ff5b3140301b2a">More...</a><br /></td></tr>
+<tr class="separator:ab5acc55580ddcf3a51ff5b3140301b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class naming_strategy_t = rtti_naming_strategy_class_name&gt;<br />
 class qx::rtti_root&lt; naming_strategy_t &gt;</h3>
 
-<p>RTTI root class. </p>
-<p>All other classes must be inherited from this class to allow you to use RTTI functions </p><dl class="tparams"><dt>Template Parameters</dt><dd>
+<p>Polymorphic base for qx class identity and inheritance queries. </p>
+<p>Derive an RTTI hierarchy from this type and use QX_RTTI_CLASS in each derived class to supply its identity and extend the inheritance chain. This system does not require compiler RTTI.</p>
+<p>Static queries describe the type declaring them; virtual queries describe the object's most-derived registered type. <a class="el" href="classqx_1_1rtti__root.html#a3c8b142423f7d12c09767f240c512e9a" title="Compare the object&#39;s dynamic class identifier with T&#39;s identifier.">is&lt;T&gt;()</a> checks exact identity, while <a class="el" href="classqx_1_1rtti__root.html#a0bbbcf2c8cf63b5c1107935cf9e77ef0" title="Test exact identity or membership in the object&#39;s RTTI base chain.">is_derived_from&lt;T&gt;()</a> also accepts base types.</p>
+<p>The naming strategy affects class names, not class identifiers. Names may be empty or shared by several types. The protected destructor prevents deleting an object directly through an <a class="el" href="classqx_1_1rtti__root.html" title="Polymorphic base for qx class identity and inheritance queries.">rtti_root</a> pointer. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">naming_strategy_t</td><td>- </td></tr>
+    <tr><td class="paramname">naming_strategy_t</td><td>- strategy providing get_name(string_view) to transform the compiler-generated type signature into a class name </td></tr>
   </table>
   </dd>
 </dl>
@@ -110,9 +163,490 @@ class qx::rtti_root&lt; naming_strategy_t &gt;</h3>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>10.09.2021 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="rtti_8h_source.html#l00057">57</a> of file <a class="el" href="rtti_8h_source.html">rtti.h</a>.</p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
+<p class="definition">Definition at line <a class="el" href="rtti_8h_source.html#l00068">68</a> of file <a class="el" href="rtti_8h_source.html">rtti.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab5acc55580ddcf3a51ff5b3140301b2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5acc55580ddcf3a51ff5b3140301b2a">&#9670;&nbsp;</a></span>_is_base_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::_is_base_id </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;&#160;</td>
+          <td class="paramname"><em>idBase</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Traverse identifiers treated as bases by derived RTTI classes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idBase</td><td>- candidate identifier from an inheritance query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true when an identifier matches during base-chain traversal</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>The root compares against its own identifier. Macro-generated overrides check their immediate base and continue recursively. </p>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00078">78</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="a8684c749612763e30d235dc262ba81b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8684c749612763e30d235dc262ba81b9">&#9670;&nbsp;</a></span>get_class_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classqx_1_1class__id.html">class_id</a> <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::get_class_id</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the identifier of the object's most-derived registered RTTI type. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>identifier used by exact-type comparisons and RTTI casts </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00072">72</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="ab5716b5162635b8eabd0dcd276f0c0f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5716b5162635b8eabd0dcd276f0c0f3">&#9670;&nbsp;</a></span>get_class_id_static()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classqx_1_1class__id.html">class_id</a> <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::get_class_id_static</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create the declaring RTTI type's identifier from its type signature. </p>
+<dl class="section note"><dt>Note</dt><dd>The signature is compiler-dependent; identifiers are not a portable format for persisting type identity across different builds. </dd></dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>identifier independent of the selected class-name representation </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00065">65</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="af67333097d2d2e76af38b7674d9f9e68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af67333097d2d2e76af38b7674d9f9e68">&#9670;&nbsp;</a></span>get_class_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string_view <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::get_class_name</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the name of the object's most-derived registered RTTI type. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>the naming strategy's result for the dynamic type; it may be empty </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00059">59</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="aa9812af0876124c7b0d5e82e997f5d7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9812af0876124c7b0d5e82e997f5d7f">&#9670;&nbsp;</a></span>get_class_name_static()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr string_view <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::get_class_name_static</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Apply the naming strategy to the declaring RTTI type's signature. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>a class-name view that may be empty, depending on the strategy </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00053">53</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="a28be0f880df6bcda6a4582fb29d376de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28be0f880df6bcda6a4582fb29d376de">&#9670;&nbsp;</a></span>get_inheritance_sequence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t  = rtti_naming_strategy_class_name&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::span&lt;const <a class="el" href="classqx_1_1class__id.html">class_id</a>&gt; <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::get_inheritance_sequence </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the registered inheritance chain in base-to-derived order. </p>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>identifiers from the <a class="el" href="classqx_1_1rtti__root.html" title="Polymorphic base for qx class identity and inheritance queries.">rtti_root</a> specialization through the dynamic type</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>QX_RTTI_CLASS returns a span backed by class-specific static storage, rather than storage owned by the object. </p>
+
+</div>
+</div>
+<a id="a3c8b142423f7d12c09767f240c512e9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c8b142423f7d12c09767f240c512e9a">&#9670;&nbsp;</a></span>is() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::is</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compare the object's dynamic class identifier with T's identifier. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>- candidate type exposing <a class="el" href="rtti_8h.html#ae0343c893e61db7576b61fe33a630bda" title="Add dynamic identity and inheritance queries to a class in a qx RTTI hierarchy.">QX_RTTI_CLASS()</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true only when the identifiers match; base types are not accepted </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00023">23</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="a41722c667c0ecb7e468a096d31cc77d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41722c667c0ecb7e468a096d31cc77d9">&#9670;&nbsp;</a></span>is() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::is </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compare against the object's dynamic class identifier. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>- candidate for exact identity, not an inheritance query </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true when id equals <a class="el" href="classqx_1_1rtti__root.html#a8684c749612763e30d235dc262ba81b9" title="Get the identifier of the object&#39;s most-derived registered RTTI type.">get_class_id()</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00035">35</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="a70343227110396ffe559780d51d191f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70343227110396ffe559780d51d191f6">&#9670;&nbsp;</a></span>is() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::is </td>
+          <td>(</td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svClassName</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compare against the class name selected by the naming strategy. </p>
+<dl class="section note"><dt>Note</dt><dd>Name equality does not imply type identity when the naming strategy produces duplicate names, such as <a class="el" href="structqx_1_1rtti__naming__strategy__empty.html" title="Returns empty string_view in get_name: { &#39;\0&#39; }.">rtti_naming_strategy_empty</a>. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">svClassName</td><td>- expected result of <a class="el" href="classqx_1_1rtti__root.html#af67333097d2d2e76af38b7674d9f9e68" title="Get the name of the object&#39;s most-derived registered RTTI type.">get_class_name()</a>, not a base-class name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true when the names match exactly </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00029">29</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="a0bbbcf2c8cf63b5c1107935cf9e77ef0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bbbcf2c8cf63b5c1107935cf9e77ef0">&#9670;&nbsp;</a></span>is_derived_from()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::is_derived_from</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Test exact identity or membership in the object's RTTI base chain. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>- candidate type exposing <a class="el" href="rtti_8h.html#ae0343c893e61db7576b61fe33a630bda" title="Add dynamic identity and inheritance queries to a class in a qx RTTI hierarchy.">QX_RTTI_CLASS()</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true for the object's registered type and its registered bases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00015">15</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="a41a863c5dcdbc3e0e7d81fead67fcbff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41a863c5dcdbc3e0e7d81fead67fcbff">&#9670;&nbsp;</a></span>is_derived_from_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::is_derived_from_id </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Test an identifier against the object's dynamic RTTI hierarchy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>- candidate class identifier, including the object's own identifier </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true when id belongs to the registered type or one of its bases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00041">41</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<a id="acdd17dc15fd6c49084ec845284c97573"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdd17dc15fd6c49084ec845284c97573">&#9670;&nbsp;</a></span>is_derived_from_id_static()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class naming_strategy_t &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool <a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root</a>&lt; naming_strategy_t &gt;::is_derived_from_id_static </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Test an identifier against the declaring type's static RTTI hierarchy. </p>
+<p><a class="el" href="classqx_1_1rtti__root.html" title="Polymorphic base for qx class identity and inheritance queries.">rtti_root</a> matches only its own identifier; QX_RTTI_CLASS extends this comparison recursively through the declared base class. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>- candidate class identifier to find in the static base chain </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Return values</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">-</td><td>true when id belongs to the declaring type or one of its bases </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00047">47</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>include/qx/rtti/<a class="el" href="rtti_8h_source.html">rtti.h</a></li>
+<li>include/qx/rtti/<a class="el" href="rtti_8inl_source.html">rtti.inl</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

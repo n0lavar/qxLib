@@ -83,6 +83,7 @@ $(function() {
 <code>#include &lt;<a class="el" href="rtti__naming__strategy_8h_source.html">qx/rtti/rtti_naming_strategy.h</a>&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;span&gt;</code><br />
+<code>#include &lt;<a class="el" href="rtti_8inl_source.html">qx/rtti/rtti.inl</a>&gt;</code><br />
 </div>
 <p><a href="rtti_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -91,18 +92,18 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__pure__base.html">qx::rtti_pure_base</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html">qx::rtti_root&lt; naming_strategy_t &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTTI root class.  <a href="classqx_1_1rtti__root.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Polymorphic base for qx class identity and inheritance queries.  <a href="classqx_1_1rtti__root.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ae0343c893e61db7576b61fe33a630bda"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rtti_8h.html#ae0343c893e61db7576b61fe33a630bda">QX_RTTI_CLASS</a>(thisClass, ...)</td></tr>
-<tr class="memdesc:ae0343c893e61db7576b61fe33a630bda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro for every class inherited from class with QX_RTTI_BASE_CLASS macro.  <a href="rtti_8h.html#ae0343c893e61db7576b61fe33a630bda">More...</a><br /></td></tr>
+<tr class="memdesc:ae0343c893e61db7576b61fe33a630bda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add dynamic identity and inheritance queries to a class in a qx RTTI hierarchy.  <a href="rtti_8h.html#ae0343c893e61db7576b61fe33a630bda">More...</a><br /></td></tr>
 <tr class="separator:ae0343c893e61db7576b61fe33a630bda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>RTTI system based on polymorphism. </p>
-<p>Using <a class="el" href="classqx_1_1rtti__root.html" title="RTTI root class.">qx::rtti_root</a> and QX_RTTI_CLASS will let you to use RTTI advantages without enabling RTTI in compiler's flags common logic is taken from <a href="https://github.com/qualab/xakep-RTTI">https://github.com/qualab/xakep-RTTI</a> (Vladimir Kerimov, qualab) </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<p>Using <a class="el" href="classqx_1_1rtti__root.html" title="Polymorphic base for qx class identity and inheritance queries.">qx::rtti_root</a> and QX_RTTI_CLASS will let you to use RTTI advantages without enabling RTTI in compiler's flags common logic is taken from <a href="https://github.com/qualab/xakep-RTTI">https://github.com/qualab/xakep-RTTI</a> (Vladimir Kerimov, qualab) </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>24.08.2020 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>(c) Nick Khrapov, 2021. All right reserved. </dd></dl>
 
@@ -134,16 +135,16 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Macro for every class inherited from class with QX_RTTI_BASE_CLASS macro. </p>
+<p>Add dynamic identity and inheritance queries to a class in a qx RTTI hierarchy. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">thisClass</td><td>- this class name </td></tr>
-    <tr><td class="paramname">...</td><td>- super class name (must implement QX_RTTI_CLASS or QX_RTTI_BASE_CLASS macro) </td></tr>
+    <tr><td class="paramname">thisClass</td><td>- type being registered, used to generate its identifier and name </td></tr>
+    <tr><td class="paramname">...</td><td>- immediate base type, either rtti_root or a type using QX_RTTI_CLASS </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="rtti_8h_source.html#l00162">162</a> of file <a class="el" href="rtti_8h_source.html">rtti.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="rtti_8h_source.html#l00202">202</a> of file <a class="el" href="rtti_8h_source.html">rtti.h</a>.</p>
 
 </div>
 </div>
