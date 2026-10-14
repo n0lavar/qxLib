@@ -2679,6 +2679,7 @@ struct QX_FMT_NS::formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::ba
 {
     template<class format_context_type>
     constexpr auto format(const qx::basic_string<char_t, traits_t>& value, format_context_type& ctx) const
+        -> decltype(ctx.out())
     {
         return QX_FMT_NS::format_to(
             ctx.out(),

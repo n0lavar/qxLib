@@ -56,7 +56,7 @@ wstring format(
 }
 
 /**
-    @brief  Converts any type that has a std::formatter overload to qx::basic_string
+    @brief  Converts any type that has a QX_FMT_NS::formatter overload to qx::basic_string
     @tparam T        - object type
     @tparam char_t   - char type (char, wchar_t, etc)
     @tparam traits_t - char traits. \see string_traits.h

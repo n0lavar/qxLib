@@ -154,7 +154,7 @@ struct QX_FMT_NS::formatter<qx::category, char_t>
     }
 
     template<class format_context_type>
-    constexpr auto format(const qx::category& value, format_context_type& ctx) const
+    constexpr auto format(const qx::category& value, format_context_type& ctx) const -> decltype(ctx.out())
     {
         if (bLog)
         {

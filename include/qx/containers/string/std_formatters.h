@@ -31,7 +31,7 @@ template<class char_t, class... args_t>
 struct QX_FMT_NS::formatter<std::variant<args_t...>, char_t> : qx::basic_formatter<char_t>
 {
     template<class context_t>
-    constexpr auto format(const std::variant<args_t...>& variant, context_t& ctx) const
+    constexpr auto format(const std::variant<args_t...>& variant, context_t& ctx) const -> decltype(ctx.out())
     {
         return std::visit(
             [&ctx]<class T>(const T& value)

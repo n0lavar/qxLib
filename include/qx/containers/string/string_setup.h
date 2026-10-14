@@ -79,9 +79,40 @@ QX_PUSH_SUPPRESS_ALL_WARNINGS();
     #include "fmt/xchar.h"
 QX_POP_SUPPRESS_WARNINGS();
     #define QX_FMT_NS fmt
+    #define _QX_FMT_DISABLE_RANGE_FORMATTING(T)                                      \
+        template<class char_t>                                                       \
+        struct fmt::range_format_kind<T, char_t>                                     \
+            : std::integral_constant<fmt::range_format, fmt::range_format::disabled> \
+        {                                                                            \
+        }
+    #define _QX_FMT_DISABLE_TUPLE_FORMATTING(T)                       \
+        template<class char_t>                                        \
+        struct fmt::is_tuple_formattable<T, char_t> : std::false_type \
+        {                                                             \
+        }
 #elif QX_CONF_FMT_LIB == QX_FMT_LIB_STD
     #include <format>
     #define QX_FMT_NS std
+    #define _QX_FMT_DISABLE_RANGE_FORMATTING(T) \
+        template<>                              \
+        inline constexpr std::range_format std::format_kind<T> = std::range_format::disabled
+    #define _QX_FMT_DISABLE_TUPLE_FORMATTING(T)
 #else
     #error No fmt lib selected
 #endif
+
+/**
+    @brief   Disable built-in range formatting for a type
+    @details If T supports range formatting, this macro disables it.
+             This is useful for types that are ranges but should not be formatted as such.
+    @param   T - type to disable range formatting for
+**/
+#define QX_FMT_DISABLE_RANGE_FORMATTING(T) _QX_FMT_DISABLE_RANGE_FORMATTING(T)
+
+/**
+    @brief   Disable built-in tuple formatting for a type
+    @details If T supports tuple formatting, this macro disables it.
+             This is useful for types that are tuples but should not be formatted as such.
+    @param   T - type to disable tuple formatting for
+**/
+#define QX_FMT_DISABLE_TUPLE_FORMATTING(T) _QX_FMT_DISABLE_TUPLE_FORMATTING(T)

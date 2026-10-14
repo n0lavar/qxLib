@@ -501,13 +501,13 @@ struct QX_FMT_NS::formatter<qx::color, char_t>
 
         if (optResult)
         {
-            return std::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), *optResult);
+            return QX_FMT_NS::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), *optResult);
         }
         else
         {
             if (eColorNameType == qx::color_name_type::rgb)
             {
-                auto it = std::format_to(
+                auto it = QX_FMT_NS::format_to(
                     ctx.out(),
                     QX_STR_PREFIX(char_t, "{},{},{}"),
                     color.r_dec(),
@@ -515,13 +515,13 @@ struct QX_FMT_NS::formatter<qx::color, char_t>
                     color.b_dec());
 
                 if (bAddAlpha)
-                    it = std::format_to(ctx.out(), QX_STR_PREFIX(char_t, ",{}"), color.a_dec());
+                    it = QX_FMT_NS::format_to(ctx.out(), QX_STR_PREFIX(char_t, ",{}"), color.a_dec());
 
                 return it;
             }
             else if (eColorNameType == qx::color_name_type::hex_lower)
             {
-                auto it = std::format_to(
+                auto it = QX_FMT_NS::format_to(
                     ctx.out(),
                     QX_STR_PREFIX(char_t, "{:x}{:x}{:x}"),
                     color.r_dec(),
@@ -529,14 +529,14 @@ struct QX_FMT_NS::formatter<qx::color, char_t>
                     color.b_dec());
 
                 if (bAddAlpha)
-                    it = std::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{:x}"), color.a_dec());
+                    it = QX_FMT_NS::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{:x}"), color.a_dec());
 
                 return it;
             }
             else
             {
                 // hex_upper as a fallback
-                auto it = std::format_to(
+                auto it = QX_FMT_NS::format_to(
                     ctx.out(),
                     QX_STR_PREFIX(char_t, "{:X}{:X}{:X}"),
                     color.r_dec(),
@@ -544,7 +544,7 @@ struct QX_FMT_NS::formatter<qx::color, char_t>
                     color.b_dec());
 
                 if (bAddAlpha || !optColorNameType)
-                    it = std::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{:X}"), color.a_dec());
+                    it = QX_FMT_NS::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{:X}"), color.a_dec());
 
                 return it;
             }
