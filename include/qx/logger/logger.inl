@@ -80,6 +80,24 @@ inline void logger::register_category(string_view svCategoryName, category_data 
     m_RegisteredCategories.try_emplace(svCategoryName, std::move(data));
 }
 
+inline void logger::set_category_formatter(
+    const category&                         category,
+    category_data::format_user_message_func FormatUserMessage) noexcept
+{
+    set_category_formatter(category.get_name(), std::move(FormatUserMessage));
+}
+
+inline void logger::set_category_formatter(
+    string_view                             svCategoryName,
+    category_data::format_user_message_func FormatUserMessage) noexcept
+{
+    std::unique_lock _(m_RegisteredCategoriesMutex);
+    if (auto it = m_RegisteredCategories.find(svCategoryName); it != m_RegisteredCategories.end())
+    {
+        it->second.FormatUserMessage = std::move(FormatUserMessage);
+    }
+}
+
 inline compile_pattern_result logger::set_default_pattern(string sPattern) noexcept
 {
     const compile_pattern_result eResult = compile_pattern(sPattern);

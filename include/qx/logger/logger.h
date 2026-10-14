@@ -84,9 +84,9 @@ public:
         //
         // Also, try to keep the capture list as short as possible - ideally no more than two pointers.
         // This improves cache locality.
-        using format_user_message_func_t =
+        using format_user_message_func =
             std::function<logger_string_pool::item(logger_string_pool::item message, logger_string_pool& stringPool)>;
-        format_user_message_func_t FormatUserMessage;
+        format_user_message_func FormatUserMessage;
     };
     using category_data_map = std::unordered_map<string_view, category_data>;
 
@@ -156,7 +156,23 @@ public:
     **/
     void register_category(string_view svCategoryName, category_data data) noexcept;
 
-    void set_category_formatter();
+    /**
+        @brief Set category formatter
+        @param category          - category to set formatter for
+        @param FormatUserMessage - category formatter
+    **/
+    void set_category_formatter(
+        const category&                         category,
+        category_data::format_user_message_func FormatUserMessage) noexcept;
+
+    /**
+        @brief Set category formatter
+        @param svCategoryName    - category to set formatter for
+        @param FormatUserMessage - category formatter
+    **/
+    void set_category_formatter(
+        string_view                             svCategoryName,
+        category_data::format_user_message_func FormatUserMessage) noexcept;
 
     /**
         @brief   Compile and set the default pattern for log messages.
