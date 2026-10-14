@@ -111,6 +111,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">register_category</a> (string_view svCategoryName, <a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</td></tr>
 <tr class="memdesc:a0bce4c36d3ed33a8cbc848afc9715890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom rules for category.  <a href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">More...</a><br /></td></tr>
 <tr class="separator:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112ccf9a94fe25476fdd63c8ededc8ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a112ccf9a94fe25476fdd63c8ededc8ab">set_category_formatter</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, category_data::format_user_message_func FormatUserMessage) noexcept</td></tr>
+<tr class="memdesc:a112ccf9a94fe25476fdd63c8ededc8ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set category formatter.  <a href="classqx_1_1logger.html#a112ccf9a94fe25476fdd63c8ededc8ab">More...</a><br /></td></tr>
+<tr class="separator:a112ccf9a94fe25476fdd63c8ededc8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a0a57b7d490b17b115aef16023c3023"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a1a0a57b7d490b17b115aef16023c3023">set_category_formatter</a> (string_view svCategoryName, category_data::format_user_message_func FormatUserMessage) noexcept</td></tr>
+<tr class="memdesc:a1a0a57b7d490b17b115aef16023c3023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set category formatter.  <a href="classqx_1_1logger.html#a1a0a57b7d490b17b115aef16023c3023">More...</a><br /></td></tr>
+<tr class="separator:a1a0a57b7d490b17b115aef16023c3023"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe154a8d627ca7e7f7c5d4e839afb246"><td class="memItemLeft" align="right" valign="top">compile_pattern_result&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#afe154a8d627ca7e7f7c5d4e839afb246">set_default_pattern</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> sPattern) noexcept</td></tr>
 <tr class="memdesc:afe154a8d627ca7e7f7c5d4e839afb246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile and set the default pattern for log messages.  <a href="classqx_1_1logger.html#afe154a8d627ca7e7f7c5d4e839afb246">More...</a><br /></td></tr>
 <tr class="separator:afe154a8d627ca7e7f7c5d4e839afb246"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -264,7 +270,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00220">220</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00238">238</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -471,7 +477,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00093">93</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00111">111</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
@@ -609,6 +615,100 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
 
 </div>
 </div>
+<a id="a112ccf9a94fe25476fdd63c8ededc8ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a112ccf9a94fe25476fdd63c8ededc8ab">&#9670;&nbsp;</a></span>set_category_formatter() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qx::logger::set_category_formatter </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classqx_1_1category.html">category</a> &amp;&#160;</td>
+          <td class="paramname"><em>category</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">category_data::format_user_message_func&#160;</td>
+          <td class="paramname"><em>FormatUserMessage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set category formatter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">category</td><td>- category to set formatter for </td></tr>
+    <tr><td class="paramname">FormatUserMessage</td><td>- category formatter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00083">83</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+
+</div>
+</div>
+<a id="a1a0a57b7d490b17b115aef16023c3023"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a0a57b7d490b17b115aef16023c3023">&#9670;&nbsp;</a></span>set_category_formatter() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qx::logger::set_category_formatter </td>
+          <td>(</td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svCategoryName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">category_data::format_user_message_func&#160;</td>
+          <td class="paramname"><em>FormatUserMessage</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set category formatter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">svCategoryName</td><td>- category to set formatter for </td></tr>
+    <tr><td class="paramname">FormatUserMessage</td><td>- category formatter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00090">90</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+
+</div>
+</div>
 <a id="afe154a8d627ca7e7f7c5d4e839afb246"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe154a8d627ca7e7f7c5d4e839afb246">&#9670;&nbsp;</a></span>set_default_pattern()</h2>
 
@@ -648,7 +748,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00083">83</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8inl_source.html#l00101">101</a> of file <a class="el" href="logger_8inl_source.html">logger.inl</a>.</p>
 
 </div>
 </div>
