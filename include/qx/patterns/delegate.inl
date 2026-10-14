@@ -30,14 +30,17 @@ public:
     }
 
 private:
-    virtual return_t invoke(const function_t& function) noexcept override
-    {
-        return m_InvokeFunction(function);
-    }
+    virtual return_t invoke(const function_t& function) noexcept override;
 
 private:
     const invoke_function_t& m_InvokeFunction;
 };
+
+template<class return_t, class function_t, class invoke_function_t>
+inline return_t invoker<return_t, function_t, invoke_function_t>::invoke(const function_t& function) noexcept
+{
+    return m_InvokeFunction(function);
+}
 
 template<class derived_t, class return_t, class... args_t>
 base_delegate<derived_t, return_t, args_t...>::base_delegate(base_delegate&& other) noexcept

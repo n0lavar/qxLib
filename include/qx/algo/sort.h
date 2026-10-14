@@ -8,9 +8,9 @@
 **/
 #pragma once
 
+#include <qx/meta/type_traits.h>
 #include <qx/typedefs.h>
 
-#include <qx/meta/type_traits.h>
 #include <algorithm>
 #include <functional>
 #include <vector>

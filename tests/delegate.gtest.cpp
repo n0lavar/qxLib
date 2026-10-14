@@ -8,10 +8,9 @@
 **/
 #include <common.h>
 
-#include <qx/patterns/delegate.h>
-
 #include <qx/containers/string/string.h>
 #include <qx/meta/type_strings.h>
+#include <qx/patterns/delegate.h>
 
 #include <span>
 
@@ -108,23 +107,29 @@ template<class get_get_result_t, class return_t, class... args_t>
 class static_method_component
 {
 public:
-    static return_t callback(args_t... args)
-    {
-        g_Tracker.push_back(callable_type::static_method);
-        return get_get_result_t::value(args...);
-    }
+    static return_t callback(args_t... args);
 };
+
+template<class get_get_result_t, class return_t, class... args_t>
+inline return_t static_method_component<get_get_result_t, return_t, args_t...>::callback(args_t... args)
+{
+    g_Tracker.push_back(callable_type::static_method);
+    return get_get_result_t::value(args...);
+}
 
 template<class get_get_result_t, class return_t>
 class static_method_component<get_get_result_t, return_t, void>
 {
 public:
-    static return_t callback()
-    {
-        g_Tracker.push_back(callable_type::static_method);
-        return get_get_result_t::value();
-    }
+    static return_t callback();
 };
+
+template<class get_get_result_t, class return_t>
+inline return_t static_method_component<get_get_result_t, return_t, void>::callback()
+{
+    g_Tracker.push_back(callable_type::static_method);
+    return get_get_result_t::value();
+}
 
 template<class get_get_result_t, class return_t, class args_tuple_t>
 struct get_static_method;
@@ -145,23 +150,29 @@ template<class get_get_result_t, class return_t, class... args_t>
 class method_component<get_get_result_t, return_t, std::tuple<args_t...>>
 {
 public:
-    return_t callback(args_t... args)
-    {
-        g_Tracker.push_back(callable_type::method);
-        return get_get_result_t::value(args...);
-    }
+    return_t callback(args_t... args);
 };
+
+template<class get_get_result_t, class return_t, class... args_t>
+inline return_t method_component<get_get_result_t, return_t, std::tuple<args_t...>>::callback(args_t... args)
+{
+    g_Tracker.push_back(callable_type::method);
+    return get_get_result_t::value(args...);
+}
 
 template<class get_get_result_t, class return_t>
 class method_component<get_get_result_t, return_t, std::tuple<std::type_identity<void>>>
 {
 public:
-    return_t callback()
-    {
-        g_Tracker.push_back(callable_type::method);
-        return get_get_result_t::value();
-    }
+    return_t callback();
 };
+
+template<class get_get_result_t, class return_t>
+inline return_t method_component<get_get_result_t, return_t, std::tuple<std::type_identity<void>>>::callback()
+{
+    g_Tracker.push_back(callable_type::method);
+    return get_get_result_t::value();
+}
 
 
 
@@ -355,131 +366,155 @@ template<class traits_t>
 class delegate_base_fixture : public ::testing::Test
 {
 protected:
-    void TearDown() override
-    {
-        Test::TearDown();
-        check_execute(true);
-    }
+    void TearDown() override;
 
     void check_execute(bool bExpectFilled)
-        requires(std::is_void_v<typename traits_t::return_type>)
-    {
-        size_t nBroadcast = 0;
-
-        traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        g_Tracker.clear();
-    }
+        requires(std::is_void_v<typename traits_t::return_type>);
 
     void check_execute(bool bExpectFilled)
         requires(
             !std::is_void_v<typename traits_t::return_type>
             && std::tuple_size_v<typename traits_t::args_tuple_type> == 1
-            && std::is_same_v<std::tuple_element_t<0, typename traits_t::args_tuple_type>, void>)
-    {
-        size_t nBroadcast = 0;
-
-        typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result1, typename traits_t::return_type());
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result2, typename traits_t::return_type());
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result3, typename traits_t::return_type());
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        g_Tracker.clear();
-    }
+            && std::is_same_v<std::tuple_element_t<0, typename traits_t::args_tuple_type>, void>);
 
     void check_execute(bool bExpectFilled)
         requires(
             !std::is_void_v<typename traits_t::return_type>
             && std::tuple_size_v<typename traits_t::args_tuple_type> == 1
-            && std::is_same_v<std::tuple_element_t<0, typename traits_t::args_tuple_type>, size_t>)
-    {
-        size_t nBroadcast = 0;
-
-        typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result1.nData, bExpectFilled ? 2 : 0);
-        EXPECT_EQ(result1.sData, QXT(""));
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result2.nData, bExpectFilled ? 4 : 0);
-        EXPECT_EQ(result2.sData, QXT(""));
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result3.nData, bExpectFilled ? 6 : 0);
-        EXPECT_EQ(result3.sData, QXT(""));
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        g_Tracker.clear();
-    }
+            && std::is_same_v<std::tuple_element_t<0, typename traits_t::args_tuple_type>, size_t>);
 
     void check_execute(bool bExpectFilled)
         requires(
             !std::is_void_v<typename traits_t::return_type>
-            && std::tuple_size_v<typename traits_t::args_tuple_type> == 2)
-    {
-        size_t nBroadcast = 0;
-
-        typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result1.nData, bExpectFilled ? 2 : 0);
-        EXPECT_EQ(result1.sData, bExpectFilled ? QXT("2") : QXT(""));
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result2.nData, bExpectFilled ? 4 : 0);
-        EXPECT_EQ(result2.sData, bExpectFilled ? QXT("4") : QXT(""));
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
-        EXPECT_EQ(result3.nData, bExpectFilled ? 6 : 0);
-        EXPECT_EQ(result3.sData, bExpectFilled ? QXT("6") : QXT(""));
-        EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
-        if (bExpectFilled)
-            EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
-
-        g_Tracker.clear();
-    }
+            && std::tuple_size_v<typename traits_t::args_tuple_type> == 2);
 
 protected:
     typename traits_t::delegate_type m_Delegate;
     std::optional<callable_type>     m_optCallableType;
 };
+
+template<class traits_t>
+inline void delegate_base_fixture<traits_t>::TearDown()
+{
+    Test::TearDown();
+    check_execute(true);
+}
+
+template<class traits_t>
+inline void delegate_base_fixture<traits_t>::check_execute(bool bExpectFilled)
+    requires(std::is_void_v<typename traits_t::return_type>)
+{
+    size_t nBroadcast = 0;
+
+    traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    g_Tracker.clear();
+}
+
+template<class traits_t>
+inline void delegate_base_fixture<traits_t>::check_execute(bool bExpectFilled)
+    requires(
+        !std::is_void_v<typename traits_t::return_type> && std::tuple_size_v<typename traits_t::args_tuple_type> == 1
+        && std::is_same_v<std::tuple_element_t<0, typename traits_t::args_tuple_type>, void>)
+{
+    size_t nBroadcast = 0;
+
+    typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result1, typename traits_t::return_type());
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result2, typename traits_t::return_type());
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result3, typename traits_t::return_type());
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    g_Tracker.clear();
+}
+
+template<class traits_t>
+inline void delegate_base_fixture<traits_t>::check_execute(bool bExpectFilled)
+    requires(
+        !std::is_void_v<typename traits_t::return_type> && std::tuple_size_v<typename traits_t::args_tuple_type> == 1
+        && std::is_same_v<std::tuple_element_t<0, typename traits_t::args_tuple_type>, size_t>)
+{
+    size_t nBroadcast = 0;
+
+    typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result1.nData, bExpectFilled ? 2 : 0);
+    EXPECT_EQ(result1.sData, QXT(""));
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result2.nData, bExpectFilled ? 4 : 0);
+    EXPECT_EQ(result2.sData, QXT(""));
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result3.nData, bExpectFilled ? 6 : 0);
+    EXPECT_EQ(result3.sData, QXT(""));
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    g_Tracker.clear();
+}
+
+template<class traits_t>
+inline void delegate_base_fixture<traits_t>::check_execute(bool bExpectFilled)
+    requires(
+        !std::is_void_v<typename traits_t::return_type> && std::tuple_size_v<typename traits_t::args_tuple_type> == 2)
+{
+    size_t nBroadcast = 0;
+
+    typename traits_t::return_type result1 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result1.nData, bExpectFilled ? 2 : 0);
+    EXPECT_EQ(result1.sData, bExpectFilled ? QXT("2") : QXT(""));
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 1 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    typename traits_t::return_type result2 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result2.nData, bExpectFilled ? 4 : 0);
+    EXPECT_EQ(result2.sData, bExpectFilled ? QXT("4") : QXT(""));
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 2 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    typename traits_t::return_type result3 = traits_t::execute_generator::execute(m_Delegate, nBroadcast++);
+    EXPECT_EQ(result3.nData, bExpectFilled ? 6 : 0);
+    EXPECT_EQ(result3.sData, bExpectFilled ? QXT("6") : QXT(""));
+    EXPECT_EQ(g_Tracker.size(), bExpectFilled ? 3 : 0);
+    if (bExpectFilled)
+        EXPECT_EQ(g_Tracker.back(), *m_optCallableType);
+
+    g_Tracker.clear();
+}
 
 
 
@@ -536,17 +571,20 @@ template<class traits_t>
 class delegate_destruction_callback_fixture : public delegate_base_fixture<traits_t>
 {
 protected:
-    void TearDown() override
-    {
-        delegate_base_fixture<traits_t>::TearDown();
-
-        m_DelegateDestructionCallback = qx::destruction_callback();
-        delegate_base_fixture<traits_t>::check_execute(false);
-    }
+    void TearDown() override;
 
 protected:
     qx::destruction_callback m_DelegateDestructionCallback;
 };
+
+template<class traits_t>
+inline void delegate_destruction_callback_fixture<traits_t>::TearDown()
+{
+    delegate_base_fixture<traits_t>::TearDown();
+
+    m_DelegateDestructionCallback = qx::destruction_callback();
+    delegate_base_fixture<traits_t>::check_execute(false);
+}
 
 TYPED_TEST_SUITE(delegate_destruction_callback_fixture, implementations_type);
 
@@ -597,19 +635,22 @@ template<class traits_t>
 class delegate_weak_fixture : public delegate_base_fixture<traits_t>
 {
 protected:
-    void TearDown() override
-    {
-        delegate_base_fixture<traits_t>::TearDown();
-
-        m_pComponent.reset();
-        delegate_base_fixture<traits_t>::check_execute(false);
-    }
+    void TearDown() override;
 
 protected:
     std::shared_ptr<typename traits_t::method_component_type> m_pComponent =
         std::make_shared<typename traits_t::method_component_type>();
     qx::delegate_token_type m_DelegateToken;
 };
+
+template<class traits_t>
+inline void delegate_weak_fixture<traits_t>::TearDown()
+{
+    delegate_base_fixture<traits_t>::TearDown();
+
+    m_pComponent.reset();
+    delegate_base_fixture<traits_t>::check_execute(false);
+}
 
 TYPED_TEST_SUITE(delegate_weak_fixture, implementations_type);
 
@@ -658,12 +699,7 @@ protected:
     using get_get_result_type = get_get_result<sum_pipe, size_t, const qx::string&>;
 
 protected:
-    void SetUp() override
-    {
-        m_Token1 = m_Delegate.add_token(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value);
-        m_Token2 = m_Delegate.add_token(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value);
-        m_Token3 = m_Delegate.add_token(get_static_method<get_get_result_type, sum_pipe, args_tuple_type>::value);
-    }
+    void SetUp() override;
 
 protected:
     delegate_type           m_Delegate;
@@ -671,6 +707,13 @@ protected:
     qx::delegate_token_type m_Token2;
     qx::delegate_token_type m_Token3;
 };
+
+inline void delegate_common_tests_fixture::SetUp()
+{
+    m_Token1 = m_Delegate.add_token(get_lambda<get_get_result_type, sum_pipe, args_tuple_type>::value);
+    m_Token2 = m_Delegate.add_token(get_function<get_get_result_type, sum_pipe, args_tuple_type>::value);
+    m_Token3 = m_Delegate.add_token(get_static_method<get_get_result_type, sum_pipe, args_tuple_type>::value);
+}
 
 
 // ------------------------------------------------- check pipe result -------------------------------------------------

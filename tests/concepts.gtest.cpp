@@ -22,7 +22,7 @@
 using vec_int   = std::vector<int>;
 using vec_float = std::vector<float>;
 
-template<typename T>
+template<class T>
 struct C;
 
 template<>

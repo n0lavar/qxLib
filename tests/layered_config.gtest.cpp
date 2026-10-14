@@ -236,46 +236,13 @@ template<class test_layered_config_set_value_traits_t>
 class test_layered_config_set_value : public ::testing::Test
 {
 protected:
-    virtual void TearDown() override
-    {
-        auto& manager = qx::layered_configs_manager::get_instance();
-        manager.set_args(g_Argc, g_Argv);
-        ASSERT_TRUE(manager.parse());
-
-        m_bPreTearDown = false;
-        TestBody();
-
-        reset();
-    }
+    virtual void TearDown() override;
 
     template<class T>
-    void set_value(qx::cstring_view svName, T value)
-    {
-        test_layered_config_set_value_traits_t::set_value_type::set_value(svName, std::move(value));
-    }
+    void set_value(qx::cstring_view svName, T value);
 
     template<class T>
-    void test_layered_config_set_value_check_type(T defaultValue, T newValue, qx::cstring_view svRuntimeName)
-    {
-        if constexpr (!test_layered_config_set_value_traits_t::set_value_type::template is_enabled<T>())
-            GTEST_SKIP();
-
-        EXPECT_NE(defaultValue, newValue);
-
-        std::optional<T> optValue = qx::layered_configs_manager::get_instance().get<T>(svRuntimeName);
-        ASSERT_TRUE(optValue);
-
-        if (m_bPreTearDown)
-        {
-            EXPECT_EQ(*optValue, defaultValue);
-            set_value(svRuntimeName, newValue);
-        }
-        else
-        {
-            EXPECT_EQ(*optValue, newValue);
-        }
-    }
-
+    void test_layered_config_set_value_check_type(T defaultValue, T newValue, qx::cstring_view svRuntimeName);
 
     bool m_bPreTearDown = true;
 
@@ -284,19 +251,68 @@ private:
     {
     }
 
-    void reset()
-    {
-        g_Argc = 0;
-
-        unset_env(k_svIntEnvName);
-        unset_env(k_svSizeEnvName);
-        unset_env(k_svFloatEnvName);
-        unset_env(k_svStringEnvName);
-        unset_env(k_svBoolEnvName);
-
-        qx::layered_configs_manager::get_instance().reset();
-    }
+    void reset();
 };
+
+template<class test_layered_config_set_value_traits_t>
+inline void test_layered_config_set_value<test_layered_config_set_value_traits_t>::TearDown()
+{
+    auto& manager = qx::layered_configs_manager::get_instance();
+    manager.set_args(g_Argc, g_Argv);
+    ASSERT_TRUE(manager.parse());
+
+    m_bPreTearDown = false;
+    TestBody();
+
+    reset();
+}
+
+template<class test_layered_config_set_value_traits_t>
+template<class T>
+inline void test_layered_config_set_value<test_layered_config_set_value_traits_t>::set_value(
+    qx::cstring_view svName,
+    T                value)
+{
+    test_layered_config_set_value_traits_t::set_value_type::set_value(svName, std::move(value));
+}
+
+template<class test_layered_config_set_value_traits_t>
+template<class T>
+inline void test_layered_config_set_value<test_layered_config_set_value_traits_t>::
+    test_layered_config_set_value_check_type(T defaultValue, T newValue, qx::cstring_view svRuntimeName)
+{
+    if constexpr (!test_layered_config_set_value_traits_t::set_value_type::template is_enabled<T>())
+        GTEST_SKIP();
+
+    EXPECT_NE(defaultValue, newValue);
+
+    std::optional<T> optValue = qx::layered_configs_manager::get_instance().get<T>(svRuntimeName);
+    ASSERT_TRUE(optValue);
+
+    if (m_bPreTearDown)
+    {
+        EXPECT_EQ(*optValue, defaultValue);
+        set_value(svRuntimeName, newValue);
+    }
+    else
+    {
+        EXPECT_EQ(*optValue, newValue);
+    }
+}
+
+template<class test_layered_config_set_value_traits_t>
+inline void test_layered_config_set_value<test_layered_config_set_value_traits_t>::reset()
+{
+    g_Argc = 0;
+
+    unset_env(k_svIntEnvName);
+    unset_env(k_svSizeEnvName);
+    unset_env(k_svFloatEnvName);
+    unset_env(k_svStringEnvName);
+    unset_env(k_svBoolEnvName);
+
+    qx::layered_configs_manager::get_instance().reset();
+}
 
 using implementations_type = ::testing::Types<
     test_layered_config_set_value_traits<set_command_line_space_trait>,

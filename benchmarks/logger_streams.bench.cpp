@@ -6,8 +6,6 @@
     @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
-#include "benchmark/benchmark.h"
-
 #include <qx/logger/base_file_logger_stream.h>
 #include <qx/logger/cout_logger_stream.h>
 #include <qx/logger/debugger_logger_stream.h>
@@ -16,6 +14,8 @@
 #include <qx/logger/file_logger_stream_ofstream.h>
 #include <qx/logger/fwrite_logger_stream.h>
 #include <qx/logger/logger.h>
+
+#include "benchmark/benchmark.h"
 
 #if QX_WIN
     #include <io.h>
@@ -181,37 +181,9 @@ template<class setup_function_t>
 class logger_stream_fixture : public benchmark::Fixture
 {
 public:
-    virtual void SetUp(::benchmark::State& state) override
-    {
-        m_RandomStrings = generate_strings(state.range(0), 0);
+    virtual void SetUp(::benchmark::State& state) override;
 
-        qx::logger_singleton::get_instance().get_logger().reset();
-        setup_function_t::set_up();
-
-        // temporarily disable console output so it doesn't interfere with the benchmark results
-        m_pOldStdout = __fdopen(__dup(__fileno(stdout)), "w");
-        m_pOldStderr = __fdopen(__dup(__fileno(stderr)), "w");
-
-        freopen("NUL", "w", stdout);
-        freopen("NUL", "w", stderr);
-    }
-
-    virtual void TearDown(::benchmark::State& state) override
-    {
-        qx::logger_singleton::get_instance().get_logger().reset();
-        std::filesystem::remove(k_sLogFileName.c_str());
-
-        fflush(stdout);
-        fflush(stderr);
-
-        __dup2(__fileno(m_pOldStdout), __fileno(stdout));
-        fclose(m_pOldStdout);
-        m_pOldStdout = nullptr;
-
-        __dup2(__fileno(m_pOldStderr), __fileno(stderr));
-        fclose(m_pOldStderr);
-        m_pOldStderr = nullptr;
-    }
+    virtual void TearDown(::benchmark::State& state) override;
 
 protected:
     std::vector<qx::string> m_RandomStrings;
@@ -219,6 +191,40 @@ protected:
     FILE* m_pOldStdout = nullptr;
     FILE* m_pOldStderr = nullptr;
 };
+
+template<class setup_function_t>
+inline void logger_stream_fixture<setup_function_t>::SetUp(::benchmark::State& state)
+{
+    m_RandomStrings = generate_strings(state.range(0), 0);
+
+    qx::logger_singleton::get_instance().get_logger().reset();
+    setup_function_t::set_up();
+
+    // temporarily disable console output so it doesn't interfere with the benchmark results
+    m_pOldStdout = __fdopen(__dup(__fileno(stdout)), "w");
+    m_pOldStderr = __fdopen(__dup(__fileno(stderr)), "w");
+
+    freopen("NUL", "w", stdout);
+    freopen("NUL", "w", stderr);
+}
+
+template<class setup_function_t>
+inline void logger_stream_fixture<setup_function_t>::TearDown(::benchmark::State& state)
+{
+    qx::logger_singleton::get_instance().get_logger().reset();
+    std::filesystem::remove(k_sLogFileName.c_str());
+
+    fflush(stdout);
+    fflush(stderr);
+
+    __dup2(__fileno(m_pOldStdout), __fileno(stdout));
+    fclose(m_pOldStdout);
+    m_pOldStdout = nullptr;
+
+    __dup2(__fileno(m_pOldStderr), __fileno(stderr));
+    fclose(m_pOldStderr);
+    m_pOldStderr = nullptr;
+}
 
 BENCHMARK_TEMPLATE_METHOD_F(logger_stream_fixture, bench)(benchmark::State& st)
 {

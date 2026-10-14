@@ -19,70 +19,88 @@ template<class T>
 class TestEasingSequence : public ::testing::Test
 {
 protected:
-    using type                = typename T::type;
-    static constexpr type eps = type(1e-7);
+    using type                   = typename T::type;
+    static constexpr type k_fEps = type(1e-7);
 
     /* called before every test */
-    virtual void SetUp() override
-    {
-        m_Sequence = T();
-    }
+    virtual void SetUp() override;
 
-    void AddDefaultElements()
-    {
-        m_Sequence.emplace_back(qx::easing::linear_func<type>, type(0.f), type(1.f));
+    void AddDefaultElements();
 
-        m_Sequence.push_back(
-            typename T::easing_element_type(qx::easing::linear_func<type>, type(1.f), type(0.5f), type(0.5f)));
-    }
+    void CheckNotStarted();
 
-    void CheckNotStarted()
-    {
-        EXPECT_TRUE(m_Sequence.is_not_started());
-        EXPECT_FALSE(m_Sequence.is_started());
-        EXPECT_FALSE(m_Sequence.is_paused());
-        EXPECT_FALSE(m_Sequence.is_finished());
-        EXPECT_FALSE(m_Sequence.is_looped());
-        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), type(0.f)));
-        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), type(0.f)));
-    }
+    void CheckStarted(type fExpectedValue, type fExpectedFraction, bool bExpectedLooped = false);
 
-    void CheckStarted(type fExpectedValue, type fExpectedFraction, bool bExpectedLooped = false)
-    {
-        EXPECT_FALSE(m_Sequence.is_not_started());
-        EXPECT_TRUE(m_Sequence.is_started());
-        EXPECT_FALSE(m_Sequence.is_paused());
-        EXPECT_FALSE(m_Sequence.is_finished());
-        EXPECT_EQ(m_Sequence.is_looped(), bExpectedLooped);
-        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, eps));
-    }
+    void CheckPaused(type fExpectedValue, type fExpectedFraction);
 
-    void CheckPaused(type fExpectedValue, type fExpectedFraction)
-    {
-        EXPECT_FALSE(m_Sequence.is_not_started());
-        EXPECT_FALSE(m_Sequence.is_started());
-        EXPECT_TRUE(m_Sequence.is_paused());
-        EXPECT_FALSE(m_Sequence.is_finished());
-        EXPECT_FALSE(m_Sequence.is_looped());
-        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, eps));
-    }
-
-    void CheckFinished(type fExpectedValue)
-    {
-        EXPECT_FALSE(m_Sequence.is_not_started());
-        EXPECT_FALSE(m_Sequence.is_started());
-        EXPECT_FALSE(m_Sequence.is_paused());
-        EXPECT_TRUE(m_Sequence.is_finished());
-        EXPECT_FALSE(m_Sequence.is_looped());
-        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), type(1.f)));
-    }
+    void CheckFinished(type fExpectedValue);
 
 protected:
     T m_Sequence;
 };
+
+template<class T>
+inline void TestEasingSequence<T>::SetUp()
+{
+    m_Sequence = T();
+}
+
+template<class T>
+inline void TestEasingSequence<T>::AddDefaultElements()
+{
+    m_Sequence.emplace_back(qx::easing::linear_func<type>, type(0.f), type(1.f));
+
+    m_Sequence.push_back(
+        typename T::easing_element_type(qx::easing::linear_func<type>, type(1.f), type(0.5f), type(0.5f)));
+}
+
+template<class T>
+inline void TestEasingSequence<T>::CheckNotStarted()
+{
+    EXPECT_TRUE(m_Sequence.is_not_started());
+    EXPECT_FALSE(m_Sequence.is_started());
+    EXPECT_FALSE(m_Sequence.is_paused());
+    EXPECT_FALSE(m_Sequence.is_finished());
+    EXPECT_FALSE(m_Sequence.is_looped());
+    EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), type(0.f)));
+    EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), type(0.f)));
+}
+
+template<class T>
+inline void TestEasingSequence<T>::CheckStarted(type fExpectedValue, type fExpectedFraction, bool bExpectedLooped)
+{
+    EXPECT_FALSE(m_Sequence.is_not_started());
+    EXPECT_TRUE(m_Sequence.is_started());
+    EXPECT_FALSE(m_Sequence.is_paused());
+    EXPECT_FALSE(m_Sequence.is_finished());
+    EXPECT_EQ(m_Sequence.is_looped(), bExpectedLooped);
+    EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, k_fEps));
+    EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, k_fEps));
+}
+
+template<class T>
+inline void TestEasingSequence<T>::CheckPaused(type fExpectedValue, type fExpectedFraction)
+{
+    EXPECT_FALSE(m_Sequence.is_not_started());
+    EXPECT_FALSE(m_Sequence.is_started());
+    EXPECT_TRUE(m_Sequence.is_paused());
+    EXPECT_FALSE(m_Sequence.is_finished());
+    EXPECT_FALSE(m_Sequence.is_looped());
+    EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, k_fEps));
+    EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), fExpectedFraction, k_fEps));
+}
+
+template<class T>
+inline void TestEasingSequence<T>::CheckFinished(type fExpectedValue)
+{
+    EXPECT_FALSE(m_Sequence.is_not_started());
+    EXPECT_FALSE(m_Sequence.is_started());
+    EXPECT_FALSE(m_Sequence.is_paused());
+    EXPECT_TRUE(m_Sequence.is_finished());
+    EXPECT_FALSE(m_Sequence.is_looped());
+    EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get(), fExpectedValue, k_fEps));
+    EXPECT_TRUE(qx::epsilon_equal(m_Sequence.get_fraction(), type(1.f)));
+}
 
 using implementations_type = ::testing::
     Types<qx::base_easing_sequence<float>, qx::base_easing_sequence<double>, qx::base_easing_sequence<long double> >;

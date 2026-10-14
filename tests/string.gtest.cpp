@@ -13,7 +13,6 @@
 #include <qx/macros/static_assert.h>
 
 #include <string_test_helpers.h>
-
 #include <list>
 #include <unordered_map>
 
@@ -576,16 +575,16 @@ TYPED_TEST(test_qx_string, find)
     EXPECT_EQ(str.find(STR("for")), 0);
     EXPECT_EQ(str.find(STR("for"), 15), 25);
     EXPECT_EQ(str.find(STR("for"), 4, StringType::npos, 14), 11);
-    EXPECT_EQ(str.find(STR("for"), 30), GTEST_SINGLE_ARGUMENT(StringType::npos));
-    EXPECT_EQ(str.find(STR("kek")), GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.find(STR("for"), 30), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.find(STR("kek")), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
 
     auto test = [&str](auto... toSearch)
     {
         EXPECT_EQ(str.find(toSearch...), 0);
         EXPECT_EQ(str.find(toSearch..., 15), 25);
         EXPECT_EQ(str.find(toSearch..., 4, 14), 11);
-        EXPECT_EQ(str.find(toSearch..., 30), GTEST_SINGLE_ARGUMENT(StringType::npos));
-        EXPECT_EQ(str.find(STR("kek")), GTEST_SINGLE_ARGUMENT(StringType::npos));
+        EXPECT_EQ(str.find(toSearch..., 30), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
+        EXPECT_EQ(str.find(STR("kek")), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
     };
 
     test(StringTypeTn(STR("for")));
@@ -602,23 +601,23 @@ TYPED_TEST(test_qx_string, substr)
 
     auto svStr0 = str.substr(0, 4);
     EXPECT_EQ(svStr0.size(), 4);
-    EXPECT_EQ(svStr0, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("many"))));
+    EXPECT_EQ(svStr0, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("many"))));
 
     auto svStr1 = str.substr(5, 9);
     EXPECT_EQ(svStr1.size(), 9);
-    EXPECT_EQ(svStr1, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("different"))));
+    EXPECT_EQ(svStr1, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("different"))));
 
     auto svStr2 = str.substr(15, 5);
     EXPECT_EQ(svStr2.size(), 5);
-    EXPECT_EQ(svStr2, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("words"))));
+    EXPECT_EQ(svStr2, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("words"))));
 
     auto svStr3 = str.substr(21, 6);
     EXPECT_EQ(svStr3.size(), 6);
-    EXPECT_EQ(svStr3, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("placed"))));
+    EXPECT_EQ(svStr3, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("placed"))));
 
     auto svStr4 = str.substr(28);
     EXPECT_EQ(svStr4.size(), 4);
-    EXPECT_EQ(svStr4, GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("here"))));
+    EXPECT_EQ(svStr4, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("here"))));
 }
 
 TYPED_TEST(test_qx_string, find_first_of)
@@ -629,12 +628,12 @@ TYPED_TEST(test_qx_string, find_first_of)
     EXPECT_EQ(str.find_first_of(CH('a')), 1);
     EXPECT_EQ(str.find_first_of(CH('n')), 2);
     EXPECT_EQ(str.find_first_of(CH(' ')), 4);
-    EXPECT_EQ(str.find_first_of(CH('x')), GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.find_first_of(CH('x')), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
 
     EXPECT_EQ(str.find_first_of(STR("kek"), 0, 3), 9);
     EXPECT_EQ(str.find_first_of(STR("abc"), 0, 3), 1);
     EXPECT_EQ(str.find_first_of(STR("ecc"), 0, 3), 9);
-    EXPECT_EQ(str.find_first_of(STR("x"), 0, 1), GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.find_first_of(STR("x"), 0, 1), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
     EXPECT_EQ(str.find_first_of(STR("m"), 0, 1), 0);
 
     auto test = [&str](auto type_var)
@@ -644,7 +643,7 @@ TYPED_TEST(test_qx_string, find_first_of)
         EXPECT_EQ(str.find_first_of(type(STR("kek"))), 9);
         EXPECT_EQ(str.find_first_of(type(STR("abc"))), 1);
         EXPECT_EQ(str.find_first_of(type(STR("ecc"))), 9);
-        EXPECT_EQ(str.find_first_of(type(STR("x"))), GTEST_SINGLE_ARGUMENT(StringType::npos));
+        EXPECT_EQ(str.find_first_of(type(STR("x"))), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_EQ(str.find_first_of(type(STR("m"))), 0);
     };
 
@@ -661,12 +660,12 @@ TYPED_TEST(test_qx_string, find_last_of)
     EXPECT_EQ(str.find_last_of(CH('d')), 26);
     EXPECT_EQ(str.find_last_of(CH('p')), 21);
     EXPECT_EQ(str.find_last_of(CH(' ')), 27);
-    EXPECT_EQ(str.find_last_of(CH('x')), GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.find_last_of(CH('x')), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
 
     EXPECT_EQ(str.find_last_of(STR("kek"), 0, 3), 31);
     EXPECT_EQ(str.find_last_of(STR("abc"), 0, 3), 24);
     EXPECT_EQ(str.find_last_of(STR("ecc"), 0, 3), 31);
-    EXPECT_EQ(str.find_last_of(STR("x"), 0, 1), GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.find_last_of(STR("x"), 0, 1), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
     EXPECT_EQ(str.find_last_of(STR("m"), 0, 1), 0);
 
     auto test = [&str](auto type_var)
@@ -676,7 +675,7 @@ TYPED_TEST(test_qx_string, find_last_of)
         EXPECT_EQ(str.find_last_of(type(STR("kek"))), 31);
         EXPECT_EQ(str.find_last_of(type(STR("abc"))), 24);
         EXPECT_EQ(str.find_last_of(type(STR("ecc"))), 31);
-        EXPECT_EQ(str.find_last_of(type(STR("x"))), GTEST_SINGLE_ARGUMENT(StringType::npos));
+        EXPECT_EQ(str.find_last_of(type(STR("x"))), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_EQ(str.find_last_of(type(STR("m"))), 0);
     };
 
@@ -756,24 +755,24 @@ TYPED_TEST(test_qx_string, split)
 
     auto words1 = str1.split(CH(' '));
     EXPECT_EQ(words1.size(), 5);
-    EXPECT_EQ(words1[0], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("many"))));
-    EXPECT_EQ(words1[1], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("different"))));
-    EXPECT_EQ(words1[2], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("words"))));
-    EXPECT_EQ(words1[3], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("placed"))));
-    EXPECT_EQ(words1[4], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("here"))));
+    EXPECT_EQ(words1[0], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("many"))));
+    EXPECT_EQ(words1[1], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("different"))));
+    EXPECT_EQ(words1[2], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("words"))));
+    EXPECT_EQ(words1[3], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("placed"))));
+    EXPECT_EQ(words1[4], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("here"))));
 
     auto check_comma_split = [](auto... splitter)
     {
         StringTypeTn str(STR("some, long, long, long, long, long, sentence"));
         auto         words = str.split(splitter...);
         EXPECT_EQ(words.size(), 7);
-        EXPECT_EQ(words[0], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("some"))));
-        EXPECT_EQ(words[1], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
-        EXPECT_EQ(words[2], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
-        EXPECT_EQ(words[3], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
-        EXPECT_EQ(words[4], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
-        EXPECT_EQ(words[5], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
-        EXPECT_EQ(words[6], GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("sentence"))));
+        EXPECT_EQ(words[0], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("some"))));
+        EXPECT_EQ(words[1], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[2], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[3], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[4], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[5], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("long"))));
+        EXPECT_EQ(words[6], QX_GTEST_SINGLE_ARGUMENT(StringTypeTn::string_view(STR("sentence"))));
     };
 
     check_comma_split(STR(", "));
@@ -805,7 +804,7 @@ TYPED_TEST(test_qx_string, remove)
         EXPECT_STREQ(str.data(), STR("001000022235666"));
 
         auto ret5 = str.remove(CH('7'));
-        EXPECT_EQ(ret5, GTEST_SINGLE_ARGUMENT(StringType::npos));
+        EXPECT_EQ(ret5, QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_STREQ(str.data(), STR("001000022235666"));
 
         auto ret6 = str.remove(CH('0'), 2);
@@ -817,7 +816,7 @@ TYPED_TEST(test_qx_string, remove)
         EXPECT_STREQ(str.data(), STR("0010002225666"));
 
         auto ret8 = str.remove(CH('0'), 6, 10);
-        EXPECT_EQ(ret8, GTEST_SINGLE_ARGUMENT(StringType::npos));
+        EXPECT_EQ(ret8, QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_STREQ(str.data(), STR("0010002225666"));
     }
 
@@ -1085,14 +1084,14 @@ TYPED_TEST(test_qx_string, operator_plus_equal)
 TYPED_TEST(test_qx_string, operator_equal)
 {
     StringTypeTn str(STR("e"));
-    EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("e"))));
+    EXPECT_EQ(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("e"))));
     EXPECT_EQ(str, CH('e'));
     EXPECT_EQ(str, STR("e"));
-    EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("e"))));
-    EXPECT_NE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("r"))));
+    EXPECT_EQ(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("e"))));
+    EXPECT_NE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("r"))));
     EXPECT_NE(str, CH('r'));
     EXPECT_NE(str, STR("r"));
-    EXPECT_NE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("r"))));
+    EXPECT_NE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("r"))));
 
     StringTypeTn str2(STR("word"));
     EXPECT_EQ(str2, STR("word"));
@@ -1104,14 +1103,14 @@ TYPED_TEST(test_qx_string, operator_equal)
 TYPED_TEST(test_qx_string, operator_not_equal)
 {
     StringTypeTn str(STR("e"));
-    EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("e"))));
+    EXPECT_EQ(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("e"))));
     EXPECT_EQ(str, CH('e'));
     EXPECT_EQ(str, STR("e"));
-    EXPECT_EQ(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("e"))));
-    EXPECT_NE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("r"))));
+    EXPECT_EQ(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("e"))));
+    EXPECT_NE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("r"))));
     EXPECT_NE(str, CH('r'));
     EXPECT_NE(str, STR("r"));
-    EXPECT_NE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("r"))));
+    EXPECT_NE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("r"))));
 
     StringTypeTn str2(STR("word"));
     EXPECT_EQ(str2, STR("word"));
@@ -1124,9 +1123,9 @@ TYPED_TEST(test_qx_string, operator_less)
 {
     StringTypeTn str(STR("5"));
 
-    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
-    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
-    EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
+    EXPECT_GE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
+    EXPECT_GE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
+    EXPECT_LT(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
 
     EXPECT_GE(str, CH('4'));
     EXPECT_GE(str, CH('5'));
@@ -1136,18 +1135,18 @@ TYPED_TEST(test_qx_string, operator_less)
     EXPECT_GE(str, STR("5"));
     EXPECT_LT(str, STR("6"));
 
-    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
-    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
-    EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
+    EXPECT_GE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
+    EXPECT_GE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
+    EXPECT_LT(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
 TYPED_TEST(test_qx_string, operator_less_equal)
 {
     StringTypeTn str(STR("5"));
 
-    EXPECT_GT(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
-    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
-    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
+    EXPECT_GT(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
+    EXPECT_LE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
+    EXPECT_LE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
 
     EXPECT_GT(str, CH('4'));
     EXPECT_LE(str, CH('5'));
@@ -1157,18 +1156,18 @@ TYPED_TEST(test_qx_string, operator_less_equal)
     EXPECT_LE(str, STR("5"));
     EXPECT_LE(str, STR("6"));
 
-    EXPECT_GT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
-    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
-    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
+    EXPECT_GT(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
+    EXPECT_LE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
+    EXPECT_LE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
 TYPED_TEST(test_qx_string, operator_greater)
 {
     StringTypeTn str(STR("5"));
 
-    EXPECT_GT(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
-    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
-    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
+    EXPECT_GT(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
+    EXPECT_LE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
+    EXPECT_LE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
 
     EXPECT_GT(str, CH('4'));
     EXPECT_LE(str, CH('5'));
@@ -1178,18 +1177,18 @@ TYPED_TEST(test_qx_string, operator_greater)
     EXPECT_LE(str, STR("5"));
     EXPECT_LE(str, STR("6"));
 
-    EXPECT_GT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
-    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
-    EXPECT_LE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
+    EXPECT_GT(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
+    EXPECT_LE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
+    EXPECT_LE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
 TYPED_TEST(test_qx_string, operator_greater_equal)
 {
     StringTypeTn str(STR("5"));
 
-    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
-    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
-    EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
+    EXPECT_GE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("4"))));
+    EXPECT_GE(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("5"))));
+    EXPECT_LT(str, QX_GTEST_SINGLE_ARGUMENT(StringTypeTn(STR("6"))));
 
     EXPECT_GE(str, CH('4'));
     EXPECT_GE(str, CH('5'));
@@ -1199,9 +1198,9 @@ TYPED_TEST(test_qx_string, operator_greater_equal)
     EXPECT_GE(str, STR("5"));
     EXPECT_LT(str, STR("6"));
 
-    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
-    EXPECT_GE(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
-    EXPECT_LT(str, GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
+    EXPECT_GE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("4"))));
+    EXPECT_GE(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("5"))));
+    EXPECT_LT(str, QX_GTEST_SINGLE_ARGUMENT(StdStringArg(STR("6"))));
 }
 
 TYPED_TEST(test_qx_string, operator_braces)
@@ -1701,7 +1700,7 @@ TYPED_TEST(test_qx_string, replase)
     EXPECT_EQ(str.size(), 35);
 
     str = pszStartStr;
-    EXPECT_EQ(str.replace(CH('z'), StdString(STR("CCCC"))), GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.replace(CH('z'), StdString(STR("CCCC"))), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
     EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
     EXPECT_EQ(str.size(), 33);
 
@@ -1735,14 +1734,14 @@ TYPED_TEST(test_qx_string, replase)
         str = pszStartStr;
         EXPECT_EQ(
             str.replace(type_find(STR("you")), type_replace(STR("12")), 26),
-            GTEST_SINGLE_ARGUMENT(StringType::npos));
+            QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
 
         str = pszStartStr;
         EXPECT_EQ(
             str.replace(type_find(STR("you")), type_replace(STR("12")), 0, 10),
-            GTEST_SINGLE_ARGUMENT(StringType::npos));
+            QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
         EXPECT_STREQ(str.data(), STR("Let me help you with your baggage"));
         EXPECT_EQ(str.size(), 33);
     };
@@ -2243,7 +2242,7 @@ TYPED_TEST(test_qx_string, rfind)
     EXPECT_EQ(str.rfind(STR("for"), 15), 11);
     EXPECT_EQ(str.rfind(STR("for"), 29, StringType::npos, 20), 25);
     EXPECT_EQ(str.rfind(STR("for"), 0), 0);
-    EXPECT_EQ(str.rfind(STR("kek")), GTEST_SINGLE_ARGUMENT(StringType::npos));
+    EXPECT_EQ(str.rfind(STR("kek")), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
 
     auto test = [str](auto... toSearch)
     {
@@ -2251,7 +2250,7 @@ TYPED_TEST(test_qx_string, rfind)
         EXPECT_EQ(str.rfind(toSearch..., 15), 11);
         EXPECT_EQ(str.rfind(toSearch..., 29, 20), 25);
         EXPECT_EQ(str.rfind(toSearch..., 0), 0);
-        EXPECT_EQ(str.rfind(STR("kek")), GTEST_SINGLE_ARGUMENT(StringType::npos));
+        EXPECT_EQ(str.rfind(STR("kek")), QX_GTEST_SINGLE_ARGUMENT(StringType::npos));
     };
 
     test(StringTypeTn(STR("for")));

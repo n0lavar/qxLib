@@ -18,8 +18,8 @@ inline singletons_manager::~singletons_manager() noexcept
 
 inline singletons_manager& singletons_manager::get_instance() noexcept
 {
-    static singletons_manager instance;
-    return instance;
+    static singletons_manager s_Instance;
+    return s_Instance;
 }
 
 inline void singletons_manager::add(std::unique_ptr<base_singleton> pSingleton) noexcept
@@ -36,21 +36,21 @@ T& singleton<T, dependencies_t...>::get_instance()
         std::is_final_v<T>,
         "T must be final in order qx::singleton to be safely used with multiple inheritance");
 
-    static std::mutex instanceMutex;
-    std::lock_guard   _(instanceMutex);
+    static std::mutex s_InstanceMutex;
+    std::lock_guard   _(s_InstanceMutex);
 
-    static T* pSavedInstance = nullptr;
-    if (!pSavedInstance) [[unlikely]]
+    static T* s_pSavedInstance = nullptr;
+    if (!s_pSavedInstance) [[unlikely]]
     {
         (dependencies_t::get_instance(), ...);
 
         std::unique_ptr<T> pInstance = std::make_unique<T>();
         pInstance->init();
-        pSavedInstance = pInstance.get();
+        s_pSavedInstance = pInstance.get();
         singletons_manager::get_instance().add(std::move(pInstance));
     }
 
-    return *pSavedInstance;
+    return *s_pSavedInstance;
 }
 
 template<class T, class... dependencies_t>

@@ -107,7 +107,7 @@ public:
 private:
     color       m_Color;
     string_view m_svName;
-    verbosity   m_Verbosity = QX_CONF_COMPILE_TIME_VERBOSITY;
+    verbosity   m_eVerbosity = QX_CONF_COMPILE_TIME_VERBOSITY;
 };
 
 } // namespace qx

@@ -43,6 +43,10 @@ The public API follows the standard library style: `snake_case`, iterators, trai
 
 ## Rules for Writing Code Entities
 
+### Files
+
+- Move function and method realization to their own files (`.inl`) if realization is larger then interfaces (including documentation and class bodies).
+
 ### Classes
 
 - Multiple inheritance is prohibited, except for interfaces.
@@ -75,6 +79,12 @@ The public API follows the standard library style: `snake_case`, iterators, trai
 - All macros taking arguments must require a trailing `;`. If the existing macro body cannot enforce this, append `QX_EMPTY_MACRO`.
 - A macro intended for use inside a class body must leave access visibility set to `private`.
 
+### Functions, methods
+
+- `int foo()` is used, use `auto foo() -> int` only if a return type is dependent on an argument.
+- Make a function `constexpr` whenever possible.
+- Make a function `noexcept` whenever possible. Prefer return codes, values, `std::optional` and `std::expected` whenever possible.
+
 ## Other Coding Rules
 
 - Do not use `using namespace XXX` throughout an entire file.
@@ -105,6 +115,7 @@ The public API follows the standard library style: `snake_case`, iterators, trai
 ## Documentation
 
 - All classes, functions, methods, and files must be properly documented.
+- Avoid pointless documentation like `@param color - color`. Describe what this this is for, edge cases (if any), contracts (if any), and so on.
 - Documentation may be omitted (but is not prohibited) for the following elements:
     - Structures (assumed to be simple enough to describe through their names).
     - Constructors and `init` methods without arguments.

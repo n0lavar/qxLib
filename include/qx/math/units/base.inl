@@ -34,7 +34,7 @@ template<unit_enum_c unit_t, class char_t>
 struct unit_formatter : basic_formatter<char_t>
 {
     template<class format_context_type_t>
-    constexpr auto format(unit_t eData, format_context_type_t& ctx) const noexcept;
+    constexpr auto format(unit_t eData, format_context_type_t& ctx) const noexcept -> decltype(ctx.out());
 };
 
 } // namespace units::details
@@ -52,7 +52,7 @@ struct QX_FMT_NS::formatter<qx::unit<T, unit_t>, char_t>
         -> decltype(ctx.out());
 
 private:
-    QX_FMT_NS::formatter<T, char_t> valueFormatter;
+    QX_FMT_NS::formatter<T, char_t> m_ValueFormatter;
 };
 
 template<qx::arithmetic_c T, qx::unit_enum_c unit_t>
@@ -209,7 +209,7 @@ template<qx::arithmetic_c T, qx::unit_enum_c unit_t, class char_t>
 template<class format_parse_context_t>
 constexpr auto QX_FMT_NS::formatter<qx::unit<T, unit_t>, char_t>::parse(format_parse_context_t& context) noexcept
 {
-    return valueFormatter.parse(context);
+    return m_ValueFormatter.parse(context);
 }
 
 
@@ -219,14 +219,14 @@ constexpr auto QX_FMT_NS::formatter<qx::unit<T, unit_t>, char_t>::format(
     const qx::unit<T, unit_t>& unit,
     format_context_type_t&     ctx) const noexcept -> decltype(ctx.out())
 {
-    auto outIt = valueFormatter.format(unit.value, ctx);
+    auto outIt = m_ValueFormatter.format(unit.value, ctx);
     return QX_FMT_NS::format_to(outIt, QX_STR_PREFIX(char_t, "{}"), unit.type);
 }
 
 template<qx::unit_enum_c unit_t, class char_t>
 template<class format_context_type_t>
 constexpr auto qx::units::details::unit_formatter<unit_t, char_t>::format(unit_t eUnit, format_context_type_t& ctx)
-    const noexcept
+    const noexcept -> decltype(ctx.out())
 {
     auto out = ctx.out();
 

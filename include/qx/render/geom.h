@@ -11,11 +11,10 @@
 #include <qx/render/draw_mode.h>
 #include <qx/typedefs.h>
 
-#include <glm/geometric.hpp>
-#include <glm/vec3.hpp>
-
 #include <array>
 #include <cmath>
+#include <glm/geometric.hpp>
+#include <glm/vec3.hpp>
 #include <numbers>
 #include <span>
 #include <unordered_map>

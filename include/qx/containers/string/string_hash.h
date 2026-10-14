@@ -19,7 +19,7 @@ namespace details
 {
 
 template<class T>
-concept has_zero_termonated_hash_func_overload =
+concept has_zero_terminated_hash_func_overload_c =
     requires(typename T::const_pointer pszStr, size_t nSeed) { T::hash_function(pszStr, nSeed); };
 
 }; // namespace details

@@ -76,7 +76,7 @@ public:
     {
         friend unique_objects_pool;
 
-        static constexpr u64 kInvalidId = static_cast<u64>(-1);
+        static constexpr u64 k_nInvalidId = static_cast<u64>(-1);
 
     public:
         token() noexcept = default;
@@ -114,7 +114,7 @@ public:
         token(u64 nId, unique_objects_pool* pPool) noexcept;
 
     private:
-        u64                  m_nId   = kInvalidId;
+        u64                  m_nId   = k_nInvalidId;
         unique_objects_pool* m_pPool = nullptr;
     };
 

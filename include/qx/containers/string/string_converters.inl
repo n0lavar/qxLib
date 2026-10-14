@@ -167,7 +167,7 @@ constexpr std::array<char_t, N> to_char_array(std::span<const char, N> svChar)
 template<class char_t, string_literal array>
 struct char_array_helper
 {
-    static constexpr auto char_array =
+    static constexpr auto k_CharArray =
         to_char_array<char_t>(std::span<const char, array.size()>(array.data(), array.data() + array.size()));
 };
 
@@ -176,7 +176,7 @@ struct char_array_helper
 template<class char_t, string_literal array>
 constexpr basic_string_view<char_t> convert_string_literal()
 {
-    constexpr auto& chars = details::char_array_helper<char_t, array>::char_array;
+    constexpr auto& chars = details::char_array_helper<char_t, array>::k_CharArray;
     return basic_string_view<char_t>(chars.data(), chars.size() - 1);
 }
 

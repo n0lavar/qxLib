@@ -13,37 +13,39 @@ namespace qx
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::reverse() noexcept
 {
-    m_EnumFlags = ~m_EnumFlags;
+    m_nEnumFlags = ~m_nEnumFlags;
 }
 
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::shift_left(size_t nShift) noexcept
 {
     using bits_type  = std::make_unsigned_t<underlying_type>;
-    using shift_type = std::make_unsigned_t<decltype(+m_EnumFlags)>;
+    using shift_type = std::make_unsigned_t<decltype(+m_nEnumFlags)>;
 
     if (std::cmp_greater_equal(nShift, std::numeric_limits<bits_type>::digits))
     {
-        m_EnumFlags = 0;
+        m_nEnumFlags = 0;
         return;
     }
 
-    m_EnumFlags = static_cast<underlying_type>(static_cast<shift_type>(static_cast<bits_type>(m_EnumFlags)) << nShift);
+    m_nEnumFlags =
+        static_cast<underlying_type>(static_cast<shift_type>(static_cast<bits_type>(m_nEnumFlags)) << nShift);
 }
 
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::shift_right(size_t nShift) noexcept
 {
     using bits_type  = std::make_unsigned_t<underlying_type>;
-    using shift_type = std::make_unsigned_t<decltype(+m_EnumFlags)>;
+    using shift_type = std::make_unsigned_t<decltype(+m_nEnumFlags)>;
 
     if (std::cmp_greater_equal(nShift, std::numeric_limits<bits_type>::digits))
     {
-        m_EnumFlags = 0;
+        m_nEnumFlags = 0;
         return;
     }
 
-    m_EnumFlags = static_cast<underlying_type>(static_cast<shift_type>(static_cast<bits_type>(m_EnumFlags)) >> nShift);
+    m_nEnumFlags =
+        static_cast<underlying_type>(static_cast<shift_type>(static_cast<bits_type>(m_nEnumFlags)) >> nShift);
 }
 
 template<enumeration_c enum_t>
@@ -85,7 +87,7 @@ constexpr flags<enum_t> flags<enum_t>::operator>>(size_t nShift) const noexcept
 }
 
 template<enumeration_c enum_t>
-constexpr flags<enum_t>::flags(enum_t eFlag) noexcept : m_EnumFlags(underlying_type(eFlag))
+constexpr flags<enum_t>::flags(enum_t eFlag) noexcept : m_nEnumFlags(underlying_type(eFlag))
 {
 }
 
@@ -102,7 +104,7 @@ template<class... args_t>
     requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr void flags<enum_t>::add(args_t... flags) noexcept
 {
-    ((m_EnumFlags |= underlying_type(flags)), ...);
+    ((m_nEnumFlags |= underlying_type(flags)), ...);
 }
 
 template<enumeration_c enum_t>
@@ -110,7 +112,7 @@ template<class... args_t>
     requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr void flags<enum_t>::remove(args_t... flags) noexcept
 {
-    ((m_EnumFlags &= ~underlying_type(flags)), ...);
+    ((m_nEnumFlags &= ~underlying_type(flags)), ...);
 }
 
 template<enumeration_c enum_t>
@@ -118,19 +120,19 @@ template<class... args_t>
     requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
 constexpr void flags<enum_t>::xor_(args_t... flags) noexcept
 {
-    ((m_EnumFlags ^= underlying_type(flags)), ...);
+    ((m_nEnumFlags ^= underlying_type(flags)), ...);
 }
 
 template<enumeration_c enum_t>
 constexpr auto flags<enum_t>::operator<=>(enum_t eFlag) const noexcept
 {
-    return underlying_type(m_EnumFlags) <=> underlying_type(eFlag);
+    return underlying_type(m_nEnumFlags) <=> underlying_type(eFlag);
 }
 
 template<enumeration_c enum_t>
 constexpr flags<enum_t>& flags<enum_t>::operator=(enum_t eFlag) noexcept
 {
-    m_EnumFlags = underlying_type(eFlag);
+    m_nEnumFlags = underlying_type(eFlag);
     return *this;
 }
 
@@ -182,19 +184,19 @@ constexpr flags<enum_t> flags<enum_t>::operator^(enum_t eFlag) const noexcept
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::add(flags flags_) noexcept
 {
-    m_EnumFlags |= flags_.m_EnumFlags;
+    m_nEnumFlags |= flags_.m_nEnumFlags;
 }
 
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::remove(flags flags_) noexcept
 {
-    m_EnumFlags &= ~flags_.m_EnumFlags;
+    m_nEnumFlags &= ~flags_.m_nEnumFlags;
 }
 
 template<enumeration_c enum_t>
 constexpr void flags<enum_t>::xor_(flags flags_) noexcept
 {
-    m_EnumFlags ^= flags_.m_EnumFlags;
+    m_nEnumFlags ^= flags_.m_nEnumFlags;
 }
 
 template<enumeration_c enum_t>
@@ -245,7 +247,7 @@ constexpr flags<enum_t> flags<enum_t>::operator^(flags flags_) const noexcept
 template<enumeration_c enum_t>
 constexpr bool flags<enum_t>::contains(enum_t eFlag) const noexcept
 {
-    return m_EnumFlags & underlying_type(eFlag);
+    return m_nEnumFlags & underlying_type(eFlag);
 }
 
 template<enumeration_c enum_t>
@@ -259,7 +261,7 @@ constexpr bool flags<enum_t>::contains_all(args_t... flags) const noexcept
 template<enumeration_c enum_t>
 constexpr bool flags<enum_t>::contains_all(flags other) const noexcept
 {
-    return (m_EnumFlags & other.m_EnumFlags) == other.m_EnumFlags;
+    return (m_nEnumFlags & other.m_nEnumFlags) == other.m_nEnumFlags;
 }
 
 template<enumeration_c enum_t>
@@ -273,20 +275,20 @@ constexpr bool flags<enum_t>::contains_any(args_t... flags) const noexcept
 template<enumeration_c enum_t>
 constexpr bool flags<enum_t>::contains_any(flags other) const noexcept
 {
-    return (m_EnumFlags & other.m_EnumFlags) != 0;
+    return (m_nEnumFlags & other.m_nEnumFlags) != 0;
 }
 
 template<enumeration_c enum_t>
 constexpr typename flags<enum_t>::underlying_type flags<enum_t>::to_integer() const noexcept
 {
-    return m_EnumFlags;
+    return m_nEnumFlags;
 }
 
 template<enumeration_c enum_t>
 constexpr flags<enum_t> flags<enum_t>::all_flags() noexcept
 {
     flags flags;
-    flags.m_EnumFlags = std::numeric_limits<underlying_type>::max();
+    flags.m_nEnumFlags = std::numeric_limits<underlying_type>::max();
     return flags;
 }
 

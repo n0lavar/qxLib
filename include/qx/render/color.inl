@@ -47,66 +47,87 @@ class string_to_color_converter final : public singleton<string_to_color_convert
     add(QX_STR_PREFIX(char_t, #pascalCaseName), color_name_type::css_pascal, color(r, g, b));
 
 public:
-    string_to_color_converter() noexcept
-    {
-        _QX_COLORS(_QX_ADD_COLOR)
-    }
+    string_to_color_converter() noexcept;
 
     /**
         @brief Add new color to the mapping
-        @param sName - color name
-        @param color - color
+        @param sName          - name registered for forward lookup
+        @param eColorNameType - css_snake or css_pascal selects the reverse lookup table;
+                               other formats only update the forward lookup
+        @param color          - RGBA value associated with sName; an existing entry with
+                               the same key is replaced
     **/
-    void add(basic_string<char_t> sName, color_name_type eColorNameType, color color) noexcept
-    {
-        if (eColorNameType == color_name_type::css_snake)
-            m_ColorToCssSnake[color] = sName;
-        else if (eColorNameType == color_name_type::css_pascal)
-            m_ColorToCssPascal[color] = sName;
-
-        m_StringToColor[sName] = std::move(color);
-    }
+    void add(basic_string<char_t> sName, color_name_type eColorNameType, color color) noexcept;
 
     /**
         @brief  Try to get ac olor from a color name
         @param  sName - color name
         @retval       - color or nullopt
     **/
-    std::optional<color> get(const basic_string<char_t>& sName) const noexcept
-    {
-        if (const auto it = m_StringToColor.find(sName); it != m_StringToColor.end())
-            return it->second;
-
-        return std::nullopt;
-    }
+    std::optional<color> get(const basic_string<char_t>& sName) const noexcept;
 
     /**
         @brief  Try to a color name get from a color 
-        @param  color          - color
-        @param  eColorNameType - color type to get
-        @retval                - color name or nullopt
+        @param  color          - RGBA lookup key
+        @param  eColorNameType - css_snake or css_pascal selects the reverse lookup table
+        @retval                - registered name, or nullopt if the key is absent or
+                                 the requested name format is unsupported
     **/
-    std::optional<basic_string_view<char_t>> get(const color& color, color_name_type eColorNameType) const noexcept
-    {
-        if (eColorNameType == color_name_type::css_snake)
-        {
-            if (const auto it = m_ColorToCssSnake.find(color); it != m_ColorToCssSnake.end())
-                return it->second;
-        }
-        else if (eColorNameType == color_name_type::css_pascal)
-        {
-            if (const auto it = m_ColorToCssPascal.find(color); it != m_ColorToCssPascal.end())
-                return it->second;
-        }
-
-        return std::nullopt;
-    }
+    std::optional<basic_string_view<char_t>> get(const color& color, color_name_type eColorNameType) const noexcept;
 
 private:
     std::unordered_map<basic_string<char_t>, color> m_StringToColor;
     std::unordered_map<color, basic_string<char_t>> m_ColorToCssSnake;
     std::unordered_map<color, basic_string<char_t>> m_ColorToCssPascal;
 };
+
+template<class char_t>
+inline string_to_color_converter<char_t>::string_to_color_converter() noexcept
+{
+    _QX_COLORS(_QX_ADD_COLOR)
+}
+
+template<class char_t>
+inline void string_to_color_converter<char_t>::add(
+    basic_string<char_t> sName,
+    color_name_type      eColorNameType,
+    color                color) noexcept
+{
+    if (eColorNameType == color_name_type::css_snake)
+        m_ColorToCssSnake[color] = sName;
+    else if (eColorNameType == color_name_type::css_pascal)
+        m_ColorToCssPascal[color] = sName;
+
+    m_StringToColor[sName] = std::move(color);
+}
+
+template<class char_t>
+inline std::optional<color> string_to_color_converter<char_t>::get(const basic_string<char_t>& sName) const noexcept
+{
+    if (const auto it = m_StringToColor.find(sName); it != m_StringToColor.end())
+        return it->second;
+
+    return std::nullopt;
+}
+
+template<class char_t>
+inline std::optional<basic_string_view<char_t>> string_to_color_converter<char_t>::get(
+    const color&    color,
+    color_name_type eColorNameType) const noexcept
+{
+    if (eColorNameType == color_name_type::css_snake)
+    {
+        if (const auto it = m_ColorToCssSnake.find(color); it != m_ColorToCssSnake.end())
+            return it->second;
+    }
+    else if (eColorNameType == color_name_type::css_pascal)
+    {
+        if (const auto it = m_ColorToCssPascal.find(color); it != m_ColorToCssPascal.end())
+            return it->second;
+    }
+
+    return std::nullopt;
+}
 
 } // namespace details
 
@@ -491,7 +512,7 @@ struct QX_FMT_NS::formatter<qx::color, char_t>
     }
 
     template<class format_context_t>
-    auto format(const qx::color& color, format_context_t& ctx) const
+    auto format(const qx::color& color, format_context_t& ctx) const -> decltype(ctx.out())
     {
         const qx::color_name_type eColorNameType =
             optColorNameType ? *optColorNameType : qx::color_name_type::hex_upper;

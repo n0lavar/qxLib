@@ -10,8 +10,8 @@
 namespace qx
 {
 
-template<size_t nSize, size_t bStringStartCapacity>
-string_pool<nSize, bStringStartCapacity>::string_pool()
+template<size_t nSize, size_t nStringStartCapacity>
+string_pool<nSize, nStringStartCapacity>::string_pool()
 {
     // Pre-create empty strings with reserved capacity 32
     for (string& s : m_Storage)
@@ -21,7 +21,7 @@ string_pool<nSize, bStringStartCapacity>::string_pool()
         b.store(~0ull, std::memory_order_relaxed);
 
     // Disable unused bits in the last block if nSize is not a multiple of 64
-    constexpr size_t nRemove = nSize % bTotalBits;
+    constexpr size_t nRemove = nSize % k_nTotalBits;
     if constexpr (nRemove != 0)
     {
         u64 nValid = (1ull << nRemove) - 1;
@@ -29,8 +29,8 @@ string_pool<nSize, bStringStartCapacity>::string_pool()
     }
 }
 
-template<size_t nSize, size_t bStringStartCapacity>
-typename string_pool<nSize, bStringStartCapacity>::item string_pool<nSize, bStringStartCapacity>::acquire()
+template<size_t nSize, size_t nStringStartCapacity>
+typename string_pool<nSize, nStringStartCapacity>::item string_pool<nSize, nStringStartCapacity>::acquire()
 {
     for (size_t nBlock = 0; nBlock < m_FreeMask.size(); ++nBlock)
     {
@@ -44,7 +44,7 @@ typename string_pool<nSize, bStringStartCapacity>::item string_pool<nSize, bStri
             if (m_FreeMask[nBlock]
                     .compare_exchange_weak(nMask, nNewMask, std::memory_order_acquire, std::memory_order_relaxed))
             {
-                const size_t nIndex = nBlock * bTotalBits + static_cast<size_t>(ctz64(nBit));
+                const size_t nIndex = nBlock * k_nTotalBits + static_cast<size_t>(ctz64(nBit));
                 return item { std::move(m_Storage[nIndex]), static_cast<int>(nIndex) };
             }
         }
@@ -54,8 +54,8 @@ typename string_pool<nSize, bStringStartCapacity>::item string_pool<nSize, bStri
     return item { string(), nFreeString };
 }
 
-template<size_t nSize, size_t bStringStartCapacity>
-void string_pool<nSize, bStringStartCapacity>::release(item item)
+template<size_t nSize, size_t nStringStartCapacity>
+void string_pool<nSize, nStringStartCapacity>::release(item item)
 {
     if (item.nIndex == nFreeString)
         return;
@@ -69,16 +69,16 @@ void string_pool<nSize, bStringStartCapacity>::release(item item)
     // Exclusive access is guaranteed by the occupancy bit
     m_Storage[nSizeIndex] = std::move(item.sValue);
 
-    const size_t nBlock  = nSizeIndex / bTotalBits;
-    const size_t nOffset = nSizeIndex % bTotalBits;
+    const size_t nBlock  = nSizeIndex / k_nTotalBits;
+    const size_t nOffset = nSizeIndex % k_nTotalBits;
     const u64    nBit    = 1ull << nOffset;
 
     // Make the slot visible as free
     m_FreeMask[nBlock].fetch_or(nBit, std::memory_order_release);
 }
 
-template<size_t nSize, size_t bStringStartCapacity>
-int string_pool<nSize, bStringStartCapacity>::ctz64(u64 nBit) noexcept
+template<size_t nSize, size_t nStringStartCapacity>
+int string_pool<nSize, nStringStartCapacity>::ctz64(u64 nBit) noexcept
 {
 #if QX_GNU || QX_CLANG || QX_APPLE_CLANG
     return __builtin_ctzll(nBit);
@@ -93,11 +93,11 @@ int string_pool<nSize, bStringStartCapacity>::ctz64(u64 nBit) noexcept
 #endif
 }
 
-template<size_t nSize, size_t bStringStartCapacity>
-void string_pool<nSize, bStringStartCapacity>::normalize(string& string)
+template<size_t nSize, size_t nStringStartCapacity>
+void string_pool<nSize, nStringStartCapacity>::normalize(string& string)
 {
     string.clear();
-    string.reserve(bStringStartCapacity);
+    string.reserve(nStringStartCapacity);
 }
 
 } // namespace qx

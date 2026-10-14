@@ -10,8 +10,6 @@
 
 #include <qx/memory/sbo_bytes.h>
 
-
-
 template<size_t nSize, size_t nStartSeed>
 static constexpr std::array<std::byte, nSize> get_bytes()
 {
@@ -67,25 +65,34 @@ protected:
     using sbo_type = qx::sbo_bytes<traits_t>;
 
 protected:
-    void set_and_check_block(const auto& block)
-    {
-        set_block(m_SBO, block);
-        check_block(m_SBO, block);
-    }
+    void set_and_check_block(const auto& block);
 
-    void test_small() const
-    {
-        EXPECT_TRUE(this->m_SBO.is_small());
-    }
+    void test_small() const;
 
-    void test_big() const
-    {
-        EXPECT_FALSE(this->m_SBO.is_small());
-    }
+    void test_big() const;
 
 protected:
     sbo_type m_SBO;
 };
+
+template<class traits_t>
+inline void test_sbo_bytes_resize<traits_t>::set_and_check_block(const auto& block)
+{
+    set_block(m_SBO, block);
+    check_block(m_SBO, block);
+}
+
+template<class traits_t>
+inline void test_sbo_bytes_resize<traits_t>::test_small() const
+{
+    EXPECT_TRUE(this->m_SBO.is_small());
+}
+
+template<class traits_t>
+inline void test_sbo_bytes_resize<traits_t>::test_big() const
+{
+    EXPECT_FALSE(this->m_SBO.is_small());
+}
 
 using implementations_type =
     ::testing::Types<test_sbo_bytes_traits<k_nSBOSize, true>, test_sbo_bytes_traits<k_nSBOSize, false>>;

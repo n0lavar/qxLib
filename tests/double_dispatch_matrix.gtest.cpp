@@ -44,14 +44,16 @@ public:
     {
     }
 
-    const qx::string& get_number() const
-    {
-        return m_sNumber;
-    }
+    const qx::string& get_number() const;
 
 private:
     qx::string m_sNumber;
 };
+
+inline const qx::string& storage_string::get_number() const
+{
+    return m_sNumber;
+}
 
 class storage_int : public storage
 {
@@ -62,14 +64,16 @@ public:
     {
     }
 
-    int get_number() const
-    {
-        return m_nNumber;
-    }
+    int get_number() const;
 
 private:
     int m_nNumber;
 };
+
+inline int storage_int::get_number() const
+{
+    return m_nNumber;
+}
 
 class storage_vector : public storage
 {
@@ -80,14 +84,16 @@ public:
     {
     }
 
-    std::span<const int> get_number() const
-    {
-        return m_Numbers;
-    }
+    std::span<const int> get_number() const;
 
 private:
     std::vector<int> m_Numbers;
 };
+
+inline std::span<const int> storage_vector::get_number() const
+{
+    return m_Numbers;
+}
 
 QX_CALL_BEFORE_MAIN = []()
 {

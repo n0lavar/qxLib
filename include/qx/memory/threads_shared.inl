@@ -89,21 +89,21 @@ template<class data_t, class synchronization_primitive_t>
 inline threads_shared<data_t, synchronization_primitive_t>::synchronization_primitive_raii::
     synchronization_primitive_raii()
 {
-    lock_synchronization_primitive(&sp);
+    lock_synchronization_primitive(&m_SynchronizationPrimitive);
 }
 
 template<class data_t, class synchronization_primitive_t>
 inline threads_shared<data_t, synchronization_primitive_t>::synchronization_primitive_raii::
     ~synchronization_primitive_raii()
 {
-    unlock_synchronization_primitive(&sp);
+    unlock_synchronization_primitive(&m_SynchronizationPrimitive);
 }
 
 template<class data_t, class synchronization_primitive_t>
 inline synchronization_primitive_t* threads_shared<data_t, synchronization_primitive_t>::
     synchronization_primitive_raii::get_object() noexcept
 {
-    return &sp;
+    return &m_SynchronizationPrimitive;
 }
 
 

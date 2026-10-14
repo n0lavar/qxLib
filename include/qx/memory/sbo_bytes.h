@@ -8,11 +8,11 @@
 **/
 #pragma once
 
-#include <array>
-#include <cstddef>
-
 #include <qx/macros/common.h>
 #include <qx/macros/static_assert.h>
+
+#include <array>
+#include <cstddef>
 
 namespace qx
 {

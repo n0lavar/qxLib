@@ -10,12 +10,12 @@
 **/
 #pragma once
 
-template<typename Char>
+template<class char_t>
 constexpr auto get_string_format_specifier(void)
 {
-    if constexpr (std::is_same_v<Char, char>)
+    if constexpr (std::is_same_v<char_t, char>)
         return "%s";
-    else if constexpr (std::is_same_v<Char, wchar_t>)
+    else if constexpr (std::is_same_v<char_t, wchar_t>)
         return L"%ls";
 }
 

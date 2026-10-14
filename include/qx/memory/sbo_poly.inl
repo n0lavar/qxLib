@@ -125,24 +125,24 @@ template<class base_t, size_t nSBOSize_>
 template<sbo_poly_assignable_c<base_t> derived_t>
 const typename sbo_poly<base_t, nSBOSize_>::operations& sbo_poly<base_t, nSBOSize_>::get_operations() noexcept
 {
-    static constexpr operations table { [](sbo_bytes_type& object) noexcept -> base_t*
-                                        {
-                                            return static_cast<base_t*>(get_object<derived_t>(object));
-                                        },
-                                        [](sbo_bytes_type& from, sbo_bytes_type& to) noexcept
-                                        {
-                                            // Called only for inline objects; resizing to the same size cannot allocate.
-                                            to.resize(get_storage_size<derived_t>());
+    static constexpr operations s_Operations { [](sbo_bytes_type& object) noexcept -> base_t*
+                                               {
+                                                   return static_cast<base_t*>(get_object<derived_t>(object));
+                                               },
+                                               [](sbo_bytes_type& from, sbo_bytes_type& to) noexcept
+                                               {
+                                                   // Called only for inline objects; resizing to the same size cannot allocate.
+                                                   to.resize(get_storage_size<derived_t>());
 
-                                            new (get_object<derived_t>(to))
-                                                derived_t(std::move(*get_object<derived_t>(from)));
-                                        },
-                                        [](sbo_bytes_type& object) noexcept
-                                        {
-                                            get_object<derived_t>(object)->~derived_t();
-                                        } };
+                                                   new (get_object<derived_t>(to))
+                                                       derived_t(std::move(*get_object<derived_t>(from)));
+                                               },
+                                               [](sbo_bytes_type& object) noexcept
+                                               {
+                                                   get_object<derived_t>(object)->~derived_t();
+                                               } };
 
-    return table;
+    return s_Operations;
 }
 
 template<class base_t, size_t nSBOSize_>

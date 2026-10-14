@@ -54,7 +54,7 @@ inline unique_objects_pool<T>::token::~token() noexcept
 template<class T>
 inline bool unique_objects_pool<T>::token::is_valid() const noexcept
 {
-    return m_pPool && m_nId != kInvalidId;
+    return m_pPool && m_nId != k_nInvalidId;
 }
 
 template<class T>

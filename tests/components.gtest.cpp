@@ -35,18 +35,22 @@ public:
     explicit CTestComponent1(char ch) : m_TestData(ch)
     {
     }
-    virtual int GetData() const override
-    {
-        return m_TestData;
-    }
-    virtual int GetData() override
-    {
-        return m_TestData;
-    }
+    virtual int GetData() const override;
+    virtual int GetData() override;
 
 private:
     char m_TestData = 'x';
 };
+
+inline int CTestComponent1::GetData() const
+{
+    return m_TestData;
+}
+
+inline int CTestComponent1::GetData()
+{
+    return m_TestData;
+}
 
 class ATestComponent2 : public ABaseTestComponent
 {
@@ -61,18 +65,22 @@ public:
     explicit CTestComponent21(int nTestData) : m_nTestData(nTestData)
     {
     }
-    virtual int GetData() const override
-    {
-        return m_nTestData;
-    }
-    virtual int GetData() override
-    {
-        return m_nTestData;
-    }
+    virtual int GetData() const override;
+    virtual int GetData() override;
 
 private:
     int m_nTestData = 0;
 };
+
+inline int CTestComponent21::GetData() const
+{
+    return m_nTestData;
+}
+
+inline int CTestComponent21::GetData()
+{
+    return m_nTestData;
+}
 
 class CTestComponent22 : public ATestComponent2
 {
@@ -82,18 +90,22 @@ public:
     explicit CTestComponent22(double fTestData) : m_fTestData(fTestData)
     {
     }
-    virtual int GetData() const override
-    {
-        return static_cast<int>(m_fTestData);
-    }
-    virtual int GetData() override
-    {
-        return static_cast<int>(m_fTestData);
-    }
+    virtual int GetData() const override;
+    virtual int GetData() override;
 
 private:
     double m_fTestData = 0.0;
 };
+
+inline int CTestComponent22::GetData() const
+{
+    return static_cast<int>(m_fTestData);
+}
+
+inline int CTestComponent22::GetData()
+{
+    return static_cast<int>(m_fTestData);
+}
 
 class CTestComponent23 : public ATestComponent2
 {
@@ -103,18 +115,22 @@ public:
     explicit CTestComponent23(std::string sTestData) : m_sTestData(std::move(sTestData))
     {
     }
-    virtual int GetData() const override
-    {
-        return std::stoi(m_sTestData);
-    }
-    virtual int GetData() override
-    {
-        return std::stoi(m_sTestData);
-    }
+    virtual int GetData() const override;
+    virtual int GetData() override;
 
 private:
     std::string m_sTestData;
 };
+
+inline int CTestComponent23::GetData() const
+{
+    return std::stoi(m_sTestData);
+}
+
+inline int CTestComponent23::GetData()
+{
+    return std::stoi(m_sTestData);
+}
 
 struct SComponents
 {

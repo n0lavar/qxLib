@@ -143,7 +143,7 @@ constexpr size_t type_strings<T, char_t>::get_num_template_parameters()
             {
                 ++nBraceCounter;
 
-                if (svSignature.find(lambdaMarker, i + 1) == i + 1)
+                if (svSignature.find(k_svLambdaMarker, i + 1) == i + 1)
                     bLambda = true;
                 else if (nParams == 0 && nBraceCounter == 1)
                     ++nParams;
@@ -182,7 +182,7 @@ constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, cha
     const string_view_type     svSignature   = create_signature();
     size_t                     nStartMarker  = svSignature.find(svStartMarker);
 
-    if (nStartMarker != string_view_type::npos && svSignature.find(lambdaMarker, nStartMarker) == nStartMarker + 1)
+    if (nStartMarker != string_view_type::npos && svSignature.find(k_svLambdaMarker, nStartMarker) == nStartMarker + 1)
         nStartMarker = string_view_type::npos;
 
     return svSignature.substr(0, nStartMarker);
@@ -225,7 +225,7 @@ constexpr auto type_strings<T, char_t>::get_template_parameters()
 
             if (nTokenStart == 0)
                 nTokenStart = i + 1;
-            else if (!bLambda && svSignature.find(lambdaMarker, i + 1) == i + 1)
+            else if (!bLambda && svSignature.find(k_svLambdaMarker, i + 1) == i + 1)
                 bLambda = true;
 
             break;

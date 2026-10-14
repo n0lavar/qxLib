@@ -1,3 +1,6 @@
+/**
+    @file  flags.gtest.cpp
+**/
 #include <common.h>
 
 #include <qx/containers/flags.h>

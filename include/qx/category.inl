@@ -18,8 +18,8 @@ constexpr category::category(string_view svName, std::optional<color> optCategor
 
 constexpr category category::set_verbosity(verbosity eVerbosity) const noexcept
 {
-    category category_    = *this;
-    category_.m_Verbosity = eVerbosity;
+    category category_     = *this;
+    category_.m_eVerbosity = eVerbosity;
     return category_;
 }
 
@@ -35,7 +35,7 @@ constexpr const color& category::get_color() const noexcept
 
 constexpr verbosity category::get_verbosity() const noexcept
 {
-    return m_Verbosity;
+    return m_eVerbosity;
 }
 
 } // namespace qx

@@ -37,12 +37,6 @@ class type_strings
 {
     using string_view_type = basic_string_view<char_t>;
 
-private:
-    static constexpr string_view_type lambdaMarker = QX_STR_PREFIX(char_t, "lambda");
-    static constexpr string_view_type create_full_signature();
-    static constexpr string_view_type create_signature();
-    static constexpr size_t           get_num_template_parameters();
-
 public:
     /**
         @brief  Get type signature (full name with template parameters)
@@ -61,6 +55,14 @@ public:
         @retval  - template parameters
     **/
     static constexpr auto get_template_parameters();
+
+private:
+    static constexpr string_view_type create_full_signature();
+    static constexpr string_view_type create_signature();
+    static constexpr size_t           get_num_template_parameters();
+
+private:
+    static constexpr string_view_type k_svLambdaMarker = QX_STR_PREFIX(char_t, "lambda");
 };
 
 } // namespace qx

@@ -11,8 +11,8 @@
 #include <qx/containers/string/string.h>
 #include <qx/containers/string/string_hash.h>
 #include <qx/macros/static_assert.h>
-#include <string_test_helpers.h>
 
+#include <string_test_helpers.h>
 #include <algorithm>
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(5233);

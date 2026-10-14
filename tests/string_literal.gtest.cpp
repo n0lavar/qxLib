@@ -15,21 +15,30 @@ template<qx::string_literal text>
 class StringTemplateClass
 {
 public:
-    static constexpr qx::cstring_view as_view()
-    {
-        return text.view();
-    }
+    static constexpr qx::cstring_view as_view();
 
-    static constexpr const char* as_as_pointer()
-    {
-        return text.data();
-    }
+    static constexpr const char* as_as_pointer();
 
-    static constexpr size_t size()
-    {
-        return text.size();
-    }
+    static constexpr size_t size();
 };
+
+template<qx::string_literal text>
+constexpr qx::cstring_view StringTemplateClass<text>::as_view()
+{
+    return text.view();
+}
+
+template<qx::string_literal text>
+constexpr const char* StringTemplateClass<text>::as_as_pointer()
+{
+    return text.data();
+}
+
+template<qx::string_literal text>
+constexpr size_t StringTemplateClass<text>::size()
+{
+    return text.size();
+}
 
 constexpr StringTemplateClass<"Text"> stringTemplateClass;
 constexpr qx::cstring_view            svText = stringTemplateClass.as_view();

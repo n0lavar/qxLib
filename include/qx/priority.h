@@ -72,14 +72,14 @@ public:
     constexpr auto operator<(const time_ordered_priority_key& other) const noexcept;
 
 private:
-    static inline std::atomic_size_t m_nIdCounter { 0 };
+    static inline std::atomic_size_t s_nIdCounter { 0 };
     priority                         m_ePriority = priority::normal;
     size_t                           m_nId       = 0;
 };
 
 inline time_ordered_priority_key::time_ordered_priority_key(priority ePriority) noexcept
     : m_ePriority(ePriority)
-    , m_nId(++m_nIdCounter)
+    , m_nId(++s_nIdCounter)
 {
 }
 

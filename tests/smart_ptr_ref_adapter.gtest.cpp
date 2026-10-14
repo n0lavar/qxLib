@@ -21,30 +21,38 @@ public:
 class test_class : public test_class_interface
 {
 public:
-    test_class(std::string data) : m_Data(std::move(data))
-    {
-        ++m_ObjectsAlive;
-    }
+    test_class(std::string data);
 
-    virtual ~test_class() override
-    {
-        --m_ObjectsAlive;
-    }
+    virtual ~test_class() override;
 
-    virtual const std::string& get_data() const override
-    {
-        return m_Data;
-    }
+    virtual const std::string& get_data() const override;
 
-    static size_t get_objects_alive()
-    {
-        return m_ObjectsAlive;
-    }
+    static size_t get_objects_alive();
 
 private:
-    std::string          m_Data;
-    inline static size_t m_ObjectsAlive = 0;
+    std::string          m_sData;
+    inline static size_t s_nObjectsAlive = 0;
 };
+
+inline test_class::test_class(std::string data) : m_sData(std::move(data))
+{
+    ++s_nObjectsAlive;
+}
+
+inline test_class::~test_class()
+{
+    --s_nObjectsAlive;
+}
+
+inline const std::string& test_class::get_data() const
+{
+    return m_sData;
+}
+
+inline size_t test_class::get_objects_alive()
+{
+    return s_nObjectsAlive;
+}
 
 template<template<class, class...> class pointer_t, class T, class... args_t>
 static void test_adapter(

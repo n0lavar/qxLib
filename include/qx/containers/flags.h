@@ -240,7 +240,7 @@ public:
     static constexpr flags all_flags() noexcept;
 
 private:
-    underlying_type m_EnumFlags = 0;
+    underlying_type m_nEnumFlags = 0;
 };
 
 } // namespace qx

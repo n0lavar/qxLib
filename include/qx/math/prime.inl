@@ -152,13 +152,13 @@ inline bool is_prime(size_t nValue, double fProbability)
 
     constexpr double fLog2 = 0.30102999566; // std::log(2)
 
-    const double nTests = std::ceil(std::log(1.0 / (1.0 - fProbability)) / fLog2);
+    const double fTests = std::ceil(std::log(1.0 / (1.0 - fProbability)) / fLog2);
 
     std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
 
     std::uniform_int_distribution<size_t> num_dist(2, nValue);
 
-    for (unsigned i = 0; i < nTests; ++i)
+    for (unsigned i = 0; i < fTests; ++i)
     {
         const size_t nRandomNumber = num_dist(generator);
         if (details::prime_power_mod(nRandomNumber, nValue - 1, nValue) != 1)

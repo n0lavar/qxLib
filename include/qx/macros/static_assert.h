@@ -18,7 +18,7 @@
 namespace qx::details
 {
 
-template<auto left, auto right, typename compare_t>
+template<auto left, auto right, class compare_t>
 struct static_assert_two
 {
     static_assert(compare_t()(left, right));

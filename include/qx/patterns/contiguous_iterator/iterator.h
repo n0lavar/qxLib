@@ -41,18 +41,9 @@ class iterator
 public:
     using super_type::super_type;
 
-    [[nodiscard]] constexpr typename super_type::reference operator*() const noexcept
-    {
-        return super_type::get();
-    }
-    [[nodiscard]] constexpr typename super_type::pointer operator->() const noexcept
-    {
-        return &super_type::get();
-    }
-    [[nodiscard]] constexpr typename super_type::reference operator[](typename super_type::size_type i) const noexcept
-    {
-        return super_type::get(i);
-    }
+    [[nodiscard]] constexpr typename super_type::reference operator*() const noexcept;
+    [[nodiscard]] constexpr typename super_type::pointer   operator->() const noexcept;
+    [[nodiscard]] constexpr typename super_type::reference operator[](typename super_type::size_type i) const noexcept;
 };
 
 /**
@@ -79,22 +70,11 @@ class const_iterator
 public:
     using super_type::super_type;
 
-    constexpr const_iterator(const iterator<container_t>& it) noexcept : super_type(it.m_pContainer, it.m_nIndex)
-    {
-    }
-    [[nodiscard]] constexpr typename super_type::const_reference operator*() const noexcept
-    {
-        return super_type::get();
-    }
-    [[nodiscard]] constexpr typename super_type::const_pointer operator->() const noexcept
-    {
-        return &super_type::get();
-    }
+    constexpr const_iterator(const iterator<container_t>& it) noexcept;
+    [[nodiscard]] constexpr typename super_type::const_reference operator*() const noexcept;
+    [[nodiscard]] constexpr typename super_type::const_pointer   operator->() const noexcept;
     [[nodiscard]] constexpr typename super_type::const_reference operator[](
-        typename super_type::size_type m) const noexcept
-    {
-        return super_type::get(m);
-    }
+        typename super_type::size_type m) const noexcept;
 };
 
 template<class container_t, class derived_t = void>
@@ -126,18 +106,9 @@ class reverse_iterator
 public:
     using super_type::super_type;
 
-    [[nodiscard]] constexpr typename super_type::reference operator*() const noexcept
-    {
-        return super_type::get();
-    }
-    [[nodiscard]] constexpr typename super_type::pointer operator->() const noexcept
-    {
-        return &super_type::get();
-    }
-    [[nodiscard]] constexpr typename super_type::reference operator[](typename super_type::size_type m) const noexcept
-    {
-        return super_type::get(m);
-    }
+    [[nodiscard]] constexpr typename super_type::reference operator*() const noexcept;
+    [[nodiscard]] constexpr typename super_type::pointer   operator->() const noexcept;
+    [[nodiscard]] constexpr typename super_type::reference operator[](typename super_type::size_type m) const noexcept;
 };
 
 /**
@@ -164,23 +135,13 @@ class const_reverse_iterator
 public:
     using super_type::super_type;
 
-    constexpr const_reverse_iterator(const reverse_iterator<container_t>& it) noexcept
-        : super_type(it.m_pContainer, it.m_nIndex)
-    {
-    }
-    [[nodiscard]] constexpr typename super_type::const_reference operator*() const noexcept
-    {
-        return super_type::get();
-    }
-    [[nodiscard]] constexpr typename super_type::const_pointer operator->() const noexcept
-    {
-        return &super_type::get();
-    }
+    constexpr const_reverse_iterator(const reverse_iterator<container_t>& it) noexcept;
+    [[nodiscard]] constexpr typename super_type::const_reference operator*() const noexcept;
+    [[nodiscard]] constexpr typename super_type::const_pointer   operator->() const noexcept;
     [[nodiscard]] constexpr typename super_type::const_reference operator[](
-        typename super_type::size_type m) const noexcept
-    {
-        return super_type::get(m);
-    }
+        typename super_type::size_type m) const noexcept;
 };
 
 } // namespace qx
+
+#include <qx/patterns/contiguous_iterator/iterator.inl>

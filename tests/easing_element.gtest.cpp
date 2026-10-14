@@ -18,64 +18,79 @@ template<class T>
 class TestEasingElements : public ::testing::Test
 {
 protected:
-    using type                = typename T::type;
-    static constexpr type eps = type(1e-6);
+    using type                   = typename T::type;
+    static constexpr type k_fEps = type(1e-6);
 
     /* called before every test */
-    virtual void SetUp() override
-    {
-        m_Element = T(qx::easing::linear_func<type>, type(-1), type(2));
-    }
+    virtual void SetUp() override;
 
-    void CheckNotStarted()
-    {
-        EXPECT_TRUE(m_Element.is_not_started());
-        EXPECT_FALSE(m_Element.is_started());
-        EXPECT_FALSE(m_Element.is_paused());
-        EXPECT_FALSE(m_Element.is_finished());
-        EXPECT_EQ(m_Element.get_status(), T::status::not_started);
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get(), type(-1.0)));
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get_fraction(), type(0)));
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get_speed(), type(1)));
-    }
+    void CheckNotStarted();
 
-    void CheckStarted(type fExpectedValue, type fExpectedFraction, type fExpectedSpeed = type(1.f))
-    {
-        EXPECT_FALSE(m_Element.is_not_started());
-        EXPECT_TRUE(m_Element.is_started());
-        EXPECT_FALSE(m_Element.is_paused());
-        EXPECT_FALSE(m_Element.is_finished());
-        EXPECT_EQ(m_Element.get_status(), T::status::started);
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get_fraction(), fExpectedFraction, eps));
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get_speed(), fExpectedSpeed, eps));
-    }
+    void CheckStarted(type fExpectedValue, type fExpectedFraction, type fExpectedSpeed = type(1.f));
 
-    void CheckFinished(type fExpectedValue)
-    {
-        EXPECT_FALSE(m_Element.is_not_started());
-        EXPECT_FALSE(m_Element.is_started());
-        EXPECT_FALSE(m_Element.is_paused());
-        EXPECT_TRUE(m_Element.is_finished());
-        EXPECT_EQ(m_Element.get_status(), T::status::finished);
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get(), fExpectedValue));
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get_fraction(), type(1.0)));
-    }
+    void CheckFinished(type fExpectedValue);
 
-    void CheckPaused(type fExpectedValue, type fExpectedFraction)
-    {
-        EXPECT_FALSE(m_Element.is_not_started());
-        EXPECT_FALSE(m_Element.is_started());
-        EXPECT_TRUE(m_Element.is_paused());
-        EXPECT_FALSE(m_Element.is_finished());
-        EXPECT_EQ(m_Element.get_status(), T::status::paused);
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get(), fExpectedValue, eps));
-        EXPECT_TRUE(qx::epsilon_equal(m_Element.get_fraction(), fExpectedFraction, eps));
-    }
+    void CheckPaused(type fExpectedValue, type fExpectedFraction);
 
 protected:
     T m_Element = T(qx::easing::linear_func<typename T::type>);
 };
+
+template<class T>
+inline void TestEasingElements<T>::SetUp()
+{
+    m_Element = T(qx::easing::linear_func<type>, type(-1), type(2));
+}
+
+template<class T>
+inline void TestEasingElements<T>::CheckNotStarted()
+{
+    EXPECT_TRUE(m_Element.is_not_started());
+    EXPECT_FALSE(m_Element.is_started());
+    EXPECT_FALSE(m_Element.is_paused());
+    EXPECT_FALSE(m_Element.is_finished());
+    EXPECT_EQ(m_Element.get_status(), T::status::not_started);
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get(), type(-1.0)));
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get_fraction(), type(0)));
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get_speed(), type(1)));
+}
+
+template<class T>
+inline void TestEasingElements<T>::CheckStarted(type fExpectedValue, type fExpectedFraction, type fExpectedSpeed)
+{
+    EXPECT_FALSE(m_Element.is_not_started());
+    EXPECT_TRUE(m_Element.is_started());
+    EXPECT_FALSE(m_Element.is_paused());
+    EXPECT_FALSE(m_Element.is_finished());
+    EXPECT_EQ(m_Element.get_status(), T::status::started);
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get(), fExpectedValue, k_fEps));
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get_fraction(), fExpectedFraction, k_fEps));
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get_speed(), fExpectedSpeed, k_fEps));
+}
+
+template<class T>
+inline void TestEasingElements<T>::CheckFinished(type fExpectedValue)
+{
+    EXPECT_FALSE(m_Element.is_not_started());
+    EXPECT_FALSE(m_Element.is_started());
+    EXPECT_FALSE(m_Element.is_paused());
+    EXPECT_TRUE(m_Element.is_finished());
+    EXPECT_EQ(m_Element.get_status(), T::status::finished);
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get(), fExpectedValue));
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get_fraction(), type(1.0)));
+}
+
+template<class T>
+inline void TestEasingElements<T>::CheckPaused(type fExpectedValue, type fExpectedFraction)
+{
+    EXPECT_FALSE(m_Element.is_not_started());
+    EXPECT_FALSE(m_Element.is_started());
+    EXPECT_TRUE(m_Element.is_paused());
+    EXPECT_FALSE(m_Element.is_finished());
+    EXPECT_EQ(m_Element.get_status(), T::status::paused);
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get(), fExpectedValue, k_fEps));
+    EXPECT_TRUE(qx::epsilon_equal(m_Element.get_fraction(), fExpectedFraction, k_fEps));
+}
 
 using implementations_type = ::testing::
     Types<qx::base_easing_element<float>, qx::base_easing_element<double>, qx::base_easing_element<long double> >;

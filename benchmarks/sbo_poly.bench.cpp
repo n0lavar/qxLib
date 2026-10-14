@@ -6,12 +6,11 @@
     @copyright (c) Nick Khrapov, 2026. All right reserved.
 
 **/
-#include "benchmark/benchmark.h"
-
 #include <qx/hash.h>
 #include <qx/memory/sbo_poly.h>
 
 #include <random>
+#include "benchmark/benchmark.h"
 
 //V_EXCLUDE_PATH *.bench.cpp
 
@@ -39,18 +38,20 @@ public:
     {
     }
 
-    virtual size_t get_hash() const override
-    {
-        size_t nHash = 0;
-        for (char c : m_Data)
-            qx::hash_combine(nHash, c);
-
-        return nHash;
-    }
+    virtual size_t get_hash() const override;
 
 private:
     std::array<char, k_nSmallDataSize> m_Data;
 };
+
+inline size_t small_test_class::get_hash() const
+{
+    size_t nHash = 0;
+    for (char c : m_Data)
+        qx::hash_combine(nHash, c);
+
+    return nHash;
+}
 static_assert(qx::sbo_poly_fittable_type_v<sbo_type, small_test_class>);
 
 class big_test_class : public base_test_class
@@ -60,21 +61,23 @@ public:
     {
     }
 
-    virtual size_t get_hash() const override
-    {
-        // use the same number of elements as in small_test_class,
-        // so that the time of hashing is the same for both classes,
-        // and the difference in performance will be only because of SBO
-        size_t nHash = 0;
-        for (size_t i = 0; i < k_nSmallDataSize; ++i)
-            qx::hash_combine(nHash, m_Data[i]);
-
-        return nHash;
-    }
+    virtual size_t get_hash() const override;
 
 private:
     std::array<char, k_nBigDataSize> m_Data;
 };
+
+inline size_t big_test_class::get_hash() const
+{
+    // use the same number of elements as in small_test_class,
+    // so that the time of hashing is the same for both classes,
+    // and the difference in performance will be only because of SBO
+    size_t nHash = 0;
+    for (size_t i = 0; i < k_nSmallDataSize; ++i)
+        qx::hash_combine(nHash, m_Data[i]);
+
+    return nHash;
+}
 static_assert(!qx::sbo_poly_fittable_type_v<sbo_type, big_test_class>);
 
 template<size_t nSize>
@@ -145,46 +148,49 @@ class data_vector_fixture : public benchmark::Fixture
     static constexpr bool k_bRandomLocation = data_traits_t::k_bRandomLocation;
 
 public:
-    virtual void SetUp(::benchmark::State& state) override
-    {
-        m_FakeData.clear();
-        m_RealData.clear();
-
-        constexpr size_t nSeed = 0;
-        std::mt19937     randomEngine(nSeed);
-
-        // assume that in live scenarios we use an SBO size that way that most of the data is small
-        constexpr double            fSmallProbability = 0.9;
-        std::bernoulli_distribution IsSmall(fSmallProbability);
-
-        constexpr double            fFakeDataProbability = 0.8;
-        std::bernoulli_distribution IsFake(fFakeDataProbability);
-
-        for (int i = 0; i < state.range(0);)
-        {
-            const bool bFake = k_bRandomLocation && IsFake(randomEngine);
-
-            std::vector<data_type>& container = bFake ? m_FakeData : m_RealData;
-            if (IsSmall(randomEngine))
-                container.emplace_back(data_traits_t::create_small(randomEngine));
-            else
-                container.emplace_back(data_traits_t::create_big(randomEngine));
-
-            if (!bFake)
-                ++i;
-        }
-
-        if constexpr (k_bRandomLocation)
-        {
-            // shuffle the data to simulate random memory locations
-            std::shuffle(m_RealData.begin(), m_RealData.end(), randomEngine);
-        }
-    }
+    virtual void SetUp(::benchmark::State& state) override;
 
 protected:
     std::vector<data_type> m_FakeData;
     std::vector<data_type> m_RealData;
 };
+
+template<class data_traits_t>
+inline void data_vector_fixture<data_traits_t>::SetUp(::benchmark::State& state)
+{
+    m_FakeData.clear();
+    m_RealData.clear();
+
+    constexpr size_t nSeed = 0;
+    std::mt19937     randomEngine(nSeed);
+
+    // assume that in live scenarios we use an SBO size that way that most of the data is small
+    constexpr double            fSmallProbability = 0.9;
+    std::bernoulli_distribution IsSmall(fSmallProbability);
+
+    constexpr double            fFakeDataProbability = 0.8;
+    std::bernoulli_distribution IsFake(fFakeDataProbability);
+
+    for (int i = 0; i < state.range(0);)
+    {
+        const bool bFake = k_bRandomLocation && IsFake(randomEngine);
+
+        std::vector<data_type>& container = bFake ? m_FakeData : m_RealData;
+        if (IsSmall(randomEngine))
+            container.emplace_back(data_traits_t::create_small(randomEngine));
+        else
+            container.emplace_back(data_traits_t::create_big(randomEngine));
+
+        if (!bFake)
+            ++i;
+    }
+
+    if constexpr (k_bRandomLocation)
+    {
+        // shuffle the data to simulate random memory locations
+        std::shuffle(m_RealData.begin(), m_RealData.end(), randomEngine);
+    }
+}
 
 BENCHMARK_TEMPLATE_METHOD_F(data_vector_fixture, bench)(benchmark::State& st)
 {

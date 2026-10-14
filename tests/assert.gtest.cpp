@@ -44,17 +44,21 @@ static_assert(qx::details::split_assert_arguments(QXT("qx::assert_eq([a), 42)"))
 class assert_exit_tests_fixture : public ::testing::Test
 {
 protected:
-    void SetUp() override
-    {
-        qx::get_logger().reset();
-        qx::get_logger().add_stream(qx::cout_logger_stream());
-    }
+    void SetUp() override;
 
-    void TearDown() override
-    {
-        qx::get_logger().reset();
-    }
+    void TearDown() override;
 };
+
+inline void assert_exit_tests_fixture::SetUp()
+{
+    qx::get_logger().reset();
+    qx::get_logger().add_stream(qx::cout_logger_stream());
+}
+
+inline void assert_exit_tests_fixture::TearDown()
+{
+    qx::get_logger().reset();
+}
 
 TEST_F(assert_exit_tests_fixture, assert)
 {
@@ -232,39 +236,9 @@ QX_POP_SUPPRESS_WARNINGS();
 class assert_callback_tests_fixture : public ::testing::Test
 {
 protected:
-    void SetUp() override
-    {
-        auto config        = qx::asserts_manager::get_instance().get_config();
-        config.onAssertion = [this](
-                                 qx::string_view     svCondition,
-                                 const qx::category& category,
-                                 qx::assert_type     eAssertType,
-                                 qx::string_view     svUserMessage,
-                                 qx::string_view     svFunction,
-                                 qx::string_view     svFile,
-                                 i32                 nLine)
-        {
-            EXPECT_EQ(svCondition, m_svExpectedCondition);
-            EXPECT_EQ(*m_pExpectedCategory, category);
-            EXPECT_EQ(m_eExpectedAssertType, eAssertType);
-            EXPECT_EQ(m_svExpectedUserMessage, svUserMessage);
-            EXPECT_EQ(m_sExpectedFunction, svFunction);
-            EXPECT_EQ(m_svExpectedFile, svFile);
-            EXPECT_EQ(m_nExpectedLine, nLine);
+    void SetUp() override;
 
-            m_bHit = true;
-        };
-        config.onExit = nullptr;
-
-        qx::asserts_manager::get_instance().set_config(std::move(config));
-    }
-
-    void TearDown() override
-    {
-        EXPECT_TRUE(m_bHit || !QX_WITH_DEBUG_ASSERTS);
-
-        qx::asserts_manager::get_instance().set_config(qx::asserts_manager::config());
-    }
+    void TearDown() override;
 
 protected:
     qx::string_view     m_svExpectedCondition;
@@ -278,6 +252,40 @@ protected:
 private:
     bool m_bHit = false;
 };
+
+inline void assert_callback_tests_fixture::SetUp()
+{
+    auto config        = qx::asserts_manager::get_instance().get_config();
+    config.onAssertion = [this](
+                             qx::string_view     svCondition,
+                             const qx::category& category,
+                             qx::assert_type     eAssertType,
+                             qx::string_view     svUserMessage,
+                             qx::string_view     svFunction,
+                             qx::string_view     svFile,
+                             i32                 nLine)
+    {
+        EXPECT_EQ(svCondition, m_svExpectedCondition);
+        EXPECT_EQ(*m_pExpectedCategory, category);
+        EXPECT_EQ(m_eExpectedAssertType, eAssertType);
+        EXPECT_EQ(m_svExpectedUserMessage, svUserMessage);
+        EXPECT_EQ(m_sExpectedFunction, svFunction);
+        EXPECT_EQ(m_svExpectedFile, svFile);
+        EXPECT_EQ(m_nExpectedLine, nLine);
+
+        m_bHit = true;
+    };
+    config.onExit = nullptr;
+
+    qx::asserts_manager::get_instance().set_config(std::move(config));
+}
+
+inline void assert_callback_tests_fixture::TearDown()
+{
+    EXPECT_TRUE(m_bHit || !QX_WITH_DEBUG_ASSERTS);
+
+    qx::asserts_manager::get_instance().set_config(qx::asserts_manager::config());
+}
 
 #define TEST_ON_ASSERTION(macro_call, condition, category, assert_type, user_message) \
     TEST_F(assert_callback_tests_fixture, QX_LINE_NAME(test_on_assertion_))           \
@@ -381,38 +389,44 @@ TEST_ON_ASSERTION_RETURN(QX_EXPECT_RETURN_CT(false, CatAssertsTests, 1, "msg {}"
 class assert_compare_tests_fixture : public ::testing::Test
 {
 protected:
-    void SetUp() override
-    {
-        auto config          = qx::asserts_manager::get_instance().get_config();
-        config.bLogAssertion = false;
-        config.onAssertion   = [this](
-                                 qx::string_view svCondition,
-                                 const qx::category&,
-                                 qx::assert_type,
-                                 qx::string_view,
-                                 qx::string_view,
-                                 qx::string_view,
-                                 i32)
-        {
-            m_sCondition = svCondition;
-        };
+    void SetUp() override;
 
-        qx::asserts_manager::get_instance().set_config(std::move(config));
-    }
+    void TearDown() override;
 
-    void TearDown() override
-    {
-        qx::asserts_manager::get_instance().set_config(qx::asserts_manager::config());
-    }
-
-    void expect_condition(qx::string_view svExpectedCondition)
-    {
-        EXPECT_EQ(m_sCondition, svExpectedCondition);
-    }
+    void expect_condition(qx::string_view svExpectedCondition);
 
 private:
     qx::string m_sCondition;
 };
+
+inline void assert_compare_tests_fixture::SetUp()
+{
+    auto config          = qx::asserts_manager::get_instance().get_config();
+    config.bLogAssertion = false;
+    config.onAssertion   = [this](
+                             qx::string_view svCondition,
+                             const qx::category&,
+                             qx::assert_type,
+                             qx::string_view,
+                             qx::string_view,
+                             qx::string_view,
+                             i32)
+    {
+        m_sCondition = svCondition;
+    };
+
+    qx::asserts_manager::get_instance().set_config(std::move(config));
+}
+
+inline void assert_compare_tests_fixture::TearDown()
+{
+    qx::asserts_manager::get_instance().set_config(qx::asserts_manager::config());
+}
+
+inline void assert_compare_tests_fixture::expect_condition(qx::string_view svExpectedCondition)
+{
+    EXPECT_EQ(m_sCondition, svExpectedCondition);
+}
 
 TEST_F(assert_compare_tests_fixture, lvalue_rvalue)
 {
@@ -718,7 +732,7 @@ template<class char_t>
 struct QX_FMT_NS::formatter<assert_compare_state, char_t> : qx::basic_formatter<char_t>
 {
     template<class context_t>
-    constexpr auto format(assert_compare_state eState, context_t& ctx) const
+    constexpr auto format(assert_compare_state eState, context_t& ctx) const -> decltype(ctx.out())
     {
         switch (eState)
         {

@@ -84,8 +84,9 @@ public:
         //
         // Also, try to keep the capture list as short as possible - ideally no more than two pointers.
         // This improves cache locality.
-        std::function<logger_string_pool::item(logger_string_pool::item message, logger_string_pool& stringPool)>
-            FormatUserMessage;
+        using format_user_message_func_t =
+            std::function<logger_string_pool::item(logger_string_pool::item message, logger_string_pool& stringPool)>;
+        format_user_message_func_t FormatUserMessage;
     };
     using category_data_map = std::unordered_map<string_view, category_data>;
 
@@ -154,6 +155,8 @@ public:
         @param data           - category data
     **/
     void register_category(string_view svCategoryName, category_data data) noexcept;
+
+    void set_category_formatter();
 
     /**
         @brief   Compile and set the default pattern for log messages.
@@ -246,14 +249,16 @@ QX_FLAGS_ENUM_CLASS(logger::message_necessity_type);
 class logger_singleton final : public singleton<logger_singleton>
 {
 public:
-    logger& get_logger() noexcept
-    {
-        return m_Logger;
-    }
+    logger& get_logger() noexcept;
 
 private:
     logger m_Logger;
 };
+
+inline logger& logger_singleton::get_logger() noexcept
+{
+    return m_Logger;
+}
 
 // Change this variable to override the logger instance used in QX_LOG macros
 inline logger* g_pGlobalLogger = nullptr;

@@ -19,24 +19,24 @@
 
 struct STestStruct
 {
-    int    intData      = 0;
-    float  floatData    = 0.f;
-    bool   boolData     = false;
-    size_t unsignedData = 0u;
+    int    nIntData      = 0;
+    float  fFloatData    = 0.f;
+    bool   bBoolData     = false;
+    size_t nUnsignedData = 0u;
 
     constexpr STestStruct(void) = default;
     constexpr STestStruct(int _intData, float _floatData, bool _boolData, size_t _unsignedData)
-        : intData(_intData)
-        , floatData(_floatData)
-        , boolData(_boolData)
-        , unsignedData(_unsignedData)
+        : nIntData(_intData)
+        , fFloatData(_floatData)
+        , bBoolData(_boolData)
+        , nUnsignedData(_unsignedData)
     {
     }
 
     bool operator==(const STestStruct& other) const
     {
-        return intData == other.intData && floatData == other.floatData && boolData == other.boolData
-               && unsignedData == other.unsignedData;
+        return nIntData == other.nIntData && fFloatData == other.fFloatData && bBoolData == other.bBoolData
+               && nUnsignedData == other.nUnsignedData;
     }
 };
 

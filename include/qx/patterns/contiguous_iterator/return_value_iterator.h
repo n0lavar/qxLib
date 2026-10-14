@@ -35,15 +35,23 @@ public:
 public:
     using super_type::super_type;
 
-    [[nodiscard]] constexpr typename super_type::value_type operator*() const noexcept
-    {
-        return super_type::get();
-    }
-    [[nodiscard]] constexpr typename super_type::value_type operator[](typename super_type::size_type m) const noexcept
-    {
-        return super_type::get(m);
-    }
+    [[nodiscard]] constexpr typename super_type::value_type operator*() const noexcept;
+    [[nodiscard]] constexpr typename super_type::value_type operator[](typename super_type::size_type m) const noexcept;
 };
+
+template<class base_iterator_t>
+[[nodiscard]] constexpr typename base_return_object_iterator<base_iterator_t>::super_type::value_type
+    base_return_object_iterator<base_iterator_t>::operator*() const noexcept
+{
+    return super_type::get();
+}
+
+template<class base_iterator_t>
+[[nodiscard]] constexpr typename base_return_object_iterator<base_iterator_t>::super_type::value_type
+    base_return_object_iterator<base_iterator_t>::operator[](typename super_type::size_type m) const noexcept
+{
+    return super_type::get(m);
+}
 
 template<class container_t>
 class return_object_iterator

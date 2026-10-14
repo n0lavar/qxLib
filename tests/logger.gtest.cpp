@@ -10,8 +10,6 @@
 
 #define QX_DEBUG_BREAK() (void)0
 
-#include <qx/logger/logger.h>
-
 #include <qx/asserts/asserts.h>
 #include <qx/asserts/error_context.h>
 #include <qx/asserts/error_context_stream.h>
@@ -21,6 +19,7 @@
 #include <qx/logger/file_logger_stream_mapping.h>
 #include <qx/logger/file_logger_stream_ofstream.h>
 #include <qx/logger/fwrite_logger_stream.h>
+#include <qx/logger/logger.h>
 
 #include <filesystem>
 #include <regex>
@@ -68,8 +67,8 @@ constexpr qx::string_view k_svFilePrefix    = QXT("logger_output_test");
 constexpr qx::string_view k_svFileExtension = QXT(".log");
 const qx::string&         get_log_file_name()
 {
-    static auto sLogFileName = qx::string(k_svLogsDirectory) + k_svFilePrefix + k_svFileExtension;
-    return sLogFileName;
+    static auto s_sLogFileName = qx::string(k_svLogsDirectory) + k_svFilePrefix + k_svFileExtension;
+    return s_sLogFileName;
 }
 
 QX_CALL_BEFORE_MAIN = []()
@@ -444,29 +443,9 @@ template<class traits_t>
 class logger_output_test : public ::testing::Test
 {
 protected:
-    virtual void SetUp() override
-    {
-        if constexpr (traits_t::bResetTestOnStart)
-            qx::get_logger().reset();
+    virtual void SetUp() override;
 
-        qx::get_logger().register_category(CatLoggerTestFileWide, { .eRuntimeVerbosity = qx::verbosity::detailed });
-        traits_t::set_up();
-    }
-
-    virtual void TearDown() override
-    {
-        qx::get_logger().flush();
-
-        const qx::string             sContent = traits_t::get_content();
-        std::vector<qx::string_view> lines    = sContent.split(QXT('\n'));
-        for (qx::string_view& svLine : lines)
-            if (svLine.ends_with(QXT('\r')))
-                svLine.remove_suffix(1);
-
-        m_CheckContent(lines);
-
-        traits_t::tear_down();
-    }
+    virtual void TearDown() override;
 
 protected:
     static void check_line(
@@ -474,76 +453,110 @@ protected:
         qx::verbosity       eVerbosity,
         const qx::category& category,
         qx::string_view     svMessage,
-        bool                bOptionalColor = false)
-    {
-        qx::string sPattern = traits_t::get_color_regex(bOptionalColor); // line color
-
-        // verbosity
-        switch (eVerbosity)
-        {
-        case qx::verbosity::detailed:
-            sPattern += QXT("\\[D\\]");
-            break;
-
-        case qx::verbosity::verbose:
-            sPattern += QXT("\\[V\\]");
-            break;
-
-        case qx::verbosity::log:
-            sPattern += QXT("   ");
-            break;
-
-        case qx::verbosity::important:
-            sPattern += QXT("\\[I\\]");
-            break;
-
-        case qx::verbosity::warning:
-            sPattern += QXT("\\[W\\]");
-            break;
-
-        case qx::verbosity::error:
-            sPattern += QXT("\\[E\\]");
-            break;
-
-        case qx::verbosity::critical:
-            sPattern += QXT("\\[C\\]");
-            break;
-
-        case qx::verbosity::none:
-            sPattern += QXT("   ");
-            break;
-        }
-
-        // date + time
-        sPattern += QXT("\\[\\d{2}.\\d{2}.\\d{4}_\\d{2}:\\d{2}:\\d{2}\\]");
-
-        // category
-        if (category != CatDefault)
-        {
-            sPattern += QXT("\\[");
-            sPattern += traits_t::get_color_regex(bOptionalColor); // reset
-            sPattern += traits_t::get_color_regex(bOptionalColor); // category color
-            sPattern += category.get_name();
-            sPattern += traits_t::get_color_regex(bOptionalColor); // reset
-            sPattern += traits_t::get_color_regex(bOptionalColor); // line color
-            sPattern += QXT("\\]");
-        }
-
-        // message
-        sPattern += QXT(" ");
-        sPattern += svMessage;
-        sPattern += traits_t::get_color_regex(true); // reset (can be absent in multiline log messages)
-
-        std::match_results<qx::string::const_pointer> match;
-        auto                                          regex = std::basic_regex(sPattern.data());
-        EXPECT_TRUE(std::regex_search(std::basic_string(svLine).c_str(), match, regex))
-            << "regex: " << qx::to_cstring(sPattern) << std::endl
-            << "line:  " << qx::to_cstring(svLine) << std::endl;
-    }
+        bool                bOptionalColor = false);
 
 protected:
     std::function<void(std::span<const qx::string_view> lines)> m_CheckContent;
 };
+
+template<class traits_t>
+inline void logger_output_test<traits_t>::SetUp()
+{
+    if constexpr (traits_t::bResetTestOnStart)
+        qx::get_logger().reset();
+
+    qx::get_logger().register_category(CatLoggerTestFileWide, { .eRuntimeVerbosity = qx::verbosity::detailed });
+    traits_t::set_up();
+}
+
+template<class traits_t>
+inline void logger_output_test<traits_t>::TearDown()
+{
+    qx::get_logger().flush();
+
+    const qx::string             sContent = traits_t::get_content();
+    std::vector<qx::string_view> lines    = sContent.split(QXT('\n'));
+    for (qx::string_view& svLine : lines)
+        if (svLine.ends_with(QXT('\r')))
+            svLine.remove_suffix(1);
+
+    m_CheckContent(lines);
+
+    traits_t::tear_down();
+}
+
+template<class traits_t>
+inline void logger_output_test<traits_t>::check_line(
+    qx::string_view     svLine,
+    qx::verbosity       eVerbosity,
+    const qx::category& category,
+    qx::string_view     svMessage,
+    bool                bOptionalColor)
+{
+    qx::string sPattern = traits_t::get_color_regex(bOptionalColor); // line color
+
+    // verbosity
+    switch (eVerbosity)
+    {
+    case qx::verbosity::detailed:
+        sPattern += QXT("\\[D\\]");
+        break;
+
+    case qx::verbosity::verbose:
+        sPattern += QXT("\\[V\\]");
+        break;
+
+    case qx::verbosity::log:
+        sPattern += QXT("   ");
+        break;
+
+    case qx::verbosity::important:
+        sPattern += QXT("\\[I\\]");
+        break;
+
+    case qx::verbosity::warning:
+        sPattern += QXT("\\[W\\]");
+        break;
+
+    case qx::verbosity::error:
+        sPattern += QXT("\\[E\\]");
+        break;
+
+    case qx::verbosity::critical:
+        sPattern += QXT("\\[C\\]");
+        break;
+
+    case qx::verbosity::none:
+        sPattern += QXT("   ");
+        break;
+    }
+
+    // date + time
+    sPattern += QXT("\\[\\d{2}.\\d{2}.\\d{4}_\\d{2}:\\d{2}:\\d{2}\\]");
+
+    // category
+    if (category != CatDefault)
+    {
+        sPattern += QXT("\\[");
+        sPattern += traits_t::get_color_regex(bOptionalColor); // reset
+        sPattern += traits_t::get_color_regex(bOptionalColor); // category color
+        sPattern += category.get_name();
+        sPattern += traits_t::get_color_regex(bOptionalColor); // reset
+        sPattern += traits_t::get_color_regex(bOptionalColor); // line color
+        sPattern += QXT("\\]");
+    }
+
+    // message
+    sPattern += QXT(" ");
+    sPattern += svMessage;
+    sPattern += traits_t::get_color_regex(true); // reset (can be absent in multiline log messages)
+
+    std::match_results<qx::string::const_pointer> match;
+    auto                                          regex = std::basic_regex(sPattern.data());
+    EXPECT_TRUE(std::regex_search(std::basic_string(svLine).c_str(), match, regex))
+        << "regex: " << qx::to_cstring(sPattern) << std::endl
+        << "line:  " << qx::to_cstring(svLine) << std::endl;
+}
 
 TYPED_TEST_SUITE(logger_output_test, implementations_type);
 
@@ -818,10 +831,7 @@ public:
     {
     }
 
-    std::shared_ptr<std::vector<qx::string>> get_messages() const noexcept
-    {
-        return m_pMessages;
-    }
+    std::shared_ptr<std::vector<qx::string>> get_messages() const noexcept;
 
     virtual void do_log(
         const qx::category&                   category,
@@ -831,10 +841,7 @@ public:
         qx::string_view                       svFile,
         qx::string_view                       svFunction,
         int                                   nLine,
-        qx::string_view                       svMessage) noexcept override
-    {
-        m_pMessages->emplace_back(svMessage);
-    }
+        qx::string_view                       svMessage) noexcept override;
 
     virtual void do_flush() noexcept override
     {
@@ -843,6 +850,24 @@ public:
 private:
     std::shared_ptr<std::vector<qx::string>> m_pMessages;
 };
+
+inline std::shared_ptr<std::vector<qx::string>> stub_stream::get_messages() const noexcept
+{
+    return m_pMessages;
+}
+
+inline void stub_stream::do_log(
+    const qx::category&                   category,
+    qx::verbosity                         eVerbosity,
+    std::thread::id                       threadId,
+    std::chrono::system_clock::time_point messageTime,
+    qx::string_view                       svFile,
+    qx::string_view                       svFunction,
+    int                                   nLine,
+    qx::string_view                       svMessage) noexcept
+{
+    m_pMessages->emplace_back(svMessage);
+}
 
 TEST(logger_test, stream_patterns)
 {

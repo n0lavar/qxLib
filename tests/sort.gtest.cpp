@@ -9,6 +9,7 @@
 #include <common.h>
 
 #include <qx/algo/sort.h>
+
 #include <array>
 #include <limits>
 #include <random>
@@ -48,35 +49,44 @@ class TestQxSort : public ::testing::Test
 {
 protected:
     /* init protected members here */
-    TestQxSort()
-    {
-        std::default_random_engine             generator(static_cast<unsigned>(time(0)));
-        std::uniform_int_distribution<int64_t> fillDistribution(traits::min_element(), traits::max_element());
-
-        for (size_t i = 0; i < m_Unsorted.size(); i++)
-            m_Unsorted[i] = fillDistribution(generator);
-
-        // assume std::sort always right
-        m_SortedStd = m_Unsorted;
-        std::sort(m_SortedStd.begin(), m_SortedStd.end(), traits::compare());
-    }
+    TestQxSort();
 
     /* called before every test */
-    void SetUp()
-    {
-        m_SortedTest = m_Unsorted;
-    }
+    void SetUp();
 
     /* called after every test */
-    void TearDown()
-    {
-        ASSERT_EQ(m_SortedStd, m_SortedTest);
-    }
+    void TearDown();
 
     std::array<int64_t, traits::array_size()> m_Unsorted {};
     std::array<int64_t, traits::array_size()> m_SortedStd {};
     std::array<int64_t, traits::array_size()> m_SortedTest {};
 };
+
+template<class traits>
+inline TestQxSort<traits>::TestQxSort()
+{
+    std::default_random_engine             generator(static_cast<unsigned>(time(0)));
+    std::uniform_int_distribution<int64_t> fillDistribution(traits::min_element(), traits::max_element());
+
+    for (size_t i = 0; i < m_Unsorted.size(); i++)
+        m_Unsorted[i] = fillDistribution(generator);
+
+    // assume std::sort always right
+    m_SortedStd = m_Unsorted;
+    std::sort(m_SortedStd.begin(), m_SortedStd.end(), traits::compare());
+}
+
+template<class traits>
+inline void TestQxSort<traits>::SetUp()
+{
+    m_SortedTest = m_Unsorted;
+}
+
+template<class traits>
+inline void TestQxSort<traits>::TearDown()
+{
+    ASSERT_EQ(m_SortedStd, m_SortedTest);
+}
 
 //---------------------------- small signed range ----------------------------
 

@@ -45,10 +45,21 @@ private:
 /**
 
     @class   rtti_root
-    @brief   RTTI root class
-    @details All other classes must be inherited from this class
-             to allow you to use RTTI functions
-    @tparam  naming_strategy_t - \see rtti_naming_strategy.h
+    @brief   Polymorphic base for qx class identity and inheritance queries.
+    @details Derive an RTTI hierarchy from this type and use QX_RTTI_CLASS in each
+             derived class to supply its identity and extend the inheritance chain.
+             This system does not require compiler RTTI.
+
+             Static queries describe the type declaring them; virtual queries
+             describe the object's most-derived registered type. is<T>() checks
+             exact identity, while is_derived_from<T>() also accepts base types.
+
+             The naming strategy affects class names, not class identifiers.
+             Names may be empty or shared by several types. The protected destructor
+             prevents deleting an object directly through an rtti_root pointer.
+    @tparam  naming_strategy_t - strategy providing get_name(string_view) to transform
+                                 the compiler-generated type signature into a class name
+    @see     rtti_naming_strategy.h
     @author  Khrapov
     @date    10.09.2021
 
@@ -70,69 +81,99 @@ public:
 
     auto operator<=>(const rtti_root&) const = default;
 
+    /**
+        @brief  Test exact identity or membership in the object's RTTI base chain.
+        @tparam T - candidate type exposing QX_RTTI_CLASS()
+        @retval   - true for the object's registered type and its registered bases
+    **/
     template<class T>
-    bool is_derived_from() const noexcept
-    {
-        constexpr class_id typeId = T::get_class_id_static();
-        return _is_base_id(typeId) || typeId == get_class_id();
-    }
+    bool is_derived_from() const noexcept;
 
+    /**
+        @brief  Compare the object's dynamic class identifier with T's identifier.
+        @tparam T - candidate type exposing QX_RTTI_CLASS()
+        @retval   - true only when the identifiers match; base types are not accepted
+    **/
     template<class T>
-    bool is() const noexcept
-    {
-        return get_class_id() == T::get_class_id_static();
-    }
+    bool is() const noexcept;
 
-    bool is(string_view svClassName) const noexcept
-    {
-        return svClassName == get_class_name();
-    }
+    /**
+        @brief   Compare against the class name selected by the naming strategy.
+        @note    Name equality does not imply type identity when the naming strategy
+                 produces duplicate names, such as rtti_naming_strategy_empty.
+        @param   svClassName - expected result of get_class_name(), not a base-class name
+        @retval              - true when the names match exactly
+    **/
+    bool is(string_view svClassName) const noexcept;
 
-    bool is(const class_id& id) const noexcept
-    {
-        return id == get_class_id();
-    }
+    /**
+        @brief  Compare against the object's dynamic class identifier.
+        @param  id - candidate for exact identity, not an inheritance query
+        @retval    - true when id equals get_class_id()
+    **/
+    bool is(const class_id& id) const noexcept;
 
-    virtual bool is_derived_from_id(const class_id& id) const noexcept
-    {
-        return is_derived_from_id_static(id);
-    }
+    /**
+        @brief  Test an identifier against the object's dynamic RTTI hierarchy.
+        @param  id - candidate class identifier, including the object's own identifier
+        @retval    - true when id belongs to the registered type or one of its bases
+    **/
+    virtual bool is_derived_from_id(const class_id& id) const noexcept;
 
-    static constexpr bool is_derived_from_id_static(const class_id& id) noexcept
-    {
-        return id == get_class_id_static();
-    }
+    /**
+        @brief   Test an identifier against the declaring type's static RTTI hierarchy.
+        @details rtti_root matches only its own identifier; QX_RTTI_CLASS extends
+                 this comparison recursively through the declared base class.
+        @param   id - candidate class identifier to find in the static base chain
+        @retval     - true when id belongs to the declaring type or one of its bases
+    **/
+    static constexpr bool is_derived_from_id_static(const class_id& id) noexcept;
 
-    static constexpr string_view get_class_name_static() noexcept
-    {
-        return naming_strategy_type::get_name(type_strings<this_class_type>::get_signature());
-    }
+    /**
+        @brief  Apply the naming strategy to the declaring RTTI type's signature.
+        @retval - a class-name view that may be empty, depending on the strategy
+    **/
+    static constexpr string_view get_class_name_static() noexcept;
 
-    virtual string_view get_class_name() const noexcept
-    {
-        return get_class_name_static();
-    }
+    /**
+        @brief  Get the name of the object's most-derived registered RTTI type.
+        @retval - the naming strategy's result for the dynamic type; it may be empty
+    **/
+    virtual string_view get_class_name() const noexcept;
 
-    static constexpr class_id get_class_id_static() noexcept
-    {
-        constexpr class_id id = class_id::create<this_class_type>();
-        return id;
-    }
+    /**
+        @brief   Create the declaring RTTI type's identifier from its type signature.
+        @note    The signature is compiler-dependent; identifiers are not a portable
+                 format for persisting type identity across different builds.
+        @retval  - identifier independent of the selected class-name representation
+    **/
+    static constexpr class_id get_class_id_static() noexcept;
 
-    virtual class_id get_class_id() const noexcept
-    {
-        return get_class_id_static();
-    }
+    /**
+        @brief  Get the identifier of the object's most-derived registered RTTI type.
+        @retval - identifier used by exact-type comparisons and RTTI casts
+    **/
+    virtual class_id get_class_id() const noexcept;
 
+    /**
+        @brief   Get the registered inheritance chain in base-to-derived order.
+        @retval  - identifiers from the rtti_root specialization through the dynamic type
+        @details QX_RTTI_CLASS returns a span backed by class-specific static storage,
+                 rather than storage owned by the object.
+    **/
     virtual std::span<const class_id> get_inheritance_sequence() const = 0;
 
 protected:
     virtual ~rtti_root() noexcept = default;
 
-    virtual bool _is_base_id(const class_id& idBase) const noexcept
-    {
-        return idBase == get_class_id_static();
-    }
+    /**
+        @brief   Traverse identifiers treated as bases by derived RTTI classes.
+        @param   idBase - candidate identifier from an inheritance query
+        @retval        - true when an identifier matches during base-chain traversal
+        @details The root compares against its own identifier. Macro-generated
+                 overrides check their immediate base and continue recursively.
+    **/
+    virtual bool _is_base_id(const class_id& idBase) const noexcept;
 };
 
 namespace filters
@@ -152,12 +193,11 @@ constexpr auto is = [](const auto& value)
 
 } // namespace filters
 
-
 /**
     @def   QX_RTTI_CLASS
-    @brief Macro for every class inherited from class with QX_RTTI_BASE_CLASS macro
-    @param thisClass  - this class name
-    @param ...        - super class name (must implement QX_RTTI_CLASS or QX_RTTI_BASE_CLASS macro)
+    @brief Add dynamic identity and inheritance queries to a class in a qx RTTI hierarchy.
+    @param thisClass - type being registered, used to generate its identifier and name
+    @param ...       - immediate base type, either rtti_root or a type using QX_RTTI_CLASS
 **/
 #define QX_RTTI_CLASS(thisClass, ...)                                                                               \
                                                                                                                     \
@@ -197,7 +237,7 @@ public:                                                                         
     }                                                                                                               \
     virtual std::span<const qx::class_id> get_inheritance_sequence() const override                                 \
     {                                                                                                               \
-        static constexpr auto ids = []()                                                                            \
+        static constexpr auto s_Ids = []()                                                                          \
         {                                                                                                           \
             std::array<qx::class_id, std::tuple_size_v<inheritance_tuple_type>> ids_;                               \
             qx::tuple_utils::iterate<inheritance_tuple_type>(                                                       \
@@ -207,7 +247,7 @@ public:                                                                         
                 });                                                                                                 \
             return ids_;                                                                                            \
         }();                                                                                                        \
-        return ids;                                                                                                 \
+        return s_Ids;                                                                                               \
     }                                                                                                               \
                                                                                                                     \
 protected:                                                                                                          \
@@ -220,3 +260,5 @@ private:                                                                        
     QX_EMPTY_MACRO
 
 } // namespace qx
+
+#include <qx/rtti/rtti.inl>

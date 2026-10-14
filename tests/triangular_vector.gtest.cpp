@@ -9,6 +9,7 @@
 #include <common.h>
 
 #include <qx/containers/triangular_vector.h>
+
 #include <algorithm>
 
 //V_EXCLUDE_PATH *.gtest.cpp

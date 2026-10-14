@@ -1,6 +1,6 @@
 /**
 
-    @file      test_config.h
+    @file      common.h
     @brief     Tests configuring
     @author    Khrapov
     @date      8.03.2020
@@ -17,7 +17,8 @@ QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <gtest/gtest.h>
 QX_POP_SUPPRESS_WARNINGS();
 
-#define GTEST_SINGLE_ARGUMENT(...) (__VA_ARGS__)
+
+#define QX_GTEST_SINGLE_ARGUMENT(...) (__VA_ARGS__)
 
 template<std::floating_point T>
 void expect_equal(T left, T right)

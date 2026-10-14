@@ -101,7 +101,7 @@ class threads_shared
         synchronization_primitive_t* get_object() noexcept;
 
     private:
-        synchronization_primitive_t sp;
+        synchronization_primitive_t m_SynchronizationPrimitive;
     };
 
 public:

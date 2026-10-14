@@ -20,45 +20,45 @@ struct DestructChecker
 {
     DestructChecker()
     {
-        counter++;
+        s_nCounter++;
     }
     ~DestructChecker()
     {
-        counter--;
+        s_nCounter--;
     }
 
-    static int counter;
+    static int s_nCounter;
 };
 
-int DestructChecker::counter = 0;
+int DestructChecker::s_nCounter = 0;
 
 TEST(containers_utils, destruct)
 {
     std::vector<DestructChecker> v(3);
-    ASSERT_EQ(DestructChecker::counter, 3);
+    ASSERT_EQ(DestructChecker::s_nCounter, 3);
 
     qx::destruct(v.begin(), v.end() - 1);
-    ASSERT_EQ(DestructChecker::counter, 1);
+    ASSERT_EQ(DestructChecker::s_nCounter, 1);
 }
 
 //------------------------------- qx::make_array -------------------------------
 
-constexpr auto TEST_ARRAY_1 = qx::make_array<5>(1);
+constexpr auto k_TestArray1 = qx::make_array<5>(1);
 static_assert(std::all_of(
-    TEST_ARRAY_1.cbegin(),
-    TEST_ARRAY_1.cend(),
+    k_TestArray1.cbegin(),
+    k_TestArray1.cend(),
     [](int val)
     {
         return val == 1;
     }));
-static_assert(TEST_ARRAY_1.size() == 5);
+static_assert(k_TestArray1.size() == 5);
 
 // ------------------------------ qx::join_arrays ------------------------------
 
-constexpr std::array first { 0, 1, 2, 3 };
-constexpr std::array second { 4, 5, 6, 7 };
-constexpr auto       result = qx::join_arrays(first, second);
-static_assert(result == std::array<int, 8> { 0, 1, 2, 3, 4, 5, 6, 7 });
+constexpr std::array k_First { 0, 1, 2, 3 };
+constexpr std::array k_Second { 4, 5, 6, 7 };
+constexpr auto       k_Result = qx::join_arrays(k_First, k_Second);
+static_assert(k_Result == std::array<int, 8> { 0, 1, 2, 3, 4, 5, 6, 7 });
 
 TEST(containers_utils, create_container)
 {

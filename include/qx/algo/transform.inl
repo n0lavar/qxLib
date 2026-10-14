@@ -14,12 +14,12 @@ namespace details
 {
 
 template<class T>
-concept has_reserve_func = requires(T t) {
+concept has_reserve_func_c = requires(T t) {
     { t.reserve(size_t()) };
 };
 
 template<class T>
-concept has_size_func = requires(T t) {
+concept has_size_func_c = requires(T t) {
     { t.size() } -> std::convertible_to<size_t>;
 };
 
@@ -36,7 +36,7 @@ auto transform_return(input_container_t&& input, const transform_callable_t& tra
     using result_container_full_t = result_container_t<result_type, result_container_rest_t...>;
     result_container_full_t result;
 
-    if constexpr (details::has_reserve_func<result_container_full_t> && details::has_size_func<input_container_t>)
+    if constexpr (details::has_reserve_func_c<result_container_full_t> && details::has_size_func_c<input_container_t>)
         result.reserve(input.size());
 
     for (auto&& inputElement : input)

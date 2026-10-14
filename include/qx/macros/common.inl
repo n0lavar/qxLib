@@ -27,14 +27,17 @@ template<class lambda_t>
 class call_before_main_invoker
 {
 public:
-    constexpr call_before_main_invoker(lambda_t lambda) : m_Lambda(std::move(lambda))
-    {
-        m_Lambda();
-    }
+    constexpr call_before_main_invoker(lambda_t lambda);
 
 private:
     lambda_t m_Lambda;
 };
+
+template<class lambda_t>
+constexpr call_before_main_invoker<lambda_t>::call_before_main_invoker(lambda_t lambda) : m_Lambda(std::move(lambda))
+{
+    m_Lambda();
+}
 
 } // namespace qx::details
 

@@ -49,13 +49,7 @@ public:
         @param  args - template parameter pack
         @retval      - class instance or nullptr if can't find factory or can't create
     **/
-    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(class_id id, args_t&&... args)
-    {
-        if (auto it = m_FactoriesById.find(id); it != m_FactoriesById.end())
-            return it->second(std::forward<args_t>(args)...);
-
-        return nullptr;
-    }
+    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(class_id id, args_t&&... args);
 
     /**
         @brief  Create object based on class name
@@ -63,15 +57,7 @@ public:
         @param  args        - template parameter pack
         @retval             - class instance or nullptr if can't find factory or can't create
     **/
-    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(string_view svClassName, args_t&&... args)
-    {
-        if (auto it = m_FactoriesByName.find(svClassName); it != m_FactoriesByName.end())
-        {
-            return it->second(std::forward<args_t>(args)...);
-        }
-
-        return nullptr;
-    }
+    [[nodiscard]] static smart_ptr_t<base_class_t> create_object(string_view svClassName, args_t&&... args);
 
     /**
         @brief  Register class so it can be constructed by creator
@@ -80,24 +66,54 @@ public:
         @param  svClassName - class name
         @retval             - true if registered
     **/
-    static bool _register_class(factory factory, class_id id, string_view svClassName)
-    {
-        if (factory && !svClassName.empty())
-        {
-            m_FactoriesById[id]            = factory;
-            m_FactoriesByName[svClassName] = factory;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    static bool _register_class(factory factory, class_id id, string_view svClassName);
 
 private:
-    static inline std::map<class_id, factory>    m_FactoriesById;
-    static inline std::map<string_view, factory> m_FactoriesByName;
+    static inline std::map<class_id, factory>    s_FactoriesById;
+    static inline std::map<string_view, factory> s_FactoriesByName;
 };
+
+template<class base_class_t, template<class> class smart_ptr_t, class... args_t>
+[[nodiscard]] inline smart_ptr_t<base_class_t> reflection_creator<base_class_t, smart_ptr_t, args_t...>::create_object(
+    class_id id,
+    args_t&&... args)
+{
+    if (auto it = s_FactoriesById.find(id); it != s_FactoriesById.end())
+        return it->second(std::forward<args_t>(args)...);
+
+    return nullptr;
+}
+
+template<class base_class_t, template<class> class smart_ptr_t, class... args_t>
+[[nodiscard]] inline smart_ptr_t<base_class_t> reflection_creator<base_class_t, smart_ptr_t, args_t...>::create_object(
+    string_view svClassName,
+    args_t&&... args)
+{
+    if (auto it = s_FactoriesByName.find(svClassName); it != s_FactoriesByName.end())
+    {
+        return it->second(std::forward<args_t>(args)...);
+    }
+
+    return nullptr;
+}
+
+template<class base_class_t, template<class> class smart_ptr_t, class... args_t>
+inline bool reflection_creator<base_class_t, smart_ptr_t, args_t...>::_register_class(
+    factory     factory,
+    class_id    id,
+    string_view svClassName)
+{
+    if (factory && !svClassName.empty())
+    {
+        s_FactoriesById[id]            = factory;
+        s_FactoriesByName[svClassName] = factory;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 namespace details
 {

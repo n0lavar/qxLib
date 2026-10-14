@@ -14,7 +14,7 @@ namespace details
 {
 
 template<sbo_poly_assignable_c<base_logger_stream> stream_t>
-static constexpr auto logger_stream_filter = [](const logger::logger_sbo& stream)
+static constexpr auto k_LoggerStreamFilter = [](const logger::logger_sbo& stream)
 {
     return stream->is<stream_t>();
 };
@@ -42,14 +42,14 @@ inline void logger::add_stream(stream_t stream) noexcept
 template<sbo_poly_assignable_c<base_logger_stream> stream_t>
 inline stream_t* logger::get_stream() noexcept
 {
-    auto it = std::ranges::find_if(m_Streams, details::logger_stream_filter<stream_t>);
+    auto it = std::ranges::find_if(m_Streams, details::k_LoggerStreamFilter<stream_t>);
     return it != m_Streams.end() ? static_cast<stream_t*>(&it->get()) : nullptr;
 }
 
 template<sbo_poly_assignable_c<base_logger_stream> stream_t>
 inline auto logger::get_streams() noexcept
 {
-    return m_Streams | std::views::filter(details::logger_stream_filter<stream_t>)
+    return m_Streams | std::views::filter(details::k_LoggerStreamFilter<stream_t>)
            | std::views::transform(
                [](logger_sbo& stream)
                {
@@ -66,7 +66,7 @@ template<sbo_poly_assignable_c<base_logger_stream> stream_t>
 inline size_t logger::remove_streams() noexcept
 {
     std::unique_lock _(m_StreamsMutex);
-    return std::erase_if(m_Streams, details::logger_stream_filter<stream_t>);
+    return std::erase_if(m_Streams, details::k_LoggerStreamFilter<stream_t>);
 }
 
 inline void logger::register_category(const category& category, category_data data) noexcept

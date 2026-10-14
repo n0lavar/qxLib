@@ -15,108 +15,139 @@
 
 //V_EXCLUDE_PATH *.gtest.cpp
 
-static int k_nObjectsCounter             = 0;
-static int k_nDerivedSmallObjectsCounter = 0;
-static int k_nDerivedBigObjectsCounter   = 0;
+static int g_nObjectsCounter             = 0;
+static int g_nDerivedSmallObjectsCounter = 0;
+static int g_nDerivedBigObjectsCounter   = 0;
 
 class base
 {
 public:
-    base(int nIntData, std::string sString) : m_nIntData(nIntData), m_sStringData(std::move(sString)), m_SavedThis(this)
-    {
-        ++k_nObjectsCounter;
-    }
+    base(int nIntData, std::string sString);
 
-    base(base&& other) noexcept
-    {
-        ++k_nObjectsCounter;
-        std::swap(m_nIntData, other.m_nIntData);
-        std::swap(m_sStringData, other.m_sStringData);
-        m_SavedThis = this;
-    }
+    base(base&& other) noexcept;
 
-    virtual ~base()
-    {
-        --k_nObjectsCounter;
-    }
+    virtual ~base();
 
-    int get_int_data() const
-    {
-        return m_nIntData;
-    }
+    int get_int_data() const;
 
-    std::string_view get_string_data() const
-    {
-        return m_sStringData;
-    }
+    std::string_view get_string_data() const;
 
-    base* get_saved_this() const
-    {
-        return m_SavedThis;
-    }
+    base* get_saved_this() const;
 
-    const base* get_this() const
-    {
-        return this;
-    }
+    const base* get_this() const;
 
 private:
     int         m_nIntData = 0;
     std::string m_sStringData;
-    base*       m_SavedThis = nullptr;
+    base*       m_pSavedThis = nullptr;
 };
+
+inline base::base(int nIntData, std::string sString)
+    : m_nIntData(nIntData)
+    , m_sStringData(std::move(sString))
+    , m_pSavedThis(this)
+{
+    ++g_nObjectsCounter;
+}
+
+inline base::base(base&& other) noexcept
+{
+    ++g_nObjectsCounter;
+    std::swap(m_nIntData, other.m_nIntData);
+    std::swap(m_sStringData, other.m_sStringData);
+    m_pSavedThis = this;
+}
+
+inline base::~base()
+{
+    --g_nObjectsCounter;
+}
+
+inline int base::get_int_data() const
+{
+    return m_nIntData;
+}
+
+inline std::string_view base::get_string_data() const
+{
+    return m_sStringData;
+}
+
+inline base* base::get_saved_this() const
+{
+    return m_pSavedThis;
+}
+
+inline const base* base::get_this() const
+{
+    return this;
+}
 
 using sbo_type = qx::sbo_poly<base, 128>;
 
 class derived_small : public base
 {
 public:
-    derived_small(int nIntData, std::string sStringData) : base(nIntData, std::move(sStringData))
-    {
-        ++k_nDerivedSmallObjectsCounter;
-    }
+    derived_small(int nIntData, std::string sStringData);
 
-    derived_small(derived_small&& other) noexcept : base(std::move(other))
-    {
-        ++k_nDerivedSmallObjectsCounter;
-    }
+    derived_small(derived_small&& other) noexcept;
 
-    virtual ~derived_small() override
-    {
-        --k_nDerivedSmallObjectsCounter;
-    }
+    virtual ~derived_small() override;
 };
+
+inline derived_small::derived_small(int nIntData, std::string sStringData) : base(nIntData, std::move(sStringData))
+{
+    ++g_nDerivedSmallObjectsCounter;
+}
+
+inline derived_small::derived_small(derived_small&& other) noexcept : base(std::move(other))
+{
+    ++g_nDerivedSmallObjectsCounter;
+}
+
+inline derived_small::~derived_small()
+{
+    --g_nDerivedSmallObjectsCounter;
+}
 QX_STATIC_ASSERT_LE(sizeof(derived_small), sbo_type::sbo_bytes_type::nBufferSize);
 
 class derived_big : public base
 {
 public:
-    derived_big(int nIntData, std::string sString, const std::array<size_t, 8>& arrayData)
-        : base(nIntData, std::move(sString))
-        , m_ArrayData(arrayData)
-    {
-        ++k_nDerivedBigObjectsCounter;
-    }
+    derived_big(int nIntData, std::string sString, const std::array<size_t, 8>& arrayData);
 
-    derived_big(derived_big&& other) noexcept : base(std::move(other))
-    {
-        ++k_nDerivedBigObjectsCounter;
-        std::swap(m_ArrayData, other.m_ArrayData);
-    }
+    derived_big(derived_big&& other) noexcept;
 
-    virtual ~derived_big() override
-    {
-        --k_nDerivedBigObjectsCounter;
-    }
+    virtual ~derived_big() override;
 
-    const std::array<size_t, 8>& get_array_data() const
-    {
-        return m_ArrayData;
-    }
+    const std::array<size_t, 8>& get_array_data() const;
 
 private:
     std::array<size_t, 8> m_ArrayData;
 };
+
+inline derived_big::derived_big(int nIntData, std::string sString, const std::array<size_t, 8>& arrayData)
+    : base(nIntData, std::move(sString))
+    , m_ArrayData(arrayData)
+{
+    ++g_nDerivedBigObjectsCounter;
+}
+
+inline derived_big::derived_big(derived_big&& other) noexcept : base(std::move(other))
+{
+    ++g_nDerivedBigObjectsCounter;
+    std::swap(m_ArrayData, other.m_ArrayData);
+}
+
+inline derived_big::~derived_big()
+{
+    --g_nDerivedBigObjectsCounter;
+}
+
+inline const std::array<size_t, 8>& derived_big::get_array_data() const
+{
+    return m_ArrayData;
+}
 QX_STATIC_ASSERT_LT(sbo_type::sbo_bytes_type::nBufferSize, sizeof(derived_big));
 
 class other_base
@@ -142,11 +173,13 @@ public:
     {
     }
 
-    int get_other_data() const override
-    {
-        return 42;
-    }
+    int get_other_data() const override;
 };
+
+inline int multiple_derived::get_other_data() const
+{
+    return 42;
+}
 
 class alignas(256) over_aligned_derived : public base
 {
@@ -196,28 +229,28 @@ static sbo_type create_big(int nIntData = k_nBigIntData)
 
 TEST(sbo_poly, lifetime_small)
 {
-    EXPECT_EQ(k_nObjectsCounter, 0);
-    EXPECT_EQ(k_nDerivedSmallObjectsCounter, 0);
+    EXPECT_EQ(g_nObjectsCounter, 0);
+    EXPECT_EQ(g_nDerivedSmallObjectsCounter, 0);
     {
         sbo_type sbo = create_small();
-        EXPECT_EQ(k_nObjectsCounter, 1);
-        EXPECT_EQ(k_nDerivedSmallObjectsCounter, 1);
+        EXPECT_EQ(g_nObjectsCounter, 1);
+        EXPECT_EQ(g_nDerivedSmallObjectsCounter, 1);
     }
-    EXPECT_EQ(k_nObjectsCounter, 0);
-    EXPECT_EQ(k_nDerivedSmallObjectsCounter, 0);
+    EXPECT_EQ(g_nObjectsCounter, 0);
+    EXPECT_EQ(g_nDerivedSmallObjectsCounter, 0);
 }
 
 TEST(sbo_poly, lifetime_big)
 {
-    EXPECT_EQ(k_nObjectsCounter, 0);
-    EXPECT_EQ(k_nDerivedBigObjectsCounter, 0);
+    EXPECT_EQ(g_nObjectsCounter, 0);
+    EXPECT_EQ(g_nDerivedBigObjectsCounter, 0);
     {
         sbo_type sbo = create_big();
-        EXPECT_EQ(k_nObjectsCounter, 1);
-        EXPECT_EQ(k_nDerivedBigObjectsCounter, 1);
+        EXPECT_EQ(g_nObjectsCounter, 1);
+        EXPECT_EQ(g_nDerivedBigObjectsCounter, 1);
     }
-    EXPECT_EQ(k_nObjectsCounter, 0);
-    EXPECT_EQ(k_nDerivedBigObjectsCounter, 0);
+    EXPECT_EQ(g_nObjectsCounter, 0);
+    EXPECT_EQ(g_nDerivedBigObjectsCounter, 0);
 }
 
 TEST(sbo_poly, move_small_to_small)

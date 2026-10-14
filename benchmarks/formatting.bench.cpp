@@ -7,10 +7,10 @@
 
 **/
 #include <qx/containers/string/string.h>
-#include "benchmark/benchmark.h"
-
 #include <qx/containers/string/string_utils.h>
 #include <qx/macros/suppress_warnings.h>
+
+#include "benchmark/benchmark.h"
 
 QX_DISABLE_MSVC_WARNINGS(4756);
 #include <cstdio>
@@ -112,52 +112,66 @@ public:
     using char_type   = traits_type::char_type;
 
 public:
-    void SetUp(const benchmark::State&) override
-    {
-        m_randomEngine = std::mt19937(static_cast<unsigned int>(s_nSeed));
-    }
+    void SetUp(const benchmark::State&) override;
 
 protected:
-    int random_int()
-    {
-        std::uniform_int_distribution dist(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
-        return dist(m_randomEngine);
-    }
+    int random_int();
 
-    float random_float()
-    {
-        std::uniform_real_distribution dist(-100000.f, 100000.f);
-        return dist(m_randomEngine);
-    }
+    float random_float();
 
-    std::basic_string<char_type> random_string(size_t nMinLength, size_t nMaxLength)
-    {
-        std::uniform_int_distribution lengthDist(nMinLength, nMaxLength);
-        const size_t                  nLength = lengthDist(m_randomEngine);
-
-        static const std::basic_string<char_type> sChars = QX_STR_PREFIX(
-            char_type,
-            "abcdefghijklmnopqrstuvwxyz"
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            "0123456789");
-
-        std::uniform_int_distribution<size_t> charsDist(0, sChars.size() - 1);
-
-        std::basic_string<char_type> sResult;
-        sResult.reserve(nLength);
-
-        for (size_t i = 0; i < nLength; ++i)
-        {
-            sResult += sChars[charsDist(m_randomEngine)];
-        }
-
-        return sResult;
-    }
+    std::basic_string<char_type> random_string(size_t nMinLength, size_t nMaxLength);
 
 private:
     inline static time_t s_nSeed = std::time(nullptr);
-    std::mt19937         m_randomEngine;
+    std::mt19937         m_RandomEngine;
 };
+
+template<class traits_t>
+inline void formatting_fixture<traits_t>::SetUp(const benchmark::State&)
+{
+    m_RandomEngine = std::mt19937(static_cast<unsigned int>(s_nSeed));
+}
+
+template<class traits_t>
+inline int formatting_fixture<traits_t>::random_int()
+{
+    std::uniform_int_distribution dist(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
+    return dist(m_RandomEngine);
+}
+
+template<class traits_t>
+inline float formatting_fixture<traits_t>::random_float()
+{
+    std::uniform_real_distribution dist(-100000.f, 100000.f);
+    return dist(m_RandomEngine);
+}
+
+template<class traits_t>
+inline std::basic_string<typename formatting_fixture<traits_t>::char_type> formatting_fixture<traits_t>::random_string(
+    size_t nMinLength,
+    size_t nMaxLength)
+{
+    std::uniform_int_distribution lengthDist(nMinLength, nMaxLength);
+    const size_t                  nLength = lengthDist(m_RandomEngine);
+
+    static const std::basic_string<char_type> s_sChars = QX_STR_PREFIX(
+        char_type,
+        "abcdefghijklmnopqrstuvwxyz"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "0123456789");
+
+    std::uniform_int_distribution<size_t> charsDist(0, s_sChars.size() - 1);
+
+    std::basic_string<char_type> sResult;
+    sResult.reserve(nLength);
+
+    for (size_t i = 0; i < nLength; ++i)
+    {
+        sResult += s_sChars[charsDist(m_RandomEngine)];
+    }
+
+    return sResult;
+}
 
 // ------------------------------------------------------------
 // std::format / fmt::format cases
