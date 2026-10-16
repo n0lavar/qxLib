@@ -936,6 +936,52 @@ TEST(logger_test, custom_category_message)
     EXPECT_STREQ((*messages)[2].c_str(), QXT("[2] message 3"));
 }
 
+TEST(logger_test, owns_registered_category_names)
+{
+    auto& logger = qx::get_logger();
+    logger.reset();
+
+    stub_stream stream(qx::base_logger_stream::config {});
+    const auto  pMessages = stream.get_messages();
+    stream.set_pattern(QXT("{message}"));
+    logger.add_stream(std::move(stream));
+
+    {
+        qx::string sCategoryName(CatCustomMessageTest.get_name());
+        logger.register_category(sCategoryName, { .eRuntimeVerbosity = qx::verbosity::detailed });
+
+        // Mutate the source while it is still alive, so a borrowed key fails deterministically.
+        sCategoryName[0] = QXT('X');
+        ASSERT_NE(
+            logger.get_message_necessity_type(
+                CatCustomMessageTest,
+                qx::verbosity::detailed,
+                std::this_thread::get_id(),
+                std::chrono::system_clock::now(),
+                {},
+                {},
+                0),
+            qx::logger::message_necessity_type::not_required);
+    }
+
+    // Lookup and formatting must still work after the source string has been destroyed.
+    logger.set_category_formatter(
+        CatCustomMessageTest,
+        [](qx::logger::logger_string_pool::item message,
+           qx::logger::logger_string_pool&      stringPool) -> qx::logger::logger_string_pool::item
+        {
+            auto newMessage = stringPool.acquire();
+            newMessage.sValue.format(QXT("owned: {}"), message.sValue);
+            stringPool.release(std::move(message));
+            return newMessage;
+        });
+
+    QX_LOG_C(CatCustomMessageTest, qx::verbosity::log, "message");
+
+    ASSERT_EQ(pMessages->size(), 1);
+    EXPECT_STREQ((*pMessages)[0].c_str(), QXT("owned: message"));
+}
+
 TEST(logger_test, terminal_colors)
 {
     // just output all the colors so we can visually see that it works

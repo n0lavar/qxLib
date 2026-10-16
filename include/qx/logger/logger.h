@@ -88,7 +88,12 @@ public:
             std::function<logger_string_pool::item(logger_string_pool::item message, logger_string_pool& stringPool)>;
         format_user_message_func FormatUserMessage;
     };
-    using category_data_map = std::unordered_map<string_view, category_data>;
+    struct category_name_hash : std::hash<string_view>
+    {
+        using is_transparent = void;
+    };
+
+    using category_data_map = std::unordered_map<string, category_data, category_name_hash, std::equal_to<>>;
 
     enum class message_necessity_type
     {
@@ -151,10 +156,10 @@ public:
 
     /**
         @brief Add custom rules for category
-        @param svCategoryName - category name, must stay valid while the logger is alive (category existence is not checked)
-        @param data           - category data
+        @param sCategoryName - category name owned by the logger (category existence is not checked)
+        @param data          - category data
     **/
-    void register_category(string_view svCategoryName, category_data data) noexcept;
+    void register_category(string sCategoryName, category_data data) noexcept;
 
     /**
         @brief Set category formatter

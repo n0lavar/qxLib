@@ -71,13 +71,13 @@ inline size_t logger::remove_streams() noexcept
 
 inline void logger::register_category(const category& category, category_data data) noexcept
 {
-    register_category(category.get_name(), std::move(data));
+    register_category(string(category.get_name()), std::move(data));
 }
 
-inline void logger::register_category(string_view svCategoryName, category_data data) noexcept
+inline void logger::register_category(string sCategoryName, category_data data) noexcept
 {
     std::unique_lock _(m_RegisteredCategoriesMutex);
-    m_RegisteredCategories.try_emplace(svCategoryName, std::move(data));
+    m_RegisteredCategories.try_emplace(std::move(sCategoryName), std::move(data));
 }
 
 inline void logger::set_category_formatter(
