@@ -83,6 +83,8 @@ $(function() {
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1logger_1_1category__name__hash.html">category_name_hash</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -108,9 +110,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a69bf50445c759b9fdb1fde85b4796d16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">register_category</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, <a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</td></tr>
 <tr class="memdesc:a69bf50445c759b9fdb1fde85b4796d16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom rules for category.  <a href="classqx_1_1logger.html#a69bf50445c759b9fdb1fde85b4796d16">More...</a><br /></td></tr>
 <tr class="separator:a69bf50445c759b9fdb1fde85b4796d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">register_category</a> (string_view svCategoryName, <a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</td></tr>
-<tr class="memdesc:a0bce4c36d3ed33a8cbc848afc9715890"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom rules for category.  <a href="classqx_1_1logger.html#a0bce4c36d3ed33a8cbc848afc9715890">More...</a><br /></td></tr>
-<tr class="separator:a0bce4c36d3ed33a8cbc848afc9715890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab99a9888991829564a0f1e79bcf125a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#ab99a9888991829564a0f1e79bcf125a6">register_category</a> (<a class="el" href="classqx_1_1basic__string.html">string</a> sCategoryName, <a class="el" href="structqx_1_1logger_1_1category__data.html">category_data</a> data) noexcept</td></tr>
+<tr class="memdesc:ab99a9888991829564a0f1e79bcf125a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add custom rules for category.  <a href="classqx_1_1logger.html#ab99a9888991829564a0f1e79bcf125a6">More...</a><br /></td></tr>
+<tr class="separator:ab99a9888991829564a0f1e79bcf125a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a112ccf9a94fe25476fdd63c8ededc8ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1logger.html#a112ccf9a94fe25476fdd63c8ededc8ab">set_category_formatter</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, category_data::format_user_message_func FormatUserMessage) noexcept</td></tr>
 <tr class="memdesc:a112ccf9a94fe25476fdd63c8ededc8ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set category formatter.  <a href="classqx_1_1logger.html#a112ccf9a94fe25476fdd63c8ededc8ab">More...</a><br /></td></tr>
 <tr class="separator:a112ccf9a94fe25476fdd63c8ededc8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -528,8 +530,8 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
 
 </div>
 </div>
-<a id="a0bce4c36d3ed33a8cbc848afc9715890"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0bce4c36d3ed33a8cbc848afc9715890">&#9670;&nbsp;</a></span>register_category() <span class="overload">[2/2]</span></h2>
+<a id="ab99a9888991829564a0f1e79bcf125a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab99a9888991829564a0f1e79bcf125a6">&#9670;&nbsp;</a></span>register_category() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -540,8 +542,8 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
         <tr>
           <td class="memname">void qx::logger::register_category </td>
           <td>(</td>
-          <td class="paramtype">string_view&#160;</td>
-          <td class="paramname"><em>svCategoryName</em>, </td>
+          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">string</a>&#160;</td>
+          <td class="paramname"><em>sCategoryName</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -565,7 +567,7 @@ template&lt;sbo_poly_assignable_c&lt; base_logger_stream &gt; stream_t&gt; </div
 <p>Add custom rules for category. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">svCategoryName</td><td>- category name, must stay valid while the logger is alive (category existence is not checked) </td></tr>
+    <tr><td class="paramname">sCategoryName</td><td>- category name owned by the logger (category existence is not checked) </td></tr>
     <tr><td class="paramname">data</td><td>- category data </td></tr>
   </table>
   </dd>
