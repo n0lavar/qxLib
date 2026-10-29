@@ -92,7 +92,7 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @brief  Constexpr absolute value</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @tparam T     - value type</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param  value - value</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @retval       - absolute value</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @return       - absolute value</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;constexpr T <a class="code" href="math_2common_8h.html#ab465ef7b0d8760b14b3893514deeb8fd">abs</a>(T value);</div>
@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @brief  Check if value is odd</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @tparam T   - integral type</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @param  val - value</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @retval     - true if value is odd</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @return     - true if value is odd</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">int</span>egral T&gt;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="math_2common_8h.html#a8662f96933a20e0a8c713191c9e58b2a">is_odd</a>(T val);</div>
@@ -110,7 +110,7 @@ $(function() {
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    @brief  Check if value is even</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    @tparam T   - integral type</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @param  val - value</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    @retval     - true if value is even</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    @return     - true if value is even</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">int</span>egral T&gt;</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="math_2common_8h.html#ae3e2a6429953e9e0156d0e73b4ae7371">is_even</a>(T val);</div>
@@ -122,7 +122,7 @@ $(function() {
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    @complexity O(log(second))</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @param      nFirst  - first num</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    @param      nSecond - second num</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    @retval             - greatest common divisor if first and second &gt; 0, otherwise 0</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    @return             - greatest common divisor if first and second &gt; 0, otherwise 0</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;constexpr <span class="keywordtype">int</span> <a class="code" href="math_2common_8h.html#aff29488c1ea7390c81dee1c9fed7c23e">gcd</a>(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"></span> </div>
@@ -131,7 +131,7 @@ $(function() {
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">    @complexity O(log(second))</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">    @param      nFirst  - first num</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    @param      nSecond - second num</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    @retval             - least common multiple if first and second &gt; 0, otherwise 0</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    @return             - least common multiple if first and second &gt; 0, otherwise 0</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;constexpr <span class="keywordtype">int</span> <a class="code" href="math_2common_8h.html#a0cc16ea666fc94bbd38b4e4e7a53b348">lcm</a>(<span class="keywordtype">int</span> nFirst, <span class="keywordtype">int</span> nSecond);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span> </div>
@@ -145,7 +145,7 @@ $(function() {
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    @tparam     T      - Integral or floating point type</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    @param      number - integral of floating point value</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    @param      nPower - integral power</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    @retval            - number ^ power</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">    @return            - number ^ power</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;constexpr <span class="keywordtype">double</span> <a class="code" href="math_2common_8h.html#af2e3d64764a1eddcd124a65d3e7166b0">pow</a>(T number, <span class="keywordtype">int</span> nPower);</div>
@@ -154,7 +154,7 @@ $(function() {
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    @brief  Max power of two in integer</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">    @tparam I      - Integral type</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">    @param  nValue - number</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">    @retval        - max power of two in the number</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">    @return        - max power of two in the number</span></div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keyword">template</span>&lt;std::<span class="keywordtype">int</span>egral I&gt;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keyword">inline</span> I <a class="code" href="math_2common_8h.html#a558b28fe2075e7c4a244b55920b69df7">maxpot</a>(I nValue);</div>

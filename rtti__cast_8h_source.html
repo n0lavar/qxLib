@@ -92,7 +92,7 @@ $(function() {
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @tparam  to_t    - type to cast to</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @tparam  from_t  - type to cast from</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param   pointer - a pointer to test</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @retval          - to_t* if from_t is inherited from pointer class, otherwise nullptr</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @return          - to_t* if from_t is inherited from pointer class, otherwise nullptr</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> to_t, <span class="keyword">class</span> from_t&gt;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a> std::derived_from&lt;from_t, rtti_pure_base&gt; &amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt;</div>
@@ -109,7 +109,7 @@ $(function() {
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    @tparam to_t   - type to cast to</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">    @tparam from_t - type to cast from</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">    @param  pValue - a pointer to test</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @retval        - to_t* if from_t is inherited from Y, otherwise nullptr</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @return        - to_t* if from_t is inherited from Y, otherwise nullptr</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> to_t, <span class="keyword">class</span> from_t&gt;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    requires std::derived_from&lt;from_t, rtti_pure_base&gt; &amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt;</div>
@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">    @tparam to_t   - type to cast to</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    @tparam from_t - type to cast from</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    @param  pValue - a pointer to test</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    @retval        - to_t* if from_t is inherited from Y, otherwise nullptr</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    @return        - to_t* if from_t is inherited from Y, otherwise nullptr</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> to_t, <span class="keyword">class</span> from_t&gt;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    requires std::derived_from&lt;from_t, rtti_pure_base&gt; &amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt;</div>
@@ -143,7 +143,7 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    @tparam to_t       - type to cast to</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    @tparam from_t     - type to cast from</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    @param  pValueLink - a pointer to test</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    @retval            - to_t* if from_t is inherited from Y, otherwise nullptr</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    @return            - to_t* if from_t is inherited from Y, otherwise nullptr</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> to_t, <span class="keyword">class</span> from_t&gt;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    requires std::derived_from&lt;from_t, rtti_pure_base&gt; &amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt;</div>
@@ -162,7 +162,7 @@ $(function() {
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    @tparam  to_t   - type to cast to</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">    @tparam  from_t - type to cast from</span></div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    @param   value  - a value to test</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    @retval         - to_t* if from_t is inherited from Y, otherwise nullptr</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    @return         - to_t* if from_t is inherited from Y, otherwise nullptr</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> to_t, <span class="keyword">class</span> from_t&gt;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    requires std::derived_from&lt;from_t, rtti_pure_base&gt; &amp;&amp; std::derived_from&lt;to_t, rtti_pure_base&gt;</div>

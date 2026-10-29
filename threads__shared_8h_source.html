@@ -167,7 +167,7 @@ $(function() {
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">        /**</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">            @brief  Get synchronization primitive stored in proxy</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">            @retval - synchronization primitive</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">            @return - synchronization primitive</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">        **/</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        synchronization_primitive_t* get_object() noexcept;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
@@ -196,14 +196,14 @@ $(function() {
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">        @brief  Wait for other threads to finish work with data object and retrieve</span></div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="comment">                proxy object</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">        @retval - proxy that provides access to an object stored in threads_shared</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">        @return - proxy that provides access to an object stored in threads_shared</span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">                  and provides raii for synchronization primitives</span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    [[nodiscard]] <a class="code" href="classqx_1_1shared__proxy.html">proxy</a> <a class="code" href="classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f">lock</a>();</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">        @brief  Try to lock synchronization primitive and get proxy</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">        @retval - proxy that provides access to an object stored</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">        @return - proxy that provides access to an object stored</span></div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">                  in threads_shared or std::nullopt</span></div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    [[nodiscard]] std::optional&lt;proxy&gt; <a class="code" href="classqx_1_1threads__shared.html#a1a1698724f64de68c7d6f62c16d1a57d">try_lock</a>();</div>

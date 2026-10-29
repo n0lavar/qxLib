@@ -198,12 +198,7 @@ template&lt;class naming_strategy_t &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true when an identifier matches during base-chain traversal</td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- true when an identifier matches during base-chain traversal</dd></dl>
 <p>The root compares against its own identifier. Macro-generated overrides check their immediate base and continue recursively. </p>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00078">78</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
@@ -233,12 +228,7 @@ template&lt;class naming_strategy_t &gt; </div>
 </div><div class="memdoc">
 
 <p>Get the identifier of the object's most-derived registered RTTI type. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>identifier used by exact-type comparisons and RTTI casts </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- identifier used by exact-type comparisons and RTTI casts </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00072">72</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -268,12 +258,7 @@ template&lt;class naming_strategy_t &gt; </div>
 
 <p>Create the declaring RTTI type's identifier from its type signature. </p>
 <dl class="section note"><dt>Note</dt><dd>The signature is compiler-dependent; identifiers are not a portable format for persisting type identity across different builds. </dd></dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>identifier independent of the selected class-name representation </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- identifier independent of the selected class-name representation </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00065">65</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -302,12 +287,7 @@ template&lt;class naming_strategy_t &gt; </div>
 </div><div class="memdoc">
 
 <p>Get the name of the object's most-derived registered RTTI type. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>the naming strategy's result for the dynamic type; it may be empty </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- the naming strategy's result for the dynamic type; it may be empty </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00059">59</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -336,12 +316,7 @@ template&lt;class naming_strategy_t &gt; </div>
 </div><div class="memdoc">
 
 <p>Apply the naming strategy to the declaring RTTI type's signature. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>a class-name view that may be empty, depending on the strategy </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- a class-name view that may be empty, depending on the strategy </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00053">53</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -373,12 +348,7 @@ template&lt;class naming_strategy_t  = rtti_naming_strategy_class_name&gt; </div
 </div><div class="memdoc">
 
 <p>Get the registered inheritance chain in base-to-derived order. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>identifiers from the <a class="el" href="classqx_1_1rtti__root.html" title="Polymorphic base for qx class identity and inheritance queries.">rtti_root</a> specialization through the dynamic type</td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- identifiers from the <a class="el" href="classqx_1_1rtti__root.html" title="Polymorphic base for qx class identity and inheritance queries.">rtti_root</a> specialization through the dynamic type</dd></dl>
 <p>QX_RTTI_CLASS returns a span backed by class-specific static storage, rather than storage owned by the object. </p>
 
 </div>
@@ -414,12 +384,7 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true only when the identifiers match; base types are not accepted </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- true only when the identifiers match; base types are not accepted </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00023">23</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -458,12 +423,7 @@ template&lt;class naming_strategy_t &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true when id equals <a class="el" href="classqx_1_1rtti__root.html#a8684c749612763e30d235dc262ba81b9" title="Get the identifier of the object&#39;s most-derived registered RTTI type.">get_class_id()</a> </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- true when id equals <a class="el" href="classqx_1_1rtti__root.html#a8684c749612763e30d235dc262ba81b9" title="Get the identifier of the object&#39;s most-derived registered RTTI type.">get_class_id()</a> </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00035">35</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -503,12 +463,7 @@ template&lt;class naming_strategy_t &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true when the names match exactly </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- true when the names match exactly </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00029">29</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -545,12 +500,7 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true for the object's registered type and its registered bases </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- true for the object's registered type and its registered bases </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00015">15</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -589,12 +539,7 @@ template&lt;class naming_strategy_t &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true when id belongs to the registered type or one of its bases </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- true when id belongs to the registered type or one of its bases </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00041">41</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 
@@ -633,12 +578,7 @@ template&lt;class naming_strategy_t &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">-</td><td>true when id belongs to the declaring type or one of its bases </td></tr>
-  </table>
-  </dd>
-</dl>
+<dl class="section return"><dt>Returns</dt><dd>- true when id belongs to the declaring type or one of its bases </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="rtti_8inl_source.html#l00047">47</a> of file <a class="el" href="rtti_8inl_source.html">rtti.inl</a>.</p>
 

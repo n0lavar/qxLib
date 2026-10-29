@@ -133,7 +133,7 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">        @brief  Try to get ac olor from a color name</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @param  sName - color name</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @retval       - color or nullopt</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @return       - color or nullopt</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    std::optional&lt;color&gt; <a class="code" href="classqx_1_1details_1_1string__to__color__converter.html#a21253869a1c6464d1a0b42da7742ab17">get</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1basic__string.html">basic_string&lt;char_t&gt;</a>&amp; sName) <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span> </div>
@@ -141,7 +141,7 @@ $(function() {
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">        @brief  Try to a color name get from a color </span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">        @param  color          - RGBA lookup key</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">        @param  eColorNameType - css_snake or css_pascal selects the reverse lookup table</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @retval                - registered name, or nullopt if the key is absent or</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">        @return                - registered name, or nullopt if the key is absent or</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">                                 the requested name format is unsupported</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    std::optional&lt;basic_string_view&lt;char_t&gt;&gt; <a class="code" href="classqx_1_1details_1_1string__to__color__converter.html#a21253869a1c6464d1a0b42da7742ab17">get</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; <a class="code" href="classqx_1_1color.html">color</a>, color_name_type eColorNameType) <span class="keyword">const</span> noexcept;</div>

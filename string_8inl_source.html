@@ -2691,7 +2691,7 @@ $(function() {
 <div class="line"><a name="l02620"></a><span class="lineno"> 2620</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l02621"></a><span class="lineno"> 2621</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l02622"></a><span class="lineno"> 2622</span>&#160;<span class="comment">    @brief  Get string size (excluding null terminator)</span></div>
-<div class="line"><a name="l02623"></a><span class="lineno"> 2623</span>&#160;<span class="comment">    @retval - string size (excluding null terminator)</span></div>
+<div class="line"><a name="l02623"></a><span class="lineno"> 2623</span>&#160;<span class="comment">    @return - string size (excluding null terminator)</span></div>
 <div class="line"><a name="l02624"></a><span class="lineno"> 2624</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l02625"></a><span class="lineno"> 2625</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l02626"></a><span class="lineno"> 2626</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::size_type basic_string&lt;char_t, traits_t&gt;::size() const noexcept</div>
@@ -2702,7 +2702,7 @@ $(function() {
 <div class="line"><a name="l02631"></a><span class="lineno"> 2631</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l02632"></a><span class="lineno"> 2632</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l02633"></a><span class="lineno"> 2633</span>&#160;<span class="comment">    @brief  Get c-string</span></div>
-<div class="line"><a name="l02634"></a><span class="lineno"> 2634</span>&#160;<span class="comment">    @retval - c-string</span></div>
+<div class="line"><a name="l02634"></a><span class="lineno"> 2634</span>&#160;<span class="comment">    @return - c-string</span></div>
 <div class="line"><a name="l02635"></a><span class="lineno"> 2635</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l02636"></a><span class="lineno"> 2636</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l02637"></a><span class="lineno"> 2637</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::pointer basic_string&lt;char_t, traits_t&gt;::data() noexcept</div>
@@ -2713,7 +2713,7 @@ $(function() {
 <div class="line"><a name="l02642"></a><span class="lineno"> 2642</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l02643"></a><span class="lineno"> 2643</span>&#160;<span class="comment">    @brief  Get char at the ind position</span></div>
 <div class="line"><a name="l02644"></a><span class="lineno"> 2644</span>&#160;<span class="comment">    @param  nIndex - char index</span></div>
-<div class="line"><a name="l02645"></a><span class="lineno"> 2645</span>&#160;<span class="comment">    @retval        - char value</span></div>
+<div class="line"><a name="l02645"></a><span class="lineno"> 2645</span>&#160;<span class="comment">    @return        - char value</span></div>
 <div class="line"><a name="l02646"></a><span class="lineno"> 2646</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l02647"></a><span class="lineno"> 2647</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l02648"></a><span class="lineno"> 2648</span>&#160;<span class="keyword">inline</span> <span class="keyword">typename</span> basic_string&lt;char_t, traits_t&gt;::reference basic_string&lt;char_t, traits_t&gt;::at(size_type nIndex)</div>

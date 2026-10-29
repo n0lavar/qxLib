@@ -152,25 +152,25 @@ $(function() {
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @brief  Create new category from this one with custom verbosity</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @param  eVerbosity - category verbosity.</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">                             User code will use this category with top priority and perform compile time checks if possible</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        @retval            - new category</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        @return            - new category</span></div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    constexpr <a class="code" href="classqx_1_1category.html">category</a> <a class="code" href="classqx_1_1category.html#a1534af0fb56e2dbc91f6f05ba88b96be">set_verbosity</a>(verbosity eVerbosity) <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">        @brief  Get category name</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">        @retval - category name</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">        @return - category name</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    constexpr string_view <a class="code" href="classqx_1_1category.html#a0b2b93e7b142f4a34cf90ceaa304177f">get_name</a>() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">        @brief  Get category color</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        @retval  - category color</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">        @return  - category color</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    constexpr <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; <a class="code" href="classqx_1_1category.html#a45f05eea5cdc8a8030b3233748bbcef2">get_color</a>() <span class="keyword">const</span> noexcept;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    /**</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">        @brief  Get category verbosity</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">        @retval  - category verbosity</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">        @return  - category verbosity</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">                   User code will use this category with top priority and perform compile time checks if possible</span></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    constexpr verbosity <a class="code" href="classqx_1_1category.html#a6dcb4e8efe067e7a397c89c916e8d722">get_verbosity</a>() <span class="keyword">const</span> noexcept;</div>

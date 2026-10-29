@@ -93,7 +93,7 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @param  p0 - point 0 (x - coordinate, y - f(x))</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @param  p1 - point 1 (x - coordinate, y - f(x))</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">    @param  x  - point</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @retval    - ~f(x)</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">    @return    - ~f(x)</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="interpolation_8h.html#af733f871b9e6a2dde54b17c87d7c5811">   27</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="interpolation_8h.html#af733f871b9e6a2dde54b17c87d7c5811">linear_interpolation</a>(<span class="keyword">const</span> glm::dvec2&amp; p0, <span class="keyword">const</span> glm::dvec2&amp; p1, <span class="keywordtype">double</span> x)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;{</div>
@@ -112,7 +112,7 @@ $(function() {
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">    @param   p3  - point 3 (x, y - coordinates, z - f(x, y))</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">    @param   p   - point (x, y - coordinates).</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">                   It can be out of points square, in this case algorithm called extrapolation</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    @retval      - ~f(p.x, p.y) </span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    @return      - ~f(p.x, p.y) </span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="interpolation_8h.html#a7b302f778e0aef24ea53a73721d4224f">   46</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">double</span> <a class="code" href="interpolation_8h.html#a7b302f778e0aef24ea53a73721d4224f">bilinear_interpolation</a>(</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">const</span> glm::dvec3&amp; p0,</div>

@@ -149,7 +149,7 @@ $(function() {
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">    @param   condition - a condition to check. if false, assert fails</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    @param   category  - a category to use for logging and reporting</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">    @param   ...       - optional user message and its format args. the format string should be without QXT</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    @retval            - condition</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    @return            - condition</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="asserts_8h.html#a8f94bc453cbc2e97ecfbb23a47cd5c80">   83</a></span>&#160;<span class="preprocessor">#define QX_EXPECT_C(condition, category, ...)   \</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">    _QX_COMMON_ASSERT(                          \</span></div>
@@ -165,7 +165,7 @@ $(function() {
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    @details QX_EXPECT macros generate nonfatal failures and remain in shipping. See @ref qx_assert_table for details.</span></div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    @param   condition - a condition to check. if false, assert fails</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="comment">    @param   ...       - optional user message and its format args. the format string should be without QXT</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    @retval            - condition</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    @return            - condition</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">   99</a></span>&#160;<span class="preprocessor">#define QX_EXPECT(condition, ...) QX_EXPECT_C(condition, QX_GET_FILE_CATEGORY(), ##__VA_ARGS__)</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"></span> </div>

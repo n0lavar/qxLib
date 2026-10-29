@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @param  itBegin  - range begin iterator</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @param  itEnd    - range end iterator</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @param  value    - value to check</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @retval          - true if range contains value</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @return          - true if range contains value</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> fwd_it_t, <span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="contains_8h.html#af2d49efbd3de8fc5e05ab1ec9106ac48">   26</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="structcontains.html">contains</a>(fwd_it_t itBegin, fwd_it_t itEnd, <span class="keyword">const</span> T&amp; value)</div>
@@ -105,7 +105,7 @@ $(function() {
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @tparam T           - value type</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    @param  container   - container to search in</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    @param  value       - value to check</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @retval             - true if container contains value</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @return             - true if container contains value</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t, <span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="contains_8h.html#a6daaac6c1da8ba6728a1148811074087">   40</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="structcontains.html">contains</a>(<span class="keyword">const</span> container_t&amp; container, <span class="keyword">const</span> T&amp; value)</div>
@@ -120,7 +120,7 @@ $(function() {
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">    @param  itBegin     - range begin iterator</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">    @param  itEnd       - range end iterator</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    @param  predicate   - predicate to check</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @retval             - true if at least one of range elements satisfies a predicate</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @return             - true if at least one of range elements satisfies a predicate</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> fwd_it_t, <span class="keyword">class</span> predicate_t&gt;</div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="contains_8h.html#a6d6544d79558649a87ccaa597c4e99ec">   55</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="contains_8h.html#a6d6544d79558649a87ccaa597c4e99ec">contains_if</a>(fwd_it_t itBegin, fwd_it_t itEnd, <span class="keyword">const</span> predicate_t&amp; predicate)</div>
@@ -134,7 +134,7 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">    @tparam predicate_t - predicate type</span></div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    @param  container   - container to search in</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    @param  predicate   - predicate to check</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    @retval             - true if at least one of container elements satisfies predicate</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">    @return             - true if at least one of container elements satisfies predicate</span></div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t, <span class="keyword">class</span> predicate_t&gt;</div>
 <div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="contains_8h.html#a8417abd30836a0cc5acb1e48a93be86c">   69</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="contains_8h.html#a6d6544d79558649a87ccaa597c4e99ec">contains_if</a>(<span class="keyword">const</span> container_t&amp; container, <span class="keyword">const</span> predicate_t&amp; predicate)</div>
@@ -150,7 +150,7 @@ $(function() {
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    @param  itWhereEnd     - first range&#39;s end iterator</span></div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">    @param  itWhatBegin    - second range&#39;s start iterator</span></div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    @param  itWhatEnd      - second range&#39;s end iterator</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    @retval                - true if found </span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    @return                - true if found </span></div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> where_fwd_it_t, <span class="keyword">class</span> what_fwd_it_t&gt;</div>
 <div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="contains_8h.html#a033251099d2096e0a16a137d0c537cd2">   85</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="contains_8h.html#a033251099d2096e0a16a137d0c537cd2">contains_any</a>(</div>
@@ -172,7 +172,7 @@ $(function() {
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    @tparam what_container_t  - second range&#39;s type</span></div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">    @param  whereContainer    - first range</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    @param  whatContainer     - second range</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    @retval                   - true if found</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    @return                   - true if found</span></div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> where_container_t, <span class="keyword">class</span> what_container_t&gt;</div>
 <div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="contains_8h.html#a6acc2da0539ae07a8245d9e240e0e952">  107</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="contains_8h.html#a033251099d2096e0a16a137d0c537cd2">contains_any</a>(<span class="keyword">const</span> where_container_t&amp; whereContainer, <span class="keyword">const</span> what_container_t&amp; whatContainer)</div>

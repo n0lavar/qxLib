@@ -91,7 +91,7 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">    @param  pszStr  - string for hashing</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">    @param  nSeed   - seed for hashing</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">    @param  nLen    - string length</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @retval         - 32bit unsigned value</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">    @return         - 32bit unsigned value</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">djb2a_hash</a>(<span class="keyword">const</span> value_t* pszStr, <span class="keywordtype">size_t</span> nSeed, <span class="keywordtype">size_t</span> nLen);</div>
@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @tparam value_t - char type</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @param  pszStr  - string for hashing (zero terminated)</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @param  nSeed   - seed for hashing</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @retval         - 32bit unsigned value</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @return         - 32bit unsigned value</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a3d321a74f68c1be9613ca451a464ec53">djb2a_hash</a>(<span class="keyword">const</span> value_t* pszStr, <span class="keywordtype">size_t</span> nSeed = 0);</div>
@@ -114,7 +114,7 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">    @param   pStr    - string for hashing</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">    @param   nSeed   - seed for hashing</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">    @param   nLen    - string length</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    @retval          - 32bit unsigned value</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">    @return          - 32bit unsigned value</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;constexpr <span class="keywordtype">size_t</span> <a class="code" href="string__utils_8h.html#a8eb00080d60f696d550f8f9800b88222">murmur_32_hash</a>(<span class="keyword">const</span> value_t* pStr, <span class="keywordtype">size_t</span> nSeed, <span class="keywordtype">size_t</span> nLen) noexcept;</div>
@@ -127,7 +127,7 @@ $(function() {
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">    @param  itEnd1     - string 1 end iterator </span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">    @param  itBegin2   - string 2 begin iterator </span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">    @param  itEnd2     - string 2 end iterator </span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    @retval            - &lt; 0 the first character that does not match has a lower value in str 1 than in str 2</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    @return            - &lt; 0 the first character that does not match has a lower value in str 1 than in str 2</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">                           0 the contents of both strings are equal</span></div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">                         &gt; 0 the first character that does not match has a greater value in str 1 than in str 2</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">**/</span></div>
@@ -139,7 +139,7 @@ $(function() {
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    @tparam value_t  - char type</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    @param  pszLeft  - first string (zero terminated)</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    @param  pszRight - second string (zero terminated)</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    @retval          -  &lt; 0 the first character that does not match has a lower value in ptr1 than in ptr2</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    @return          -  &lt; 0 the first character that does not match has a lower value in ptr1 than in ptr2</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">                          0 the contents of both strings are equal</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">                        &gt; 0 the first character that does not match has a greater value in ptr1 than in ptr2</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">**/</span></div>
@@ -219,7 +219,7 @@ $(function() {
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">    @brief  Get format specifier for type</span></div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">    @tparam value_t - char type</span></div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">    @tparam T       - target type</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">    @retval         - format specifier or nullptr</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">    @return         - format specifier or nullptr</span></div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t, <span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;constexpr <span class="keyword">const</span> value_t* get_format_specifier() noexcept;</div>
@@ -229,7 +229,7 @@ $(function() {
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">            for runtime prefer std::strlen as there are may be a lot of optimizations</span></div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">    @tparam value_t - char type</span></div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">    @param  psz     - pointer to string zero terminated</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    @retval         - string length</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    @return         - string length</span></div>
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> value_t&gt;</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;constexpr std::size_t strlen(<span class="keyword">const</span> value_t* psz);</div>

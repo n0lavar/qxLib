@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @tparam     random_it_t - random access iterator</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @param      begin       - begin iterator </span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @param      end         - end iterator </span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @retval                 - false if [begin, end) already sorted </span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @return                 - false if [begin, end) already sorted </span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> random_it_t&gt;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="sort_8h.html#a8df817949492b0f240bf39468fcdeeaa">sort_required</a>(random_it_t begin, random_it_t end);</div>
@@ -365,7 +365,7 @@ $(function() {
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;<span class="comment">    @param      end            - end iterator</span></div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;<span class="comment">    @param      compare        - comparison function</span></div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="comment">    @param      nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail</span></div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">    @retval                    - true if sorted, false if required buffer size is greather then max</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;<span class="comment">    @return                    - true if sorted, false if required buffer size is greather then max</span></div>
 <div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> random_it_t, <span class="keyword">class</span> compare_t = std::less&lt;&gt;&gt;</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;[[nodiscard]] <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="sort_8h.html#a65ff4b19aeee985756190fd4fa7c1d87">sort_counting</a>(</div>
@@ -382,7 +382,7 @@ $(function() {
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">    @param      cont           - container ref</span></div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">    @param      compare        - comparison function</span></div>
 <div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">    @param      nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">    @retval                    - true if sorted, false if required buffer size is greather then max</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">    @return                    - true if sorted, false if required buffer size is greather then max</span></div>
 <div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> container_t, <span class="keyword">class</span> compare_t = std::less&lt;&gt;&gt;</div>
 <div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;[[nodiscard]] <span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="sort_8h.html#a65ff4b19aeee985756190fd4fa7c1d87">sort_counting</a>(</div>

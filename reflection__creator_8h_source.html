@@ -118,7 +118,7 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">        @brief  Create object based on class id</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">        @param  id   - class id</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">        @param  args - template parameter pack</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        @retval      - class instance or nullptr if can&#39;t find factory or can&#39;t create</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">        @return      - class instance or nullptr if can&#39;t find factory or can&#39;t create</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    [[nodiscard]] <span class="keyword">static</span> smart_ptr_t&lt;base_class_t&gt; <a class="code" href="classqx_1_1reflection__creator.html#a0751dcb958bb72d74de262d1a140bd61">create_object</a>(<a class="code" href="classqx_1_1class__id.html">class_id</a> <span class="keywordtype">id</span>, args_t&amp;&amp;... args);</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"></span> </div>
@@ -126,7 +126,7 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">        @brief  Create object based on class name</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">        @param  svClassName - class name</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">        @param  args        - template parameter pack</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        @retval             - class instance or nullptr if can&#39;t find factory or can&#39;t create</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">        @return             - class instance or nullptr if can&#39;t find factory or can&#39;t create</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    [[nodiscard]] <span class="keyword">static</span> smart_ptr_t&lt;base_class_t&gt; <a class="code" href="classqx_1_1reflection__creator.html#a0751dcb958bb72d74de262d1a140bd61">create_object</a>(string_view svClassName, args_t&amp;&amp;... args);</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span> </div>
@@ -135,7 +135,7 @@ $(function() {
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">        @param  factory     - class factory</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">        @param  id          - class id</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">        @param  svClassName - class name</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @retval             - true if registered</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">        @return             - true if registered</span></div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    **/</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1reflection__creator.html#aa6c00f24e4ce3704d17f2e6c865877bd">_register_class</a>(factory factory, <a class="code" href="classqx_1_1class__id.html">class_id</a> <span class="keywordtype">id</span>, string_view svClassName);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
