@@ -213,7 +213,7 @@ inline typename vector2d<T>::size_type vector2d<T>::capacity(void) const noexcep
 
 /**
     @brief  Get number of elements in whole vector2d
-    @retval - num of elements (cols * rows)
+    @return - num of elements (cols * rows)
 **/
 template<class T>
 inline typename vector2d<T>::size_type vector2d<T>::size() const noexcept
@@ -223,7 +223,7 @@ inline typename vector2d<T>::size_type vector2d<T>::size() const noexcept
 
 /**
     @brief  Get first element pointer
-    @retval - first element pointer
+    @return - first element pointer
 **/
 template<class T>
 inline typename vector2d<T>::pointer vector2d<T>::data() noexcept
@@ -234,7 +234,7 @@ inline typename vector2d<T>::pointer vector2d<T>::data() noexcept
 /**
     @brief  Get element at nIndex pos
     @param  nIndex - continuous vector index
-    @retval        - element
+    @return        - element
 **/
 template<class T>
 inline typename vector2d<T>::reference vector2d<T>::at(size_type nIndex)

@@ -65,7 +65,7 @@ public:
 
     /**
         @brief  operator size_t
-        @retval - hash number
+        @return - hash number
     **/
     constexpr operator size_t() const noexcept;
 
@@ -86,7 +86,7 @@ namespace literals
     @brief  String hash literal for constexpr converting. Can be used with switch-case
     @param  pszStr - literal text pointer
     @param  nSize  - literal text size
-    @retval        - text hash value
+    @return        - text hash value
 **/
 constexpr basic_string_hash<string_traits::default_traits<char>> operator"" _sh(const char* pszStr, size_t nSize);
 
@@ -94,7 +94,7 @@ constexpr basic_string_hash<string_traits::default_traits<char>> operator"" _sh(
     @brief  String hash literal for constexpr converting. Can be used with switch-case
     @param  pszStr - literal text pointer
     @param  nSize  - literal text size
-    @retval        - text hash value
+    @return        - text hash value
 **/
 constexpr basic_string_hash<string_traits::default_traits<wchar_t>> operator"" _sh(
     const wchar_t

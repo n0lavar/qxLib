@@ -50,25 +50,25 @@ public:
 
     /**
         @brief  Evaluate comparison.
-        @retval - comparison result
+        @return - comparison result
     **/
     constexpr bool result() const noexcept(noexcept(operation_t {}(left(), right())));
 
     /**
         @brief  Convert comparison object to bool.
-        @retval - comparison result
+        @return - comparison result
     **/
     constexpr explicit operator bool() const noexcept(noexcept(result()));
 
     /**
         @brief  Get left operand.
-        @retval - left operand
+        @return - left operand
     **/
     constexpr const auto& left() const noexcept;
 
     /**
         @brief  Get right operand.
-        @retval - right operand
+        @return - right operand
     **/
     constexpr const auto& right() const noexcept;
 
@@ -92,7 +92,7 @@ struct predicates::validator<details::assert_comparison<left_t, right_t, operati
     @details When used in macro assertions, this allows you to see both the names and values of variables
     @param   left  - left operand
     @param   right - right operand
-    @retval        - assertion comparison object
+    @return        - assertion comparison object
 
     @code
     QX_EXPECT(qx::assert_eq(nValue, nOther)); // "nValue [41] == nOther [42]"
@@ -112,7 +112,7 @@ constexpr auto assert_eq(left_t&& left, right_t&& right) noexcept(
     @details When used in macro assertions, this allows you to see both the names and values of variables
     @param   left  - left operand
     @param   right - right operand
-    @retval        - assertion comparison object
+    @return        - assertion comparison object
 
     @code
     QX_EXPECT(qx::assert_ne(nValue, nSame); // "nValue [41] != nSame [41]"
@@ -132,7 +132,7 @@ constexpr auto assert_ne(left_t&& left, right_t&& right) noexcept(
     @details When used in macro assertions, this allows you to see both the names and values of variables
     @param   left  - left operand
     @param   right - right operand
-    @retval        - assertion comparison object
+    @return        - assertion comparison object
 
     @code
     QX_EXPECT(qx::assert_lt(nOther, nValue)); // "nOther [42] < nValue [41]"
@@ -152,7 +152,7 @@ constexpr auto assert_lt(left_t&& left, right_t&& right) noexcept(
     @details When used in macro assertions, this allows you to see both the names and values of variables
     @param   left  - left operand
     @param   right - right operand
-    @retval        - assertion comparison object
+    @return        - assertion comparison object
 
     @code
     QX_EXPECT(qx::assert_le(nOther, nValue)); // "nOther [42] <= nValue [41]"
@@ -172,7 +172,7 @@ constexpr auto assert_le(left_t&& left, right_t&& right) noexcept(
     @details When used in macro assertions, this allows you to see both the names and values of variables
     @param   left  - left operand
     @param   right - right operand
-    @retval        - assertion comparison object
+    @return        - assertion comparison object
 
     @code
     QX_EXPECT(qx::assert_gt(nValue, nOther)); // "nValue [41] > nOther [42]"
@@ -192,7 +192,7 @@ constexpr auto assert_gt(left_t&& left, right_t&& right) noexcept(
     @details When used in macro assertions, this allows you to see both the names and values of variables
     @param   left  - left operand
     @param   right - right operand
-    @retval        - assertion comparison object
+    @return        - assertion comparison object
 
     @code
     QX_EXPECT(qx::assert_ge(nValue, nOther)); // "nValue [41] >= nOther [42]"

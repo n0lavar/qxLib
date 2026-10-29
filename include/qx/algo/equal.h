@@ -22,7 +22,7 @@ namespace qx
     @param   range2Begin - second range begin iterator
     @param   range2End   - second range end iterator
     @param   pred        - predicate that compares values from left and right ranges
-    @retval              - true if ranges are equal
+    @return              - true if ranges are equal
 **/
 template<class it_1_t, class it_2_t, class pred_t>
 inline bool equal_rotated(
@@ -41,7 +41,7 @@ inline bool equal_rotated(
     @param   range1    - first range 
     @param   range2    - second range
     @param   pred      - predicate that compares values from left and right ranges
-    @retval            - true if ranges are equal
+    @return            - true if ranges are equal
 **/
 template<class range_1_t, class range_2_t, class pred_t>
 inline bool equal_rotated(const range_1_t& range1, const range_2_t& range2, const pred_t& pred) noexcept;
@@ -55,7 +55,7 @@ inline bool equal_rotated(const range_1_t& range1, const range_2_t& range2, cons
     @param   range1End   - first range end iterator
     @param   range2Begin - second range begin iterator
     @param   range2End   - second range end iterator
-    @retval              - true if ranges are equal
+    @return              - true if ranges are equal
 **/
 template<class it_1_t, class it_2_t>
 inline bool equal_rotated(it_1_t range1Begin, it_1_t range1End, it_2_t range2Begin, it_2_t range2End) noexcept;
@@ -67,7 +67,7 @@ inline bool equal_rotated(it_1_t range1Begin, it_1_t range1End, it_2_t range2Beg
     @tparam  range_2_t - second range type
     @param   range1    - first range
     @param   range2    - second range
-    @retval            - true if ranges are equal
+    @return            - true if ranges are equal
 **/
 template<class range_1_t, class range_2_t>
 inline bool equal_rotated(const range_1_t& range1, const range_2_t& range2) noexcept;

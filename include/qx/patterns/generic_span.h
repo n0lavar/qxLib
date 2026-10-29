@@ -114,7 +114,7 @@ public:
         @brief  operator=
         @tparam container_t - any container, which adapter satisfies forward iterator concept
         @param  container   - container instance. container must not be edited until adapter death
-        @retval             - this object reference
+        @return             - this object reference
     **/
     template<class container_t>
     generic_span& operator=(container_t& container) noexcept;
@@ -124,31 +124,31 @@ public:
 
     /**
         @brief  Check if span is empty
-        @retval  - true if empty
+        @return  - true if empty
     **/
     bool empty() const noexcept;
 
     /**
         @brief  Return iterator to beginning
-        @retval  - iterator to beginning
+        @return  - iterator to beginning
     **/
     iterator begin() const noexcept;
 
     /**
         @brief  Return iterator to end
-        @retval  - iterator to end
+        @return  - iterator to end
     **/
     iterator end() const noexcept;
 
     /**
         @brief  Return const iterator to beginning
-        @retval  - const iterator to beginning
+        @return  - const iterator to beginning
     **/
     iterator cbegin() const noexcept;
 
     /**
         @brief  Return const iterator to end
-        @retval  - const iterator to end
+        @return  - const iterator to end
     **/
     iterator cend() const noexcept;
 
@@ -159,7 +159,7 @@ private:
         @tparam adapter_t   - adapter callable type
         @param  container   - container instance. container must not be edited until adapter death
         @param  adapter     - function which transforms Container::value_type to T*
-        @retval             - values generator
+        @return             - values generator
     **/
     template<class container_t, class adapter_t>
     static generator_type create_initial_generator(container_t&& container, adapter_t adapter) noexcept;

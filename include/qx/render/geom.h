@@ -62,14 +62,14 @@ constexpr std::array<index_type, 6> rect = { 0, 1, 3, 1, 2, 3 };
 /**
     @brief  Create tangent vector for a given normal
     @param  normal - normal vector
-    @retval        - tangent vector
+    @return        - tangent vector
 **/
 glm::vec3 create_tangent(const glm::vec3& normal);
 
 /**
     @brief  Transform triangle indices to line indices
     @param  triangles - triangle indices
-    @retval           - line indices
+    @return           - line indices
 **/
 indices transform_triangle_indices_to_lines(indices_view triangles);
 
@@ -79,7 +79,7 @@ indices transform_triangle_indices_to_lines(indices_view triangles);
     @param  fSide2       - side 2 length
     @param  fSide3       - side 3 length
     @param  bFlatNormals - if true, each vertex will have independent normal
-    @retval              - parallelogram geometry
+    @return              - parallelogram geometry
 **/
 geometry create_parallelogram(float fSide1, float fSide2, float fSide3, bool bFlatNormals = true);
 
@@ -88,7 +88,7 @@ geometry create_parallelogram(float fSide1, float fSide2, float fSide3, bool bFl
     @param  fSide1 - side 1 length
     @param  fSide2 - side 2 length
     @param  fSide3 - side 3 length
-    @retval        - parallelogram geometry
+    @return        - parallelogram geometry
 **/
 geometry create_parallelogram_lines(float fSide1, float fSide2, float fSide3);
 
@@ -96,14 +96,14 @@ geometry create_parallelogram_lines(float fSide1, float fSide2, float fSide3);
     @brief  Create cube geometry
     @param  fSide        - cube side length
     @param  bFlatNormals - if true, each vertex will have independent normal
-    @retval              - cube geometry
+    @return              - cube geometry
 **/
 geometry create_cube(float fSide, bool bFlatNormals = true);
 
 /**
     @brief  Create cube geometry for lines drawing
     @param  fSide - cube side length
-    @retval       - cube geometry
+    @return       - cube geometry
 **/
 geometry create_cube_lines(float fSide);
 
@@ -111,14 +111,14 @@ geometry create_cube_lines(float fSide);
     @brief  Create icosahedron geometry
     @param  fRadius      - icosahedron radius
     @param  bFlatNormals - if true, each vertex will have independent normal
-    @retval              - icosahedron geometry
+    @return              - icosahedron geometry
 **/
 geometry create_icosahedron(float fRadius, bool bFlatNormals = true);
 
 /**
     @brief  Create icosahedron geometry for lines drawing
     @param  fRadius - icosahedron radius
-    @retval         - icosahedron geometry
+    @return         - icosahedron geometry
 **/
 geometry create_icosahedron_lines(float fRadius);
 
@@ -127,7 +127,7 @@ geometry create_icosahedron_lines(float fRadius);
     @param  fRadius      - icosphere radius
     @param  nDivides     - num of divides of icosahedron (bigger is higher precision)
     @param  bFlatNormals - if true, each vertex will have independent normal
-    @retval              - icosphere geometry
+    @return              - icosphere geometry
 **/
 geometry create_icosphere(float fRadius, size_t nDivides, bool bFlatNormals = false);
 
@@ -135,7 +135,7 @@ geometry create_icosphere(float fRadius, size_t nDivides, bool bFlatNormals = fa
     @brief  Create icosphere geometry for lines drawing
     @param  fRadius  - icosphere radius 
     @param  nDivides - num of divides of icosahedron (bigger is higher precision) 
-    @retval          - icosphere geometry 
+    @return          - icosphere geometry 
 **/
 geometry create_icosphere_lines(float fRadius, size_t nDivides);
 
@@ -143,7 +143,7 @@ geometry create_icosphere_lines(float fRadius, size_t nDivides);
     @brief  Create rectangle geometry
     @param  fWidth  - rectangle width
     @param  fHeight - rectangle height
-    @retval         - rectangle geometry
+    @return         - rectangle geometry
 **/
 geometry create_rect(float fWidth, float fHeight);
 
@@ -151,21 +151,21 @@ geometry create_rect(float fWidth, float fHeight);
     @brief  Create rectangle geometry for lines drawing
     @param  fWidth  - rectangle width
     @param  fHeight - rectangle height
-    @retval         - rectangle geometry
+    @return         - rectangle geometry
 **/
 geometry create_rect_lines(float fWidth, float fHeight);
 
 /**
     @brief  Create square geometry
     @param  fSideLength - square side length
-    @retval             - square geometry
+    @return             - square geometry
 **/
 geometry create_square(float fSideLength);
 
 /**
     @brief  Create square geometry for lines drawing
     @param  fSideLength - square side length
-    @retval             - square geometry
+    @return             - square geometry
 **/
 geometry create_square_lines(float fSideLength);
 
@@ -175,7 +175,7 @@ geometry create_square_lines(float fSideLength);
     @param  fVertRadius - ellipse vertical radius
     @param  nSides      - number of lines in ellipse edge, must be > 3
                           the greater value, the smoother еру edge
-    @retval             - ellipse geometry
+    @return             - ellipse geometry
 **/
 geometry create_ellipse(float fHorRadius, float fVertRadius, size_t nSides);
 
@@ -185,7 +185,7 @@ geometry create_ellipse(float fHorRadius, float fVertRadius, size_t nSides);
     @param  fVertRadius - ellipse vertical radius
     @param  nSides      - number of lines in ellipse edge, must be > 3
                           the greater value, the smoother еру edge
-    @retval             - ellipse geometry
+    @return             - ellipse geometry
 **/
 geometry create_ellipse_lines(float fHorRadius, float fVertRadius, size_t nSides);
 
@@ -194,7 +194,7 @@ geometry create_ellipse_lines(float fHorRadius, float fVertRadius, size_t nSides
     @param  fRadius - circle radius
     @param  nSides  - number of lines in ellipse edge, must be > 3
                       the greater value, the smoother еру edge
-    @retval         - circle geometry
+    @return         - circle geometry
 **/
 geometry create_circle(float fRadius, size_t nSides);
 
@@ -203,7 +203,7 @@ geometry create_circle(float fRadius, size_t nSides);
     @param  fRadius - circle radius
     @param  nSides  - number of lines in ellipse edge, must be > 3
                       the greater value, the smoother еру edge
-    @retval         - circle geometry
+    @return         - circle geometry
 **/
 geometry create_circle_lines(float fRadius, size_t nSides);
 

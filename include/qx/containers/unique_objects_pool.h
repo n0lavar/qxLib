@@ -91,13 +91,13 @@ public:
         /**
             @brief   Is this token have been set (not default)
             @warning This method does not check if the pool of this object is alive
-            @retval  - true if this object is valid
+            @return  - true if this object is valid
         **/
         bool is_valid() const noexcept;
 
         /**
             @brief  Same as is_valid()
-            @retval  - true if this object is valid
+            @return  - true if this object is valid
         **/
         explicit operator bool() const noexcept;
 
@@ -129,7 +129,7 @@ public:
         @brief  Get or create object
         @tparam U     - value type
         @param  value - object to search and to construct if wasn't able to find
-        @retval       - token to existing or constructed object
+        @return       - token to existing or constructed object
     **/
     template<class U>
     token get_or_create(U&& value) noexcept;
@@ -141,13 +141,13 @@ public:
 
     /**
         @brief  Get number of objects stored
-        @retval  - number of objects stored
+        @return  - number of objects stored
     **/
     size_t size() const;
 
     /**
         @brief  Is pool empty
-        @retval  - true if pool is empty
+        @return  - true if pool is empty
     **/
     bool empty() const;
 
@@ -167,7 +167,7 @@ private:
     /**
         @brief  Get value of the object with the specified id
         @param  nId - object id
-        @retval     - object value
+        @return     - object value
     **/
     const T& get_value(u64 nId) noexcept;
 

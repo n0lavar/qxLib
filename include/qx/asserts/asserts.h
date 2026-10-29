@@ -78,7 +78,7 @@
     @param   condition - a condition to check. if false, assert fails
     @param   category  - a category to use for logging and reporting
     @param   ...       - optional user message and its format args. the format string should be without QXT
-    @retval            - condition
+    @return            - condition
 **/
 #define QX_EXPECT_C(condition, category, ...)   \
     _QX_COMMON_ASSERT(                          \
@@ -94,7 +94,7 @@
     @details QX_EXPECT macros generate nonfatal failures and remain in shipping. See @ref qx_assert_table for details.
     @param   condition - a condition to check. if false, assert fails
     @param   ...       - optional user message and its format args. the format string should be without QXT
-    @retval            - condition
+    @return            - condition
 **/
 #define QX_EXPECT(condition, ...) QX_EXPECT_C(condition, QX_GET_FILE_CATEGORY(), ##__VA_ARGS__)
 

@@ -84,7 +84,7 @@ public:
     /**
         @brief  Test exact identity or membership in the object's RTTI base chain.
         @tparam T - candidate type exposing QX_RTTI_CLASS()
-        @retval   - true for the object's registered type and its registered bases
+        @return   - true for the object's registered type and its registered bases
     **/
     template<class T>
     bool is_derived_from() const noexcept;
@@ -92,7 +92,7 @@ public:
     /**
         @brief  Compare the object's dynamic class identifier with T's identifier.
         @tparam T - candidate type exposing QX_RTTI_CLASS()
-        @retval   - true only when the identifiers match; base types are not accepted
+        @return   - true only when the identifiers match; base types are not accepted
     **/
     template<class T>
     bool is() const noexcept;
@@ -102,21 +102,21 @@ public:
         @note    Name equality does not imply type identity when the naming strategy
                  produces duplicate names, such as rtti_naming_strategy_empty.
         @param   svClassName - expected result of get_class_name(), not a base-class name
-        @retval              - true when the names match exactly
+        @return              - true when the names match exactly
     **/
     bool is(string_view svClassName) const noexcept;
 
     /**
         @brief  Compare against the object's dynamic class identifier.
         @param  id - candidate for exact identity, not an inheritance query
-        @retval    - true when id equals get_class_id()
+        @return    - true when id equals get_class_id()
     **/
     bool is(const class_id& id) const noexcept;
 
     /**
         @brief  Test an identifier against the object's dynamic RTTI hierarchy.
         @param  id - candidate class identifier, including the object's own identifier
-        @retval    - true when id belongs to the registered type or one of its bases
+        @return    - true when id belongs to the registered type or one of its bases
     **/
     virtual bool is_derived_from_id(const class_id& id) const noexcept;
 
@@ -125,19 +125,19 @@ public:
         @details rtti_root matches only its own identifier; QX_RTTI_CLASS extends
                  this comparison recursively through the declared base class.
         @param   id - candidate class identifier to find in the static base chain
-        @retval     - true when id belongs to the declaring type or one of its bases
+        @return     - true when id belongs to the declaring type or one of its bases
     **/
     static constexpr bool is_derived_from_id_static(const class_id& id) noexcept;
 
     /**
         @brief  Apply the naming strategy to the declaring RTTI type's signature.
-        @retval - a class-name view that may be empty, depending on the strategy
+        @return - a class-name view that may be empty, depending on the strategy
     **/
     static constexpr string_view get_class_name_static() noexcept;
 
     /**
         @brief  Get the name of the object's most-derived registered RTTI type.
-        @retval - the naming strategy's result for the dynamic type; it may be empty
+        @return - the naming strategy's result for the dynamic type; it may be empty
     **/
     virtual string_view get_class_name() const noexcept;
 
@@ -145,19 +145,19 @@ public:
         @brief   Create the declaring RTTI type's identifier from its type signature.
         @note    The signature is compiler-dependent; identifiers are not a portable
                  format for persisting type identity across different builds.
-        @retval  - identifier independent of the selected class-name representation
+        @return  - identifier independent of the selected class-name representation
     **/
     static constexpr class_id get_class_id_static() noexcept;
 
     /**
         @brief  Get the identifier of the object's most-derived registered RTTI type.
-        @retval - identifier used by exact-type comparisons and RTTI casts
+        @return - identifier used by exact-type comparisons and RTTI casts
     **/
     virtual class_id get_class_id() const noexcept;
 
     /**
         @brief   Get the registered inheritance chain in base-to-derived order.
-        @retval  - identifiers from the rtti_root specialization through the dynamic type
+        @return  - identifiers from the rtti_root specialization through the dynamic type
         @details QX_RTTI_CLASS returns a span backed by class-specific static storage,
                  rather than storage owned by the object.
     **/
@@ -169,7 +169,7 @@ protected:
     /**
         @brief   Traverse identifiers treated as bases by derived RTTI classes.
         @param   idBase - candidate identifier from an inheritance query
-        @retval        - true when an identifier matches during base-chain traversal
+        @return        - true when an identifier matches during base-chain traversal
         @details The root compares against its own identifier. Macro-generated
                  overrides check their immediate base and continue recursively.
     **/

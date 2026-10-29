@@ -30,7 +30,7 @@ using vector_of_values = std::vector<iterator_value_t<it_t>>;
     @tparam     random_it_t - random access iterator
     @param      begin       - begin iterator 
     @param      end         - end iterator 
-    @retval                 - false if [begin, end) already sorted 
+    @return                 - false if [begin, end) already sorted 
 **/
 template<class random_it_t>
 inline bool sort_required(random_it_t begin, random_it_t end);
@@ -294,7 +294,7 @@ inline void sort_merge(
     @param      end            - end iterator
     @param      compare        - comparison function
     @param      nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail
-    @retval                    - true if sorted, false if required buffer size is greather then max
+    @return                    - true if sorted, false if required buffer size is greather then max
 **/
 template<class random_it_t, class compare_t = std::less<>>
 [[nodiscard]] inline bool sort_counting(
@@ -311,7 +311,7 @@ template<class random_it_t, class compare_t = std::less<>>
     @param      cont           - container ref
     @param      compare        - comparison function
     @param      nMaxBufferSize - max buffer size. if required size is bigger than this value, sorting will fail
-    @retval                    - true if sorted, false if required buffer size is greather then max
+    @return                    - true if sorted, false if required buffer size is greather then max
 **/
 template<class container_t, class compare_t = std::less<>>
 [[nodiscard]] inline bool sort_counting(

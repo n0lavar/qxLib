@@ -98,7 +98,7 @@ public:
     /**
         @brief  Reserve vector size
         @param  nElements - num elements
-        @retval           - true if reserved successfully
+        @return           - true if reserved successfully
     **/
     bool reserve(size_type nElements);
 
@@ -106,7 +106,7 @@ public:
         @brief  Resize vector
         @param  rows - num of rows
         @param  cols - num of cols
-        @retval      - true if resized successfully
+        @return      - true if resized successfully
     **/
     bool resize(size_type rows, size_type cols);
 
@@ -118,7 +118,7 @@ public:
         @param   rows - num of rows in new vector
         @param   cols - num of cols in new vector
         @param   data - data to fill
-        @retval       - true if resized successfully
+        @return       - true if resized successfully
     **/
     bool resize(size_type rows, size_type cols, const_reference data);
 
@@ -136,14 +136,14 @@ public:
     /**
         @brief  operator[]
         @param  nRow - row number
-        @retval      - row
+        @return      - row
     **/
     pointer operator[](size_type nRow) noexcept;
 
     /**
         @brief  operator[]
         @param  nRow - row number
-        @retval      - row
+        @return      - row
     **/
     const_pointer operator[](size_type nRow) const noexcept;
 
@@ -151,7 +151,7 @@ public:
         @brief  Get element
         @param  nRow - row number
         @param  nCol - col number
-        @retval      - element
+        @return      - element
     **/
     const_reference get(size_type nRow, size_type nCol) const noexcept;
 
@@ -165,31 +165,31 @@ public:
 
     /**
         @brief  Get num of rows in vector
-        @retval - num of rows in vector
+        @return - num of rows in vector
     **/
     size_type rows() const noexcept;
 
     /**
         @brief  Get num of cols in vector
-        @retval - num of cols in vector
+        @return - num of cols in vector
     **/
     size_type cols() const noexcept;
 
     /**
         @brief  Get num of rows in vector
-        @retval - num of rows in vector
+        @return - num of rows in vector
     **/
     size_type size_x() const noexcept;
 
     /**
         @brief  Get num of cols in vector
-        @retval - num of cols in vector
+        @return - num of cols in vector
     **/
     size_type size_y() const noexcept;
 
     /**
         @brief  Get allocated size
-        @retval - allocated size
+        @return - allocated size
     **/
     size_type capacity() const noexcept;
 

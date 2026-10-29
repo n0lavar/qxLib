@@ -84,7 +84,7 @@ public:
         @param  svFunction    - assert location function
         @param  svFile        - assert location file
         @param  nLine         - assert location line number
-        @retval               - true if debug break is required
+        @return               - true if debug break is required
     **/
     bool do_assert(
         string_view     svCondition,
@@ -104,7 +104,7 @@ public:
 
     /**
         @brief  Get config
-        @retval  - existing config
+        @return  - existing config
     **/
     const config& get_config() const;
 

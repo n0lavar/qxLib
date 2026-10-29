@@ -62,7 +62,7 @@ public:
     /**
         @brief  Try to get ac olor from a color name
         @param  sName - color name
-        @retval       - color or nullopt
+        @return       - color or nullopt
     **/
     std::optional<color> get(const basic_string<char_t>& sName) const noexcept;
 
@@ -70,7 +70,7 @@ public:
         @brief  Try to a color name get from a color 
         @param  color          - RGBA lookup key
         @param  eColorNameType - css_snake or css_pascal selects the reverse lookup table
-        @retval                - registered name, or nullopt if the key is absent or
+        @return                - registered name, or nullopt if the key is absent or
                                  the requested name format is unsupported
     **/
     std::optional<basic_string_view<char_t>> get(const color& color, color_name_type eColorNameType) const noexcept;

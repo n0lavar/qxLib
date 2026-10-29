@@ -20,7 +20,7 @@ namespace qx
              that removes the need to specify the type and unnecessary parentheses.
     @tparam  T     - object type
     @param   value - object value
-    @retval        - object hash
+    @return        - object hash
 **/
 template<class T>
 constexpr size_t get_hash(const T& value) noexcept

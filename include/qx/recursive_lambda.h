@@ -37,7 +37,7 @@ struct recursive_lambda
     @brief  Create lambda that can be called recursively 
     @tparam lambda_t - lambda type: see code example
     @param  lambda   - lambda object
-    @retval          - lambda that can be called recursively
+    @return          - lambda that can be called recursively
 
     @code
     auto calc_fibonacci = qx::make_recursive_lambda(

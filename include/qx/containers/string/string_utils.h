@@ -20,7 +20,7 @@ namespace qx
     @param  pszStr  - string for hashing
     @param  nSeed   - seed for hashing
     @param  nLen    - string length
-    @retval         - 32bit unsigned value
+    @return         - 32bit unsigned value
 **/
 template<class value_t>
 constexpr size_t djb2a_hash(const value_t* pszStr, size_t nSeed, size_t nLen);
@@ -30,7 +30,7 @@ constexpr size_t djb2a_hash(const value_t* pszStr, size_t nSeed, size_t nLen);
     @tparam value_t - char type
     @param  pszStr  - string for hashing (zero terminated)
     @param  nSeed   - seed for hashing
-    @retval         - 32bit unsigned value
+    @return         - 32bit unsigned value
 **/
 template<class value_t>
 constexpr size_t djb2a_hash(const value_t* pszStr, size_t nSeed = 0);
@@ -43,7 +43,7 @@ constexpr size_t djb2a_hash(const value_t* pszStr, size_t nSeed = 0);
     @param   pStr    - string for hashing
     @param   nSeed   - seed for hashing
     @param   nLen    - string length
-    @retval          - 32bit unsigned value
+    @return          - 32bit unsigned value
 **/
 template<class value_t>
 constexpr size_t murmur_32_hash(const value_t* pStr, size_t nSeed, size_t nLen) noexcept;
@@ -56,7 +56,7 @@ constexpr size_t murmur_32_hash(const value_t* pStr, size_t nSeed, size_t nLen) 
     @param  itEnd1     - string 1 end iterator 
     @param  itBegin2   - string 2 begin iterator 
     @param  itEnd2     - string 2 end iterator 
-    @retval            - < 0 the first character that does not match has a lower value in str 1 than in str 2
+    @return            - < 0 the first character that does not match has a lower value in str 1 than in str 2
                            0 the contents of both strings are equal
                          > 0 the first character that does not match has a greater value in str 1 than in str 2
 **/
@@ -68,7 +68,7 @@ constexpr int iter_strcmp(fwd_it_1_t itBegin1, fwd_it_1_t itEnd1, fwd_it_2_t itB
     @tparam value_t  - char type
     @param  pszLeft  - first string (zero terminated)
     @param  pszRight - second string (zero terminated)
-    @retval          -  < 0 the first character that does not match has a lower value in ptr1 than in ptr2
+    @return          -  < 0 the first character that does not match has a lower value in ptr1 than in ptr2
                           0 the contents of both strings are equal
                         > 0 the first character that does not match has a greater value in ptr1 than in ptr2
 **/
@@ -148,7 +148,7 @@ namespace qx
     @brief  Get format specifier for type
     @tparam value_t - char type
     @tparam T       - target type
-    @retval         - format specifier or nullptr
+    @return         - format specifier or nullptr
 **/
 template<class value_t, class T>
 constexpr const value_t* get_format_specifier() noexcept;
@@ -158,7 +158,7 @@ constexpr const value_t* get_format_specifier() noexcept;
             for runtime prefer std::strlen as there are may be a lot of optimizations
     @tparam value_t - char type
     @param  psz     - pointer to string zero terminated
-    @retval         - string length
+    @return         - string length
 **/
 template<class value_t>
 constexpr std::size_t strlen(const value_t* psz);

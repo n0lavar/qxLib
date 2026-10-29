@@ -38,7 +38,7 @@ struct basic_format_string_strong_checks : public QX_FMT_NS::basic_format_string
         @brief  Check braces balance and args num
         @tparam T     - string view convertible type
         @param  value - format string to check
-        @retval       - save format string as input
+        @return       - save format string as input
     **/
     template<class T>
     static consteval const T& parse_format_string(const T& value);

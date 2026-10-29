@@ -57,7 +57,7 @@ protected:
     /**
         @brief  Create a folder (if required) and get log file path
         @param  config - file logger configuration
-        @retval        - log file path, empty path on error
+        @return        - log file path, empty path on error
     **/
     std::filesystem::path prepare_folder_and_get_log_file_path(const config& config) noexcept;
 };

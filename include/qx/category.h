@@ -81,25 +81,25 @@ public:
         @brief  Create new category from this one with custom verbosity
         @param  eVerbosity - category verbosity.
                              User code will use this category with top priority and perform compile time checks if possible
-        @retval            - new category
+        @return            - new category
     **/
     constexpr category set_verbosity(verbosity eVerbosity) const noexcept;
 
     /**
         @brief  Get category name
-        @retval - category name
+        @return - category name
     **/
     constexpr string_view get_name() const noexcept;
 
     /**
         @brief  Get category color
-        @retval  - category color
+        @return  - category color
     **/
     constexpr const color& get_color() const noexcept;
 
     /**
         @brief  Get category verbosity
-        @retval  - category verbosity
+        @return  - category verbosity
                    User code will use this category with top priority and perform compile time checks if possible
     **/
     constexpr verbosity get_verbosity() const noexcept;

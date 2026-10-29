@@ -30,7 +30,7 @@ using unique_ref = details::smart_ptr_ref_adapter<std::unique_ptr, T, deleter_t>
     @tparam T                  - type to store
     @tparam constructor_args_t - T constructor types
     @param  args               - T constructor values
-    @retval                    - made unique_ref
+    @return                    - made unique_ref
 **/
 template<class T, class... constructor_args_t>
 unique_ref<T> make_unique_ref(constructor_args_t&&... args);
@@ -42,7 +42,7 @@ unique_ref<T> make_unique_ref(constructor_args_t&&... args);
     @tparam constructor_args_t - T constructor types
     @param  deleter            - custom constructor
     @param  args               - T constructor values
-    @retval                    - made unique_ref
+    @return                    - made unique_ref
 **/
 template<class T, class deleter_t, class... constructor_args_t>
 unique_ref<T, deleter_t> make_unique_ref_with_deleter(deleter_t deleter, constructor_args_t&&... args);

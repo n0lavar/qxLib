@@ -22,7 +22,7 @@ namespace qx
     @param   left      - left value
     @param   value     - value
     @param   right     - right value
-    @retval            - true, left <= value <= right
+    @return            - true, left <= value <= right
 **/
 template<class T, class compare_t = std::less_equal<>>
 constexpr bool between(T left, T value, T right);
@@ -35,7 +35,7 @@ constexpr bool between(T left, T value, T right);
     @param  value     - value
     @param  right     - right value
     @param  compare   - comparator function
-    @retval           - true, left <= value <= right
+    @return           - true, left <= value <= right
 **/
 template<class T, class compare_t = std::less_equal<>>
 constexpr bool between(T left, T value, T right, compare_t compare);

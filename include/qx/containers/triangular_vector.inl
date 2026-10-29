@@ -191,7 +191,7 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::_get_vecto
 
 /**
     @brief  Get triangular vector size
-    @retval - number of elements in triangular vector (without duplication)
+    @return - number of elements in triangular vector (without duplication)
 **/
 template<class T>
 inline typename triangular_vector<T>::size_type triangular_vector<T>::size(void) const noexcept
@@ -201,7 +201,7 @@ inline typename triangular_vector<T>::size_type triangular_vector<T>::size(void)
 
 /**
     @brief  Get raw data pointer
-    @retval - data pointer
+    @return - data pointer
 **/
 template<class T>
 inline typename triangular_vector<T>::pointer triangular_vector<T>::data(void) noexcept
@@ -212,7 +212,7 @@ inline typename triangular_vector<T>::pointer triangular_vector<T>::data(void) n
 /**
     @brief  Get element in continuous vector at index
     @param  nIndex - continuous vector index
-    @retval        - value
+    @return        - value
 **/
 template<class T>
 inline typename triangular_vector<T>::reference triangular_vector<T>::at(size_type nIndex)

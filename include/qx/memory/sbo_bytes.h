@@ -58,20 +58,20 @@ public:
     /**
         @brief  Make sure the capacity is at least nRequestedSize and allocate memory if needed, and change the size to nRequestedSize
         @param  nRequestedSize - required size (bytes)
-        @retval                - false if memory allocation failed, true otherwise
+        @return                - false if memory allocation failed, true otherwise
     **/
     bool resize(size_type nRequestedSize) noexcept;
 
     /**
         @brief  Make sure the capacity is at least nRequestedSize and allocate memory if needed, but do not change the size
         @param  nRequestedSize - required size (bytes)
-        @retval                - false if memory allocation failed, true otherwise
+        @return                - false if memory allocation failed, true otherwise
     **/
     bool reserve(size_type nRequestedSize) noexcept;
 
     /**
         @brief  Reduce capacity to fit the size, possibly moving data to the internal buffer if the size becomes small
-        @retval  - false if memory allocation failed, SBO remains valid in this case, true otherwise
+        @return  - false if memory allocation failed, SBO remains valid in this case, true otherwise
     **/
     bool shrink_to_fit() noexcept;
 
@@ -82,31 +82,31 @@ public:
 
     /**
         @brief  Get SBO data: from a buffer or from a heap
-        @retval - SBO data pointer
+        @return - SBO data pointer
     **/
     QX_FORCE_INLINE std::byte* data() noexcept;
 
     /**
         @brief  Get SBO data: from a buffer or from a heap
-        @retval  - SBO data pointer
+        @return  - SBO data pointer
     **/
     QX_FORCE_INLINE const std::byte* data() const noexcept;
 
     /**
         @brief  Get SBO size (bytes)
-        @retval - SBO size (bytes)
+        @return - SBO size (bytes)
     **/
     QX_FORCE_INLINE size_type size() const noexcept;
 
     /**
         @brief  Get SBO capacity (bytes)
-        @retval - SBO capacity (bytes), can't be less than nBufferSize
+        @return - SBO capacity (bytes), can't be less than nBufferSize
     **/
     QX_FORCE_INLINE size_type capacity() const noexcept;
 
     /**
         @brief  Is the SBO small and fits into the local buffer
-        @retval - true if the SBO is small and fits into the local buffer
+        @return - true if the SBO is small and fits into the local buffer
     **/
     QX_FORCE_INLINE bool is_small() const noexcept;
 
@@ -116,7 +116,7 @@ private:
         @details The initial state can be either small or big, but the final state will be big.
                  If the initial state is small, data will be preserved if bPreserveContents is true.
         @param   nNewSize - required size (bytes)
-        @retval           - false if memory allocation failed, true otherwise
+        @return           - false if memory allocation failed, true otherwise
     **/
     bool reallocate_to_big(size_type nNewSize) noexcept;
 
@@ -131,7 +131,7 @@ private:
     /**
         @brief  Get new size according to the growth strategy
         @param  nRequestedSize - required size (bytes)
-        @retval                - new size
+        @return                - new size
     **/
     QX_FORCE_INLINE size_type get_new_size(size_type nRequestedSize) const noexcept;
 

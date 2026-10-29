@@ -97,62 +97,62 @@ public:
 
     /**
         @brief  Get value of current sequence element
-        @retval - value of current sequence element
+        @return - value of current sequence element
     **/
     T get() const noexcept;
 
     /**
         @brief  Get a fraction indicating how much of the sequence has played
-        @retval - fraction [0.0, 1.0]
+        @return - fraction [0.0, 1.0]
     **/
     T get_fraction() const noexcept;
 
     /**
         @brief  Get updating speed value
-        @retval - speed
+        @return - speed
     **/
     T get_speed() const noexcept;
 
     /**
         @brief  Is sequence not started
-        @retval - true if sequence is not started
+        @return - true if sequence is not started
     **/
     bool is_not_started() const noexcept;
 
     /**
         @brief  Is sequence started
-        @retval - true if sequence is started
+        @return - true if sequence is started
     **/
     bool is_started() const noexcept;
 
     /**
         @brief  Is sequence paused
-        @retval - true if sequence is paused
+        @return - true if sequence is paused
     **/
     bool is_paused() const noexcept;
 
     /**
         @brief  Is sequence finished
-        @retval - true if sequence is finished
+        @return - true if sequence is finished
     **/
     bool is_finished() const noexcept;
 
     /**
         @brief  Is sequence looped
-        @retval - true if sequence is looped
+        @return - true if sequence is looped
     **/
     bool is_looped() const noexcept;
 
 private:
     /**
         @brief  Get current element pointer or nullptr if no elements
-        @retval - current element pointer or nullptr if no elements
+        @return - current element pointer or nullptr if no elements
     **/
     easing_element_type* get_current_element() noexcept;
 
     /**
         @brief  Get current element pointer or nullptr if no elements
-        @retval - current element pointer or nullptr if no elements
+        @return - current element pointer or nullptr if no elements
     **/
     const easing_element_type* get_current_element() const noexcept;
 

@@ -94,80 +94,80 @@ public:
 
     /**
         @brief  Get upper left corner pos
-        @retval - upper left corner pos
+        @return - upper left corner pos
     **/
     constexpr const vector_t& pos() const noexcept;
 
     /**
         @brief   Get min rect pos
         @details same as pos()
-        @retval  - min rect pos
+        @return  - min rect pos
     **/
     constexpr const vector_t& min() const noexcept;
 
     /**
         @brief  Get max rect pos
-        @retval - max rect pos
+        @return - max rect pos
     **/
     constexpr vector_t max() const noexcept;
 
     /**
         @brief  Get rect size
-        @retval - rect size
+        @return - rect size
     **/
     constexpr const vector_t& size() const noexcept;
 
     /**
         @brief  Get rect width
-        @retval - rect width
+        @return - rect width
     **/
     constexpr value_type width() const noexcept;
 
     /**
         @brief  Get rect height
-        @retval - rect height
+        @return - rect height
     **/
     constexpr value_type height() const noexcept;
 
     /**
         @brief  Get rect left border coordinate (x)
-        @retval - rect left border coordinate (x)
+        @return - rect left border coordinate (x)
     **/
     constexpr value_type left() const noexcept;
 
     /**
         @brief  rect right border coordinate (x)
-        @retval - rect right border coordinate (x)
+        @return - rect right border coordinate (x)
     **/
     constexpr value_type right() const noexcept;
 
     /**
         @brief  rect top border coordinate (y)
-        @retval - rect top border coordinate (y)
+        @return - rect top border coordinate (y)
     **/
     constexpr value_type top() const noexcept;
 
     /**
         @brief  rect bottom border coordinate (y)
-        @retval - rect bottom border coordinate (y)
+        @return - rect bottom border coordinate (y)
     **/
     constexpr value_type bottom() const noexcept;
 
     /**
         @brief  Get rect center pos
-        @retval - rect center pos
+        @return - rect center pos
     **/
     constexpr vector_t center() const noexcept;
 
     /**
         @brief  Is rect empty
-        @retval - true if rect is empty
+        @return - true if rect is empty
     **/
     constexpr bool empty() const noexcept;
 
     /**
         @brief  Calc rect area
-        @retval - rect area
+        @return - rect area
     **/
     constexpr value_type area() const noexcept;
 
@@ -175,7 +175,7 @@ public:
         @brief  Is point inside rect
         @param  pos       - point pos
         @param  originPos - coordinate system center pos
-        @retval           - true if pos is inside rect
+        @return           - true if pos is inside rect
     **/
     constexpr bool contains(const vector_t& pos, const vector_t& originPos = vector_t(0.f)) const noexcept;
 
@@ -183,21 +183,21 @@ public:
         @brief  Is other rect inside this rect
         @param  other     - other rect
         @param  originPos - coordinate system center pos
-        @retval           - true if other rect is inside this rect
+        @return           - true if other rect is inside this rect
     **/
     constexpr bool contains(const basic_rect& other, const vector_t& originPos = vector_t(0.f)) const noexcept;
 
     /**
         @brief  Is this rect overlaps other rect
         @param  other - other rect
-        @retval       - true if this rect is overlaps other rect
+        @return       - true if this rect is overlaps other rect
     **/
     constexpr bool overlaps(const basic_rect& other) const noexcept;
 
     /**
         @brief  Get rect representing overlap this rect by other rect
         @param  other - other rect
-        @retval       - rect representing overlap this rect by other rect or nullopt
+        @return       - rect representing overlap this rect by other rect or nullopt
     **/
     constexpr std::optional<basic_rect> overlap(const basic_rect& other) const noexcept;
 

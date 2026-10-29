@@ -223,7 +223,7 @@ public:
         @tparam  args_t  - template parameter pack type
         @param   sFormat - format string
         @param   args    - format arguments
-        @retval          - formatted string
+        @return          - formatted string
     **/
     template<class... args_t>
         requires format_acceptable_args_c<char_t, args_t...>
@@ -259,7 +259,7 @@ public:
         @tparam  args_t   - template parameter pack type
         @param   svFormat - format string
         @param   args     - format arguments
-        @retval           - formatted string
+        @return           - formatted string
     **/
     template<class... args_t>
         requires format_acceptable_args_c<char_t, args_t...>
@@ -285,7 +285,7 @@ public:
     /**
         @brief  Reserve memory for the string
         @param  nCapacity - required capacity
-        @retval           - new string capacity
+        @return           - new string capacity
     **/
     size_type reserve(size_type nCapacity) noexcept;
 
@@ -293,7 +293,7 @@ public:
         @brief   Resize string
         @details If the new size is smaller, the string may be 
         @param   nSymbols - new size (symbols without null terminator, not bytes)
-        @retval           - true if a memory allocation is successful
+        @return           - true if a memory allocation is successful
     **/
     bool resize(size_type nSymbols) noexcept;
 
@@ -311,7 +311,7 @@ public:
         @brief  Get substring
         @param  nPos     - start index
         @param  nSymbols - string size (npos - to the end)
-        @retval          - substring view
+        @return          - substring view
     **/
     string_view substr(size_type nPos, size_type nSymbols = npos) const noexcept;
 
@@ -327,38 +327,38 @@ public:
 
     /**
         @brief  Get first char of the string
-        @retval - first char of the string
+        @return - first char of the string
     **/
     value_type front() const noexcept;
 
     /**
         @brief  Get last char of the string
-        @retval - last char of the string
+        @return - last char of the string
     **/
     value_type back() const noexcept;
 
     /**
         @brief  Get string length
         @brief  Same as size()
-        @retval - string length
+        @return - string length
     **/
     size_type length() const noexcept;
 
     /**
         @brief  Get pointer to string zero terminated
-        @retval - pointer to string zero terminated
+        @return - pointer to string zero terminated
     **/
     const_pointer c_str() const noexcept;
 
     /**
         @brief  Get allocated memory size (including null terminator)
-        @retval - allocated memory size
+        @return - allocated memory size
     **/
     size_type capacity() const noexcept;
 
     /**
         @brief  Get the theoretical maximum of string size
-        @retval - theoretical maximum of string size
+        @return - theoretical maximum of string size
     **/
     static constexpr size_type max_size() noexcept;
 
@@ -371,7 +371,7 @@ public:
                  This will be fixed in the future when possible.
         @tparam  to_t      - type to convert
         @param   pszFormat - format string (according to https://en.cppreference.com/w/c/io/fscanf)
-        @retval            - converted value or std::nullopt
+        @return            - converted value or std::nullopt
     **/
     template<class to_t>
     std::optional<to_t> to(const_pointer pszFormat = nullptr) const noexcept;
@@ -381,7 +381,7 @@ public:
         @param  pDest  - pointer to the destination character string 
         @param  nCount - length of the substring 
         @param  nPos   - position of the first character to include 
-        @retval        - number of characters copied
+        @return        - number of characters copied
     **/
     size_type copy(pointer pDest, size_type nCount, size_type nPos = 0) const noexcept;
 
@@ -397,7 +397,7 @@ public:
         @brief  Construct string from custom type and get it
         @tparam from_t - type to convert from
         @param  data   - data of type from_type
-        @retval        - constructed string
+        @return        - constructed string
     **/
     template<class from_t>
     static basic_string static_from(const from_t& data);
@@ -442,7 +442,7 @@ public:
         @brief  Insert substring
         @param  nPos     - first char index
         @param  chSymbol - symbol to insert
-        @retval          - pos of char after last char of inserted string or npos
+        @return          - pos of char after last char of inserted string or npos
     **/
     size_type insert(size_type nPos, value_type chSymbol) noexcept;
 
@@ -451,7 +451,7 @@ public:
         @param  nPos     - first char index 
         @param  pszWhat  - source string 
         @param  nSymbols - number of symbols to insert 
-        @retval          - pos of char after last char of inserted string or npos
+        @return          - pos of char after last char of inserted string or npos
     **/
     size_type insert(size_type nPos, const_pointer pszWhat, size_type nSymbols = npos) noexcept;
 
@@ -459,7 +459,7 @@ public:
         @brief  Insert substring
         @param  nPos  - first char index
         @param  sWhat - string to insert
-        @retval       - pos of char after last char of inserted string or npos
+        @return       - pos of char after last char of inserted string or npos
     **/
     size_type insert(size_type nPos, const basic_string& sWhat) noexcept;
 
@@ -469,7 +469,7 @@ public:
         @param  nPos        - first char index
         @param  itWhatBegin - source first iterator
         @param  itWhatEnd   - source last iterator
-        @retval             - pos of char after last char of inserted string or npos
+        @return             - pos of char after last char of inserted string or npos
     **/
     template<class fwd_it_t>
     size_type insert(size_type nPos, fwd_it_t itWhatBegin, fwd_it_t itWhatEnd) noexcept;
@@ -479,7 +479,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  nPos     - first char index
         @param  sWhat    - source string
-        @retval          - pos of char after last char of inserted string or npos
+        @return          - pos of char after last char of inserted string or npos
     **/
     template<range_of_t_c<char_t> string_t>
     size_type insert(size_type nPos, string_t sWhat) noexcept;
@@ -488,7 +488,7 @@ public:
         @brief  Insert char
         @param  itPos    - first char iterator
         @param  chSymbol - char to insert
-        @retval          - pos of char after last char of inserted string or npos
+        @return          - pos of char after last char of inserted string or npos
     **/
     size_type insert(const_iterator itPos, value_type chSymbol) noexcept;
 
@@ -497,7 +497,7 @@ public:
         @param  itPos    - first char iterator
         @param  pszWhat  - source string
         @param  nSymbols - number of symbols to insert
-        @retval          - pos of char after last char of inserted string or npos
+        @return          - pos of char after last char of inserted string or npos
     **/
     size_type insert(const_iterator itPos, const_pointer pszWhat, size_type nSymbols = npos) noexcept;
 
@@ -505,7 +505,7 @@ public:
         @brief  Insert substring
         @param  itPos - first char iterator
         @param  sWhat - string to insert
-        @retval       - pos of char after last char of inserted string or npos
+        @return       - pos of char after last char of inserted string or npos
     **/
     size_type insert(const_iterator itPos, const basic_string& sWhat) noexcept;
 
@@ -515,7 +515,7 @@ public:
         @param  itPos       - first char iterator 
         @param  itWhatBegin - source string first iterator 
         @param  itWhatEnd   - source string last iterator 
-        @retval             - pos of char after last char of inserted string or npos
+        @return             - pos of char after last char of inserted string or npos
     **/
     template<class fwd_it_t>
     size_type insert(const_iterator itPos, fwd_it_t itWhatBegin, fwd_it_t itWhatEnd) noexcept;
@@ -525,7 +525,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  itPos    - first char iterator
         @param  sWhat    - source string
-        @retval          - pos of char after last char of inserted string or npos
+        @return          - pos of char after last char of inserted string or npos
     **/
     template<range_of_t_c<char_t> string_t>
     size_type insert(const_iterator itPos, string_t sWhat) noexcept;
@@ -570,33 +570,33 @@ public:
 
     /**
         @brief  Erase last char and return it
-        @retval - last char
+        @return - last char
     **/
     value_type pop_back() noexcept;
 
     /**
         @brief  Erase first char and return it
-        @retval - first char
+        @return - first char
     **/
     value_type pop_front() noexcept;
 
     /**
         @brief  Trim the string to the left (whitespace characters)
-        @retval - number of deleted symbols
+        @return - number of deleted symbols
     **/
     size_type trim_left() noexcept;
 
     /**
         @brief  Trim the string to the left
         @param  chSymbol - symbol to delete
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     size_type trim_left(value_type chSymbol) noexcept;
 
     /**
         @brief  Trim the string to the left
         @param  pszStr - string with symbols to delete 
-        @retval        - number of deleted symbols
+        @return        - number of deleted symbols
     **/
     size_type trim_left(const_pointer pszStr) noexcept;
 
@@ -604,14 +604,14 @@ public:
         @brief  Trim the string to the left
         @param  pszStr   - string with symbols to delete
         @param  nStrSize - string size
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     size_type trim_left(const_pointer pszStr, size_type nStrSize) noexcept;
 
     /**
         @brief  Trim the string to the left
         @param  sStr - string with symbols to delete
-        @retval      - number of deleted symbols
+        @return      - number of deleted symbols
     **/
     size_type trim_left(const basic_string& sStr) noexcept;
 
@@ -620,7 +620,7 @@ public:
         @tparam fwd_it_t - forward iterator type
         @param  itBegin  - begin it of string with symbols to delete
         @param  itEnd    - begin it of string with symbols to delete
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     template<class fwd_it_t>
     size_type trim_left(fwd_it_t itBegin, fwd_it_t itEnd) noexcept;
@@ -629,28 +629,28 @@ public:
         @brief  Trim the string to the left
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string with symbols to delete 
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     template<range_of_t_c<char_t> string_t>
     size_type trim_left(const string_t& sStr) noexcept;
 
     /**
         @brief  Trim the string to the right (whitespace characters)
-        @retval - number of deleted symbols
+        @return - number of deleted symbols
     **/
     size_type trim_right() noexcept;
 
     /**
         @brief  Trim the string to the right
         @param  chSymbol - symbol to delete
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     size_type trim_right(value_type chSymbol) noexcept;
 
     /**
         @brief  Trim the string to the right
         @param  pszStr - string with symbols to delete
-        @retval        - number of deleted symbols
+        @return        - number of deleted symbols
     **/
     size_type trim_right(const_pointer pszStr) noexcept;
 
@@ -658,14 +658,14 @@ public:
         @brief  Trim the string to the right
         @param  pszStr   - string with symbols to delete
         @param  nStrSize - string size
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     size_type trim_right(const_pointer pszStr, size_type nStrSize) noexcept;
 
     /**
         @brief  Trim the string to the right
         @param  sStr - string with symbols to delete
-        @retval      - number of deleted symbols
+        @return      - number of deleted symbols
     **/
     size_type trim_right(const basic_string& sStr) noexcept;
 
@@ -674,7 +674,7 @@ public:
         @tparam fwd_it_t - forward iterator type
         @param  itBegin  - begin it of string with symbols to delete
         @param  itEnd    - begin it of string with symbols to delete
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     template<class fwd_it_t>
     size_type trim_right(fwd_it_t itBegin, fwd_it_t itEnd) noexcept;
@@ -683,28 +683,28 @@ public:
         @brief  Trim the string to the right
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string with symbols to delete
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     template<range_of_t_c<char_t> string_t>
     size_type trim_right(const string_t& sStr) noexcept;
 
     /**
         @brief  Trim the string to the both sides (whitespace characters)
-        @retval - number of deleted symbols
+        @return - number of deleted symbols
     **/
     size_type trim() noexcept;
 
     /**
         @brief  Trim the string to the both sides
         @param  chSymbol - symbol to delete
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     size_type trim(value_type chSymbol) noexcept;
 
     /**
         @brief  Trim the string to the both sides
         @param  pszStr - string with symbols to delete 
-        @retval        - number of deleted symbols
+        @return        - number of deleted symbols
     **/
     size_type trim(const_pointer pszStr) noexcept;
 
@@ -712,14 +712,14 @@ public:
         @brief  Trim the string to the both sides
         @param  pszStr   - string with symbols to delete
         @param  nStrSize - string size
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     size_type trim(const_pointer pszStr, size_type nStrSize) noexcept;
 
     /**
         @brief  Trim the string to the both sides
         @param  sStr - string with symbols to delete
-        @retval      - number of deleted symbols
+        @return      - number of deleted symbols
     **/
     size_type trim(const basic_string& sStr) noexcept;
 
@@ -728,7 +728,7 @@ public:
         @tparam fwd_it_t - forward iterator type
         @param  itBegin  - begin it of string with symbols to delete
         @param  itEnd    - begin it of string with symbols to delete
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     template<class fwd_it_t>
     size_type trim(fwd_it_t itBegin, fwd_it_t itEnd) noexcept;
@@ -737,7 +737,7 @@ public:
         @brief  Trim the string to the both sides
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string with symbols to delete
-        @retval          - number of deleted symbols
+        @return          - number of deleted symbols
     **/
     template<range_of_t_c<char_t> string_t>
     size_type trim(const string_t& sStr) noexcept;
@@ -747,7 +747,7 @@ public:
         @param  chSymbol - char to remove
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
-        @retval          - position where the first occurrence was or npos
+        @return          - position where the first occurrence was or npos
     **/
     size_type remove(value_type chSymbol, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
@@ -757,7 +757,7 @@ public:
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
         @param  nStrSize - c-string size
-        @retval          - position where the first occurrence was or npos
+        @return          - position where the first occurrence was or npos
     **/
     size_type remove(
         const_pointer pszStr,
@@ -770,7 +770,7 @@ public:
         @param  sStr   - string to remove
         @param  nBegin - start searching index
         @param  nEnd   - end searching index
-        @retval        - position where the first occurrence was or npos
+        @return        - position where the first occurrence was or npos
     **/
     size_type remove(const basic_string& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
@@ -781,7 +781,7 @@ public:
         @param  itEnd    - string end iterator
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
-        @retval          - position where the first occurrence was or npos
+        @return          - position where the first occurrence was or npos
     **/
     template<class fwd_it_t>
     size_type remove(fwd_it_t itBegin, fwd_it_t itEnd, size_type nBegin = 0, size_type nEnd = npos) noexcept;
@@ -792,7 +792,7 @@ public:
         @param  sStr     - string to remove
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
-        @retval          - position where the first occurrence was or npos
+        @return          - position where the first occurrence was or npos
     **/
     template<range_of_t_c<char_t> string_t>
     size_type remove(const string_t& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
@@ -800,7 +800,7 @@ public:
     /**
         @brief  Remove string prefix if matches
         @param  chSymbol - char to remove
-        @retval          - true if removed
+        @return          - true if removed
     **/
     bool remove_prefix(value_type chSymbol) noexcept;
 
@@ -808,14 +808,14 @@ public:
         @brief  Remove string prefix if matches
         @param  pszStr   - string to remove
         @param  nStrSize - string size
-        @retval          - true if removed
+        @return          - true if removed
     **/
     bool remove_prefix(const_pointer pszStr, size_type nStrSize = npos) noexcept;
 
     /**
         @brief  Remove string prefix if matches
         @param  sStr - string to remove
-        @retval      - true if removed
+        @return      - true if removed
     **/
     bool remove_prefix(const basic_string& sStr) noexcept;
 
@@ -824,7 +824,7 @@ public:
         @tparam fwd_it_t - forward iterator type
         @param  itBegin  - string to remove begin iterator
         @param  itEnd    - string to remove end iterator
-        @retval          - true if removed
+        @return          - true if removed
     **/
     template<class fwd_it_t>
     bool remove_prefix(fwd_it_t itBegin, fwd_it_t itEnd) noexcept;
@@ -833,7 +833,7 @@ public:
         @brief  Remove string prefix if matches
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to remove
-        @retval          - true if removed
+        @return          - true if removed
     **/
     template<range_of_t_c<char_t> string_t>
     bool remove_prefix(const string_t& sStr) noexcept;
@@ -841,7 +841,7 @@ public:
     /**
         @brief  Remove string suffix if matches
         @param  chSymbol - char to remove 
-        @retval          - true if removed
+        @return          - true if removed
     **/
     bool remove_suffix(value_type chSymbol) noexcept;
 
@@ -849,14 +849,14 @@ public:
         @brief  Remove string suffix if matches
         @param  pszStr   - string to remove
         @param  nStrSize - string size
-        @retval          - true if removed
+        @return          - true if removed
     **/
     bool remove_suffix(const_pointer pszStr, size_type nStrSize = npos) noexcept;
 
     /**
         @brief  Remove string suffix if matches
         @param  sStr   - string to remove
-        @retval        - true if removed
+        @return        - true if removed
     **/
     bool remove_suffix(const basic_string& sStr) noexcept;
 
@@ -865,7 +865,7 @@ public:
         @tparam fwd_it_t - forward iterator type
         @param  itBegin  - string to remove begin iterator
         @param  itEnd    - string to remove end iterator
-        @retval          - true if removed
+        @return          - true if removed
     **/
     template<class fwd_it_t>
     bool remove_suffix(fwd_it_t itBegin, fwd_it_t itEnd) noexcept;
@@ -874,7 +874,7 @@ public:
         @brief  Remove string suffix if matches
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to remove
-        @retval          - true if removed
+        @return          - true if removed
     **/
     template<range_of_t_c<char_t> string_t>
     bool remove_suffix(const string_t& sStr) noexcept;
@@ -884,7 +884,7 @@ public:
         @param  chSymbol - char to remove 
         @param  nBegin   - start searching index 
         @param  nEnd     - end searching index 
-        @retval          - number of deleted occurrences
+        @return          - number of deleted occurrences
     **/
     size_type remove_all(value_type chSymbol, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
@@ -894,7 +894,7 @@ public:
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
         @param  nStrSize - string size
-        @retval          - number of deleted occurrences
+        @return          - number of deleted occurrences
     **/
     size_type remove_all(
         const_pointer pszStr,
@@ -907,7 +907,7 @@ public:
         @param  sStr   - string to remove
         @param  nBegin - start searching index
         @param  nEnd   - end searching index
-        @retval        - number of deleted occurrences
+        @return        - number of deleted occurrences
     **/
     size_type remove_all(const basic_string& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
 
@@ -918,7 +918,7 @@ public:
         @param  itLast   - string end iterator
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
-        @retval          - number of deleted occurrences
+        @return          - number of deleted occurrences
     **/
     template<class fwd_it_t>
     size_type remove_all(fwd_it_t itFirst, fwd_it_t itLast, size_type nBegin = 0, size_type nEnd = npos) noexcept;
@@ -929,7 +929,7 @@ public:
         @param  sStr     - string to remove
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
-        @retval          - number of deleted occurrences
+        @return          - number of deleted occurrences
     **/
     template<range_of_t_c<char_t> string_t>
     size_type remove_all(const string_t& sStr, size_type nBegin = 0, size_type nEnd = npos) noexcept;
@@ -941,7 +941,7 @@ public:
         @param  nSize        - substring size
         @param  pszReplace   - new substring pointer
         @param  nReplaceSize - new substring suze
-        @retval              - pos of char after last char of replaced string or npos
+        @return              - pos of char after last char of replaced string or npos
     **/
     size_type replace(size_type nBegin, size_type nSize, const_pointer pszReplace, size_t nReplaceSize) noexcept;
 
@@ -952,7 +952,7 @@ public:
         @param  nBegin           - substring start index
         @param  nSize            - substring size
         @param  sReplace         - new substring
-        @retval                  - pos of char after last char of replaced string or npos
+        @return                  - pos of char after last char of replaced string or npos
     **/
     template<class replace_string_t>
     size_type replace(size_type nBegin, size_type nSize, const replace_string_t& sReplace) noexcept;
@@ -965,7 +965,7 @@ public:
         @param  sReplace         - string to replace with
         @param  nBegin           - start searching index
         @param  nEnd             - end searching index
-        @retval                  - pos of char after last char of replaced string or npos
+        @return                  - pos of char after last char of replaced string or npos
     **/
     template<class find_string_t, class replace_string_t>
     size_type replace(
@@ -982,7 +982,7 @@ public:
         @param  sReplace         - string to replace with
         @param  nBegin           - start searching index
         @param  nEnd             - end searching index
-        @retval                  - number of replaced occurrences
+        @return                  - number of replaced occurrences
     **/
     template<class find_string_t, class replace_string_t>
     size_type replace_all(
@@ -994,7 +994,7 @@ public:
     /**
         @brief  Performs a binary comparison of the characters
         @param  chSymbol - symbol to compare
-        @retval          - < 0 the first character that does not match has
+        @return          - < 0 the first character that does not match has
                                a lower value in this than in chSymbol
                            = 0 the contents of both strings are equal
                            > 0 the first character that does not match has
@@ -1005,7 +1005,7 @@ public:
     /**
         @brief  Performs a binary comparison of the characters
         @param  pszStr - string to compare. must not be nullptr
-        @retval        - < 0 the first character that does not match has
+        @return        - < 0 the first character that does not match has
                              a lower value in this than in chSymbol
                          = 0 the contents of both strings are equal
                          > 0 the first character that does not match has
@@ -1017,7 +1017,7 @@ public:
         @brief  Performs a binary comparison of the characters
         @param  pStr     - string to compare. must not be nullptr
         @param  nStrSize - number of symbols to compare
-        @retval          - < 0 the first character that does not match has
+        @return          - < 0 the first character that does not match has
                                a lower value in this than in chSymbol
                            = 0 the contents of both strings are equal
                            > 0 the first character that does not match has
@@ -1028,7 +1028,7 @@ public:
     /**
         @brief  Performs a binary comparison of the characters
         @param  sStr - string to compare
-        @retval      - < 0 the first character that does not match has
+        @return      - < 0 the first character that does not match has
                            a lower value in this than in chSymbol
                        = 0 the contents of both strings are equal
                        > 0 the first character that does not match has
@@ -1041,7 +1041,7 @@ public:
         @tparam fwd_it_t - forward iterator type
         @param  itBegin  - string to compare begin iterator
         @param  itEnd    - string to compare end iterator
-        @retval          - < 0 the first character that does not match has
+        @return          - < 0 the first character that does not match has
                                a lower value in this than in chSymbol
                            = 0 the contents of both strings are equal
                            > 0 the first character that does not match has
@@ -1054,7 +1054,7 @@ public:
         @brief  Performs a binary comparison of the characters
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string to compare
-        @retval          - < 0 the first character that does not match has
+        @return          - < 0 the first character that does not match has
                                a lower value in this than in chSymbol
                            = 0 the contents of both strings are equal
                            > 0 the first character that does not match has
@@ -1068,7 +1068,7 @@ public:
         @param  chSymbol - char to find
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index (npos - to the end)
-        @retval          - substring index or npos if not found
+        @return          - substring index or npos if not found
     **/
     size_type find(value_type chSymbol, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
@@ -1078,7 +1078,7 @@ public:
         @param  nBegin    - start searching index
         @param  nWhatSize - string length (npos - string is zero terminated)
         @param  nEnd      - end searching index (npos - to the end).
-        @retval           - substring index
+        @return           - substring index
     **/
     size_type find(const_pointer pszWhat, size_type nBegin = 0, size_type nWhatSize = npos, size_type nEnd = npos)
         const noexcept;
@@ -1088,7 +1088,7 @@ public:
         @param  sWhat  - string to find
         @param  nBegin - start searching index
         @param  nEnd   - end searching index
-        @retval        - substring index or npos if not found
+        @return        - substring index or npos if not found
     **/
     size_type find(const basic_string& sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
 
@@ -1099,7 +1099,7 @@ public:
         @param  itWhatEnd   - substring end iterator
         @param  nBegin      - start searching index
         @param  nEnd        - end searching index
-        @retval             - substring index or npos if not found
+        @return             - substring index or npos if not found
     **/
     template<class fwd_it_t>
     size_type find(fwd_it_t itWhatBegin, fwd_it_t itWhatEnd, size_type nBegin = 0, size_type nEnd = npos)
@@ -1111,7 +1111,7 @@ public:
         @param  sWhat    - substring
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
-        @retval          - substring index or npos if not found
+        @return          - substring index or npos if not found
     **/
     template<range_of_t_c<char_t> string_t>
     size_type find(string_t sWhat, size_type nBegin = 0, size_type nEnd = npos) const noexcept;
@@ -1122,7 +1122,7 @@ public:
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
                            (if nBegin < end, result is equivalent of find(...))
-        @retval          - substring index or npos if not found
+        @return          - substring index or npos if not found
     **/
     size_type rfind(value_type chSymbol, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
@@ -1133,7 +1133,7 @@ public:
         @param  nWhatSize - c-string length
         @param  nEnd      - end searching index
                             (if nBegin < end, result is equivalent of find(...))
-        @retval           - substring index or npos if not found
+        @return           - substring index or npos if not found
     **/
     size_type rfind(const_pointer pszWhat, size_type nBegin = npos, size_type nWhatSize = npos, size_type nEnd = 0)
         const noexcept;
@@ -1144,7 +1144,7 @@ public:
         @param  nBegin - start searching index
         @param  nEnd   - end searching index
                          (if nBegin < end, result is equivalent of find(...))
-        @retval        - substring index or npos if not found
+        @return        - substring index or npos if not found
     **/
     size_type rfind(const basic_string& sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
 
@@ -1156,7 +1156,7 @@ public:
         @param  nBegin      - start searching index
         @param  nEnd        - end searching index
                               (if nBegin < end, result is equivalent of find(...))
-        @retval             - substring index or npos if not found
+        @return             - substring index or npos if not found
     **/
     template<class fwd_it_t>
     size_type rfind(fwd_it_t itWhatBegin, fwd_it_t itWhatEnd, size_type nBegin = npos, size_type nEnd = 0)
@@ -1169,7 +1169,7 @@ public:
         @param  nBegin   - start searching index
         @param  nEnd     - end searching index
                            (if nBegin < end, result is equivalent of find(...))
-        @retval          - substring index or npos if not found
+        @return          - substring index or npos if not found
     **/
     template<range_of_t_c<char_t> string_t>
     size_type rfind(string_t sWhat, size_type nBegin = npos, size_type nEnd = 0) const noexcept;
@@ -1178,7 +1178,7 @@ public:
         @brief  Find first position of character
         @param  chSymbol - char to find
         @param  nBegin   - position at which the search is to begin
-        @retval          - symbol index or npos
+        @return          - symbol index or npos
     **/
     size_type find_first_of(value_type chSymbol, size_type nBegin = 0) const noexcept;
 
@@ -1187,7 +1187,7 @@ public:
         @param  pszWhat   - string identifying characters to search for
         @param  nBegin    - position at which the search is to begin
         @param  nWhatSize - length of character string identifying characters to search for
-        @retval           - symbol index or npos
+        @return           - symbol index or npos
     **/
     size_type find_first_of(const_pointer pszWhat, size_type nBegin, size_type nWhatSize) const noexcept;
 
@@ -1195,7 +1195,7 @@ public:
         @brief  Finds the first character equal to one of characters in the given character sequence
         @param  pszWhat - null terminated string identifying characters to search for
         @param  nBegin  - position at which the search is to begin
-        @retval         - symbol index or npos
+        @return         - symbol index or npos
     **/
     size_type find_first_of(const_pointer pszWhat, size_type nBegin = 0) const noexcept;
 
@@ -1203,7 +1203,7 @@ public:
         @brief  Finds the first character equal to one of characters in the given character sequence
         @param  sWhat  - string identifying characters to search for
         @param  nBegin - position at which the search is to begin
-        @retval        - symbol index or npos
+        @return        - symbol index or npos
     **/
     size_type find_first_of(const basic_string& sWhat, size_type nBegin = 0) const noexcept;
 
@@ -1213,7 +1213,7 @@ public:
         @param  itWhatBegin - begin it of string identifying characters to search for
         @param  itWhatEnd   - end it of string identifying characters to search for
         @param  nBegin      - position at which the search is to begin
-        @retval             - symbol index or npos
+        @return             - symbol index or npos
     **/
     template<class fwd_it_t>
     size_type find_first_of(fwd_it_t itWhatBegin, fwd_it_t itWhatEnd, size_type nBegin = 0) const noexcept;
@@ -1223,7 +1223,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - string identifying characters to search for
         @param  nBegin   - position at which the search is to begin
-        @retval          - symbol index or npos
+        @return          - symbol index or npos
     **/
     template<range_of_t_c<char_t> string_t>
     size_type find_first_of(string_t sWhat, size_type nBegin = 0) const noexcept;
@@ -1232,7 +1232,7 @@ public:
         @brief  Find last position of character
         @param  chSymbol - char to find
         @param  nEnd     - position at which the search is to finish
-        @retval          - symbol index or npos
+        @return          - symbol index or npos
     **/
     size_type find_last_of(value_type chSymbol, size_type nEnd = 0) const noexcept;
 
@@ -1241,7 +1241,7 @@ public:
         @param  pszWhat   - string identifying characters to search for
         @param  nEnd      - position at which the search is to finish
         @param  nWhatSize - length of character string identifying characters to search for
-        @retval           - symbol index or npos
+        @return           - symbol index or npos
     **/
     size_type find_last_of(const_pointer pszWhat, size_type nEnd, size_type nWhatSize) const noexcept;
 
@@ -1249,7 +1249,7 @@ public:
         @brief  Finds the last character equal to one of characters in the given character sequence
         @param  pszWhat - null terminated string identifying characters to search for
         @param  nEnd    - position at which the search is to finish
-        @retval         - symbol index or npos
+        @return         - symbol index or npos
     **/
     size_type find_last_of(const_pointer pszWhat, size_type nEnd = 0) const noexcept;
 
@@ -1257,7 +1257,7 @@ public:
         @brief  Finds the last character equal to one of characters in the given character sequence
         @param  sWhat - string identifying characters to search for 
         @param  nEnd  - position at which the search is to finish 
-        @retval       - symbol index or npos
+        @return       - symbol index or npos
     **/
     size_type find_last_of(const basic_string& sWhat, size_type nEnd = 0) const noexcept;
 
@@ -1267,7 +1267,7 @@ public:
         @param  itWhatBegin - begin it of string identifying characters to search for 
         @param  itWhatEnd   - end it of string identifying characters to search for 
         @param  nEnd        - position at which the search is to finish 
-        @retval             - symbol index or npos
+        @return             - symbol index or npos
     **/
     template<class fwd_it_t>
     size_type find_last_of(fwd_it_t itWhatBegin, fwd_it_t itWhatEnd, size_type nEnd = 0) const noexcept;
@@ -1277,7 +1277,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - string identifying characters to search for
         @param  nEnd     - position at which the search is to finish
-        @retval          - symbol index or npos
+        @return          - symbol index or npos
     **/
     template<range_of_t_c<char_t> string_t>
     size_type find_last_of(string_t sWhat, size_type nEnd = 0) const noexcept;
@@ -1286,7 +1286,7 @@ public:
         @brief  Finds the first character not equal to chSymbol
         @param  chSymbol - char to find
         @param  nBegin   - position at which the search is to begin
-        @retval          - symbol index or npos
+        @return          - symbol index or npos
     **/
     size_type find_first_not_of(value_type chSymbol, size_type nBegin = 0) const noexcept;
 
@@ -1295,7 +1295,7 @@ public:
         @param  pszWhat   - string identifying characters to search for
         @param  nBegin    - position at which the search is to begin
         @param  nWhatSize - length of character string identifying characters to search for
-        @retval           - symbol index or npos
+        @return           - symbol index or npos
     **/
     size_type find_first_not_of(const_pointer pszWhat, size_type nBegin, size_type nWhatSize) const noexcept;
 
@@ -1303,7 +1303,7 @@ public:
         @brief  Finds the first character equal to none of the characters in the given character sequence
         @param  pszWhat - null terminated string identifying characters to search for
         @param  nBegin  - position at which the search is to begin
-        @retval         - symbol index or npos
+        @return         - symbol index or npos
     **/
     size_type find_first_not_of(const_pointer pszWhat, size_type nBegin = 0) const noexcept;
 
@@ -1311,7 +1311,7 @@ public:
         @brief  Finds the first character equal to none of the characters in the given character sequence
         @param  sWhat  - string identifying characters to search for
         @param  nBegin - position at which the search is to begin
-        @retval        - symbol index or npos
+        @return        - symbol index or npos
     **/
     size_type find_first_not_of(const basic_string& sWhat, size_type nBegin = 0) const noexcept;
 
@@ -1321,7 +1321,7 @@ public:
         @param  itWhatBegin - begin it of string identifying characters to search for
         @param  itWhatEnd   - end it of string identifying characters to search for
         @param  nBegin      - position at which the search is to begin
-        @retval             - symbol index or npos
+        @return             - symbol index or npos
     **/
     template<class fwd_it_t>
     size_type find_first_not_of(fwd_it_t itWhatBegin, fwd_it_t itWhatEnd, size_type nBegin = 0) const noexcept;
@@ -1331,7 +1331,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - string identifying characters to search for 
         @param  nBegin   - position at which the search is to begin 
-        @retval          - symbol index or npos
+        @return          - symbol index or npos
     **/
     template<range_of_t_c<char_t> string_t>
     size_type find_first_not_of(string_t sWhat, size_type nBegin = 0) const noexcept;
@@ -1340,7 +1340,7 @@ public:
         @brief  Finds the last character not equal to chSymbol
         @param  chSymbol - char to find 
         @param  nEnd     - position at which the search is to finish 
-        @retval          - symbol index or npos
+        @return          - symbol index or npos
     **/
     size_type find_last_not_of(value_type chSymbol, size_type nEnd = 0) const noexcept;
 
@@ -1349,7 +1349,7 @@ public:
         @param  pszWhat   - string identifying characters to search for
         @param  nEnd      - position at which the search is to finish
         @param  nWhatSize - length of character string identifying characters to search for
-        @retval           - symbol index or npos
+        @return           - symbol index or npos
     **/
     size_type find_last_not_of(const_pointer pszWhat, size_type nEnd, size_type nWhatSize) const noexcept;
 
@@ -1357,7 +1357,7 @@ public:
         @brief  Finds the last character equal to none of the characters in the given character sequence
         @param  pszWhat - null terminated string identifying characters to search for
         @param  nEnd    - position at which the search is to finish
-        @retval         - symbol index or npos
+        @return         - symbol index or npos
     **/
     size_type find_last_not_of(const_pointer pszWhat, size_type nEnd = 0) const noexcept;
 
@@ -1365,7 +1365,7 @@ public:
         @brief  Finds the last character equal to none of the characters in the given character sequence
         @param  sWhat - string identifying characters to search for
         @param  nEnd  - position at which the search is to finish
-        @retval       - symbol index or npos
+        @return       - symbol index or npos
     **/
     size_type find_last_not_of(const basic_string& sWhat, size_type nEnd = 0) const noexcept;
 
@@ -1375,7 +1375,7 @@ public:
         @param  itWhatBegin - begin it of string identifying characters to search for
         @param  itWhatEnd   - end it of string identifying characters to search for
         @param  nEnd        - position at which the search is to finish
-        @retval             - symbol index or npos
+        @return             - symbol index or npos
     **/
     template<class fwd_it_t>
     size_type find_last_not_of(fwd_it_t itWhatBegin, fwd_it_t itWhatEnd, size_type nEnd = 0) const noexcept;
@@ -1385,7 +1385,7 @@ public:
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sWhat    - string identifying characters to search for 
         @param  nEnd     - position at which the search is to finish 
-        @retval          - symbol index or npos
+        @return          - symbol index or npos
     **/
     template<range_of_t_c<char_t> string_t>
     size_type find_last_not_of(string_t sWhat, size_type nEnd = 0) const noexcept;
@@ -1393,7 +1393,7 @@ public:
     /**
         @brief  Split string by separator
         @param  chSeparator - char separator
-        @retval             - string_view container 
+        @return             - string_view container 
     **/
     views split(const value_type chSeparator) const noexcept;
 
@@ -1401,14 +1401,14 @@ public:
         @brief  Split string by separator
         @param  pszSeparator - separator string
         @param  nSepLen      - separator string length (npos if str is null terminated)
-        @retval              - string_view container
+        @return              - string_view container
     **/
     views split(const_pointer pszSeparator, size_type nSepLen = npos) const noexcept;
 
     /**
         @brief  Split string by separator
         @param  sSeparator - separator string
-        @retval            - string_view container
+        @return            - string_view container
     **/
     views split(const basic_string& sSeparator) const noexcept;
 
@@ -1417,7 +1417,7 @@ public:
         @tparam fwd_it_t   - forward iterator type
         @param  itSepFirst - separator begin iterator 
         @param  itSepLast  - separator end iterator 
-        @retval            - string_view container
+        @return            - string_view container
     **/
     template<class fwd_it_t>
     views split(fwd_it_t itSepFirst, fwd_it_t itSepLast) const noexcept;
@@ -1426,7 +1426,7 @@ public:
         @brief  Split string by separator
         @tparam string_t    - string-ish type, satisfying the "range_of_t_c" concept
         @param  sSeparator  - separator string
-        @retval             - string_view container
+        @return             - string_view container
     **/
     template<range_of_t_c<char_t> string_t>
     views split(const string_t& sSeparator) const noexcept;
@@ -1434,7 +1434,7 @@ public:
     /**
         @brief  Check if current string starts with char
         @param  chSymbol - char for comparison
-        @retval          - true if starts with char
+        @return          - true if starts with char
     **/
     bool starts_with(value_type chSymbol) const noexcept;
 
@@ -1442,14 +1442,14 @@ public:
         @brief  Check if current string starts with string
         @param  pszStr   - const pointer to string
         @param  nStrSize - string length
-        @retval          - true if starts with string
+        @return          - true if starts with string
     **/
     bool starts_with(const_pointer pszStr, size_type nStrSize = npos) const noexcept;
 
     /**
         @brief  Check if current string starts with string
         @param  sStr - string to check 
-        @retval      - true if starts with string
+        @return      - true if starts with string
     **/
     bool starts_with(const basic_string& sStr) const noexcept;
 
@@ -1458,7 +1458,7 @@ public:
         @tparam fwd_it_t - forward iterator type
         @param  itBegin  - string begin iterator
         @param  itEnd    - string end iterator
-        @retval          - true if starts with string
+        @return          - true if starts with string
     **/
     template<class fwd_it_t>
     bool starts_with(fwd_it_t itBegin, fwd_it_t itEnd) const noexcept;
@@ -1467,7 +1467,7 @@ public:
         @brief  Check if current string starts with string
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string container to check
-        @retval          - true if starts with string
+        @return          - true if starts with string
     **/
     template<range_of_t_c<char_t> string_t>
     bool starts_with(const string_t& sStr) const noexcept;
@@ -1475,7 +1475,7 @@ public:
     /**
         @brief  Check if current string ends with char
         @param  chSymbol - char for comparison
-        @retval          - true if ends with char
+        @return          - true if ends with char
     **/
     bool ends_with(value_type chSymbol) const noexcept;
 
@@ -1483,14 +1483,14 @@ public:
         @brief  Check if current string ends with string
         @param  pszStr   - const pointer to string
         @param  nStrSize - string length
-        @retval          - true if ends with string
+        @return          - true if ends with string
     **/
     bool ends_with(const_pointer pszStr, size_type nStrSize = npos) const noexcept;
 
     /**
         @brief  Check if current string ends with string
         @param  sStr - string to check
-        @retval      - true if starts with string
+        @return      - true if starts with string
     **/
     bool ends_with(const basic_string& sStr) const noexcept;
 
@@ -1499,7 +1499,7 @@ public:
         @tparam fwd_it_t - forward iterator type
         @param  itBegin  - string begin iterator
         @param  itEnd    - string end iterator
-        @retval          - true if ends with string
+        @return          - true if ends with string
     **/
     template<class fwd_it_t>
     bool ends_with(fwd_it_t itBegin, fwd_it_t itEnd) const noexcept;
@@ -1508,7 +1508,7 @@ public:
         @brief  Check if current string ends with string
         @tparam string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param  sStr     - string container to check
-        @retval          - true if starts with string
+        @return          - true if starts with string
     **/
     template<range_of_t_c<char_t> string_t>
     bool ends_with(const string_t& sStr) const noexcept;
@@ -1517,7 +1517,7 @@ public:
         @brief   Check if string contains char
         @details Equal to find != npos
         @param   chSymbol - char to check
-        @retval           - true if this string contains substring
+        @return           - true if this string contains substring
     **/
     bool contains(value_type chSymbol) const noexcept;
 
@@ -1526,7 +1526,7 @@ public:
         @details Equal to find != npos
         @param   pszStr   - substring to check
         @param   nStrSize - substring size 
-        @retval           - true if this string contains substring
+        @return           - true if this string contains substring
     **/
     bool contains(const_pointer pszStr, size_type nStrSize = npos) const noexcept;
 
@@ -1534,7 +1534,7 @@ public:
         @brief   Check if string contains substring
         @details Equal to find != npos
         @param   sStr - string to check
-        @retval       - true if this string contains substring
+        @return       - true if this string contains substring
     **/
     bool contains(const basic_string& sStr) const noexcept;
 
@@ -1544,7 +1544,7 @@ public:
         @tparam  fwd_it_t - forward iterator type
         @param   itBegin  - substring begin iterator 
         @param   itEnd    - substring end iterator 
-        @retval           - true if this string contains substring
+        @return           - true if this string contains substring
     **/
     template<class fwd_it_t>
     bool contains(fwd_it_t itBegin, fwd_it_t itEnd) const noexcept;
@@ -1554,7 +1554,7 @@ public:
         @details Equal to find != npos
         @tparam  string_t - string-ish type, satisfying the "range_of_t_c" concept
         @param   sStr     - string to check
-        @retval           - true if this string contains substring
+        @return           - true if this string contains substring
     **/
     template<range_of_t_c<char_t> string_t>
     bool contains(const string_t& sStr) const noexcept;
@@ -1619,7 +1619,7 @@ private:
         @brief  Common algorithm for trimming string to the left
         @tparam searcher_t - "searcher" type
         @param  searcher   - function that returns true if symbol has to be deleted
-        @retval            - number of deleted symbols
+        @return            - number of deleted symbols
     **/
     template<class searcher_t>
     size_type _trim_left(const searcher_t& searcher) noexcept;
@@ -1628,7 +1628,7 @@ private:
         @brief  Common algorithm for trimming string to the right
         @tparam searcher_t - "searcher" type
         @param  searcher   - function that returns true if symbol has to be deleted
-        @retval            - number of deleted symbols
+        @return            - number of deleted symbols
     **/
     template<class searcher_t>
     size_type _trim_right(const searcher_t& searcher) noexcept;
@@ -1637,7 +1637,7 @@ private:
         @brief  Common algorithm for trimming string to the both sides
         @tparam searcher_t - "searcher" type
         @param  searcher   - function that returns true if symbol has to be deleted
-        @retval            - number of deleted symbols
+        @return            - number of deleted symbols
     **/
     template<class searcher_t>
     size_type _trim(const searcher_t& searcher) noexcept;
@@ -1648,7 +1648,7 @@ private:
         @param  nBegin       - start searching index 
         @param  nEnd         - end searching index (npos - to the end) 
         @param  comparator   - comparator function 
-        @retval              - substring index or npos if not found
+        @return              - substring index or npos if not found
     **/
     template<class comparator_t>
     size_type _find(size_type nBegin, size_type nEnd, const comparator_t& comparator) const noexcept;
@@ -1659,7 +1659,7 @@ private:
         @param  nBegin       - start searching index 
         @param  nEnd         - end searching index 
         @param  comparator   - comparator function 
-        @retval              - substring index or npos if not found
+        @return              - substring index or npos if not found
     **/
     template<class comparator_t>
     size_type _rfind(size_type nBegin, size_type nEnd, const comparator_t& comparator) const noexcept;
@@ -1672,7 +1672,7 @@ private:
         @param  itEnd         - end it of "of" string
         @param  nBegin        - position at which the search is to begin
         @param  incrementer   - function that increments iterator and returns itEnd when string is over
-        @retval               - symbol index or npos
+        @return               - symbol index or npos
     **/
     template<class incrementer_t, class fwd_it_t>
     size_type _find_first_of(fwd_it_t itBegin, fwd_it_t itEnd, size_type nBegin, const incrementer_t& incrementer)
@@ -1686,7 +1686,7 @@ private:
         @param  itEnd         - end it of "of" string
         @param  nEnd          - position at which the search is to finish
         @param  incrementer   - function that increments iterator and returns itEnd when string is over
-        @retval               - symbol index or npos
+        @return               - symbol index or npos
     **/
     template<class incrementer_t, class fwd_it_t>
     size_type _find_last_of(fwd_it_t itBegin, fwd_it_t itEnd, size_type nEnd, const incrementer_t& incrementer)
@@ -1700,7 +1700,7 @@ private:
         @param  itEnd         - end it of "of" string
         @param  nBegin        - position at which the search is to begin
         @param  incrementer   - function that increments iterator and returns itEnd when string is over
-        @retval               - symbol index or npos
+        @return               - symbol index or npos
     **/
     template<class incrementer_t, class fwd_it_t>
     size_type _find_first_not_of(fwd_it_t itBegin, fwd_it_t itEnd, size_type nBegin, const incrementer_t& incrementer)
@@ -1714,7 +1714,7 @@ private:
         @param  itEnd         - end it of "of" string
         @param  nEnd          - position at which the search is to finish
         @param  incrementer   - function that increments iterator and returns itEnd when string is over
-        @retval               - symbol index or npos
+        @return               - symbol index or npos
     **/
     template<class incrementer_t, class fwd_it_t>
     size_type _find_last_not_of(fwd_it_t itBegin, fwd_it_t itEnd, size_type nEnd, const incrementer_t& incrementer)
@@ -1724,7 +1724,7 @@ private:
         @brief  Get the size of a string like type object
         @tparam string_view_like_t - string like type
         @param  sValue             - string like type object
-        @retval                    - string like type object size
+        @return                    - string like type object size
     **/
     template<class string_view_like_t>
     static size_type _get_string_view_like_size(const string_view_like_t& sValue) noexcept;
@@ -1733,7 +1733,7 @@ private:
         @brief  Get the data of a string like type object
         @tparam string_view_like_t - string like type
         @param  sValue             - string like type object
-        @retval                    - string like type object data
+        @return                    - string like type object data
     **/
     template<class string_view_like_t>
     static const_pointer _get_string_view_like_data(const string_view_like_t& sValue) noexcept;

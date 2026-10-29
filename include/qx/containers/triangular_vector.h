@@ -90,14 +90,14 @@ public:
     /**
         @brief  Reserve memory for vector
         @param  nSideSize - new matrix side size
-        @retval           - true if reserved
+        @return           - true if reserved
     **/
     bool reserve(size_type nSideSize);
 
     /**
         @brief  Resize triangular vector without filling with new value
         @param  nSideSize - new matrix side size
-        @retval           - true if resized
+        @return           - true if resized
     **/
     bool resize(size_type nSideSize);
 
@@ -105,7 +105,7 @@ public:
         @brief  Resize triangular vector with filling with new value
         @param  nSideSize - new matrix side size
         @param  data      - data to fill
-        @retval           - true if resized
+        @return           - true if resized
     **/
     bool resize(size_type nSideSize, const_reference data);
 
@@ -119,7 +119,7 @@ public:
         @brief  Get value on position
         @param  nRow - row num
         @param  nCol - column num
-        @retval      - vector value
+        @return      - vector value
     **/
     const_reference get(size_type nRow, size_type nCol) const noexcept;
 
@@ -133,13 +133,13 @@ public:
 
     /**
         @brief  Get matrix side size
-        @retval - matrix side size
+        @return - matrix side size
     **/
     size_type size_side() const noexcept;
 
     /**
         @brief  Get capacity
-        @retval - capacity
+        @return - capacity
     **/
     size_type capacity() const noexcept;
 
@@ -153,14 +153,14 @@ private:
         @brief  Convert row and column numbers to continuous vector index
         @param  nRow - row number
         @param  nCol - column number
-        @retval      - continuous vector index
+        @return      - continuous vector index
     **/
     static size_type _get_index(size_type nRow, size_type nCol) noexcept;
 
     /**
         @brief  Get continuous vector size
         @param  nSideSize - matrix side size
-        @retval           - continuous vector size
+        @return           - continuous vector size
     **/
     static size_type _get_vector_size(size_type nSideSize) noexcept;
 

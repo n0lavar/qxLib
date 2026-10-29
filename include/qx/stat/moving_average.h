@@ -23,7 +23,7 @@ using moving_average_weights_func = std::function<std::vector<T>(size_t nEntries
     @brief  Generate weights for moving_average as arithmetic mean
     @tparam T        - floating point ish type
     @param  nEntries - number of entries in moving_average
-    @retval          - weights
+    @return          - weights
 **/
 template<class T>
 inline std::vector<T> get_moving_average_simple_weights(size_t nEntries);
@@ -33,7 +33,7 @@ inline std::vector<T> get_moving_average_simple_weights(size_t nEntries);
             from highest weight for the most recent data, down to zero
     @tparam T        - floating point ish type
     @param  nEntries - number of entries in moving_average
-    @retval          - weights
+    @return          - weights
 **/
 template<class T>
 inline std::vector<T> get_moving_average_linear_weights(size_t nEntries);
@@ -43,7 +43,7 @@ inline std::vector<T> get_moving_average_linear_weights(size_t nEntries);
             from highest weight for the most recent data, down to zero
     @tparam T        - floating point ish type
     @param  nEntries - number of entries in moving_average
-    @retval          - weights
+    @return          - weights
 **/
 template<class T>
 inline std::vector<T> get_moving_average_exp_weights(size_t nEntries);
@@ -80,19 +80,19 @@ public:
     /**
         @brief  Update moving average
         @param  value - new value
-        @retval       - new moving average
+        @return       - new moving average
     **/
     T update(T value);
 
     /**
         @brief  Get current moving average
-        @retval - current moving average
+        @return - current moving average
     **/
     T get() const;
 
     /**
         @brief  Get number of entries in average calc
-        @retval - number of entries in average calc
+        @return - number of entries in average calc
     **/
     size_t get_num_entries() const;
 

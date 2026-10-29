@@ -76,7 +76,7 @@ enum class compile_pattern_result
                         One type may be absent or present multiple times.
                         You can use any format specifiers.
                         The result will be in the same string.
-    @retval           - Compilation result. If != ok, sPattern is considered invalid.
+    @return           - Compilation result. If != ok, sPattern is considered invalid.
 **/
 template<class char_t, class traits_t>
 compile_pattern_result compile_pattern(basic_string<char_t, traits_t>& sPattern) noexcept;

@@ -21,7 +21,7 @@ namespace qx
     @tparam value_t     - value type
     @param  container   - container to add to
     @param  value       - value to check and add
-    @retval             - true if value was added
+    @return             - true if value was added
 **/
 template<class container_t, class value_t>
 bool add_unique(container_t& container, value_t&& value)
@@ -45,7 +45,7 @@ bool add_unique(container_t& container, value_t&& value)
     @param  container   - container to add to
     @param  value       - value to check and add
     @param  predicate   - predicate object
-    @retval             - true if value was added
+    @return             - true if value was added
 **/
 template<class container_t, class value_t, class predicate_t>
 bool add_unique_if(container_t& container, value_t&& value, const predicate_t& predicate)

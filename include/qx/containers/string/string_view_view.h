@@ -39,13 +39,13 @@ public:
 
     /**
         @brief  Return iterator to beginning
-        @retval  - iterator to beginning
+        @return  - iterator to beginning
     **/
     string_view_iterator<char_t> begin() const noexcept;
 
     /**
         @brief  Return iterator to end
-        @retval  - iterator to end
+        @return  - iterator to end
     **/
     string_view_iterator<char_t> end() const noexcept;
 

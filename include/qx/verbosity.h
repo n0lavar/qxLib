@@ -32,7 +32,7 @@ enum class verbosity
 /**
     @brief  Check if the verbosity level is an error
     @param  eVerbosity - verbosity level to check
-    @retval            - true if the verbosity level is error or critical, false otherwise
+    @return            - true if the verbosity level is error or critical, false otherwise
 **/
 constexpr bool is_error(verbosity eVerbosity) noexcept
 {

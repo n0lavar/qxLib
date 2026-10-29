@@ -20,7 +20,7 @@ namespace qx
     @complexity O(sqrt(number))
     @tparam     I      - Integral type
     @param      nValue - number for search
-    @retval            - all prime factors vector
+    @return            - all prime factors vector
 **/
 template<class I>
 inline std::vector<I> find_prime_factors(I nValue);
@@ -31,7 +31,7 @@ inline std::vector<I> find_prime_factors(I nValue);
     @complexity O(nMaxNumber * log(log(number)))
     @tparam     I          - Integral type
     @param      nMaxNumber - max number for search
-    @retval                - all primes vector
+    @return                - all primes vector
 **/
 template<class I>
 inline std::vector<I> find_primes(I nMaxNumber);
@@ -41,7 +41,7 @@ inline std::vector<I> find_primes(I nMaxNumber);
     @details    1.0 probability, high computational complexity
     @complexity O(sqrt(number))
     @param      nValue - number
-    @retval            - true if prime
+    @return            - true if prime
 **/
 inline bool is_prime(size_t nValue);
 
@@ -49,7 +49,7 @@ inline bool is_prime(size_t nValue);
     @brief  Is number prime with some probability
     @param  nValue       - number
     @param  fProbability - probability (0, 1]
-    @retval              - true is number is prime with some probability
+    @return              - true is number is prime with some probability
 **/
 inline bool is_prime(size_t nValue, double fProbability);
 

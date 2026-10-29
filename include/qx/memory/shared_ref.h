@@ -30,7 +30,7 @@ using shared_ref = details::smart_ptr_ref_adapter<std::shared_ptr, T>;
     @tparam T                  - type to store
     @tparam constructor_args_t - T constructor types
     @param  args               - T constructor values
-    @retval                    - made shared_ref
+    @return                    - made shared_ref
 **/
 template<class T, class... constructor_args_t>
 shared_ref<T> make_shared_ref(constructor_args_t&&... args);

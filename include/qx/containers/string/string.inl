@@ -2620,7 +2620,7 @@ basic_string<char_t, traits_t> operator+(const string_t& lhs, const basic_string
 
 /**
     @brief  Get string size (excluding null terminator)
-    @retval - string size (excluding null terminator)
+    @return - string size (excluding null terminator)
 **/
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::size() const noexcept
@@ -2631,7 +2631,7 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 
 /**
     @brief  Get c-string
-    @retval - c-string
+    @return - c-string
 **/
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::pointer basic_string<char_t, traits_t>::data() noexcept
@@ -2642,7 +2642,7 @@ inline typename basic_string<char_t, traits_t>::pointer basic_string<char_t, tra
 /**
     @brief  Get char at the ind position
     @param  nIndex - char index
-    @retval        - char value
+    @return        - char value
 **/
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::reference basic_string<char_t, traits_t>::at(size_type nIndex)

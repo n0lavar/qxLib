@@ -31,7 +31,7 @@ namespace qx
     @param   x1             - right border
     @param   nIntervalsPer1 - number of intervals per dx = 1
     @tpara m function_2d_t  - function that takes double and returns double
-    @retval                 - approximate integral; 0 for zero extent;
+    @return                 - approximate integral; 0 for zero extent;
                               NaN for invalid bounds, zero density or sample count overflow
 **/
 template<class function_2d_t>
@@ -49,7 +49,7 @@ inline double integrate_rectangle_rule(
     @param   x1             - right border 
     @param   nIntervalsPer1 - number of intervals per dx = 1 
     @tparam  function_2d_t  - function that takes double and returns double
-    @retval                 - approximate integral; 0 for zero extent;
+    @return                 - approximate integral; 0 for zero extent;
                               NaN for invalid bounds, zero density or sample count overflow
 **/
 template<class function_2d_t>
@@ -69,7 +69,7 @@ inline double integrate_trapezoid_rule(
     @param   nIntervalsPer1 - number of intervals per dx = 1 
     @param   nMaxRecursion  - max recursion depth 
     @tpara m function_2d_t  - function that takes double and returns double
-    @retval                 - approximate integral; 0 for zero extent;
+    @return                 - approximate integral; 0 for zero extent;
                               NaN for invalid bounds, zero density or sample count overflow
 **/
 template<class function_2d_t>
@@ -92,7 +92,7 @@ inline double integrate_adaptive_midpoint(
     @param   pos1                - right up corner coordinates
     @param   nPointsPerOneSquare - points per 1 square (more is better)
     @tparam  function_2d_t       - function that takes double and returns double
-    @retval                      - approximate integral; 0 for zero area;
+    @return                      - approximate integral; 0 for zero area;
                                    NaN for invalid bounds, zero density or sample count overflow
 **/
 template<class function_2d_t>

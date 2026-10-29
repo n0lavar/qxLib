@@ -71,13 +71,13 @@ public:
         @see     qx::logger_specifiers for details
         @warning Not thread safe on purpose. Set it before you pass this stream to a logger!
         @param   sPattern - a pattern for the stream
-        @retval           - pattern compilation result
+        @return           - pattern compilation result
     **/
     compile_pattern_result set_pattern(pattern_string_t sPattern) noexcept;
 
     /**
         @brief  Get a message pattern if present
-        @retval  - a pattern for the stream
+        @return  - a pattern for the stream
     **/
     std::optional<string_view> get_pattern() const noexcept;
 
@@ -118,7 +118,7 @@ public:
         @param  svFile      - file name string
         @param  svFunction  - function name string
         @param  nLine       - code line number
-        @retval             - true is this message is unconditionally required by this stream
+        @return             - true is this message is unconditionally required by this stream
     **/
     virtual bool log_unconditionally_required(
         const category&                       category,

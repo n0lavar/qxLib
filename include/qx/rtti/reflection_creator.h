@@ -47,7 +47,7 @@ public:
         @brief  Create object based on class id
         @param  id   - class id
         @param  args - template parameter pack
-        @retval      - class instance or nullptr if can't find factory or can't create
+        @return      - class instance or nullptr if can't find factory or can't create
     **/
     [[nodiscard]] static smart_ptr_t<base_class_t> create_object(class_id id, args_t&&... args);
 
@@ -55,7 +55,7 @@ public:
         @brief  Create object based on class name
         @param  svClassName - class name
         @param  args        - template parameter pack
-        @retval             - class instance or nullptr if can't find factory or can't create
+        @return             - class instance or nullptr if can't find factory or can't create
     **/
     [[nodiscard]] static smart_ptr_t<base_class_t> create_object(string_view svClassName, args_t&&... args);
 
@@ -64,7 +64,7 @@ public:
         @param  factory     - class factory
         @param  id          - class id
         @param  svClassName - class name
-        @retval             - true if registered
+        @return             - true if registered
     **/
     static bool _register_class(factory factory, class_id id, string_view svClassName);
 

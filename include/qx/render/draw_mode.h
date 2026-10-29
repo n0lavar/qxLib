@@ -75,7 +75,7 @@ enum class draw_mode
 /**
     @brief  Returns true if the specified draw mode draws triangles
     @param  eDrawMode - draw mode to check
-    @retval           - true if the specified draw mode draws triangles
+    @return           - true if the specified draw mode draws triangles
 **/
 constexpr bool is_triandles(draw_mode eDrawMode)
 {

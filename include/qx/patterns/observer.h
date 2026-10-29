@@ -68,7 +68,7 @@ public:
 
     /**
         @brief  operator bool
-        @retval - true if observer_token is valid
+        @return - true if observer_token is valid
     **/
     operator bool() const noexcept;
 
@@ -177,7 +177,7 @@ public:
     /**
         @brief  Attach observer to this subject
         @param  pObserver - observer pointer 
-        @retval           - observer_token for auto detaching observer from this subject 
+        @return           - observer_token for auto detaching observer from this subject 
     **/
     [[nodiscard]] observer_token attach(observer_t* pObserver) noexcept;
 
@@ -189,79 +189,79 @@ public:
 
     /**
         @brief  Return iterator to beginning
-        @retval - iterator to beginning
+        @return - iterator to beginning
     **/
     iterator begin();
 
     /**
         @brief  Return iterator to beginning
-        @retval - iterator to beginning
+        @return - iterator to beginning
     **/
     const_iterator begin() const;
 
     /**
         @brief  Return const iterator to beginning
-        @retval - const iterator to beginning
+        @return - const iterator to beginning
     **/
     const_iterator cbegin() const;
 
     /**
         @brief  Return iterator to end
-        @retval - iterator to end
+        @return - iterator to end
     **/
     iterator end();
 
     /**
         @brief  Return iterator to end
-        @retval - iterator to end
+        @return - iterator to end
     **/
     const_iterator end() const;
 
     /**
         @brief  Return const iterator to end
-        @retval - const iterator to end
+        @return - const iterator to end
     **/
     const_iterator cend() const;
 
     /**
         @brief  Return reverse iterator to reverse beginning
-        @retval - reverse iterator to reverse beginning
+        @return - reverse iterator to reverse beginning
     **/
     reverse_iterator rbegin();
 
     /**
         @brief  Return reverse iterator to reverse beginning
-        @retval - reverse iterator to reverse beginning
+        @return - reverse iterator to reverse beginning
     **/
     const_reverse_iterator rbegin() const;
 
     /**
         @brief  Return const reverse iterator to reverse beginning
-        @retval - const reverse iterator to reverse beginning
+        @return - const reverse iterator to reverse beginning
     **/
     const_reverse_iterator crbegin() const;
 
     /**
         @brief  Return reverse iterator to reverse end
-        @retval - reverse iterator to reverse end
+        @return - reverse iterator to reverse end
     **/
     reverse_iterator rend();
 
     /**
         @brief  Return reverse iterator to reverse end
-        @retval - reverse iterator to reverse end
+        @return - reverse iterator to reverse end
     **/
     const_reverse_iterator rend() const;
 
     /**
         @brief  Return const reverse iterator to reverse end
-        @retval - const reverse iterator to reverse end
+        @return - const reverse iterator to reverse end
     **/
     const_reverse_iterator crend() const;
 
     /**
         @brief  Get number of observers attached to this subject
-        @retval - number of observers attached to this subject
+        @return - number of observers attached to this subject
     **/
     size_t get_num_observers() const noexcept;
 

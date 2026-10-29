@@ -61,20 +61,20 @@ public:
     /**
         @brief  Set font color
         @param  fontColor - new font color
-        @retval           - terminal_color instance to pass to the ostream
+        @return           - terminal_color instance to pass to the ostream
     **/
     static constexpr terminal_color font(const color& fontColor) noexcept;
 
     /**
         @brief  Set background color
         @param  bgColor - new background color
-        @retval         - terminal_color instance to pass to the ostream
+        @return         - terminal_color instance to pass to the ostream
     **/
     static constexpr terminal_color back(const color& bgColor) noexcept;
 
     /**
         @brief  Reset all colors
-        @retval  - terminal_color instance to pass to the ostream
+        @return  - terminal_color instance to pass to the ostream
     **/
     static constexpr terminal_color reset() noexcept;
 

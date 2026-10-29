@@ -50,7 +50,7 @@ public:
 
     /**
         @brief  Acquire a string from the pool.
-        @retval - If a free slot exists, returns it (moved) and its index,
+        @return - If a free slot exists, returns it (moved) and its index,
                   otherwise returns a fresh string with nIndex = nFreeString.
     **/
     item acquire();
@@ -66,7 +66,7 @@ private:
     /**
         @brief  Count trailing zeros for a non-zero 64-bit value
         @param  nBit - 64-bit value
-        @retval      - number of trailing zeros
+        @return      - number of trailing zeros
     **/
     static int ctz64(u64 nBit) noexcept;
 

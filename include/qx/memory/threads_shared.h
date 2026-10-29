@@ -96,7 +96,7 @@ class threads_shared
 
         /**
             @brief  Get synchronization primitive stored in proxy
-            @retval - synchronization primitive
+            @return - synchronization primitive
         **/
         synchronization_primitive_t* get_object() noexcept;
 
@@ -125,14 +125,14 @@ public:
     /**
         @brief  Wait for other threads to finish work with data object and retrieve
                 proxy object
-        @retval - proxy that provides access to an object stored in threads_shared
+        @return - proxy that provides access to an object stored in threads_shared
                   and provides raii for synchronization primitives
     **/
     [[nodiscard]] proxy lock();
 
     /**
         @brief  Try to lock synchronization primitive and get proxy
-        @retval - proxy that provides access to an object stored
+        @return - proxy that provides access to an object stored
                   in threads_shared or std::nullopt
     **/
     [[nodiscard]] std::optional<proxy> try_lock();

@@ -40,19 +40,19 @@ class type_strings
 public:
     /**
         @brief  Get type signature (full name with template parameters)
-        @retval  - type signature
+        @return  - type signature
     **/
     static constexpr string_view_type get_signature();
 
     /**
         @brief  Get type name (short name without template parameters)
-        @retval  - type name
+        @return  - type name
     **/
     static constexpr string_view_type get_name();
 
     /**
         @brief  Get type template parameters
-        @retval  - template parameters
+        @return  - template parameters
     **/
     static constexpr auto get_template_parameters();
 

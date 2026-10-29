@@ -18,7 +18,7 @@ namespace qx
     @tparam args_t  - format arguments types
     @param  sFormat - format string
     @param  args    - template parameter pack
-    @retval         - formatted string
+    @return         - formatted string
 **/
 template<class... args_t>
     requires format_acceptable_args_c<char, args_t...>
@@ -43,7 +43,7 @@ cstring format(
     @tparam args_t  - format arguments types
     @param  sFormat - format string
     @param  args    - template parameter pack
-    @retval         - formatted string
+    @return         - formatted string
 **/
 template<class... args_t>
     requires format_acceptable_args_c<wchar_t, args_t...>
@@ -61,7 +61,7 @@ wstring format(
     @tparam char_t   - char type (char, wchar_t, etc)
     @tparam traits_t - char traits. \see string_traits.h
     @param  value    - object to convert
-    @retval          - qx::basic_string
+    @return          - qx::basic_string
 **/
 template<class T, class char_t = char_type, class traits_t = string_traits::default_traits<char_t>>
 basic_string<char_t, traits_t> convert_to_string(const T& value) noexcept

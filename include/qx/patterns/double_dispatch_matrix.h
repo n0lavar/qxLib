@@ -104,14 +104,14 @@ public:
         @brief  Call a function if there is any
         @param  first  - first object
         @param  second - second object
-        @retval        - a return value if a function for these types found, std::nullopt otherwise
+        @return        - a return value if a function for these types found, std::nullopt otherwise
     **/
     std::optional<return_type> invoke(const base_type& first, const base_type& second);
 
     /**
         @brief  Check that for each registered type there is a match to all other types,
                 including the type itself, and that all these functions are valid. 
-        @retval  - true if this symmetric matrix is complete
+        @return  - true if this symmetric matrix is complete
     **/
     bool check_matrix_completeness() const noexcept;
 
@@ -120,7 +120,7 @@ private:
         @brief  Get or create a function for two types
         @param  first  - first type
         @param  second - second type (can be same as the first type)
-        @retval        - function
+        @return        - function
     **/
     function_type& get_function(class_id first, class_id second) noexcept;
 

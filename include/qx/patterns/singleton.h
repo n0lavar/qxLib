@@ -64,7 +64,7 @@ private:
 
     /**
         @brief  Returns singletons manager instance
-        @retval  - singletons manager instance
+        @return  - singletons manager instance
     **/
     static singletons_manager& get_instance() noexcept;
 
@@ -102,7 +102,7 @@ class singleton : public base_singleton
 public:
     /**
         @brief  Get singleton instance
-        @retval  - singleton instance
+        @return  - singleton instance
     **/
     static T& get_instance();
 

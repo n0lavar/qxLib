@@ -35,7 +35,7 @@ public:
     /**
         @brief  Create a class id for a given type (the type doesn't require to use qx rtti system)
         @tparam T - a type
-        @retval   - T id
+        @return   - T id
     **/
     template<class T>
     constexpr static class_id create();
@@ -50,7 +50,7 @@ public:
 
     /**
         @brief  Get class name
-        @retval  - class name
+        @return  - class name
     **/
     constexpr string_view get_class_name() const;
 

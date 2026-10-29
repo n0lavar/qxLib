@@ -22,7 +22,7 @@ namespace qx
     @param  nMaxIterations        - max iterations number (sometimes alg breaks)
     @tparam function_t            - function that takes double and returns double
     @tparam derivative_function_t - function that takes double and returns double
-    @retval                       - approximate root
+    @return                       - approximate root
 **/
 template<class function_t, class derivative_function_t>
 inline double newtons_method(

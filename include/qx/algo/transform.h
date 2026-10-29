@@ -50,7 +50,7 @@ namespace qx
     @tparam result_container_rest_t - any types required for result_container_t after element type
     @param  input                   - input container, may be moved
     @param  transformCallable       - transformation callable
-    @retval                         - container with transformed elements
+    @return                         - container with transformed elements
 **/
 template<
     template<class...> class result_container_t,

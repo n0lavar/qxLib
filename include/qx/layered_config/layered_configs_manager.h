@@ -72,7 +72,7 @@ public:
     /**
         @brief   Show help message if "--help" or "-h" argument is present in command line arguments.
         @details Should be called after set_args().
-        @retval  - true if help message was shown. usually the app should exit after that
+        @return  - true if help message was shown. usually the app should exit after that
     **/
     bool show_help() const noexcept;
 
@@ -80,7 +80,7 @@ public:
         @brief   Parse command line arguments, environment variables, and default values.
         @details Should be called after set_args() and before get()/set() of any variable.
                  You can call it multiple times during the app lifetime, for example, to load variables from different DLLs.
-        @retval  - true all required variables are present and have valid values
+        @return  - true all required variables are present and have valid values
     **/
     bool parse() noexcept;
 
@@ -88,7 +88,7 @@ public:
         @brief  Get variable value by runtime name.
         @tparam T             - type of variable
         @param  svRuntimeName - runtime name of variable
-        @retval               - optional with variable value if it is present, has valid value and correct type
+        @return               - optional with variable value if it is present, has valid value and correct type
     **/
     template<class T>
     std::optional<T> get(cstring_view svRuntimeName) const noexcept;
@@ -98,7 +98,7 @@ public:
         @tparam T             - type of variable
         @param  svRuntimeName - runtime name of variable
         @param  value         - new variable value
-        @retval               - true if the value was set successfully
+        @return               - true if the value was set successfully
     **/
     template<class T>
     bool set(cstring_view svRuntimeName, T value) noexcept;

@@ -72,7 +72,7 @@ public:
 
     /**
         @brief  Check if this iterator is valid (i.e. it didn't reach the end of the sequence)
-        @retval  - true if this iterator is valid
+        @return  - true if this iterator is valid
     **/
     constexpr operator bool() const noexcept;
 
@@ -81,7 +81,7 @@ public:
         @param  svFull                   - string to iterate
         @param  chDelimiter              - delimiter character
         @param  eDelimiterInclusionFlags - flags that determine whether to include delimiters in parts when iterating
-        @retval                          - iterator to beginning
+        @return                          - iterator to beginning
     **/
     constexpr static base_string_view_iterator begin(
         value_type                       svFull,
@@ -93,7 +93,7 @@ public:
         @param  svFull                   - string to iterate
         @param  chDelimiter              - delimiter character
         @param  eDelimiterInclusionFlags - flags that determine whether to include delimiters in parts when iterating
-        @retval                          - iterator to end
+        @return                          - iterator to end
     **/
     constexpr static base_string_view_iterator end(
         value_type                       svFull,

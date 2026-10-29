@@ -98,7 +98,7 @@ private:
         runs out of space.
 
         @param  nNewCapacity - new capacity in bytes (must be >= current size)
-        @retval              - true - remapping succeeded  
+        @return              - true - remapping succeeded  
     **/
     bool remap_to_capacity(size_t nNewCapacity) noexcept;
 
@@ -113,7 +113,7 @@ private:
         This function guarantees that subsequent writes will not overflow the mapped memory region.
 
         @param  nAdditionalBytes - Number of bytes that need to be written
-        @retval                  - true - enough space is available or remapping succeeded  
+        @return                  - true - enough space is available or remapping succeeded  
     **/
     bool ensure_capacity(size_t nAdditionalBytes) noexcept;
 
@@ -135,7 +135,7 @@ private:
 
         @param  nValue     - value to align
         @param  nAlignment - alignment / granularity / page size
-        @retval            - aligned value >= value
+        @return            - aligned value >= value
     **/
     static size_t align_up_u64(size_t nValue, size_t nAlignment) noexcept;
 

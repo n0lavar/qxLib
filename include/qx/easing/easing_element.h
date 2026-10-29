@@ -78,7 +78,7 @@ public:
     /**
         @brief  Update element corresponding to easing function
         @param  fDeltaTime - delta time
-        @retval            - the portion of time that was not used
+        @return            - the portion of time that was not used
     **/
     [[nodiscard]] T update(T fDeltaTime) noexcept;
 
@@ -90,49 +90,49 @@ public:
 
     /**
         @brief  Get current value of element
-        @retval - current value of element
+        @return - current value of element
     **/
     [[nodiscard]] T get() const noexcept;
 
     /**
         @brief  Get a fraction indicating how much of the element has played
-        @retval - fraction [0.0, 1.0]
+        @return - fraction [0.0, 1.0]
     **/
     [[nodiscard]] T get_fraction() const noexcept;
 
     /**
         @brief  Get speed value
-        @retval - speed value
+        @return - speed value
     **/
     [[nodiscard]] T get_speed() const noexcept;
 
     /**
         @brief  Get element status
-        @retval - element status
+        @return - element status
     **/
     [[nodiscard]] status get_status() const noexcept;
 
     /**
         @brief  Check if element is not started
-        @retval - true if element is not started
+        @return - true if element is not started
     **/
     [[nodiscard]] bool is_not_started() const noexcept;
 
     /**
         @brief  Check if element is started
-        @retval - true if element is started
+        @return - true if element is started
     **/
     [[nodiscard]] bool is_started() const noexcept;
 
     /**
         @brief  Check if element is paused
-        @retval - true if element is paused
+        @return - true if element is paused
     **/
     [[nodiscard]] bool is_paused() const noexcept;
 
     /**
         @brief  Check if element is finished
-        @retval - true if element is finished
+        @return - true if element is finished
     **/
     [[nodiscard]] bool is_finished() const noexcept;
 

@@ -104,7 +104,7 @@ public:
         @brief  operator=
         @tparam derived_t - type inherited from base_t
         @param  object    - an object to store
-        @retval           - this object reference
+        @return           - this object reference
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
     sbo_poly& operator=(derived_t&& object);
@@ -125,13 +125,13 @@ public:
 
     /**
         @brief  Get object reference. Always valid.
-        @retval  - object reference
+        @return  - object reference
     **/
     base_t& get() noexcept;
 
     /**
         @brief  Get object reference. Always valid.
-        @retval  - object reference
+        @return  - object reference
     **/
     const base_t& get() const noexcept;
 
@@ -139,7 +139,7 @@ private:
     /**
         @brief  Get type operations table
         @tparam derived_t - type inherited from base_t
-        @retval           - operations
+        @return           - operations
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
     static const operations& get_operations() noexcept;
@@ -147,7 +147,7 @@ private:
     /**
         @brief  Get the number of bytes required to store an object with proper alignment
         @tparam derived_t - type inherited from base_t
-        @retval           - object size plus the worst-case alignment padding when required
+        @return           - object size plus the worst-case alignment padding when required
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
     static constexpr size_t get_storage_size() noexcept;
@@ -156,7 +156,7 @@ private:
         @brief  Get a properly aligned pointer to an object in the storage
         @tparam derived_t - type inherited from base_t
         @param  data      - storage containing the object
-        @retval           - aligned pointer to the object
+        @return           - aligned pointer to the object
     **/
     template<sbo_poly_assignable_c<base_t> derived_t>
     static derived_t* get_object(sbo_bytes_type& data) noexcept;

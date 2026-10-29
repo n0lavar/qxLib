@@ -64,7 +64,7 @@ public:
 
     /**
         @brief  Is current state default
-        @retval - true if default
+        @return - true if default
     **/
     bool is_default() const noexcept;
 

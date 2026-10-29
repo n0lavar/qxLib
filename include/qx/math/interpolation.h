@@ -22,7 +22,7 @@ namespace qx
     @param  p0 - point 0 (x - coordinate, y - f(x))
     @param  p1 - point 1 (x - coordinate, y - f(x))
     @param  x  - point
-    @retval    - ~f(x)
+    @return    - ~f(x)
 **/
 inline double linear_interpolation(const glm::dvec2& p0, const glm::dvec2& p1, double x)
 {
@@ -41,7 +41,7 @@ inline double linear_interpolation(const glm::dvec2& p0, const glm::dvec2& p1, d
     @param   p3  - point 3 (x, y - coordinates, z - f(x, y))
     @param   p   - point (x, y - coordinates).
                    It can be out of points square, in this case algorithm called extrapolation
-    @retval      - ~f(p.x, p.y) 
+    @return      - ~f(p.x, p.y) 
 **/
 inline double bilinear_interpolation(
     const glm::dvec3& p0,

@@ -43,13 +43,13 @@ public:
 
     /**
         @brief  Get on messages delegate
-        @retval  - on messages delegate
+        @return  - on messages delegate
     **/
     threads_shared<on_message_delegates_map_t>& get_on_messages() noexcept;
 
     /**
         @brief  Get on error delegate
-        @retval  - on error delegate
+        @return  - on error delegate
     **/
     threads_shared<on_error_delegate, std::recursive_mutex>& get_on_error() noexcept;
 

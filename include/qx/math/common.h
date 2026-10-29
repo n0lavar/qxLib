@@ -21,7 +21,7 @@ namespace qx
     @brief  Constexpr absolute value
     @tparam T     - value type
     @param  value - value
-    @retval       - absolute value
+    @return       - absolute value
 **/
 template<class T>
 constexpr T abs(T value);
@@ -30,7 +30,7 @@ constexpr T abs(T value);
     @brief  Check if value is odd
     @tparam T   - integral type
     @param  val - value
-    @retval     - true if value is odd
+    @return     - true if value is odd
 **/
 template<std::integral T>
 constexpr bool is_odd(T val);
@@ -39,7 +39,7 @@ constexpr bool is_odd(T val);
     @brief  Check if value is even
     @tparam T   - integral type
     @param  val - value
-    @retval     - true if value is even
+    @return     - true if value is even
 **/
 template<std::integral T>
 constexpr bool is_even(T val);
@@ -51,7 +51,7 @@ constexpr bool is_even(T val);
     @complexity O(log(second))
     @param      nFirst  - first num
     @param      nSecond - second num
-    @retval             - greatest common divisor if first and second > 0, otherwise 0
+    @return             - greatest common divisor if first and second > 0, otherwise 0
 **/
 constexpr int gcd(int nFirst, int nSecond);
 
@@ -60,7 +60,7 @@ constexpr int gcd(int nFirst, int nSecond);
     @complexity O(log(second))
     @param      nFirst  - first num
     @param      nSecond - second num
-    @retval             - least common multiple if first and second > 0, otherwise 0
+    @return             - least common multiple if first and second > 0, otherwise 0
 **/
 constexpr int lcm(int nFirst, int nSecond);
 
@@ -74,7 +74,7 @@ constexpr int lcm(int nFirst, int nSecond);
     @tparam     T      - Integral or floating point type
     @param      number - integral of floating point value
     @param      nPower - integral power
-    @retval            - number ^ power
+    @return            - number ^ power
 **/
 template<class T>
 constexpr double pow(T number, int nPower);
@@ -83,7 +83,7 @@ constexpr double pow(T number, int nPower);
     @brief  Max power of two in integer
     @tparam I      - Integral type
     @param  nValue - number
-    @retval        - max power of two in the number
+    @return        - max power of two in the number
 **/
 template<std::integral I>
 inline I maxpot(I nValue);

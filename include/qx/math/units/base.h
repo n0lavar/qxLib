@@ -81,7 +81,7 @@ class convert;
     @tparam T      - floating point or integral value type
     @tparam unit_t - unit type enum
     @param  unit   - input unit
-    @retval        - the closest value greater than one from the SI for the unit of measurement
+    @return        - the closest value greater than one from the SI for the unit of measurement
 **/
 template<arithmetic_c T, unit_enum_c unit_t>
 constexpr unit<T, unit_t> normalize_unit(unit<T, unit_t> unit) noexcept;
@@ -92,7 +92,7 @@ constexpr unit<T, unit_t> normalize_unit(unit<T, unit_t> unit) noexcept;
     @tparam unit_t       - unit type enum
     @param  value        - input unit value
     @param  eInitialType - input unit type
-    @retval              - the closest value greater than one from the SI for the unit of measurement
+    @return              - the closest value greater than one from the SI for the unit of measurement
 **/
 template<arithmetic_c T, unit_enum_c unit_t>
 constexpr unit<T, unit_t> normalize_unit(T value, unit_t eInitialType) noexcept;
@@ -104,7 +104,7 @@ constexpr unit<T, unit_t> normalize_unit(T value, unit_t eInitialType) noexcept;
     @tparam  unit_t  - unit enum
     @tparam  char_t  - input string char type
     @param   svValue - input string value
-    @retval          - a unit if created successfully or `std::nullopt`
+    @return          - a unit if created successfully or `std::nullopt`
 **/
 template<arithmetic_c T, unit_enum_c unit_t, class char_t>
 std::optional<unit<T, unit_t>> unit_from_string(basic_string_view<char_t> svValue) noexcept;
@@ -116,7 +116,7 @@ std::optional<unit<T, unit_t>> unit_from_string(basic_string_view<char_t> svValu
     @tparam  unit_t   - unit enum
     @tparam  char_t   - input string char type
     @param   pszValue - input string value
-    @retval           - a unit if created successfully or `std::nullopt`
+    @return           - a unit if created successfully or `std::nullopt`
 **/
 template<arithmetic_c T, unit_enum_c unit_t, class char_t>
 std::optional<unit<T, unit_t>> unit_from_string(const char_t* pszValue) noexcept;
@@ -126,7 +126,7 @@ std::optional<unit<T, unit_t>> unit_from_string(const char_t* pszValue) noexcept
     @tparam unit_t - unit enum
     @tparam char_t - result string view char type
     @param  eUnit  - unit to search
-    @retval        - unit suffix
+    @return        - unit suffix
 **/
 template<unit_enum_c unit_t, class char_t = char_type>
 constexpr std::optional<basic_string_view<char_t>> get_unit_suffix(unit_t eUnit) noexcept;

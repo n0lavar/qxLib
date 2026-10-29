@@ -189,7 +189,7 @@ public:
     /**
         @brief  Check if flag is present
         @param  eFlag - flag to check
-        @retval       - true if flag is present
+        @return       - true if flag is present
     **/
     constexpr bool contains(enum_t eFlag) const noexcept;
 
@@ -197,7 +197,7 @@ public:
         @brief  Check if all the specified flags are present
         @tparam args_t... - template parameters pack, all types should be same as enum_t
         @param  flags     - flags to check
-        @retval true if all the specified flags are present
+        @return true if all the specified flags are present
     **/
     template<class... args_t>
         requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
@@ -206,7 +206,7 @@ public:
     /**
         @brief  Check if all the specified flags are present
         @param  other - flags to check
-        @retval       - true if all the specified flags are present
+        @return       - true if all the specified flags are present
     **/
     constexpr bool contains_all(flags other) const noexcept;
 
@@ -214,7 +214,7 @@ public:
         @brief  Check if any of the specified flags is present
         @tparam args_t... - template parameters pack, all types should be same as enum_t
         @param  flags     - flags to check
-        @retval           - true if any of the specified flags is present
+        @return           - true if any of the specified flags is present
     **/
     template<class... args_t>
         requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
@@ -223,19 +223,19 @@ public:
     /**
         @brief  Check if any of the specified flags is present
         @param  other - flags to check
-        @retval       - true if any of the specified flags is present
+        @return       - true if any of the specified flags is present
     **/
     constexpr bool contains_any(flags other) const noexcept;
 
     /**
         @brief  Convert to the corresponding integer value
-        @retval  - integer value
+        @return  - integer value
     **/
     constexpr underlying_type to_integer() const noexcept;
 
     /**
         @brief  Get a flags with all bits equal 1
-        @retval  - flags with all bits equal 1
+        @return  - flags with all bits equal 1
     **/
     static constexpr flags all_flags() noexcept;
 

@@ -238,87 +238,87 @@ public:
 
     /**
         @brief  Get red component
-        @retval - red component
+        @return - red component
     **/
     constexpr float r() const noexcept;
 
     /**
         @brief  Get green component
-        @retval - green component
+        @return - green component
     **/
     constexpr float g() const noexcept;
 
     /**
         @brief  Get blue component
-        @retval - blue component
+        @return - blue component
     **/
     constexpr float b() const noexcept;
 
     /**
         @brief  Get alpha component
-        @retval - alpha component
+        @return - alpha component
     **/
     constexpr float a() const noexcept;
 
     /**
         @brief  Get color component
         @param  i - component number [0, 3]
-        @retval   - component value
+        @return   - component value
     **/
     constexpr float& operator[](size_t i) noexcept;
 
     /**
         @brief  Get color component
         @param  i - component number [0, 3]
-        @retval   - component value
+        @return   - component value
     **/
     constexpr const float& operator[](size_t i) const noexcept;
 
     /**
         @brief  Get red component as decimal 
-        @retval - red component as decimal
+        @return - red component as decimal
     **/
     constexpr int r_dec() const noexcept;
 
     /**
         @brief  Get green component as decimal 
-        @retval - green component as decimal
+        @return - green component as decimal
     **/
     constexpr int g_dec() const noexcept;
 
     /**
         @brief  Get blue component as decimal 
-        @retval - blue component as decimal
+        @return - blue component as decimal
     **/
     constexpr int b_dec() const noexcept;
 
     /**
         @brief  Get alpha component as decimal 
-        @retval - alpha component as decimal
+        @return - alpha component as decimal
     **/
     constexpr int a_dec() const noexcept;
 
     /**
         @brief  Get pointer to the first component
-        @retval - pointer to the first component
+        @return - pointer to the first component
     **/
     constexpr const float* data() const noexcept;
 
     /**
         @brief  Get color as hex
-        @retval - hex color value in 0xRRGGBB format
+        @return - hex color value in 0xRRGGBB format
     **/
     constexpr unsigned int hex_rgb() const noexcept;
 
     /**
         @brief  Get color as hex
-        @retval - hex color value in 0xRRGGBBAA format
+        @return - hex color value in 0xRRGGBBAA format
     **/
     constexpr unsigned int hex_rgba() const noexcept;
 
     /**
         @brief  Get color as hex
-        @retval  - hex color value in 0xAARRGGBB format
+        @return  - hex color value in 0xAARRGGBB format
     **/
     constexpr unsigned int hex_argb() const noexcept;
 
@@ -454,7 +454,7 @@ public:
         @brief  Make darker color
         @param  other    - original color
         @param  fPercent - dark factor
-        @retval          - darker color
+        @return          - darker color
     **/
     constexpr static color darken(const color& other, float fPercent) noexcept;
 
@@ -462,7 +462,7 @@ public:
         @brief  Make brighter color
         @param  other    - original color
         @param  fPercent - brighter factor
-        @retval          - brighter color
+        @return          - brighter color
     **/
     constexpr static color brighten(const color& other, float fPercent) noexcept;
 
@@ -478,14 +478,14 @@ public:
     /**
         @brief  Try to create color from string
         @param  svColorName - color name: css style (alice_blue, AliceBlue, aliceblue) or #F0F8FF or 0xF0F8FFFF(0xRRGGBBAA) or 0xF0F8FF(0xRRGGBB)
-        @retval             - found color or nullopt
+        @return             - found color or nullopt
     **/
     static std::optional<color> from_string(string_view svColorName) noexcept;
 
     /**
         @brief  Generate a color unique for a hash value
         @param  nHash - hash value
-        @retval       - generated color
+        @return       - generated color
     **/
     static constexpr color from_hash(size_t nHash) noexcept;
 
@@ -493,13 +493,13 @@ public:
         @brief   Get empty color (0, 0, 0, 0)
         @details - empty color can be useful for out of border values
                    as they won't affect calc result
-        @retval  - empty color
+        @return  - empty color
     **/
     static constexpr color empty() noexcept;
 
     /**
         @brief  Get number of float components
-        @retval  - number of float components
+        @return  - number of float components
     **/
     static constexpr size_t size() noexcept;
 
@@ -507,21 +507,21 @@ private:
     /**
         @brief  Clamp a value to a valid range
         @param  fValue - input value
-        @retval        - clamped value [0.f, 1.f]
+        @return        - clamped value [0.f, 1.f]
     **/
     static constexpr float clamp_value(float fValue) noexcept;
 
     /**
         @brief  Convert decimal value to float
         @param  nValue - decimal value   [0, 255]
-        @retval        - float value     [0.f, 1.f]
+        @return        - float value     [0.f, 1.f]
     **/
     static constexpr float dec_to_float(int nValue) noexcept;
 
     /**
         @brief  Convert float value to decimal
         @param  fValue - float value     [0.f, 1.f]
-        @retval        - decimal value   [0, 255]
+        @return        - decimal value   [0, 255]
     **/
     static constexpr int float_to_dec(float fValue) noexcept;
 

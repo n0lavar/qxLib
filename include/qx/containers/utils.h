@@ -29,7 +29,7 @@ inline void destruct(iterator_t itStart, iterator_t itEnd);
     @tparam N        - number of elements in array
     @tparam T        - array value type
     @param  init_val - init value
-    @retval          - filled array
+    @return          - filled array
 **/
 template<size_t N, class T>
 constexpr auto make_array(T init_val = T());
@@ -41,7 +41,7 @@ constexpr auto make_array(T init_val = T());
     @tparam RightLength - right array length
     @param  rhs         - left array
     @param  lhs         - right array
-    @retval             - new array where elements from the right array placed after elements from the left array
+    @return             - new array where elements from the right array placed after elements from the left array
 **/
 template<class T, std::size_t LeftLength, std::size_t RightLength>
 constexpr std::array<T, LeftLength + RightLength> join_arrays(
@@ -53,7 +53,7 @@ constexpr std::array<T, LeftLength + RightLength> join_arrays(
     @tparam N    - span and array compile time size
     @tparam T    - span and array type
     @param  span - span object
-    @retval      - array object
+    @return      - array object
 **/
 template<std::size_t N, class T>
 constexpr std::array<T, N> span_to_array(std::span<T, N> span);
@@ -64,7 +64,7 @@ constexpr std::array<T, N> span_to_array(std::span<T, N> span);
     @tparam result_container_t - target container type, must support value_type and push_back
     @tparam container_t        - original container type, must support forward iteration
     @param  from               - original container
-    @retval                    - target container
+    @return                    - target container
 **/
 template<class result_container_t, class container_t>
 result_container_t make_container(const container_t& from);
@@ -73,7 +73,7 @@ result_container_t make_container(const container_t& from);
     @brief  Get the size of memory allocated for container elements
     @tparam container_t - container type
     @param  container   - container const ref
-    @retval             - the size of memory allocated for container elements
+    @return             - the size of memory allocated for container elements
 **/
 template<class container_t>
 constexpr size_t bytes_size(const container_t& container);

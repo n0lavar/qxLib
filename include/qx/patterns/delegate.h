@@ -105,7 +105,7 @@ public:
         @brief  Create a singlecast delegate
         @tparam creation_args_t - any arguments that can be used in add_weak or add_token
         @param  args            - template parameter pack
-        @retval                 - created delegate
+        @return                 - created delegate
     **/
     template<class... creation_args_t>
     static derived_t create_singlecast(creation_args_t... args) noexcept;
@@ -119,7 +119,7 @@ public:
         @param   callable   - callable object
         @param   ePriority  - callable priority. Callables will be called in order of priority,
                               from highest to lowest, and in the order they were added.
-        @retval             - a token that can be used to remove this callable from the delegate
+        @return             - a token that can be used to remove this callable from the delegate
     **/
     template<callable_c<return_t, args_t...> callable_t>
     [[maybe_unused]] delegate_token_type add_token(callable_t callable, priority ePriority = priority::normal) noexcept;
@@ -134,7 +134,7 @@ public:
         @param   pMethod   - object's method pointer
         @param   ePriority - callable priority. Callables will be called in order of priority,
                              from highest to lowest, and in the order they were added.
-        @retval            - a token that can be used to remove this callable from the delegate
+        @return            - a token that can be used to remove this callable from the delegate
     **/
     template<class object_t>
     [[maybe_unused]] delegate_token_type add_token(
@@ -148,7 +148,7 @@ public:
         @param  callable   - callable object
         @param  ePriority  - callable priority. Callables will be called in order of priority,
                              from highest to lowest, and in the order they were added.
-        @retval            - an object that removes this callable from the delegate on its destruction
+        @return            - an object that removes this callable from the delegate on its destruction
     **/
     template<callable_c<return_t, args_t...> callable_t>
     [[nodiscard]] destruction_callback add_destruction_callback(
@@ -162,7 +162,7 @@ public:
         @param  pMethod   - object's method pointer
         @param  ePriority - callable priority. Callables will be called in order of priority,
                             from highest to lowest, and in the order they were added.
-        @retval           - an object that removes this callable from the delegate on its destruction
+        @return           - an object that removes this callable from the delegate on its destruction
     **/
     template<class object_t>
     [[nodiscard]] destruction_callback add_destruction_callback(
@@ -178,7 +178,7 @@ public:
         @param  callable    - callable object
         @param  ePriority   - callable priority. Callables will be called in order of priority,
                               from highest to lowest, and in the order they were added.
-        @retval             - a token that can be used to remove this callable from the delegate
+        @return             - a token that can be used to remove this callable from the delegate
     **/
     template<class object_t, callable_c<return_t, args_t...> callable_t>
     [[maybe_unused]] delegate_token_type add_weak(
@@ -193,7 +193,7 @@ public:
         @param  pMethod     - object's method pointer
         @param  ePriority   - callable priority. Callables will be called in order of priority,
                               from highest to lowest, and in the order they were added.
-        @retval             - a token that can be used to remove this callable from the delegate
+        @return             - a token that can be used to remove this callable from the delegate
     **/
     template<class object_t>
     [[maybe_unused]] delegate_token_type add_weak(
@@ -204,7 +204,7 @@ public:
     /**
         @brief  Remove a callable using its token
         @param  token - callable token
-        @retval       - true is a callable was deleted
+        @return       - true is a callable was deleted
     **/
     bool remove(delegate_token_type token) noexcept;
 
@@ -215,13 +215,13 @@ public:
 
     /**
         @brief  Get the number of functions bound to this delegate
-        @retval  - the number of functions bound to this delegate
+        @return  - the number of functions bound to this delegate
     **/
     size_t size() const noexcept;
 
     /**
         @brief  Check if this delegate is empty
-        @retval  - true if this delegate is empty
+        @return  - true if this delegate is empty
     **/
     bool empty() const noexcept;
 
@@ -232,7 +232,7 @@ protected:
         @tparam invoke_multiple_t - a callable type that executes a delegate callable by copying args into it
         @param  invokeSingle      - invoke_single_t object
         @param  invokeMultiple    - invoke_multiple_t object
-        @retval                   - void or piping result of all delegate callables 
+        @return                   - void or piping result of all delegate callables 
     **/
     template<class invoke_single_t, class invoke_multiple_t>
     return_t execute_internal(const invoke_single_t& invokeSingle, const invoke_multiple_t& invokeMultiple)
@@ -243,7 +243,7 @@ private:
         @brief  Add a value using the destruction callback strategy
         @param  key   - priority + time key
         @param  value - a function to add
-        @retval       - a destruction callback
+        @return       - a destruction callback
     **/
     destruction_callback add_destruction_callback(time_ordered_priority_key key, function_type value) noexcept;
 
@@ -286,7 +286,7 @@ public:
     /**
         @brief  Execute all the callables the delegate has
         @param  args - arguments to pass to all the callbacks
-        @retval      - void or piping result of all delegate callables
+        @return      - void or piping result of all delegate callables
     **/
     return_t execute(args_t... args) const noexcept;
 };
@@ -300,7 +300,7 @@ class delegate<return_t()> final : public details::base_delegate<delegate<return
 public:
     /**
         @brief  Execute all the callables the delegate has
-        @retval  - void or piping result of all delegate callables
+        @return  - void or piping result of all delegate callables
     **/
     return_t execute() const noexcept;
 };

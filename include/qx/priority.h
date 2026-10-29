@@ -58,7 +58,7 @@ public:
 
     /**
         @brief  Get key priority
-        @retval  - key priority
+        @return  - key priority
     **/
     priority get_priority() const noexcept;
 

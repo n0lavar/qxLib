@@ -37,7 +37,7 @@ public:
     /**
         @brief  Get variable value.
                 If the variable is not set in any layer or has invalid value, the default value will be returned.
-        @retval  - variable value
+        @return  - variable value
     **/
     constexpr T get() const noexcept;
 
@@ -111,7 +111,7 @@ public:
 
     /**
         @brief  Finalize building layered_config_variable instance and add it to layered_configs_manager.
-        @retval  - built layered_config_variable instance
+        @return  - built layered_config_variable instance
     **/
     layered_config_variable<T> build() noexcept;
 

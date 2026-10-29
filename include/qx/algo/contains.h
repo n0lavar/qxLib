@@ -20,7 +20,7 @@ namespace qx
     @param  itBegin  - range begin iterator
     @param  itEnd    - range end iterator
     @param  value    - value to check
-    @retval          - true if range contains value
+    @return          - true if range contains value
 **/
 template<class fwd_it_t, class T>
 bool contains(fwd_it_t itBegin, fwd_it_t itEnd, const T& value)
@@ -34,7 +34,7 @@ bool contains(fwd_it_t itBegin, fwd_it_t itEnd, const T& value)
     @tparam T           - value type
     @param  container   - container to search in
     @param  value       - value to check
-    @retval             - true if container contains value
+    @return             - true if container contains value
 **/
 template<class container_t, class T>
 bool contains(const container_t& container, const T& value)
@@ -49,7 +49,7 @@ bool contains(const container_t& container, const T& value)
     @param  itBegin     - range begin iterator
     @param  itEnd       - range end iterator
     @param  predicate   - predicate to check
-    @retval             - true if at least one of range elements satisfies a predicate
+    @return             - true if at least one of range elements satisfies a predicate
 **/
 template<class fwd_it_t, class predicate_t>
 bool contains_if(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t& predicate)
@@ -63,7 +63,7 @@ bool contains_if(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t& predicate)
     @tparam predicate_t - predicate type
     @param  container   - container to search in
     @param  predicate   - predicate to check
-    @retval             - true if at least one of container elements satisfies predicate
+    @return             - true if at least one of container elements satisfies predicate
 **/
 template<class container_t, class predicate_t>
 bool contains_if(const container_t& container, const predicate_t& predicate)
@@ -79,7 +79,7 @@ bool contains_if(const container_t& container, const predicate_t& predicate)
     @param  itWhereEnd     - first range's end iterator
     @param  itWhatBegin    - second range's start iterator
     @param  itWhatEnd      - second range's end iterator
-    @retval                - true if found 
+    @return                - true if found 
 **/
 template<class where_fwd_it_t, class what_fwd_it_t>
 constexpr bool contains_any(
@@ -101,7 +101,7 @@ constexpr bool contains_any(
     @tparam what_container_t  - second range's type
     @param  whereContainer    - first range
     @param  whatContainer     - second range
-    @retval                   - true if found
+    @return                   - true if found
 **/
 template<class where_container_t, class what_container_t>
 constexpr bool contains_any(const where_container_t& whereContainer, const what_container_t& whatContainer)

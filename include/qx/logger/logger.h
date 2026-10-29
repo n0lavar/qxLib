@@ -119,7 +119,7 @@ public:
         @brief   Get the first occurrence of a stream of the given type
         @warning This must be protected with get_streams_mutex() shared lock
         @tparam  stream_t - stream type to search for
-        @retval           - stream pointer or nullptr if no stream found
+        @return           - stream pointer or nullptr if no stream found
     **/
     template<sbo_poly_assignable_c<base_logger_stream> stream_t>
     stream_t* get_stream() noexcept;
@@ -128,21 +128,21 @@ public:
         @brief   Get all the streams of the given type
         @warning This must be protected with get_streams_mutex() shared lock
         @tparam  stream_t - stream type to search for
-        @retval           - streams view
+        @return           - streams view
     **/
     template<sbo_poly_assignable_c<base_logger_stream> stream_t>
     auto get_streams() noexcept;
 
     /**
         @brief  Get streams mutex
-        @retval  - streams mutex
+        @return  - streams mutex
     **/
     std::shared_mutex& get_streams_mutex() noexcept;
 
     /**
         @brief  Remove all the streams of the given type
         @tparam stream_t - stream type to search for
-        @retval          - number of streams removed
+        @return          - number of streams removed
     **/
     template<sbo_poly_assignable_c<base_logger_stream> stream_t>
     size_t remove_streams() noexcept;
@@ -184,7 +184,7 @@ public:
         @warning Not thread safe on purpose due to optimization reasons.
                  Make sure you set it only once before any log line.
         @param   sPattern - formatting pattern, see qx::logger_specifiers
-        @retval           - compilation result. If != ok the pattern is unchanged.
+        @return           - compilation result. If != ok the pattern is unchanged.
     **/
     compile_pattern_result set_default_pattern(string sPattern) noexcept;
 
@@ -231,7 +231,7 @@ public:
         @param   svFile      - file name string
         @param   svFunction  - function name string
         @param   nLine       - code line number
-        @retval              - get message necessity type
+        @return              - get message necessity type
     **/
     flags<message_necessity_type> get_message_necessity_type(
         const category&                       category,
@@ -286,7 +286,7 @@ inline logger* g_pGlobalLogger = nullptr;
 
 /**
     @brief  Get the logger instance used in QX_LOG macros
-    @retval  - logger instance
+    @return  - logger instance
 **/
 inline logger& get_logger() noexcept
 {

@@ -59,13 +59,13 @@ public:
 
         /**
             @brief  Get object pointer
-            @retval - T object pointer
+            @return - T object pointer
         **/
         T* get() const noexcept;
 
         /**
             @brief  Is object presents
-            @retval - true if object presents
+            @return - true if object presents
         **/
         explicit operator bool() const noexcept;
 
@@ -73,7 +73,7 @@ public:
             @brief  operator==
             @tparam U     - lock_ptr with pointer convertible to T
             @param  other - other link_ptr
-            @retval       - true, if objects are equal
+            @return       - true, if objects are equal
         **/
         template<class U>
         bool operator==(const U& other) const noexcept;
@@ -82,7 +82,7 @@ public:
             @brief  operator<=>
             @tparam U     - lock_ptr with pointer convertible to T
             @param  other - other link_ptr
-            @retval       - three-way comparison result
+            @return       - three-way comparison result
         **/
         template<class U>
         std::strong_ordering operator<=>(const U& other) const noexcept;
@@ -140,7 +140,7 @@ public:
         @brief  operator=
         @tparam U     - T or type convertible to T
         @param  pLink - other link 
-        @retval       - this object reference
+        @return       - this object reference
     **/
     template<class U>
     link& operator=(const link<U>& pLink) noexcept;
@@ -157,7 +157,7 @@ public:
         @brief  operator=
         @tparam U     - T or type convertible to T
         @param  pLink - other link rvalue ref
-        @retval       - this object reference
+        @return       - this object reference
     **/
     template<class U>
     link& operator=(link<U>&& pLink) noexcept;
@@ -170,7 +170,7 @@ public:
 
     /**
         @brief  Lock and return strong pointer
-        @retval - strong pointer
+        @return - strong pointer
     **/
     lock_ptr lock() const noexcept;
 
@@ -181,13 +181,13 @@ public:
 
     /**
         @brief  If pointer is expired
-        @retval - true if pointer is expired
+        @return - true if pointer is expired
     **/
     bool expired() const noexcept;
 
     /**
         @brief  If pointer is expired
-        @retval - true if pointer is expired
+        @return - true if pointer is expired
     **/
     explicit operator bool() const noexcept;
 

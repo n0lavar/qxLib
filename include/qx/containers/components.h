@@ -50,7 +50,7 @@ public:
 
     /**
         @brief  Get object status
-        @retval  - object status
+        @return  - object status
         **/
     constexpr flags<component_status> get_status_flags() const noexcept;
 
@@ -103,7 +103,7 @@ public:
         @param  pComponent  - component object
         @param  ePriority   - initial component priority
         @param  statusFlags - initial component status
-        @retval             - raw component pointer which acts like a component's handle
+        @return             - raw component pointer which acts like a component's handle
     **/
     template<std::derived_from<base_component_t> component_t>
     [[maybe_unused]] component_t* add(
@@ -114,7 +114,7 @@ public:
     /**
         @brief  Remove the component from the container
         @param  pRawComponent - raw component pointer which acts like a component's handle
-        @retval               - component object
+        @return               - component object
     **/
     [[maybe_unused]] std::unique_ptr<base_component_t> remove(const base_component_t* pRawComponent) noexcept;
 
@@ -122,7 +122,7 @@ public:
         @brief  Try to get a component of the given type with the highest priority
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  bIncludeDisabled - true if a search should include disabled components
-        @retval                  - component pointer or nullptr
+        @return                  - component pointer or nullptr
     **/
     template<std::derived_from<base_component_t> component_t>
     [[nodiscard]] component_t* try_get(bool bIncludeDisabled = false) noexcept;
@@ -131,7 +131,7 @@ public:
         @brief  Try to get a component of the given type with the highest priority
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  bIncludeDisabled - true if a search should include disabled components
-        @retval                  - component pointer or nullptr
+        @return                  - component pointer or nullptr
     **/
     template<std::derived_from<base_component_t> component_t>
     [[nodiscard]] const component_t* try_get(bool bIncludeDisabled = false) const noexcept;
@@ -141,7 +141,7 @@ public:
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  id               - type id
         @param  bIncludeDisabled - true if a search should include disabled components
-        @retval                  - component pointer or nullptr
+        @return                  - component pointer or nullptr
     **/
     template<std::derived_from<base_component_t> component_t = base_component_t>
     [[nodiscard]] component_t* try_get(class_id id, bool bIncludeDisabled = false) noexcept;
@@ -151,7 +151,7 @@ public:
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  id               - type id
         @param  bIncludeDisabled - true if a search should include disabled components
-        @retval                  - component pointer or nullptr
+        @return                  - component pointer or nullptr
     **/
     template<std::derived_from<base_component_t> component_t = base_component_t>
     [[nodiscard]] const component_t* try_get(class_id id, bool bIncludeDisabled = false) const noexcept;
@@ -160,7 +160,7 @@ public:
         @brief  Get a component of the given type with the highest priority (no existence checks are performed)
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  bIncludeDisabled - true if a search should include disabled components
-        @retval                  - component reference
+        @return                  - component reference
     **/
     template<std::derived_from<base_component_t> component_t>
     [[nodiscard]] component_t& get(bool bIncludeDisabled = false) noexcept;
@@ -169,7 +169,7 @@ public:
         @brief  Get a component of the given type with the highest priority (no existence checks are performed)
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  bIncludeDisabled - true if a search should include disabled components
-        @retval                  - component reference
+        @return                  - component reference
     **/
     template<std::derived_from<base_component_t> component_t>
     [[nodiscard]] const component_t& get(bool bIncludeDisabled = false) const noexcept;
@@ -179,7 +179,7 @@ public:
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  id               - type id
         @param  bIncludeDisabled - true if a search should include disabled components
-        @retval                  - component reference
+        @return                  - component reference
     **/
     template<std::derived_from<base_component_t> component_t = base_component_t>
     [[nodiscard]] base_component_t& get(class_id id, bool bIncludeDisabled = false) noexcept;
@@ -189,7 +189,7 @@ public:
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  id               - type id
         @param  bIncludeDisabled - true if a search should include disabled components
-        @retval                  - component reference
+        @return                  - component reference
     **/
     template<std::derived_from<base_component_t> component_t = base_component_t>
     [[nodiscard]] const base_component_t& get(class_id id, bool bIncludeDisabled = false) const noexcept;
@@ -198,7 +198,7 @@ public:
         @brief  Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing priority
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  bIncludeDisabled - true if the view should include disabled components
-        @retval                  - view of components
+        @return                  - view of components
     **/
     template<std::derived_from<base_component_t> component_t = base_component_t>
     [[nodiscard]] auto view(bool bIncludeDisabled = false) noexcept;
@@ -207,7 +207,7 @@ public:
         @brief  Get a view which may be used in a ranged-based for loop and consists of components of a given type with decreasing priority
         @tparam component_t      - component type which doesn't have to be a final class type, may be any base or super type
         @param  bIncludeDisabled - true if the view should include disabled components
-        @retval                  - view of components
+        @return                  - view of components
     **/
     template<std::derived_from<base_component_t> component_t = base_component_t>
     [[nodiscard]] auto view(bool bIncludeDisabled = false) const noexcept;
@@ -215,7 +215,7 @@ public:
     /**
         @brief  Get component status
         @param  pRawComponent - raw component pointer which acts like a component's handle
-        @retval               - component status
+        @return               - component status
     **/
     [[nodiscard]] std::optional<flags<component_status>> get_component_status(
         const base_component_t* pRawComponent) const noexcept;
@@ -224,7 +224,7 @@ public:
         @brief  Set (override) a component status
         @param  pRawComponent - raw component pointer which acts like a component's handle
         @param  newStatus     - new component status
-        @retval               - true if a component has been found and a new value has been set
+        @return               - true if a component has been found and a new value has been set
     **/
     [[maybe_unused]] bool set_component_status(
         const base_component_t* pRawComponent,
@@ -234,7 +234,7 @@ public:
         @brief  Add new component status flags to the current ones
         @param  pRawComponent - raw component pointer which acts like a component's handle
         @param  newStatuses   - new component status flags 
-        @retval               - true if a component has been found and a new value has been set
+        @return               - true if a component has been found and a new value has been set
     **/
     [[maybe_unused]] bool add_component_status(
         const base_component_t* pRawComponent,
@@ -244,7 +244,7 @@ public:
         @brief  Add component status flags from the current ones
         @param  pRawComponent    - raw component pointer which acts like a component's handle
         @param  statusesToRemove - component status flags to remove
-        @retval                  - true if a component has been found and a new value has been set
+        @return                  - true if a component has been found and a new value has been set
     **/
     [[maybe_unused]] bool remove_component_status(
         const base_component_t* pRawComponent,
@@ -253,7 +253,7 @@ public:
     /**
         @brief  Get component priority
         @param  pRawComponent - raw component pointer which acts like a component's handle
-        @retval               - component priority
+        @return               - component priority
     **/
     [[nodiscard]] std::optional<priority> get_component_priority(const base_component_t* pRawComponent) const noexcept;
 
@@ -261,7 +261,7 @@ public:
         @brief  Set component priority
         @param  pRawComponent         - raw component pointer which acts like a component's handle
         @param  eNewComponentPriority - new component priority
-        @retval                       - true if a component has been found and a new value has been set
+        @return                       - true if a component has been found and a new value has been set
     **/
     [[maybe_unused]] bool set_component_priority(
         const base_component_t* pRawComponent,
@@ -269,7 +269,7 @@ public:
 
     /**
         @brief  Check if container doesn't have any components 
-        @retval  - true if container doesn't have any components
+        @return  - true if container doesn't have any components
     **/
     [[nodiscard]] bool empty() const noexcept;
 
@@ -282,7 +282,7 @@ private:
     /**
         @brief  Get a status of a given component
         @param  pRawComponent - raw component pointer which acts like a component's handle
-        @retval               - status
+        @return               - status
     **/
     [[nodiscard]] std::optional<component_status_key> get_status(const base_component_t* pRawComponent) const noexcept;
 
@@ -291,7 +291,7 @@ private:
         @warning This method may change the container, and you shall not use it while iterating over it
         @param   pRawComponent - raw component pointer which acts like a component's handle
         @param   status        - new component's status
-        @retval                - true if the component is found and a status was set
+        @return                - true if the component is found and a status was set
     **/
     [[maybe_unused]] bool set_status(const base_component_t* pRawComponent, component_status_key status) noexcept;
 
@@ -300,7 +300,7 @@ private:
         @tparam component_t              - final class type
         @tparam callable_t               - a callable that takes a class data
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
-        @retval                          - final class data object
+        @return                          - final class data object
     **/
     template<
         std::derived_from<base_component_t>                                  component_t,
@@ -312,7 +312,7 @@ private:
         @tparam component_t              - final class type
         @tparam callable_t               - a callable that takes a class data
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
-        @retval                          - final class data object
+        @return                          - final class data object
     **/
     template<
         std::derived_from<base_component_t>                                  component_t,
@@ -322,7 +322,7 @@ private:
     /**
         @brief  Get or add class data
         @tparam component_t - final class type
-        @retval             - final class data object
+        @return             - final class data object
     **/
     template<std::derived_from<base_component_t> component_t>
     class_data& get_or_add_class_data() noexcept;
@@ -330,7 +330,7 @@ private:
     /**
         @brief  Get or add class data
         @tparam component_t - final class type
-        @retval             - final class data object
+        @return             - final class data object
     **/
     template<std::derived_from<base_component_t> component_t>
     const class_data& get_or_add_class_data() const noexcept;
@@ -340,7 +340,7 @@ private:
         @tparam callable_t               - a callable that takes a class data
         @param  pRawComponent            - an object used to identify a class type
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
-        @retval                          - final class data object
+        @return                          - final class data object
     **/
     template<callable_c<void, typename components<base_component_t>::class_data&> callable_t>
     class_data& iterate_class_data(const base_component_t* pRawComponent, callable_t iterateClassDataFunction) noexcept;
@@ -350,7 +350,7 @@ private:
         @tparam callable_t               - a callable that takes a class data
         @param  pRawComponent            - an object used to identify a class type
         @param  iterateClassDataFunction - a function that iterates over a class data from base_component_t + 1 to component_t
-        @retval                          - final class data object
+        @return                          - final class data object
     **/
     template<callable_c<void, typename components<base_component_t>::class_data&> callable_t>
     const class_data& iterate_class_data(const base_component_t* pRawComponent, callable_t iterateClassDataFunction)
@@ -359,14 +359,14 @@ private:
     /**
         @brief  Get or add class data
         @param  pRawComponent - an object used to identify a class type
-        @retval               - final class data object
+        @return               - final class data object
     **/
     class_data& get_or_add_class_data(const base_component_t* pRawComponent) noexcept;
 
     /**
         @brief  Get or add class data
         @param  pRawComponent - an object used to identify a class type
-        @retval               - final class data object
+        @return               - final class data object
     **/
     const class_data& get_or_add_class_data(const base_component_t* pRawComponent) const noexcept;
 
