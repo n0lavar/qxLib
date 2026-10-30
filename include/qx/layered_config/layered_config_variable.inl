@@ -50,7 +50,8 @@ consteval layered_config_variable_builder<T>::layered_config_variable_builder(
     };
     m_Data.pTToString = [](const std::any& data) -> cstring
     {
-        return convert_to_string<T, char>(std::any_cast<T>(data));
+        return convert_to_string<typename details::layered_config_variable_type<T>::type, char>(
+            std::any_cast<const typename details::layered_config_variable_type<T>::type&>(data));
     };
     m_Data.svTypeName = []() -> cstring_view
     {

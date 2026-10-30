@@ -10,6 +10,7 @@
 
 #include <qx/layered_config/layered_config_variable.h>
 
+#include <array>
 #include <cstdlib>
 
 const qx::cstring k_sExeName = "app";
@@ -226,6 +227,24 @@ struct set_runtime_trait
     }
 };
 
+struct set_runtime_string_trait
+{
+    template<class T>
+    static void set_value(qx::cstring_view svRuntimeName, T value)
+    {
+        const auto sValue = qx::convert_to_string<T, char>(value);
+        ASSERT_EQ(
+            qx::layered_configs_manager::get_instance().set_string(svRuntimeName, sValue),
+            qx::layered_configs_manager::set_result::success);
+    }
+
+    template<class T>
+    static constexpr bool is_enabled() noexcept
+    {
+        return true;
+    }
+};
+
 template<class set_value_t>
 struct test_layered_config_set_value_traits
 {
@@ -286,8 +305,15 @@ inline void test_layered_config_set_value<test_layered_config_set_value_traits_t
 
     EXPECT_NE(defaultValue, newValue);
 
-    std::optional<T> optValue = qx::layered_configs_manager::get_instance().get<T>(svRuntimeName);
+    auto&            manager  = qx::layered_configs_manager::get_instance();
+    std::optional<T> optValue = manager.get<T>(svRuntimeName);
     ASSERT_TRUE(optValue);
+
+    const auto optString = manager.get_string(svRuntimeName);
+    ASSERT_TRUE(optString);
+
+    const auto sExpected = qx::convert_to_string<T, char>(m_bPreTearDown ? defaultValue : newValue);
+    EXPECT_EQ(*optString, sExpected);
 
     if (m_bPreTearDown)
     {
@@ -319,7 +345,8 @@ using implementations_type = ::testing::Types<
     test_layered_config_set_value_traits<set_command_line_equal_trait>,
     test_layered_config_set_value_traits<set_command_line_flag_trait>,
     test_layered_config_set_value_traits<set_env_trait>,
-    test_layered_config_set_value_traits<set_runtime_trait>>;
+    test_layered_config_set_value_traits<set_runtime_trait>,
+    test_layered_config_set_value_traits<set_runtime_string_trait>>;
 
 TYPED_TEST_SUITE(test_layered_config_set_value, implementations_type);
 
@@ -368,4 +395,26 @@ TEST(layered_config, empty_or_invalid_args)
     EXPECT_FALSE(manager.show_help());
     EXPECT_TRUE(manager.parse());
     manager.reset();
+}
+
+TEST(layered_config, get_variables)
+{
+    constexpr auto expected = std::to_array<qx::layered_config_variable_info>(
+        { { k_svIntRuntimeName, {}, qx::type_strings<int, char>::get_signature() },
+          { k_svSizeRuntimeName, {}, qx::type_strings<size_t, char>::get_signature() },
+          { k_svFloatRuntimeName, {}, "float" },
+          { k_svStringRuntimeName, {}, "string" },
+          { k_svBoolRuntimeName, {}, "bool" } });
+
+    const auto variables = qx::layered_configs_manager::get_instance().get_variables();
+    ASSERT_EQ(variables.size(), expected.size());
+    EXPECT_TRUE(std::ranges::is_sorted(variables, {}, &qx::layered_config_variable_info::svName));
+
+    for (const auto& info : expected)
+    {
+        const auto it = std::ranges::find(variables, info.svName, &qx::layered_config_variable_info::svName);
+        ASSERT_NE(it, variables.end());
+        EXPECT_EQ(it->svDescription, info.svDescription);
+        EXPECT_EQ(it->svTypeName, info.svTypeName);
+    }
 }

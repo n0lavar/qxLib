@@ -40,6 +40,16 @@ struct layered_config_variable_data
 } // namespace details
 
 /**
+    @brief Public variable metadata for enumeration and help; views refer to registered static names.
+**/
+struct layered_config_variable_info
+{
+    cstring_view svName;
+    cstring_view svDescription;
+    cstring_view svTypeName;
+};
+
+/**
 
     @class   layered_configs_manager
     @brief   A singleton that manages layered configuration variables
@@ -52,6 +62,14 @@ class layered_configs_manager final : public singleton<layered_configs_manager>
 {
     template<class T>
     friend class layered_config_variable_builder;
+
+public:
+    enum class set_result
+    {
+        success,
+        unknown_variable,
+        invalid_value
+    };
 
 public:
     /**
@@ -102,6 +120,30 @@ public:
     **/
     template<class T>
     bool set(cstring_view svRuntimeName, T value) noexcept;
+
+    /**
+        @brief  Read a value through its registered string formatter without knowing its C++ type.
+        @param  svRuntimeName - registered runtime name, matched exactly
+        @return               - owned string for the current value or default; nullopt for an unknown name
+    **/
+    std::optional<cstring> get_string(cstring_view svRuntimeName) const noexcept;
+
+    /**
+        @brief   Set a variable from text using its existing registered parser.
+        @details Every registered variable is writable. Conversion rules match environment and command-line
+                 parsing. On success this uses the same runtime storage as set<T>(); no file is written.
+                 Failure leaves the previous value unchanged. Call only on the manager's owning thread.
+        @param  svRuntimeName - registered runtime name, matched exactly
+        @param  svValue       - text to convert to the variable's declared type
+        @return               - success, unknown_variable or invalid_value
+    **/
+    set_result set_string(cstring_view svRuntimeName, cstring_view svValue) noexcept;
+
+    /**
+        @brief  Enumerate registered variables without exposing converters or stored values.
+        @return - metadata sorted by runtime name; views retain the registered names' and descriptions' lifetime
+    **/
+    std::vector<layered_config_variable_info> get_variables() const noexcept;
 
     /**
         @brief Clear all variables and command line arguments. You should call parse() after that to set variables again.

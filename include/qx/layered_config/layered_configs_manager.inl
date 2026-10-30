@@ -305,6 +305,46 @@ inline bool layered_configs_manager::set(cstring_view svRuntimeName, T value) no
     return true;
 }
 
+inline std::optional<cstring> layered_configs_manager::get_string(cstring_view svRuntimeName) const noexcept
+{
+    const auto itData = m_VariableData.find(svRuntimeName);
+    if (itData == m_VariableData.end())
+        return std::nullopt;
+
+    const auto itValue = m_Variables.find(svRuntimeName);
+    if (itValue != m_Variables.end())
+        return itData->second.pTToString(itValue->second);
+
+    return itData->second.pTToString(m_DefaultVariables.at(svRuntimeName));
+}
+
+inline layered_configs_manager::set_result layered_configs_manager::set_string(
+    cstring_view svRuntimeName,
+    cstring_view svValue) noexcept
+{
+    const auto itData = m_VariableData.find(svRuntimeName);
+    if (itData == m_VariableData.end())
+        return set_result::unknown_variable;
+
+    auto optValue = itData->second.pStringToT(svValue);
+    if (!optValue)
+        return set_result::invalid_value;
+
+    m_Variables[itData->first] = std::move(*optValue);
+
+    return set_result::success;
+}
+
+inline std::vector<layered_config_variable_info> layered_configs_manager::get_variables() const noexcept
+{
+    std::vector<layered_config_variable_info> variables;
+    for (const auto& [svName, data] : m_VariableData)
+        variables.emplace_back(svName, data.svDescription, data.svTypeName);
+
+    std::ranges::sort(variables, {}, &layered_config_variable_info::svName);
+    return variables;
+}
+
 inline void layered_configs_manager::reset() noexcept
 {
     m_Variables.clear();
