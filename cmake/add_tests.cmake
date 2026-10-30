@@ -35,6 +35,7 @@ macro(set_test_options _target)
 endmacro()
 
 macro(add_tests
+    _enabled
     # a cpp with the main() function
     _tests_main_cpp
     # a folder in VS where this test should be placed
@@ -43,10 +44,9 @@ macro(add_tests
     _glob_recurse_pattern
     _setup_test_target
 )
-    option(GENERATE_TESTS "Generate tests projects? Enabling this requires gtest" OFF)
     option(TEST_DEBUG_BREAKS "Should gtest hit a debug break when condition fails?" OFF)
 
-    if (GENERATE_TESTS)
+    if (${_enabled})
         find_package(GTest REQUIRED MODULE)
         enable_testing()
         file(GLOB_RECURSE TEST_SRC_FILES "${_glob_recurse_pattern}")

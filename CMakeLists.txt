@@ -69,7 +69,10 @@ macro(qx_setup_test_target _target)
     set_target_options(${_target})
 endmacro()
 
+option(QX_GENERATE_TESTS "Generate qxLib tests? Enabling this requires gtest" OFF)
+
 add_tests(
+    "${QX_GENERATE_TESTS}"
     "${PROJECT_SOURCE_DIR}/tests/main.cpp" 
     "qxLibTests" 
     "${PROJECT_SOURCE_DIR}/tests/*.gtest.cpp"
@@ -82,10 +85,9 @@ add_benchmarks(
 )
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    find_package(Python3 REQUIRED COMPONENTS Interpreter)
-
     add_custom_target(RegenerateSolution
-        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/Tools/generate_sln.py
+        COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_SOURCE_DIR}" -B "${CMAKE_BINARY_DIR}"
+        VERBATIM
     )
     set_target_properties(RegenerateSolution PROPERTIES
         FOLDER "Tools"
