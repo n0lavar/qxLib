@@ -23,8 +23,8 @@ The public API follows the standard library style: `snake_case`, iterators, trai
 | struct member | `bName` | Structure members (which must be public) have no scope prefix. |
 | static | `s_Name` | A static class member or a static method in a function or method. |
 | global variable | `g_Name` | A variable at file or namespace scope. Should generally be avoided. |
-| global constant | `k_Name` | A constexpr or const constant at file, namespace, structure, or class scope. |
-| local variable / argument | `bName` | Usually `camelCase` with a type prefix where applicable. Short conventional names (`it`, `i`, `args`) are allowed. |
+| global constant | `k_Name` | A constexpr or const constant at file, namespace, structure, or class scope. Not for local constants. |
+| local variable / argument / constant | `bName` | Usually `camelCase` with a type prefix where applicable. Short conventional names (`it`, `i`, `args`) are allowed. |
 
 ### Type Prefixes
 
@@ -72,6 +72,55 @@ The public API follows the standard library style: `snake_case`, iterators, trai
     - `qx::subject<T>`
     - cache members
 
+### Conditions, loops
+
+If a condition or a loop definition or its body has more than one line, its body should have braces, unless its body is another small loop or a condition.
+
+The examples use the sorting algorithms from [`sort.inl`](../include/qx/algo/sort.inl).
+
+<details>
+<summary>Good</summary>
+
+```cpp
+if (!sort_required(begin, end))
+    return;
+
+for (random_it_t i = begin + 1; i != end; ++i)
+    for (random_it_t j = i; j != begin && compare(*j, *(j - 1)); --j)
+        std::iter_swap(j - 1, j);
+
+for (random_it_t it = begin; it != end; ++it)
+{
+    random_it_t itMin = it;
+    for (random_it_t j = it + 1; j != end; ++j)
+        if (compare(*j, *itMin))
+            itMin = j;
+
+    std::iter_swap(it, itMin);
+}
+```
+
+</details>
+
+<details>
+<summary>Bad</summary>
+
+```cpp
+for (random_it_t i = begin + 1; i != end; ++i)
+{
+    for (random_it_t j = i; j != begin && compare(*j, *(j - 1)); --j)
+        std::iter_swap(j - 1, j);
+}
+
+for (random_it_t i = begin + 1; i != end; ++i)
+    for (random_it_t j = i; j != begin && compare(*j, *(j - 1)); --j)
+    {
+        std::iter_swap(j - 1, j);
+    }
+```
+
+</details>
+
 ### Macros
 
 - Try to solve the problem without a macro before adding a new one.
@@ -79,14 +128,18 @@ The public API follows the standard library style: `snake_case`, iterators, trai
 - All macros taking arguments must require a trailing `;`. If the existing macro body cannot enforce this, append `QX_EMPTY_MACRO`.
 - A macro intended for use inside a class body must leave access visibility set to `private`.
 
-### Functions, methods
+### Functions, methods, lambdas
 
 - `int foo()` is used, use `auto foo() -> int` only if a return type is dependent on an argument.
 - Make a function `constexpr` whenever possible.
 - Make a function `noexcept` whenever possible. Prefer return codes, values, `std::optional` and `std::expected` whenever possible.
+- Avoid `[=]` and `[&]` lambda capturing.
+- Prefer return value in favour of capture list and reference arguments.
+- Separate logical parts using empty spaces. Add more lines between logical parts of higher level. Usually you want to add empty lines after loops and conditions.
 
 ## Other Coding Rules
 
+- Avoid magic numbers.
 - Do not use `using namespace XXX` throughout an entire file.
 - Use `qx::string_view` instead of `const qx::string&`, `const qx::char_t*`, `const qx::char_t*, size_t`, `const qx::char_t[N]`, etc.
 - Use `std::span<const T>` instead of `const container<T>&` wherever possible.
@@ -96,6 +149,9 @@ The public API follows the standard library style: `snake_case`, iterators, trai
     - Use `QX_FMT_NS` instead of the corresponding namespace (because the library supports both `std` and `fmt` formatting)
     - A specialization for `char_t` must be present, and `QX_STR_PREFIX` must be used where necessary (because the library supports both `char` and `wchar_t` as the main string type)
     - `-> decltype(ctx.out())` must be the explicit return type of `format` (otherwise `fmt` tries to explicitly instantiate templates it should not touch)
+    <details>
+    <summary>Example</summary>
+
     ```cpp
     template<class char_t, class traits_t>
     struct QX_FMT_NS::formatter<qx::basic_string<char_t, traits_t>, char_t> : qx::basic_formatter<char_t>
@@ -112,24 +168,4 @@ The public API follows the standard library style: `snake_case`, iterators, trai
     };
     ```
 
-## Documentation
-
-- All classes, functions, methods, and files must be properly documented.
-- Avoid pointless documentation like `@param color - color`. Describe what this this is for, edge cases (if any), contracts (if any), and so on.
-- Documentation may be omitted (but is not prohibited) for the following elements:
-    - Structures (assumed to be simple enough to describe through their names).
-    - Constructors and `init` methods without arguments.
-    - Destructors.
-    - Any methods using `= default`.
-    - Operators, if they do exactly what first comes to mind and have no side effects.
-    - Overridden virtual functions (do not duplicate the description from the base class). Instead, group these methods by base class and add the following before the group:
-    ```
-    // base_class
-    //
-    virtual void foo() override;
-    virtual void bar() override;
-    ```
-    - Functions in namespace `details`.
-    - Specializations of helper structures or functions (`std::hash`, `std::formatter`, etc.)
-    - Builder return values (`*this`).
-    - private methods
+    </details>
