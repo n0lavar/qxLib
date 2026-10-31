@@ -275,15 +275,11 @@ inline bool layered_configs_manager::parse() noexcept
 template<class T>
 inline std::optional<T> layered_configs_manager::get(cstring_view svRuntimeName) const noexcept
 {
-    auto it = m_Variables.find(svRuntimeName);
-    if (it == m_Variables.end())
-    {
-        it = m_DefaultVariables.find(svRuntimeName);
-        if (it == m_DefaultVariables.end())
-            return std::nullopt;
-    }
+    const auto optValue = get(svRuntimeName);
+    if (!optValue)
+        return std::nullopt;
 
-    const auto* pValue = std::any_cast<typename details::layered_config_variable_type<T>::type>(&it->second);
+    const auto* pValue = std::any_cast<typename details::layered_config_variable_type<T>::type>(&optValue->get());
     if (!pValue)
         return std::nullopt;
 
@@ -303,6 +299,20 @@ inline bool layered_configs_manager::set(cstring_view svRuntimeName, T value) no
 
     m_Variables[svRuntimeName] = typename details::layered_config_variable_type<T>::type(std::move(value));
     return true;
+}
+
+inline std::optional<std::reference_wrapper<const std::any>> layered_configs_manager::get(
+    cstring_view svRuntimeName) const noexcept
+{
+    const auto itValue = m_Variables.find(svRuntimeName);
+    if (itValue != m_Variables.end())
+        return std::cref(itValue->second);
+
+    const auto itDefault = m_DefaultVariables.find(svRuntimeName);
+    if (itDefault == m_DefaultVariables.end())
+        return std::nullopt;
+
+    return std::cref(itDefault->second);
 }
 
 inline std::optional<cstring> layered_configs_manager::get_string(cstring_view svRuntimeName) const noexcept

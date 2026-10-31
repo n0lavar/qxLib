@@ -14,6 +14,7 @@
 #include <qx/patterns/singleton.h>
 
 #include <any>
+#include <functional>
 #include <unordered_map>
 
 namespace qx
@@ -121,6 +122,15 @@ public:
     **/
     template<class T>
     bool set(cstring_view svRuntimeName, T value) noexcept;
+
+    /**
+        @brief   Read the current value without knowing its C++ type.
+        @details The reference is valid until the stored value is removed or the manager is reset.
+                 Setting or parsing values may change which value is current.
+        @param   svRuntimeName - registered runtime name, matched exactly
+        @return                - reference to the stored value, or nullopt for an unknown name
+    **/
+    std::optional<std::reference_wrapper<const std::any>> get(cstring_view svRuntimeName) const noexcept;
 
     /**
         @brief  Read a value through its registered string formatter without knowing its C++ type.

@@ -315,6 +315,19 @@ inline void test_layered_config_set_value<test_layered_config_set_value_traits_t
     std::optional<T> optValue = manager.get<T>(svRuntimeName);
     ASSERT_TRUE(optValue);
 
+    const auto optAny = manager.get(svRuntimeName);
+    ASSERT_TRUE(optAny);
+
+    using stored_type               = typename qx::details::layered_config_variable_type<T>::type;
+    const stored_type* pStoredValue = std::any_cast<stored_type>(&optAny->get());
+    ASSERT_NE(pStoredValue, nullptr);
+    EXPECT_EQ(*pStoredValue, m_bPreTearDown ? defaultValue : newValue);
+
+    const auto optSameValue = manager.get(svRuntimeName);
+    ASSERT_TRUE(optSameValue);
+    EXPECT_EQ(&optAny->get(), &optSameValue->get());
+    EXPECT_FALSE(manager.get("unknown_variable").has_value());
+
     const auto optString = manager.get_string(svRuntimeName);
     ASSERT_TRUE(optString);
 
