@@ -124,6 +124,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a40cbab0d0ccbf3d6db6ebc3eb3cccfc1"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a40cbab0d0ccbf3d6db6ebc3eb3cccfc1">qx::utf8_to_string</a> (cstring_view pszUtf8)</td></tr>
 <tr class="memdesc:a40cbab0d0ccbf3d6db6ebc3eb3cccfc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert const char* representing UTF8 to wstring.  <a href="string__converters_8h.html#a40cbab0d0ccbf3d6db6ebc3eb3cccfc1">More...</a><br /></td></tr>
 <tr class="separator:a40cbab0d0ccbf3d6db6ebc3eb3cccfc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae79dd10cd509e56cb3f80db97b2b554d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#ae79dd10cd509e56cb3f80db97b2b554d">qx::string_to_uft8</a> (cstring &amp;out, string_view svText)</td></tr>
+<tr class="memdesc:ae79dd10cd509e56cb3f80db97b2b554d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the engine string representation to UTF-8 bytes.  <a href="string__converters_8h.html#ae79dd10cd509e56cb3f80db97b2b554d">More...</a><br /></td></tr>
+<tr class="separator:ae79dd10cd509e56cb3f80db97b2b554d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa6a8603ac83691bd5ccc6a814bb4403"><td class="memItemLeft" align="right" valign="top">cstring&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#afa6a8603ac83691bd5ccc6a814bb4403">qx::string_to_uft8</a> (string_view svText)</td></tr>
+<tr class="memdesc:afa6a8603ac83691bd5ccc6a814bb4403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert the engine string representation to UTF-8 bytes.  <a href="string__converters_8h.html#afa6a8603ac83691bd5ccc6a814bb4403">More...</a><br /></td></tr>
+<tr class="separator:afa6a8603ac83691bd5ccc6a814bb4403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06220f14639f405c16d3cdcc1af79570"><td class="memTemplParams" colspan="2">template&lt;class char_t , string_literal sLiteral&gt; </td></tr>
 <tr class="memitem:a06220f14639f405c16d3cdcc1af79570"><td class="memTemplItemLeft" align="right" valign="top">constexpr basic_string_view&lt; char_t &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="string__converters_8h.html#a06220f14639f405c16d3cdcc1af79570">qx::convert_string_literal</a> ()</td></tr>
 <tr class="memdesc:a06220f14639f405c16d3cdcc1af79570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a constexpr string literal to the wider or equal char type string view.  <a href="string__converters_8h.html#a06220f14639f405c16d3cdcc1af79570">More...</a><br /></td></tr>
@@ -171,7 +177,91 @@ template&lt;class char_t , string_literal sLiteral&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- constexpr string view of a wider or equal char type </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="string__converters_8inl_source.html#l00177">177</a> of file <a class="el" href="string__converters_8inl_source.html">string_converters.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="string__converters_8inl_source.html#l00212">212</a> of file <a class="el" href="string__converters_8inl_source.html">string_converters.inl</a>.</p>
+
+</div>
+</div>
+<a id="ae79dd10cd509e56cb3f80db97b2b554d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae79dd10cd509e56cb3f80db97b2b554d">&#9670;&nbsp;</a></span>string_to_uft8() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qx::string_to_uft8 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classqx_1_1basic__string.html">cstring</a> &amp;&#160;</td>
+          <td class="paramname"><em>out</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svText</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert the engine string representation to UTF-8 bytes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">out</td><td>- destination UTF-8 string; cleared for empty or unrepresentable input </td></tr>
+    <tr><td class="paramname">svText</td><td>- source string, with embedded nulls preserved </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="string__converters_8inl_source.html#l00155">155</a> of file <a class="el" href="string__converters_8inl_source.html">string_converters.inl</a>.</p>
+
+</div>
+</div>
+<a id="afa6a8603ac83691bd5ccc6a814bb4403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa6a8603ac83691bd5ccc6a814bb4403">&#9670;&nbsp;</a></span>string_to_uft8() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">cstring qx::string_to_uft8 </td>
+          <td>(</td>
+          <td class="paramtype">string_view&#160;</td>
+          <td class="paramname"><em>svText</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Convert the engine string representation to UTF-8 bytes. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">svText</td><td>- source string, with embedded nulls preserved </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>- UTF-8 bytes, or an empty string for empty or unrepresentable input </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="string__converters_8inl_source.html#l00183">183</a> of file <a class="el" href="string__converters_8inl_source.html">string_converters.inl</a>.</p>
 
 </div>
 </div>

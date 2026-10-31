@@ -344,122 +344,129 @@ $(function() {
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44">  276</a></span>&#160;<span class="keyword">inline</span> std::optional&lt;T&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44">layered_configs_manager::get</a>(cstring_view svRuntimeName) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;{</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> optValue = get(svRuntimeName);</div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keywordflow">if</span> (!optValue)</div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;        <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>* pValue = std::any_cast&lt;typename details::layered_config_variable_type&lt;T&gt;::type&gt;(&amp;optValue-&gt;get());</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keywordflow">if</span> (!pValue)</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;        <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="keywordflow">return</span> *pValue;</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;}</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160; </div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00290"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">  290</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">layered_configs_manager::set</a>(cstring_view svRuntimeName, T value) noexcept</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;{</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="comment">// set a value only if types match</span></div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> it = m_DefaultVariables.find(svRuntimeName);</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordflow">if</span> (it == m_DefaultVariables.end())</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keywordflow">if</span> (!std::any_cast&lt;<span class="keyword">typename</span> details::layered_config_variable_type&lt;T&gt;::type&gt;(&amp;it-&gt;second))</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    m_Variables[svRuntimeName] = <span class="keyword">typename</span> details::layered_config_variable_type&lt;T&gt;::type(std::move(value));</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;}</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
-<div class="line"><a name="l00304"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#ad14f6fcfdff32eeb95f0a5bc3191895d">  304</a></span>&#160;<span class="keyword">inline</span> std::optional&lt;std::reference_wrapper&lt;const std::any&gt;&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44">layered_configs_manager::get</a>(</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    cstring_view svRuntimeName) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;{</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itValue = m_Variables.find(svRuntimeName);</div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    <span class="keywordflow">if</span> (itValue != m_Variables.end())</div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <span class="keywordflow">return</span> std::cref(itValue-&gt;second);</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itDefault = m_DefaultVariables.find(svRuntimeName);</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    <span class="keywordflow">if</span> (itDefault == m_DefaultVariables.end())</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    <span class="keywordflow">return</span> std::cref(itDefault-&gt;second);</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;}</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
-<div class="line"><a name="l00318"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a2720d54021f2f1f6fff442c7ffad0af6">  318</a></span>&#160;<span class="keyword">inline</span> std::optional&lt;cstring&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a2720d54021f2f1f6fff442c7ffad0af6">layered_configs_manager::get_string</a>(cstring_view svRuntimeName) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;{</div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itData = m_VariableData.find(svRuntimeName);</div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    <span class="keywordflow">if</span> (itData == m_VariableData.end())</div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;        <span class="keywordflow">return</span> std::nullopt;</div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160; </div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itValue = m_Variables.find(svRuntimeName);</div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordflow">if</span> (itValue != m_Variables.end())</div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;        <span class="keywordflow">return</span> itData-&gt;second.pTToString(itValue-&gt;second);</div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160; </div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;    <span class="keywordflow">return</span> itData-&gt;second.pTToString(m_DefaultVariables.at(svRuntimeName));</div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;}</div>
-<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160; </div>
-<div class="line"><a name="l00331"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a590a3e6212c37a7856d900c48b1bf208">  331</a></span>&#160;<span class="keyword">inline</span> layered_configs_manager::set_result <a class="code" href="classqx_1_1layered__configs__manager.html#a590a3e6212c37a7856d900c48b1bf208">layered_configs_manager::set_string</a>(</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    cstring_view svRuntimeName,</div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    cstring_view svValue) noexcept</div>
-<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;{</div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itData = m_VariableData.find(svRuntimeName);</div>
-<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keywordflow">if</span> (itData == m_VariableData.end())</div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;        <span class="keywordflow">return</span> set_result::unknown_variable;</div>
+<div class="line"><a name="l00276"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a514350b84f01c29c681d99131cb449b8">  276</a></span>&#160;<span class="keyword">inline</span> std::expected&lt;T, layered_configs_manager::get_error&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a514350b84f01c29c681d99131cb449b8">layered_configs_manager::get</a>(</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    cstring_view svRuntimeName) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;{</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> optValue = get(svRuntimeName);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">if</span> (!optValue)</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordflow">return</span> std::unexpected(optValue.error());</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span>* pValue = std::any_cast&lt;typename details::layered_config_variable_type&lt;T&gt;::type&gt;(&amp;optValue-&gt;get());</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <span class="keywordflow">if</span> (!pValue)</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        <span class="keywordflow">return</span> std::unexpected(get_error::type_mismatch);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">return</span> *pValue;</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00291"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a147ece9355e2cb390bc769c2caf9a6ce">  291</a></span>&#160;<span class="keyword">inline</span> std::expected&lt;void, layered_configs_manager::set_error&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a147ece9355e2cb390bc769c2caf9a6ce">layered_configs_manager::set</a>(</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    cstring_view svRuntimeName,</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    T            value) noexcept</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;{</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="keyword">using</span> stored_type = <span class="keyword">typename</span> details::layered_config_variable_type&lt;T&gt;::type;</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="keywordflow">return</span> set(svRuntimeName, std::any(stored_type(std::move(value))));</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;}</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;<span class="keyword">inline</span> std::expected&lt;std::reference_wrapper&lt;const std::any&gt;, <a class="code" href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">layered_configs_manager::get_error</a>&gt;</div>
+<div class="line"><a name="l00300"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#acbdce9fa3f68562955ce456cbce6c294">  300</a></span>&#160;    <a class="code" href="classqx_1_1layered__configs__manager.html#a514350b84f01c29c681d99131cb449b8">layered_configs_manager::get</a>(cstring_view svRuntimeName) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;{</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itValue = m_Variables.find(svRuntimeName);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="keywordflow">if</span> (itValue != m_Variables.end())</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="keywordflow">return</span> std::cref(itValue-&gt;second);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160; </div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itDefault = m_DefaultVariables.find(svRuntimeName);</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordflow">if</span> (itDefault == m_DefaultVariables.end())</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        <span class="keywordflow">return</span> std::unexpected(get_error::unknown_variable);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160; </div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">return</span> std::cref(itDefault-&gt;second);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;}</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#abe98c1589252871146a84102d3fef7fc">  313</a></span>&#160;<span class="keyword">inline</span> std::expected&lt;void, layered_configs_manager::set_error&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a147ece9355e2cb390bc769c2caf9a6ce">layered_configs_manager::set</a>(</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    cstring_view svRuntimeName,</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    std::any     value) noexcept</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;{</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> it = m_DefaultVariables.find(svRuntimeName);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160; </div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;    <span class="keywordflow">if</span> (it == m_DefaultVariables.end())</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        <span class="keywordflow">return</span> std::unexpected(set_error::unknown_variable);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160; </div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    <span class="keywordflow">if</span> (it-&gt;second.type() != value.type())</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;        <span class="keywordflow">return</span> std::unexpected(set_error::type_mismatch);</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    m_Variables[it-&gt;first] = std::move(value);</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    <span class="keywordflow">return</span> {};</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;}</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
+<div class="line"><a name="l00329"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#adcb5bf21ce0ce6ef99a16746f24a526f">  329</a></span>&#160;<span class="keyword">inline</span> std::expected&lt;cstring, layered_configs_manager::get_error&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#adcb5bf21ce0ce6ef99a16746f24a526f">layered_configs_manager::get_string</a>(</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    cstring_view svRuntimeName) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;{</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> value = get(svRuntimeName);</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordflow">if</span> (!value)</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;        <span class="keywordflow">return</span> std::unexpected(value.error());</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160; </div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;    <span class="keywordflow">return</span> m_VariableData.at(svRuntimeName).pTToString(value-&gt;get());</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;}</div>
 <div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160; </div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keyword">auto</span> optValue = itData-&gt;second.pStringToT(svValue);</div>
-<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <span class="keywordflow">if</span> (!optValue)</div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;        <span class="keywordflow">return</span> set_result::invalid_value;</div>
-<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    m_Variables[itData-&gt;first] = std::move(*optValue);</div>
-<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keywordflow">return</span> set_result::success;</div>
-<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;}</div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160; </div>
-<div class="line"><a name="l00348"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a3b05218d210df73c86dae66d22295a4f">  348</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;layered_config_variable_info&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a3b05218d210df73c86dae66d22295a4f">layered_configs_manager::get_variables</a>() const noexcept</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;{</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    std::vector&lt;layered_config_variable_info&gt; variables;</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [svName, data] : m_VariableData)</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        variables.emplace_back(svName, data.svDescription, data.svTypeName, data.svGroupName);</div>
+<div class="line"><a name="l00339"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a09d408070e9b1e53b835975b7447f08a">  339</a></span>&#160;<span class="keyword">inline</span> std::expected&lt;void, layered_configs_manager::set_error&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a09d408070e9b1e53b835975b7447f08a">layered_configs_manager::set_string</a>(</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    cstring_view svRuntimeName,</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    cstring_view svValue) noexcept</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;{</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> itData = m_VariableData.find(svRuntimeName);</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    <span class="keywordflow">if</span> (itData == m_VariableData.end())</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">return</span> std::unexpected(set_error::unknown_variable);</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keyword">auto</span> optValue = itData-&gt;second.pStringToT(svValue);</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <span class="keywordflow">if</span> (!optValue)</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">return</span> std::unexpected(set_error::invalid_value);</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    <span class="keywordflow">return</span> set(svRuntimeName, std::move(*optValue));</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;}</div>
 <div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160; </div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    std::ranges::sort(variables, {}, &amp;layered_config_variable_info::svName);</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    <span class="keywordflow">return</span> variables;</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;}</div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
-<div class="line"><a name="l00358"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a7c0808eb07db404a7e3d6195b57a6f95">  358</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1layered__configs__manager.html#a7c0808eb07db404a7e3d6195b57a6f95">layered_configs_manager::reset</a>() noexcept</div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;{</div>
-<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    m_Variables.clear();</div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;}</div>
-<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160; </div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
-<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;<span class="keywordtype">void</span> layered_configs_manager::add_variable(</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    cstring_view                                 svRuntimeName,</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    <span class="keyword">const</span> <a class="code" href="structqx_1_1details_1_1layered__config__variable__data.html">details::layered_config_variable_data</a>&amp; data,</div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    T                                            defaultValue) noexcept</div>
-<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;{</div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    m_VariableData[svRuntimeName]     = data;</div>
-<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    m_DefaultVariables[svRuntimeName] = <span class="keyword">typename</span> details::layered_config_variable_type&lt;T&gt;::type(defaultValue);</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;}</div>
-<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00354"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a3b05218d210df73c86dae66d22295a4f">  354</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;layered_config_variable_info&gt; <a class="code" href="classqx_1_1layered__configs__manager.html#a3b05218d210df73c86dae66d22295a4f">layered_configs_manager::get_variables</a>() const noexcept</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;{</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    std::vector&lt;layered_config_variable_info&gt; variables;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; [svName, data] : m_VariableData)</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        variables.emplace_back(svName, data.svDescription, data.svTypeName, data.svGroupName);</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    std::ranges::sort(variables, {}, &amp;layered_config_variable_info::svName);</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    <span class="keywordflow">return</span> variables;</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;}</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160; </div>
+<div class="line"><a name="l00364"></a><span class="lineno"><a class="line" href="classqx_1_1layered__configs__manager.html#a7c0808eb07db404a7e3d6195b57a6f95">  364</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1layered__configs__manager.html#a7c0808eb07db404a7e3d6195b57a6f95">layered_configs_manager::reset</a>() noexcept</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;{</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;    m_Variables.clear();</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;}</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;<span class="keywordtype">void</span> layered_configs_manager::add_variable(</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    cstring_view                                 svRuntimeName,</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    <span class="keyword">const</span> <a class="code" href="structqx_1_1details_1_1layered__config__variable__data.html">details::layered_config_variable_data</a>&amp; data,</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    T                                            defaultValue) noexcept</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;{</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    m_VariableData[svRuntimeName]     = data;</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    m_DefaultVariables[svRuntimeName] = <span class="keyword">typename</span> details::layered_config_variable_type&lt;T&gt;::type(defaultValue);</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;}</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html"><div class="ttname"><a href="classqx_1_1basic__string.html">qx::basic_string&lt; char &gt;</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_a50c47c6a6797fb55d42bb324982e5c45"><div class="ttname"><a href="classqx_1_1basic__string.html#a50c47c6a6797fb55d42bb324982e5c45">qx::basic_string::append_format</a></div><div class="ttdeci">requires format_acceptable_args_c&lt; char_t, args_t... &gt; void append_format(const format_string_type&lt; std::type_identity_t&lt; args_t &gt;... &gt; sFormat, args_t &amp;&amp;... args) noexcept</div><div class="ttdoc">Append the formatted string to the current one.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00146">string.inl:146</a></div></div>
 <div class="ttc" id="aclassqx_1_1basic__string_html_ac98fc25780d542fd98864eb544752b2a"><div class="ttname"><a href="classqx_1_1basic__string.html#ac98fc25780d542fd98864eb544752b2a">qx::basic_string::c_str</a></div><div class="ttdeci">const_pointer c_str() const noexcept</div><div class="ttdoc">Get pointer to string zero terminated.</div><div class="ttdef"><b>Definition:</b> <a href="string_8inl_source.html#l00273">string.inl:273</a></div></div>
-<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a2720d54021f2f1f6fff442c7ffad0af6"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a2720d54021f2f1f6fff442c7ffad0af6">qx::layered_configs_manager::get_string</a></div><div class="ttdeci">std::optional&lt; cstring &gt; get_string(cstring_view svRuntimeName) const noexcept</div><div class="ttdoc">Read a value through its registered string formatter without knowing its C++ type.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00318">layered_configs_manager.inl:318</a></div></div>
-<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a3b05218d210df73c86dae66d22295a4f"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a3b05218d210df73c86dae66d22295a4f">qx::layered_configs_manager::get_variables</a></div><div class="ttdeci">std::vector&lt; layered_config_variable_info &gt; get_variables() const noexcept</div><div class="ttdoc">Enumerate registered variables without exposing converters or stored values.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00348">layered_configs_manager.inl:348</a></div></div>
-<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a590a3e6212c37a7856d900c48b1bf208"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a590a3e6212c37a7856d900c48b1bf208">qx::layered_configs_manager::set_string</a></div><div class="ttdeci">set_result set_string(cstring_view svRuntimeName, cstring_view svValue) noexcept</div><div class="ttdoc">Set a variable from text using its existing registered parser.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00331">layered_configs_manager.inl:331</a></div></div>
-<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a7c0808eb07db404a7e3d6195b57a6f95"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a7c0808eb07db404a7e3d6195b57a6f95">qx::layered_configs_manager::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">Clear all variables and command line arguments. You should call parse() after that to set variables a...</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00358">layered_configs_manager.inl:358</a></div></div>
-<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a9fd1751bf5efe5a619509a0ce8c80c44"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44">qx::layered_configs_manager::get</a></div><div class="ttdeci">std::optional&lt; T &gt; get(cstring_view svRuntimeName) const noexcept</div><div class="ttdoc">Get variable value by runtime name.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00276">layered_configs_manager.inl:276</a></div></div>
+<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a09d408070e9b1e53b835975b7447f08a"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a09d408070e9b1e53b835975b7447f08a">qx::layered_configs_manager::set_string</a></div><div class="ttdeci">std::expected&lt; void, set_error &gt; set_string(cstring_view svRuntimeName, cstring_view svValue) noexcept</div><div class="ttdoc">Set a variable from text using its existing registered parser.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00339">layered_configs_manager.inl:339</a></div></div>
+<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a147ece9355e2cb390bc769c2caf9a6ce"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a147ece9355e2cb390bc769c2caf9a6ce">qx::layered_configs_manager::set</a></div><div class="ttdeci">std::expected&lt; void, set_error &gt; set(cstring_view svRuntimeName, T value) noexcept</div><div class="ttdoc">Set variable value by runtime name. Only set if the variable type matches.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00291">layered_configs_manager.inl:291</a></div></div>
+<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a30b0deccaca6284c8452818198440b5e"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">qx::layered_configs_manager::get_error</a></div><div class="ttdeci">get_error</div><div class="ttdoc">Errors returned when reading a registered variable.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8h_source.html#l00073">layered_configs_manager.h:74</a></div></div>
+<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a3b05218d210df73c86dae66d22295a4f"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a3b05218d210df73c86dae66d22295a4f">qx::layered_configs_manager::get_variables</a></div><div class="ttdeci">std::vector&lt; layered_config_variable_info &gt; get_variables() const noexcept</div><div class="ttdoc">Enumerate registered variables without exposing converters or stored values.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00354">layered_configs_manager.inl:354</a></div></div>
+<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a514350b84f01c29c681d99131cb449b8"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a514350b84f01c29c681d99131cb449b8">qx::layered_configs_manager::get</a></div><div class="ttdeci">std::expected&lt; T, get_error &gt; get(cstring_view svRuntimeName) const noexcept</div><div class="ttdoc">Get variable value by runtime name.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00276">layered_configs_manager.inl:276</a></div></div>
+<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_a7c0808eb07db404a7e3d6195b57a6f95"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#a7c0808eb07db404a7e3d6195b57a6f95">qx::layered_configs_manager::reset</a></div><div class="ttdeci">void reset() noexcept</div><div class="ttdoc">Clear all variables and command line arguments. You should call parse() after that to set variables a...</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00364">layered_configs_manager.inl:364</a></div></div>
 <div class="ttc" id="aclassqx_1_1layered__configs__manager_html_acb440fa2f252277b938911587b82c946"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#acb440fa2f252277b938911587b82c946">qx::layered_configs_manager::set_app_description</a></div><div class="ttdeci">void set_app_description(cstring sAppDescription) noexcept</div><div class="ttdoc">Set app description. It will be shown in help message.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00030">layered_configs_manager.inl:30</a></div></div>
 <div class="ttc" id="aclassqx_1_1layered__configs__manager_html_ad71135b1830d83b89e11c6a36252258c"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#ad71135b1830d83b89e11c6a36252258c">qx::layered_configs_manager::parse</a></div><div class="ttdeci">bool parse() noexcept</div><div class="ttdoc">Parse command line arguments, environment variables, and default values.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00152">layered_configs_manager.inl:152</a></div></div>
-<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_adb3641af3325fe582779f59c415e11a2"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">qx::layered_configs_manager::set</a></div><div class="ttdeci">bool set(cstring_view svRuntimeName, T value) noexcept</div><div class="ttdoc">Set variable value by runtime name. Only set if the variable type matches.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00290">layered_configs_manager.inl:290</a></div></div>
+<div class="ttc" id="aclassqx_1_1layered__configs__manager_html_adcb5bf21ce0ce6ef99a16746f24a526f"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#adcb5bf21ce0ce6ef99a16746f24a526f">qx::layered_configs_manager::get_string</a></div><div class="ttdeci">std::expected&lt; cstring, get_error &gt; get_string(cstring_view svRuntimeName) const noexcept</div><div class="ttdoc">Read a value through its registered string formatter without knowing its C++ type.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00329">layered_configs_manager.inl:329</a></div></div>
 <div class="ttc" id="aclassqx_1_1layered__configs__manager_html_ae200765aaa34658ad811f56339da3e57"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#ae200765aaa34658ad811f56339da3e57">qx::layered_configs_manager::show_help</a></div><div class="ttdeci">bool show_help() const noexcept</div><div class="ttdoc">Show help message if &quot;--help&quot; or &quot;-h&quot; argument is present in command line arguments.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00046">layered_configs_manager.inl:46</a></div></div>
 <div class="ttc" id="aclassqx_1_1layered__configs__manager_html_ae20970c389ba665db76bc599778757c2"><div class="ttname"><a href="classqx_1_1layered__configs__manager.html#ae20970c389ba665db76bc599778757c2">qx::layered_configs_manager::set_args</a></div><div class="ttdeci">void set_args(int argc, char *argv[]) noexcept</div><div class="ttdoc">Set command line arguments.</div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00035">layered_configs_manager.inl:35</a></div></div>
 <div class="ttc" id="acontains_8h_html_a6d6544d79558649a87ccaa597c4e99ec"><div class="ttname"><a href="contains_8h.html#a6d6544d79558649a87ccaa597c4e99ec">qx::contains_if</a></div><div class="ttdeci">bool contains_if(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t &amp;predicate)</div><div class="ttdoc">Check if at least one of range's elements satisfies a predicate.</div><div class="ttdef"><b>Definition:</b> <a href="contains_8h_source.html#l00055">contains.h:55</a></div></div>
 <div class="ttc" id="alogger_8h_html_a79dd4ee569e1f68524cee4ed028f628a"><div class="ttname"><a href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">QX_LOG</a></div><div class="ttdeci">#define QX_LOG(eVerbosity,...)</div><div class="ttdoc">Log message.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00038">logger.h:38</a></div></div>
 <div class="ttc" id="asort_8h_html_a56e84ae28c8b16102d3dcddc8990931b"><div class="ttname"><a href="sort_8h.html#a56e84ae28c8b16102d3dcddc8990931b">qx::sort</a></div><div class="ttdeci">void sort(random_it_t begin, random_it_t end, compare_t compare=compare_t())</div><div class="ttdoc">Sort by the most suitable algorithm.</div><div class="ttdef"><b>Definition:</b> <a href="sort_8inl_source.html#l00522">sort.inl:522</a></div></div>
 <div class="ttc" id="astring__converters_8h_html_a26e646b1bb0c6774a11bf22b296e81ef"><div class="ttname"><a href="string__converters_8h.html#a26e646b1bb0c6774a11bf22b296e81ef">qx::to_string</a></div><div class="ttdeci">void to_string(string &amp;out, cstring_view stringView, const std::locale &amp;locale=std::locale())</div><div class="ttdoc">Convert a char string to common string type.</div><div class="ttdef"><b>Definition:</b> <a href="string__converters_8inl_source.html#l00069">string_converters.inl:69</a></div></div>
-<div class="ttc" id="astructqx_1_1details_1_1layered__config__variable__data_html"><div class="ttname"><a href="structqx_1_1details_1_1layered__config__variable__data.html">qx::details::layered_config_variable_data</a></div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8h_source.html#l00026">layered_configs_manager.h:27</a></div></div>
+<div class="ttc" id="astructqx_1_1details_1_1layered__config__variable__data_html"><div class="ttname"><a href="structqx_1_1details_1_1layered__config__variable__data.html">qx::details::layered_config_variable_data</a></div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8h_source.html#l00027">layered_configs_manager.h:28</a></div></div>
 <div class="ttc" id="astructqx_1_1details_1_1layered__config__variable__type_html"><div class="ttname"><a href="structqx_1_1details_1_1layered__config__variable__type.html">qx::details::layered_config_variable_type</a></div><div class="ttdef"><b>Definition:</b> <a href="layered__configs__manager_8inl_source.html#l00017">layered_configs_manager.inl:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

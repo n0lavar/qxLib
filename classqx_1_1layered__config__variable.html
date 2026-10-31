@@ -83,9 +83,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af4c3c0b42932f2a9b980a49db531dee2"><td class="memItemLeft" align="right" valign="top">constexpr T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__config__variable.html#af4c3c0b42932f2a9b980a49db531dee2">get</a> () const noexcept</td></tr>
 <tr class="memdesc:af4c3c0b42932f2a9b980a49db531dee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get variable value. If the variable is not set in any layer or has invalid value, the default value will be returned.  <a href="classqx_1_1layered__config__variable.html#af4c3c0b42932f2a9b980a49db531dee2">More...</a><br /></td></tr>
 <tr class="separator:af4c3c0b42932f2a9b980a49db531dee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af480bf3f043436ded01c454079d607bb"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__config__variable.html#af480bf3f043436ded01c454079d607bb">set</a> (T value) noexcept</td></tr>
-<tr class="memdesc:af480bf3f043436ded01c454079d607bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set variable value at runtime. It will override value from all other layers.  <a href="classqx_1_1layered__config__variable.html#af480bf3f043436ded01c454079d607bb">More...</a><br /></td></tr>
-<tr class="separator:af480bf3f043436ded01c454079d607bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2ae1c1a0e3c6b2dd11dd4f122bf6cfb"><td class="memItemLeft" align="right" valign="top">constexpr std::expected&lt; void, <a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">layered_configs_manager::set_error</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__config__variable.html#aa2ae1c1a0e3c6b2dd11dd4f122bf6cfb">set</a> (T value) noexcept</td></tr>
+<tr class="memdesc:aa2ae1c1a0e3c6b2dd11dd4f122bf6cfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set variable value at runtime. It will override value from all other layers.  <a href="classqx_1_1layered__config__variable.html#aa2ae1c1a0e3c6b2dd11dd4f122bf6cfb">More...</a><br /></td></tr>
+<tr class="separator:aa2ae1c1a0e3c6b2dd11dd4f122bf6cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
@@ -132,8 +132,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="af480bf3f043436ded01c454079d607bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af480bf3f043436ded01c454079d607bb">&#9670;&nbsp;</a></span>set()</h2>
+<a id="aa2ae1c1a0e3c6b2dd11dd4f122bf6cfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2ae1c1a0e3c6b2dd11dd4f122bf6cfb">&#9670;&nbsp;</a></span>set()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,7 +144,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr void <a class="el" href="classqx_1_1layered__config__variable.html">qx::layered_config_variable</a>&lt; T &gt;::set </td>
+          <td class="memname">constexpr std::expected&lt; void, <a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">layered_configs_manager::set_error</a> &gt; <a class="el" href="classqx_1_1layered__config__variable.html">qx::layered_config_variable</a>&lt; T &gt;::set </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -165,8 +165,9 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>- success, or unknown_variable / type_mismatch error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__config__variable_8inl_source.html#l00021">21</a> of file <a class="el" href="layered__config__variable_8inl_source.html">layered_config_variable.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__config__variable_8inl_source.html#l00022">22</a> of file <a class="el" href="layered__config__variable_8inl_source.html">layered_config_variable.inl</a>.</p>
 
 </div>
 </div>

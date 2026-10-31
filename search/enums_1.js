@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['priority_1846',['priority',['../priority_8h.html#a596815b7b01439344e1858a12743c8ec',1,'qx']]]
+  ['log_5ffile_5fpolicy_1850',['log_file_policy',['../base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220',1,'qx']]]
 ];

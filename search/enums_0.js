@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['log_5ffile_5fpolicy_1845',['log_file_policy',['../base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220',1,'qx']]]
+  ['get_5ferror_1849',['get_error',['../classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e',1,'qx::layered_configs_manager']]]
 ];

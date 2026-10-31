@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classqx_1_1layered__configs__manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -87,6 +88,15 @@ Inheritance diagram for qx::layered_configs_manager:</div>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a30b0deccaca6284c8452818198440b5e"><td class="memItemLeft" align="right" valign="top"><a id="a30b0deccaca6284c8452818198440b5e"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">get_error</a> </td></tr>
+<tr class="memdesc:a30b0deccaca6284c8452818198440b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Errors returned when reading a registered variable. <br /></td></tr>
+<tr class="separator:a30b0deccaca6284c8452818198440b5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86dabce1fbae5dbe98b9f69c92a132e9"><td class="memItemLeft" align="right" valign="top"><a id="a86dabce1fbae5dbe98b9f69c92a132e9"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">set_error</a> </td></tr>
+<tr class="memdesc:a86dabce1fbae5dbe98b9f69c92a132e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Errors returned when writing a variable; failed writes preserve the current value. <br /></td></tr>
+<tr class="separator:a86dabce1fbae5dbe98b9f69c92a132e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:acb440fa2f252277b938911587b82c946"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#acb440fa2f252277b938911587b82c946">set_app_description</a> (<a class="el" href="classqx_1_1basic__string.html">cstring</a> sAppDescription) noexcept</td></tr>
@@ -101,23 +111,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad71135b1830d83b89e11c6a36252258c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#ad71135b1830d83b89e11c6a36252258c">parse</a> () noexcept</td></tr>
 <tr class="memdesc:ad71135b1830d83b89e11c6a36252258c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse command line arguments, environment variables, and default values.  <a href="classqx_1_1layered__configs__manager.html#ad71135b1830d83b89e11c6a36252258c">More...</a><br /></td></tr>
 <tr class="separator:ad71135b1830d83b89e11c6a36252258c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9fd1751bf5efe5a619509a0ce8c80c44"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:a9fd1751bf5efe5a619509a0ce8c80c44"><td class="memTemplItemLeft" align="right" valign="top">std::optional&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44">get</a> (cstring_view svRuntimeName) const noexcept</td></tr>
-<tr class="memdesc:a9fd1751bf5efe5a619509a0ce8c80c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get variable value by runtime name.  <a href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44">More...</a><br /></td></tr>
-<tr class="separator:a9fd1751bf5efe5a619509a0ce8c80c44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb3641af3325fe582779f59c415e11a2"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
-<tr class="memitem:adb3641af3325fe582779f59c415e11a2"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">set</a> (cstring_view svRuntimeName, T value) noexcept</td></tr>
-<tr class="memdesc:adb3641af3325fe582779f59c415e11a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set variable value by runtime name. Only set if the variable type matches.  <a href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">More...</a><br /></td></tr>
-<tr class="separator:adb3641af3325fe582779f59c415e11a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad14f6fcfdff32eeb95f0a5bc3191895d"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::reference_wrapper&lt; const std::any &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#ad14f6fcfdff32eeb95f0a5bc3191895d">get</a> (cstring_view svRuntimeName) const noexcept</td></tr>
-<tr class="memdesc:ad14f6fcfdff32eeb95f0a5bc3191895d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current value without knowing its C++ type.  <a href="classqx_1_1layered__configs__manager.html#ad14f6fcfdff32eeb95f0a5bc3191895d">More...</a><br /></td></tr>
-<tr class="separator:ad14f6fcfdff32eeb95f0a5bc3191895d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2720d54021f2f1f6fff442c7ffad0af6"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classqx_1_1basic__string.html">cstring</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a2720d54021f2f1f6fff442c7ffad0af6">get_string</a> (cstring_view svRuntimeName) const noexcept</td></tr>
-<tr class="memdesc:a2720d54021f2f1f6fff442c7ffad0af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a value through its registered string formatter without knowing its C++ type.  <a href="classqx_1_1layered__configs__manager.html#a2720d54021f2f1f6fff442c7ffad0af6">More...</a><br /></td></tr>
-<tr class="separator:a2720d54021f2f1f6fff442c7ffad0af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a590a3e6212c37a7856d900c48b1bf208"><td class="memItemLeft" align="right" valign="top">set_result&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a590a3e6212c37a7856d900c48b1bf208">set_string</a> (cstring_view svRuntimeName, cstring_view svValue) noexcept</td></tr>
-<tr class="memdesc:a590a3e6212c37a7856d900c48b1bf208"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a variable from text using its existing registered parser.  <a href="classqx_1_1layered__configs__manager.html#a590a3e6212c37a7856d900c48b1bf208">More...</a><br /></td></tr>
-<tr class="separator:a590a3e6212c37a7856d900c48b1bf208"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a514350b84f01c29c681d99131cb449b8"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a514350b84f01c29c681d99131cb449b8"><td class="memTemplItemLeft" align="right" valign="top">std::expected&lt; T, <a class="el" href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">get_error</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a514350b84f01c29c681d99131cb449b8">get</a> (cstring_view svRuntimeName) const noexcept</td></tr>
+<tr class="memdesc:a514350b84f01c29c681d99131cb449b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get variable value by runtime name.  <a href="classqx_1_1layered__configs__manager.html#a514350b84f01c29c681d99131cb449b8">More...</a><br /></td></tr>
+<tr class="separator:a514350b84f01c29c681d99131cb449b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a147ece9355e2cb390bc769c2caf9a6ce"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a147ece9355e2cb390bc769c2caf9a6ce"><td class="memTemplItemLeft" align="right" valign="top">std::expected&lt; void, <a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">set_error</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a147ece9355e2cb390bc769c2caf9a6ce">set</a> (cstring_view svRuntimeName, T value) noexcept</td></tr>
+<tr class="memdesc:a147ece9355e2cb390bc769c2caf9a6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set variable value by runtime name. Only set if the variable type matches.  <a href="classqx_1_1layered__configs__manager.html#a147ece9355e2cb390bc769c2caf9a6ce">More...</a><br /></td></tr>
+<tr class="separator:a147ece9355e2cb390bc769c2caf9a6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbdce9fa3f68562955ce456cbce6c294"><td class="memItemLeft" align="right" valign="top">std::expected&lt; std::reference_wrapper&lt; const std::any &gt;, <a class="el" href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">get_error</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#acbdce9fa3f68562955ce456cbce6c294">get</a> (cstring_view svRuntimeName) const noexcept</td></tr>
+<tr class="memdesc:acbdce9fa3f68562955ce456cbce6c294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current value without knowing its C++ type.  <a href="classqx_1_1layered__configs__manager.html#acbdce9fa3f68562955ce456cbce6c294">More...</a><br /></td></tr>
+<tr class="separator:acbdce9fa3f68562955ce456cbce6c294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe98c1589252871146a84102d3fef7fc"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, <a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">set_error</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#abe98c1589252871146a84102d3fef7fc">set</a> (cstring_view svRuntimeName, std::any value) noexcept</td></tr>
+<tr class="memdesc:abe98c1589252871146a84102d3fef7fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a type-erased value using the variable's exact registered C++ type.  <a href="classqx_1_1layered__configs__manager.html#abe98c1589252871146a84102d3fef7fc">More...</a><br /></td></tr>
+<tr class="separator:abe98c1589252871146a84102d3fef7fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcb5bf21ce0ce6ef99a16746f24a526f"><td class="memItemLeft" align="right" valign="top">std::expected&lt; <a class="el" href="classqx_1_1basic__string.html">cstring</a>, <a class="el" href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">get_error</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#adcb5bf21ce0ce6ef99a16746f24a526f">get_string</a> (cstring_view svRuntimeName) const noexcept</td></tr>
+<tr class="memdesc:adcb5bf21ce0ce6ef99a16746f24a526f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a value through its registered string formatter without knowing its C++ type.  <a href="classqx_1_1layered__configs__manager.html#adcb5bf21ce0ce6ef99a16746f24a526f">More...</a><br /></td></tr>
+<tr class="separator:adcb5bf21ce0ce6ef99a16746f24a526f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09d408070e9b1e53b835975b7447f08a"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, <a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">set_error</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a09d408070e9b1e53b835975b7447f08a">set_string</a> (cstring_view svRuntimeName, cstring_view svValue) noexcept</td></tr>
+<tr class="memdesc:a09d408070e9b1e53b835975b7447f08a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a variable from text using its existing registered parser.  <a href="classqx_1_1layered__configs__manager.html#a09d408070e9b1e53b835975b7447f08a">More...</a><br /></td></tr>
+<tr class="separator:a09d408070e9b1e53b835975b7447f08a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b05218d210df73c86dae66d22295a4f"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structqx_1_1layered__config__variable__info.html">layered_config_variable_info</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a3b05218d210df73c86dae66d22295a4f">get_variables</a> () const noexcept</td></tr>
 <tr class="memdesc:a3b05218d210df73c86dae66d22295a4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumerate registered variables without exposing converters or stored values.  <a href="classqx_1_1layered__configs__manager.html#a3b05218d210df73c86dae66d22295a4f">More...</a><br /></td></tr>
 <tr class="separator:a3b05218d210df73c86dae66d22295a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,10 +144,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Doesn't support multithreading </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>17.05.2026 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8h_source.html#l00063">63</a> of file <a class="el" href="layered__configs__manager_8h_source.html">layered_configs_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8h_source.html#l00064">64</a> of file <a class="el" href="layered__configs__manager_8h_source.html">layered_configs_manager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a9fd1751bf5efe5a619509a0ce8c80c44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fd1751bf5efe5a619509a0ce8c80c44">&#9670;&nbsp;</a></span>get() <span class="overload">[1/2]</span></h2>
+<a id="a514350b84f01c29c681d99131cb449b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514350b84f01c29c681d99131cb449b8">&#9670;&nbsp;</a></span>get() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,7 +158,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; T &gt; qx::layered_configs_manager::get </td>
+          <td class="memname">std::expected&lt; T, <a class="el" href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">layered_configs_manager::get_error</a> &gt; qx::layered_configs_manager::get </td>
           <td>(</td>
           <td class="paramtype">cstring_view&#160;</td>
           <td class="paramname"><em>svRuntimeName</em></td><td>)</td>
@@ -172,14 +185,14 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>- optional with variable value if it is present, has valid value and correct type </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>- value, or unknown_variable / type_mismatch error </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00276">276</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
-<a id="ad14f6fcfdff32eeb95f0a5bc3191895d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad14f6fcfdff32eeb95f0a5bc3191895d">&#9670;&nbsp;</a></span>get() <span class="overload">[2/2]</span></h2>
+<a id="acbdce9fa3f68562955ce456cbce6c294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbdce9fa3f68562955ce456cbce6c294">&#9670;&nbsp;</a></span>get() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -188,7 +201,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; std::reference_wrapper&lt; const std::any &gt; &gt; qx::layered_configs_manager::get </td>
+          <td class="memname">std::expected&lt; std::reference_wrapper&lt; const std::any &gt;, <a class="el" href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">layered_configs_manager::get_error</a> &gt; qx::layered_configs_manager::get </td>
           <td>(</td>
           <td class="paramtype">cstring_view&#160;</td>
           <td class="paramname"><em>svRuntimeName</em></td><td>)</td>
@@ -209,14 +222,14 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>- reference to the stored value, or nullopt for an unknown name </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>- reference to the stored value, or unknown_variable error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00304">304</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00300">300</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
-<a id="a2720d54021f2f1f6fff442c7ffad0af6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2720d54021f2f1f6fff442c7ffad0af6">&#9670;&nbsp;</a></span>get_string()</h2>
+<a id="adcb5bf21ce0ce6ef99a16746f24a526f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcb5bf21ce0ce6ef99a16746f24a526f">&#9670;&nbsp;</a></span>get_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +238,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="classqx_1_1basic__string.html">cstring</a> &gt; qx::layered_configs_manager::get_string </td>
+          <td class="memname">std::expected&lt; <a class="el" href="classqx_1_1basic__string.html">cstring</a>, <a class="el" href="classqx_1_1layered__configs__manager.html#a30b0deccaca6284c8452818198440b5e">layered_configs_manager::get_error</a> &gt; qx::layered_configs_manager::get_string </td>
           <td>(</td>
           <td class="paramtype">cstring_view&#160;</td>
           <td class="paramname"><em>svRuntimeName</em></td><td>)</td>
@@ -246,9 +259,9 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>- owned string for the current value or default; nullopt for an unknown name </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>- owned string for the current value or default, or unknown_variable error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00318">318</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00329">329</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
@@ -278,7 +291,7 @@ template&lt;class T &gt; </div>
 <p>Enumerate registered variables without exposing converters or stored values. </p>
 <dl class="section return"><dt>Returns</dt><dd>- metadata sorted by runtime name; views retain the registered names' and descriptions' lifetime </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00348">348</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00354">354</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
@@ -306,14 +319,62 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p>Parse command line arguments, environment variables, and default values. </p>
-<p>Should be called after <a class="el" href="classqx_1_1layered__configs__manager.html#ae20970c389ba665db76bc599778757c2" title="Set command line arguments.">set_args()</a> and before <a class="el" href="classqx_1_1layered__configs__manager.html#a9fd1751bf5efe5a619509a0ce8c80c44" title="Get variable value by runtime name.">get()</a>/set() of any variable. You can call it multiple times during the app lifetime, for example, to load variables from different DLLs. </p><dl class="section return"><dt>Returns</dt><dd>- true all required variables are present and have valid values </dd></dl>
+<p>Should be called after <a class="el" href="classqx_1_1layered__configs__manager.html#ae20970c389ba665db76bc599778757c2" title="Set command line arguments.">set_args()</a> and before <a class="el" href="classqx_1_1layered__configs__manager.html#a514350b84f01c29c681d99131cb449b8" title="Get variable value by runtime name.">get()</a>/set() of any variable. You can call it multiple times during the app lifetime, for example, to load variables from different DLLs. </p><dl class="section return"><dt>Returns</dt><dd>- true all required variables are present and have valid values </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00152">152</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
-<a id="adb3641af3325fe582779f59c415e11a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb3641af3325fe582779f59c415e11a2">&#9670;&nbsp;</a></span>set()</h2>
+<a id="abe98c1589252871146a84102d3fef7fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe98c1589252871146a84102d3fef7fc">&#9670;&nbsp;</a></span>set() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::expected&lt; void, <a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">layered_configs_manager::set_error</a> &gt; qx::layered_configs_manager::set </td>
+          <td>(</td>
+          <td class="paramtype">cstring_view&#160;</td>
+          <td class="paramname"><em>svRuntimeName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::any&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set a type-erased value using the variable's exact registered C++ type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">svRuntimeName</td><td>- registered runtime name </td></tr>
+    <tr><td class="paramname">value</td><td>- owned value; a mismatched type leaves the variable unchanged </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>- success, or unknown_variable / type_mismatch error </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00313">313</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+
+</div>
+</div>
+<a id="a147ece9355e2cb390bc769c2caf9a6ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a147ece9355e2cb390bc769c2caf9a6ce">&#9670;&nbsp;</a></span>set() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -324,7 +385,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool qx::layered_configs_manager::set </td>
+          <td class="memname">std::expected&lt; void, <a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">layered_configs_manager::set_error</a> &gt; qx::layered_configs_manager::set </td>
           <td>(</td>
           <td class="paramtype">cstring_view&#160;</td>
           <td class="paramname"><em>svRuntimeName</em>, </td>
@@ -362,9 +423,9 @@ template&lt;class T &gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>- true if the value was set successfully </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>- success, or unknown_variable / type_mismatch error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00290">290</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00291">291</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
@@ -451,8 +512,8 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
-<a id="a590a3e6212c37a7856d900c48b1bf208"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a590a3e6212c37a7856d900c48b1bf208">&#9670;&nbsp;</a></span>set_string()</h2>
+<a id="a09d408070e9b1e53b835975b7447f08a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09d408070e9b1e53b835975b7447f08a">&#9670;&nbsp;</a></span>set_string()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -461,7 +522,7 @@ template&lt;class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">layered_configs_manager::set_result qx::layered_configs_manager::set_string </td>
+          <td class="memname">std::expected&lt; void, <a class="el" href="classqx_1_1layered__configs__manager.html#a86dabce1fbae5dbe98b9f69c92a132e9">layered_configs_manager::set_error</a> &gt; qx::layered_configs_manager::set_string </td>
           <td>(</td>
           <td class="paramtype">cstring_view&#160;</td>
           <td class="paramname"><em>svRuntimeName</em>, </td>
@@ -486,16 +547,16 @@ template&lt;class T &gt; </div>
 </div><div class="memdoc">
 
 <p>Set a variable from text using its existing registered parser. </p>
-<p>Every registered variable is writable. Conversion rules match environment and command-line parsing. On success this uses the same runtime storage as <a class="el" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2" title="Set variable value by runtime name. Only set if the variable type matches.">set&lt;T&gt;()</a>; no file is written. Failure leaves the previous value unchanged. Call only on the manager's owning thread. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Every registered variable is writable. Conversion rules match environment and command-line parsing. On success this uses the same runtime storage as <a class="el" href="classqx_1_1layered__configs__manager.html#a147ece9355e2cb390bc769c2caf9a6ce" title="Set variable value by runtime name. Only set if the variable type matches.">set&lt;T&gt;()</a>; no file is written. Failure leaves the previous value unchanged. Call only on the manager's owning thread. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">svRuntimeName</td><td>- registered runtime name, matched exactly </td></tr>
     <tr><td class="paramname">svValue</td><td>- text to convert to the variable's declared type </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>- success, unknown_variable or invalid_value </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>- success, or unknown_variable / invalid_value error </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00331">331</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00339">339</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
