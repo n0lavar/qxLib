@@ -76,8 +76,6 @@ The public API follows the standard library style: `snake_case`, iterators, trai
 
 If a condition or a loop definition or its body has more than one line, its body should have braces, unless its body is another small loop or a condition.
 
-The examples use the sorting algorithms from [`sort.inl`](../include/qx/algo/sort.inl).
-
 <details>
 <summary>Good</summary>
 
@@ -144,6 +142,7 @@ for (random_it_t i = begin + 1; i != end; ++i)
 - Use `qx::string_view` instead of `const qx::string&`, `const qx::char_t*`, `const qx::char_t*, size_t`, `const qx::char_t[N]`, etc.
 - Use `std::span<const T>` instead of `const container<T>&` wherever possible.
 - Separate includes with blank lines in the following order: the corresponding library includes, then external library includes (including std).
+- Only use `auto` for lambdas, iterators, and very complex types.
 - Use `qx::link` instead of `std::weak_ptr` wherever possible.
 - Follow these rules when instantiating formatters:
     - Use `QX_FMT_NS` instead of the corresponding namespace (because the library supports both `std` and `fmt` formatting)

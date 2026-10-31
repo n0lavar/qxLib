@@ -7,7 +7,7 @@
 
 - Use multiline documentation comments with `/**` and `**/` on separate lines. Single-line comments such as `/** @brief List all registered variables, sorted by runtime name. **/` are not allowed.
 - `@brief` and `@details` are aligned.
-- `@tparam`, `@param` and `@return` are aligned and have ` - `. If possible, they also should be aligned with `@brief` and `@details`.
+- `@tparam`, `@param` and `@return` are aligned and have ` - ` (the `-` character must be indented the same distance from the beginning of the line for all elements). If possible, they also should be aligned with `@brief` and `@details`.
 - Like any cpp code, the width is limited by 120 symbols.
 - `@return` must be used, never `@retval`.
 
