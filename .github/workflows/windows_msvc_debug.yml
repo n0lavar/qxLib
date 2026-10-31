@@ -24,3 +24,5 @@ jobs:
           msvc_runtime_library: MultiThreadedDebug
           BOOST_ROOT: ${{ steps.install_dependencies.outputs.BOOST_ROOT }}
       - uses: ./.github/actions/windows/run_tests
+        with:
+          build_type: Debug

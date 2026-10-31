@@ -1,5 +1,8 @@
 name: Run tests
 description: "Runs the test suites using ctest."
+inputs:
+  build_type:
+    required: true
 runs:
   using: composite
   steps:
@@ -7,4 +10,4 @@ runs:
       shell: cmd
       working-directory: build
       run: |
-        ctest --output-on-failure -j %NUMBER_OF_PROCESSORS%
+        ctest -C ${{ inputs.build_type }} --no-tests=error --output-on-failure -j %NUMBER_OF_PROCESSORS%

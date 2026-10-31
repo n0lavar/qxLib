@@ -25,6 +25,6 @@ runs:
           -DCMAKE_EXE_LINKER_FLAGS="${{ inputs.cxx_linker_flags }}" ^
           -DCMAKE_MSVC_RUNTIME_LIBRARY="${{ inputs.msvc_runtime_library }}" ^
           -DBOOST_ROOT=${{ inputs.BOOST_ROOT }} ^
-          -DGENERATE_TESTS=1 ^
+          -DQX_GENERATE_TESTS=1 ^
           -DGENERATE_BENCHMARKS=1
         cmake --build . --config ${{ inputs.build_type }} -j %NUMBER_OF_PROCESSORS%

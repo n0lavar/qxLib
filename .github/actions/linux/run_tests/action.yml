@@ -20,7 +20,7 @@ runs:
       run: |
         set +e
 
-        ctest --output-on-failure 2>&1 | tee ctest.log
+        ctest --no-tests=error --output-on-failure 2>&1 | tee ctest.log
         ctest_exit=${PIPESTATUS[0]}
 
         ctest --rerun-failed -VV 2>&1 | tee ctest-rerun-failed.log
