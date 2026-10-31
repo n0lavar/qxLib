@@ -109,6 +109,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adb3641af3325fe582779f59c415e11a2"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">set</a> (cstring_view svRuntimeName, T value) noexcept</td></tr>
 <tr class="memdesc:adb3641af3325fe582779f59c415e11a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set variable value by runtime name. Only set if the variable type matches.  <a href="classqx_1_1layered__configs__manager.html#adb3641af3325fe582779f59c415e11a2">More...</a><br /></td></tr>
 <tr class="separator:adb3641af3325fe582779f59c415e11a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad14f6fcfdff32eeb95f0a5bc3191895d"><td class="memItemLeft" align="right" valign="top">std::optional&lt; std::reference_wrapper&lt; const std::any &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#ad14f6fcfdff32eeb95f0a5bc3191895d">get</a> (cstring_view svRuntimeName) const noexcept</td></tr>
+<tr class="memdesc:ad14f6fcfdff32eeb95f0a5bc3191895d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the current value without knowing its C++ type.  <a href="classqx_1_1layered__configs__manager.html#ad14f6fcfdff32eeb95f0a5bc3191895d">More...</a><br /></td></tr>
+<tr class="separator:ad14f6fcfdff32eeb95f0a5bc3191895d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2720d54021f2f1f6fff442c7ffad0af6"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="classqx_1_1basic__string.html">cstring</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1layered__configs__manager.html#a2720d54021f2f1f6fff442c7ffad0af6">get_string</a> (cstring_view svRuntimeName) const noexcept</td></tr>
 <tr class="memdesc:a2720d54021f2f1f6fff442c7ffad0af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a value through its registered string formatter without knowing its C++ type.  <a href="classqx_1_1layered__configs__manager.html#a2720d54021f2f1f6fff442c7ffad0af6">More...</a><br /></td></tr>
 <tr class="separator:a2720d54021f2f1f6fff442c7ffad0af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -128,10 +131,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <p>Doesn't support multithreading </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>17.05.2026 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8h_source.html#l00062">62</a> of file <a class="el" href="layered__configs__manager_8h_source.html">layered_configs_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8h_source.html#l00063">63</a> of file <a class="el" href="layered__configs__manager_8h_source.html">layered_configs_manager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9fd1751bf5efe5a619509a0ce8c80c44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9fd1751bf5efe5a619509a0ce8c80c44">&#9670;&nbsp;</a></span>get()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fd1751bf5efe5a619509a0ce8c80c44">&#9670;&nbsp;</a></span>get() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,6 +178,43 @@ template&lt;class T &gt; </div>
 
 </div>
 </div>
+<a id="ad14f6fcfdff32eeb95f0a5bc3191895d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad14f6fcfdff32eeb95f0a5bc3191895d">&#9670;&nbsp;</a></span>get() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; std::reference_wrapper&lt; const std::any &gt; &gt; qx::layered_configs_manager::get </td>
+          <td>(</td>
+          <td class="paramtype">cstring_view&#160;</td>
+          <td class="paramname"><em>svRuntimeName</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the current value without knowing its C++ type. </p>
+<p>The reference is valid until the stored value is removed or the manager is reset. Setting or parsing values may change which value is current. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">svRuntimeName</td><td>- registered runtime name, matched exactly </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>- reference to the stored value, or nullopt for an unknown name </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00304">304</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+
+</div>
+</div>
 <a id="a2720d54021f2f1f6fff442c7ffad0af6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2720d54021f2f1f6fff442c7ffad0af6">&#9670;&nbsp;</a></span>get_string()</h2>
 
@@ -208,7 +248,7 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- owned string for the current value or default; nullopt for an unknown name </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00308">308</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00318">318</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
@@ -238,7 +278,7 @@ template&lt;class T &gt; </div>
 <p>Enumerate registered variables without exposing converters or stored values. </p>
 <dl class="section return"><dt>Returns</dt><dd>- metadata sorted by runtime name; views retain the registered names' and descriptions' lifetime </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00338">338</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00348">348</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
@@ -324,7 +364,7 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- true if the value was set successfully </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00294">294</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00290">290</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
@@ -455,7 +495,7 @@ template&lt;class T &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- success, unknown_variable or invalid_value </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00321">321</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="layered__configs__manager_8inl_source.html#l00331">331</a> of file <a class="el" href="layered__configs__manager_8inl_source.html">layered_configs_manager.inl</a>.</p>
 
 </div>
 </div>
