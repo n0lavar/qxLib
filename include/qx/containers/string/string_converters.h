@@ -137,6 +137,20 @@ void utf8_to_string(string& out, cstring_view pszUtf8);
 [[nodiscard]] string utf8_to_string(cstring_view pszUtf8);
 
 /**
+    @brief Convert the engine string representation to UTF-8 bytes.
+    @param out    - destination UTF-8 string; cleared for empty or unrepresentable input
+    @param svText - source string, with embedded nulls preserved
+**/
+void string_to_uft8(cstring& out, string_view svText);
+
+/**
+    @brief  Convert the engine string representation to UTF-8 bytes.
+    @param  svText - source string, with embedded nulls preserved
+    @return        - UTF-8 bytes, or an empty string for empty or unrepresentable input
+**/
+[[nodiscard]] cstring string_to_uft8(string_view svText);
+
+/**
     @brief  Convert a constexpr string literal to the wider or equal char type string view
     @tparam char_t    - target string view type
     @tparam sLiteral  - constexpr string literal

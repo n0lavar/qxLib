@@ -152,6 +152,41 @@ inline string utf8_to_string(cstring_view utf8)
     return sResult;
 }
 
+inline void string_to_uft8(cstring& out, string_view svText)
+{
+#if QX_CONF_CHAR == QX_CHAR_T_CHAR
+    out = svText;
+#elif QX_CONF_CHAR == QX_CHAR_T_WCHAR_T
+    if (svText.empty() || !std::in_range<int>(svText.size()))
+    {
+        out.clear();
+        return;
+    }
+
+    #if QX_WIN
+    const int nInputLength = static_cast<int>(svText.size());
+    const int nLength      = WideCharToMultiByte(CP_UTF8, 0, svText.data(), nInputLength, nullptr, 0, nullptr, nullptr);
+    out.assign(nLength, '\0');
+    if (nLength != 0)
+        WideCharToMultiByte(CP_UTF8, 0, svText.data(), nInputLength, out.data(), nLength, nullptr, nullptr);
+    #else
+    QX_PUSH_SUPPRESS_ALL_WARNINGS();
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    out = converter.to_bytes(svText.data(), svText.data() + svText.size());
+    QX_POP_SUPPRESS_WARNINGS();
+    #endif
+#else
+    #error Unsupported char type
+#endif
+}
+
+inline cstring string_to_uft8(string_view svText)
+{
+    cstring sResult;
+    string_to_uft8(sResult, svText);
+    return sResult;
+}
+
 namespace details
 {
 

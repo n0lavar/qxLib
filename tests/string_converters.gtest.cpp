@@ -59,3 +59,17 @@ TEST(string_converters, to_string)
     }
 #endif
 }
+
+TEST(string_converters, string_to_uft8_preserves_unicode_and_embedded_nulls)
+{
+    const qx::cstring source("A\0\xD0\x96\xF0\x9F\x8C\x8D", 8);
+    const qx::string  text = qx::utf8_to_string(source);
+    EXPECT_EQ(qx::string_to_uft8(text), source);
+
+    qx::cstring output("previous");
+    qx::string_to_uft8(output, text);
+    EXPECT_EQ(output, source);
+    qx::string_to_uft8(output, {});
+    EXPECT_TRUE(output.empty());
+    EXPECT_TRUE(qx::string_to_uft8({}).empty());
+}

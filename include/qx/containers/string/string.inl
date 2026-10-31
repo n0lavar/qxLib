@@ -85,7 +85,7 @@ template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::assign(const basic_string& sAnother) noexcept
 {
     if (sAnother.data() != data())
-        assign(sAnother.data());
+        assign(sAnother.data(), sAnother.size());
 }
 
 template<class char_t, class traits_t>
