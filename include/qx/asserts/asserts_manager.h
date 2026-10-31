@@ -181,7 +181,7 @@ private:
     #define _QX_DEBUG_BREAK() __builtin_debugtrap()
 #elif QX_GNU
     #include <signal.h>
-    #define _QX_DEBUG_BREAK() raise(SIGTRAP)
+    #define _QX_DEBUG_BREAK() static_cast<void>(raise(SIGTRAP))
 #else
     #define _QX_DEBUG_BREAK() QX_EMPTY_MACRO
 #endif
