@@ -14,6 +14,7 @@
 #include <qx/patterns/singleton.h>
 
 #include <any>
+#include <expected>
 #include <functional>
 #include <unordered_map>
 
@@ -66,10 +67,22 @@ class layered_configs_manager final : public singleton<layered_configs_manager>
     friend class layered_config_variable_builder;
 
 public:
-    enum class set_result
+    /**
+        @brief Errors returned when reading a registered variable.
+    **/
+    enum class get_error
     {
-        success,
         unknown_variable,
+        type_mismatch
+    };
+
+    /**
+        @brief Errors returned when writing a variable; failed writes preserve the current value.
+    **/
+    enum class set_error
+    {
+        unknown_variable,
+        type_mismatch,
         invalid_value
     };
 
@@ -108,36 +121,44 @@ public:
         @brief  Get variable value by runtime name.
         @tparam T             - type of variable
         @param  svRuntimeName - runtime name of variable
-        @return               - optional with variable value if it is present, has valid value and correct type
+        @return               - value, or unknown_variable / type_mismatch error
     **/
     template<class T>
-    std::optional<T> get(cstring_view svRuntimeName) const noexcept;
+    std::expected<T, get_error> get(cstring_view svRuntimeName) const noexcept;
 
     /**
         @brief  Set variable value by runtime name. Only set if the variable type matches.
         @tparam T             - type of variable
         @param  svRuntimeName - runtime name of variable
         @param  value         - new variable value
-        @return               - true if the value was set successfully
+        @return               - success, or unknown_variable / type_mismatch error
     **/
     template<class T>
-    bool set(cstring_view svRuntimeName, T value) noexcept;
+    std::expected<void, set_error> set(cstring_view svRuntimeName, T value) noexcept;
 
     /**
         @brief   Read the current value without knowing its C++ type.
         @details The reference is valid until the stored value is removed or the manager is reset.
                  Setting or parsing values may change which value is current.
         @param   svRuntimeName - registered runtime name, matched exactly
-        @return                - reference to the stored value, or nullopt for an unknown name
+        @return                - reference to the stored value, or unknown_variable error
     **/
-    std::optional<std::reference_wrapper<const std::any>> get(cstring_view svRuntimeName) const noexcept;
+    std::expected<std::reference_wrapper<const std::any>, get_error> get(cstring_view svRuntimeName) const noexcept;
+
+    /**
+        @brief Set a type-erased value using the variable's exact registered C++ type.
+        @param svRuntimeName - registered runtime name
+        @param value         - owned value; a mismatched type leaves the variable unchanged
+        @return              - success, or unknown_variable / type_mismatch error
+    **/
+    std::expected<void, set_error> set(cstring_view svRuntimeName, std::any value) noexcept;
 
     /**
         @brief  Read a value through its registered string formatter without knowing its C++ type.
         @param  svRuntimeName - registered runtime name, matched exactly
-        @return               - owned string for the current value or default; nullopt for an unknown name
+        @return               - owned string for the current value or default, or unknown_variable error
     **/
-    std::optional<cstring> get_string(cstring_view svRuntimeName) const noexcept;
+    std::expected<cstring, get_error> get_string(cstring_view svRuntimeName) const noexcept;
 
     /**
         @brief   Set a variable from text using its existing registered parser.
@@ -146,9 +167,9 @@ public:
                  Failure leaves the previous value unchanged. Call only on the manager's owning thread.
         @param  svRuntimeName - registered runtime name, matched exactly
         @param  svValue       - text to convert to the variable's declared type
-        @return               - success, unknown_variable or invalid_value
+        @return               - success, or unknown_variable / invalid_value error
     **/
-    set_result set_string(cstring_view svRuntimeName, cstring_view svValue) noexcept;
+    std::expected<void, set_error> set_string(cstring_view svRuntimeName, cstring_view svValue) noexcept;
 
     /**
         @brief  Enumerate registered variables without exposing converters or stored values.

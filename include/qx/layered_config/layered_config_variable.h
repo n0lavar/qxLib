@@ -44,8 +44,9 @@ public:
     /**
         @brief Set variable value at runtime. It will override value from all other layers.
         @param value - variable value
+        @return      - success, or unknown_variable / type_mismatch error
     **/
-    constexpr void set(T value) noexcept;
+    constexpr std::expected<void, layered_configs_manager::set_error> set(T value) noexcept;
 
 private:
     constexpr layered_config_variable() noexcept = default;

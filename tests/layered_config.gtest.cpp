@@ -1,4 +1,4 @@
-﻿/**
+/**
 
     @file      layered_config.gtest.cpp
     @author    Khrapov
@@ -233,15 +233,29 @@ struct set_runtime_trait
     }
 };
 
+struct set_runtime_any_trait
+{
+    template<class T>
+    static void set_value(qx::cstring_view svName, T value)
+    {
+        using stored_type = typename qx::details::layered_config_variable_type<T>::type;
+        EXPECT_TRUE(qx::layered_configs_manager::get_instance().set(svName, std::any(stored_type(value))));
+    }
+
+    template<class T>
+    static constexpr bool is_enabled()
+    {
+        return true;
+    }
+};
+
 struct set_runtime_string_trait
 {
     template<class T>
     static void set_value(qx::cstring_view svRuntimeName, T value)
     {
         const auto sValue = qx::convert_to_string<T, char>(value);
-        ASSERT_EQ(
-            qx::layered_configs_manager::get_instance().set_string(svRuntimeName, sValue),
-            qx::layered_configs_manager::set_result::success);
+        ASSERT_TRUE(qx::layered_configs_manager::get_instance().set_string(svRuntimeName, sValue));
     }
 
     template<class T>
@@ -311,8 +325,8 @@ inline void test_layered_config_set_value<test_layered_config_set_value_traits_t
 
     EXPECT_NE(defaultValue, newValue);
 
-    auto&            manager  = qx::layered_configs_manager::get_instance();
-    std::optional<T> optValue = manager.get<T>(svRuntimeName);
+    auto&                                                    manager  = qx::layered_configs_manager::get_instance();
+    std::expected<T, qx::layered_configs_manager::get_error> optValue = manager.get<T>(svRuntimeName);
     ASSERT_TRUE(optValue);
 
     const auto optAny = manager.get(svRuntimeName);
@@ -326,7 +340,30 @@ inline void test_layered_config_set_value<test_layered_config_set_value_traits_t
     const auto optSameValue = manager.get(svRuntimeName);
     ASSERT_TRUE(optSameValue);
     EXPECT_EQ(&optAny->get(), &optSameValue->get());
-    EXPECT_FALSE(manager.get("unknown_variable").has_value());
+    using get_error = qx::layered_configs_manager::get_error;
+    using set_error = qx::layered_configs_manager::set_error;
+    EXPECT_EQ(manager.get<T>("unknown_variable"), std::unexpected(get_error::unknown_variable));
+    EXPECT_EQ(manager.get<double>(svRuntimeName), std::unexpected(get_error::type_mismatch));
+    EXPECT_EQ(manager.get("unknown_variable"), std::unexpected(get_error::unknown_variable));
+    EXPECT_EQ(manager.get_string("unknown_variable"), std::unexpected(get_error::unknown_variable));
+
+    EXPECT_EQ(manager.set("unknown_variable", newValue), std::unexpected(set_error::unknown_variable));
+    EXPECT_EQ(
+        manager.set("unknown_variable", std::any(stored_type(newValue))),
+        std::unexpected(set_error::unknown_variable));
+    EXPECT_EQ(manager.set_string("unknown_variable", "42"), std::unexpected(set_error::unknown_variable));
+
+    EXPECT_EQ(manager.set(svRuntimeName, 12.5), std::unexpected(set_error::type_mismatch));
+    EXPECT_EQ(manager.set(svRuntimeName, std::any(12.5)), std::unexpected(set_error::type_mismatch));
+    EXPECT_EQ(manager.set(svRuntimeName, std::any()), std::unexpected(set_error::type_mismatch));
+    if constexpr (!std::is_same_v<T, bool>)
+        EXPECT_EQ(manager.set(svRuntimeName, std::any(true)), std::unexpected(set_error::type_mismatch));
+    if constexpr (!std::is_same_v<T, qx::cstring_view>)
+        EXPECT_EQ(manager.set_string(svRuntimeName, "invalid"), std::unexpected(set_error::invalid_value));
+
+    const auto unchangedValue = manager.get<T>(svRuntimeName);
+    ASSERT_TRUE(unchangedValue);
+    EXPECT_EQ(*unchangedValue, m_bPreTearDown ? defaultValue : newValue);
 
     const auto optString = manager.get_string(svRuntimeName);
     ASSERT_TRUE(optString);
@@ -365,7 +402,8 @@ using implementations_type = ::testing::Types<
     test_layered_config_set_value_traits<set_command_line_flag_trait>,
     test_layered_config_set_value_traits<set_env_trait>,
     test_layered_config_set_value_traits<set_runtime_trait>,
-    test_layered_config_set_value_traits<set_runtime_string_trait>>;
+    test_layered_config_set_value_traits<set_runtime_string_trait>,
+    test_layered_config_set_value_traits<set_runtime_any_trait>>;
 
 TYPED_TEST_SUITE(test_layered_config_set_value, implementations_type);
 
@@ -437,4 +475,25 @@ TEST(layered_config, get_variables)
         EXPECT_EQ(it->svTypeName, info.svTypeName);
         EXPECT_EQ(it->svGroupName, info.svGroupName);
     }
+}
+
+TEST(layered_config, type_erased_string_set_preserves_embedded_nulls)
+{
+    auto& manager = qx::layered_configs_manager::get_instance();
+    struct reset_guard
+    {
+        ~reset_guard()
+        {
+            qx::layered_configs_manager::get_instance().reset();
+        }
+    } guard;
+    const qx::cstring text("A\0B with spaces", 15);
+    const std::any    value(text);
+    ASSERT_TRUE(manager.set(k_svStringRuntimeName, value));
+    const auto stored = manager.get(k_svStringRuntimeName);
+    ASSERT_TRUE(stored);
+    const auto* pText = std::any_cast<qx::cstring>(&stored->get());
+    ASSERT_NE(pText, nullptr);
+    EXPECT_EQ(pText->size(), text.size());
+    EXPECT_EQ(*pText, text);
 }

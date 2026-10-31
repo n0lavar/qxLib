@@ -13,14 +13,15 @@ namespace qx
 template<class T>
 constexpr T layered_config_variable<T>::get() const noexcept
 {
-    std::optional<T> optValue = layered_configs_manager::get_instance().get<T>(m_svRuntimeName);
+    std::expected<T, layered_configs_manager::get_error> optValue =
+        layered_configs_manager::get_instance().get<T>(m_svRuntimeName);
     return optValue ? *optValue : m_DefaultValue;
 }
 
 template<class T>
-constexpr void layered_config_variable<T>::set(T value) noexcept
+constexpr std::expected<void, layered_configs_manager::set_error> layered_config_variable<T>::set(T value) noexcept
 {
-    layered_configs_manager::get_instance().set(m_svRuntimeName, std::move(value));
+    return layered_configs_manager::get_instance().set(m_svRuntimeName, std::move(value));
 }
 
 template<class T>

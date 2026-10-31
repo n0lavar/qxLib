@@ -53,6 +53,7 @@ find_package(FMT)
 
 
 add_library(qxLib ${FILES_HEADERS} ${FILES_SOURCES} ${FILES_INLINES} ${FILES_NATVIS} ${PVSCONFIG_FILE})
+target_compile_features(qxLib PUBLIC cxx_std_23)
 
 macro(qx_setup_test_target _target)
     target_include_directories(${_target} PRIVATE

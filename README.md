@@ -37,7 +37,7 @@ Feel free to suggest any improvements.
 The library doesn't install these dependencies, only tries to find existing ones.
 
 Required:
-+ C++20
++ C++23
 + [glm](https://github.com/g-truc/glm.git)
 
 Optional:

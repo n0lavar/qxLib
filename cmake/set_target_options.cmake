@@ -107,7 +107,7 @@ function(set_target_options _target)
     )
         
     target_compile_features(${_target} PRIVATE 
-        cxx_std_20
+        cxx_std_23
     )
     
     set_target_properties(${_target} PROPERTIES 

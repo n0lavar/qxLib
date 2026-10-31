@@ -273,36 +273,31 @@ inline bool layered_configs_manager::parse() noexcept
 }
 
 template<class T>
-inline std::optional<T> layered_configs_manager::get(cstring_view svRuntimeName) const noexcept
+inline std::expected<T, layered_configs_manager::get_error> layered_configs_manager::get(
+    cstring_view svRuntimeName) const noexcept
 {
     const auto optValue = get(svRuntimeName);
     if (!optValue)
-        return std::nullopt;
+        return std::unexpected(optValue.error());
 
     const auto* pValue = std::any_cast<typename details::layered_config_variable_type<T>::type>(&optValue->get());
     if (!pValue)
-        return std::nullopt;
+        return std::unexpected(get_error::type_mismatch);
 
     return *pValue;
 }
 
 template<class T>
-inline bool layered_configs_manager::set(cstring_view svRuntimeName, T value) noexcept
+inline std::expected<void, layered_configs_manager::set_error> layered_configs_manager::set(
+    cstring_view svRuntimeName,
+    T            value) noexcept
 {
-    // set a value only if types match
-    const auto it = m_DefaultVariables.find(svRuntimeName);
-    if (it == m_DefaultVariables.end())
-        return false;
-
-    if (!std::any_cast<typename details::layered_config_variable_type<T>::type>(&it->second))
-        return false;
-
-    m_Variables[svRuntimeName] = typename details::layered_config_variable_type<T>::type(std::move(value));
-    return true;
+    using stored_type = typename details::layered_config_variable_type<T>::type;
+    return set(svRuntimeName, std::any(stored_type(std::move(value))));
 }
 
-inline std::optional<std::reference_wrapper<const std::any>> layered_configs_manager::get(
-    cstring_view svRuntimeName) const noexcept
+inline std::expected<std::reference_wrapper<const std::any>, layered_configs_manager::get_error>
+    layered_configs_manager::get(cstring_view svRuntimeName) const noexcept
 {
     const auto itValue = m_Variables.find(svRuntimeName);
     if (itValue != m_Variables.end())
@@ -310,39 +305,50 @@ inline std::optional<std::reference_wrapper<const std::any>> layered_configs_man
 
     const auto itDefault = m_DefaultVariables.find(svRuntimeName);
     if (itDefault == m_DefaultVariables.end())
-        return std::nullopt;
+        return std::unexpected(get_error::unknown_variable);
 
     return std::cref(itDefault->second);
 }
 
-inline std::optional<cstring> layered_configs_manager::get_string(cstring_view svRuntimeName) const noexcept
+inline std::expected<void, layered_configs_manager::set_error> layered_configs_manager::set(
+    cstring_view svRuntimeName,
+    std::any     value) noexcept
 {
-    const auto itData = m_VariableData.find(svRuntimeName);
-    if (itData == m_VariableData.end())
-        return std::nullopt;
+    const auto it = m_DefaultVariables.find(svRuntimeName);
 
-    const auto itValue = m_Variables.find(svRuntimeName);
-    if (itValue != m_Variables.end())
-        return itData->second.pTToString(itValue->second);
+    if (it == m_DefaultVariables.end())
+        return std::unexpected(set_error::unknown_variable);
 
-    return itData->second.pTToString(m_DefaultVariables.at(svRuntimeName));
+    if (it->second.type() != value.type())
+        return std::unexpected(set_error::type_mismatch);
+
+    m_Variables[it->first] = std::move(value);
+    return {};
 }
 
-inline layered_configs_manager::set_result layered_configs_manager::set_string(
+inline std::expected<cstring, layered_configs_manager::get_error> layered_configs_manager::get_string(
+    cstring_view svRuntimeName) const noexcept
+{
+    const auto value = get(svRuntimeName);
+    if (!value)
+        return std::unexpected(value.error());
+
+    return m_VariableData.at(svRuntimeName).pTToString(value->get());
+}
+
+inline std::expected<void, layered_configs_manager::set_error> layered_configs_manager::set_string(
     cstring_view svRuntimeName,
     cstring_view svValue) noexcept
 {
     const auto itData = m_VariableData.find(svRuntimeName);
     if (itData == m_VariableData.end())
-        return set_result::unknown_variable;
+        return std::unexpected(set_error::unknown_variable);
 
     auto optValue = itData->second.pStringToT(svValue);
     if (!optValue)
-        return set_result::invalid_value;
+        return std::unexpected(set_error::invalid_value);
 
-    m_Variables[itData->first] = std::move(*optValue);
-
-    return set_result::success;
+    return set(svRuntimeName, std::move(*optValue));
 }
 
 inline std::vector<layered_config_variable_info> layered_configs_manager::get_variables() const noexcept
