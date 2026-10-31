@@ -92,6 +92,8 @@ Inheritance diagram for qx::asserts_manager:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1asserts__manager_1_1config.html">config</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structqx_1_1asserts__manager_1_1interceptor__entry.html">interceptor_entry</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -101,20 +103,73 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5f1a8aca0cc458f9843d7a606734f9e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#a5f1a8aca0cc458f9843d7a606734f9e4">exit</a> (const <a class="el" href="classqx_1_1category.html">category</a> &amp;<a class="el" href="classqx_1_1category.html">category</a>, assert_type eAssertType)</td></tr>
 <tr class="memdesc:a5f1a8aca0cc458f9843d7a606734f9e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called in fatal assertions to exit the application.  <a href="classqx_1_1asserts__manager.html#a5f1a8aca0cc458f9843d7a606734f9e4">More...</a><br /></td></tr>
 <tr class="separator:a5f1a8aca0cc458f9843d7a606734f9e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9e8f2a61621ea37308b9d2d7b030802"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structqx_1_1asserts__manager_1_1config.html">config</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#ac9e8f2a61621ea37308b9d2d7b030802">get_config</a> () const</td></tr>
-<tr class="memdesc:ac9e8f2a61621ea37308b9d2d7b030802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get config.  <a href="classqx_1_1asserts__manager.html#ac9e8f2a61621ea37308b9d2d7b030802">More...</a><br /></td></tr>
-<tr class="separator:ac9e8f2a61621ea37308b9d2d7b030802"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6073954c5e12f9385d0e1588d48a93c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structqx_1_1asserts__manager_1_1config.html">config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#ac6073954c5e12f9385d0e1588d48a93c">get_config</a> () const</td></tr>
+<tr class="memdesc:ac6073954c5e12f9385d0e1588d48a93c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get config.  <a href="classqx_1_1asserts__manager.html#ac6073954c5e12f9385d0e1588d48a93c">More...</a><br /></td></tr>
+<tr class="separator:ac6073954c5e12f9385d0e1588d48a93c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f7c5b7f0559ae53bc60bb7c78349808"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#a4f7c5b7f0559ae53bc60bb7c78349808">set_config</a> (<a class="el" href="structqx_1_1asserts__manager_1_1config.html">config</a> <a class="el" href="structqx_1_1asserts__manager_1_1config.html">config</a>)</td></tr>
 <tr class="memdesc:a4f7c5b7f0559ae53bc60bb7c78349808"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set config.  <a href="classqx_1_1asserts__manager.html#a4f7c5b7f0559ae53bc60bb7c78349808">More...</a><br /></td></tr>
 <tr class="separator:a4f7c5b7f0559ae53bc60bb7c78349808"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a612cbc46448900b37ba9fe394e0409dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#a612cbc46448900b37ba9fe394e0409dd">add_interceptor</a> (const void *pOwner, interceptor_func interceptor)</td></tr>
+<tr class="memdesc:a612cbc46448900b37ba9fe394e0409dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register an assertion interceptor.  <a href="classqx_1_1asserts__manager.html#a612cbc46448900b37ba9fe394e0409dd">More...</a><br /></td></tr>
+<tr class="separator:a612cbc46448900b37ba9fe394e0409dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fb375486109ec22cc1a1de5b10d2877"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1asserts__manager.html#a6fb375486109ec22cc1a1de5b10d2877">remove_interceptor</a> (const void *pOwner)</td></tr>
+<tr class="memdesc:a6fb375486109ec22cc1a1de5b10d2877"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove an interceptor, waiting for callbacks already in progress.  <a href="classqx_1_1asserts__manager.html#a6fb375486109ec22cc1a1de5b10d2877">More...</a><br /></td></tr>
+<tr class="separator:a6fb375486109ec22cc1a1de5b10d2877"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Determines assertions behavior. </p>
 <dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>4.01.2026 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts__manager_8h_source.html#l00037">37</a> of file <a class="el" href="asserts__manager_8h_source.html">asserts_manager.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts__manager_8h_source.html#l00057">57</a> of file <a class="el" href="asserts__manager_8h_source.html">asserts_manager.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a612cbc46448900b37ba9fe394e0409dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a612cbc46448900b37ba9fe394e0409dd">&#9670;&nbsp;</a></span>add_interceptor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qx::asserts_manager::add_interceptor </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>pOwner</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">interceptor_func&#160;</td>
+          <td class="paramname"><em>interceptor</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Register an assertion interceptor. </p>
+<p>Interceptors are tried in registration order before normal assertion handling. A matching interceptor suppresses logging, the callback and debug break. Fatal assertions still call onExit. It must not modify the interceptor list or the manager configuration from its callback. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pOwner</td><td>- unique identity used to remove the interceptor </td></tr>
+    <tr><td class="paramname">interceptor</td><td>- returns true when the assertion is handled </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00097">97</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
+
+</div>
+</div>
 <a id="aad840c19a39b338793d471d9188e5f66"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad840c19a39b338793d471d9188e5f66">&#9670;&nbsp;</a></span>do_assert()</h2>
 
@@ -194,7 +249,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- true if debug break is required </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00013">13</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00041">41</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
 
 </div>
 </div>
@@ -241,12 +296,12 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00044">44</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00078">78</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
 
 </div>
 </div>
-<a id="ac9e8f2a61621ea37308b9d2d7b030802"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9e8f2a61621ea37308b9d2d7b030802">&#9670;&nbsp;</a></span>get_config()</h2>
+<a id="ac6073954c5e12f9385d0e1588d48a93c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6073954c5e12f9385d0e1588d48a93c">&#9670;&nbsp;</a></span>get_config()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,7 +310,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="structqx_1_1asserts__manager_1_1config.html">asserts_manager::config</a> &amp; qx::asserts_manager::get_config </td>
+          <td class="memname"><a class="el" href="structqx_1_1asserts__manager_1_1config.html">asserts_manager::config</a> qx::asserts_manager::get_config </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -269,9 +324,45 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get config. </p>
-<dl class="section return"><dt>Returns</dt><dd>- existing config </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>- a thread-safe copy of the current configuration </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00050">50</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00085">85</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
+
+</div>
+</div>
+<a id="a6fb375486109ec22cc1a1de5b10d2877"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fb375486109ec22cc1a1de5b10d2877">&#9670;&nbsp;</a></span>remove_interceptor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void qx::asserts_manager::remove_interceptor </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>pOwner</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Remove an interceptor, waiting for callbacks already in progress. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pOwner</td><td>- identity supplied when registering the interceptor </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00103">103</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
 
 </div>
 </div>
@@ -307,7 +398,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00055">55</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts__manager_8inl_source.html#l00091">91</a> of file <a class="el" href="asserts__manager_8inl_source.html">asserts_manager.inl</a>.</p>
 
 </div>
 </div>

@@ -82,174 +82,269 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="predicates_8h.html">qx/algo/predicates.h</a>&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="assert__compare_8h.html">qx/asserts/assert_compare.h</a>&gt;</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="error__context__stream_8h.html">qx/asserts/error_context_stream.h</a>&gt;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="logger_8h.html">qx/logger/logger.h</a>&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="macro__user__message_8h.html">qx/macros/details/macro_user_message.h</a>&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="windows_8h.html">qx/windows.h</a>&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">namespace </span>qx</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">enum class</span> assert_type</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    assert,</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    verify,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    expect,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    ensure</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;};</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @class   asserts_manager</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @brief   Determines assertions behavior</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @author  Khrapov</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @date    4.01.2026</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classqx_1_1asserts__manager.html">   37</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1asserts__manager.html">asserts_manager</a> final : <span class="keyword">public</span> <a class="code" href="classsingleton.html">singleton</a>&lt;asserts_manager&gt;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structqx_1_1asserts__manager_1_1config.html">   40</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        std::function&lt;void(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, assert_type eAssertType)&gt; onExit =</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            [](<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, assert_type eAssertType)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="comment">// Configurable fatal-assertion handler exits normally to avoid a second report.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            std::exit(0); <span class="comment">//-V2014</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        };</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        std::function&lt;verbosity(assert_type eAssertType)&gt; getVerbosity = [](assert_type eAssertType)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">switch</span> (eAssertType)</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">case</span> assert_type::assert:</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordflow">case</span> assert_type::verify:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordflow">return</span> verbosity::critical;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">case</span> assert_type::expect:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordflow">case</span> assert_type::ensure:</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                <span class="keywordflow">return</span> verbosity::error;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            }</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        };</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        std::function&lt;void(</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            string_view     svCondition,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            assert_type     eAssertType,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            string_view     svUserMessage,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            string_view     svFunction,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            string_view     svFile,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc">i32</a>             nLine)&gt;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            onAssertion;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordtype">bool</span> bLogAssertion = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    };</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">        @brief  An entry point for all assertions</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">        @param  svCondition   - a string representation of the condition</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">        @param  category      - a category of the assertion (file wide or manually specified)</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">        @param  eAssertType   - an assertion type</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">        @param  sUserMessage  - formatted user message, if specified</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">        @param  svFunction    - assert location function</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">        @param  svFile        - assert location file</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">        @param  nLine         - assert location line number</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">        @return               - true if debug break is required</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1asserts__manager.html#aad840c19a39b338793d471d9188e5f66">do_assert</a>(</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        string_view     svCondition,</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        assert_type     eAssertType,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordtype">string</span>          sUserMessage,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        string_view     svFunction,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        string_view     svFile,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <a class="code" href="typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc">i32</a>             nLine);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">        @brief Called in fatal assertions to exit the application</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">        @param category    - a category of the assertion (file wide or manually specified)</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">        @param eAssertType - an assertion type</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1asserts__manager.html#a5f1a8aca0cc458f9843d7a606734f9e4">exit</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, assert_type eAssertType);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">        @brief  Get config</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">        @return  - existing config</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keyword">const</span> <a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a>&amp; <a class="code" href="classqx_1_1asserts__manager.html#ac9e8f2a61621ea37308b9d2d7b030802">get_config</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    /**</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">        @brief Set config</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">        @param config - new config</span></div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment">    **/</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1asserts__manager.html#a4f7c5b7f0559ae53bc60bb7c78349808">set_config</a>(<a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a> <a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a>);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a> m_Config;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;};</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">#if QX_MSVC</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">    #define _QX_DEBUG_BREAK() __debugbreak()</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#elif QX_CLANG</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">    #define _QX_DEBUG_BREAK() __builtin_debugtrap()</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">#elif QX_GNU</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">    #include &lt;signal.h&gt;</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">    #define _QX_DEBUG_BREAK() raise(SIGTRAP)</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">    #define _QX_DEBUG_BREAK() QX_EMPTY_MACRO</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#ifndef QX_DEBUG_BREAK</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">    #define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">#define _QX_COMMON_ASSERT(condition, category, assert_type, after_debug_break, result_t, ...)                      \</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">    static_cast&lt;result_t&gt;(                                                                                         \</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">        qx::predicates::is_valid(condition)                                                                        \</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="preprocessor">        || (qx::asserts_manager::get_instance().do_assert(                                                         \</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">                qx::details::get_assert_condition_string&lt;QXT(#condition)&gt;(condition),                              \</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">                category,                                                                                          \</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">                assert_type,                                                                                       \</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">                std::move(_QX_MACRO_USER_MESSAGE(static_cast&lt;qx::string_pool&lt;&gt;*&gt;(nullptr), ##__VA_ARGS__).sValue), \</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">                qx::convert_string_literal&lt;qx::char_type, __FUNCTION__&gt;(),                                         \</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">                QXT(__FILE__),                                                                                     \</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">                QX_LINE)                                                                                           \</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">                ? QX_DEBUG_BREAK()                                                                                 \</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">                : (void)0,                                                                                         \</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">            after_debug_break(category, assert_type),                                                              \</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">            false))</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">#ifndef _QX_ASSERT_AFTER_DEBUG_BREAK_FATAL</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">    #define _QX_ASSERT_AFTER_DEBUG_BREAK_FATAL(category, assert_type) \</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">        qx::asserts_manager::get_instance().exit(category, assert_type)</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">#ifndef _QX_ASSERT_AFTER_DEBUG_BREAK_NON_FATAL</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">    #define _QX_ASSERT_AFTER_DEBUG_BREAK_NON_FATAL(category, assert_type) false</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#ifndef QX_WITH_DEBUG_ASSERTS</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">    #define QX_WITH_DEBUG_ASSERTS QX_WITH_DEBUG_INFO</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="asserts__manager_8inl.html">qx/asserts/asserts_manager.inl</a>&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="format__string_8h.html">qx/containers/string/format_string.h</a>&gt;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="logger_8h.html">qx/logger/logger.h</a>&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="macro__user__message_8h.html">qx/macros/details/macro_user_message.h</a>&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="windows_8h.html">qx/windows.h</a>&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;shared_mutex&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#if QX_LINUX</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">    #include &lt;cstdio&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#elif QX_MACOS &amp;&amp; (QX_WITH_DEBUG_INFO)</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">    #include &lt;sys/sysctl.h&gt;</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">    #include &lt;sys/types.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">    #include &lt;unistd.h&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span>qx</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @brief   Check whether the current process or thread is being traced by a debugger.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    @details Detection is supported on Windows, Linux and debug-info builds on macOS. Linux uses procfs;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">             a non-debugger tracer also counts. An unavailable query or unsupported platform returns false.</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @return  - true when tracing is detected, otherwise false</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="asserts__manager_8h.html#aa1081018bb4de0e3e082d9b8eb8f0999">is_debugger_present</a>() noexcept;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;enum class assert_type</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    assert,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    verify,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    expect,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ensure</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">    @class   asserts_manager</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">    @brief   Determines assertions behavior</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">    @author  Khrapov</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">    @date    4.01.2026</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classqx_1_1asserts__manager.html">   57</a></span>&#160;<span class="keyword">class </span><a class="code" href="classqx_1_1asserts__manager.html">asserts_manager</a> final : <span class="keyword">public</span> <a class="code" href="classsingleton.html">singleton</a>&lt;asserts_manager&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;{</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">using</span> exit_func      = std::function&lt;void(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, assert_type eAssertType)&gt;;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keyword">using</span> verbosity_func = std::function&lt;verbosity(assert_type eAssertType)&gt;;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">using</span> assertion_func = std::function&lt;void(</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        string_view     svCondition,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        assert_type     eAssertType,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        string_view     svUserMessage,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        string_view     svFunction,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        string_view     svFile,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc">i32</a>             nLine)&gt;;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="structqx_1_1asserts__manager_1_1config.html">   71</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        exit_func onExit = [](<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, assert_type eAssertType)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="comment">// Configurable fatal-assertion handler exits normally to avoid a second report.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            std::exit(0); <span class="comment">//-V2014</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        };</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        verbosity_func getVerbosity = [](assert_type eAssertType)</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordflow">switch</span> (eAssertType)</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordflow">case</span> assert_type::assert:</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            <span class="keywordflow">case</span> assert_type::verify:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordflow">return</span> verbosity::critical;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordflow">case</span> assert_type::expect:</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            <span class="keywordflow">case</span> assert_type::ensure:</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                <span class="keywordflow">return</span> verbosity::error;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        };</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        assertion_func onAssertion;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordtype">bool</span> bLogAssertion = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    };</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keyword">using</span> interceptor_func = std::function&lt;bool(</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        string_view     svCondition,</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        assert_type     eAssertType,</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        string_view     svUserMessage,</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        string_view     svFunction,</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        string_view     svFile,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <a class="code" href="typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc">i32</a>             nLine)&gt;;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="structqx_1_1asserts__manager_1_1interceptor__entry.html">  108</a></span>&#160;    <span class="keyword">struct </span><a class="code" href="structqx_1_1asserts__manager_1_1interceptor__entry.html">interceptor_entry</a></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">void</span>*      pOwner;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        interceptor_func callback;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    };</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">        @brief  An entry point for all assertions</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">        @param  svCondition   - a string representation of the condition</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">        @param  category      - a category of the assertion (file wide or manually specified)</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">        @param  eAssertType   - an assertion type</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">        @param  sUserMessage  - formatted user message, if specified</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">        @param  svFunction    - assert location function</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">        @param  svFile        - assert location file</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">        @param  nLine         - assert location line number</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment">        @return               - true if debug break is required</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classqx_1_1asserts__manager.html#aad840c19a39b338793d471d9188e5f66">do_assert</a>(</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        string_view     svCondition,</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        assert_type     eAssertType,</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <span class="keywordtype">string</span>          sUserMessage,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        string_view     svFunction,</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        string_view     svFile,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <a class="code" href="typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc">i32</a>             nLine);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">        @brief Called in fatal assertions to exit the application</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">        @param category    - a category of the assertion (file wide or manually specified)</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="comment">        @param eAssertType - an assertion type</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1asserts__manager.html#a5f1a8aca0cc458f9843d7a606734f9e4">exit</a>(<span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp; <a class="code" href="classqx_1_1category.html">category</a>, assert_type eAssertType);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="comment">        @brief  Get config</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="comment">        @return  - a thread-safe copy of the current configuration</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    <a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a> <a class="code" href="classqx_1_1asserts__manager.html#ac6073954c5e12f9385d0e1588d48a93c">get_config</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="comment">        @brief Set config</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="comment">        @param config - new config</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1asserts__manager.html#a4f7c5b7f0559ae53bc60bb7c78349808">set_config</a>(<a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a> <a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="comment">        @brief   Register an assertion interceptor.</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="comment">        @details Interceptors are tried in registration order before normal assertion handling. A matching</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">                 interceptor suppresses logging, the callback and debug break. Fatal assertions still call onExit. It must not</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="comment">                 modify the interceptor list or the manager configuration from its callback.</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="comment">        @param   pOwner      - unique identity used to remove the interceptor</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">        @param   interceptor - returns true when the assertion is handled</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1asserts__manager.html#a612cbc46448900b37ba9fe394e0409dd">add_interceptor</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* pOwner, interceptor_func interceptor);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="comment">        @brief  Remove an interceptor, waiting for callbacks already in progress.</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="comment">        @param  pOwner - identity supplied when registering the interceptor</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classqx_1_1asserts__manager.html#a6fb375486109ec22cc1a1de5b10d2877">remove_interceptor</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* pOwner);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keyword">mutable</span> std::shared_mutex      m_Mutex;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <a class="code" href="structqx_1_1asserts__manager_1_1config.html">config</a>                         m_Config;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    std::vector&lt;interceptor_entry&gt; m_Interceptors;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;};</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">#if QX_MSVC</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">    #define _QX_DEBUG_BREAK() __debugbreak()</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">#elif QX_CLANG</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">    #define _QX_DEBUG_BREAK() __builtin_debugtrap()</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">#elif QX_GNU</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">    #include &lt;signal.h&gt;</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">    #define _QX_DEBUG_BREAK() raise(SIGTRAP)</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="preprocessor">    #define _QX_DEBUG_BREAK() QX_EMPTY_MACRO</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="preprocessor">#ifndef QX_DEBUG_BREAK</span><span class="comment"></span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">    /**</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="comment">        @brief Interrupt execution for a debugger using the platform&#39;s debug trap.</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="comment">    **/</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno"><a class="line" href="asserts__manager_8h.html#abb893a89347d79d71d5e864c803225d0">  193</a></span>&#160;<span class="preprocessor">    #define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()</span></div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="preprocessor">#define _QX_COMMON_ASSERT(condition, category, assert_type, after_debug_break, result_t, ...)                      \</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="preprocessor">    static_cast&lt;result_t&gt;(                                                                                         \</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="preprocessor">        qx::predicates::is_valid(condition)                                                                        \</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="preprocessor">        || (qx::asserts_manager::get_instance().do_assert(                                                         \</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="preprocessor">                qx::details::get_assert_condition_string&lt;QXT(#condition)&gt;(condition),                              \</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="preprocessor">                category,                                                                                          \</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="preprocessor">                assert_type,                                                                                       \</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="preprocessor">                std::move(_QX_MACRO_USER_MESSAGE(static_cast&lt;qx::string_pool&lt;&gt;*&gt;(nullptr), ##__VA_ARGS__).sValue), \</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="preprocessor">                qx::convert_string_literal&lt;qx::char_type, __FUNCTION__&gt;(),                                         \</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="preprocessor">                QXT(__FILE__),                                                                                     \</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="preprocessor">                QX_LINE)                                                                                           \</span></div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;<span class="preprocessor">                ? QX_DEBUG_BREAK()                                                                                 \</span></div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;<span class="preprocessor">                : (void)0,                                                                                         \</span></div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;<span class="preprocessor">            after_debug_break(category, assert_type),                                                              \</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="preprocessor">            false))</span></div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160; </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="preprocessor">#ifndef _QX_ASSERT_AFTER_DEBUG_BREAK_FATAL</span></div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;<span class="preprocessor">    #define _QX_ASSERT_AFTER_DEBUG_BREAK_FATAL(category, assert_type) \</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="preprocessor">        qx::asserts_manager::get_instance().exit(category, assert_type)</span></div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="preprocessor">#ifndef _QX_ASSERT_AFTER_DEBUG_BREAK_NON_FATAL</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="preprocessor">    #define _QX_ASSERT_AFTER_DEBUG_BREAK_NON_FATAL(category, assert_type) false</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="preprocessor">#ifndef QX_WITH_DEBUG_ASSERTS</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="preprocessor">    #define QX_WITH_DEBUG_ASSERTS QX_WITH_DEBUG_INFO</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="struct_q_x___f_m_t___n_s_1_1formatter_3_01qx_1_1assert__type_00_01char__t_01_4.html">  226</a></span>&#160;<span class="keyword">struct </span>QX_FMT_NS::formatter&lt;qx::assert_type, char_t&gt; : <a class="code" href="structqx_1_1basic__formatter.html">qx::basic_formatter</a>&lt;char_t&gt;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;{</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> format_context_t&gt;</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    constexpr <span class="keyword">auto</span> format(qx::assert_type eType, format_context_t&amp; ctx) <span class="keyword">const</span> -&gt; decltype(ctx.out())</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        qx::basic_string_view&lt;char_t&gt; svName;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;        <span class="keywordflow">switch</span> (eType)</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        {</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        <span class="keywordflow">case</span> qx::assert_type::assert:</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            svName = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;assert&quot;</span>);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        <span class="keywordflow">case</span> qx::assert_type::verify:</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            svName = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;verify&quot;</span>);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;        <span class="keywordflow">case</span> qx::assert_type::expect:</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            svName = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;expect&quot;</span>);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;        <span class="keywordflow">case</span> qx::assert_type::ensure:</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            svName = <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;ensure&quot;</span>);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <span class="keywordflow">return</span> QX_FMT_NS::format_to(ctx.out(), <a class="code" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(char_t, <span class="stringliteral">&quot;{}&quot;</span>), svName);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    }</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;};</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="asserts__manager_8inl.html">qx/asserts/asserts_manager.inl</a>&gt;</span></div>
 <div class="ttc" id="aassert__compare_8h_html"><div class="ttname"><a href="assert__compare_8h.html">assert_compare.h</a></div></div>
+<div class="ttc" id="aasserts__manager_8h_html_aa1081018bb4de0e3e082d9b8eb8f0999"><div class="ttname"><a href="asserts__manager_8h.html#aa1081018bb4de0e3e082d9b8eb8f0999">qx::is_debugger_present</a></div><div class="ttdeci">bool is_debugger_present() noexcept</div><div class="ttdoc">Check whether the current process or thread is being traced by a debugger.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00013">asserts_manager.inl:13</a></div></div>
 <div class="ttc" id="aasserts__manager_8inl_html"><div class="ttname"><a href="asserts__manager_8inl.html">asserts_manager.inl</a></div></div>
-<div class="ttc" id="aclassqx_1_1asserts__manager_html"><div class="ttname"><a href="classqx_1_1asserts__manager.html">qx::asserts_manager</a></div><div class="ttdoc">Determines assertions behavior.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8h_source.html#l00037">asserts_manager.h:38</a></div></div>
-<div class="ttc" id="aclassqx_1_1asserts__manager_html_a4f7c5b7f0559ae53bc60bb7c78349808"><div class="ttname"><a href="classqx_1_1asserts__manager.html#a4f7c5b7f0559ae53bc60bb7c78349808">qx::asserts_manager::set_config</a></div><div class="ttdeci">void set_config(config config)</div><div class="ttdoc">Set config.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00055">asserts_manager.inl:55</a></div></div>
-<div class="ttc" id="aclassqx_1_1asserts__manager_html_a5f1a8aca0cc458f9843d7a606734f9e4"><div class="ttname"><a href="classqx_1_1asserts__manager.html#a5f1a8aca0cc458f9843d7a606734f9e4">qx::asserts_manager::exit</a></div><div class="ttdeci">void exit(const category &amp;category, assert_type eAssertType)</div><div class="ttdoc">Called in fatal assertions to exit the application.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00044">asserts_manager.inl:44</a></div></div>
-<div class="ttc" id="aclassqx_1_1asserts__manager_html_aad840c19a39b338793d471d9188e5f66"><div class="ttname"><a href="classqx_1_1asserts__manager.html#aad840c19a39b338793d471d9188e5f66">qx::asserts_manager::do_assert</a></div><div class="ttdeci">bool do_assert(string_view svCondition, const category &amp;category, assert_type eAssertType, string sUserMessage, string_view svFunction, string_view svFile, i32 nLine)</div><div class="ttdoc">An entry point for all assertions.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00013">asserts_manager.inl:13</a></div></div>
-<div class="ttc" id="aclassqx_1_1asserts__manager_html_ac9e8f2a61621ea37308b9d2d7b030802"><div class="ttname"><a href="classqx_1_1asserts__manager.html#ac9e8f2a61621ea37308b9d2d7b030802">qx::asserts_manager::get_config</a></div><div class="ttdeci">const config &amp; get_config() const</div><div class="ttdoc">Get config.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00050">asserts_manager.inl:50</a></div></div>
+<div class="ttc" id="aclassqx_1_1asserts__manager_html"><div class="ttname"><a href="classqx_1_1asserts__manager.html">qx::asserts_manager</a></div><div class="ttdoc">Determines assertions behavior.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8h_source.html#l00057">asserts_manager.h:58</a></div></div>
+<div class="ttc" id="aclassqx_1_1asserts__manager_html_a4f7c5b7f0559ae53bc60bb7c78349808"><div class="ttname"><a href="classqx_1_1asserts__manager.html#a4f7c5b7f0559ae53bc60bb7c78349808">qx::asserts_manager::set_config</a></div><div class="ttdeci">void set_config(config config)</div><div class="ttdoc">Set config.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00091">asserts_manager.inl:91</a></div></div>
+<div class="ttc" id="aclassqx_1_1asserts__manager_html_a5f1a8aca0cc458f9843d7a606734f9e4"><div class="ttname"><a href="classqx_1_1asserts__manager.html#a5f1a8aca0cc458f9843d7a606734f9e4">qx::asserts_manager::exit</a></div><div class="ttdeci">void exit(const category &amp;category, assert_type eAssertType)</div><div class="ttdoc">Called in fatal assertions to exit the application.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00078">asserts_manager.inl:78</a></div></div>
+<div class="ttc" id="aclassqx_1_1asserts__manager_html_a612cbc46448900b37ba9fe394e0409dd"><div class="ttname"><a href="classqx_1_1asserts__manager.html#a612cbc46448900b37ba9fe394e0409dd">qx::asserts_manager::add_interceptor</a></div><div class="ttdeci">void add_interceptor(const void *pOwner, interceptor_func interceptor)</div><div class="ttdoc">Register an assertion interceptor.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00097">asserts_manager.inl:97</a></div></div>
+<div class="ttc" id="aclassqx_1_1asserts__manager_html_a6fb375486109ec22cc1a1de5b10d2877"><div class="ttname"><a href="classqx_1_1asserts__manager.html#a6fb375486109ec22cc1a1de5b10d2877">qx::asserts_manager::remove_interceptor</a></div><div class="ttdeci">void remove_interceptor(const void *pOwner)</div><div class="ttdoc">Remove an interceptor, waiting for callbacks already in progress.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00103">asserts_manager.inl:103</a></div></div>
+<div class="ttc" id="aclassqx_1_1asserts__manager_html_aad840c19a39b338793d471d9188e5f66"><div class="ttname"><a href="classqx_1_1asserts__manager.html#aad840c19a39b338793d471d9188e5f66">qx::asserts_manager::do_assert</a></div><div class="ttdeci">bool do_assert(string_view svCondition, const category &amp;category, assert_type eAssertType, string sUserMessage, string_view svFunction, string_view svFile, i32 nLine)</div><div class="ttdoc">An entry point for all assertions.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00041">asserts_manager.inl:41</a></div></div>
+<div class="ttc" id="aclassqx_1_1asserts__manager_html_ac6073954c5e12f9385d0e1588d48a93c"><div class="ttname"><a href="classqx_1_1asserts__manager.html#ac6073954c5e12f9385d0e1588d48a93c">qx::asserts_manager::get_config</a></div><div class="ttdeci">config get_config() const</div><div class="ttdoc">Get config.</div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8inl_source.html#l00085">asserts_manager.inl:85</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00061">category.h:62</a></div></div>
 <div class="ttc" id="aclasssingleton_html"><div class="ttname"><a href="classsingleton.html">singleton</a></div><div class="ttdoc">Inherit the necessary singleton class from this.</div></div>
 <div class="ttc" id="aerror__context__stream_8h_html"><div class="ttname"><a href="error__context__stream_8h.html">error_context_stream.h</a></div></div>
+<div class="ttc" id="aformat__string_8h_html"><div class="ttname"><a href="format__string_8h.html">format_string.h</a></div></div>
 <div class="ttc" id="alogger_8h_html"><div class="ttname"><a href="logger_8h.html">logger.h</a></div></div>
 <div class="ttc" id="amacro__user__message_8h_html"><div class="ttname"><a href="macro__user__message_8h.html">macro_user_message.h</a></div></div>
 <div class="ttc" id="apredicates_8h_html"><div class="ttname"><a href="predicates_8h.html">predicates.h</a></div></div>
-<div class="ttc" id="astructqx_1_1asserts__manager_1_1config_html"><div class="ttname"><a href="structqx_1_1asserts__manager_1_1config.html">qx::asserts_manager::config</a></div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8h_source.html#l00040">asserts_manager.h:41</a></div></div>
+<div class="ttc" id="astring__utils_8h_html_ae4f688084b037e2e7a63a13eaf539a02"><div class="ttname"><a href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a></div><div class="ttdeci">#define QX_STR_PREFIX(value_t, str)</div><div class="ttdoc">Chose witch of prefixes add to string : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00120">string_utils.h:120</a></div></div>
+<div class="ttc" id="astructqx_1_1asserts__manager_1_1config_html"><div class="ttname"><a href="structqx_1_1asserts__manager_1_1config.html">qx::asserts_manager::config</a></div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8h_source.html#l00071">asserts_manager.h:72</a></div></div>
+<div class="ttc" id="astructqx_1_1asserts__manager_1_1interceptor__entry_html"><div class="ttname"><a href="structqx_1_1asserts__manager_1_1interceptor__entry.html">qx::asserts_manager::interceptor_entry</a></div><div class="ttdef"><b>Definition:</b> <a href="asserts__manager_8h_source.html#l00108">asserts_manager.h:109</a></div></div>
+<div class="ttc" id="astructqx_1_1basic__formatter_html"><div class="ttname"><a href="structqx_1_1basic__formatter.html">qx::basic_formatter</a></div><div class="ttdef"><b>Definition:</b> <a href="format__string_8h_source.html#l00058">format_string.h:59</a></div></div>
 <div class="ttc" id="atypedefs_8h_html_aec4a1429cc91fb7ff41599b263c348cc"><div class="ttname"><a href="typedefs_8h.html#aec4a1429cc91fb7ff41599b263c348cc">i32</a></div><div class="ttdeci">std::int32_t i32</div><div class="ttdoc">− 9 223 372 036 854 775 808 .. 9 223 372 036 854 775 807</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00031">typedefs.h:32</a></div></div>
 <div class="ttc" id="awindows_8h_html"><div class="ttname"><a href="windows_8h.html">windows.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
