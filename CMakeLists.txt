@@ -71,6 +71,8 @@ endmacro()
 
 option(QX_GENERATE_TESTS "Generate qxLib tests? Enabling this requires gtest" OFF)
 
+enable_testing()
+
 add_tests(
     "${QX_GENERATE_TESTS}"
     "${PROJECT_SOURCE_DIR}/tests/main.cpp" 

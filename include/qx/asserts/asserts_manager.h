@@ -11,12 +11,32 @@
 #include <qx/algo/predicates.h>
 #include <qx/asserts/assert_compare.h>
 #include <qx/asserts/error_context_stream.h>
+#include <qx/containers/string/format_string.h>
 #include <qx/logger/logger.h>
 #include <qx/macros/details/macro_user_message.h>
 #include <qx/windows.h>
 
+#include <shared_mutex>
+#include <vector>
+
+#if QX_LINUX
+    #include <cstdio>
+#elif QX_MACOS && (QX_WITH_DEBUG_INFO)
+    #include <sys/sysctl.h>
+    #include <sys/types.h>
+    #include <unistd.h>
+#endif
+
 namespace qx
 {
+
+/**
+    @brief   Check whether the current process or thread is being traced by a debugger.
+    @details Detection is supported on Windows, Linux and debug-info builds on macOS. Linux uses procfs;
+             a non-debugger tracer also counts. An unavailable query or unsupported platform returns false.
+    @return  - true when tracing is detected, otherwise false
+**/
+bool is_debugger_present() noexcept;
 
 enum class assert_type
 {
@@ -37,16 +57,26 @@ enum class assert_type
 class asserts_manager final : public singleton<asserts_manager>
 {
 public:
+    using exit_func      = std::function<void(const category& category, assert_type eAssertType)>;
+    using verbosity_func = std::function<verbosity(assert_type eAssertType)>;
+    using assertion_func = std::function<void(
+        string_view     svCondition,
+        const category& category,
+        assert_type     eAssertType,
+        string_view     svUserMessage,
+        string_view     svFunction,
+        string_view     svFile,
+        i32             nLine)>;
+
     struct config
     {
-        std::function<void(const category& category, assert_type eAssertType)> onExit =
-            [](const category& category, assert_type eAssertType)
+        exit_func onExit = [](const category& category, assert_type eAssertType)
         {
             // Configurable fatal-assertion handler exits normally to avoid a second report.
             std::exit(0); //-V2014
         };
 
-        std::function<verbosity(assert_type eAssertType)> getVerbosity = [](assert_type eAssertType)
+        verbosity_func getVerbosity = [](assert_type eAssertType)
         {
             switch (eAssertType)
             {
@@ -61,17 +91,24 @@ public:
             }
         };
 
-        std::function<void(
-            string_view     svCondition,
-            const category& category,
-            assert_type     eAssertType,
-            string_view     svUserMessage,
-            string_view     svFunction,
-            string_view     svFile,
-            i32             nLine)>
-            onAssertion;
+        assertion_func onAssertion;
 
         bool bLogAssertion = true;
+    };
+
+    using interceptor_func = std::function<bool(
+        string_view     svCondition,
+        const category& category,
+        assert_type     eAssertType,
+        string_view     svUserMessage,
+        string_view     svFunction,
+        string_view     svFile,
+        i32             nLine)>;
+
+    struct interceptor_entry
+    {
+        const void*      pOwner;
+        interceptor_func callback;
     };
 
 public:
@@ -104,9 +141,9 @@ public:
 
     /**
         @brief  Get config
-        @return  - existing config
+        @return  - a thread-safe copy of the current configuration
     **/
-    const config& get_config() const;
+    config get_config() const;
 
     /**
         @brief Set config
@@ -114,8 +151,26 @@ public:
     **/
     void set_config(config config);
 
+    /**
+        @brief   Register an assertion interceptor.
+        @details Interceptors are tried in registration order before normal assertion handling. A matching
+                 interceptor suppresses logging, the callback and debug break. Fatal assertions still call onExit. It must not
+                 modify the interceptor list or the manager configuration from its callback.
+        @param   pOwner      - unique identity used to remove the interceptor
+        @param   interceptor - returns true when the assertion is handled
+    **/
+    void add_interceptor(const void* pOwner, interceptor_func interceptor);
+
+    /**
+        @brief  Remove an interceptor, waiting for callbacks already in progress.
+        @param  pOwner - identity supplied when registering the interceptor
+    **/
+    void remove_interceptor(const void* pOwner);
+
 private:
-    config m_Config;
+    mutable std::shared_mutex      m_Mutex;
+    config                         m_Config;
+    std::vector<interceptor_entry> m_Interceptors;
 };
 
 } // namespace qx
@@ -132,6 +187,9 @@ private:
 #endif
 
 #ifndef QX_DEBUG_BREAK
+    /**
+        @brief Interrupt execution for a debugger using the platform's debug trap.
+    **/
     #define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()
 #endif
 
@@ -163,5 +221,35 @@ private:
 #ifndef QX_WITH_DEBUG_ASSERTS
     #define QX_WITH_DEBUG_ASSERTS QX_WITH_DEBUG_INFO
 #endif
+
+template<class char_t>
+struct QX_FMT_NS::formatter<qx::assert_type, char_t> : qx::basic_formatter<char_t>
+{
+    template<class format_context_t>
+    constexpr auto format(qx::assert_type eType, format_context_t& ctx) const -> decltype(ctx.out())
+    {
+        qx::basic_string_view<char_t> svName;
+        switch (eType)
+        {
+        case qx::assert_type::assert:
+            svName = QX_STR_PREFIX(char_t, "assert");
+            break;
+
+        case qx::assert_type::verify:
+            svName = QX_STR_PREFIX(char_t, "verify");
+            break;
+
+        case qx::assert_type::expect:
+            svName = QX_STR_PREFIX(char_t, "expect");
+            break;
+
+        case qx::assert_type::ensure:
+            svName = QX_STR_PREFIX(char_t, "ensure");
+            break;
+        }
+
+        return QX_FMT_NS::format_to(ctx.out(), QX_STR_PREFIX(char_t, "{}"), svName);
+    }
+};
 
 #include <qx/asserts/asserts_manager.inl>

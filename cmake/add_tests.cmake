@@ -53,7 +53,8 @@ macro(add_tests
 
         # from list of files we'll create tests name.gtest.cpp -> name
         foreach(_test_file ${TEST_SRC_FILES})
-            get_filename_component(_target ${_test_file} NAME_WE)
+            get_filename_component(_target ${_test_file} NAME)
+            string(REGEX REPLACE "\\.gtest\\.cpp$" "" _target "${_target}")
             set(_target "${_target}.gtest")
             add_executable("${_target}" ${_test_file} "${_tests_main_cpp}" ${PVSCONFIG_FILE})
             cmake_language(CALL ${_setup_test_target} ${_target})
