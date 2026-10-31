@@ -339,7 +339,7 @@ inline std::vector<layered_config_variable_info> layered_configs_manager::get_va
 {
     std::vector<layered_config_variable_info> variables;
     for (const auto& [svName, data] : m_VariableData)
-        variables.emplace_back(svName, data.svDescription, data.svTypeName);
+        variables.emplace_back(svName, data.svDescription, data.svTypeName, data.svGroupName);
 
     std::ranges::sort(variables, {}, &layered_config_variable_info::svName);
     return variables;

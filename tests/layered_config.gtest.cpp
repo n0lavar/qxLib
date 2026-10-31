@@ -21,6 +21,9 @@ constexpr qx::cstring_view k_svFloatRuntimeName  = "layered_config_test_float";
 constexpr qx::cstring_view k_svStringRuntimeName = "layered_config_test_string";
 constexpr qx::cstring_view k_svBoolRuntimeName   = "layered_config_test_bool";
 
+constexpr qx::cstring_view k_svNumericGroup = "Numeric";
+constexpr qx::cstring_view k_svFloatGroup   = "Floating point";
+
 constexpr qx::cstring_view k_svIntEnvName    = "QX_LAYERED_CONFIG_TEST_INT";
 constexpr qx::cstring_view k_svSizeEnvName   = "QX_LAYERED_CONFIG_TEST_SIZE";
 constexpr qx::cstring_view k_svFloatEnvName  = "QX_LAYERED_CONFIG_TEST_FLOAT";
@@ -93,16 +96,19 @@ static void set_env(qx::cstring_view svKey, qx::cstring_view svValue)
 qx::layered_config_variable g_lcInt = qx::layered_config_variable_builder(k_svIntRuntimeName, k_nDefaultIntValue)
                                           .env(k_svIntEnvName)
                                           .command_line(k_svIntCommandLineFullName, k_svIntCommandLineShortName)
+                                          .group(k_svNumericGroup)
                                           .build();
 
 qx::layered_config_variable g_lcSize = qx::layered_config_variable_builder(k_svSizeRuntimeName, k_nDefaultSizeValue)
                                            .env(k_svSizeEnvName)
                                            .command_line(k_svSizeCommandLineFullName, k_svSizeCommandLineShortName)
+                                           .group(k_svNumericGroup)
                                            .build();
 
 qx::layered_config_variable g_lcFloat = qx::layered_config_variable_builder(k_svFloatRuntimeName, k_fDefaultFloatValue)
                                             .env(k_svFloatEnvName)
                                             .command_line(k_svFloatCommandLineFullName, k_svFloatCommandLineShortName)
+                                            .group(k_svFloatGroup)
                                             .build();
 
 qx::layered_config_variable g_lcString =
@@ -400,11 +406,11 @@ TEST(layered_config, empty_or_invalid_args)
 TEST(layered_config, get_variables)
 {
     constexpr auto expected = std::to_array<qx::layered_config_variable_info>(
-        { { k_svIntRuntimeName, {}, qx::type_strings<int, char>::get_signature() },
-          { k_svSizeRuntimeName, {}, qx::type_strings<size_t, char>::get_signature() },
-          { k_svFloatRuntimeName, {}, "float" },
-          { k_svStringRuntimeName, {}, "string" },
-          { k_svBoolRuntimeName, {}, "bool" } });
+        { { k_svIntRuntimeName, {}, qx::type_strings<int, char>::get_signature(), k_svNumericGroup },
+          { k_svSizeRuntimeName, {}, qx::type_strings<size_t, char>::get_signature(), k_svNumericGroup },
+          { k_svFloatRuntimeName, {}, "float", k_svFloatGroup },
+          { k_svStringRuntimeName, {}, "string", {} },
+          { k_svBoolRuntimeName, {}, "bool", {} } });
 
     const auto variables = qx::layered_configs_manager::get_instance().get_variables();
     ASSERT_EQ(variables.size(), expected.size());
@@ -416,5 +422,6 @@ TEST(layered_config, get_variables)
         ASSERT_NE(it, variables.end());
         EXPECT_EQ(it->svDescription, info.svDescription);
         EXPECT_EQ(it->svTypeName, info.svTypeName);
+        EXPECT_EQ(it->svGroupName, info.svGroupName);
     }
 }

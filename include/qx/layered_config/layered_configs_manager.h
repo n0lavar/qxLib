@@ -47,6 +47,7 @@ struct layered_config_variable_info
     cstring_view svName;
     cstring_view svDescription;
     cstring_view svTypeName;
+    cstring_view svGroupName;
 };
 
 /**
