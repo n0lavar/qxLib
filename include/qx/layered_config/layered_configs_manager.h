@@ -10,6 +10,7 @@
 
 #include <qx/algo/contains.h>
 #include <qx/algo/sort.h>
+#include <qx/containers/string/string_converters.h>
 #include <qx/logger/logger.h>
 #include <qx/patterns/singleton.h>
 
@@ -26,17 +27,17 @@ namespace details
 
 struct layered_config_variable_data
 {
-    cstring_view svEnvName;
-    cstring_view svFullCommandLineName;
-    cstring_view svShortCommandLineName;
+    string_view svEnvName;
+    string_view svFullCommandLineName;
+    string_view svShortCommandLineName;
 
-    cstring_view svGroupName;
-    cstring_view svDescription;
-    bool         bRequired = false;
+    string_view svGroupName;
+    string_view svDescription;
+    bool        bRequired = false;
 
-    std::optional<std::any> (*pStringToT)(cstring_view svData) = nullptr;
-    cstring (*pTToString)(const std::any& data)                = nullptr;
-    cstring_view svTypeName;
+    std::optional<std::any> (*pStringToT)(string_view svData) = nullptr;
+    string (*pTToString)(const std::any& data)                = nullptr;
+    string_view svTypeName;
 };
 
 } // namespace details
@@ -46,10 +47,10 @@ struct layered_config_variable_data
 **/
 struct layered_config_variable_info
 {
-    cstring_view svName;
-    cstring_view svDescription;
-    cstring_view svTypeName;
-    cstring_view svGroupName;
+    string_view svName;
+    string_view svDescription;
+    string_view svTypeName;
+    string_view svGroupName;
 };
 
 /**
@@ -91,10 +92,10 @@ public:
         @brief Set app description. It will be shown in help message.
         @param sAppDescription - app description
     **/
-    void set_app_description(cstring sAppDescription) noexcept;
+    void set_app_description(string sAppDescription) noexcept;
 
     /**
-        @brief   Set command line arguments.
+        @brief   Copy command line arguments, converting narrow input with to_string().
         @details Should be called once at the beginning of the app before the first parse().
                  Non-positive argc or null argv clears the command line arguments.
         @param   argc - number of command line arguments
@@ -124,7 +125,7 @@ public:
         @return               - value, or unknown_variable / type_mismatch error
     **/
     template<class T>
-    std::expected<T, get_error> get(cstring_view svRuntimeName) const noexcept;
+    std::expected<T, get_error> get(string_view svRuntimeName) const noexcept;
 
     /**
         @brief  Set variable value by runtime name. Only set if the variable type matches.
@@ -134,7 +135,7 @@ public:
         @return               - success, or unknown_variable / type_mismatch error
     **/
     template<class T>
-    std::expected<void, set_error> set(cstring_view svRuntimeName, T value) noexcept;
+    std::expected<void, set_error> set(string_view svRuntimeName, T value) noexcept;
 
     /**
         @brief   Read the current value without knowing its C++ type.
@@ -143,7 +144,7 @@ public:
         @param   svRuntimeName - registered runtime name, matched exactly
         @return                - reference to the stored value, or unknown_variable error
     **/
-    std::expected<std::reference_wrapper<const std::any>, get_error> get(cstring_view svRuntimeName) const noexcept;
+    std::expected<std::reference_wrapper<const std::any>, get_error> get(string_view svRuntimeName) const noexcept;
 
     /**
         @brief Set a type-erased value using the variable's exact registered C++ type.
@@ -151,14 +152,14 @@ public:
         @param value         - owned value; a mismatched type leaves the variable unchanged
         @return              - success, or unknown_variable / type_mismatch error
     **/
-    std::expected<void, set_error> set(cstring_view svRuntimeName, std::any value) noexcept;
+    std::expected<void, set_error> set(string_view svRuntimeName, std::any value) noexcept;
 
     /**
         @brief  Read a value through its registered string formatter without knowing its C++ type.
         @param  svRuntimeName - registered runtime name, matched exactly
         @return               - owned string for the current value or default, or unknown_variable error
     **/
-    std::expected<cstring, get_error> get_string(cstring_view svRuntimeName) const noexcept;
+    std::expected<string, get_error> get_string(string_view svRuntimeName) const noexcept;
 
     /**
         @brief   Set a variable from text using its existing registered parser.
@@ -169,7 +170,7 @@ public:
         @param  svValue       - text to convert to the variable's declared type
         @return               - success, or unknown_variable / invalid_value error
     **/
-    std::expected<void, set_error> set_string(cstring_view svRuntimeName, cstring_view svValue) noexcept;
+    std::expected<void, set_error> set_string(string_view svRuntimeName, string_view svValue) noexcept;
 
     /**
         @brief  Enumerate registered variables without exposing converters or stored values.
@@ -192,17 +193,17 @@ private:
     **/
     template<class T>
     void add_variable(
-        cstring_view                                 svRuntimeName,
+        string_view                                  svRuntimeName,
         const details::layered_config_variable_data& data,
         T                                            defaultValue) noexcept;
 
 private:
-    cstring                m_sAppDescription;
-    std::span<char* const> m_Args;
+    string              m_sAppDescription;
+    std::vector<string> m_Args;
 
-    std::unordered_map<cstring_view, details::layered_config_variable_data> m_VariableData;
-    std::unordered_map<cstring_view, std::any>                              m_DefaultVariables;
-    std::unordered_map<cstring_view, std::any>                              m_Variables;
+    std::unordered_map<string_view, details::layered_config_variable_data> m_VariableData;
+    std::unordered_map<string_view, std::any>                              m_DefaultVariables;
+    std::unordered_map<string_view, std::any>                              m_Variables;
 };
 
 } // namespace qx

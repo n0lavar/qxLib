@@ -52,8 +52,8 @@ private:
     constexpr layered_config_variable() noexcept = default;
 
 private:
-    T            m_DefaultValue;
-    cstring_view m_svRuntimeName;
+    T           m_DefaultValue;
+    string_view m_svRuntimeName;
 };
 
 /**
@@ -74,13 +74,13 @@ public:
         @param svRuntimeName - runtime name of variable
         @param defaultValue  - a value to be used if the variable is not set in any layer or has invalid value
     **/
-    consteval layered_config_variable_builder(cstring_view svRuntimeName, T defaultValue = {}) noexcept;
+    consteval layered_config_variable_builder(string_view svRuntimeName, T defaultValue = {}) noexcept;
 
     /**
         @brief  Add environment variable layer with specified name
         @param  svEnvName - name of environment variable
     **/
-    consteval layered_config_variable_builder env(cstring_view svEnvName) noexcept;
+    consteval layered_config_variable_builder env(string_view svEnvName) noexcept;
 
     /**
         @brief  Add command line argument layer with specified full and short names.
@@ -88,21 +88,21 @@ public:
         @param  svFullName  - full name of command line argument
         @param  svShortName - short name of command line argument
     **/
-    consteval layered_config_variable_builder command_line(cstring_view svFullName, cstring_view svShortName = {});
+    consteval layered_config_variable_builder command_line(string_view svFullName, string_view svShortName = {});
 
     /**
         @brief   Set the group name for the variable.
         @details Variables with the same group name can be displayed together in help messages.
         @param   svGroupName - group name
     **/
-    consteval layered_config_variable_builder group(cstring_view svGroupName) noexcept;
+    consteval layered_config_variable_builder group(string_view svGroupName) noexcept;
 
     /**
         @brief   Set the description for the variable.
         @details This description will be shown in help messages.
         @param   svDescription - description of the variable
     **/
-    consteval layered_config_variable_builder description(cstring_view svDescription) noexcept;
+    consteval layered_config_variable_builder description(string_view svDescription) noexcept;
 
     /**
         @brief Mark variable as required. If a required variable is not set in any layer or has invalid value,
@@ -118,7 +118,7 @@ public:
 
 private:
     details::layered_config_variable_data m_Data;
-    cstring_view                          m_svRuntimeName;
+    string_view                           m_svRuntimeName;
     T                                     m_DefaultValue;
 };
 

@@ -13,9 +13,9 @@ namespace qx
 template<class T>
 constexpr T layered_config_variable<T>::get() const noexcept
 {
-    std::expected<T, layered_configs_manager::get_error> optValue =
+    std::expected<T, layered_configs_manager::get_error> value =
         layered_configs_manager::get_instance().get<T>(m_svRuntimeName);
-    return optValue ? *optValue : m_DefaultValue;
+    return value ? *value : m_DefaultValue;
 }
 
 template<class T>
@@ -26,21 +26,21 @@ constexpr std::expected<void, layered_configs_manager::set_error> layered_config
 
 template<class T>
 consteval layered_config_variable_builder<T>::layered_config_variable_builder(
-    cstring_view svRuntimeName,
-    T            defaultValue) noexcept
+    string_view svRuntimeName,
+    T           defaultValue) noexcept
     : m_svRuntimeName(svRuntimeName)
     , m_DefaultValue(std::move(defaultValue))
 {
-    m_Data.pStringToT = [](cstring_view svData) -> std::optional<std::any>
+    m_Data.pStringToT = [](string_view svData) -> std::optional<std::any>
     {
-        if constexpr (std::is_same_v<T, cstring_view>)
+        if constexpr (std::is_same_v<T, string_view>)
         {
-            return cstring(svData);
+            return string(svData);
         }
         else
         {
             // todo get rid of an allocation
-            cstring sData = svData;
+            string sData = svData;
 
             std::optional<T> optResult = sData.to<T>();
             if (!optResult)
@@ -49,26 +49,26 @@ consteval layered_config_variable_builder<T>::layered_config_variable_builder(
             return std::move(*optResult);
         }
     };
-    m_Data.pTToString = [](const std::any& data) -> cstring
+    m_Data.pTToString = [](const std::any& data) -> string
     {
-        return convert_to_string<typename details::layered_config_variable_type<T>::type, char>(
+        return convert_to_string<typename details::layered_config_variable_type<T>::type, char_type>(
             std::any_cast<const typename details::layered_config_variable_type<T>::type&>(data));
     };
-    m_Data.svTypeName = []() -> cstring_view
+    m_Data.svTypeName = []() -> string_view
     {
-        if constexpr (std::is_same_v<T, cstring_view>)
+        if constexpr (std::is_same_v<T, string_view>)
         {
-            return "string";
+            return QXT("string");
         }
         else
         {
-            return type_strings<T, char>::get_signature();
+            return type_strings<T, char_type>::get_signature();
         }
     }();
 }
 
 template<class T>
-consteval layered_config_variable_builder<T> layered_config_variable_builder<T>::env(cstring_view svEnvName) noexcept
+consteval layered_config_variable_builder<T> layered_config_variable_builder<T>::env(string_view svEnvName) noexcept
 {
     m_Data.svEnvName = svEnvName;
     return *this;
@@ -76,23 +76,22 @@ consteval layered_config_variable_builder<T> layered_config_variable_builder<T>:
 
 template<class T>
 consteval layered_config_variable_builder<T> layered_config_variable_builder<T>::command_line(
-    cstring_view svFullName,
-    cstring_view svShortName)
+    string_view svFullName,
+    string_view svShortName)
 {
     m_Data.svFullCommandLineName = svFullName;
-    if (!m_Data.svFullCommandLineName.starts_with("--"))
-        throw "Full command line name must start with --";
+    if (!m_Data.svFullCommandLineName.starts_with(QXT("--")))
+        throw QXT("Full command line name must start with --");
 
     m_Data.svShortCommandLineName = svShortName;
-    if (!m_Data.svShortCommandLineName.empty() && !m_Data.svShortCommandLineName.starts_with("-"))
-        throw "Short command line name must start with -";
+    if (!m_Data.svShortCommandLineName.empty() && !m_Data.svShortCommandLineName.starts_with(QXT("-")))
+        throw QXT("Short command line name must start with -");
 
     return *this;
 }
 
 template<class T>
-consteval layered_config_variable_builder<T> layered_config_variable_builder<T>::group(
-    cstring_view svGroupName) noexcept
+consteval layered_config_variable_builder<T> layered_config_variable_builder<T>::group(string_view svGroupName) noexcept
 {
     m_Data.svGroupName = svGroupName;
     return *this;
@@ -100,7 +99,7 @@ consteval layered_config_variable_builder<T> layered_config_variable_builder<T>:
 
 template<class T>
 consteval layered_config_variable_builder<T> layered_config_variable_builder<T>::description(
-    cstring_view svDescription) noexcept
+    string_view svDescription) noexcept
 {
     m_Data.svDescription = svDescription;
     return *this;

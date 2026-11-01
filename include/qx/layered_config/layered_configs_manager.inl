@@ -20,14 +20,14 @@ struct layered_config_variable_type
 };
 
 template<>
-struct layered_config_variable_type<cstring_view>
+struct layered_config_variable_type<string_view>
 {
-    using type = cstring;
+    using type = string;
 };
 
 } // namespace details
 
-inline void layered_configs_manager::set_app_description(cstring sAppDescription) noexcept
+inline void layered_configs_manager::set_app_description(string sAppDescription) noexcept
 {
     m_sAppDescription = std::move(sAppDescription);
 }
@@ -36,21 +36,24 @@ inline void layered_configs_manager::set_args(int argc, char* argv[]) noexcept
 {
     if (argc <= 0 || argv == nullptr)
     {
-        m_Args = {};
+        m_Args.clear();
         return;
     }
 
-    m_Args = std::span(argv, static_cast<size_t>(argc));
+    m_Args.clear();
+    m_Args.reserve(static_cast<size_t>(argc));
+    for (int i = 0; i < argc; ++i)
+        m_Args.push_back(to_string(cstring_view(argv[i])));
 }
 
 inline bool layered_configs_manager::show_help() const noexcept
 {
     if (!contains_if(
             m_Args,
-            [](const char* const pszValue)
+            [](const string& sValue)
             {
-                cstring_view svValue(pszValue);
-                return svValue == "--help" || svValue == "-h";
+                const string_view svValue = sValue;
+                return svValue == QXT("--help") || svValue == QXT("-h");
             }))
     {
         return false;
@@ -58,10 +61,10 @@ inline bool layered_configs_manager::show_help() const noexcept
 
     struct data_with_runtime_name : details::layered_config_variable_data
     {
-        cstring_view svRuntimeName;
+        string_view svRuntimeName;
     };
 
-    std::map<cstring_view, std::vector<data_with_runtime_name>> groups;
+    std::map<string_view, std::vector<data_with_runtime_name>> groups;
     for (const auto& [svRuntimeName, data] : m_VariableData)
     {
         groups[data.svGroupName].emplace_back(data, svRuntimeName);
@@ -77,10 +80,10 @@ inline bool layered_configs_manager::show_help() const noexcept
             });
     }
 
-    cstring sHelp;
+    string sHelp;
     if (!groups.empty())
     {
-        constexpr cstring_view svRequired = "required  ";
+        constexpr string_view svRequired = QXT("required  ");
 
         size_t nMaxFullCommandLineNameLength  = 0;
         size_t nMaxShortCommandLineNameLength = 0;
@@ -101,27 +104,27 @@ inline bool layered_configs_manager::show_help() const noexcept
             }
         }
 
-        sHelp.append_format("\n\nUsage: {} [options]\n", m_Args[0]);
-        sHelp += "Using formats: [--key], [-k], [--key=value], [-k=value], [--key value], [-k value]\n\n";
+        sHelp.append_format(QXT("\n\nUsage: {} [options]\n"), m_Args[0]);
+        sHelp += QXT("Using formats: [--key], [-k], [--key=value], [-k=value], [--key value], [-k value]\n\n");
 
         if (!m_sAppDescription.empty())
-            sHelp.append_format("{}\n\n", m_sAppDescription);
+            sHelp.append_format(QXT("{}\n\n"), m_sAppDescription);
 
         for (const auto& [svGroupName, lines] : groups)
         {
             if (!svGroupName.empty())
-                sHelp.append_format("{}:\n", svGroupName);
+                sHelp.append_format(QXT("{}:\n"), svGroupName);
             else
-                sHelp += "General options:\n";
+                sHelp += QXT("General options:\n");
 
             sHelp +=
-                "------------------------------------------------------------------------------------------------------"
-                "------------------\n";
+                QXT("--------------------------------------------------------------------------------------------------"
+                    "----------------------\n");
 
             for (const data_with_runtime_name& line : lines)
             {
                 sHelp.append_format(
-                    "{:<{}}  {:<{}}  {:<{}}  {:<{}}{}\n",
+                    QXT("{:<{}}  {:<{}}  {:<{}}  {:<{}}{}\n"),
                     line.svFullCommandLineName,
                     nMaxFullCommandLineNameLength,
                     line.svShortCommandLineName,
@@ -129,29 +132,29 @@ inline bool layered_configs_manager::show_help() const noexcept
                     line.svTypeName,
                     nMaxTypeNameLength,
                     line.bRequired ? svRequired
-                                   : cstring_view(line.pTToString(m_Variables.at(line.svRuntimeName)) + "  "),
+                                   : string_view(line.pTToString(m_Variables.at(line.svRuntimeName)) + QXT("  ")),
                     nMaxRequiredNameLength,
                     line.svDescription);
             }
 
-            sHelp += "\n";
+            sHelp += QXT("\n");
         }
     }
     else
     {
-        sHelp += "This app doesn't have any command line arguments.\n\n";
+        sHelp += QXT("This app doesn't have any command line arguments.\n\n");
         if (!m_sAppDescription.empty())
-            sHelp.append_format("{}\n\n", m_sAppDescription);
+            sHelp.append_format(QXT("{}\n\n"), m_sAppDescription);
     }
 
-    QX_LOG(qx::verbosity::important, qx::to_string(sHelp));
+    QX_LOG(qx::verbosity::important, sHelp);
 
     return true;
 }
 
 inline bool layered_configs_manager::parse() noexcept
 {
-    std::unordered_map<cstring_view, std::any> variables;
+    std::unordered_map<string_view, std::any> variables;
 
     // read default variables
     for (const auto& [svRuntimeName, value] : m_DefaultVariables)
@@ -161,9 +164,9 @@ inline bool layered_configs_manager::parse() noexcept
     // read envs
     for (const auto& [svRuntimeName, data] : m_VariableData)
     {
-        if (const char* pszEnvValue = std::getenv(cstring(data.svEnvName).c_str()))
+        if (const char* pszEnvValue = std::getenv(to_cstring(data.svEnvName).c_str()))
         {
-            std::optional<std::any> optValue = data.pStringToT(pszEnvValue);
+            std::optional<std::any> optValue = data.pStringToT(to_string(pszEnvValue));
             if (!optValue)
                 continue;
 
@@ -174,18 +177,18 @@ inline bool layered_configs_manager::parse() noexcept
     // read command lines args
     for (size_t i = 1; i < m_Args.size(); ++i)
     {
-        const cstring_view svArgument = m_Args[i];
+        const string_view svArgument = m_Args[i];
 
-        bool         bShortKey = false;
-        cstring_view svKey;
-        cstring_view svValue;
+        bool        bShortKey = false;
+        string_view svKey;
+        string_view svValue;
 
-        svKey = cstring_view(svArgument.begin(), svArgument.end());
-        if (svArgument.starts_with("--"))
+        svKey = string_view(svArgument.begin(), svArgument.end());
+        if (svArgument.starts_with(QXT("--")))
         {
             bShortKey = false;
         }
-        else if (svArgument.starts_with("-"))
+        else if (svArgument.starts_with(QXT("-")))
         {
             bShortKey = true;
         }
@@ -195,22 +198,22 @@ inline bool layered_configs_manager::parse() noexcept
                 qx::verbosity::warning,
                 "Invalid command argument format: {}. "
                 "Use \"--key=value\", \"--key value\", \"-k value\", \"--key\", \"-k\" instead.",
-                qx::to_string(svArgument));
+                svArgument);
             continue;
         }
 
         // --key=value / -k=value
-        if (const size_t nEqualPos = svKey.find('='); nEqualPos != cstring_view::npos)
+        if (const size_t nEqualPos = svKey.find('='); nEqualPos != string_view::npos)
         {
-            svValue = cstring_view(svKey.begin() + nEqualPos + 1, svKey.end());
-            svKey   = cstring_view(svKey.begin(), svKey.begin() + nEqualPos);
+            svValue = string_view(svKey.begin() + nEqualPos + 1, svKey.end());
+            svKey   = string_view(svKey.begin(), svKey.begin() + nEqualPos);
         }
         // --key value / -k value
         else if (i + 1 < m_Args.size())
         {
-            const cstring_view svNextArgument = m_Args[i + 1];
+            const string_view svNextArgument = m_Args[i + 1];
 
-            if (!svNextArgument.starts_with("-"))
+            if (!svNextArgument.starts_with(QXT("-")))
             {
                 svValue = svNextArgument;
                 ++i;
@@ -218,24 +221,24 @@ inline bool layered_configs_manager::parse() noexcept
             else
             {
                 // --key / -k
-                svValue = "true";
+                svValue = QXT("true");
             }
         }
         // --key / -k
         else
         {
-            svValue = "true";
+            svValue = QXT("true");
         }
 
         if (svKey.empty())
         {
-            QX_LOG(qx::verbosity::warning, "Empty command argument key: {}.", qx::to_string(svArgument));
+            QX_LOG(qx::verbosity::warning, "Empty command argument key: {}.", svArgument);
             continue;
         }
 
         if (svValue.empty())
         {
-            QX_LOG(qx::verbosity::warning, "Empty command argument value: {}.", qx::to_string(svArgument));
+            QX_LOG(qx::verbosity::warning, "Empty command argument value: {}.", svArgument);
             continue;
         }
 
@@ -260,7 +263,7 @@ inline bool layered_configs_manager::parse() noexcept
     {
         if (data.bRequired && !variables.contains(svRuntimeName))
         {
-            QX_LOG(qx::verbosity::error, "Required variable missing: {}.", qx::to_string(data.svFullCommandLineName));
+            QX_LOG(qx::verbosity::error, "Required variable missing: {}.", data.svFullCommandLineName);
             bAllRequiredVariablesPresent = false;
         }
     }
@@ -274,13 +277,13 @@ inline bool layered_configs_manager::parse() noexcept
 
 template<class T>
 inline std::expected<T, layered_configs_manager::get_error> layered_configs_manager::get(
-    cstring_view svRuntimeName) const noexcept
+    string_view svRuntimeName) const noexcept
 {
-    const auto optValue = get(svRuntimeName);
-    if (!optValue)
-        return std::unexpected(optValue.error());
+    const auto value = get(svRuntimeName);
+    if (!value)
+        return std::unexpected(value.error());
 
-    const auto* pValue = std::any_cast<typename details::layered_config_variable_type<T>::type>(&optValue->get());
+    const auto* pValue = std::any_cast<typename details::layered_config_variable_type<T>::type>(&value->get());
     if (!pValue)
         return std::unexpected(get_error::type_mismatch);
 
@@ -289,15 +292,15 @@ inline std::expected<T, layered_configs_manager::get_error> layered_configs_mana
 
 template<class T>
 inline std::expected<void, layered_configs_manager::set_error> layered_configs_manager::set(
-    cstring_view svRuntimeName,
-    T            value) noexcept
+    string_view svRuntimeName,
+    T           value) noexcept
 {
     using stored_type = typename details::layered_config_variable_type<T>::type;
     return set(svRuntimeName, std::any(stored_type(std::move(value))));
 }
 
 inline std::expected<std::reference_wrapper<const std::any>, layered_configs_manager::get_error>
-    layered_configs_manager::get(cstring_view svRuntimeName) const noexcept
+    layered_configs_manager::get(string_view svRuntimeName) const noexcept
 {
     const auto itValue = m_Variables.find(svRuntimeName);
     if (itValue != m_Variables.end())
@@ -311,8 +314,8 @@ inline std::expected<std::reference_wrapper<const std::any>, layered_configs_man
 }
 
 inline std::expected<void, layered_configs_manager::set_error> layered_configs_manager::set(
-    cstring_view svRuntimeName,
-    std::any     value) noexcept
+    string_view svRuntimeName,
+    std::any    value) noexcept
 {
     const auto it = m_DefaultVariables.find(svRuntimeName);
 
@@ -326,10 +329,10 @@ inline std::expected<void, layered_configs_manager::set_error> layered_configs_m
     return {};
 }
 
-inline std::expected<cstring, layered_configs_manager::get_error> layered_configs_manager::get_string(
-    cstring_view svRuntimeName) const noexcept
+inline std::expected<string, layered_configs_manager::get_error> layered_configs_manager::get_string(
+    string_view svRuntimeName) const noexcept
 {
-    const auto value = get(svRuntimeName);
+    const std::expected<std::reference_wrapper<const std::any>, get_error> value = get(svRuntimeName);
     if (!value)
         return std::unexpected(value.error());
 
@@ -337,8 +340,8 @@ inline std::expected<cstring, layered_configs_manager::get_error> layered_config
 }
 
 inline std::expected<void, layered_configs_manager::set_error> layered_configs_manager::set_string(
-    cstring_view svRuntimeName,
-    cstring_view svValue) noexcept
+    string_view svRuntimeName,
+    string_view svValue) noexcept
 {
     const auto itData = m_VariableData.find(svRuntimeName);
     if (itData == m_VariableData.end())
@@ -368,7 +371,7 @@ inline void layered_configs_manager::reset() noexcept
 
 template<class T>
 void layered_configs_manager::add_variable(
-    cstring_view                                 svRuntimeName,
+    string_view                                  svRuntimeName,
     const details::layered_config_variable_data& data,
     T                                            defaultValue) noexcept
 {

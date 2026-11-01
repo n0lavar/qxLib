@@ -15,40 +15,40 @@
 
 const qx::cstring k_sExeName = "app";
 
-constexpr qx::cstring_view k_svIntRuntimeName    = "layered_config_test_int";
-constexpr qx::cstring_view k_svSizeRuntimeName   = "layered_config_test_size";
-constexpr qx::cstring_view k_svFloatRuntimeName  = "layered_config_test_float";
-constexpr qx::cstring_view k_svStringRuntimeName = "layered_config_test_string";
-constexpr qx::cstring_view k_svBoolRuntimeName   = "layered_config_test_bool";
+constexpr qx::string_view k_svIntRuntimeName    = QXT("layered_config_test_int");
+constexpr qx::string_view k_svSizeRuntimeName   = QXT("layered_config_test_size");
+constexpr qx::string_view k_svFloatRuntimeName  = QXT("layered_config_test_float");
+constexpr qx::string_view k_svStringRuntimeName = QXT("layered_config_test_string");
+constexpr qx::string_view k_svBoolRuntimeName   = QXT("layered_config_test_bool");
 
-constexpr qx::cstring_view k_svNumericGroup = "Numeric";
-constexpr qx::cstring_view k_svFloatGroup   = "Floating point";
+constexpr qx::string_view k_svNumericGroup = QXT("Numeric");
+constexpr qx::string_view k_svFloatGroup   = QXT("Floating point");
 
-constexpr qx::cstring_view k_svIntEnvName    = "QX_LAYERED_CONFIG_TEST_INT";
-constexpr qx::cstring_view k_svSizeEnvName   = "QX_LAYERED_CONFIG_TEST_SIZE";
-constexpr qx::cstring_view k_svFloatEnvName  = "QX_LAYERED_CONFIG_TEST_FLOAT";
-constexpr qx::cstring_view k_svStringEnvName = "QX_LAYERED_CONFIG_TEST_STRING";
-constexpr qx::cstring_view k_svBoolEnvName   = "QX_LAYERED_CONFIG_TEST_BOOL";
+constexpr qx::string_view k_svIntEnvName    = QXT("QX_LAYERED_CONFIG_TEST_INT");
+constexpr qx::string_view k_svSizeEnvName   = QXT("QX_LAYERED_CONFIG_TEST_SIZE");
+constexpr qx::string_view k_svFloatEnvName  = QXT("QX_LAYERED_CONFIG_TEST_FLOAT");
+constexpr qx::string_view k_svStringEnvName = QXT("QX_LAYERED_CONFIG_TEST_STRING");
+constexpr qx::string_view k_svBoolEnvName   = QXT("QX_LAYERED_CONFIG_TEST_BOOL");
 
-constexpr qx::cstring_view k_svIntCommandLineFullName    = "--layered-config-test-int";
-constexpr qx::cstring_view k_svSizeCommandLineFullName   = "--layered-config-test-size";
-constexpr qx::cstring_view k_svFloatCommandLineFullName  = "--layered-config-test-float";
-constexpr qx::cstring_view k_svStringCommandLineFullName = "--layered-config-test-string";
-constexpr qx::cstring_view k_svBoolCommandLineFullName   = "--layered-config-test-bool";
+constexpr qx::string_view k_svIntCommandLineFullName    = QXT("--layered-config-test-int");
+constexpr qx::string_view k_svSizeCommandLineFullName   = QXT("--layered-config-test-size");
+constexpr qx::string_view k_svFloatCommandLineFullName  = QXT("--layered-config-test-float");
+constexpr qx::string_view k_svStringCommandLineFullName = QXT("--layered-config-test-string");
+constexpr qx::string_view k_svBoolCommandLineFullName   = QXT("--layered-config-test-bool");
 
-constexpr qx::cstring_view k_svIntCommandLineShortName    = "-i";
-constexpr qx::cstring_view k_svSizeCommandLineShortName   = "-s";
-constexpr qx::cstring_view k_svFloatCommandLineShortName  = "-f";
-constexpr qx::cstring_view k_svStringCommandLineShortName = "-t";
-constexpr qx::cstring_view k_svBoolCommandLineShortName   = "-b";
+constexpr qx::string_view k_svIntCommandLineShortName    = QXT("-i");
+constexpr qx::string_view k_svSizeCommandLineShortName   = QXT("-s");
+constexpr qx::string_view k_svFloatCommandLineShortName  = QXT("-f");
+constexpr qx::string_view k_svStringCommandLineShortName = QXT("-t");
+constexpr qx::string_view k_svBoolCommandLineShortName   = QXT("-b");
 
-const std::map<qx::cstring_view, qx::cstring_view> k_RuntimeToEnv { { k_svIntRuntimeName, k_svIntEnvName },
-                                                                    { k_svSizeRuntimeName, k_svSizeEnvName },
-                                                                    { k_svFloatRuntimeName, k_svFloatEnvName },
-                                                                    { k_svStringRuntimeName, k_svStringEnvName },
-                                                                    { k_svBoolRuntimeName, k_svBoolEnvName } };
+const std::map<qx::string_view, qx::string_view> k_RuntimeToEnv { { k_svIntRuntimeName, k_svIntEnvName },
+                                                                  { k_svSizeRuntimeName, k_svSizeEnvName },
+                                                                  { k_svFloatRuntimeName, k_svFloatEnvName },
+                                                                  { k_svStringRuntimeName, k_svStringEnvName },
+                                                                  { k_svBoolRuntimeName, k_svBoolEnvName } };
 
-const std::map<qx::cstring_view, qx::cstring_view> k_RuntimeToCommandLineFull {
+const std::map<qx::string_view, qx::string_view> k_RuntimeToCommandLineFull {
     { k_svIntRuntimeName, k_svIntCommandLineFullName },
     { k_svSizeRuntimeName, k_svSizeCommandLineFullName },
     { k_svFloatRuntimeName, k_svFloatCommandLineFullName },
@@ -56,7 +56,7 @@ const std::map<qx::cstring_view, qx::cstring_view> k_RuntimeToCommandLineFull {
     { k_svBoolRuntimeName, k_svBoolCommandLineFullName }
 };
 
-const std::map<qx::cstring_view, qx::cstring_view> k_RuntimeToCommandLineShort {
+const std::map<qx::string_view, qx::string_view> k_RuntimeToCommandLineShort {
     { k_svIntRuntimeName, k_svIntCommandLineShortName },
     { k_svSizeRuntimeName, k_svSizeCommandLineShortName },
     { k_svFloatRuntimeName, k_svFloatCommandLineShortName },
@@ -64,15 +64,15 @@ const std::map<qx::cstring_view, qx::cstring_view> k_RuntimeToCommandLineShort {
     { k_svBoolRuntimeName, k_svBoolCommandLineShortName }
 };
 
-constexpr int              k_nDefaultIntValue     = -10;
-constexpr size_t           k_nDefaultSizeValue    = 20;
-constexpr float            k_fDefaultFloatValue   = 3.5f;
-constexpr qx::cstring_view k_svDefaultStringValue = "default";
-constexpr bool             k_bDefaultBoolValue    = false;
+constexpr int             k_nDefaultIntValue     = -10;
+constexpr size_t          k_nDefaultSizeValue    = 20;
+constexpr float           k_fDefaultFloatValue   = 3.5f;
+constexpr qx::string_view k_svDefaultStringValue = QXT("default");
+constexpr bool            k_bDefaultBoolValue    = false;
 
-static void unset_env(const qx::cstring_view svKey)
+static void unset_env(const qx::string_view svKey)
 {
-    qx::cstring sKey = svKey;
+    qx::cstring sKey = qx::to_cstring(svKey);
 #ifdef _WIN32
     _putenv_s(sKey.c_str(), "");
 #else
@@ -80,10 +80,10 @@ static void unset_env(const qx::cstring_view svKey)
 #endif
 }
 
-static void set_env(qx::cstring_view svKey, qx::cstring_view svValue)
+static void set_env(qx::string_view svKey, qx::string_view svValue)
 {
-    qx::cstring sKey   = svKey;
-    qx::cstring sValue = svValue;
+    qx::cstring sKey   = qx::to_cstring(svKey);
+    qx::cstring sValue = qx::to_cstring(svValue);
 
 #ifdef _WIN32
     ASSERT_EQ(_putenv_s(sKey.c_str(), sValue.c_str()), 0);
@@ -128,15 +128,15 @@ int   g_Argc    = 1;
 struct set_command_line_space_trait
 {
     template<class T>
-    static void set_value(qx::cstring_view svRuntimeName, T value)
+    static void set_value(qx::string_view svRuntimeName, T value)
     {
-        qx::cstring_view svCommandLineName = k_RuntimeToCommandLineFull.at(svRuntimeName);
+        qx::string_view svCommandLineName = k_RuntimeToCommandLineFull.at(svRuntimeName);
 
         static qx::cstring sKey;
-        sKey = svCommandLineName;
+        sKey = qx::to_cstring(svCommandLineName);
 
         static qx::cstring sValue;
-        sValue = qx::convert_to_string<T, char>(value);
+        sValue = qx::to_cstring(qx::convert_to_string<T, qx::char_type>(value));
 
         g_Argv[0] = const_cast<char*>(k_sExeName.c_str());
         g_Argv[1] = sKey.data();
@@ -154,12 +154,13 @@ struct set_command_line_space_trait
 struct set_command_line_equal_trait
 {
     template<class T>
-    static void set_value(qx::cstring_view svRuntimeName, T value)
+    static void set_value(qx::string_view svRuntimeName, T value)
     {
-        qx::cstring_view svCommandLineName = k_RuntimeToCommandLineFull.at(svRuntimeName);
+        qx::string_view svCommandLineName = k_RuntimeToCommandLineFull.at(svRuntimeName);
 
         static qx::cstring sValue;
-        sValue = qx::cstring(svCommandLineName) + "=" + qx::convert_to_string<T, char>(value);
+        sValue =
+            qx::to_cstring(svCommandLineName) + "=" + qx::to_cstring(qx::convert_to_string<T, qx::char_type>(value));
 
         g_Argv[0] = const_cast<char*>(k_sExeName.c_str());
         g_Argv[1] = sValue.data();
@@ -176,19 +177,21 @@ struct set_command_line_equal_trait
 struct set_command_line_flag_trait
 {
     template<class T>
-    static void set_value(qx::cstring_view svRuntimeName, T value)
+    static void set_value(qx::string_view svRuntimeName, T value)
     {
-        qx::cstring_view svCommandLineName = k_RuntimeToCommandLineFull.at(svRuntimeName);
+        qx::string_view svCommandLineName = k_RuntimeToCommandLineFull.at(svRuntimeName);
 
         static qx::cstring sValue;
         if constexpr (std::is_same_v<T, bool>)
         {
-            sValue = value ? qx::cstring(svCommandLineName)
-                           : qx::cstring(svCommandLineName) + "=" + qx::convert_to_string<T, char>(value);
+            sValue = value ? qx::to_cstring(svCommandLineName)
+                           : qx::to_cstring(svCommandLineName) + "="
+                                 + qx::to_cstring(qx::convert_to_string<T, qx::char_type>(value));
         }
         else
         {
-            sValue = qx::cstring(svCommandLineName) + "=" + qx::convert_to_string<T, char>(value);
+            sValue = qx::to_cstring(svCommandLineName) + "="
+                     + qx::to_cstring(qx::convert_to_string<T, qx::char_type>(value));
         }
 
         g_Argv[0] = const_cast<char*>(k_sExeName.c_str());
@@ -206,9 +209,9 @@ struct set_command_line_flag_trait
 struct set_env_trait
 {
     template<class T>
-    static void set_value(qx::cstring_view svRuntimeName, T value)
+    static void set_value(qx::string_view svRuntimeName, T value)
     {
-        set_env(k_RuntimeToEnv.at(svRuntimeName), qx::convert_to_string<T, char>(value));
+        set_env(k_RuntimeToEnv.at(svRuntimeName), qx::convert_to_string<T, qx::char_type>(value));
     }
 
     template<class T>
@@ -221,7 +224,7 @@ struct set_env_trait
 struct set_runtime_trait
 {
     template<class T>
-    static void set_value(qx::cstring_view svRuntimeName, T value)
+    static void set_value(qx::string_view svRuntimeName, T value)
     {
         ASSERT_TRUE(qx::layered_configs_manager::get_instance().set(svRuntimeName, value));
     }
@@ -236,7 +239,7 @@ struct set_runtime_trait
 struct set_runtime_any_trait
 {
     template<class T>
-    static void set_value(qx::cstring_view svName, T value)
+    static void set_value(qx::string_view svName, T value)
     {
         using stored_type = typename qx::details::layered_config_variable_type<T>::type;
         EXPECT_TRUE(qx::layered_configs_manager::get_instance().set(svName, std::any(stored_type(value))));
@@ -252,9 +255,9 @@ struct set_runtime_any_trait
 struct set_runtime_string_trait
 {
     template<class T>
-    static void set_value(qx::cstring_view svRuntimeName, T value)
+    static void set_value(qx::string_view svRuntimeName, T value)
     {
-        const auto sValue = qx::convert_to_string<T, char>(value);
+        const auto sValue = qx::convert_to_string<T, qx::char_type>(value);
         ASSERT_TRUE(qx::layered_configs_manager::get_instance().set_string(svRuntimeName, sValue));
     }
 
@@ -278,10 +281,10 @@ protected:
     virtual void TearDown() override;
 
     template<class T>
-    void set_value(qx::cstring_view svName, T value);
+    void set_value(qx::string_view svName, T value);
 
     template<class T>
-    void test_layered_config_set_value_check_type(T defaultValue, T newValue, qx::cstring_view svRuntimeName);
+    void test_layered_config_set_value_check_type(T defaultValue, T newValue, qx::string_view svRuntimeName);
 
     bool m_bPreTearDown = true;
 
@@ -309,8 +312,8 @@ inline void test_layered_config_set_value<test_layered_config_set_value_traits_t
 template<class test_layered_config_set_value_traits_t>
 template<class T>
 inline void test_layered_config_set_value<test_layered_config_set_value_traits_t>::set_value(
-    qx::cstring_view svName,
-    T                value)
+    qx::string_view svName,
+    T               value)
 {
     test_layered_config_set_value_traits_t::set_value_type::set_value(svName, std::move(value));
 }
@@ -318,67 +321,67 @@ inline void test_layered_config_set_value<test_layered_config_set_value_traits_t
 template<class test_layered_config_set_value_traits_t>
 template<class T>
 inline void test_layered_config_set_value<test_layered_config_set_value_traits_t>::
-    test_layered_config_set_value_check_type(T defaultValue, T newValue, qx::cstring_view svRuntimeName)
+    test_layered_config_set_value_check_type(T defaultValue, T newValue, qx::string_view svRuntimeName)
 {
     if constexpr (!test_layered_config_set_value_traits_t::set_value_type::template is_enabled<T>())
         GTEST_SKIP();
 
     EXPECT_NE(defaultValue, newValue);
 
-    auto&                                                    manager  = qx::layered_configs_manager::get_instance();
-    std::expected<T, qx::layered_configs_manager::get_error> optValue = manager.get<T>(svRuntimeName);
-    ASSERT_TRUE(optValue);
+    qx::layered_configs_manager&                             manager = qx::layered_configs_manager::get_instance();
+    std::expected<T, qx::layered_configs_manager::get_error> value   = manager.get<T>(svRuntimeName);
+    ASSERT_TRUE(value);
 
-    const auto optAny = manager.get(svRuntimeName);
-    ASSERT_TRUE(optAny);
+    const auto anyValue = manager.get(svRuntimeName);
+    ASSERT_TRUE(anyValue);
 
     using stored_type               = typename qx::details::layered_config_variable_type<T>::type;
-    const stored_type* pStoredValue = std::any_cast<stored_type>(&optAny->get());
+    const stored_type* pStoredValue = std::any_cast<stored_type>(&anyValue->get());
     ASSERT_NE(pStoredValue, nullptr);
     EXPECT_EQ(*pStoredValue, m_bPreTearDown ? defaultValue : newValue);
 
-    const auto optSameValue = manager.get(svRuntimeName);
-    ASSERT_TRUE(optSameValue);
-    EXPECT_EQ(&optAny->get(), &optSameValue->get());
+    const auto sameValue = manager.get(svRuntimeName);
+    ASSERT_TRUE(sameValue);
+    EXPECT_EQ(&anyValue->get(), &sameValue->get());
     using get_error = qx::layered_configs_manager::get_error;
     using set_error = qx::layered_configs_manager::set_error;
-    EXPECT_EQ(manager.get<T>("unknown_variable"), std::unexpected(get_error::unknown_variable));
+    EXPECT_EQ(manager.get<T>(QXT("unknown_variable")), std::unexpected(get_error::unknown_variable));
     EXPECT_EQ(manager.get<double>(svRuntimeName), std::unexpected(get_error::type_mismatch));
-    EXPECT_EQ(manager.get("unknown_variable"), std::unexpected(get_error::unknown_variable));
-    EXPECT_EQ(manager.get_string("unknown_variable"), std::unexpected(get_error::unknown_variable));
+    EXPECT_EQ(manager.get(QXT("unknown_variable")), std::unexpected(get_error::unknown_variable));
+    EXPECT_EQ(manager.get_string(QXT("unknown_variable")), std::unexpected(get_error::unknown_variable));
 
-    EXPECT_EQ(manager.set("unknown_variable", newValue), std::unexpected(set_error::unknown_variable));
+    EXPECT_EQ(manager.set(QXT("unknown_variable"), newValue), std::unexpected(set_error::unknown_variable));
     EXPECT_EQ(
-        manager.set("unknown_variable", std::any(stored_type(newValue))),
+        manager.set(QXT("unknown_variable"), std::any(stored_type(newValue))),
         std::unexpected(set_error::unknown_variable));
-    EXPECT_EQ(manager.set_string("unknown_variable", "42"), std::unexpected(set_error::unknown_variable));
+    EXPECT_EQ(manager.set_string(QXT("unknown_variable"), QXT("42")), std::unexpected(set_error::unknown_variable));
 
     EXPECT_EQ(manager.set(svRuntimeName, 12.5), std::unexpected(set_error::type_mismatch));
     EXPECT_EQ(manager.set(svRuntimeName, std::any(12.5)), std::unexpected(set_error::type_mismatch));
     EXPECT_EQ(manager.set(svRuntimeName, std::any()), std::unexpected(set_error::type_mismatch));
     if constexpr (!std::is_same_v<T, bool>)
         EXPECT_EQ(manager.set(svRuntimeName, std::any(true)), std::unexpected(set_error::type_mismatch));
-    if constexpr (!std::is_same_v<T, qx::cstring_view>)
-        EXPECT_EQ(manager.set_string(svRuntimeName, "invalid"), std::unexpected(set_error::invalid_value));
+    if constexpr (!std::is_same_v<T, qx::string_view>)
+        EXPECT_EQ(manager.set_string(svRuntimeName, QXT("invalid")), std::unexpected(set_error::invalid_value));
 
-    const auto unchangedValue = manager.get<T>(svRuntimeName);
+    const std::expected<T, qx::layered_configs_manager::get_error> unchangedValue = manager.get<T>(svRuntimeName);
     ASSERT_TRUE(unchangedValue);
     EXPECT_EQ(*unchangedValue, m_bPreTearDown ? defaultValue : newValue);
 
-    const auto optString = manager.get_string(svRuntimeName);
-    ASSERT_TRUE(optString);
+    const auto stringValue = manager.get_string(svRuntimeName);
+    ASSERT_TRUE(stringValue);
 
-    const auto sExpected = qx::convert_to_string<T, char>(m_bPreTearDown ? defaultValue : newValue);
-    EXPECT_EQ(*optString, sExpected);
+    const auto sExpected = qx::convert_to_string<T, qx::char_type>(m_bPreTearDown ? defaultValue : newValue);
+    EXPECT_EQ(*stringValue, sExpected);
 
     if (m_bPreTearDown)
     {
-        EXPECT_EQ(*optValue, defaultValue);
+        EXPECT_EQ(*value, defaultValue);
         set_value(svRuntimeName, newValue);
     }
     else
     {
-        EXPECT_EQ(*optValue, newValue);
+        EXPECT_EQ(*value, newValue);
     }
 }
 
@@ -424,9 +427,9 @@ TYPED_TEST(test_layered_config_set_value, float)
 
 TYPED_TEST(test_layered_config_set_value, string)
 {
-    this->template test_layered_config_set_value_check_type<qx::cstring_view>(
+    this->template test_layered_config_set_value_check_type<qx::string_view>(
         k_svDefaultStringValue,
-        "not default",
+        QXT("not default"),
         k_svStringRuntimeName);
 }
 
@@ -457,11 +460,11 @@ TEST(layered_config, empty_or_invalid_args)
 TEST(layered_config, get_variables)
 {
     constexpr auto expected = std::to_array<qx::layered_config_variable_info>(
-        { { k_svIntRuntimeName, {}, qx::type_strings<int, char>::get_signature(), k_svNumericGroup },
-          { k_svSizeRuntimeName, {}, qx::type_strings<size_t, char>::get_signature(), k_svNumericGroup },
-          { k_svFloatRuntimeName, {}, "float", k_svFloatGroup },
-          { k_svStringRuntimeName, {}, "string", {} },
-          { k_svBoolRuntimeName, {}, "bool", {} } });
+        { { k_svIntRuntimeName, {}, qx::type_strings<int, qx::char_type>::get_signature(), k_svNumericGroup },
+          { k_svSizeRuntimeName, {}, qx::type_strings<size_t, qx::char_type>::get_signature(), k_svNumericGroup },
+          { k_svFloatRuntimeName, {}, QXT("float"), k_svFloatGroup },
+          { k_svStringRuntimeName, {}, QXT("string"), {} },
+          { k_svBoolRuntimeName, {}, QXT("bool"), {} } });
 
     const auto variables = qx::layered_configs_manager::get_instance().get_variables();
     ASSERT_EQ(variables.size(), expected.size());
@@ -479,7 +482,7 @@ TEST(layered_config, get_variables)
 
 TEST(layered_config, type_erased_string_set_preserves_embedded_nulls)
 {
-    auto& manager = qx::layered_configs_manager::get_instance();
+    qx::layered_configs_manager& manager = qx::layered_configs_manager::get_instance();
     struct reset_guard
     {
         ~reset_guard()
@@ -487,12 +490,13 @@ TEST(layered_config, type_erased_string_set_preserves_embedded_nulls)
             qx::layered_configs_manager::get_instance().reset();
         }
     } guard;
-    const qx::cstring text("A\0B with spaces", 15);
-    const std::any    value(text);
+    const qx::string text(QXT("A\0B with spaces"), 15);
+    const std::any   value(text);
     ASSERT_TRUE(manager.set(k_svStringRuntimeName, value));
-    const auto stored = manager.get(k_svStringRuntimeName);
+    const std::expected<std::reference_wrapper<const std::any>, qx::layered_configs_manager::get_error> stored =
+        manager.get(k_svStringRuntimeName);
     ASSERT_TRUE(stored);
-    const auto* pText = std::any_cast<qx::cstring>(&stored->get());
+    const qx::string* pText = std::any_cast<qx::string>(&stored->get());
     ASSERT_NE(pText, nullptr);
     EXPECT_EQ(pText->size(), text.size());
     EXPECT_EQ(*pText, text);
