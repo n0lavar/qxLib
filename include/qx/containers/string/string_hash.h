@@ -88,7 +88,7 @@ namespace literals
     @param  nSize  - literal text size
     @return        - text hash value
 **/
-constexpr basic_string_hash<string_traits::default_traits<char>> operator"" _sh(const char* pszStr, size_t nSize);
+constexpr basic_string_hash<string_traits::default_traits<char>> operator""_sh(const char* pszStr, size_t nSize);
 
 /**
     @brief  String hash literal for constexpr converting. Can be used with switch-case
@@ -96,10 +96,7 @@ constexpr basic_string_hash<string_traits::default_traits<char>> operator"" _sh(
     @param  nSize  - literal text size
     @return        - text hash value
 **/
-constexpr basic_string_hash<string_traits::default_traits<wchar_t>> operator"" _sh(
-    const wchar_t
-    *      pszStr,
-    size_t nSize);
+constexpr basic_string_hash<string_traits::default_traits<wchar_t>> operator""_sh(const wchar_t* pszStr, size_t nSize);
 
 } // namespace literals
 

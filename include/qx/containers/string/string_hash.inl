@@ -46,17 +46,17 @@ constexpr basic_string_hash<traits_t>::operator size_t() const noexcept
 
 
 
-// ------------------------------- operator"" _sh ------------------------------
+// ------------------------------- operator""_sh ------------------------------
 
 namespace literals
 {
 
-constexpr basic_string_hash<string_traits::default_traits<char>> operator"" _sh(const char* pszStr, size_t nSize)
+constexpr basic_string_hash<string_traits::default_traits<char>> operator""_sh(const char* pszStr, size_t nSize)
 {
     return basic_string_hash<string_traits::default_traits<char>>(pszStr, nSize);
 }
 
-constexpr basic_string_hash<string_traits::default_traits<wchar_t>> operator"" _sh(const wchar_t * pszStr, size_t nSize)
+constexpr basic_string_hash<string_traits::default_traits<wchar_t>> operator""_sh(const wchar_t* pszStr, size_t nSize)
 {
     return basic_string_hash<string_traits::default_traits<wchar_t>>(pszStr, nSize);
 }
