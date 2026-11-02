@@ -2775,7 +2775,7 @@ $(function() {
 <div class="line"><a name="l02704"></a><span class="lineno"> 2704</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t, <span class="keyword">class</span> traits_t&gt;</div>
 <div class="line"><a name="l02705"></a><span class="lineno"> 2705</span>&#160;qx::details::istream&lt;char_t&gt;&amp; operator&gt;&gt;(qx::details::istream&lt;char_t&gt;&amp; is, <a class="code" href="classqx_1_1basic__string.html">qx::basic_string&lt;char_t, traits_t&gt;</a>&amp; str)</div>
 <div class="line"><a name="l02706"></a><span class="lineno"> 2706</span>&#160;{</div>
-<div class="line"><a name="l02707"></a><span class="lineno"> 2707</span>&#160;    <span class="keyword">typename</span> qx::details::istream&lt;traits_t&gt;::iostate ret_bit = qx::details::istream&lt;traits_t&gt;::goodbit;</div>
+<div class="line"><a name="l02707"></a><span class="lineno"> 2707</span>&#160;    <span class="keyword">typename</span> qx::details::istream&lt;char_t&gt;::iostate ret_bit = qx::details::istream&lt;char_t&gt;::goodbit;</div>
 <div class="line"><a name="l02708"></a><span class="lineno"> 2708</span>&#160; </div>
 <div class="line"><a name="l02709"></a><span class="lineno"> 2709</span>&#160;    <span class="keyword">auto</span> try_push_back = [&amp;str, &amp;is, &amp;ret_bit](char_t ch)</div>
 <div class="line"><a name="l02710"></a><span class="lineno"> 2710</span>&#160;    {</div>
@@ -2788,7 +2788,7 @@ $(function() {
 <div class="line"><a name="l02717"></a><span class="lineno"> 2717</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l02718"></a><span class="lineno"> 2718</span>&#160;        {</div>
 <div class="line"><a name="l02719"></a><span class="lineno"> 2719</span>&#160;            is.unget();</div>
-<div class="line"><a name="l02720"></a><span class="lineno"> 2720</span>&#160;            ret_bit |= qx::details::istream&lt;traits_t&gt;::failbit;</div>
+<div class="line"><a name="l02720"></a><span class="lineno"> 2720</span>&#160;            ret_bit |= qx::details::istream&lt;char_t&gt;::failbit;</div>
 <div class="line"><a name="l02721"></a><span class="lineno"> 2721</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a name="l02722"></a><span class="lineno"> 2722</span>&#160;        }</div>
 <div class="line"><a name="l02723"></a><span class="lineno"> 2723</span>&#160;    };</div>
