@@ -8,6 +8,8 @@
 **/
 #pragma once
 
+#include <version>
+
 //---------------------------------- platform ----------------------------------
 
 #if defined(_WIN64) || defined(_WIN32)
@@ -30,7 +32,13 @@
 
 //---------------------------------- compiler ----------------------------------
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER)
+    #define QX_MSVC_COMPATIBLE 1
+#else
+    #define QX_MSVC_COMPATIBLE 0
+#endif
+
+#if QX_MSVC_COMPATIBLE && !defined(__clang__) && !defined(__INTEL_COMPILER)
     #define QX_MSVC 1
 #else
     #define QX_MSVC 0
@@ -52,6 +60,26 @@
     #define QX_APPLE_CLANG 1
 #else
     #define QX_APPLE_CLANG 0
+#endif
+
+//---------------------------------- standard library ----------------------------------
+
+#ifdef _LIBCPP_VERSION
+    #define QX_LIBCPP 1
+#else
+    #define QX_LIBCPP 0
+#endif
+
+#ifdef _MSVC_STL_VERSION
+    #define QX_MSVC_STL 1
+#else
+    #define QX_MSVC_STL 0
+#endif
+
+#ifdef __GLIBCXX__
+    #define QX_LIBSTDCXX 1
+#else
+    #define QX_LIBSTDCXX 0
 #endif
 
 //------------------------------------ build -----------------------------------

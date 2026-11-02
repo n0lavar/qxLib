@@ -92,7 +92,7 @@ inline generic_span<T, traits_t>::generic_span(container_t& container) noexcept
           
               if (it != container.end())
               {
-                  pRet = it.operator->();
+                  pRet = std::addressof(*it);
                   ++it;
               }
           

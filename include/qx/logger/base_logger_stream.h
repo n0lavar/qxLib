@@ -20,6 +20,7 @@
 #include <memory>
 #include <mutex>
 #include <thread>
+#include <type_traits>
 
 QX_DEFINE_CATEGORY(CatLogger, qx::color::dark_turquoise());
 
@@ -49,13 +50,7 @@ public:
     };
 
     // maximize cache locality, taking into consideration wchar_t size and logger_sbo size
-    using pattern_string_t =
-#if QX_MSVC
-        big_string
-#else
-        huge_string
-#endif
-        ;
+    using pattern_string_t = std::conditional_t<sizeof(wchar_t) == 2, big_string, huge_string>;
 
 public:
     /**

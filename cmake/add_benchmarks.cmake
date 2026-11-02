@@ -1,5 +1,5 @@
 macro(set_benchmark_options _target)
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    if((CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU") AND NOT WIN32)
         target_link_libraries(${_target} PRIVATE
             -pthread
             -lstdc++fs
@@ -20,10 +20,15 @@ macro(add_benchmarks
     option(GENERATE_BENCHMARKS "Generate benchmarks projects? Enabling this requires benchmark" OFF)
 
     if (GENERATE_BENCHMARKS)
-        find_package(benchmark REQUIRED CONFIG PATHS
-            "${EXTERNAL_FOLDER}/benchmark/build"
-            "${CMAKE_CURRENT_SOURCE_DIR}/../benchmark/build"
-        )
+        if(QX_DEPENDENCIES_BUILD_DIR)
+            find_package(benchmark REQUIRED CONFIG PATHS
+                "${EXTERNAL_FOLDER}/benchmark/${QX_DEPENDENCIES_BUILD_DIR}" NO_DEFAULT_PATH)
+        else()
+            find_package(benchmark REQUIRED CONFIG PATHS
+                "${EXTERNAL_FOLDER}/benchmark/build"
+                "${CMAKE_CURRENT_SOURCE_DIR}/../benchmark/build"
+            )
+        endif()
         file(GLOB_RECURSE BENCHMARKS_SRC_FILES "${_glob_recurse_pattern}")
 
         # from list of files we'll create benchmarks name.bench.cpp -> name
@@ -49,6 +54,7 @@ macro(add_benchmarks
             target_link_libraries(${_target} PRIVATE
                 ${BENCHMARK_LIBRARIES}
             )
+
 
             if(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
                 target_compile_options(${_target} PRIVATE

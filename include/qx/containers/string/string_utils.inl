@@ -236,7 +236,7 @@ constexpr const value_t* get_format_specifier() noexcept
     }
     else if constexpr (std::is_pointer_v<test_type>)
     {
-#if QX_MSVC
+#if QX_MSVC_COMPATIBLE
         pszFormat = QX_STR_PREFIX(value_t, "0x%p");
 #else
         pszFormat = QX_STR_PREFIX(value_t, "%p");

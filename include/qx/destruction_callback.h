@@ -10,6 +10,9 @@
 
 #include <qx/macros/copyable_movable.h>
 
+#include <functional>
+#include <utility>
+
 namespace qx
 {
 

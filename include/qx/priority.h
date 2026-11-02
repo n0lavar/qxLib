@@ -12,6 +12,9 @@
 #include <qx/hash.h>
 #include <qx/typedefs.h>
 
+#include <atomic>
+#include <functional>
+
 namespace qx
 {
 

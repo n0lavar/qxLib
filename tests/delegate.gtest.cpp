@@ -12,6 +12,7 @@
 #include <qx/meta/type_strings.h>
 #include <qx/patterns/delegate.h>
 
+#include <expected>
 #include <span>
 
 //V_EXCLUDE_PATH *.gtest.cpp
@@ -917,4 +918,53 @@ TEST(delegate, small_object_optimization_and_size)
     EXPECT_EQ(delegate.execute(), 0);
     EXPECT_TRUE(delegate.empty());
     EXPECT_EQ(delegate.size(), 0);
+}
+
+// Compilation regression: instantiating execute() with std::expected previously failed in Bloomberg clang/libc++.
+// Exercise the void, piped and non-piped return paths with multiple subscribers.
+TEST(delegate, expected_argument)
+{
+    using argument_type = std::expected<int, int>;
+    argument_type value = 2;
+
+    int                               nCalled = 0;
+    qx::delegate<void(argument_type)> voidDelegate;
+    voidDelegate.add_token(
+        [&nCalled](argument_type arg)
+        {
+            nCalled += *arg;
+        });
+    voidDelegate.add_token(
+        [&nCalled](argument_type arg)
+        {
+            nCalled += *arg;
+        });
+    voidDelegate.execute(value);
+    EXPECT_EQ(nCalled, 4);
+
+    qx::delegate<int(argument_type)> pipeDelegate;
+    pipeDelegate.add_token(
+        [](argument_type arg)
+        {
+            return *arg;
+        });
+    pipeDelegate.add_token(
+        [](argument_type arg)
+        {
+            return *arg + 1;
+        });
+    EXPECT_EQ(pipeDelegate.execute(value), 3);
+
+    qx::delegate<not_a_pipe(argument_type)> delegate;
+    delegate.add_token(
+        [](argument_type arg)
+        {
+            return not_a_pipe { static_cast<size_t>(*arg), {} };
+        });
+    delegate.add_token(
+        [](argument_type arg)
+        {
+            return not_a_pipe { static_cast<size_t>(*arg + 1), {} };
+        });
+    EXPECT_EQ(delegate.execute(value).nData, 3);
 }

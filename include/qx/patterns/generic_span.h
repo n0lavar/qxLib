@@ -11,6 +11,7 @@
 #include <qx/meta/qualifiers.h>
 
 #include <functional>
+#include <memory>
 
 namespace qx
 {

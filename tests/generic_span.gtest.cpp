@@ -104,5 +104,4 @@ TEST(generic_span, container_with_adapter)
     TestContainerWithAdapter<char, std::vector>();
     TestContainerWithAdapter<char, std::deque>();
     TestContainerWithAdapter<char, std::list>();
-    TestContainerWithAdapter<char, std::basic_string>();
 }

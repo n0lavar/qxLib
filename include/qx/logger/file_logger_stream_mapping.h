@@ -14,7 +14,7 @@
 
 #include <limits>
 
-#if QX_CLANG || QX_APPLE_CLANG || QX_GNU
+#if !QX_WIN
     #include <fcntl.h>
     #include <sys/mman.h>
     #include <sys/stat.h>
