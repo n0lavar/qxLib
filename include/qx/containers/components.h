@@ -97,6 +97,13 @@ private:
     };
 
 public:
+    components()                             = default;
+    components(const components&)            = delete;
+    components& operator=(const components&) = delete;
+    components(components&& other) noexcept  = default;
+    components& operator=(components&& other) noexcept;
+    ~components();
+
     /**
         @brief  Add a component
         @tparam component_t - component type which doesn't have to be a final class type, may be any base or super type 
@@ -274,7 +281,8 @@ public:
     [[nodiscard]] bool empty() const noexcept;
 
     /**
-        @brief Clear the container, e.g. remove all the components
+        @brief   Clear the container and destroy its components.
+        @details Components are destroyed in reverse priority order, and in reverse addition order within a priority.
     **/
     void clear() noexcept;
 

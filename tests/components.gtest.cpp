@@ -362,3 +362,135 @@ TEST(components, clear)
     components.pComponent23_3 = nullptr;
     TestTryGetTemplate(components);
 }
+
+namespace
+{
+
+class CDestroyedComponentA : public ABaseTestComponent
+{
+    QX_RTTI_CLASS(CDestroyedComponentA, ABaseTestComponent);
+
+public:
+    CDestroyedComponentA(std::vector<int>& order, int nValue) : m_Order(order), m_nValue(nValue)
+    {
+    }
+    virtual ~CDestroyedComponentA() override
+    {
+        m_Order.push_back(m_nValue);
+    }
+    virtual int GetData() const override
+    {
+        return m_nValue;
+    }
+    virtual int GetData() override
+    {
+        return m_nValue;
+    }
+
+private:
+    std::vector<int>& m_Order;
+    int               m_nValue;
+};
+
+class CDestroyedComponentB : public ABaseTestComponent
+{
+    QX_RTTI_CLASS(CDestroyedComponentB, ABaseTestComponent);
+
+public:
+    CDestroyedComponentB(std::vector<int>& order, int nValue) : m_Order(order), m_nValue(nValue)
+    {
+    }
+    virtual ~CDestroyedComponentB() override
+    {
+        m_Order.push_back(m_nValue);
+    }
+    virtual int GetData() const override
+    {
+        return m_nValue;
+    }
+    virtual int GetData() override
+    {
+        return m_nValue;
+    }
+
+private:
+    std::vector<int>& m_Order;
+    int               m_nValue;
+};
+
+void PopulateForDestruction(qx::components<ABaseTestComponent>& components, std::vector<int>& order)
+{
+    auto pFirst  = components.add(std::make_unique<CDestroyedComponentA>(order, 1), qx::priority::normal);
+    auto pSecond = components.add(std::make_unique<CDestroyedComponentB>(order, 2), qx::priority::high);
+    components.add(
+        std::make_unique<CDestroyedComponentB>(order, 3),
+        qx::priority::normal,
+        qx::component_status::disabled);
+    components.add(std::make_unique<CDestroyedComponentA>(order, 4), qx::priority::low);
+    components.add(std::make_unique<CDestroyedComponentA>(order, 5), qx::priority::high);
+    components.add(std::make_unique<CDestroyedComponentB>(order, 6), qx::priority::low);
+    components.add(std::make_unique<CDestroyedComponentA>(order, 7), qx::priority::normal);
+    auto pEighth = components.add(std::make_unique<CDestroyedComponentB>(order, 8), qx::priority::high);
+    components.add(std::make_unique<CDestroyedComponentA>(order, 9), qx::priority::low);
+    components.add(std::make_unique<CDestroyedComponentB>(order, 10));
+    components.add(std::make_unique<CDestroyedComponentA>(order, 11));
+    components.add(std::make_unique<CDestroyedComponentB>(order, 12));
+    components.add(std::make_unique<CDestroyedComponentA>(order, 13));
+    components.add(std::make_unique<CDestroyedComponentB>(order, 14));
+    components.add(std::make_unique<CDestroyedComponentA>(order, 15));
+
+    EXPECT_TRUE(components.set_component_priority(pFirst, qx::priority::high));
+    EXPECT_TRUE(components.set_component_priority(pEighth, qx::priority::low));
+    EXPECT_TRUE(components.add_component_status(pSecond, qx::component_status::disabled));
+}
+
+void CheckDestructionOrder(const std::vector<int>& order)
+{
+    EXPECT_EQ(order, (std::vector<int> { 9, 8, 6, 4, 15, 14, 13, 12, 11, 10, 7, 3, 5, 2, 1 }));
+}
+
+} // namespace
+
+TEST(components, clear_destroys_in_reverse_priority_and_insertion_order)
+{
+    std::vector<int>                   order;
+    qx::components<ABaseTestComponent> components;
+    PopulateForDestruction(components, order);
+
+    components.clear();
+
+    CheckDestructionOrder(order);
+    EXPECT_TRUE(components.empty());
+
+    components.clear();
+    CheckDestructionOrder(order);
+}
+
+TEST(components, destructor_destroys_in_reverse_priority_and_insertion_order)
+{
+    std::vector<int> order;
+    {
+        qx::components<ABaseTestComponent> components;
+        PopulateForDestruction(components, order);
+    }
+    CheckDestructionOrder(order);
+}
+
+TEST(components, move_assignment_clears_previous_components_in_order)
+{
+    std::vector<int> targetOrder;
+    std::vector<int> sourceOrder;
+    {
+        qx::components<ABaseTestComponent> target;
+        PopulateForDestruction(target, targetOrder);
+        qx::components<ABaseTestComponent> source;
+        PopulateForDestruction(source, sourceOrder);
+
+        target = std::move(source);
+
+        CheckDestructionOrder(targetOrder);
+        EXPECT_TRUE(sourceOrder.empty());
+    }
+    CheckDestructionOrder(targetOrder);
+    CheckDestructionOrder(sourceOrder);
+}

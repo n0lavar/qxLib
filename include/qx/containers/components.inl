@@ -62,6 +62,25 @@ typename components<base_component_t>::class_data& components<base_component_t>:
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
+components<base_component_t>& components<base_component_t>::operator=(components&& other) noexcept
+{
+    if (this != &other)
+    {
+        clear();
+        m_RootClass.derivedClasses.swap(other.m_RootClass.derivedClasses);
+        m_RootClass.components.swap(other.m_RootClass.components);
+        m_RootClass.priorityCache.swap(other.m_RootClass.priorityCache);
+    }
+    return *this;
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
+components<base_component_t>::~components()
+{
+    clear();
+}
+
+template<std::derived_from<rtti_pure_base> base_component_t>
 template<std::derived_from<base_component_t> component_t>
 component_t* components<base_component_t>::add(
     std::unique_ptr<component_t> pComponent,
@@ -304,9 +323,10 @@ bool components<base_component_t>::empty() const noexcept
 template<std::derived_from<rtti_pure_base> base_component_t>
 void components<base_component_t>::clear() noexcept
 {
+    while (!m_RootClass.priorityCache.empty())
+        remove(m_RootClass.priorityCache.rbegin()->second);
+
     m_RootClass.derivedClasses.clear();
-    m_RootClass.components.clear();
-    m_RootClass.priorityCache.clear();
 }
 
 template<std::derived_from<rtti_pure_base> base_component_t>
