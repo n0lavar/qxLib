@@ -175,9 +175,9 @@ private:
 
 } // namespace qx
 
-#if QX_MSVC
+#if QX_MSVC_COMPATIBLE
     #define _QX_DEBUG_BREAK() __debugbreak()
-#elif QX_CLANG
+#elif QX_CLANG || QX_APPLE_CLANG
     #define _QX_DEBUG_BREAK() __builtin_debugtrap()
 #elif QX_GNU
     #include <signal.h>

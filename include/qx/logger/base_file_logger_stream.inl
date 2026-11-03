@@ -58,8 +58,13 @@ inline std::filesystem::path base_file_logger_stream::prepare_folder_and_get_log
         {
             const std::filesystem::file_time_type lastWriteTimeFileClock =
                 std::filesystem::last_write_time(sLogFile.c_str());
+#if QX_MSVC_STL
             const auto lastWriteTimeSystemClock =
                 std::chrono::clock_cast<std::chrono::system_clock>(lastWriteTimeFileClock);
+#else
+            const auto lastWriteTimeSystemClock =
+                std::filesystem::file_time_type::clock::to_sys(lastWriteTimeFileClock);
+#endif
             const auto lastWriteTimeSystemClockSeconds =
                 std::chrono::floor<std::chrono::seconds>(lastWriteTimeSystemClock);
 

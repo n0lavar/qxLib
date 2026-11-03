@@ -249,6 +249,85 @@ return_t base_delegate<derived_t, return_t, args_t...>::execute_internal(
             return return_t {};
     }
 
+#if (QX_CLANG || QX_APPLE_CLANG) && QX_LIBCPP
+    // Work around recursive constraint evaluation in Bloomberg clang/libc++ when delegate arguments include
+    // std::expected: copying the map or comparing its iterators can trigger an invalid operator== lookup.
+
+    // modifying during iteration protection
+    thread_local variant_type tempFunctions;
+    if (std::holds_alternative<single_value_type>(*m_optFunctions))
+    {
+        tempFunctions.template emplace<single_value_type>(std::get<single_value_type>(*m_optFunctions));
+        return invokeSingle(std::get<single_value_type>(tempFunctions).second);
+    }
+    else
+    {
+        const container_type& source = std::get<container_type>(*m_optFunctions);
+        if (!std::holds_alternative<container_type>(tempFunctions))
+            tempFunctions.template emplace<container_type>();
+        container_type& container = std::get<container_type>(tempFunctions);
+        bool            sameKeys  = source.size() == container.size();
+        if (sameKeys)
+        {
+            auto sourceIt = source.begin();
+            auto targetIt = container.begin();
+            for (size_t i = 0; i < source.size(); ++i, ++sourceIt, ++targetIt)
+                if (!(sourceIt->first == targetIt->first))
+                {
+                    sameKeys = false;
+                    break;
+                }
+        }
+
+        auto sourceIt = source.begin();
+        if (sameKeys)
+        {
+            auto targetIt = container.begin();
+            for (size_t i = 0; i < source.size(); ++i, ++sourceIt, ++targetIt)
+                targetIt->second = sourceIt->second;
+        }
+        else
+        {
+            container.clear();
+            for (size_t i = 0; i < source.size(); ++i, ++sourceIt)
+                container.try_emplace(sourceIt->first, sourceIt->second);
+        }
+
+        invoker<return_t, function_type, invoke_single_t>   invokerSingle(invokeSingle);
+        invoker<return_t, function_type, invoke_multiple_t> invokerMultiple(invokeMultiple);
+        base_invoker<return_t, function_type>*              invoker = nullptr;
+        if (container.size() == 1)
+            invoker = &invokerSingle;
+        else
+            invoker = &invokerMultiple;
+        if constexpr (std::is_void_v<return_t>)
+        {
+            size_t index = 0;
+            for (auto it = container.begin(); index < container.size(); ++it, ++index)
+                invoker->invoke(it->second);
+
+            return;
+        }
+        else if constexpr (delegate_pipe_c<return_t>)
+        {
+            return_t result {};
+            size_t   index = 0;
+            for (auto it = container.begin(); index < container.size(); ++it, ++index)
+                result = result | invoker->invoke(it->second);
+
+            return result;
+        }
+        else
+        {
+            return_t result {};
+            size_t   index = 0;
+            for (auto it = container.begin(); index < container.size(); ++it, ++index)
+                result = invoker->invoke(it->second);
+
+            return result;
+        }
+    }
+#else
     // modifying during iteration protection
     thread_local variant_type tempFunctions;
     tempFunctions = *m_optFunctions;
@@ -294,6 +373,7 @@ return_t base_delegate<derived_t, return_t, args_t...>::execute_internal(
             return result;
         }
     }
+#endif
 }
 
 template<class derived_t, class return_t, class... args_t>

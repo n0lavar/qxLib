@@ -10,13 +10,18 @@ endfunction()
 
 function(set_target_options _target)
 
-    if(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-    
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND MSVC)
+        target_compile_options(${_target} PRIVATE
+            /EHsc
+            $<$<CONFIG:Debug>:-D_DEBUG>
+            $<$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>:-DNDEBUG>
+        )
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:-D_DEBUG>
         )
-        
-    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
+
+    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
         
         target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:-D_DEBUG>

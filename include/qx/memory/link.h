@@ -31,7 +31,7 @@ class link
 {
     QX_COPYMOVABLE(link);
 
-    // friend templated link class
+    template<class U>
     friend class link;
 
 public:

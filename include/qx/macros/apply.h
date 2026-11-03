@@ -9,6 +9,8 @@
 **/
 #pragma once
 
+#include <qx/macros/config.h>
+
 #define _QX_APPLY_EVAL0(...) __VA_ARGS__
 #define _QX_APPLY_EVAL1(...) _QX_APPLY_EVAL0(_QX_APPLY_EVAL0(_QX_APPLY_EVAL0(__VA_ARGS__)))
 #define _QX_APPLY_EVAL2(...) _QX_APPLY_EVAL1(_QX_APPLY_EVAL1(_QX_APPLY_EVAL1(__VA_ARGS__)))
@@ -16,7 +18,7 @@
 #define _QX_APPLY_EVAL4(...) _QX_APPLY_EVAL3(_QX_APPLY_EVAL3(_QX_APPLY_EVAL3(__VA_ARGS__)))
 #define _QX_APPLY_EVAL5(...) _QX_APPLY_EVAL4(_QX_APPLY_EVAL4(_QX_APPLY_EVAL4(__VA_ARGS__)))
 
-#ifdef _MSC_VER
+#if QX_MSVC_COMPATIBLE
     // MSVC needs more evaluations
     #define _QX_APPLY_EVAL6(...) _QX_APPLY_EVAL5(_QX_APPLY_EVAL5(_QX_APPLY_EVAL5(__VA_ARGS__)))
     #define _QX_APPLY_EVAL(...)  _QX_APPLY_EVAL6(_QX_APPLY_EVAL6(__VA_ARGS__))

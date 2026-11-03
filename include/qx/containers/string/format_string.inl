@@ -49,7 +49,7 @@ consteval const T& basic_format_string_strong_checks<char_t, args_t...>::parse_f
             ++nNumBracesPairs;
             if (nBracesBalance == 0)
             {
-                throw std::format_error(
+                throw QX_FMT_NS::format_error(
                     "Format string error: num of closing braces > num of opening braces at some point of the format "
                     "string");
             }
@@ -59,12 +59,12 @@ consteval const T& basic_format_string_strong_checks<char_t, args_t...>::parse_f
 
     if (nBracesBalance > 0)
     {
-        throw std::format_error(
+        throw QX_FMT_NS::format_error(
             "Format string error: num of opening braces > num of closing braces at the end of the format string");
     }
 
     if (sizeof...(args_t) != nNumBracesPairs)
-        throw std::format_error("Format string error: num of args != num of braces pairs");
+        throw QX_FMT_NS::format_error("Format string error: num of args != num of braces pairs");
 
     return value;
 }

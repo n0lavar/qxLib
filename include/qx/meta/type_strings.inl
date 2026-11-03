@@ -13,13 +13,13 @@ namespace qx
 template<class T, class char_t>
 constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, char_t>::create_full_signature()
 {
-#if QX_MSVC
-    return QX_STR_PREFIX(char_t, __FUNCSIG__);
-#elif QX_CLANG || QX_GNU
+#if QX_CLANG || QX_APPLE_CLANG || QX_GNU
     if constexpr (std::is_same_v<char_t, char>)
         return __PRETTY_FUNCTION__;
     else
         return convert_string_literal<char_t, __PRETTY_FUNCTION__>();
+#elif QX_MSVC
+    return QX_STR_PREFIX(char_t, __FUNCSIG__);
 #endif
 }
 
@@ -94,12 +94,12 @@ constexpr typename type_strings<T, char_t>::string_view_type type_strings<T, cha
 
     constexpr string_view_type svFunctionSignature = create_full_signature();
 
-#if QX_MSVC
-    constexpr string_view_type svStartMarker = QX_STR_PREFIX(char_t, "type_strings<");
-    constexpr string_view_type svEndMarker   = QX_STR_PREFIX(char_t, ">::create_full_signature(");
-#elif QX_CLANG
+#if QX_CLANG || QX_APPLE_CLANG
     constexpr string_view_type svStartMarker = QX_STR_PREFIX(char_t, "T = ");
     constexpr string_view_type svEndMarker   = QX_STR_PREFIX(char_t, ", char_t = ");
+#elif QX_MSVC
+    constexpr string_view_type svStartMarker = QX_STR_PREFIX(char_t, "type_strings<");
+    constexpr string_view_type svEndMarker   = QX_STR_PREFIX(char_t, ">::create_full_signature(");
 #elif QX_GNU
     constexpr string_view_type svStartMarker = QX_STR_PREFIX(char_t, "T = ");
     constexpr string_view_type svEndMarker   = QX_STR_PREFIX(char_t, ";");

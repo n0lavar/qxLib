@@ -43,7 +43,7 @@ constexpr call_before_main_invoker<lambda_t>::call_before_main_invoker(lambda_t 
 
 #define _QX_DO_JOIN(symbol1, symbol2) symbol1##symbol2
 
-#if !QX_RELEASE && QX_MSVC
+#if !QX_RELEASE && QX_MSVC_COMPATIBLE
     #define _QX_DISABLE_OPTIMIZATIONS() __pragma(optimize("", off))
     #define _QX_ENABLE_OPTIMIZATIONS()  __pragma(optimize("", on))
 #else
@@ -51,7 +51,7 @@ constexpr call_before_main_invoker<lambda_t>::call_before_main_invoker(lambda_t 
     #define _QX_ENABLE_OPTIMIZATIONS()
 #endif
 
-#if !QX_DEBUG && QX_MSVC
+#if !QX_DEBUG && QX_MSVC_COMPATIBLE
     #define _QX_FORCE_INLINE __forceinline
 #elif !QX_DEBUG && (QX_GNU || QX_CLANG || QX_APPLE_CLANG)
     #define _QX_FORCE_INLINE inline __attribute__((always_inline))
@@ -70,7 +70,7 @@ constexpr call_before_main_invoker<lambda_t>::call_before_main_invoker(lambda_t 
 #endif
 // clang-format on
 
-#if QX_MSVC
+#if QX_MSVC_COMPATIBLE
     #define _QX_EMPTY_BASES __declspec(empty_bases)
 #else
     #define _QX_EMPTY_BASES

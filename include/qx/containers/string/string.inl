@@ -2704,7 +2704,7 @@ qx::details::ostream<char_t>& operator<<(
 template<class char_t, class traits_t>
 qx::details::istream<char_t>& operator>>(qx::details::istream<char_t>& is, qx::basic_string<char_t, traits_t>& str)
 {
-    typename qx::details::istream<traits_t>::iostate ret_bit = qx::details::istream<traits_t>::goodbit;
+    typename qx::details::istream<char_t>::iostate ret_bit = qx::details::istream<char_t>::goodbit;
 
     auto try_push_back = [&str, &is, &ret_bit](char_t ch)
     {
@@ -2717,7 +2717,7 @@ qx::details::istream<char_t>& operator>>(qx::details::istream<char_t>& is, qx::b
         else
         {
             is.unget();
-            ret_bit |= qx::details::istream<traits_t>::failbit;
+            ret_bit |= qx::details::istream<char_t>::failbit;
             return false;
         }
     };

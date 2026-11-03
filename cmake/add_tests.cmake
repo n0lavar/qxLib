@@ -1,24 +1,23 @@
 macro(set_test_options _target)
-    if(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-    
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND MSVC)
+        # clang-cl uses the Windows runtime and does not link Unix libraries.
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         target_link_libraries(${_target} PRIVATE
-            -pthread 
+            -pthread
             -lstdc++fs
         )
-
-    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)    
-        
-        target_link_options(${_target} PRIVATE 
+    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        target_link_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:--coverage>
         )
-        
+
         target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:--coverage -fkeep-inline-functions -fkeep-static-consts>
         )
-        
+
         target_link_libraries(${_target} PRIVATE
-            -pthread 
-			-lstdc++fs
+            -pthread
+            -lstdc++fs
         )
 
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
@@ -32,6 +31,7 @@ macro(set_test_options _target)
     target_link_libraries(${_target} PRIVATE
         ${GTEST_LIBRARIES}
     )
+
 endmacro()
 
 macro(add_tests

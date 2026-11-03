@@ -27,16 +27,23 @@ endif(GTEST_ROOT_DIR)
 # locate header
 find_path(GTEST_INCLUDE_DIR "gtest/gtest.h" PATHS ${_GTEST_HEADER_SEARCH_DIRS})
 # Require a library as well as headers so configuration fails before linking.
-find_library(GTEST_LIBRARY_RELEASE NAMES gtest PATHS
-    "${GTEST_INCLUDE_DIR}/../../build/lib/Release"
-    "${GTEST_INCLUDE_DIR}/../lib"
-    "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu"
-)
-find_library(GTEST_LIBRARY_DEBUG NAMES gtestd gtest PATHS
-    "${GTEST_INCLUDE_DIR}/../../build/lib/Debug"
-    "${GTEST_INCLUDE_DIR}/../lib"
-    "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu"
-)
+if(QX_DEPENDENCIES_BUILD_DIR)
+    find_library(GTEST_LIBRARY_RELEASE NAMES gtest PATHS
+        "${EXTERNAL_FOLDER}/googletest/${QX_DEPENDENCIES_BUILD_DIR}/lib/Release" NO_DEFAULT_PATH)
+    find_library(GTEST_LIBRARY_DEBUG NAMES gtestd gtest PATHS
+        "${EXTERNAL_FOLDER}/googletest/${QX_DEPENDENCIES_BUILD_DIR}/lib/Debug" NO_DEFAULT_PATH)
+else()
+    find_library(GTEST_LIBRARY_RELEASE NAMES gtest PATHS
+        "${GTEST_INCLUDE_DIR}/../../build/lib/Release"
+        "${GTEST_INCLUDE_DIR}/../lib"
+        "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu"
+    )
+    find_library(GTEST_LIBRARY_DEBUG NAMES gtestd gtest PATHS
+        "${GTEST_INCLUDE_DIR}/../../build/lib/Debug"
+        "${GTEST_INCLUDE_DIR}/../lib"
+        "${GTEST_INCLUDE_DIR}/../lib/x86_64-linux-gnu"
+    )
+endif()
 include(SelectLibraryConfigurations)
 select_library_configurations(GTEST)
 include(FindPackageHandleStandardArgs)
