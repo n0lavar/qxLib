@@ -158,8 +158,8 @@ $(function() {
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="classqx_1_1class__id.html">class_id</a> <span class="keywordtype">id</span>,</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    std::map&lt;class_id, factory&gt;&amp; factories_by_id = factories_by_id();</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = factories_by_id.find(<span class="keywordtype">id</span>); it != factories_by_id.end())</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    std::map&lt;class_id, factory&gt;&amp; factories_by_id_ = factories_by_id();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = factories_by_id_.find(<span class="keywordtype">id</span>); it != factories_by_id_.end())</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">return</span> it-&gt;second(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
@@ -170,8 +170,8 @@ $(function() {
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    string_view svClassName,</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;{</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    std::map&lt;class_id, factory&gt;&amp; factories_by_name = factories_by_name();</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = factories_by_name().find(svClassName); it != factories_by_name().end())</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    std::map&lt;string_view, factory&gt;&amp; factories_by_name_ = factories_by_name();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span> it = factories_by_name_.find(svClassName); it != factories_by_name_.end())</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    {</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        <span class="keywordflow">return</span> it-&gt;second(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
