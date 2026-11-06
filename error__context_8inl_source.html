@@ -103,26 +103,32 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">if</span> (<span class="keyword">auto</span>* pStream = <a class="code" href="logger_8h.html#a3feb5ccf05cba22a551d6e4523139448">get_logger</a>().get_stream&lt;error_context_stream&gt;())</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        (*pStream-&gt;get_on_messages().lock())[std::this_thread::get_id()].remove(m_OnMessagesToken);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        pStream-&gt;get_on_error().lock()-&gt;remove(m_OnErrorToken);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> error_context::on_message(verbosity eVerbosity, string_view svMessage) noexcept</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (eVerbosity &gt;= m_eMinCatchVerbosity)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        m_sMessages += svMessage;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keyword">auto</span>&amp; onMessages = *pStream-&gt;get_on_messages().lock();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> itOnMessage = onMessages.find(std::this_thread::get_id()); itOnMessage != onMessages.end())</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            itOnMessage-&gt;second.remove(m_OnMessagesToken);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">if</span> (itOnMessage-&gt;second.empty())</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                onMessages.erase(itOnMessage);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        pStream-&gt;get_on_error().lock()-&gt;remove(m_OnErrorToken);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> error_context::on_error(std::thread::id errorThreadId) noexcept</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> error_context::on_message(verbosity eVerbosity, string_view svMessage) noexcept</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (m_ThreadId == errorThreadId &amp;&amp; !m_sMessages.empty())</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">QX_LOG</a>(qx::verbosity::log, <span class="stringliteral">&quot;\n{}\n{}{}&quot;</span>, m_svHeader, m_sMessages, m_svFooter);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">if</span> (eVerbosity &gt;= m_eMinCatchVerbosity)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        m_sMessages += svMessage;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> error_context::on_error(std::thread::id errorThreadId) noexcept</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">if</span> (m_ThreadId == errorThreadId &amp;&amp; !m_sMessages.empty())</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">QX_LOG</a>(qx::verbosity::log, <span class="stringliteral">&quot;\n{}\n{}{}&quot;</span>, m_svHeader, m_sMessages, m_svFooter);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1error__context_html_a55712970318e3aef7f18481ef4fd9176"><div class="ttname"><a href="classqx_1_1error__context.html#a55712970318e3aef7f18481ef4fd9176">qx::error_context::error_context</a></div><div class="ttdeci">error_context(verbosity eMinCaptureVerbosity, string_view svHeader=QXT(&quot;Error context start&quot;), string_view svFooter=QXT(&quot;Error context end&quot;)) noexcept</div><div class="ttdoc">error_context object constructor</div><div class="ttdef"><b>Definition:</b> <a href="error__context_8inl_source.html#l00013">error_context.inl:13</a></div></div>
-<div class="ttc" id="alogger_8h_html_a3feb5ccf05cba22a551d6e4523139448"><div class="ttname"><a href="logger_8h.html#a3feb5ccf05cba22a551d6e4523139448">qx::get_logger</a></div><div class="ttdeci">logger &amp; get_logger() noexcept</div><div class="ttdoc">Get the logger instance used in QX_LOG macros.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00291">logger.h:291</a></div></div>
+<div class="ttc" id="alogger_8h_html_a3feb5ccf05cba22a551d6e4523139448"><div class="ttname"><a href="logger_8h.html#a3feb5ccf05cba22a551d6e4523139448">qx::get_logger</a></div><div class="ttdeci">logger &amp; get_logger() noexcept</div><div class="ttdoc">Get the logger instance used in QX_LOG macros.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00293">logger.h:293</a></div></div>
 <div class="ttc" id="alogger_8h_html_a79dd4ee569e1f68524cee4ed028f628a"><div class="ttname"><a href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">QX_LOG</a></div><div class="ttdeci">#define QX_LOG(eVerbosity,...)</div><div class="ttdoc">Log message.</div><div class="ttdef"><b>Definition:</b> <a href="logger_8h_source.html#l00038">logger.h:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

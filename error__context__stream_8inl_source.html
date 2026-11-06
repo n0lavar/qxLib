@@ -131,14 +131,18 @@ $(function() {
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    error_context_stream_data&amp; data = *m_Data;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="structcontains.html">contains</a>(*data.disabledThreads.lock(), threadId))</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        (*data.onMessages.lock())[threadId].execute(eVerbosity, svMessage);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;}</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> error_context_stream::do_flush()</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;{</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keyword">auto</span>&amp; onMessages = *data.onMessages.lock();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">if</span> (<span class="keyword">auto</span> itOnMessage = onMessages.find(threadId); itOnMessage != onMessages.end())</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            itOnMessage-&gt;second.execute(eVerbosity, svMessage);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> error_context_stream::do_flush()</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;{</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00061">category.h:62</a></div></div>
 <div class="ttc" id="aclassqx_1_1error__context__stream_html_a06c1187a5978bddc50fd2da688786df6"><div class="ttname"><a href="classqx_1_1error__context__stream.html#a06c1187a5978bddc50fd2da688786df6">qx::error_context_stream::get_on_messages</a></div><div class="ttdeci">threads_shared&lt; on_message_delegates_map_t &gt; &amp; get_on_messages() noexcept</div><div class="ttdoc">Get on messages delegate.</div><div class="ttdef"><b>Definition:</b> <a href="error__context__stream_8inl_source.html#l00019">error_context_stream.inl:20</a></div></div>
 <div class="ttc" id="aclassqx_1_1error__context__stream_html_a9d3d3d990aa868e751f6f46da3eff4b0"><div class="ttname"><a href="classqx_1_1error__context__stream.html#a9d3d3d990aa868e751f6f46da3eff4b0">qx::error_context_stream::on_error</a></div><div class="ttdeci">void on_error(std::thread::id errorThreadId) noexcept</div><div class="ttdoc">Emit error event for all listeners.</div><div class="ttdef"><b>Definition:</b> <a href="error__context__stream_8inl_source.html#l00031">error_context_stream.inl:31</a></div></div>

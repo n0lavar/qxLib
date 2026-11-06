@@ -9,6 +9,6 @@ var searchData=
   ['link_1660',['link',['../classqx_1_1link.html#a7d0aaef5705d686fdd1d0ea5db0404ca',1,'qx::link::link(const std::shared_ptr&lt; U &gt; &amp;pStrong) noexcept'],['../classqx_1_1link.html#ab06d224d0a2e66c082bc328b9693cf99',1,'qx::link::link(const link&lt; U &gt; &amp;pLink) noexcept'],['../classqx_1_1link.html#ac5f23a15679e348acb7fa32f2246c763',1,'qx::link::link(link&lt; U &gt; &amp;&amp;pLink) noexcept'],['../classqx_1_1link.html#a413eb19c581de68acafe83b9f6fe4616',1,'qx::link::link(std::nullptr_t) noexcept'],['../classqx_1_1link.html#aab9e56e1fdaca4bfb1866def27ced8c1',1,'qx::link::link(std::weak_ptr&lt; T &gt; pWeak) noexcept'],['../classqx_1_1link.html#a503609973dce3cf2905782178490f603',1,'qx::link::link(std::weak_ptr&lt; U &gt; pWeak) noexcept']]],
   ['lock_1661',['lock',['../classqx_1_1link.html#a24382e977367a817ccddf21d3acd8e34',1,'qx::link::lock()'],['../classqx_1_1threads__shared.html#a1540b252169d22fef4f4fb61ff9aec5f',1,'qx::threads_shared::lock()']]],
   ['log_1662',['log',['../classqx_1_1base__logger__stream.html#aae7796b4f64ac842ffa1a0a0832f56e0',1,'qx::base_logger_stream']]],
-  ['log_5fmacro_1663',['log_macro',['../classqx_1_1logger.html#a8c4de37c0788147d909d31ffa156e507',1,'qx::logger']]],
+  ['log_5fmacro_1663',['log_macro',['../classqx_1_1logger.html#ad5141aed6e73df9c837bc4645cb69533',1,'qx::logger']]],
   ['log_5funconditionally_5frequired_1664',['log_unconditionally_required',['../classqx_1_1base__logger__stream.html#a4b7766c935d598de4999b98709c214cb',1,'qx::base_logger_stream']]]
 ];

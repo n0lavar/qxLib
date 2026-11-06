@@ -26,7 +26,7 @@ var searchData=
   ['lock_5fptr_500',['lock_ptr',['../classqx_1_1link_1_1lock__ptr.html',1,'qx::link']]],
   ['log_501',['log',['../classqx_1_1base__logger__stream.html#aae7796b4f64ac842ffa1a0a0832f56e0',1,'qx::base_logger_stream']]],
   ['log_5ffile_5fpolicy_502',['log_file_policy',['../base__file__logger__stream_8h.html#aaab6d2d26ae57b1521451921e1273220',1,'qx']]],
-  ['log_5fmacro_503',['log_macro',['../classqx_1_1logger.html#a8c4de37c0788147d909d31ffa156e507',1,'qx::logger']]],
+  ['log_5fmacro_503',['log_macro',['../classqx_1_1logger.html#ad5141aed6e73df9c837bc4645cb69533',1,'qx::logger']]],
   ['log_5funconditionally_5frequired_504',['log_unconditionally_required',['../classqx_1_1base__logger__stream.html#a4b7766c935d598de4999b98709c214cb',1,'qx::base_logger_stream']]],
   ['logger_505',['logger',['../logger_readme.html',1,'(Global Namespace)'],['../classqx_1_1logger.html',1,'qx::logger']]],
   ['logger_2eh_506',['logger.h',['../logger_8h.html',1,'']]],
