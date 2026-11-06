@@ -69,8 +69,17 @@ public:
     static bool _register_class(factory factory, class_id id, string_view svClassName);
 
 private:
-    static inline std::map<class_id, factory>    s_FactoriesById;
-    static inline std::map<string_view, factory> s_FactoriesByName;
+    [[nodiscard]] static std::map<class_id, factory>& factories_by_id()
+    {
+        static std::map<class_id, factory> s_FactoriesById;
+        return s_FactoriesById;
+    }
+
+    [[nodiscard]] static std::map<string_view, factory>& factories_by_name()
+    {
+        static std::map<string_view, factory> s_FactoriesByName;
+        return s_FactoriesByName;
+    }
 };
 
 template<class base_class_t, template<class> class smart_ptr_t, class... args_t>
@@ -78,7 +87,8 @@ template<class base_class_t, template<class> class smart_ptr_t, class... args_t>
     class_id id,
     args_t&&... args)
 {
-    if (auto it = s_FactoriesById.find(id); it != s_FactoriesById.end())
+    std::map<class_id, factory>& factories_by_id_ = factories_by_id();
+    if (auto it = factories_by_id_.find(id); it != factories_by_id_.end())
         return it->second(std::forward<args_t>(args)...);
 
     return nullptr;
@@ -89,7 +99,8 @@ template<class base_class_t, template<class> class smart_ptr_t, class... args_t>
     string_view svClassName,
     args_t&&... args)
 {
-    if (auto it = s_FactoriesByName.find(svClassName); it != s_FactoriesByName.end())
+    std::map<string_view, factory>& factories_by_name_ = factories_by_name();
+    if (auto it = factories_by_name_.find(svClassName); it != factories_by_name_.end())
     {
         return it->second(std::forward<args_t>(args)...);
     }
@@ -105,8 +116,8 @@ inline bool reflection_creator<base_class_t, smart_ptr_t, args_t...>::_register_
 {
     if (factory && !svClassName.empty())
     {
-        s_FactoriesById[id]            = factory;
-        s_FactoriesByName[svClassName] = factory;
+        factories_by_id()[id]            = factory;
+        factories_by_name()[svClassName] = factory;
         return true;
     }
     else

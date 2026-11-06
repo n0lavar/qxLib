@@ -31,7 +31,12 @@ fwd_it_t remove_if_i(fwd_it_t itBegin, fwd_it_t itEnd, const predicate_t& predic
     for (fwd_it_t it = itBegin; it != itEnd; ++it)
     {
         if (!predicate(i))
-            *itDest++ = std::move(*it);
+        {
+            if (itDest != it)
+                *itDest = std::move(*it);
+
+            ++itDest;
+        }
 
         ++i;
     }

@@ -3,8 +3,9 @@
 
 	<Type Name="qx::basic_string&lt;char, *&gt;">
 		<Expand>
-			<Item Name="[text]"  Condition="m_Data.m_nAllocatedSize==0">(const char*)m_Data.m_Data.buffer._Elems,s</Item>
-			<Item Name="[text]"  Condition="m_Data.m_nAllocatedSize!=0">(const char*)m_Data.m_Data.pData,s</Item>
+			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize==0" Optional="true">(const char*)m_Data.m_Data.buffer._Elems,s</Item>
+			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize==0" Optional="true">(const char*)m_Data.m_Data.buffer.__elems_,s</Item>
+			<Item Name="[text]"  Condition="m_Data.m_nAllocatedSize!=0">(const char*)*(void**)&amp;m_Data.m_Data,s</Item>
 			<Item Name="[size_chars]">m_Data.m_nSize/sizeof(char)</Item>
 			<Item Name="[allocated_chars]">m_Data.m_nAllocatedSize/sizeof(char)</Item>
 		</Expand>
@@ -12,8 +13,9 @@
 
 	<Type Name="qx::basic_string&lt;wchar_t, *&gt;">
 		<Expand>
-			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize==0">(const wchar_t*)m_Data.m_Data.buffer._Elems,su</Item>
-			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize!=0">(const wchar_t*)m_Data.m_Data.pData,su</Item>
+			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize==0" Optional="true">(const wchar_t*)m_Data.m_Data.buffer._Elems,su</Item>
+			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize==0" Optional="true">(const wchar_t*)m_Data.m_Data.buffer.__elems_,su</Item>
+			<Item Name="[text]" Condition="m_Data.m_nAllocatedSize!=0">(const wchar_t*)*(void**)&amp;m_Data.m_Data,su</Item>
 			<Item Name="[size_chars]">m_Data.m_nSize/sizeof(wchar_t)</Item>
 			<Item Name="[allocated_chars]">m_Data.m_nAllocatedSize/sizeof(wchar_t)</Item>
 		</Expand>

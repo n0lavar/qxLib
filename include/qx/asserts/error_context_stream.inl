@@ -60,7 +60,11 @@ inline void error_context_stream::do_log(
 {
     error_context_stream_data& data = *m_Data;
     if (!contains(*data.disabledThreads.lock(), threadId))
-        (*data.onMessages.lock())[threadId].execute(eVerbosity, svMessage);
+    {
+        auto& onMessages = *data.onMessages.lock();
+        if (auto itOnMessage = onMessages.find(threadId); itOnMessage != onMessages.end())
+            itOnMessage->second.execute(eVerbosity, svMessage);
+    }
 }
 
 inline void error_context_stream::do_flush()

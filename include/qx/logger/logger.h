@@ -1,4 +1,4 @@
-﻿/**
+/**
 
     @file      logger.h
     @author    Khrapov
@@ -191,14 +191,15 @@ public:
     /**
         @brief   Main log function: log to all streams. For macro and internal usage.
         @warning All input args must be ready for async work (i.e. be stable)
-        @param   category    - code category
-        @param   eVerbosity  - message verbosity
-        @param   threadId    - thread where the log is called
-        @param   messageTime - message creation time
-        @param   svFile      - file name string
-        @param   svFunction  - function name string
-        @param   nLine       - code line number
-        @param   message     - user message string
+        @param   category          - code category
+        @param   eVerbosity        - message verbosity
+        @param   threadId          - thread where the log is called
+        @param   messageTime       - message creation time
+        @param   svFile            - file name string
+        @param   svFunction        - function name string
+        @param   nLine             - code line number
+        @param   eMessageNecessity - result of get_message_necessity_type for this message
+        @param   message           - user message string
     **/
     virtual void log_macro(
         const category&                       category,
@@ -208,6 +209,7 @@ public:
         string_view                           svFile,
         string_view                           svFunction,
         int                                   nLine,
+        flags<message_necessity_type>         eMessageNecessity,
         logger_string_pool::item              message);
 
     /**
@@ -297,23 +299,38 @@ inline logger& get_logger() noexcept
 
 #ifndef _QX_LOG_C
 // __FUNCTION__ isn't a char array on linux, so we need to convert it
-    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)               \
-        do                                                                            \
-        {                                                                             \
-            verbosityCheckKeyword const auto& _category = category;                   \
-            if verbosityCheckKeyword (eVerbosity >= _category.get_verbosity())        \
-            {                                                                         \
-                qx::logger& _logger = qx::get_logger();                               \
-                _logger.log_macro(                                                    \
-                    _category,                                                        \
-                    eVerbosity,                                                       \
-                    std::this_thread::get_id(),                                       \
-                    std::chrono::system_clock::now(),                                 \
-                    QX_SHORT_FILE,                                                    \
-                    qx::convert_string_literal<qx::char_type, __FUNCTION__>(),        \
-                    QX_LINE,                                                          \
-                    _QX_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__)); \
-            }                                                                         \
+    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)                                              \
+        do                                                                                                           \
+        {                                                                                                            \
+            verbosityCheckKeyword const auto& _category = category;                                                  \
+            if verbosityCheckKeyword (eVerbosity >= _category.get_verbosity())                                       \
+            {                                                                                                        \
+                qx::logger&                                         _logger      = qx::get_logger();                 \
+                const std::thread::id                               _threadId    = std::this_thread::get_id();       \
+                const std::chrono::system_clock::time_point         _messageTime = std::chrono::system_clock::now(); \
+                const qx::flags<qx::logger::message_necessity_type> _messageNecessity =                              \
+                    _logger.get_message_necessity_type(                                                              \
+                        _category,                                                                                   \
+                        eVerbosity,                                                                                  \
+                        _threadId,                                                                                   \
+                        _messageTime,                                                                                \
+                        QX_SHORT_FILE,                                                                               \
+                        qx::convert_string_literal<qx::char_type, __FUNCTION__>(),                                   \
+                        QX_LINE);                                                                                    \
+                if (_messageNecessity != qx::logger::message_necessity_type::not_required)                           \
+                {                                                                                                    \
+                    _logger.log_macro(                                                                               \
+                        _category,                                                                                   \
+                        eVerbosity,                                                                                  \
+                        _threadId,                                                                                   \
+                        _messageTime,                                                                                \
+                        QX_SHORT_FILE,                                                                               \
+                        qx::convert_string_literal<qx::char_type, __FUNCTION__>(),                                   \
+                        QX_LINE,                                                                                     \
+                        _messageNecessity,                                                                           \
+                        _QX_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__));                            \
+                }                                                                                                    \
+            }                                                                                                        \
         } while (false)
 #endif
 

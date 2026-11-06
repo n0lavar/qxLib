@@ -116,11 +116,9 @@ inline void logger::log_macro(
     string_view                           svFile,
     string_view                           svFunction,
     int                                   nLine,
+    flags<message_necessity_type>         eMessageNecessity,
     logger_string_pool::item              message)
 {
-    const flags<message_necessity_type> eMessageNecessity =
-        get_message_necessity_type(category, eVerbosity, threadId, messageTime, svFile, svFunction, nLine);
-
     {
         std::shared_lock _(m_RegisteredCategoriesMutex);
         if (auto itRegisteredCategory = m_RegisteredCategories.find(category.get_name());

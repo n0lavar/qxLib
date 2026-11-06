@@ -32,7 +32,13 @@ inline error_context::~error_context() noexcept
 
     if (auto* pStream = get_logger().get_stream<error_context_stream>())
     {
-        (*pStream->get_on_messages().lock())[std::this_thread::get_id()].remove(m_OnMessagesToken);
+        auto& onMessages = *pStream->get_on_messages().lock();
+        if (auto itOnMessage = onMessages.find(std::this_thread::get_id()); itOnMessage != onMessages.end())
+        {
+            itOnMessage->second.remove(m_OnMessagesToken);
+            if (itOnMessage->second.empty())
+                onMessages.erase(itOnMessage);
+        }
         pStream->get_on_error().lock()->remove(m_OnErrorToken);
     }
 }

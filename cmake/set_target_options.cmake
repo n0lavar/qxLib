@@ -78,8 +78,6 @@ function(set_target_options _target)
 
             $<$<CONFIG:Debug>: /ZI /D_DEBUG /bigobj>
             $<$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>: /DNDEBUG>
-
-            /MP # multithreaded compilation
         )
 
         # disable the following warnings for the Debug configuration
@@ -118,6 +116,12 @@ function(set_target_options _target)
     set_target_properties(${_target} PROPERTIES 
         LINKER_LANGUAGE CXX
     )
-        
+
+    if(CMAKE_GENERATOR MATCHES "Visual Studio")
+        set_target_properties(${_target} PROPERTIES
+            VS_GLOBAL_UseMultiToolTask true
+        )
+    endif()
+
 endfunction()
 
