@@ -95,28 +95,30 @@ $(function() {
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="structqx_1_1rtti__naming__strategy__empty.html">   25</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1rtti__naming__strategy__empty.html">rtti_naming_strategy_empty</a></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">static</span> constexpr string_view get_name(string_view) noexcept</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span> QXT(<span class="stringliteral">&quot;&quot;</span>);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @struct rtti_naming_strategy_class_name</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    @brief  Returns class name string_view in get_name</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    @author Khrapov</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @date   10.09.2021</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">**/</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="structqx_1_1rtti__naming__strategy__class__name.html">   39</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1rtti__naming__strategy__class__name.html">rtti_naming_strategy_class_name</a></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;{</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">static</span> constexpr string_view get_name(string_view svName) noexcept</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    {</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordflow">return</span> svName;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="ttc" id="astructqx_1_1rtti__naming__strategy__class__name_html"><div class="ttname"><a href="structqx_1_1rtti__naming__strategy__class__name.html">qx::rtti_naming_strategy_class_name</a></div><div class="ttdoc">Returns class name string_view in get_name.</div><div class="ttdef"><b>Definition:</b> <a href="rtti__naming__strategy_8h_source.html#l00039">rtti_naming_strategy.h:40</a></div></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">static</span> constexpr basic_string_view&lt;char_t&gt; get_name(basic_string_view&lt;char_t&gt;) noexcept</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">return</span> {};</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;};</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">    @struct rtti_naming_strategy_class_name</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">    @brief  Returns class name string_view in get_name</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">    @author Khrapov</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">    @date   10.09.2021</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">**/</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structqx_1_1rtti__naming__strategy__class__name.html">   40</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structqx_1_1rtti__naming__strategy__class__name.html">rtti_naming_strategy_class_name</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="keywordtype">char</span>_t&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keyword">static</span> constexpr basic_string_view&lt;char_t&gt; get_name(basic_string_view&lt;char_t&gt; svName) noexcept</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">return</span> svName;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="astructqx_1_1rtti__naming__strategy__class__name_html"><div class="ttname"><a href="structqx_1_1rtti__naming__strategy__class__name.html">qx::rtti_naming_strategy_class_name</a></div><div class="ttdoc">Returns class name string_view in get_name.</div><div class="ttdef"><b>Definition:</b> <a href="rtti__naming__strategy_8h_source.html#l00040">rtti_naming_strategy.h:41</a></div></div>
 <div class="ttc" id="astructqx_1_1rtti__naming__strategy__empty_html"><div class="ttname"><a href="structqx_1_1rtti__naming__strategy__empty.html">qx::rtti_naming_strategy_empty</a></div><div class="ttdoc">Returns empty string_view in get_name: { '\0' }.</div><div class="ttdef"><b>Definition:</b> <a href="rtti__naming__strategy_8h_source.html#l00025">rtti_naming_strategy.h:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
