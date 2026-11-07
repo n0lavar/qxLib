@@ -16,11 +16,33 @@ inline void to_wstring(wstring& out, cstring_view stringView, const std::locale&
 {
     QX_PERF_SCOPE();
 
+    if (stringView.empty())
+    {
+        out.clear();
+        return;
+    }
+
     out.assign(stringView.size(), L'\0');
-    std::use_facet<std::ctype<wchar_t>>(locale).widen(
-        stringView.data(),
-        stringView.data() + stringView.size(),
-        out.data());
+
+#if QX_STRING_USE_CRT_LOCALE
+    if (_locale_t crtLocale = &locale == &get_locale() ? details::get_locale_state().crtLocale.get() : nullptr)
+    {
+        for (size_t i = 0; i < stringView.size(); ++i)
+        {
+            wchar_t ch = static_cast<wchar_t>(WEOF);
+            if (static_cast<int>(stringView[i]) != EOF && _mbtowc_l(&ch, stringView.data() + i, 1, crtLocale) < 0)
+                ch = static_cast<wchar_t>(WEOF);
+
+            out[i] = ch;
+        }
+
+        return;
+    }
+#endif
+
+    const std::ctype<wchar_t>& facet =
+        &locale == &get_locale() ? get_locale_facet() : std::use_facet<std::ctype<wchar_t>>(locale);
+    facet.widen(stringView.data(), stringView.data() + stringView.size(), out.data());
 }
 
 inline wstring to_wstring(cstring_view stringView, const std::locale& locale)
@@ -44,9 +66,32 @@ inline void to_cstring(cstring& out, wstring_view stringView, const std::locale&
 {
     QX_PERF_SCOPE();
 
+    if (stringView.empty())
+    {
+        out.clear();
+        return;
+    }
+
     out.assign(stringView.size(), '\0');
-    std::use_facet<std::ctype<wchar_t>>(locale)
-        .narrow(stringView.data(), stringView.data() + stringView.size(), '?', out.data());
+
+#if QX_STRING_USE_CRT_LOCALE
+    if (_locale_t crtLocale = &locale == &get_locale() ? details::get_locale_state().crtLocale.get() : nullptr)
+    {
+        for (size_t i = 0; i < stringView.size(); ++i)
+        {
+            char          buffer[MB_LEN_MAX];
+            const wchar_t ch      = stringView[i];
+            const int     nLength = ch == static_cast<wchar_t>(WEOF) ? -1 : _wctomb_l(buffer, ch, crtLocale);
+            out[i]                = nLength == 1 && static_cast<int>(buffer[0]) != EOF ? buffer[0] : '?';
+        }
+
+        return;
+    }
+#endif
+
+    const std::ctype<wchar_t>& facet =
+        &locale == &get_locale() ? get_locale_facet() : std::use_facet<std::ctype<wchar_t>>(locale);
+    facet.narrow(stringView.data(), stringView.data() + stringView.size(), '?', out.data());
 }
 
 inline cstring to_cstring(wstring_view stringView, const std::locale& locale)
