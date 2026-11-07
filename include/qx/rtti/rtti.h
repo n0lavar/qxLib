@@ -133,13 +133,26 @@ public:
         @brief  Apply the naming strategy to the declaring RTTI type's signature.
         @return - a class-name view that may be empty, depending on the strategy
     **/
-    static constexpr string_view get_class_name_static() noexcept;
+    template<class char_t = char_type>
+    static constexpr basic_string_view<char_t> get_class_name_static() noexcept;
 
     /**
         @brief  Get the name of the object's most-derived registered RTTI type.
         @return - the naming strategy's result for the dynamic type; it may be empty
     **/
-    virtual string_view get_class_name() const noexcept;
+    virtual qx::basic_string_view<char_type> get_class_name() const noexcept;
+
+    /**
+        @brief  Get the name of the object's most-derived registered RTTI type.
+        @return - the naming strategy's result for the dynamic type; it may be empty
+    **/
+    virtual qx::basic_string_view<char> get_class_name_cstring() const noexcept;
+
+    /**
+        @brief  Get the name of the object's most-derived registered RTTI type.
+        @return - the naming strategy's result for the dynamic type; it may be empty
+    **/
+    virtual qx::basic_string_view<wchar_t> get_class_name_wstring() const noexcept;
 
     /**
         @brief   Create the declaring RTTI type's identifier from its type signature.
@@ -199,64 +212,74 @@ constexpr auto is = [](const auto& value)
     @param thisClass - type being registered, used to generate its identifier and name
     @param ...       - immediate base type, either rtti_root or a type using QX_RTTI_CLASS
 **/
-#define QX_RTTI_CLASS(thisClass, ...)                                                                               \
-                                                                                                                    \
-public:                                                                                                             \
-    using this_class_type  = thisClass;                                                                             \
-    using super_class_type = __VA_ARGS__;                                                                           \
-    using base_class_type  = typename super_class_type::base_class_type;                                            \
-    using inheritance_tuple_type =                                                                                  \
-        qx::tuple_utils::join_t<typename super_class_type::inheritance_tuple_type, this_class_type>;                \
-                                                                                                                    \
-public:                                                                                                             \
-    static constexpr bool is_derived_from_id_static(const qx::class_id& id) noexcept                                \
-    {                                                                                                               \
-        return id == get_class_id_static() || super_class_type::is_derived_from_id_static(id);                      \
-    }                                                                                                               \
-    virtual bool is_derived_from_id(const qx::class_id& id) const noexcept override                                 \
-    {                                                                                                               \
-        static_assert(std::is_same_v<std::remove_cvref_t<decltype(*this)>, this_class_type>);                       \
-        return is_derived_from_id_static(id);                                                                       \
-    }                                                                                                               \
-    static constexpr qx::string_view get_class_name_static() noexcept                                               \
-    {                                                                                                               \
-        return base_class_type::naming_strategy_type::get_name(qx::type_strings<this_class_type>::get_signature()); \
-    }                                                                                                               \
-    virtual qx::class_id get_class_id() const noexcept override                                                     \
-    {                                                                                                               \
-        return get_class_id_static();                                                                               \
-    }                                                                                                               \
-    static constexpr qx::class_id get_class_id_static() noexcept                                                    \
-    {                                                                                                               \
-        constexpr qx::class_id id = qx::class_id::create<this_class_type>();                                        \
-        return id;                                                                                                  \
-    }                                                                                                               \
-    virtual qx::string_view get_class_name() const noexcept override                                                \
-    {                                                                                                               \
-        return get_class_name_static();                                                                             \
-    }                                                                                                               \
-    virtual std::span<const qx::class_id> get_inheritance_sequence() const override                                 \
-    {                                                                                                               \
-        static constexpr auto s_Ids = []()                                                                          \
-        {                                                                                                           \
-            std::array<qx::class_id, std::tuple_size_v<inheritance_tuple_type>> ids_;                               \
-            qx::tuple_utils::iterate<inheritance_tuple_type>(                                                       \
-                [&ids_]<class T, size_t I>()                                                                        \
-                {                                                                                                   \
-                    ids_[I] = T::get_class_id_static();                                                             \
-                });                                                                                                 \
-            return ids_;                                                                                            \
-        }();                                                                                                        \
-        return s_Ids;                                                                                               \
-    }                                                                                                               \
-                                                                                                                    \
-protected:                                                                                                          \
-    virtual bool _is_base_id(const qx::class_id& base_id) const noexcept override                                   \
-    {                                                                                                               \
-        return base_id == super_class_type::get_class_id_static() || super_class_type::_is_base_id(base_id);        \
-    }                                                                                                               \
-                                                                                                                    \
-private:                                                                                                            \
+#define QX_RTTI_CLASS(thisClass, ...)                                                                        \
+                                                                                                             \
+public:                                                                                                      \
+    using this_class_type  = thisClass;                                                                      \
+    using super_class_type = __VA_ARGS__;                                                                    \
+    using base_class_type  = typename super_class_type::base_class_type;                                     \
+    using inheritance_tuple_type =                                                                           \
+        qx::tuple_utils::join_t<typename super_class_type::inheritance_tuple_type, this_class_type>;         \
+                                                                                                             \
+public:                                                                                                      \
+    static constexpr bool is_derived_from_id_static(const qx::class_id& id) noexcept                         \
+    {                                                                                                        \
+        return id == get_class_id_static() || super_class_type::is_derived_from_id_static(id);               \
+    }                                                                                                        \
+    virtual bool is_derived_from_id(const qx::class_id& id) const noexcept override                          \
+    {                                                                                                        \
+        static_assert(std::is_same_v<std::remove_cvref_t<decltype(*this)>, this_class_type>);                \
+        return is_derived_from_id_static(id);                                                                \
+    }                                                                                                        \
+    virtual qx::class_id get_class_id() const noexcept override                                              \
+    {                                                                                                        \
+        return get_class_id_static();                                                                        \
+    }                                                                                                        \
+    static constexpr qx::class_id get_class_id_static() noexcept                                             \
+    {                                                                                                        \
+        constexpr qx::class_id id = qx::class_id::create<this_class_type>();                                 \
+        return id;                                                                                           \
+    }                                                                                                        \
+    template<class char_t = qx::char_type>                                                                   \
+    static constexpr qx::basic_string_view<char_t> get_class_name_static() noexcept                          \
+    {                                                                                                        \
+        return base_class_type::naming_strategy_type::get_name(                                              \
+            qx::type_strings<this_class_type, char_t>::get_signature());                                     \
+    }                                                                                                        \
+    virtual qx::basic_string_view<qx::char_type> get_class_name() const noexcept override                    \
+    {                                                                                                        \
+        return get_class_name_static<qx::char_type>();                                                       \
+    }                                                                                                        \
+    virtual qx::basic_string_view<char> get_class_name_cstring() const noexcept override                     \
+    {                                                                                                        \
+        return get_class_name_static<char>();                                                                \
+    }                                                                                                        \
+    virtual qx::basic_string_view<wchar_t> get_class_name_wstring() const noexcept override                  \
+    {                                                                                                        \
+        return get_class_name_static<wchar_t>();                                                             \
+    }                                                                                                        \
+    virtual std::span<const qx::class_id> get_inheritance_sequence() const override                          \
+    {                                                                                                        \
+        static constexpr auto s_Ids = []()                                                                   \
+        {                                                                                                    \
+            std::array<qx::class_id, std::tuple_size_v<inheritance_tuple_type>> ids_;                        \
+            qx::tuple_utils::iterate<inheritance_tuple_type>(                                                \
+                [&ids_]<class T, size_t I>()                                                                 \
+                {                                                                                            \
+                    ids_[I] = T::get_class_id_static();                                                      \
+                });                                                                                          \
+            return ids_;                                                                                     \
+        }();                                                                                                 \
+        return s_Ids;                                                                                        \
+    }                                                                                                        \
+                                                                                                             \
+protected:                                                                                                   \
+    virtual bool _is_base_id(const qx::class_id& base_id) const noexcept override                            \
+    {                                                                                                        \
+        return base_id == super_class_type::get_class_id_static() || super_class_type::_is_base_id(base_id); \
+    }                                                                                                        \
+                                                                                                             \
+private:                                                                                                     \
     QX_EMPTY_MACRO
 
 } // namespace qx

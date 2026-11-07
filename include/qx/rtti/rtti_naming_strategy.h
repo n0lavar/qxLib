@@ -24,9 +24,10 @@ namespace qx
 **/
 struct rtti_naming_strategy_empty
 {
-    static constexpr string_view get_name(string_view) noexcept
+    template<class char_t>
+    static constexpr basic_string_view<char_t> get_name(basic_string_view<char_t>) noexcept
     {
-        return QXT("");
+        return {};
     }
 };
 
@@ -38,7 +39,8 @@ struct rtti_naming_strategy_empty
 **/
 struct rtti_naming_strategy_class_name
 {
-    static constexpr string_view get_name(string_view svName) noexcept
+    template<class char_t>
+    static constexpr basic_string_view<char_t> get_name(basic_string_view<char_t> svName) noexcept
     {
         return svName;
     }

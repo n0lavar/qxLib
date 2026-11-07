@@ -50,15 +50,28 @@ constexpr bool rtti_root<naming_strategy_t>::is_derived_from_id_static(const cla
 }
 
 template<class naming_strategy_t>
-constexpr string_view rtti_root<naming_strategy_t>::get_class_name_static() noexcept
+template<class char_t>
+constexpr basic_string_view<char_t> rtti_root<naming_strategy_t>::get_class_name_static() noexcept
 {
-    return naming_strategy_type::get_name(type_strings<this_class_type>::get_signature());
+    return naming_strategy_type::get_name(type_strings<this_class_type, char_t>::get_signature());
 }
 
 template<class naming_strategy_t>
-inline string_view rtti_root<naming_strategy_t>::get_class_name() const noexcept
+inline basic_string_view<char_type> rtti_root<naming_strategy_t>::get_class_name() const noexcept
 {
-    return get_class_name_static();
+    return get_class_name_static<char_type>();
+}
+
+template<class naming_strategy_t>
+inline qx::basic_string_view<char> rtti_root<naming_strategy_t>::get_class_name_cstring() const noexcept
+{
+    return get_class_name_static<char>();
+}
+
+template<class naming_strategy_t>
+inline qx::basic_string_view<wchar_t> rtti_root<naming_strategy_t>::get_class_name_wstring() const noexcept
+{
+    return get_class_name_static<wchar_t>();
 }
 
 template<class naming_strategy_t>
