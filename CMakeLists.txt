@@ -91,8 +91,12 @@ add_benchmarks(
 )
 
 if (CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    find_package(Python3 COMPONENTS Interpreter REQUIRED)
+
     add_custom_target(RegenerateSolution
-        COMMAND "${CMAKE_COMMAND}" -S "${CMAKE_SOURCE_DIR}" -B "${CMAKE_BINARY_DIR}"
+        COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/generate_sln.py"
+            --sources_folder "${CMAKE_SOURCE_DIR}" --build_folder "${CMAKE_BINARY_DIR}"
+        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/tools"
         VERBATIM
     )
     set_target_properties(RegenerateSolution PROPERTIES

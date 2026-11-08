@@ -17,8 +17,7 @@ def clean_build_folder(build_folder: Path):
         full_path: Path = os.path.join(build_folder, entry)
 
         if os.path.isfile(full_path):
-            _, extension = os.path.splitext(entry)
-            if extension.lower() not in ALLOWED_EXTENSIONS:
+            if not entry.lower().endswith(tuple(ALLOWED_EXTENSIONS)):
                 os.remove(full_path)
         elif os.path.isdir(full_path):
             shutil.rmtree(full_path, ignore_errors=True)
@@ -64,11 +63,11 @@ def create_parser():
     parser.add_argument("--sources_folder", default="..")
     parser.add_argument("--build_folder", default="../build/msvc")
     parser.add_argument("--toolchain_file", help="Path to a CMake toolchain file")
-    parser.add_argument("--cmake_generator", default="Visual Studio 17 2022")
+    parser.add_argument("--cmake_generator", default="Visual Studio 18 2026")
     parser.add_argument("--arch", default="x64")
-    parser.add_argument("--tests-qx-lib", action=argparse.BooleanOptionalAction)
-    parser.add_argument("--tests_debug_breaks", action=argparse.BooleanOptionalAction)
-    parser.add_argument("--benchmarks", action=argparse.BooleanOptionalAction)
+    parser.add_argument("--tests-qx-lib", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--tests_debug_breaks", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--benchmarks", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--cmake_flags", default="")
     parser.add_argument("--cpp_compiler_flags", default="")
     return parser
