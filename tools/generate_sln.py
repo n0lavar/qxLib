@@ -66,7 +66,7 @@ def create_parser():
     parser.add_argument("--toolchain_file", help="Path to a CMake toolchain file")
     parser.add_argument("--cmake_generator", default="Visual Studio 17 2022")
     parser.add_argument("--arch", default="x64")
-    parser.add_argument("--tests", action=argparse.BooleanOptionalAction)
+    parser.add_argument("--tests-qx-lib", action=argparse.BooleanOptionalAction)
     parser.add_argument("--tests_debug_breaks", action=argparse.BooleanOptionalAction)
     parser.add_argument("--benchmarks", action=argparse.BooleanOptionalAction)
     parser.add_argument("--cmake_flags", default="")
@@ -90,7 +90,7 @@ def main(args) -> int:
         cmake_generator=args.cmake_generator,
         arch=args.arch,
         toolchain_file=toolchain_file,
-        tests=args.tests,
+        tests=args.tests_qx_lib,
         tests_debug_breaks=args.tests_debug_breaks,
         benchmarks=args.benchmarks
     )
