@@ -23,7 +23,7 @@ template<class container_t, class derived_t>
     container_t,
     derived_t>::operator->() const noexcept
 {
-    return &super_type::get();
+    return super_type::get_address();
 }
 
 template<class container_t, class derived_t>
@@ -53,7 +53,7 @@ template<class container_t, class derived_t>
     container_t,
     derived_t>::operator->() const noexcept
 {
-    return &super_type::get();
+    return super_type::get_address();
 }
 
 template<class container_t, class derived_t>

@@ -29,6 +29,13 @@ constexpr decltype(auto) base_iterator<container_t>::get(difference_type nShift)
 }
 
 template<class container_t>
+constexpr auto base_iterator<container_t>::get_address() const noexcept
+{
+    auto pData = m_pContainer->data();
+    return pData ? pData + m_nIndex : pData;
+}
+
+template<class container_t>
 constexpr typename base_iterator<container_t>::size_type base_iterator<container_t>::get_index() const noexcept
 {
     return m_nIndex;

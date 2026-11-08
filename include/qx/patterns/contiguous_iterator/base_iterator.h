@@ -60,6 +60,7 @@ protected:
     constexpr void           shift(difference_type nShift) noexcept;
     constexpr decltype(auto) get(difference_type nShift = 0) const noexcept;
     constexpr size_type      get_index() const noexcept;
+    constexpr auto           get_address() const noexcept;
 
 private:
     size_type    m_nIndex     = 0u;
