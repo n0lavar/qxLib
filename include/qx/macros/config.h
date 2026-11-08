@@ -8,7 +8,17 @@
 **/
 #pragma once
 
+#if defined(__clang__) && !defined(__apple_build_version__)
+_Pragma("GCC diagnostic push");
+_Pragma("GCC diagnostic ignored \"-Wreserved-identifier\"");
+_Pragma("GCC diagnostic ignored \"-Wreserved-macro-identifier\"");
+#endif
+
 #include <version>
+
+#if defined(__clang__) && !defined(__apple_build_version__)
+_Pragma("GCC diagnostic pop");
+#endif
 
 //---------------------------------- platform ----------------------------------
 

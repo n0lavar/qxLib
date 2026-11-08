@@ -12,10 +12,45 @@ function(set_target_options _target)
 
     if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND MSVC)
         target_compile_options(${_target} PRIVATE
+            # exceptions support
             /EHsc
+
+            # enable all warnings
+            -Wall
+            # -Werror
+
+            -Wno-switch # 4061, 4062 - enumerator in switch of enum is not explicitly handled
+            -Wno-unused-parameter # 4100 - unreferenced formal parameter
+            -Wno-unused-variable # 4101 - unreferenced local variable
+            -Wno-overloaded-virtual # 4264, 4266 - no override available for virtual member function
+            -Wno-inconsistent-missing-override # 4265 - 'function' should have an 'override' specifier
+            -Wno-padded # 4324, 4820 - structure was padded
+            -Wno-sign-conversion # 4365 - signed/unsigned mismatch
+            -Wno-sign-compare # 4365 - signed/unsigned mismatch
+            -Wno-microsoft-template-shadow # 4456 - 'identifier' is shadowed by a template parameter
+            -Wno-unused-value # 4554 - expression result not used
+            -Wno-unreachable-code # 4702 - unreachable code
+            -Wno-deprecated-declarations # 4996 - deprecated declaration used
+            -Wno-missing-braces # 5246 - initialization of a subobject should be wrapped in braces
+            -Wno-implicit-fallthrough # 5262 - implicit fall-through occurs here
+            -Wno-unused-const-variable # 5264 - 'const' variable is not used
+            
+            # clang-specific compat family has no MSVC counterpart
+            -Wno-c++98-compat-pedantic
+            -Wno-c++20-extensions
+
             $<$<CONFIG:Debug>:-D_DEBUG>
             $<$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>:-DNDEBUG>
         )
+
+        # disable the following warnings for the Debug and RelWithDebInfo configurations
+        set(NON_DEBUG_WARNINGS
+            -Wno-unused-but-set-variable # 4189 - local variable is initialized but not referenced
+            -Wno-unused-function # 4505 - unreferenced local function has been removed
+            -Wno-unused-lambda-capture # 5233 - explicit lambda capture is not used
+        )
+        add_compile_options_for_configs(${_target} "Debug;RelWithDebInfo" "${NON_DEBUG_WARNINGS}")
+
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:-D_DEBUG>

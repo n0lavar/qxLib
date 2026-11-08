@@ -8,13 +8,18 @@
 **/
 #pragma once
 
+#include <qx/macros/suppress_warnings.h>
 #include <qx/render/draw_mode.h>
 #include <qx/typedefs.h>
 
 #include <array>
 #include <cmath>
+
+QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <glm/geometric.hpp>
 #include <glm/vec3.hpp>
+QX_POP_SUPPRESS_WARNINGS();
+
 #include <numbers>
 #include <span>
 #include <unordered_map>
@@ -174,7 +179,7 @@ geometry create_square_lines(float fSideLength);
     @param  fHorRadius  - ellipse horizontal radius
     @param  fVertRadius - ellipse vertical radius
     @param  nSides      - number of lines in ellipse edge, must be > 3
-                          the greater value, the smoother еру edge
+                          the greater value, the smoother пїЅпїЅпїЅ edge
     @return             - ellipse geometry
 **/
 geometry create_ellipse(float fHorRadius, float fVertRadius, size_t nSides);
@@ -184,7 +189,7 @@ geometry create_ellipse(float fHorRadius, float fVertRadius, size_t nSides);
     @param  fHorRadius  - ellipse horizontal radius
     @param  fVertRadius - ellipse vertical radius
     @param  nSides      - number of lines in ellipse edge, must be > 3
-                          the greater value, the smoother еру edge
+                          the greater value, the smoother пїЅпїЅпїЅ edge
     @return             - ellipse geometry
 **/
 geometry create_ellipse_lines(float fHorRadius, float fVertRadius, size_t nSides);
@@ -193,7 +198,7 @@ geometry create_ellipse_lines(float fHorRadius, float fVertRadius, size_t nSides
     @brief  Create circle geometry for lines drawing
     @param  fRadius - circle radius
     @param  nSides  - number of lines in ellipse edge, must be > 3
-                      the greater value, the smoother еру edge
+                      the greater value, the smoother пїЅпїЅпїЅ edge
     @return         - circle geometry
 **/
 geometry create_circle(float fRadius, size_t nSides);
@@ -202,7 +207,7 @@ geometry create_circle(float fRadius, size_t nSides);
     @brief  Create circle geometry for lines drawing
     @param  fRadius - circle radius
     @param  nSides  - number of lines in ellipse edge, must be > 3
-                      the greater value, the smoother еру edge
+                      the greater value, the smoother пїЅпїЅпїЅ edge
     @return         - circle geometry
 **/
 geometry create_circle_lines(float fRadius, size_t nSides);
