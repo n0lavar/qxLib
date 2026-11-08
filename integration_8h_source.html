@@ -87,9 +87,9 @@ $(function() {
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;optional&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;random&gt;</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<a class="code" href="suppress__warnings_8h.html#a1fceb568dd8fd733d4ea910b45f7f740">QX_PUSH_SUPPRESS_ALL_WARNINGS</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;QX_POP_SUPPRESS_WARNINGS();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a>();</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">namespace </span>qx</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;{</div>
@@ -178,6 +178,8 @@ $(function() {
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#include &lt;qx/math/integration.inl&gt;</span></div>
 <div class="ttc" id="aintegration_8h_html_a626e48c33cfbac802c4eb90b8bd90ee4"><div class="ttname"><a href="integration_8h.html#a626e48c33cfbac802c4eb90b8bd90ee4">qx::integrate_rectangle_rule</a></div><div class="ttdeci">double integrate_rectangle_rule(const function_2d_t &amp;func, double x0, double x1, size_t nIntervalsPer1=10) noexcept(noexcept(static_cast&lt; double &gt;(func(0.0))))</div><div class="ttdoc">Integrate using rectangle rule.</div><div class="ttdef"><b>Definition:</b> <a href="integration_8inl_source.html#l00036">integration.inl:36</a></div></div>
 <div class="ttc" id="arecursive__lambda_8h_html"><div class="ttname"><a href="recursive__lambda_8h.html">recursive_lambda.h</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a1fceb568dd8fd733d4ea910b45f7f740"><div class="ttname"><a href="suppress__warnings_8h.html#a1fceb568dd8fd733d4ea910b45f7f740">QX_PUSH_SUPPRESS_ALL_WARNINGS</a></div><div class="ttdeci">#define QX_PUSH_SUPPRESS_ALL_WARNINGS()</div><div class="ttdoc">Disable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00112">suppress_warnings.h:112</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a4bee1042b6a06f2bf93410cc56146ece"><div class="ttname"><a href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a></div><div class="ttdeci">#define QX_POP_SUPPRESS_WARNINGS()</div><div class="ttdoc">Enable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00119">suppress_warnings.h:119</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

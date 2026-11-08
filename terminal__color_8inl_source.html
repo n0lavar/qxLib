@@ -134,12 +134,12 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword"></span>{</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">auto</span> fprintf_wrapper = []&lt;<span class="keyword">class</span>... args_t&gt;(args_t&amp;&amp;... args)</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        QX_PUSH_SUPPRESS_MSVC_WARNINGS(4774);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a0afef6a432ea9616a67bc536148b8a88">QX_PUSH_SUPPRESS_MSVC_WARNINGS</a>(4774);</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_t, char&gt;)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            std::fprintf(std::forward&lt;args_t&gt;(args)...);</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            std::fwprintf(std::forward&lt;args_t&gt;(args)...);</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a>();</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    };</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">switch</span> (m_eType)</div>
@@ -480,6 +480,8 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1terminal__color_html_a8b451c1737e63bfe9a15d6e17b0d0737"><div class="ttname"><a href="classqx_1_1terminal__color.html#a8b451c1737e63bfe9a15d6e17b0d0737">qx::terminal_color::write</a></div><div class="ttdeci">void write(FILE *pStream) const</div><div class="ttdoc">Write terminal color to the specified stream.</div><div class="ttdef"><b>Definition:</b> <a href="terminal__color_8inl_source.html#l00062">terminal_color.inl:62</a></div></div>
 <div class="ttc" id="aclassqx_1_1terminal__color_html_ae9fb7dde44b497fbc0465dc6e68dc5cb"><div class="ttname"><a href="classqx_1_1terminal__color.html#ae9fb7dde44b497fbc0465dc6e68dc5cb">qx::terminal_color::back</a></div><div class="ttdeci">static constexpr terminal_color back(const color &amp;bgColor) noexcept</div><div class="ttdoc">Set background color.</div><div class="ttdef"><b>Definition:</b> <a href="terminal__color_8inl_source.html#l00051">terminal_color.inl:51</a></div></div>
 <div class="ttc" id="astring__utils_8h_html_ae4f688084b037e2e7a63a13eaf539a02"><div class="ttname"><a href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a></div><div class="ttdeci">#define QX_STR_PREFIX(value_t, str)</div><div class="ttdoc">Chose witch of prefixes add to string : L or none.</div><div class="ttdef"><b>Definition:</b> <a href="string__utils_8h_source.html#l00120">string_utils.h:120</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a0afef6a432ea9616a67bc536148b8a88"><div class="ttname"><a href="suppress__warnings_8h.html#a0afef6a432ea9616a67bc536148b8a88">QX_PUSH_SUPPRESS_MSVC_WARNINGS</a></div><div class="ttdeci">#define QX_PUSH_SUPPRESS_MSVC_WARNINGS(warnings)</div><div class="ttdoc">Disable specified MSVC warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00126">suppress_warnings.h:126</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a4bee1042b6a06f2bf93410cc56146ece"><div class="ttname"><a href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a></div><div class="ttdeci">#define QX_POP_SUPPRESS_WARNINGS()</div><div class="ttdoc">Enable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00119">suppress_warnings.h:119</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

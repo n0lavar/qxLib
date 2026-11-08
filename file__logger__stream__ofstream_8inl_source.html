@@ -109,9 +109,9 @@ $(function() {
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_type, wchar_t&gt;)</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        QX_DISABLE_MSVC_WARNINGS(4996);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a1b3afadc80bbb3811cea95175a96bec1">QX_DISABLE_MSVC_WARNINGS</a>(4996);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        m_File.imbue(std::locale(std::locale(), <span class="keyword">new</span> std::codecvt_utf16&lt;char_type, 0x10ffff, std::little_endian&gt;));</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        QX_RESTORE_MSVC_WARNINGS(4996);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a0add8898e9b17bc1caa89e76bc667442">QX_RESTORE_MSVC_WARNINGS</a>(4996);</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
@@ -152,6 +152,8 @@ $(function() {
 <div class="ttc" id="astructqx_1_1base__file__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__file__logger__stream_1_1config.html">qx::base_file_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8h_source.html#l00039">base_file_logger_stream.h:40</a></div></div>
 <div class="ttc" id="astructqx_1_1details_1_1get__cerr_html"><div class="ttname"><a href="structqx_1_1details_1_1get__cerr.html">qx::details::get_cerr</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00019">base_logger_stream.inl:20</a></div></div>
 <div class="ttc" id="astructqx_1_1unit_html"><div class="ttname"><a href="structqx_1_1unit.html">qx::unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00051">base.h:52</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a0add8898e9b17bc1caa89e76bc667442"><div class="ttname"><a href="suppress__warnings_8h.html#a0add8898e9b17bc1caa89e76bc667442">QX_RESTORE_MSVC_WARNINGS</a></div><div class="ttdeci">#define QX_RESTORE_MSVC_WARNINGS(warnings)</div><div class="ttdoc">Enable warnings after QX_DISABLE_MSVC_WARNINGS.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00139">suppress_warnings.h:139</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a1b3afadc80bbb3811cea95175a96bec1"><div class="ttname"><a href="suppress__warnings_8h.html#a1b3afadc80bbb3811cea95175a96bec1">QX_DISABLE_MSVC_WARNINGS</a></div><div class="ttdeci">#define QX_DISABLE_MSVC_WARNINGS(warnings)</div><div class="ttdoc">Force disable MSVC warnings, including all nested header includes.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00133">suppress_warnings.h:133</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

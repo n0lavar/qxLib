@@ -342,9 +342,9 @@ $(function() {
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszFormat,</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        args_t&amp;&amp;... args) noexcept</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a1fceb568dd8fd733d4ea910b45f7f740">QX_PUSH_SUPPRESS_ALL_WARNINGS</a>();</div>
 <div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        <span class="keywordflow">return</span> std::sscanf(pszString, pszFormat, std::forward&lt;args_t&gt;(args)...);</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a>();</div>
 <div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;    }</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;};</div>
 <div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160; </div>
@@ -370,9 +370,9 @@ $(function() {
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keyword">typename</span> usings_char_traits_t::const_pointer pszFormat,</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        args_t&amp;&amp;... args) noexcept</div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    {</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        QX_PUSH_SUPPRESS_ALL_WARNINGS();</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a1fceb568dd8fd733d4ea910b45f7f740">QX_PUSH_SUPPRESS_ALL_WARNINGS</a>();</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        <span class="keywordflow">return</span> std::swscanf(pszString, pszFormat, std::forward&lt;args_t&gt;(args)...);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        QX_POP_SUPPRESS_WARNINGS();</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a>();</div>
 <div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;};</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
@@ -575,6 +575,8 @@ $(function() {
 <div class="ttc" id="astructqx_1_1string__traits_1_1transform__char__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1transform__char__traits.html">qx::string_traits::transform_char_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00131">string_traits.h:131</a></div></div>
 <div class="ttc" id="astructqx_1_1string__traits_1_1usings__traits_html"><div class="ttname"><a href="structqx_1_1string__traits_1_1usings__traits.html">qx::string_traits::usings_traits</a></div><div class="ttdef"><b>Definition:</b> <a href="string__traits_8h_source.html#l00029">string_traits.h:30</a></div></div>
 <div class="ttc" id="asuppress__warnings_8h_html"><div class="ttname"><a href="suppress__warnings_8h.html">suppress_warnings.h</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a1fceb568dd8fd733d4ea910b45f7f740"><div class="ttname"><a href="suppress__warnings_8h.html#a1fceb568dd8fd733d4ea910b45f7f740">QX_PUSH_SUPPRESS_ALL_WARNINGS</a></div><div class="ttdeci">#define QX_PUSH_SUPPRESS_ALL_WARNINGS()</div><div class="ttdoc">Disable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00112">suppress_warnings.h:112</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a4bee1042b6a06f2bf93410cc56146ece"><div class="ttname"><a href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a></div><div class="ttdeci">#define QX_POP_SUPPRESS_WARNINGS()</div><div class="ttdoc">Enable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00119">suppress_warnings.h:119</a></div></div>
 <div class="ttc" id="atypedefs_8h_html_a65cf28726f89e62ccf2f1354bc2716df"><div class="ttname"><a href="typedefs_8h.html#a65cf28726f89e62ccf2f1354bc2716df">u32</a></div><div class="ttdeci">std::uint32_t u32</div><div class="ttdoc">0 .. 18 446 744 073 709 551 615</div><div class="ttdef"><b>Definition:</b> <a href="typedefs_8h_source.html#l00022">typedefs.h:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
