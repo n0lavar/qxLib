@@ -113,9 +113,16 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a7f56a97c227cc680049656c5e26ad621">clear</a> () noexcept</td></tr>
 <tr class="memdesc:a7f56a97c227cc680049656c5e26ad621"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all the callables in this delegate. <br /></td></tr>
 <tr class="separator:a7f56a97c227cc680049656c5e26ad621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05b1db5507dfa77f374b52f2fa7e4b07"><td class="memItemLeft" align="right" valign="top"><a id="a05b1db5507dfa77f374b52f2fa7e4b07"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a05b1db5507dfa77f374b52f2fa7e4b07">clear_dead</a> () noexcept</td></tr>
+<tr class="memdesc:a05b1db5507dfa77f374b52f2fa7e4b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove weak subscriptions whose tracked objects have expired, without invoking callbacks. <br /></td></tr>
+<tr class="separator:a05b1db5507dfa77f374b52f2fa7e4b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e895ecbe515b7a1292f8e4c18a16d77"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a9e895ecbe515b7a1292f8e4c18a16d77">size</a> () const noexcept</td></tr>
 <tr class="memdesc:a9e895ecbe515b7a1292f8e4c18a16d77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of functions bound to this delegate.  <a href="classqx_1_1details_1_1base__delegate.html#a9e895ecbe515b7a1292f8e4c18a16d77">More...</a><br /></td></tr>
 <tr class="separator:a9e895ecbe515b7a1292f8e4c18a16d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad309830c2881edb49482fcdbc56c385d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#ad309830c2881edb49482fcdbc56c385d">is_singlecast</a> () const noexcept</td></tr>
+<tr class="memdesc:ad309830c2881edb49482fcdbc56c385d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether exactly one callable is bound to this delegate.  <a href="classqx_1_1details_1_1base__delegate.html#ad309830c2881edb49482fcdbc56c385d">More...</a><br /></td></tr>
+<tr class="separator:ad309830c2881edb49482fcdbc56c385d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d75f96bba871ae8518c60d261e2d4b5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a9d75f96bba871ae8518c60d261e2d4b5">empty</a> () const noexcept</td></tr>
 <tr class="memdesc:a9d75f96bba871ae8518c60d261e2d4b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this delegate is empty.  <a href="classqx_1_1details_1_1base__delegate.html#a9d75f96bba871ae8518c60d261e2d4b5">More...</a><br /></td></tr>
 <tr class="separator:a9d75f96bba871ae8518c60d261e2d4b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -129,10 +136,10 @@ Static Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a540c3530a3058a98533f36c4588f54d0"><td class="memTemplParams" colspan="2">template&lt;class invoke_single_t , class invoke_multiple_t &gt; </td></tr>
-<tr class="memitem:a540c3530a3058a98533f36c4588f54d0"><td class="memTemplItemLeft" align="right" valign="top">return_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a540c3530a3058a98533f36c4588f54d0">execute_internal</a> (const invoke_single_t &amp;invokeSingle, const invoke_multiple_t &amp;invokeMultiple) const noexcept</td></tr>
-<tr class="memdesc:a540c3530a3058a98533f36c4588f54d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all callables.  <a href="classqx_1_1details_1_1base__delegate.html#a540c3530a3058a98533f36c4588f54d0">More...</a><br /></td></tr>
-<tr class="separator:a540c3530a3058a98533f36c4588f54d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abba116a7dd3d832ecfc095d77059aefe"><td class="memTemplParams" colspan="2">template&lt;class invoke_single_t , class invoke_multiple_t &gt; </td></tr>
+<tr class="memitem:abba116a7dd3d832ecfc095d77059aefe"><td class="memTemplItemLeft" align="right" valign="top">return_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#abba116a7dd3d832ecfc095d77059aefe">execute_internal</a> (const invoke_single_t &amp;invokeSingle, const invoke_multiple_t &amp;invokeMultiple) noexcept</td></tr>
+<tr class="memdesc:abba116a7dd3d832ecfc095d77059aefe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all callables.  <a href="classqx_1_1details_1_1base__delegate.html#abba116a7dd3d832ecfc095d77059aefe">More...</a><br /></td></tr>
+<tr class="separator:abba116a7dd3d832ecfc095d77059aefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class derived_t, class return_t, class... args_t&gt;<br />
@@ -206,7 +213,7 @@ template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- an object that removes this callable from the delegate on its destruction </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00106">106</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00113">113</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -271,7 +278,7 @@ template&lt;class object_t &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- an object that removes this callable from the delegate on its destruction </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00116">116</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00123">123</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -330,7 +337,7 @@ template&lt;callable_c&lt; return_t, args_t... &gt; callable_t&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- a token that can be used to remove this callable from the delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00078">78</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00085">85</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -396,7 +403,7 @@ template&lt;class object_t &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- a token that can be used to remove this callable from the delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00090">90</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00097">97</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -462,7 +469,7 @@ template&lt;class object_t , callable_c&lt; return_t, args_t... &gt; callable_t&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- a token that can be used to remove this callable from the delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00132">132</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00139">139</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -527,7 +534,7 @@ template&lt;class object_t &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- a token that can be used to remove this callable from the delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00151">151</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00158">158</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -574,7 +581,7 @@ template&lt;class... creation_args_t&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- created delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00063">63</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00070">70</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -603,12 +610,12 @@ template&lt;class derived_t , class return_t , class... args_t&gt; </div>
 <p>Check if this delegate is empty. </p>
 <dl class="section return"><dt>Returns</dt><dd>- true if this delegate is empty </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00233">233</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00272">272</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
-<a id="a540c3530a3058a98533f36c4588f54d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a540c3530a3058a98533f36c4588f54d0">&#9670;&nbsp;</a></span>execute_internal()</h2>
+<a id="abba116a7dd3d832ecfc095d77059aefe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abba116a7dd3d832ecfc095d77059aefe">&#9670;&nbsp;</a></span>execute_internal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -635,7 +642,7 @@ template&lt;class invoke_single_t , class invoke_multiple_t &gt; </div>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td> const</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -662,7 +669,36 @@ template&lt;class invoke_single_t , class invoke_multiple_t &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- void or piping result of all delegate callables </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00240">240</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00279">279</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+
+</div>
+</div>
+<a id="ad309830c2881edb49482fcdbc56c385d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad309830c2881edb49482fcdbc56c385d">&#9670;&nbsp;</a></span>is_singlecast()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class derived_t , class return_t , class... args_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classqx_1_1details_1_1base__delegate.html">qx::details::base_delegate</a>&lt; derived_t, return_t, args_t &gt;::is_singlecast</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check whether exactly one callable is bound to this delegate. </p>
+<p>Expired weak subscriptions remain counted until <a class="el" href="classqx_1_1details_1_1base__delegate.html#a05b1db5507dfa77f374b52f2fa7e4b07" title="Remove weak subscriptions whose tracked objects have expired, without invoking callbacks.">clear_dead()</a> is called. </p><dl class="section return"><dt>Returns</dt><dd>- true if exactly one callable is bound </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00266">266</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -701,7 +737,7 @@ template&lt;class derived_t , class return_t , class... args_t&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- true is a callable was deleted </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00169">169</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00176">176</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>
@@ -730,7 +766,7 @@ template&lt;class derived_t , class return_t , class... args_t&gt; </div>
 <p>Get the number of functions bound to this delegate. </p>
 <dl class="section return"><dt>Returns</dt><dd>- the number of functions bound to this delegate </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00207">207</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8inl_source.html#l00240">240</a> of file <a class="el" href="delegate_8inl_source.html">delegate.inl</a>.</p>
 
 </div>
 </div>

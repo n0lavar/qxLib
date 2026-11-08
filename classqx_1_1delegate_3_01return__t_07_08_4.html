@@ -84,9 +84,9 @@ Inheritance diagram for qx::delegate&lt; return_t()&gt;:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aed1288b0be773f6318c11a3a73500ad1"><td class="memItemLeft" align="right" valign="top">return_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1delegate_3_01return__t_07_08_4.html#aed1288b0be773f6318c11a3a73500ad1">execute</a> () const noexcept</td></tr>
-<tr class="memdesc:aed1288b0be773f6318c11a3a73500ad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all the callables the delegate has.  <a href="classqx_1_1delegate_3_01return__t_07_08_4.html#aed1288b0be773f6318c11a3a73500ad1">More...</a><br /></td></tr>
-<tr class="separator:aed1288b0be773f6318c11a3a73500ad1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b7f4dd4ebe67d6ba0869ccf1fe47740"><td class="memItemLeft" align="right" valign="top">return_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1delegate_3_01return__t_07_08_4.html#a2b7f4dd4ebe67d6ba0869ccf1fe47740">execute</a> () noexcept</td></tr>
+<tr class="memdesc:a2b7f4dd4ebe67d6ba0869ccf1fe47740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all the callables the delegate has.  <a href="classqx_1_1delegate_3_01return__t_07_08_4.html#a2b7f4dd4ebe67d6ba0869ccf1fe47740">More...</a><br /></td></tr>
+<tr class="separator:a2b7f4dd4ebe67d6ba0869ccf1fe47740"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classqx_1_1details_1_1base__delegate"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classqx_1_1details_1_1base__delegate')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classqx_1_1details_1_1base__delegate.html">qx::details::base_delegate&lt; delegate&lt; return_t()&gt;, return_t &gt;</a></td></tr>
 <tr class="memitem:ab9a78ba2d95833ac335966fe7671ee51 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classqx_1_1time__ordered__priority__key.html">delegate_token_type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#ab9a78ba2d95833ac335966fe7671ee51">add_token</a> (callable_t callable, <a class="el" href="priority_8h.html#a596815b7b01439344e1858a12743c8ec">priority</a> ePriority=priority::normal) noexcept</td></tr>
 <tr class="memdesc:ab9a78ba2d95833ac335966fe7671ee51 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a callable using a token with manual unsubscribing.  <a href="classqx_1_1details_1_1base__delegate.html#ab9a78ba2d95833ac335966fe7671ee51">More...</a><br /></td></tr>
@@ -113,9 +113,16 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a7f56a97c227cc680049656c5e26ad621">clear</a> () noexcept</td></tr>
 <tr class="memdesc:a7f56a97c227cc680049656c5e26ad621 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all the callables in this delegate. <br /></td></tr>
 <tr class="separator:a7f56a97c227cc680049656c5e26ad621 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05b1db5507dfa77f374b52f2fa7e4b07 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memItemLeft" align="right" valign="top"><a id="a05b1db5507dfa77f374b52f2fa7e4b07"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a05b1db5507dfa77f374b52f2fa7e4b07">clear_dead</a> () noexcept</td></tr>
+<tr class="memdesc:a05b1db5507dfa77f374b52f2fa7e4b07 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove weak subscriptions whose tracked objects have expired, without invoking callbacks. <br /></td></tr>
+<tr class="separator:a05b1db5507dfa77f374b52f2fa7e4b07 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e895ecbe515b7a1292f8e4c18a16d77 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a9e895ecbe515b7a1292f8e4c18a16d77">size</a> () const noexcept</td></tr>
 <tr class="memdesc:a9e895ecbe515b7a1292f8e4c18a16d77 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of functions bound to this delegate.  <a href="classqx_1_1details_1_1base__delegate.html#a9e895ecbe515b7a1292f8e4c18a16d77">More...</a><br /></td></tr>
 <tr class="separator:a9e895ecbe515b7a1292f8e4c18a16d77 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad309830c2881edb49482fcdbc56c385d inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#ad309830c2881edb49482fcdbc56c385d">is_singlecast</a> () const noexcept</td></tr>
+<tr class="memdesc:ad309830c2881edb49482fcdbc56c385d inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether exactly one callable is bound to this delegate.  <a href="classqx_1_1details_1_1base__delegate.html#ad309830c2881edb49482fcdbc56c385d">More...</a><br /></td></tr>
+<tr class="separator:ad309830c2881edb49482fcdbc56c385d inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d75f96bba871ae8518c60d261e2d4b5 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a9d75f96bba871ae8518c60d261e2d4b5">empty</a> () const noexcept</td></tr>
 <tr class="memdesc:a9d75f96bba871ae8518c60d261e2d4b5 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this delegate is empty.  <a href="classqx_1_1details_1_1base__delegate.html#a9d75f96bba871ae8518c60d261e2d4b5">More...</a><br /></td></tr>
 <tr class="separator:a9d75f96bba871ae8518c60d261e2d4b5 inherit pub_methods_classqx_1_1details_1_1base__delegate"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,19 +134,19 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:aac9e2700d15bfd9d7ef4d08d8bdddf4b inherit pub_static_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a singlecast delegate.  <a href="classqx_1_1details_1_1base__delegate.html#aac9e2700d15bfd9d7ef4d08d8bdddf4b">More...</a><br /></td></tr>
 <tr class="separator:aac9e2700d15bfd9d7ef4d08d8bdddf4b inherit pub_static_methods_classqx_1_1details_1_1base__delegate"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classqx_1_1details_1_1base__delegate"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classqx_1_1details_1_1base__delegate')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classqx_1_1details_1_1base__delegate.html">qx::details::base_delegate&lt; delegate&lt; return_t()&gt;, return_t &gt;</a></td></tr>
-<tr class="memitem:a540c3530a3058a98533f36c4588f54d0 inherit pro_methods_classqx_1_1details_1_1base__delegate"><td class="memItemLeft" align="right" valign="top">return_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#a540c3530a3058a98533f36c4588f54d0">execute_internal</a> (const invoke_single_t &amp;invokeSingle, const invoke_multiple_t &amp;invokeMultiple) const noexcept</td></tr>
-<tr class="memdesc:a540c3530a3058a98533f36c4588f54d0 inherit pro_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all callables.  <a href="classqx_1_1details_1_1base__delegate.html#a540c3530a3058a98533f36c4588f54d0">More...</a><br /></td></tr>
-<tr class="separator:a540c3530a3058a98533f36c4588f54d0 inherit pro_methods_classqx_1_1details_1_1base__delegate"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abba116a7dd3d832ecfc095d77059aefe inherit pro_methods_classqx_1_1details_1_1base__delegate"><td class="memItemLeft" align="right" valign="top">return_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1details_1_1base__delegate.html#abba116a7dd3d832ecfc095d77059aefe">execute_internal</a> (const invoke_single_t &amp;invokeSingle, const invoke_multiple_t &amp;invokeMultiple) noexcept</td></tr>
+<tr class="memdesc:abba116a7dd3d832ecfc095d77059aefe inherit pro_methods_classqx_1_1details_1_1base__delegate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all callables.  <a href="classqx_1_1details_1_1base__delegate.html#abba116a7dd3d832ecfc095d77059aefe">More...</a><br /></td></tr>
+<tr class="separator:abba116a7dd3d832ecfc095d77059aefe inherit pro_methods_classqx_1_1details_1_1base__delegate"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class return_t, class... args_t&gt;<br />
 class qx::delegate&lt; return_t()&gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="delegate_8h_source.html#l00296">296</a> of file <a class="el" href="delegate_8h_source.html">delegate.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="delegate_8h_source.html#l00315">315</a> of file <a class="el" href="delegate_8h_source.html">delegate.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aed1288b0be773f6318c11a3a73500ad1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed1288b0be773f6318c11a3a73500ad1">&#9670;&nbsp;</a></span>execute()</h2>
+<a id="a2b7f4dd4ebe67d6ba0869ccf1fe47740"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b7f4dd4ebe67d6ba0869ccf1fe47740">&#9670;&nbsp;</a></span>execute()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,7 +160,7 @@ template&lt;class return_t , class... args_t&gt; </div>
           <td class="memname">return_t <a class="el" href="classqx_1_1delegate.html">qx::delegate</a>&lt; return_t()&gt;::execute </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
