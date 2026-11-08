@@ -45,8 +45,7 @@ inline return_t invoker<return_t, function_t, invoke_function_t>::invoke(const f
 template<class derived_t, class return_t, class... args_t>
 base_delegate<derived_t, return_t, args_t...>::base_delegate(base_delegate&& other) noexcept
 {
-    std::swap(m_optFunctions, other.m_optFunctions);
-    std::swap(m_pDelegateAliveMarker, other.m_pDelegateAliveMarker);
+    *this = std::move(other);
 }
 
 template<class derived_t, class return_t, class... args_t>
@@ -54,7 +53,15 @@ typename base_delegate<derived_t, return_t, args_t...>::base_delegate& base_dele
     operator=(base_delegate&& other) noexcept
 {
     std::swap(m_optFunctions, other.m_optFunctions);
+    std::swap(m_WeakSubscriptions, other.m_WeakSubscriptions);
     std::swap(m_pDelegateAliveMarker, other.m_pDelegateAliveMarker);
+
+    if (m_pDelegateAliveMarker)
+        *m_pDelegateAliveMarker = this;
+
+    if (other.m_pDelegateAliveMarker)
+        *other.m_pDelegateAliveMarker = &other;
+
     return *this;
 }
 
@@ -168,6 +175,13 @@ delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_weak(
 template<class derived_t, class return_t, class... args_t>
 bool base_delegate<derived_t, return_t, args_t...>::remove(delegate_token_type token) noexcept
 {
+    m_WeakSubscriptions.erase(token);
+    return remove_function(token);
+}
+
+template<class derived_t, class return_t, class... args_t>
+bool base_delegate<derived_t, return_t, args_t...>::remove_function(delegate_token_type token) noexcept
+{
     return m_optFunctions
            && std::visit(
                [this, token]<class T>(T& value)
@@ -201,6 +215,25 @@ template<class derived_t, class return_t, class... args_t>
 void base_delegate<derived_t, return_t, args_t...>::clear() noexcept
 {
     m_optFunctions.reset();
+    m_WeakSubscriptions.clear();
+}
+
+template<class derived_t, class return_t, class... args_t>
+void base_delegate<derived_t, return_t, args_t...>::clear_dead() noexcept
+{
+    for (auto it = m_WeakSubscriptions.begin(); it != m_WeakSubscriptions.end();)
+    {
+        if (it->second.expired())
+        {
+            const delegate_token_type token = it->first;
+            it                              = m_WeakSubscriptions.erase(it);
+            remove_function(token);
+        }
+        else
+        {
+            ++it;
+        }
+    }
 }
 
 template<class derived_t, class return_t, class... args_t>
@@ -230,6 +263,12 @@ size_t base_delegate<derived_t, return_t, args_t...>::size() const noexcept
 }
 
 template<class derived_t, class return_t, class... args_t>
+bool base_delegate<derived_t, return_t, args_t...>::is_singlecast() const noexcept
+{
+    return size() == 1;
+}
+
+template<class derived_t, class return_t, class... args_t>
 bool base_delegate<derived_t, return_t, args_t...>::empty() const noexcept
 {
     return size() == 0;
@@ -239,8 +278,9 @@ template<class derived_t, class return_t, class... args_t>
 template<class invoke_single_t, class invoke_multiple_t>
 return_t base_delegate<derived_t, return_t, args_t...>::execute_internal(
     const invoke_single_t&   invokeSingle,
-    const invoke_multiple_t& invokeMultiple) const noexcept
+    const invoke_multiple_t& invokeMultiple) noexcept
 {
+    clear_dead();
     if (!m_optFunctions)
     {
         if constexpr (std::is_void_v<return_t>)
@@ -383,19 +423,15 @@ void base_delegate<derived_t, return_t, args_t...>::add_weak(
     std::weak_ptr<object_t>   pWeakObject,
     callable_t                callable) noexcept
 {
+    m_WeakSubscriptions.emplace(key, pWeakObject);
     add_function(
         key,
         [this, key, pWeakObject, callable_ = std::move(callable)](args_t... args)
         {
             if (std::shared_ptr<object_t> pObject = pWeakObject.lock())
-            {
                 return callable_(pObject.get(), std::forward<args_t>(args)...);
-            }
-            else
-            {
-                remove(key);
-                return return_t();
-            }
+
+            return return_t();
         });
 }
 
@@ -407,12 +443,12 @@ destruction_callback base_delegate<derived_t, return_t, args_t...>::add_destruct
     add_function(key, std::move(value));
 
     if (!m_pDelegateAliveMarker)
-        m_pDelegateAliveMarker = std::make_shared<bool>(true);
+        m_pDelegateAliveMarker = std::make_shared<base_delegate*>(this);
 
-    return [this, key, pDelegateAliveMarker = std::weak_ptr(m_pDelegateAliveMarker)]()
+    return [key, pDelegateAliveMarker = std::weak_ptr(m_pDelegateAliveMarker)]()
     {
-        if (!pDelegateAliveMarker.expired())
-            remove(key);
+        if (const auto pDelegate = pDelegateAliveMarker.lock())
+            (*pDelegate)->remove(key);
     };
 }
 
@@ -443,7 +479,7 @@ void base_delegate<derived_t, return_t, args_t...>::add_function(
 
 template<class return_t, class... args_t>
     requires(sizeof...(args_t) > 0 && (!std::is_void_v<args_t> && ...))
-return_t delegate<return_t(args_t...)>::execute(args_t... args) const noexcept
+return_t delegate<return_t(args_t...)>::execute(args_t... args) noexcept
 {
     return this->execute_internal(
         [&args...](const typename super_type::function_type& function)
@@ -457,7 +493,7 @@ return_t delegate<return_t(args_t...)>::execute(args_t... args) const noexcept
 }
 
 template<class return_t>
-return_t delegate<return_t(void)>::execute() const noexcept
+return_t delegate<return_t(void)>::execute() noexcept
 {
     return this->execute_internal(
         [](const typename super_type::function_type& function)

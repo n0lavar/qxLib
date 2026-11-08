@@ -14,8 +14,8 @@
 #include <qx/priority.h>
 
 #include <concepts>
+#include <flat_map>
 #include <functional>
-#include <map>
 #include <memory>
 #include <optional>
 #include <variant>
@@ -93,7 +93,7 @@ public:
 
 private:
     using single_value_type = std::pair<time_ordered_priority_key, function_type>;
-    using container_type    = std::map<time_ordered_priority_key, function_type>;
+    using container_type    = std::flat_map<time_ordered_priority_key, function_type>;
     using variant_type      = std::variant<single_value_type, container_type>;
     using data_type         = std::optional<variant_type>;
 
@@ -214,10 +214,22 @@ public:
     void clear() noexcept;
 
     /**
+        @brief Remove weak subscriptions whose tracked objects have expired, without invoking callbacks.
+    **/
+    void clear_dead() noexcept;
+
+    /**
         @brief  Get the number of functions bound to this delegate
         @return  - the number of functions bound to this delegate
     **/
     size_t size() const noexcept;
+
+    /**
+        @brief  Check whether exactly one callable is bound to this delegate.
+        @details Expired weak subscriptions remain counted until clear_dead() is called.
+        @return - true if exactly one callable is bound
+    **/
+    bool is_singlecast() const noexcept;
 
     /**
         @brief  Check if this delegate is empty
@@ -235,10 +247,16 @@ protected:
         @return                   - void or piping result of all delegate callables 
     **/
     template<class invoke_single_t, class invoke_multiple_t>
-    return_t execute_internal(const invoke_single_t& invokeSingle, const invoke_multiple_t& invokeMultiple)
-        const noexcept;
+    return_t execute_internal(const invoke_single_t& invokeSingle, const invoke_multiple_t& invokeMultiple) noexcept;
 
 private:
+    /**
+        @brief  Remove a callable without modifying weak subscription metadata.
+        @param  token - callable token
+        @return       - true if a callable was removed
+    **/
+    bool remove_function(delegate_token_type token) noexcept;
+
     /**
         @brief  Add a value using the destruction callback strategy
         @param  key   - priority + time key
@@ -266,10 +284,11 @@ private:
     void add_weak(time_ordered_priority_key key, std::weak_ptr<object_t> pWeakObject, callable_t callable) noexcept;
 
 private:
-    data_type m_optFunctions;
+    data_type                                                           m_optFunctions;
+    std::flat_map<time_ordered_priority_key, std::weak_ptr<const void>> m_WeakSubscriptions;
 
     // in case a delegate was destroyed before a destruction callback
-    std::shared_ptr<bool> m_pDelegateAliveMarker;
+    std::shared_ptr<base_delegate*> m_pDelegateAliveMarker;
 };
 
 } // namespace details
@@ -288,7 +307,7 @@ public:
         @param  args - arguments to pass to all the callbacks
         @return      - void or piping result of all delegate callables
     **/
-    return_t execute(args_t... args) const noexcept;
+    return_t execute(args_t... args) noexcept;
 };
 
 // @copydoc delegate
@@ -302,7 +321,7 @@ public:
         @brief  Execute all the callables the delegate has
         @return  - void or piping result of all delegate callables
     **/
-    return_t execute() const noexcept;
+    return_t execute() noexcept;
 };
 
 } // namespace qx
