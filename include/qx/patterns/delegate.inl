@@ -426,7 +426,7 @@ void base_delegate<derived_t, return_t, args_t...>::add_weak(
     m_WeakSubscriptions.emplace(key, pWeakObject);
     add_function(
         key,
-        [this, key, pWeakObject, callable_ = std::move(callable)](args_t... args)
+        [pWeakObject, callable_ = std::move(callable)](args_t... args)
         {
             if (std::shared_ptr<object_t> pObject = pWeakObject.lock())
                 return callable_(pObject.get(), std::forward<args_t>(args)...);
