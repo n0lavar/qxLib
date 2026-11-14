@@ -1,6 +1,6 @@
 # Documentation rules
 
-- All classes, functions, methods, macros, and files must be properly documented.
+- All classes, functions, methods, macros, and files must be properly documented (except for test entities).
 - Avoid pointless documentation like `@param color - color`. Describe what this this is for, edge cases (if any), contracts (if any), and so on.
 
 # Documentation style
