@@ -321,12 +321,7 @@ struct fwrite_colors : base_cout
 {
     static qx::string get_color_regex(bool bOptional = false)
     {
-#if QX_WIN
         return qx::string(QXT("(\x1B(?:[@-Z\\-_]|\\[[0-?]*[ -\\/]*[@-~]))")) + (bOptional ? QXT("?") : QXT(""));
-#else
-        // linux (?) doesn't capture colors in fwrite stream
-        return {};
-#endif
     }
 
     static void set_up()
