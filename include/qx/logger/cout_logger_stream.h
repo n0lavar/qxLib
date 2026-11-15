@@ -18,7 +18,7 @@ namespace qx
 
     @class   cout_logger_stream
     @brief   Logger stream based on std::cout output
-    @details On Linux, output is always `UTF8` (aka char) even with qx::char_type == wchar_t.
+    @details The output is UTF-8 regardless of the char type
     @author  Khrapov
     @date    28.07.2021
 

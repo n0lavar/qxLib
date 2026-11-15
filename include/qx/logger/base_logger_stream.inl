@@ -124,4 +124,17 @@ inline bool base_logger_stream::log_unconditionally_required(
     return false;
 }
 
+inline cstring_view base_logger_stream::to_utf8(string_view svMessage)
+{
+#if QX_CONF_CHAR == QX_CHAR_T_CHAR
+    return svMessage;
+#elif QX_CONF_CHAR == QX_CHAR_T_WCHAR_T
+    thread_local cstring s_sUtf8;
+    string_to_uft8(s_sUtf8, svMessage);
+    return { s_sUtf8.data(), s_sUtf8.size() };
+#else
+    #error Unsupported char type
+#endif
+}
+
 } // namespace qx

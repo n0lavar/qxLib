@@ -147,34 +147,12 @@ inline void file_logger_stream_mapping::do_log(
     int                                   nLine,
     string_view                           svMessage)
 {
-    const size_t nRequiredSize = svMessage.size() * std::min(sizeof(char_type), sizeof(char16_t));
-    if (!ensure_capacity(nRequiredSize))
+    const cstring_view svUtf8 = to_utf8(svMessage);
+    if (!ensure_capacity(svUtf8.size()))
         return;
 
-#if QX_WIN || QX_CONF_USE_CHAR
-    std::memcpy(m_pData + m_nSize, svMessage.data(), nRequiredSize);
-    m_nSize += nRequiredSize;
-#else
-    std::array<char16_t, 2048> chunk;
-
-    const char_type* pData           = svMessage.data();
-    size_t           nCharsRemaining = svMessage.size();
-
-    while (nCharsRemaining > 0)
-    {
-        size_t nCharsToTake = std::min(nCharsRemaining, chunk.size());
-        for (size_t i = 0; i < nCharsToTake; ++i)
-        {
-            chunk[i] = static_cast<char16_t>(static_cast<char16_t>(pData[i]) & 0xFFFFu);
-        }
-
-        std::memcpy(m_pData + m_nSize, chunk.data(), nCharsToTake * sizeof(char16_t));
-
-        m_nSize += nCharsToTake * sizeof(char16_t);
-        pData += nCharsToTake;
-        nCharsRemaining -= nCharsToTake;
-    }
-#endif
+    std::memcpy(m_pData + m_nSize, svUtf8.data(), svUtf8.size());
+    m_nSize += svUtf8.size();
 }
 
 inline void file_logger_stream_mapping::do_flush()

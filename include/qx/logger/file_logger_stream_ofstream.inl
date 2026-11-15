@@ -17,7 +17,7 @@ inline file_logger_stream_ofstream::file_logger_stream_ofstream(
 {
     const std::filesystem::path path = prepare_folder_and_get_log_file_path(streamConfig);
 
-    m_File = std::basic_ofstream<char_type>(
+    m_File = std::ofstream(
         path,
         std::ios_base::binary
             | (streamConfig.eLogFilePolicy == log_file_policy::clear_then_upend ? std::ios_base::trunc
@@ -32,15 +32,8 @@ inline file_logger_stream_ofstream::file_logger_stream_ofstream(
     if (bufferSize.value > 0)
     {
         const unit<size_t, units::data> bytes = convert(bufferSize).to(units::data::bytes);
-        m_Buffer.resize(bytes / sizeof(char_type));
+        m_Buffer.resize(bytes.value);
         m_File.rdbuf()->pubsetbuf(m_Buffer.data(), m_Buffer.size());
-    }
-
-    if constexpr (std::is_same_v<char_type, wchar_t>)
-    {
-        QX_DISABLE_MSVC_WARNINGS(4996);
-        m_File.imbue(std::locale(std::locale(), new std::codecvt_utf16<char_type, 0x10ffff, std::little_endian>));
-        QX_RESTORE_MSVC_WARNINGS(4996);
     }
 }
 
@@ -61,7 +54,10 @@ inline void file_logger_stream_ofstream::do_log(
     string_view                           svMessage)
 {
     if (m_File)
-        m_File.write(svMessage.data(), svMessage.size());
+    {
+        const cstring_view svUtf8 = to_utf8(svMessage);
+        m_File.write(svUtf8.data(), static_cast<std::streamsize>(svUtf8.size()));
+    }
 }
 
 inline void file_logger_stream_ofstream::do_flush()

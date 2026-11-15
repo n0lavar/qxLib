@@ -25,18 +25,20 @@ inline void fwrite_logger_stream::cout_colorized(verbosity eVerbosity, string_vi
 {
     check_previous_message(eVerbosity);
 
-    FILE* output = !is_error(eVerbosity) ? stdout : stderr;
-    terminal_color::font(rangeColor).write<char_type>(output);
-    fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), output);
-    terminal_color::reset().write<char_type>(output);
+    FILE*              output = !is_error(eVerbosity) ? stdout : stderr;
+    const cstring_view svUtf8 = to_utf8(svMessage);
+    terminal_color::font(rangeColor).write<char>(output);
+    fwrite(svUtf8.data(), sizeof(char), svUtf8.size(), output);
+    terminal_color::reset().write<char>(output);
 }
 
 inline void fwrite_logger_stream::cout_common(verbosity eVerbosity, string_view svMessage)
 {
     check_previous_message(eVerbosity);
 
-    FILE* output = !is_error(eVerbosity) ? stdout : stderr;
-    fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), output);
+    FILE*              output = !is_error(eVerbosity) ? stdout : stderr;
+    const cstring_view svUtf8 = to_utf8(svMessage);
+    fwrite(svUtf8.data(), sizeof(char), svUtf8.size(), output);
 }
 
 } // namespace qx

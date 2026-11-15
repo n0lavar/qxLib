@@ -124,6 +124,14 @@ public:
         string_view                           svFunction,
         int                                   nLine) const noexcept;
 
+protected:
+    /**
+        @brief  Encode a message as UTF-8 for a byte output
+        @param  svMessage - message to encode
+        @return           - UTF-8 bytes, valid until the next call on the same thread
+    **/
+    static cstring_view to_utf8(string_view svMessage);
+
 private:
     /**
         @brief Proceed stream logging

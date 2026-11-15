@@ -20,7 +20,7 @@ namespace qx
 
     @class   file_logger_stream_fopen
     @brief   FILE* based file logger stream
-    @details UTF-8 LE (char) or UTF-16 LE (wchar_t)
+    @details UTF-8 regardless of the char type
     @author  Khrapov
     @date    15.01.2026
 

@@ -35,7 +35,7 @@ namespace qx
              the file is mapped into the process address space and written
              via simple memory copies.
 
-             UTF-8 LE (char) or UTF-16 LE (wchar_t).
+             UTF-8 regardless of the char type.
 
              While the file is open for writing, a sequence of NUL characters appears at the end of the file.
              This is expected and follows the logic of how memory-mapped files work.

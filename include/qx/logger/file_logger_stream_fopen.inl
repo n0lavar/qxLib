@@ -65,28 +65,8 @@ inline void file_logger_stream_fopen::do_log(
 {
     if (m_pFile)
     {
-#if QX_WIN || QX_CONF_USE_CHAR
-        std::fwrite(svMessage.data(), sizeof(char_type), svMessage.size(), m_pFile);
-#else
-        std::array<char16_t, 2048> chunk;
-
-        const char_type* pData           = svMessage.data();
-        size_t           nCharsRemaining = svMessage.size();
-
-        while (nCharsRemaining > 0)
-        {
-            size_t nCharsToTake = std::min(nCharsRemaining, chunk.size());
-            for (size_t i = 0; i < nCharsToTake; ++i)
-            {
-                chunk[i] = static_cast<char16_t>(static_cast<char16_t>(pData[i]) & 0xFFFFu);
-            }
-
-            std::fwrite(chunk.data(), sizeof(char16_t), nCharsToTake, m_pFile);
-
-            pData += nCharsToTake;
-            nCharsRemaining -= nCharsToTake;
-        }
-#endif
+        const cstring_view svUtf8 = to_utf8(svMessage);
+        std::fwrite(svUtf8.data(), sizeof(char), svUtf8.size(), m_pFile);
     }
 }
 

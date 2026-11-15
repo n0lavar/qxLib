@@ -104,17 +104,11 @@ struct base_file : base_traits
 
         EXPECT_TRUE(std::filesystem::exists(get_log_file_name().c_str()));
 
-        const std::filesystem::path        path(get_log_file_name().c_str());
-        std::basic_ifstream<qx::char_type> file(path, std::ios::binary);
+        const std::filesystem::path path(get_log_file_name().c_str());
+        std::ifstream               file(path, std::ios::binary);
 
-        if constexpr (std::is_same_v<qx::char_type, wchar_t>)
-        {
-            QX_DISABLE_MSVC_WARNINGS(4996);
-            file.imbue(std::locale(file.getloc(), new std::codecvt_utf16<qx::char_type, 0x10ffff, std::little_endian>));
-            QX_RESTORE_MSVC_WARNINGS(4996);
-        }
-
-        return { std::istreambuf_iterator<qx::char_type>(file), std::istreambuf_iterator<qx::char_type>() };
+        const qx::cstring sUtf8 { std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
+        return qx::utf8_to_string(sUtf8);
     }
 
     static void tear_down()
@@ -219,14 +213,6 @@ struct base_cout : base_traits
     static inline int s_nReadPipe  = -1;
     static inline int s_nWritePipe = -1;
 
-#if QX_WIN
-    // Previous text modes (used when wchar_t is active)
-    static inline int s_nOldOutMode = -1;
-    static inline int s_nOldErrMode = -1;
-#else
-    static inline bool s_bCharOutput = false;
-#endif
-
     // Redirect stdout and stderr into a single pipe
     static void set_up()
     {
@@ -258,31 +244,11 @@ struct base_cout : base_traits
         ASSERT_NE(__dup2(s_nWritePipe, STDOUT_FILENO), -1);
         ASSERT_NE(__dup2(s_nWritePipe, STDERR_FILENO), -1);
 #endif
-
-#if QX_WIN
-        // If wchar_t is used, switch CRT to UTF-16 text mode
-        if constexpr (std::is_same_v<qx::char_type, wchar_t>)
-        {
-            s_nOldOutMode = _setmode(__fileno(stdout), _O_U16TEXT);
-            s_nOldErrMode = _setmode(__fileno(stderr), _O_U16TEXT);
-        }
-#endif
     }
 
     // Restore stdout/stderr and return captured output
     static qx::string get_content()
     {
-#if QX_WIN
-        // Restore previous text mode if wchar_t was used
-        if constexpr (std::is_same_v<qx::char_type, wchar_t>)
-        {
-            if (s_nOldOutMode != -1)
-                _setmode(__fileno(stdout), s_nOldOutMode);
-            if (s_nOldErrMode != -1)
-                _setmode(__fileno(stderr), s_nOldErrMode);
-        }
-#endif
-
         // Restore original stdout/stderr
         __dup2(s_nOldOutDescriptor, __fileno(stdout));
         __dup2(s_nOldErrDescriptor, __fileno(stderr));
@@ -295,49 +261,22 @@ struct base_cout : base_traits
         __close(s_nWritePipe);
         s_nWritePipe = -1;
 
-        // Read all captured bytes
-        qx::string             sContent;
+        // Read all captured UTF-8 bytes
+        qx::cstring            sUtf8;
         std::array<char, 1024> buffer;
         while (true)
         {
-            int n = __read(s_nReadPipe, buffer.data(), static_cast<unsigned int>(buffer.size()));
-            if (n > 0)
-            {
-#if QX_WIN
-                QX_PUSH_SUPPRESS_MSVC_WARNINGS(4244);
-                if constexpr (std::is_same_v<qx::char_type, char>)
-                {
-                    sContent.append(buffer.data(), buffer.data() + n);
-                }
-                else
-                {
-                    for (int i = 0; i < n; i += sizeof(qx::char_type))
-                        sContent.push_back(*reinterpret_cast<qx::char_type*>(&buffer[i]));
-                }
-                QX_POP_SUPPRESS_WARNINGS();
-#else
-                if (s_bCharOutput)
-                {
-                    for (int i = 0; i < n; ++i)
-                        sContent.append(static_cast<qx::char_type>(buffer[i]));
-                }
-                else
-                {
-                    for (int i = 0; i < n; i += sizeof(qx::char_type))
-                        sContent.push_back(*reinterpret_cast<qx::char_type*>(&buffer[i]));
-                }
-#endif
-            }
-            else
-            {
+            const int n = __read(s_nReadPipe, buffer.data(), static_cast<unsigned int>(buffer.size()));
+            if (n <= 0)
                 break;
-            }
+
+            sUtf8.append(buffer.data(), buffer.data() + n);
         }
 
         __close(s_nReadPipe);
         s_nReadPipe = -1;
 
-        return sContent;
+        return qx::utf8_to_string(sUtf8);
     }
 
     static void tear_down()
@@ -349,11 +288,6 @@ struct cout : base_cout
 {
     static void set_up()
     {
-        // On POSIX, cout outputs always use char
-#if !QX_WIN
-        s_bCharOutput = true;
-#endif
-
         base_cout::set_up();
         qx::get_logger().add_stream(qx::cout_logger_stream(qx::cout_logger_stream::config { {}, false, false }));
     }
@@ -363,10 +297,6 @@ struct fwrite : base_cout
 {
     static void set_up()
     {
-#if !QX_WIN
-        s_bCharOutput = false;
-#endif
-
         base_cout::set_up();
         qx::get_logger().add_stream(qx::fwrite_logger_stream(qx::fwrite_logger_stream::config()));
     }
@@ -381,11 +311,6 @@ struct cout_colors : base_cout
 
     static void set_up()
     {
-        // On POSIX, cout outputs always use char
-#if !QX_WIN
-        s_bCharOutput = true;
-#endif
-
         base_cout::set_up();
         qx::get_logger().add_stream(
             qx::cout_logger_stream(qx::cout_logger_stream::config { { .bUseColors = true }, false, false }));
@@ -406,10 +331,6 @@ struct fwrite_colors : base_cout
 
     static void set_up()
     {
-#if !QX_WIN
-        s_bCharOutput = false;
-#endif
-
         base_cout::set_up();
         qx::get_logger().add_stream(qx::fwrite_logger_stream(qx::fwrite_logger_stream::config({ .bUseColors = true })));
     }
@@ -421,10 +342,6 @@ struct default_constructed : base_cout
 
     static void set_up()
     {
-#if !QX_WIN
-        s_bCharOutput = false;
-#endif
-
         base_cout::set_up();
         // default constructed logger should have fwrite_logger_stream inside and be ready to be used
     }

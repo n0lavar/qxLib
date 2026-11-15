@@ -20,7 +20,7 @@ namespace qx
 
     @class   file_logger_stream_ofstream
     @brief   std::ofstream based file logger stream
-    @details UTF-8 LE (char) or UTF-16 LE (wchar_t)
+    @details UTF-8 regardless of the char type
     @author  Khrapov
     @date    14.01.2026
 
@@ -58,8 +58,8 @@ public:
     virtual void do_flush() override;
 
 private:
-    std::basic_ofstream<char_type> m_File;
-    std::vector<char_type>         m_Buffer;
+    std::ofstream     m_File;
+    std::vector<char> m_Buffer;
 };
 
 } // namespace qx

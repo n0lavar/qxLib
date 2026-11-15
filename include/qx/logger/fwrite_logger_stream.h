@@ -19,6 +19,7 @@ namespace qx
 
     @class   fwrite_logger_stream
     @brief   Logger stream based on std::fwrite output
+    @details The output is UTF-8 regardless of the char type
     @author  Khrapov
     @date    18.01.2026
 
