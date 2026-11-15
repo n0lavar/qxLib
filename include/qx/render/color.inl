@@ -42,9 +42,10 @@ class string_to_color_converter final : public singleton<string_to_color_convert
 {
     friend color;
 
-#define _QX_ADD_COLOR(snakeCaseName, pascalCaseName, r, g, b)                               \
-    add(QX_STR_PREFIX(char_t, #snakeCaseName), color_name_type::css_snake, color(r, g, b)); \
-    add(QX_STR_PREFIX(char_t, #pascalCaseName), color_name_type::css_pascal, color(r, g, b));
+#define _QX_ADD_COLOR(snakeCaseName, pascalCaseName, lowerCaseName, r, g, b)                  \
+    add(QX_STR_PREFIX(char_t, #snakeCaseName), color_name_type::css_snake, color(r, g, b));   \
+    add(QX_STR_PREFIX(char_t, #pascalCaseName), color_name_type::css_pascal, color(r, g, b)); \
+    add(QX_STR_PREFIX(char_t, #lowerCaseName), color_name_type::css_lower, color(r, g, b));
 
 public:
     string_to_color_converter() noexcept;
@@ -52,7 +53,7 @@ public:
     /**
         @brief Add new color to the mapping
         @param sName          - name registered for forward lookup
-        @param eColorNameType - css_snake or css_pascal selects the reverse lookup table;
+        @param eColorNameType - css_snake, css_pascal or css_lower selects the reverse lookup table;
                                other formats only update the forward lookup
         @param color          - RGBA value associated with sName; an existing entry with
                                the same key is replaced
@@ -69,7 +70,7 @@ public:
     /**
         @brief  Try to a color name get from a color 
         @param  color          - RGBA lookup key
-        @param  eColorNameType - css_snake or css_pascal selects the reverse lookup table
+        @param  eColorNameType - css_snake, css_pascal or css_lower selects the reverse lookup table
         @return                - registered name, or nullopt if the key is absent or
                                  the requested name format is unsupported
     **/
@@ -79,6 +80,7 @@ private:
     std::unordered_map<basic_string<char_t>, color> m_StringToColor;
     std::unordered_map<color, basic_string<char_t>> m_ColorToCssSnake;
     std::unordered_map<color, basic_string<char_t>> m_ColorToCssPascal;
+    std::unordered_map<color, basic_string<char_t>> m_ColorToCssLower;
 };
 
 template<class char_t>
@@ -97,6 +99,8 @@ inline void string_to_color_converter<char_t>::add(
         m_ColorToCssSnake[color] = sName;
     else if (eColorNameType == color_name_type::css_pascal)
         m_ColorToCssPascal[color] = sName;
+    else if (eColorNameType == color_name_type::css_lower)
+        m_ColorToCssLower[color] = sName;
 
     m_StringToColor[sName] = std::move(color);
 }
@@ -123,6 +127,11 @@ inline std::optional<basic_string_view<char_t>> string_to_color_converter<char_t
     else if (eColorNameType == color_name_type::css_pascal)
     {
         if (const auto it = m_ColorToCssPascal.find(color); it != m_ColorToCssPascal.end())
+            return it->second;
+    }
+    else if (eColorNameType == color_name_type::css_lower)
+    {
+        if (const auto it = m_ColorToCssLower.find(color); it != m_ColorToCssLower.end())
             return it->second;
     }
 
@@ -478,6 +487,11 @@ struct QX_FMT_NS::formatter<qx::color, char_t>
             {
                 ++it;
                 optColorNameType = qx::color_name_type::css_pascal;
+            }
+            else if (*it == QX_CHAR_PREFIX(char_t, 'l'))
+            {
+                ++it;
+                optColorNameType = qx::color_name_type::css_lower;
             }
             else if (*it == QX_CHAR_PREFIX(char_t, 'x'))
             {
