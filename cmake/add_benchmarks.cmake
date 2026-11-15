@@ -29,13 +29,19 @@ macro(add_benchmarks
                 "${CMAKE_CURRENT_SOURCE_DIR}/../benchmark/build"
             )
         endif()
+
+        set_target_properties(benchmark::benchmark benchmark::benchmark_main PROPERTIES
+            MAP_IMPORTED_CONFIG_RELWITHDEBINFO Release
+            MAP_IMPORTED_CONFIG_MINSIZEREL Release
+        )
+
         file(GLOB_RECURSE BENCHMARKS_SRC_FILES "${_glob_recurse_pattern}")
 
         # from list of files we'll create benchmarks name.bench.cpp -> name
         foreach(_file ${BENCHMARKS_SRC_FILES})
             get_filename_component(_target ${_file} NAME_WE)
             set(_target "${_target}.bench")
-            
+
             add_executable("${_target}" ${_file} ${PVSCONFIG_FILE})
 
             target_include_directories(${_target} PRIVATE
@@ -65,7 +71,7 @@ macro(add_benchmarks
                 )
             endif()
 
-            set_target_properties (${_target} PROPERTIES 
+            set_target_properties (${_target} PROPERTIES
                 FOLDER "${_ide_folder}"
             )
         endforeach()
