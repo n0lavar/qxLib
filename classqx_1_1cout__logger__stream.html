@@ -187,10 +187,14 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ab5acc55580ddcf3a51ff5b3140301b2a inherit pro_methods_classqx_1_1rtti__root"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1rtti__root.html#ab5acc55580ddcf3a51ff5b3140301b2a">_is_base_id</a> (const <a class="el" href="classqx_1_1class__id.html">class_id</a> &amp;idBase) const noexcept</td></tr>
 <tr class="memdesc:ab5acc55580ddcf3a51ff5b3140301b2a inherit pro_methods_classqx_1_1rtti__root"><td class="mdescLeft">&#160;</td><td class="mdescRight">Traverse identifiers treated as bases by derived RTTI classes.  <a href="classqx_1_1rtti__root.html#ab5acc55580ddcf3a51ff5b3140301b2a">More...</a><br /></td></tr>
 <tr class="separator:ab5acc55580ddcf3a51ff5b3140301b2a inherit pro_methods_classqx_1_1rtti__root"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_static_methods_classqx_1_1base__logger__stream"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classqx_1_1base__logger__stream')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classqx_1_1base__logger__stream.html">qx::base_logger_stream</a></td></tr>
+<tr class="memitem:a1d8899d6f5572384e5bbde837fbd76dd inherit pro_static_methods_classqx_1_1base__logger__stream"><td class="memItemLeft" align="right" valign="top">static cstring_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classqx_1_1base__logger__stream.html#a1d8899d6f5572384e5bbde837fbd76dd">to_utf8</a> (string_view svMessage)</td></tr>
+<tr class="memdesc:a1d8899d6f5572384e5bbde837fbd76dd inherit pro_static_methods_classqx_1_1base__logger__stream"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encode a message as UTF-8 for a byte output.  <a href="classqx_1_1base__logger__stream.html#a1d8899d6f5572384e5bbde837fbd76dd">More...</a><br /></td></tr>
+<tr class="separator:a1d8899d6f5572384e5bbde837fbd76dd inherit pro_static_methods_classqx_1_1base__logger__stream"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Logger stream based on std::cout output. </p>
-<p>On Linux, output is always <code>UTF8</code> (aka char) even with qx::char_type == wchar_t. </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
+<p>The output is UTF-8 regardless of the char type </p><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>28.07.2021 </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="cout__logger__stream_8h_source.html#l00026">26</a> of file <a class="el" href="cout__logger__stream_8h_source.html">cout_logger_stream.h</a>.</p>

@@ -88,7 +88,7 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">const</span> std::filesystem::path path = <a class="code" href="classqx_1_1base__file__logger__stream.html#afe294906f69a8ece35b638c8a29d05cb">prepare_folder_and_get_log_file_path</a>(streamConfig);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    m_File = std::basic_ofstream&lt;char_type&gt;(</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    m_File = std::ofstream(</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        path,</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        std::ios_base::binary</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            | (streamConfig.eLogFilePolicy == log_file_policy::clear_then_upend ? std::ios_base::trunc</div>
@@ -103,57 +103,52 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">if</span> (bufferSize.value &gt; 0)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">const</span> <a class="code" href="structqx_1_1unit.html">unit&lt;size_t, units::data&gt;</a> bytes = <a class="code" href="classqx_1_1convert.html">convert</a>(bufferSize).to(units::data::bytes);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        m_Buffer.resize(bytes / <span class="keyword">sizeof</span>(char_type));</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        m_Buffer.resize(bytes.value);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        m_File.rdbuf()-&gt;pubsetbuf(m_Buffer.data(), m_Buffer.size());</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> constexpr (std::is_same_v&lt;char_type, wchar_t&gt;)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a1b3afadc80bbb3811cea95175a96bec1">QX_DISABLE_MSVC_WARNINGS</a>(4996);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        m_File.imbue(std::locale(std::locale(), <span class="keyword">new</span> std::codecvt_utf16&lt;char_type, 0x10ffff, std::little_endian&gt;));</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="suppress__warnings_8h.html#a0add8898e9b17bc1caa89e76bc667442">QX_RESTORE_MSVC_WARNINGS</a>(4996);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">inline</span> file_logger_stream_ofstream::~file_logger_stream_ofstream()</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span> (m_File)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        m_File &lt;&lt; std::flush;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream__ofstream.html#af28dbc57787eb589b440d7966e819ed8">   53</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream__ofstream.html#af28dbc57787eb589b440d7966e819ed8">file_logger_stream_ofstream::do_log</a>(</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;                       <a class="code" href="classqx_1_1category.html">category</a>,</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    verbosity                             eVerbosity,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    std::thread::id                       threadId,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    std::chrono::system_clock::time_point messageTime,</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    string_view                           svFile,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    string_view                           svFunction,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">int</span>                                   nLine,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    string_view                           svMessage)</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;{</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (m_File)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        m_File.write(svMessage.data(), svMessage.size());</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream__ofstream.html#a348a154b2fe2dc897dede65ba2ef1610">   67</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream__ofstream.html#a348a154b2fe2dc897dede65ba2ef1610">file_logger_stream_ofstream::do_flush</a>()</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;{</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (m_File)</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        m_File &lt;&lt; std::flush;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;}</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">inline</span> file_logger_stream_ofstream::~file_logger_stream_ofstream()</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">if</span> (m_File)</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        m_File &lt;&lt; std::flush;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream__ofstream.html#af28dbc57787eb589b440d7966e819ed8">   46</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream__ofstream.html#af28dbc57787eb589b440d7966e819ed8">file_logger_stream_ofstream::do_log</a>(</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">const</span> <a class="code" href="classqx_1_1category.html">category</a>&amp;                       <a class="code" href="classqx_1_1category.html">category</a>,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    verbosity                             eVerbosity,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    std::thread::id                       threadId,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    std::chrono::system_clock::time_point messageTime,</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    string_view                           svFile,</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    string_view                           svFunction,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">int</span>                                   nLine,</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    string_view                           svMessage)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (m_File)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">const</span> cstring_view svUtf8 = <a class="code" href="classqx_1_1base__logger__stream.html#a1d8899d6f5572384e5bbde837fbd76dd">to_utf8</a>(svMessage);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        m_File.write(svUtf8.data(), <span class="keyword">static_cast&lt;</span>std::streamsize<span class="keyword">&gt;</span>(svUtf8.size()));</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="classqx_1_1file__logger__stream__ofstream.html#a348a154b2fe2dc897dede65ba2ef1610">   63</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1file__logger__stream__ofstream.html#a348a154b2fe2dc897dede65ba2ef1610">file_logger_stream_ofstream::do_flush</a>()</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;{</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (m_File)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        m_File &lt;&lt; std::flush;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="aclassqx_1_1base__file__logger__stream_html"><div class="ttname"><a href="classqx_1_1base__file__logger__stream.html">qx::base_file_logger_stream</a></div><div class="ttdoc">Base class for all file logger streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8h_source.html#l00034">base_file_logger_stream.h:35</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__file__logger__stream_html_afe294906f69a8ece35b638c8a29d05cb"><div class="ttname"><a href="classqx_1_1base__file__logger__stream.html#afe294906f69a8ece35b638c8a29d05cb">qx::base_file_logger_stream::prepare_folder_and_get_log_file_path</a></div><div class="ttdeci">std::filesystem::path prepare_folder_and_get_log_file_path(const config &amp;config) noexcept</div><div class="ttdoc">Create a folder (if required) and get log file path.</div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8inl_source.html#l00018">base_file_logger_stream.inl:18</a></div></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a1d8899d6f5572384e5bbde837fbd76dd"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a1d8899d6f5572384e5bbde837fbd76dd">qx::base_logger_stream::to_utf8</a></div><div class="ttdeci">static cstring_view to_utf8(string_view svMessage)</div><div class="ttdoc">Encode a message as UTF-8 for a byte output.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00127">base_logger_stream.inl:127</a></div></div>
 <div class="ttc" id="aclassqx_1_1category_html"><div class="ttname"><a href="classqx_1_1category.html">qx::category</a></div><div class="ttdoc">A category is a class that identifies a particular piece of code. This code can be located in differe...</div><div class="ttdef"><b>Definition:</b> <a href="category_8h_source.html#l00061">category.h:62</a></div></div>
 <div class="ttc" id="aclassqx_1_1convert_html"><div class="ttname"><a href="classqx_1_1convert.html">qx::convert</a></div><div class="ttdoc">A conversion class.</div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00077">base.h:77</a></div></div>
 <div class="ttc" id="aclassqx_1_1file__logger__stream__ofstream_html_a13205f86a582bcb5a0da8ecdf4dca5d9"><div class="ttname"><a href="classqx_1_1file__logger__stream__ofstream.html#a13205f86a582bcb5a0da8ecdf4dca5d9">qx::file_logger_stream_ofstream::file_logger_stream_ofstream</a></div><div class="ttdeci">file_logger_stream_ofstream(const config &amp;streamConfig=config(), unit&lt; size_t, units::data &gt; bufferSize={ 8192 *sizeof(char_type), units::data::bytes })</div><div class="ttdoc">file_logger_stream_ofstream object constructor</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__ofstream_8inl_source.html#l00013">file_logger_stream_ofstream.inl:13</a></div></div>
-<div class="ttc" id="aclassqx_1_1file__logger__stream__ofstream_html_a348a154b2fe2dc897dede65ba2ef1610"><div class="ttname"><a href="classqx_1_1file__logger__stream__ofstream.html#a348a154b2fe2dc897dede65ba2ef1610">qx::file_logger_stream_ofstream::do_flush</a></div><div class="ttdeci">virtual void do_flush() override</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__ofstream_8inl_source.html#l00067">file_logger_stream_ofstream.inl:67</a></div></div>
-<div class="ttc" id="aclassqx_1_1file__logger__stream__ofstream_html_af28dbc57787eb589b440d7966e819ed8"><div class="ttname"><a href="classqx_1_1file__logger__stream__ofstream.html#af28dbc57787eb589b440d7966e819ed8">qx::file_logger_stream_ofstream::do_log</a></div><div class="ttdeci">virtual void do_log(const category &amp;category, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage) override</div><div class="ttdoc">Proceed stream logging.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__ofstream_8inl_source.html#l00053">file_logger_stream_ofstream.inl:53</a></div></div>
+<div class="ttc" id="aclassqx_1_1file__logger__stream__ofstream_html_a348a154b2fe2dc897dede65ba2ef1610"><div class="ttname"><a href="classqx_1_1file__logger__stream__ofstream.html#a348a154b2fe2dc897dede65ba2ef1610">qx::file_logger_stream_ofstream::do_flush</a></div><div class="ttdeci">virtual void do_flush() override</div><div class="ttdoc">Flush the stream.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__ofstream_8inl_source.html#l00063">file_logger_stream_ofstream.inl:63</a></div></div>
+<div class="ttc" id="aclassqx_1_1file__logger__stream__ofstream_html_af28dbc57787eb589b440d7966e819ed8"><div class="ttname"><a href="classqx_1_1file__logger__stream__ofstream.html#af28dbc57787eb589b440d7966e819ed8">qx::file_logger_stream_ofstream::do_log</a></div><div class="ttdeci">virtual void do_log(const category &amp;category, verbosity eVerbosity, std::thread::id threadId, std::chrono::system_clock::time_point messageTime, string_view svFile, string_view svFunction, int nLine, string_view svMessage) override</div><div class="ttdoc">Proceed stream logging.</div><div class="ttdef"><b>Definition:</b> <a href="file__logger__stream__ofstream_8inl_source.html#l00046">file_logger_stream_ofstream.inl:46</a></div></div>
 <div class="ttc" id="astructqx_1_1base__file__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1base__file__logger__stream_1_1config.html">qx::base_file_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="base__file__logger__stream_8h_source.html#l00039">base_file_logger_stream.h:40</a></div></div>
 <div class="ttc" id="astructqx_1_1details_1_1get__cerr_html"><div class="ttname"><a href="structqx_1_1details_1_1get__cerr.html">qx::details::get_cerr</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00019">base_logger_stream.inl:20</a></div></div>
 <div class="ttc" id="astructqx_1_1unit_html"><div class="ttname"><a href="structqx_1_1unit.html">qx::unit</a></div><div class="ttdef"><b>Definition:</b> <a href="base_8h_source.html#l00051">base.h:52</a></div></div>
-<div class="ttc" id="asuppress__warnings_8h_html_a0add8898e9b17bc1caa89e76bc667442"><div class="ttname"><a href="suppress__warnings_8h.html#a0add8898e9b17bc1caa89e76bc667442">QX_RESTORE_MSVC_WARNINGS</a></div><div class="ttdeci">#define QX_RESTORE_MSVC_WARNINGS(warnings)</div><div class="ttdoc">Enable warnings after QX_DISABLE_MSVC_WARNINGS.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00139">suppress_warnings.h:139</a></div></div>
-<div class="ttc" id="asuppress__warnings_8h_html_a1b3afadc80bbb3811cea95175a96bec1"><div class="ttname"><a href="suppress__warnings_8h.html#a1b3afadc80bbb3811cea95175a96bec1">QX_DISABLE_MSVC_WARNINGS</a></div><div class="ttdeci">#define QX_DISABLE_MSVC_WARNINGS(warnings)</div><div class="ttdoc">Force disable MSVC warnings, including all nested header includes.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00133">suppress_warnings.h:133</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -93,36 +93,39 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">if</span> (streamConfig.bUntieCin)</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="structqx_1_1details_1_1get__cout.html">details::get_cout&lt;char_type&gt;::get</a>().tie(<span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="structqx_1_1details_1_1get__cerr.html">details::get_cerr&lt;char_type&gt;::get</a>().tie(<span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        std::cout.tie(<span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        std::cerr.tie(<span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classqx_1_1cout__logger__stream.html#aba66827e83bbdf6a49c81593bcbf4c32">   30</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code" href="classqx_1_1cout__logger__stream.html#aba66827e83bbdf6a49c81593bcbf4c32">cout_logger_stream::do_flush</a>()</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="structqx_1_1details_1_1get__cout.html">details::get_cout&lt;char_type&gt;::get</a>() &lt;&lt; std::flush;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="structqx_1_1details_1_1get__cerr.html">details::get_cerr&lt;char_type&gt;::get</a>() &lt;&lt; std::flush;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::cout &lt;&lt; std::flush;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::cerr &lt;&lt; std::flush;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> cout_logger_stream::cout_colorized(verbosity eVerbosity, string_view svMessage, <span class="keyword">const</span> <a class="code" href="classqx_1_1color.html">color</a>&amp; rangeColor)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">check_previous_message</a>(eVerbosity);</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">auto</span>&amp; outputStream =</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        !<a class="code" href="verbosity_8h.html#ad9c2505438bde68672f82dba0d48f521">is_error</a>(eVerbosity) ? <a class="code" href="structqx_1_1details_1_1get__cout.html">details::get_cout&lt;char_type&gt;::get</a>() : details::get_cerr&lt;char_type&gt;::get();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    outputStream &lt;&lt; <a class="code" href="classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde">terminal_color::font</a>(rangeColor) &lt;&lt; svMessage &lt;&lt; <a class="code" href="classqx_1_1terminal__color.html#a712277ca54e216847f8aaa11ccb473ea">terminal_color::reset</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> cout_logger_stream::cout_common(verbosity eVerbosity, string_view svMessage)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">check_previous_message</a>(eVerbosity);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">auto</span>&amp; outputStream =</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        !is_error(eVerbosity) ? details::get_cout&lt;char_type&gt;::get() : details::get_cerr&lt;char_type&gt;::get();</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    outputStream &lt;&lt; svMessage;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::ostream&amp;      outputStream = !<a class="code" href="verbosity_8h.html#ad9c2505438bde68672f82dba0d48f521">is_error</a>(eVerbosity) ? std::cout : std::cerr;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">const</span> cstring_view svUtf8       = <a class="code" href="classqx_1_1base__logger__stream.html#a1d8899d6f5572384e5bbde837fbd76dd">to_utf8</a>(svMessage);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    outputStream &lt;&lt; <a class="code" href="classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde">terminal_color::font</a>(rangeColor);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    outputStream.write(svUtf8.data(), <span class="keyword">static_cast&lt;</span>std::streamsize<span class="keyword">&gt;</span>(svUtf8.size()));</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    outputStream &lt;&lt; <a class="code" href="classqx_1_1terminal__color.html#a712277ca54e216847f8aaa11ccb473ea">terminal_color::reset</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">inline</span> <span class="keywordtype">void</span> cout_logger_stream::cout_common(verbosity eVerbosity, string_view svMessage)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">check_previous_message</a>(eVerbosity);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    std::ostream&amp;      outputStream = !is_error(eVerbosity) ? std::cout : std::cerr;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">const</span> cstring_view svUtf8       = <a class="code" href="classqx_1_1base__logger__stream.html#a1d8899d6f5572384e5bbde837fbd76dd">to_utf8</a>(svMessage);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    outputStream.write(svUtf8.data(), <span class="keyword">static_cast&lt;</span>std::streamsize<span class="keyword">&gt;</span>(svUtf8.size()));</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="ttc" id="aclassqx_1_1base__logger__stream_html_a1d8899d6f5572384e5bbde837fbd76dd"><div class="ttname"><a href="classqx_1_1base__logger__stream.html#a1d8899d6f5572384e5bbde837fbd76dd">qx::base_logger_stream::to_utf8</a></div><div class="ttdeci">static cstring_view to_utf8(string_view svMessage)</div><div class="ttdoc">Encode a message as UTF-8 for a byte output.</div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00127">base_logger_stream.inl:127</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__standard__streams__stream_html"><div class="ttname"><a href="classqx_1_1base__standard__streams__stream.html">qx::base_standard_streams_stream</a></div><div class="ttdoc">A base class for logger streams based on standard streams.</div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8h_source.html#l00025">base_standard_streams_stream.h:26</a></div></div>
 <div class="ttc" id="aclassqx_1_1base__standard__streams__stream_html_a8643f960f2d61dfe54dc6ef1116dc848"><div class="ttname"><a href="classqx_1_1base__standard__streams__stream.html#a8643f960f2d61dfe54dc6ef1116dc848">qx::base_standard_streams_stream::check_previous_message</a></div><div class="ttdeci">void check_previous_message(verbosity eCurrentMessageVerbosity)</div><div class="ttdoc">Check the previous message type and flush if needed.</div><div class="ttdef"><b>Definition:</b> <a href="base__standard__streams__stream_8inl_source.html#l00107">base_standard_streams_stream.inl:107</a></div></div>
 <div class="ttc" id="aclassqx_1_1color_html"><div class="ttname"><a href="classqx_1_1color.html">qx::color</a></div><div class="ttdoc">RGBA color.</div><div class="ttdef"><b>Definition:</b> <a href="color_8h_source.html#l00194">color.h:195</a></div></div>
@@ -131,8 +134,6 @@ $(function() {
 <div class="ttc" id="aclassqx_1_1terminal__color_html_a712277ca54e216847f8aaa11ccb473ea"><div class="ttname"><a href="classqx_1_1terminal__color.html#a712277ca54e216847f8aaa11ccb473ea">qx::terminal_color::reset</a></div><div class="ttdeci">static constexpr terminal_color reset() noexcept</div><div class="ttdoc">Reset all colors.</div><div class="ttdef"><b>Definition:</b> <a href="terminal__color_8inl_source.html#l00056">terminal_color.inl:56</a></div></div>
 <div class="ttc" id="aclassqx_1_1terminal__color_html_a892a9091e6b4763aee54f6e83b7eafde"><div class="ttname"><a href="classqx_1_1terminal__color.html#a892a9091e6b4763aee54f6e83b7eafde">qx::terminal_color::font</a></div><div class="ttdeci">static constexpr terminal_color font(const color &amp;fontColor) noexcept</div><div class="ttdoc">Set font color.</div><div class="ttdef"><b>Definition:</b> <a href="terminal__color_8inl_source.html#l00046">terminal_color.inl:46</a></div></div>
 <div class="ttc" id="astructqx_1_1cout__logger__stream_1_1config_html"><div class="ttname"><a href="structqx_1_1cout__logger__stream_1_1config.html">qx::cout_logger_stream::config</a></div><div class="ttdef"><b>Definition:</b> <a href="cout__logger__stream_8h_source.html#l00031">cout_logger_stream.h:32</a></div></div>
-<div class="ttc" id="astructqx_1_1details_1_1get__cerr_html"><div class="ttname"><a href="structqx_1_1details_1_1get__cerr.html">qx::details::get_cerr</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00019">base_logger_stream.inl:20</a></div></div>
-<div class="ttc" id="astructqx_1_1details_1_1get__cout_html"><div class="ttname"><a href="structqx_1_1details_1_1get__cout.html">qx::details::get_cout</a></div><div class="ttdef"><b>Definition:</b> <a href="base__logger__stream_8inl_source.html#l00037">base_logger_stream.inl:38</a></div></div>
 <div class="ttc" id="averbosity_8h_html_ad9c2505438bde68672f82dba0d48f521"><div class="ttname"><a href="verbosity_8h.html#ad9c2505438bde68672f82dba0d48f521">qx::is_error</a></div><div class="ttdeci">constexpr bool is_error(verbosity eVerbosity) noexcept</div><div class="ttdoc">Check if the verbosity level is an error.</div><div class="ttdef"><b>Definition:</b> <a href="verbosity_8h_source.html#l00037">verbosity.h:37</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
