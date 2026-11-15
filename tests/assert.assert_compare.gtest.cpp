@@ -35,13 +35,13 @@ inline void assert_compare_tests_fixture::SetUp()
     auto config          = qx::asserts_manager::get_instance().get_config();
     config.bLogAssertion = false;
     config.onAssertion   = [this](
-                             qx::string_view svCondition,
-                             const qx::category&,
-                             qx::assert_type,
-                             qx::string_view,
-                             qx::string_view,
-                             qx::string_view,
-                             i32)
+                               qx::string_view svCondition,
+                               const qx::category&,
+                               qx::assert_type,
+                               qx::string_view,
+                               qx::string_view,
+                               qx::string_view,
+                               i32)
     {
         m_sCondition = svCondition;
     };
@@ -237,9 +237,10 @@ TEST_F(assert_compare_tests_fixture, streamoff_expression)
     constexpr std::streamoff nRowSize  = 22;
     constexpr std::streamoff nFileSize = 43;
 
-    EXPECT_FALSE(QX_EXPECT(qx::assert_eq(
-        static_cast<std::streamoff>(inputFile.tellg()) + nRowSize,
-        static_cast<std::streamoff>(nFileSize))));
+    EXPECT_FALSE(QX_EXPECT(
+        qx::assert_eq(
+            static_cast<std::streamoff>(inputFile.tellg()) + nRowSize,
+            static_cast<std::streamoff>(nFileSize))));
     expect_condition(
         QXT("static_cast<std::streamoff>(inputFile.tellg()) + nRowSize [42] == "
             "static_cast<std::streamoff>(nFileSize) [43]"));

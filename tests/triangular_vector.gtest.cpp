@@ -28,13 +28,14 @@ TEST(TestQxTriangularVector, constructing)
         EXPECT_FALSE(v.empty());
         EXPECT_EQ(v.size(), 15);
         EXPECT_EQ(v.size_side(), 5);
-        EXPECT_TRUE(std::all_of(
-            v.cbegin(),
-            v.cend(),
-            [](auto val)
-            {
-                return val == 2;
-            }));
+        EXPECT_TRUE(
+            std::all_of(
+                v.cbegin(),
+                v.cend(),
+                [](auto val)
+                {
+                    return val == 2;
+                }));
     };
 
     {

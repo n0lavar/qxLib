@@ -115,6 +115,7 @@ string_pool<nStringsPoolSize>::item format_macro_user_message(
 #define _QX_MACRO_USER_MESSAGE_32(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32) QXT(a1), a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32
 // clang-format on
 
-#define _QX_MACRO_USER_MESSAGE(stringsPool, ...)                                 \
-    qx::details::format_macro_user_message(stringsPool __VA_OPT__(, ) QX_EXPAND( \
-        QX_APPEND_VA_ARG_COUNT(_QX_MACRO_USER_MESSAGE_, __VA_ARGS__)(__VA_ARGS__)))
+#define _QX_MACRO_USER_MESSAGE(stringsPool, ...) \
+    qx::details::format_macro_user_message(      \
+        stringsPool __VA_OPT__(, )               \
+            QX_EXPAND(QX_APPEND_VA_ARG_COUNT(_QX_MACRO_USER_MESSAGE_, __VA_ARGS__)(__VA_ARGS__)))

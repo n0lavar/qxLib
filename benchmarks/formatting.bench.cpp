@@ -383,12 +383,13 @@ BENCHMARK_TEMPLATE_METHOD_F(formatting_fixture, bench_printf_small_string_string
             this->random_string(0, qx::basic_string<char_type>::traits_type::nMemoryBufferSize);
         st.ResumeTiming();
 
-        benchmark::DoNotOptimize(traits_type::format(
-            (std::basic_string<char_type>(qx::get_format_specifier<char_type, char_type*>())
-             + QX_STR_PREFIX(char_type, " ") + qx::get_format_specifier<char_type, char_type*>())
-                .c_str(),
-            str1.c_str(),
-            str2.c_str()));
+        benchmark::DoNotOptimize(
+            traits_type::format(
+                (std::basic_string<char_type>(qx::get_format_specifier<char_type, char_type*>())
+                 + QX_STR_PREFIX(char_type, " ") + qx::get_format_specifier<char_type, char_type*>())
+                    .c_str(),
+                str1.c_str(),
+                str2.c_str()));
     }
 }
 
@@ -423,12 +424,13 @@ BENCHMARK_TEMPLATE_METHOD_F(formatting_fixture, bench_printf_big_string_string)(
             2 * qx::basic_string<char_type>::traits_type::nMemoryBufferSize);
         st.ResumeTiming();
 
-        benchmark::DoNotOptimize(traits_type::format(
-            (std::basic_string<char_type>(qx::get_format_specifier<char_type, char_type*>())
-             + QX_STR_PREFIX(char_type, " ") + qx::get_format_specifier<char_type, char_type*>())
-                .c_str(),
-            str1.c_str(),
-            str2.c_str()));
+        benchmark::DoNotOptimize(
+            traits_type::format(
+                (std::basic_string<char_type>(qx::get_format_specifier<char_type, char_type*>())
+                 + QX_STR_PREFIX(char_type, " ") + qx::get_format_specifier<char_type, char_type*>())
+                    .c_str(),
+                str1.c_str(),
+                str2.c_str()));
     }
 }
 

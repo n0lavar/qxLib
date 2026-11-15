@@ -532,28 +532,31 @@ TYPED_TEST_SUITE(delegate_token_fixture, implementations_type);
 TYPED_TEST(delegate_token_fixture, token_lambda)
 {
     this->m_optCallableType = callable_type::lambda;
-    this->m_Delegate.add_token(get_lambda<
-                               typename TypeParam::get_get_result_type,
-                               typename TypeParam::return_type,
-                               typename TypeParam::args_tuple_type>::value);
+    this->m_Delegate.add_token(
+        get_lambda<
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 TYPED_TEST(delegate_token_fixture, token_function)
 {
     this->m_optCallableType = callable_type::function;
-    this->m_Delegate.add_token(get_function<
-                               typename TypeParam::get_get_result_type,
-                               typename TypeParam::return_type,
-                               typename TypeParam::args_tuple_type>::value);
+    this->m_Delegate.add_token(
+        get_function<
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 TYPED_TEST(delegate_token_fixture, token_static_method)
 {
     this->m_optCallableType = callable_type::static_method;
-    this->m_Delegate.add_token(get_static_method<
-                               typename TypeParam::get_get_result_type,
-                               typename TypeParam::return_type,
-                               typename TypeParam::args_tuple_type>::value);
+    this->m_Delegate.add_token(
+        get_static_method<
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 TYPED_TEST(delegate_token_fixture, token_method)
@@ -591,32 +594,32 @@ TYPED_TEST_SUITE(delegate_destruction_callback_fixture, implementations_type);
 
 TYPED_TEST(delegate_destruction_callback_fixture, destruction_callback_lambda)
 {
-    this->m_optCallableType = callable_type::lambda;
-    this->m_DelegateDestructionCallback =
-        this->m_Delegate.add_destruction_callback(get_lambda<
-                                                  typename TypeParam::get_get_result_type,
-                                                  typename TypeParam::return_type,
-                                                  typename TypeParam::args_tuple_type>::value);
+    this->m_optCallableType             = callable_type::lambda;
+    this->m_DelegateDestructionCallback = this->m_Delegate.add_destruction_callback(
+        get_lambda<
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 TYPED_TEST(delegate_destruction_callback_fixture, destruction_callback_function)
 {
-    this->m_optCallableType = callable_type::function;
-    this->m_DelegateDestructionCallback =
-        this->m_Delegate.add_destruction_callback(get_function<
-                                                  typename TypeParam::get_get_result_type,
-                                                  typename TypeParam::return_type,
-                                                  typename TypeParam::args_tuple_type>::value);
+    this->m_optCallableType             = callable_type::function;
+    this->m_DelegateDestructionCallback = this->m_Delegate.add_destruction_callback(
+        get_function<
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 TYPED_TEST(delegate_destruction_callback_fixture, destruction_callback_static_method)
 {
-    this->m_optCallableType = callable_type::static_method;
-    this->m_DelegateDestructionCallback =
-        this->m_Delegate.add_destruction_callback(get_static_method<
-                                                  typename TypeParam::get_get_result_type,
-                                                  typename TypeParam::return_type,
-                                                  typename TypeParam::args_tuple_type>::value);
+    this->m_optCallableType             = callable_type::static_method;
+    this->m_DelegateDestructionCallback = this->m_Delegate.add_destruction_callback(
+        get_static_method<
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 TYPED_TEST(delegate_destruction_callback_fixture, destruction_callback_method)
@@ -661,9 +664,9 @@ TYPED_TEST(delegate_weak_fixture, weak_lambda)
     this->m_DelegateToken   = this->m_Delegate.add_weak(
         std::weak_ptr<typename TypeParam::method_component_type>(this->m_pComponent),
         get_lambda<
-              typename TypeParam::get_get_result_type,
-              typename TypeParam::return_type,
-              typename TypeParam::args_tuple_type>::value);
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 TYPED_TEST(delegate_weak_fixture, weak_function)
@@ -672,9 +675,9 @@ TYPED_TEST(delegate_weak_fixture, weak_function)
     this->m_DelegateToken   = this->m_Delegate.add_weak(
         std::weak_ptr<typename TypeParam::method_component_type>(this->m_pComponent),
         get_function<
-              typename TypeParam::get_get_result_type,
-              typename TypeParam::return_type,
-              typename TypeParam::args_tuple_type>::value);
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 TYPED_TEST(delegate_weak_fixture, weak_static_method)
@@ -683,9 +686,9 @@ TYPED_TEST(delegate_weak_fixture, weak_static_method)
     this->m_DelegateToken   = this->m_Delegate.add_weak(
         std::weak_ptr<typename TypeParam::method_component_type>(this->m_pComponent),
         get_static_method<
-              typename TypeParam::get_get_result_type,
-              typename TypeParam::return_type,
-              typename TypeParam::args_tuple_type>::value);
+            typename TypeParam::get_get_result_type,
+            typename TypeParam::return_type,
+            typename TypeParam::args_tuple_type>::value);
 }
 
 

@@ -35,13 +35,14 @@ TEST(TestQxVector2d, constructing)
         EXPECT_EQ(v.size_y(), 4);
         EXPECT_EQ(v.rows(), 5);
         EXPECT_EQ(v.cols(), 4);
-        EXPECT_TRUE(std::all_of(
-            v.cbegin(),
-            v.cend(),
-            [](auto val)
-            {
-                return val == 2;
-            }));
+        EXPECT_TRUE(
+            std::all_of(
+                v.cbegin(),
+                v.cend(),
+                [](auto val)
+                {
+                    return val == 2;
+                }));
     };
 
     {

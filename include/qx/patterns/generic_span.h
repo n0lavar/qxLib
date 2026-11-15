@@ -79,8 +79,8 @@ public:
         [[nodiscard]] iterator  operator++(int) noexcept;
         bool                    operator!=(const iterator& r) const noexcept;
         bool                    operator==(const iterator& r) const noexcept;
-        operator void*() const noexcept;
-        operator bool() const noexcept;
+                                operator void*() const noexcept;
+                                operator bool() const noexcept;
 
     private:
         generator_type m_Generator;

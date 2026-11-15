@@ -254,46 +254,52 @@ TEST(components, view)
             components.pComponent23_1, components.pComponent21_1, components.pComponent22_1
         };
         EXPECT_TRUE(std::ranges::equal(ABaseTestComponent_objects, components.components.view(), RefPointerComparator));
-        EXPECT_TRUE(std::ranges::equal(
-            ABaseTestComponent_objects,
-            components.components.template view<ABaseTestComponent>(),
-            RefPointerComparator));
+        EXPECT_TRUE(
+            std::ranges::equal(
+                ABaseTestComponent_objects,
+                components.components.template view<ABaseTestComponent>(),
+                RefPointerComparator));
 
         const std::array<CTestComponent1*, 1> CTestComponent1_objects { components.pComponent1 };
-        EXPECT_TRUE(std::ranges::equal(
-            CTestComponent1_objects,
-            components.components.template view<CTestComponent1>(),
-            RefPointerComparator));
+        EXPECT_TRUE(
+            std::ranges::equal(
+                CTestComponent1_objects,
+                components.components.template view<CTestComponent1>(),
+                RefPointerComparator));
 
         const std::array<ATestComponent2*, 6> ATestComponent2_objects {
             components.pComponent23_2, components.pComponent21_2, components.pComponent22_2,
             components.pComponent23_1, components.pComponent21_1, components.pComponent22_1
         };
-        EXPECT_TRUE(std::ranges::equal(
-            ATestComponent2_objects,
-            components.components.template view<ATestComponent2>(),
-            RefPointerComparator));
+        EXPECT_TRUE(
+            std::ranges::equal(
+                ATestComponent2_objects,
+                components.components.template view<ATestComponent2>(),
+                RefPointerComparator));
 
         const std::array<CTestComponent21*, 2> CTestComponent21_objects { components.pComponent21_2,
                                                                           components.pComponent21_1 };
-        EXPECT_TRUE(std::ranges::equal(
-            CTestComponent21_objects,
-            components.components.template view<CTestComponent21>(),
-            RefPointerComparator));
+        EXPECT_TRUE(
+            std::ranges::equal(
+                CTestComponent21_objects,
+                components.components.template view<CTestComponent21>(),
+                RefPointerComparator));
 
         const std::array<CTestComponent22*, 2> CTestComponent22_objects { components.pComponent22_2,
                                                                           components.pComponent22_1 };
-        EXPECT_TRUE(std::ranges::equal(
-            CTestComponent22_objects,
-            components.components.template view<CTestComponent22>(),
-            RefPointerComparator));
+        EXPECT_TRUE(
+            std::ranges::equal(
+                CTestComponent22_objects,
+                components.components.template view<CTestComponent22>(),
+                RefPointerComparator));
 
         const std::array<CTestComponent23*, 2> CTestComponent23_objects { components.pComponent23_2,
                                                                           components.pComponent23_1 };
-        EXPECT_TRUE(std::ranges::equal(
-            CTestComponent23_objects,
-            components.components.template view<CTestComponent23>(),
-            RefPointerComparator));
+        EXPECT_TRUE(
+            std::ranges::equal(
+                CTestComponent23_objects,
+                components.components.template view<CTestComponent23>(),
+                RefPointerComparator));
     };
 
     SComponents components = CreateComponents();

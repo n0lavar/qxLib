@@ -336,9 +336,10 @@ inline geometry create_ellipse(float fHorRadius, float fVertRadius, size_t nSide
     {
         ret.geomIndices.push_back(static_cast<index_type>(i));
         ret.geomVertices.emplace_back(
-            details::create_vertex({ fHorRadius * std::cos(static_cast<float>(i) * f2Pi / fSides),
-                                     fVertRadius * std::sin(static_cast<float>(i) * f2Pi / fSides),
-                                     0.f }));
+            details::create_vertex(
+                { fHorRadius * std::cos(static_cast<float>(i) * f2Pi / fSides),
+                  fVertRadius * std::sin(static_cast<float>(i) * f2Pi / fSides),
+                  0.f }));
     }
 
     ret.eDrawMode = draw_mode::triangles_fan;

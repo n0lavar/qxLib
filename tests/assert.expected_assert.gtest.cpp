@@ -65,13 +65,13 @@ TEST(expected_assert_tests, matches_type_and_message_and_forwards_other_assertio
     size_t                            nForwarded     = 0;
     config.bLogAssertion                             = false;
     config.onAssertion                               = [&nForwarded](
-                             qx::string_view,
-                             const qx::category&,
-                             qx::assert_type,
-                             qx::string_view,
-                             qx::string_view,
-                             qx::string_view,
-                             i32)
+                                                           qx::string_view,
+                                                           const qx::category&,
+                                                           qx::assert_type,
+                                                           qx::string_view,
+                                                           qx::string_view,
+                                                           qx::string_view,
+                                                           i32)
     {
         ++nForwarded;
     };
@@ -108,12 +108,12 @@ TEST(expected_assert_tests, matches_type_and_message_and_forwards_other_assertio
 
 TEST(expected_assert_tests, supports_simultaneous_expectations)
 {
-    qx::expected_assert first = qx::expected_assert_builder()
-                                    .condition(QXT("false"))
-                                    .message(QXT("first"))
-                                    .count(2)
-                                    .type(qx::assert_type::expect)
-                                    .build();
+    qx::expected_assert first  = qx::expected_assert_builder()
+                                     .condition(QXT("false"))
+                                     .message(QXT("first"))
+                                     .count(2)
+                                     .type(qx::assert_type::expect)
+                                     .build();
     qx::expected_assert second = qx::expected_assert_builder()
                                      .condition(QXT("false"))
                                      .message(QXT("second"))
@@ -146,12 +146,12 @@ static void run_expected_fatal_assert(qx::assert_type eExpectedType)
 {
     qx::asserts_manager::config config = qx::asserts_manager::get_instance().get_config();
     config.onAssertion                 = [](qx::string_view,
-                            const qx::category&,
-                            qx::assert_type,
-                            qx::string_view,
-                            qx::string_view,
-                            qx::string_view,
-                            i32)
+                                            const qx::category&,
+                                            qx::assert_type,
+                                            qx::string_view,
+                                            qx::string_view,
+                                            qx::string_view,
+                                            i32)
     {
         std::exit(77);
     };
@@ -229,12 +229,12 @@ TEST(expected_assert_tests, matches_all_selected_fields)
     i32                               nLine = 0;
     config.bLogAssertion                    = false;
     config.onAssertion                      = [&](qx::string_view,
-                             const qx::category&,
-                             qx::assert_type,
-                             qx::string_view,
-                             qx::string_view svFunction,
-                             qx::string_view svFile,
-                             i32             nAssertLine)
+                                                  const qx::category&,
+                                                  qx::assert_type,
+                                                  qx::string_view,
+                                                  qx::string_view svFunction,
+                                                  qx::string_view svFile,
+                                                  i32             nAssertLine)
     {
         ++nForwarded;
         sFunction = svFunction;
@@ -299,12 +299,12 @@ TEST(expected_assert_tests, strings_match_exactly_by_default)
     qx::string                        sFile;
     config.bLogAssertion = false;
     config.onAssertion   = [&](qx::string_view,
-                             const qx::category&,
-                             qx::assert_type,
-                             qx::string_view,
-                             qx::string_view svFunction,
-                             qx::string_view svFile,
-                             i32)
+                               const qx::category&,
+                               qx::assert_type,
+                               qx::string_view,
+                               qx::string_view svFunction,
+                               qx::string_view svFile,
+                               i32)
     {
         ++nForwarded;
         sFunction = svFunction;
@@ -351,15 +351,15 @@ TEST(expected_assert_tests, reports_selected_expectation_details)
         {
             scoped_disable_gtest_break disableBreak;
             qx::expected_assert        expected = qx::expected_assert_builder()
-                                               .condition(QXT("x > [0-9]+"), true)
-                                               .category(CatOtherExpectedAssert)
-                                               .type(qx::assert_type::expect)
-                                               .message(QXT("bad value"))
-                                               .function(QXT("test.*"), true)
-                                               .file(QXT("file.cpp"))
-                                               .line(42)
-                                               .count(2)
-                                               .build();
+                                                      .condition(QXT("x > [0-9]+"), true)
+                                                      .category(CatOtherExpectedAssert)
+                                                      .type(qx::assert_type::expect)
+                                                      .message(QXT("bad value"))
+                                                      .function(QXT("test.*"), true)
+                                                      .file(QXT("file.cpp"))
+                                                      .line(42)
+                                                      .count(2)
+                                                      .build();
         }
     }
 
