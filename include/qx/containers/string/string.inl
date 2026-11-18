@@ -1929,19 +1929,13 @@ inline bool basic_string<char_t, traits_t>::starts_with(value_type chSymbol) con
 template<class char_t, class traits_t>
 inline bool basic_string<char_t, traits_t>::starts_with(const_pointer pszStr, size_type nStrSize) const noexcept
 {
-    if (pszStr)
-    {
-        if (size_type nThisSize = size(); nThisSize > 0)
-        {
-            if (nStrSize == npos)
-                nStrSize = traits_t::length(pszStr);
+    if (!pszStr)
+        return false;
 
-            if (nStrSize <= nThisSize)
-                return traits_t::compare_n(data(), pszStr, nStrSize) == 0;
-        }
-    }
+    if (nStrSize == npos)
+        nStrSize = traits_t::length(pszStr);
 
-    return false;
+    return starts_with(pszStr, pszStr + nStrSize);
 }
 
 template<class char_t, class traits_t>
@@ -1954,8 +1948,11 @@ template<class char_t, class traits_t>
 template<class fwd_it_t>
 inline bool basic_string<char_t, traits_t>::starts_with(fwd_it_t itBegin, fwd_it_t itEnd) const noexcept
 {
-    auto nStrSize = std::distance(itBegin, itEnd);
-    return iter_strcmp(cbegin(), cbegin() + static_cast<size_type>(nStrSize), itBegin, itEnd) == 0;
+    const size_type nOtherSize = static_cast<size_type>(std::distance(itBegin, itEnd));
+    if (nOtherSize > size())
+        return false;
+
+    return iter_strcmp(cbegin(), cbegin() + nOtherSize, itBegin, itEnd) == 0;
 }
 
 template<class char_t, class traits_t>
