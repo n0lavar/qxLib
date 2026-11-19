@@ -21,10 +21,13 @@
 
 /**
     @def   QX_LINE_NAME
-    @brief Do magic! Creates a unique name using the line number
-    @param prefix - name prefix
+    @brief Do magic! Creates a unique details-prefixed name using the line number
+    @param prefix - name prefix in snake_case
+    @code
+    QX_LINE_NAME(name) // at line 166 -> details_name_166
+    @endcode
 **/
-#define QX_LINE_NAME(prefix) QX_JOIN(prefix, __LINE__)
+#define QX_LINE_NAME(prefix) QX_JOIN(QX_JOIN(details_##prefix, _), __LINE__)
 
 /**
     @brief A helper to avoid duplication when converting c libs constants to string literals

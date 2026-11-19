@@ -58,11 +58,11 @@ class smart_ptr_ref_adapter<std::unique_ptr, T, args_t...>
     {
     };
 
-    template<class _T, class... _constructor_args_t>
-    friend unique_ref<_T> qx::make_unique_ref(_constructor_args_t&&... args);
+    template<class T_, class... _constructor_args_t>
+    friend unique_ref<T_> qx::make_unique_ref(_constructor_args_t&&... args);
 
-    template<class _T, class _deleter_t, class... _constructor_args_t>
-    friend unique_ref<_T, _deleter_t> qx::make_unique_ref_with_deleter(
+    template<class T_, class _deleter_t, class... _constructor_args_t>
+    friend unique_ref<T_, _deleter_t> qx::make_unique_ref_with_deleter(
         _deleter_t deleter,
         _constructor_args_t&&... args);
 

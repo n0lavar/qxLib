@@ -66,7 +66,7 @@ TYPED_TEST(TestStringHashTyped, hashes_inequality)
     EXPECT_TRUE(bAllDifferent);
 }
 
-TEST(TestStringHash, operator_)
+TEST(TestStringHash, operator_equal)
 {
     using namespace qx::literals;
 

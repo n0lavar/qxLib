@@ -72,22 +72,22 @@ struct static_assert_between
     Static assertions that shows left and right in error msg
 */
 #define QX_STATIC_ASSERT_EQ(left, right) \
-    constexpr qx::details::static_assert_two<(left), (right), std::equal_to<>> QX_LINE_NAME(_static_assert_eq_)
+    constexpr qx::details::static_assert_two<(left), (right), std::equal_to<>> QX_LINE_NAME(static_assert_eq)
 
 #define QX_STATIC_ASSERT_NE(left, right) \
-    constexpr qx::details::static_assert_two<(left), (right), std::not_equal_to<>> QX_LINE_NAME(_static_assert_nq_)
+    constexpr qx::details::static_assert_two<(left), (right), std::not_equal_to<>> QX_LINE_NAME(static_assert_nq)
 
 #define QX_STATIC_ASSERT_LT(left, right) \
-    constexpr qx::details::static_assert_two<(left), (right), std::less<>> QX_LINE_NAME(_static_assert_lt_)
+    constexpr qx::details::static_assert_two<(left), (right), std::less<>> QX_LINE_NAME(static_assert_lt)
 
 #define QX_STATIC_ASSERT_LE(left, right) \
-    constexpr qx::details::static_assert_two<(left), (right), std::less_equal<>> QX_LINE_NAME(_static_assert_le_)
+    constexpr qx::details::static_assert_two<(left), (right), std::less_equal<>> QX_LINE_NAME(static_assert_le)
 
 #define QX_STATIC_ASSERT_GT(left, right) \
-    constexpr qx::details::static_assert_two<(left), (right), std::greater<>> QX_LINE_NAME(_static_assert_gt_)
+    constexpr qx::details::static_assert_two<(left), (right), std::greater<>> QX_LINE_NAME(static_assert_gt)
 
 #define QX_STATIC_ASSERT_GE(left, right) \
-    constexpr qx::details::static_assert_two<(left), (right), std::greater_equal<>> QX_LINE_NAME(_static_assert_ge_)
+    constexpr qx::details::static_assert_two<(left), (right), std::greater_equal<>> QX_LINE_NAME(static_assert_ge)
 
 /**
     @def   QX_STATIC_ASSERT_BETWEEN
@@ -97,7 +97,7 @@ struct static_assert_between
     @param right - right value
 **/
 #define QX_STATIC_ASSERT_BETWEEN(left, value, right) \
-    qx::details::static_assert_between<(left), (value), (right)> QX_LINE_NAME(static_assert_between_)
+    qx::details::static_assert_between<(left), (value), (right)> QX_LINE_NAME(static_assert_between)
 
 /**
     @brief This static assert will fail if block it placed in must not be instantiated

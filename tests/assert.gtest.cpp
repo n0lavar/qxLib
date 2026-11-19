@@ -205,7 +205,7 @@ TEST(qx_assert, ensure_compilation)
     if (macro_call)                     \
         ;                               \
                                         \
-    const bool QX_LINE_NAME(_) = macro_call
+    const bool QX_LINE_NAME(result) = macro_call
 
 TEST(qx_assert, expect_compilation)
 {
@@ -301,7 +301,7 @@ inline void assert_callback_tests_fixture::TearDown()
 }
 
 #define TEST_ON_ASSERTION(macro_call, condition, category, assert_type, user_message) \
-    TEST_F(assert_callback_tests_fixture, QX_LINE_NAME(test_on_assertion_))           \
+    TEST_F(assert_callback_tests_fixture, QX_LINE_NAME(test_on_assertion))            \
     {                                                                                 \
         this->m_svExpectedCondition   = QXT(QX_STRINGIFY(condition));                 \
         this->m_pExpectedCategory     = &category;                                    \
@@ -315,7 +315,7 @@ inline void assert_callback_tests_fixture::TearDown()
     }
 
 #define TEST_ON_ASSERTION_LOOP(macro_call, condition, category, assert_type, user_message) \
-    TEST_F(assert_callback_tests_fixture, QX_LINE_NAME(test_on_assertion_))                \
+    TEST_F(assert_callback_tests_fixture, QX_LINE_NAME(test_on_assertion))                 \
     {                                                                                      \
         this->m_svExpectedCondition   = QXT(QX_STRINGIFY(condition));                      \
         this->m_pExpectedCategory     = &category;                                         \
@@ -332,7 +332,7 @@ inline void assert_callback_tests_fixture::TearDown()
     }
 
 #define TEST_ON_ASSERTION_RETURN(macro_call, condition, category, assert_type, user_message) \
-    TEST_F(assert_callback_tests_fixture, QX_LINE_NAME(test_on_assertion_))                  \
+    TEST_F(assert_callback_tests_fixture, QX_LINE_NAME(test_on_assertion))                   \
     {                                                                                        \
         auto Check = [this]() -> int                                                         \
         {                                                                                    \

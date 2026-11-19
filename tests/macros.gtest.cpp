@@ -50,7 +50,7 @@ QX_STATIC_ASSERT_STR_EQ(pszName, "val");
 // ---------------------------------------------------- QX_LINE_NAME ---------------------------------------------------
 
 constexpr int QX_LINE_NAME(test) = 5;
-static_assert(test52 == 5);
+static_assert(details_test_52 == 5);
 
 
 

@@ -45,8 +45,8 @@ class smart_ptr_ref_adapter<std::shared_ptr, T> : public overload_functions_smar
     {
     };
 
-    template<class _T, class... _constructor_args_t>
-    friend shared_ref<_T> qx::make_shared_ref(_constructor_args_t&&... args);
+    template<class T_, class... _constructor_args_t>
+    friend shared_ref<T_> qx::make_shared_ref(_constructor_args_t&&... args);
 
 public:
     using super                 = overload_functions_smart_ptr_ref_adapter<std::shared_ptr, T>;

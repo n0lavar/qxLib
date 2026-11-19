@@ -74,7 +74,7 @@
     @endcode 
 **/
 #define QX_CALL_BEFORE_MAIN \
-    inline volatile const qx::details::call_before_main_invoker QX_LINE_NAME(_stubCallBeforeMain)
+    inline volatile const qx::details::call_before_main_invoker QX_LINE_NAME(call_before_main)
 
 /**
     @brief Start a block with compiling optimisations disabled.

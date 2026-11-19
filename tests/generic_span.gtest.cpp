@@ -75,19 +75,19 @@ struct std::hash<NotT<T>>
 template<class T, template<class...> class container_t>
 void TestContainerWithAdapter()
 {
-    using _NotT = NotT<T>;
-    container_t<_NotT>  container { _NotT { 'a' }, _NotT { 'b' }, _NotT { 'c' }, _NotT { 'd' } };
+    using NotT_ = NotT<T>;
+    container_t<NotT_>  container { NotT_ { 'a' }, NotT_ { 'b' }, NotT_ { 'c' }, NotT_ { 'd' } };
     qx::generic_span<T> span(
         container,
-        [](_NotT& notT) -> T&
+        [](NotT_& notT) -> T&
         {
             return notT.value;
         });
     EXPECT_FALSE(span.empty());
 
-    container_t<_NotT> newContainer;
+    container_t<NotT_> newContainer;
     for (qx::copy_qualifiers_t<decltype(container), T>& value : span)
-        newContainer.insert(newContainer.end(), _NotT { value });
+        newContainer.insert(newContainer.end(), NotT_ { value });
 
     auto it1 = std::ranges::find(span, 'b');
     EXPECT_TRUE(it1);
