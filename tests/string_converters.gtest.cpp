@@ -3,7 +3,7 @@
     @file      string_converters.gtest.cpp
     @author    Khrapov
     @date      17.04.2022
-    @copyright (c) Nick Khrapov, 2022. All right reserved.
+    @copyright В© Nick Khrapov, 2022. All right reserved.
 
 **/
 #include <common.h>
@@ -53,7 +53,7 @@ TEST(string_converters, to_string)
 
 #if 0
     {
-        qx::wstring wstr(L"Привет мир");
+        qx::wstring wstr(L"РџСЂРёРІРµС‚ РјРёСЂ");
         qx::string  str = qx::to_string(wstr);
         EXPECT_STREQ(str.data(), QXT("?????? ???"));
     }

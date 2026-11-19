@@ -23,7 +23,7 @@ For a new file, use its actual name, author, creation date, and copyright inform
     @file      error_context.h
     @author    Khrapov
     @date      10.02.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 #pragma once

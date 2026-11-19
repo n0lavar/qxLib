@@ -1,9 +1,9 @@
-﻿/**
+/**
 
     @file      typedefs.h
     @author    Khrapov
     @date      18.06.2019
-    @copyright (c) Nick Khrapov, 2021. All right reserved.
+    @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

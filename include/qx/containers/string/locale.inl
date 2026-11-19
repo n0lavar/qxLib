@@ -3,7 +3,7 @@
     @file      locale.inl
     @author    Khrapov
     @date      07.11.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 

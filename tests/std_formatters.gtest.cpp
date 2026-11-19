@@ -3,7 +3,7 @@
     @file      std_formatters.gtest.cpp
     @author    Khrapov
     @date      27.03.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 #include <common.h>

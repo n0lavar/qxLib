@@ -1,9 +1,9 @@
-﻿/**
+/**
 
     @file      string.h
     @author    Khrapov
     @date      4.09.2019
-    @copyright (c) Nick Khrapov, 2021. All right reserved.
+    @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

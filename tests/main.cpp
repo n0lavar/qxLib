@@ -3,7 +3,7 @@
     @file      main.cpp
     @author    Khrapov
     @date      8.03.2020
-    @copyright (c) Nick Khrapov, 2021. All right reserved.
+    @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
 

@@ -3,7 +3,7 @@
     @file      logger_specifiers.h
     @author    Khrapov
     @date      9.09.2026
-    @copyright © Nick Khrapov, 2026. All right reserved.
+    @copyright Â© Nick Khrapov, 2026. All right reserved.
 
 **/
 #pragma once

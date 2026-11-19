@@ -3,7 +3,7 @@
     @file      file_logger_stream_ofstream.h
     @author    Khrapov
     @date      14.01.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 #pragma once

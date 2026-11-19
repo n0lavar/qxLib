@@ -3,7 +3,7 @@
     @file      sbo_poly.bench.cpp
     @author    Khrapov
     @date      10.05.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 #include <qx/hash.h>

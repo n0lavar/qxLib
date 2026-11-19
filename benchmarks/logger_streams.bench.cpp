@@ -3,7 +3,7 @@
     @file      logger_streams.bench.cpp
     @author    Khrapov
     @date      16.01.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 #include <qx/logger/base_file_logger_stream.h>

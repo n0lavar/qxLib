@@ -3,7 +3,7 @@
     @file      fwrite_logger_stream.inl
     @author    Khrapov
     @date      18.01.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 

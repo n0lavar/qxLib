@@ -3,7 +3,7 @@
     @file      string_literal.gtest.cpp
     @author    Khrapov
     @date      10.09.2021
-    @copyright (c) Nick Khrapov, 2021. All right reserved.
+    @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
 #include <common.h>

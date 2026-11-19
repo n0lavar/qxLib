@@ -4,7 +4,7 @@
     @brief     Tests configuring
     @author    Khrapov
     @date      8.03.2020
-    @copyright © Nick Khrapov, 2021. All right reserved.
+    @copyright Â© Nick Khrapov, 2021. All right reserved.
 
 **/
 #pragma once

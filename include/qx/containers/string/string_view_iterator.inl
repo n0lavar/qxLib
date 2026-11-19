@@ -3,7 +3,7 @@
     @file      string_view_iterator.inl
     @author    Khrapov
     @date      24.10.2023
-    @copyright (c) Nick Khrapov, 2023. All right reserved.
+    @copyright © Nick Khrapov, 2023. All right reserved.
 
 **/
 

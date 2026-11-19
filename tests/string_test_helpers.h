@@ -5,7 +5,7 @@
     @details   ~
     @author    Khrapov
     @date      17.04.2022
-    @copyright © Nick Khrapov, 2022. All right reserved.
+    @copyright Â© Nick Khrapov, 2022. All right reserved.
 
 **/
 #pragma once

@@ -3,7 +3,7 @@
     @file      expected_assert.inl
     @author    Khrapov
     @date      31.10.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 

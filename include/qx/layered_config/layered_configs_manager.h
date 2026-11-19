@@ -3,7 +3,7 @@
     @file      layered_configs_manager.h
     @author    Khrapov
     @date      12.05.2026
-    @copyright (c) Nick Khrapov, 2026. All right reserved.
+    @copyright © Nick Khrapov, 2026. All right reserved.
 
 **/
 #pragma once

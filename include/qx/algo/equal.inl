@@ -3,7 +3,7 @@
     @file      equal.inl
     @author    Khrapov
     @date      20.08.2023
-    @copyright (c) Nick Khrapov, 2023. All right reserved.
+    @copyright © Nick Khrapov, 2023. All right reserved.
 
 **/
 
