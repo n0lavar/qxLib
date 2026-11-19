@@ -34,7 +34,8 @@ function(set_target_options _target)
             -Wno-missing-braces # 5246 - initialization of a subobject should be wrapped in braces
             -Wno-implicit-fallthrough # 5262 - implicit fall-through occurs here
             -Wno-unused-const-variable # 5264 - 'const' variable is not used
-            
+            -Wno-unsafe-buffer-usage # clang-p2996 f17c8d6 crashes with an access violation on this analysis (assert/logger tests)
+
             # clang-specific compat family has no MSVC counterpart
             -Wno-c++98-compat-pedantic
             -Wno-c++20-extensions
