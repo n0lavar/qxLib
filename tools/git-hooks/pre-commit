@@ -1,0 +1,16 @@
+#!/bin/sh
+
+script="$(dirname "$0")/scripts/reformat_utf8.py"
+if [ ! -f "$script" ]; then
+    echo "pre-commit: ERROR, reformat_utf8.py not found in the scripts subfolder" >&2
+    exit 1
+fi
+
+for py in python python3 py; do
+    if command -v "$py" >/dev/null 2>&1; then
+        exec "$py" "$script"
+    fi
+done
+
+echo "pre-commit: ERROR, python interpreter not found; install Python" >&2
+exit 1

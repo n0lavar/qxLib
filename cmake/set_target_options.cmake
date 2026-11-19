@@ -58,27 +58,30 @@ function(set_target_options _target)
         )
 
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-        
+
         target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:-D_DEBUG>
         )
-		
+
 	elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
-	
+
 		target_compile_options(${_target} PRIVATE
             $<$<CONFIG:Debug>:-D_DEBUG>
         )
-    
+
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
 
         string(REGEX REPLACE "bin/.+" "include" MSVC_INCLUDE_PATH ${CMAKE_CXX_COMPILER})
 
         target_compile_options(${_target} PRIVATE
             # exceptions support
-            /EHsc 
+            /EHsc
 
             # MSVC requires it for __VA_OPT__, despite being C++20 feature
             /Zc:preprocessor
+
+            # sources are UTF-8 without BOM
+            /utf-8
 
             # enable all warnings and treat them as errors
             /Wall /WX
@@ -118,14 +121,14 @@ function(set_target_options _target)
 
         # disable the following warnings for the Debug configuration
         set(NON_DEBUG_WARNINGS
-            /wd4127 # conditional expression is constant			
-            /wd4189 # 'variable' : local variable is initialized but not referenced			
+            /wd4127 # conditional expression is constant
+            /wd4189 # 'variable' : local variable is initialized but not referenced
             /wd4505 # 'function' : unreferenced local function has been removed
             /wd5233 # explicit lambda capture 'identifier' is not used
         )
         add_compile_options_for_configs(${_target} "Debug;RelWithDebInfo" "${NON_DEBUG_WARNINGS}")
-        
-        target_link_options(${_target} PRIVATE 
+
+        target_link_options(${_target} PRIVATE
             $<$<CONFIG:Release>: /NODEFAULTLIB:LIBCMTD>
             $<$<CONFIG:Debug>: /INCREMENTAL>
             "/ignore:4098" # defaultlib 'library' conflicts with use of other libs; use /NODEFAULTLIB:library
@@ -135,7 +138,7 @@ function(set_target_options _target)
         target_compile_definitions(${_target} PRIVATE
             _CRT_SECURE_NO_WARNINGS
         )
-        
+
     endif()
 
     target_compile_definitions(${_target} PRIVATE
@@ -144,12 +147,12 @@ function(set_target_options _target)
         $<$<CONFIG:RelWithDebInfo>: QX_DEBUG=0 QX_RELEASE=0 QX_REL_WITH_DEBUG_INFO=1 QX_MIN_SIZE_RELEASE=0>
         $<$<CONFIG:MinSizeRel>:     QX_DEBUG=0 QX_RELEASE=0 QX_REL_WITH_DEBUG_INFO=0 QX_MIN_SIZE_RELEASE=1>
     )
-        
-    target_compile_features(${_target} PRIVATE 
+
+    target_compile_features(${_target} PRIVATE
         cxx_std_23
     )
-    
-    set_target_properties(${_target} PROPERTIES 
+
+    set_target_properties(${_target} PROPERTIES
         LINKER_LANGUAGE CXX
     )
 
@@ -160,4 +163,3 @@ function(set_target_options _target)
     endif()
 
 endfunction()
-
