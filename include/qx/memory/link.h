@@ -19,7 +19,7 @@ namespace qx
 /**
 
     @class   link
-    @brief   std::weak_ptr wrapper that do not allow you 
+    @brief   std::weak_ptr wrapper that do not allow you
              to create strong pointer (std::shared_ptr)
     @tparam  T - pointer class type
     @author  Khrapov
@@ -38,7 +38,7 @@ public:
     /**
 
         @class   lock_ptr
-        @brief   std::shared_ptr wrapper 
+        @brief   std::shared_ptr wrapper
         @author  Khrapov
         @date    23.11.2021
 
@@ -139,7 +139,7 @@ public:
     /**
         @brief  operator=
         @tparam U     - T or type convertible to T
-        @param  pLink - other link 
+        @param  pLink - other link
         @return       - this object reference
     **/
     template<class U>
@@ -164,9 +164,9 @@ public:
 
     /**
         @brief link object constructor
-        @param  - nullptr
+        @param nullptr_t - nullptr
     **/
-    link(std::nullptr_t) noexcept;
+    link(std::nullptr_t nullptr_t) noexcept;
 
     /**
         @brief  Lock and return strong pointer

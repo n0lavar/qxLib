@@ -78,7 +78,6 @@ public:
 
     /**
         @brief  Output to stream
-        @tparam char_t      - char type, typically char or wchar_t
         @param  category    - code category
         @param  eVerbosity  - message verbosity
         @param  threadId    - thread where the log is called

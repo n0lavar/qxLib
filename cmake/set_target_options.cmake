@@ -40,6 +40,11 @@ function(set_target_options _target)
             -Wno-c++98-compat-pedantic
             -Wno-c++20-extensions
 
+            # clang's comment parser does not understand the project's Doxygen usage: @struct on class templates, @tparam on concepts
+            -Wno-documentation
+            # Doxygen ALIASES commands (@complexity etc.) are valid for the docs, but clang knows nothing about them
+            -Wno-documentation-unknown-command
+
             $<$<CONFIG:Debug>:-D_DEBUG>
             $<$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>:-DNDEBUG>
         )

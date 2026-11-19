@@ -42,7 +42,7 @@ namespace qx
 
     @class   flags
     @brief   Wrapper for enumerations to be used as a list of flags
-    @tparam  enum_t - enum flags type 
+    @tparam  enum_t - enum flags type
     @code
 
     enum class EFlags
@@ -109,8 +109,8 @@ public:
 
     /**
         @brief  flags object constructor
-        @tparam args_t... - template parameters pack, all types should be same as enum_t
-        @param  flags     - flags to add at construction
+        @tparam args_t - template parameters pack, all types should be same as enum_t
+        @param  flags  - flags to add at construction
     **/
     template<class... args_t>
         requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)
@@ -118,8 +118,8 @@ public:
 
     /**
         @brief  Add all the flags specified
-        @tparam args_t... - template parameters pack, all types should be same as enum_t
-        @param  flags     - flags to add
+        @tparam args_t - template parameters pack, all types should be same as enum_t
+        @param  flags  - flags to add
     **/
     template<class... args_t>
         requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
@@ -127,8 +127,8 @@ public:
 
     /**
         @brief  Remove all the flags specified
-        @tparam args_t... - template parameters pack, all types should be same as enum_t
-        @param  flags     - flags to remove
+        @tparam args_t - template parameters pack, all types should be same as enum_t
+        @param  flags  - flags to remove
     **/
     template<class... args_t>
         requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
@@ -136,8 +136,8 @@ public:
 
     /**
         @brief  Apply a bitwise XOR to a flags value
-        @tparam args_t... - template parameters pack, all types should be same as enum_t
-        @param  flags     - flags to apply
+        @tparam args_t - template parameters pack, all types should be same as enum_t
+        @param  flags  - flags to apply
     **/
     template<class... args_t>
         requires(sizeof...(args_t) >= 1 && specific_variadic_args_v<enum_t, args_t...>)
@@ -195,8 +195,8 @@ public:
 
     /**
         @brief  Check if all the specified flags are present
-        @tparam args_t... - template parameters pack, all types should be same as enum_t
-        @param  flags     - flags to check
+        @tparam args_t  - template parameters pack, all types should be same as enum_t
+        @param  flags  - flags to check
         @return true if all the specified flags are present
     **/
     template<class... args_t>
@@ -212,9 +212,9 @@ public:
 
     /**
         @brief  Check if any of the specified flags is present
-        @tparam args_t... - template parameters pack, all types should be same as enum_t
-        @param  flags     - flags to check
-        @return           - true if any of the specified flags is present
+        @tparam args_t - template parameters pack, all types should be same as enum_t
+        @param  flags  - flags to check
+        @return        - true if any of the specified flags is present
     **/
     template<class... args_t>
         requires(sizeof...(args_t) >= 2 && specific_variadic_args_v<enum_t, args_t...>)

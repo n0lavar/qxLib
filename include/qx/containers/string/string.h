@@ -338,8 +338,7 @@ public:
     value_type back() const noexcept;
 
     /**
-        @brief  Get string length
-        @brief  Same as size()
+        @brief  Get string length, same as size()
         @return - string length
     **/
     size_type length() const noexcept;

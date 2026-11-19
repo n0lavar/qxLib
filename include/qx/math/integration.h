@@ -30,7 +30,7 @@ namespace qx
     @param   x0             - left border
     @param   x1             - right border
     @param   nIntervalsPer1 - number of intervals per dx = 1
-    @tpara m function_2d_t  - function that takes double and returns double
+    @tparam function_2d_t - function that takes double and returns double
     @return                 - approximate integral; 0 for zero extent;
                               NaN for invalid bounds, zero density or sample count overflow
 **/
@@ -68,7 +68,7 @@ inline double integrate_trapezoid_rule(
     @param   fMaxSliceError - max error per one slice 
     @param   nIntervalsPer1 - number of intervals per dx = 1 
     @param   nMaxRecursion  - max recursion depth 
-    @tpara m function_2d_t  - function that takes double and returns double
+    @tparam function_2d_t - function that takes double and returns double
     @return                 - approximate integral; 0 for zero extent;
                               NaN for invalid bounds, zero density or sample count overflow
 **/
