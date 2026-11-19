@@ -11,6 +11,7 @@
 #include <qx/containers/string/string.h>
 #include <qx/containers/string/string_view.h>
 #include <qx/hash.h>
+#include <qx/macros/common.h>
 #include <qx/macros/copyable_movable.h>
 #include <qx/macros/suppress_warnings.h>
 #include <qx/patterns/singleton.h>
@@ -165,7 +166,8 @@ QX_POP_SUPPRESS_WARNINGS();
     macro(white                  , White                , white                , 255, 255, 255) \
     macro(white_smoke            , WhiteSmoke           , whitesmoke           , 245, 245, 245) \
     macro(yellow                 , Yellow               , yellow               , 255, 255,   0) \
-    macro(yellow_green           , YellowGreen          , yellowgreen          , 154, 205,  50)
+    macro(yellow_green           , YellowGreen          , yellowgreen          , 154, 205,  50) \
+    QX_EMPTY_MACRO
 // clang-format on
 
 

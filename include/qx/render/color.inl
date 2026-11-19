@@ -86,7 +86,7 @@ private:
 template<class char_t>
 inline string_to_color_converter<char_t>::string_to_color_converter() noexcept
 {
-    QX_DETAILS_COLORS(QX_DETAILS_ADD_COLOR)
+    QX_DETAILS_COLORS(QX_DETAILS_ADD_COLOR);
 }
 
 template<class char_t>
