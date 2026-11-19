@@ -61,7 +61,7 @@ TEST(threads_shared, main)
     std::thread thread_setting_0 { [&sharedData]()
                                    {
                                        std::default_random_engine generator(static_cast<unsigned>(std::time(nullptr)));
-                                       std::uniform_int_distribution distribution(MIN_MS_WAIT, MAX_MS_WAIT);
+                                       std::uniform_int_distribution<size_t> distribution(MIN_MS_WAIT, MAX_MS_WAIT);
 
                                        for (size_t i = 0; i < NUM_ITERATIONS; ++i)
                                        {

@@ -200,6 +200,9 @@ private:
     size_type m_nAllocatedSize = 0;
 };
 
+template<class T>
+vector2d(size_t rows, size_t cols, const T& data) -> vector2d<T>;
+
 } // namespace qx
 
 #include <qx/containers/vector2d.inl>

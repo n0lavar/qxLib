@@ -56,6 +56,9 @@ private:
     string_view m_svRuntimeName;
 };
 
+template<class T>
+layered_config_variable(const layered_config_variable<T>& variable) -> layered_config_variable<T>;
+
 /**
 
     @class   layered_config_variable_builder
@@ -121,6 +124,9 @@ private:
     string_view                           m_svRuntimeName;
     T                                     m_DefaultValue;
 };
+
+template<class T>
+layered_config_variable_builder(string_view svRuntimeName, T defaultValue) -> layered_config_variable_builder<T>;
 
 } // namespace qx
 

@@ -217,7 +217,7 @@ TYPED_TEST(test_string_view_iterator, random_directions)
     qx::basic_string_view<TypeParam> svValue     = QX_STR_PREFIX(TypeParam, "/a/bb/ccc/dddd/");
     const TypeParam                  chDelimiter = QX_CHAR_PREFIX(TypeParam, '/');
 
-    auto it = qx::string_view_iterator(svValue, chDelimiter);
+    auto it = qx::string_view_iterator<TypeParam>(svValue, chDelimiter);
     EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "a"));
     ++it;
     EXPECT_EQ(*it, QX_STR_PREFIX(TypeParam, "bb"));
@@ -269,7 +269,7 @@ TYPED_TEST(test_string_view_iterator, print)
             [chDelimiter](qx::basic_string_view<TypeParam> svFull, qx::flags<qx::delimiter_inclusion_flags> eFlags)
         {
             std::wcout << L"    " << svFull << std::endl;
-            for (auto it = qx::string_view_iterator(svFull, chDelimiter, eFlags); it; ++it)
+            for (auto it = qx::string_view_iterator<TypeParam>(svFull, chDelimiter, eFlags); it; ++it)
             {
                 std::wcout << L"        " << *it << std::endl;
             }
@@ -280,7 +280,7 @@ TYPED_TEST(test_string_view_iterator, print)
             [chDelimiter](qx::basic_string_view<TypeParam> svFull, qx::flags<qx::delimiter_inclusion_flags> eFlags)
         {
             std::wcout << L"    " << svFull << std::endl;
-            for (auto it = qx::reverse_string_view_iterator(svFull, chDelimiter, eFlags); it; ++it)
+            for (auto it = qx::reverse_string_view_iterator<TypeParam>(svFull, chDelimiter, eFlags); it; ++it)
             {
                 std::wcout << L"        " << *it << std::endl;
             }
