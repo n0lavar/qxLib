@@ -27,20 +27,20 @@
 #if QX_WIN
     #include <fcntl.h>
     #include <io.h>
-    #define __dup    _dup
-    #define __dup2   _dup2
-    #define __close  _close
-    #define __read   _read
-    #define __pipe   _pipe
-    #define __fileno _fileno
+    #define QX_DUP    _dup
+    #define QX_DUP2   _dup2
+    #define QX_CLOSE  _close
+    #define QX_READ   _read
+    #define QX_PIPE   _pipe
+    #define QX_FILENO _fileno
 #else
     #include <fcntl.h>
     #include <unistd.h>
-    #define __dup    dup
-    #define __dup2   dup2
-    #define __close  close
-    #define __read   read
-    #define __fileno fileno
+    #define QX_DUP    dup
+    #define QX_DUP2   dup2
+    #define QX_CLOSE  close
+    #define QX_READ   read
+    #define QX_FILENO fileno
 #endif
 
 //V_EXCLUDE_PATH *.gtest.cpp
@@ -220,15 +220,15 @@ struct base_cout : base_traits
         std::fflush(stderr);
 
         // Save original stdout/stderr descriptors
-        s_nOldOutDescriptor = __dup(__fileno(stdout));
+        s_nOldOutDescriptor = QX_DUP(QX_FILENO(stdout));
         ASSERT_GE(s_nOldOutDescriptor, 0);
-        s_nOldErrDescriptor = __dup(__fileno(stderr));
+        s_nOldErrDescriptor = QX_DUP(QX_FILENO(stderr));
         ASSERT_GE(s_nOldErrDescriptor, 0);
 
         int fds[2];
 #if QX_WIN
         // Create binary pipe (no CR/LF or encoding conversion)
-        ASSERT_EQ(__pipe(fds, 1 << 16, _O_BINARY), 0);
+        ASSERT_EQ(QX_PIPE(fds, 1 << 16, _O_BINARY), 0);
 #else
         // Create POSIX pipe
         ASSERT_EQ(::pipe(fds), 0);
@@ -238,11 +238,11 @@ struct base_cout : base_traits
 
         // Redirect both stdout and stderr to the same pipe
 #if QX_WIN
-        ASSERT_EQ(__dup2(s_nWritePipe, __fileno(stdout)), 0);
-        ASSERT_EQ(__dup2(s_nWritePipe, __fileno(stderr)), 0);
+        ASSERT_EQ(QX_DUP2(s_nWritePipe, QX_FILENO(stdout)), 0);
+        ASSERT_EQ(QX_DUP2(s_nWritePipe, QX_FILENO(stderr)), 0);
 #else
-        ASSERT_NE(__dup2(s_nWritePipe, STDOUT_FILENO), -1);
-        ASSERT_NE(__dup2(s_nWritePipe, STDERR_FILENO), -1);
+        ASSERT_NE(QX_DUP2(s_nWritePipe, STDOUT_FILENO), -1);
+        ASSERT_NE(QX_DUP2(s_nWritePipe, STDERR_FILENO), -1);
 #endif
     }
 
@@ -250,15 +250,15 @@ struct base_cout : base_traits
     static qx::string get_content()
     {
         // Restore original stdout/stderr
-        __dup2(s_nOldOutDescriptor, __fileno(stdout));
-        __dup2(s_nOldErrDescriptor, __fileno(stderr));
-        __close(s_nOldOutDescriptor);
+        QX_DUP2(s_nOldOutDescriptor, QX_FILENO(stdout));
+        QX_DUP2(s_nOldErrDescriptor, QX_FILENO(stderr));
+        QX_CLOSE(s_nOldOutDescriptor);
         s_nOldOutDescriptor = -1;
-        __close(s_nOldErrDescriptor);
+        QX_CLOSE(s_nOldErrDescriptor);
         s_nOldErrDescriptor = -1;
 
         // Close write end so read end receives EOF
-        __close(s_nWritePipe);
+        QX_CLOSE(s_nWritePipe);
         s_nWritePipe = -1;
 
         // Read all captured UTF-8 bytes
@@ -266,14 +266,14 @@ struct base_cout : base_traits
         std::array<char, 1024> buffer;
         while (true)
         {
-            const int n = __read(s_nReadPipe, buffer.data(), static_cast<unsigned int>(buffer.size()));
+            const int n = QX_READ(s_nReadPipe, buffer.data(), static_cast<unsigned int>(buffer.size()));
             if (n <= 0)
                 break;
 
             sUtf8.append(buffer.data(), buffer.data() + n);
         }
 
-        __close(s_nReadPipe);
+        QX_CLOSE(s_nReadPipe);
         s_nReadPipe = -1;
 
         return qx::utf8_to_string(sUtf8);

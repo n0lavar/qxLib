@@ -42,7 +42,7 @@ class string_to_color_converter final : public singleton<string_to_color_convert
 {
     friend color;
 
-#define _QX_ADD_COLOR(snakeCaseName, pascalCaseName, lowerCaseName, r, g, b)                  \
+#define QX_DETAILS_ADD_COLOR(snakeCaseName, pascalCaseName, lowerCaseName, r, g, b)           \
     add(QX_STR_PREFIX(char_t, #snakeCaseName), color_name_type::css_snake, color(r, g, b));   \
     add(QX_STR_PREFIX(char_t, #pascalCaseName), color_name_type::css_pascal, color(r, g, b)); \
     add(QX_STR_PREFIX(char_t, #lowerCaseName), color_name_type::css_lower, color(r, g, b));
@@ -86,7 +86,7 @@ private:
 template<class char_t>
 inline string_to_color_converter<char_t>::string_to_color_converter() noexcept
 {
-    _QX_COLORS(_QX_ADD_COLOR)
+    QX_DETAILS_COLORS(QX_DETAILS_ADD_COLOR)
 }
 
 template<class char_t>

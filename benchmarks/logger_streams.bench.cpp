@@ -19,16 +19,16 @@
 
 #if QX_WIN
     #include <io.h>
-    #define __dup    _dup
-    #define __dup2   _dup2
-    #define __fileno _fileno
-    #define __fdopen _fdopen
+    #define QX_DUP    _dup
+    #define QX_DUP2   _dup2
+    #define QX_FILENO _fileno
+    #define QX_FDOPEN _fdopen
 #else
     #include <unistd.h>
-    #define __dup    dup
-    #define __dup2   dup2
-    #define __fileno fileno
-    #define __fdopen fdopen
+    #define QX_DUP    dup
+    #define QX_DUP2   dup2
+    #define QX_FILENO fileno
+    #define QX_FDOPEN fdopen
 #endif
 
 #include <cstdio>
@@ -207,8 +207,8 @@ inline void logger_stream_fixture<setup_function_t>::SetUp(::benchmark::State& s
     setup_function_t::set_up();
 
     // temporarily disable console output so it doesn't interfere with the benchmark results
-    m_pOldStdout = __fdopen(__dup(__fileno(stdout)), "w");
-    m_pOldStderr = __fdopen(__dup(__fileno(stderr)), "w");
+    m_pOldStdout = QX_FDOPEN(QX_DUP(QX_FILENO(stdout)), "w");
+    m_pOldStderr = QX_FDOPEN(QX_DUP(QX_FILENO(stderr)), "w");
 
     freopen("NUL", "w", stdout);
     freopen("NUL", "w", stderr);
@@ -223,11 +223,11 @@ inline void logger_stream_fixture<setup_function_t>::TearDown(::benchmark::State
     fflush(stdout);
     fflush(stderr);
 
-    __dup2(__fileno(m_pOldStdout), __fileno(stdout));
+    QX_DUP2(QX_FILENO(m_pOldStdout), QX_FILENO(stdout));
     fclose(m_pOldStdout);
     m_pOldStdout = nullptr;
 
-    __dup2(__fileno(m_pOldStderr), __fileno(stderr));
+    QX_DUP2(QX_FILENO(m_pOldStderr), QX_FILENO(stderr));
     fclose(m_pOldStderr);
     m_pOldStderr = nullptr;
 }

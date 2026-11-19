@@ -30,7 +30,7 @@
 /**
     @brief Concatenates two preprocessor tokens, performing macro expansion on them first
 **/
-#define QX_JOIN(symbol1, symbol2) _QX_DO_JOIN(symbol1, symbol2)
+#define QX_JOIN(symbol1, symbol2) QX_DETAILS_DO_JOIN(symbol1, symbol2)
 
 /**
     @brief Same as __LINE__, but fixes some problems when using it in constexpr context
@@ -80,17 +80,17 @@
     @brief Start a block with compiling optimisations disabled.
            Must be outside of functions and have an appropriate QX_ENABLE_OPTIMIZATIONS().
 **/
-#define QX_DISABLE_OPTIMIZATIONS() _QX_DISABLE_OPTIMIZATIONS()
+#define QX_DISABLE_OPTIMIZATIONS() QX_DETAILS_DISABLE_OPTIMIZATIONS()
 
 /**
     @brief End a block with compiling optimisations disabled.
 **/
-#define QX_ENABLE_OPTIMIZATIONS() _QX_ENABLE_OPTIMIZATIONS()
+#define QX_ENABLE_OPTIMIZATIONS() QX_DETAILS_ENABLE_OPTIMIZATIONS()
 
 /**
     @brief Make this function forcefully inlined (except for QX_DEBUG build)
 **/
-#define QX_FORCE_INLINE _QX_FORCE_INLINE
+#define QX_FORCE_INLINE QX_DETAILS_FORCE_INLINE
 
 /**
     @brief   Add __VA_ARGS__ count to the preprocessor prefix
@@ -101,7 +101,7 @@
     QX_APPEND_VA_ARG_COUNT(foo_, 1, 1, 1); // -> foo_3
     @endcode
 **/
-#define QX_APPEND_VA_ARG_COUNT(prefix, ...) _QX_APPEND_VA_ARG_COUNT(prefix, ##__VA_ARGS__)
+#define QX_APPEND_VA_ARG_COUNT(prefix, ...) QX_DETAILS_APPEND_VA_ARG_COUNT(prefix, ##__VA_ARGS__)
 
 /**
     @brief   Get number of va args
@@ -121,4 +121,4 @@
 /**
     @brief Enables The Empty Base Class Optimization (EBCO) for a class
 **/
-#define QX_EMPTY_BASES _QX_EMPTY_BASES
+#define QX_EMPTY_BASES QX_DETAILS_EMPTY_BASES

@@ -28,7 +28,7 @@
     @param eVerbosity - message verbosity
     @param ...        - user message and its format args. the format string should be without QXT
 **/
-#define QX_LOG_C(category, eVerbosity, ...) _QX_LOG_C(constexpr, category, eVerbosity, ##__VA_ARGS__)
+#define QX_LOG_C(category, eVerbosity, ...) QX_DETAILS_LOG_C(constexpr, category, eVerbosity, ##__VA_ARGS__)
 
 /**
     @brief Log message
@@ -43,7 +43,7 @@
     @param eVerbosity - message verbosity
     @param ...        - user message and its format args. the format string should be without QXT
 **/
-#define QX_LOG_REF(category, eVerbosity, ...) _QX_LOG_C(, category, eVerbosity, ##__VA_ARGS__)
+#define QX_LOG_REF(category, eVerbosity, ...) QX_DETAILS_LOG_C(, category, eVerbosity, ##__VA_ARGS__)
 
 namespace qx
 {
@@ -297,9 +297,9 @@ inline logger& get_logger() noexcept
 
 } // namespace qx
 
-#ifndef _QX_LOG_C
+#ifndef QX_DETAILS_LOG_C
 // __FUNCTION__ isn't a char array on linux, so we need to convert it
-    #define _QX_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)                                              \
+    #define QX_DETAILS_LOG_C(verbosityCheckKeyword, category, eVerbosity, ...)                                       \
         do                                                                                                           \
         {                                                                                                            \
             verbosityCheckKeyword const auto& _category = category;                                                  \
@@ -328,7 +328,7 @@ inline logger& get_logger() noexcept
                         qx::convert_string_literal<qx::char_type, __FUNCTION__>(),                                   \
                         QX_LINE,                                                                                     \
                         _messageNecessity,                                                                           \
-                        _QX_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__));                            \
+                        QX_DETAILS_MACRO_USER_MESSAGE(_logger._get_string_pool(), __VA_ARGS__));                     \
                 }                                                                                                    \
             }                                                                                                        \
         } while (false)

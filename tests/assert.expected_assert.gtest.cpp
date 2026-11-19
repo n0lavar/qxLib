@@ -91,7 +91,7 @@ TEST(expected_assert_tests, matches_type_and_message_and_forwards_other_assertio
         QX_EXPECT(false, "other");
         QX_EXPECT(bCondition, "value {}", 42);
 #undef QX_DEBUG_BREAK
-#define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()
+#define QX_DEBUG_BREAK() QX_DETAILS_DEBUG_BREAK()
 
         QX_EXPECT(false, "value {}", 13);
 #if QX_WITH_DEBUG_ASSERTS
@@ -99,7 +99,7 @@ TEST(expected_assert_tests, matches_type_and_message_and_forwards_other_assertio
     #define QX_DEBUG_BREAK() (void)0
         QX_ENSURE(false, "value {}", 99);
     #undef QX_DEBUG_BREAK
-    #define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()
+    #define QX_DEBUG_BREAK() QX_DETAILS_DEBUG_BREAK()
 #endif
     }
     manager.set_config(previousConfig);
@@ -216,7 +216,7 @@ static void trigger_expected_assert_test()
     QX_EXPECT_C(false, CatOtherExpectedAssert, "message.");
 }
 #undef QX_DEBUG_BREAK
-#define QX_DEBUG_BREAK() _QX_DEBUG_BREAK()
+#define QX_DEBUG_BREAK() QX_DETAILS_DEBUG_BREAK()
 
 TEST(expected_assert_tests, matches_all_selected_fields)
 {

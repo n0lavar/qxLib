@@ -38,7 +38,7 @@
     @param   category  - a category to use for logging and reporting
     @param   ...       - optional user message and its format args. the format string should be without QXT
 **/
-#define QX_ASSERT_C(condition, category, ...) _QX_ASSERT_C(condition, category, ##__VA_ARGS__)
+#define QX_ASSERT_C(condition, category, ...) QX_DETAILS_ASSERT_C(condition, category, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true
@@ -56,13 +56,7 @@
     @param   ...       - optional user message and its format args. the format string should be without QXT
 **/
 #define QX_VERIFY_C(condition, category, ...) \
-    _QX_COMMON_ASSERT(                        \
-        condition,                            \
-        category,                             \
-        qx::assert_type::verify,              \
-        _QX_ASSERT_AFTER_DEBUG_BREAK_FATAL,   \
-        void,                                 \
-        ##__VA_ARGS__)
+    QX_DETAILS_COMMON_ASSERT(condition, category, qx::assert_type::verify, QX_DETAILS_ASSERT_AFTER_DEBUG_BREAK_FATAL, void, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true
@@ -80,14 +74,8 @@
     @param   ...       - optional user message and its format args. the format string should be without QXT
     @return            - condition
 **/
-#define QX_EXPECT_C(condition, category, ...)   \
-    _QX_COMMON_ASSERT(                          \
-        condition,                              \
-        category,                               \
-        qx::assert_type::expect,                \
-        _QX_ASSERT_AFTER_DEBUG_BREAK_NON_FATAL, \
-        bool,                                   \
-        ##__VA_ARGS__)
+#define QX_EXPECT_C(condition, category, ...) \
+    QX_DETAILS_COMMON_ASSERT(condition, category, qx::assert_type::expect, QX_DETAILS_ASSERT_AFTER_DEBUG_BREAK_NON_FATAL, bool, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true
@@ -105,7 +93,8 @@
     @param   category  - a category to use for logging and reporting
     @param   ...       - optional user message and its format args. the format string should be without QXT
 **/
-#define QX_EXPECT_CONTINUE_C(condition, category, ...) _QX_EXPECT_ACTION(condition, category, continue, ##__VA_ARGS__)
+#define QX_EXPECT_CONTINUE_C(condition, category, ...) \
+    QX_DETAILS_EXPECT_ACTION(condition, category, continue, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true and calls continue; otherwise
@@ -122,7 +111,7 @@
     @param   category  - a category to use for logging and reporting
     @param   ...       - optional user message and its format args. the format string should be without QXT
 **/
-#define QX_EXPECT_BREAK_C(condition, category, ...) _QX_EXPECT_ACTION(condition, category, break, ##__VA_ARGS__)
+#define QX_EXPECT_BREAK_C(condition, category, ...) QX_DETAILS_EXPECT_ACTION(condition, category, break, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true and calls break; otherwise
@@ -139,7 +128,8 @@
     @param   category  - a category to use for logging and reporting
     @param   ...       - optional user message and its format args. the format string should be without QXT
 **/
-#define QX_EXPECT_RETURN_C(condition, category, ...) _QX_EXPECT_ACTION(condition, category, return, ##__VA_ARGS__)
+#define QX_EXPECT_RETURN_C(condition, category, ...) \
+    QX_DETAILS_EXPECT_ACTION(condition, category, return, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true and calls return; otherwise
@@ -158,7 +148,7 @@
     @param   ...          - optional user message and its format args. the format string should be without QXT
 **/
 #define QX_EXPECT_RETURN_CT(condition, category, return_value, ...) \
-    _QX_EXPECT_ACTION(condition, category, return return_value, ##__VA_ARGS__)
+    QX_DETAILS_EXPECT_ACTION(condition, category, return return_value, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true and calls return return_value; otherwise
@@ -177,7 +167,8 @@
     @param   category  - a category to use for logging and reporting
     @param   ...       - optional user message and its format args. the format string should be without QXT
 **/
-#define QX_EXPECT_CO_RETURN_C(condition, category, ...) _QX_EXPECT_ACTION(condition, category, co_return, ##__VA_ARGS__)
+#define QX_EXPECT_CO_RETURN_C(condition, category, ...) \
+    QX_DETAILS_EXPECT_ACTION(condition, category, co_return, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true and calls co_return; otherwise
@@ -196,7 +187,7 @@
     @param   ...          - optional user message and its format args. the format string should be without QXT
 **/
 #define QX_EXPECT_CO_RETURN_CT(condition, category, return_value, ...) \
-    _QX_EXPECT_ACTION(condition, category, co_return return_value, ##__VA_ARGS__)
+    QX_DETAILS_EXPECT_ACTION(condition, category, co_return return_value, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true and calls co_return return_value; otherwise
@@ -215,7 +206,7 @@
     @param   category  - a category to use for logging and reporting
     @param   ...       - optional user message and its format args. the format string should be without QXT
 **/
-#define QX_ENSURE_C(condition, category, ...) _QX_ENSURE_C(condition, category, ##__VA_ARGS__)
+#define QX_ENSURE_C(condition, category, ...) QX_DETAILS_ENSURE_C(condition, category, ##__VA_ARGS__)
 
 /**
     @brief   Verifies that the condition is true

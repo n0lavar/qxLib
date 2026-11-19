@@ -25,7 +25,7 @@ QX_POP_SUPPRESS_WARNINGS();
 
 /// @see https://www.cssportal.com/html-colors/x11-colors.php
 // clang-format off
-#define _QX_COLORS(macro)\
+#define QX_DETAILS_COLORS(macro)\
     macro(alice_blue             , AliceBlue            , aliceblue            , 240, 248, 255) \
     macro(antique_white          , AntiqueWhite         , antiquewhite         , 250, 235, 215) \
     macro(aqua                   , Aqua                 , aqua                 ,   0, 255, 255) \
@@ -467,14 +467,14 @@ public:
     **/
     constexpr static color brighten(const color& other, float fPercent) noexcept;
 
-#define _QX_COLOR_METHOD(snakeCaseName, pascalCaseName, lowerCaseName, r, g, b) \
-    static constexpr auto snakeCaseName(float fAlpha = 1.f) noexcept            \
-    {                                                                           \
-        return color(r, g, b, float_to_dec(fAlpha));                            \
+#define QX_DETAILS_COLOR_METHOD(snakeCaseName, pascalCaseName, lowerCaseName, r, g, b) \
+    static constexpr auto snakeCaseName(float fAlpha = 1.f) noexcept                   \
+    {                                                                                  \
+        return color(r, g, b, float_to_dec(fAlpha));                                   \
     }
 
     /// Color functions
-    _QX_COLORS(_QX_COLOR_METHOD);
+    QX_DETAILS_COLORS(QX_DETAILS_COLOR_METHOD);
 
     /**
         @brief  Try to create color from string
