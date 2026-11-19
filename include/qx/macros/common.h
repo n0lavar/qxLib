@@ -101,7 +101,7 @@
     QX_APPEND_VA_ARG_COUNT(foo_, 1, 1, 1); // -> foo_3
     @endcode
 **/
-#define QX_APPEND_VA_ARG_COUNT(prefix, ...) QX_DETAILS_APPEND_VA_ARG_COUNT(prefix, ##__VA_ARGS__)
+#define QX_APPEND_VA_ARG_COUNT(prefix, ...) QX_DETAILS_APPEND_VA_ARG_COUNT(prefix __VA_OPT__(, ) __VA_ARGS__)
 
 /**
     @brief   Get number of va args
@@ -111,7 +111,7 @@
     QX_VA_ARG_COUNT(1, 1, 1); // -> 3
     @endcode 
 **/
-#define QX_VA_ARG_COUNT(...) QX_APPEND_VA_ARG_COUNT(, ##__VA_ARGS__)
+#define QX_VA_ARG_COUNT(...) QX_APPEND_VA_ARG_COUNT(__VA_OPT__(, ) __VA_ARGS__)
 
 /**
     @brief Forces an extra macro expansion step so that a macro result is fully resolved before being used as a function-like macro.

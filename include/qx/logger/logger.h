@@ -28,14 +28,14 @@
     @param eVerbosity - message verbosity
     @param ...        - user message and its format args. the format string should be without QXT
 **/
-#define QX_LOG_C(category, eVerbosity, ...) QX_DETAILS_LOG_C(constexpr, category, eVerbosity, ##__VA_ARGS__)
+#define QX_LOG_C(category, eVerbosity, ...) QX_DETAILS_LOG_C(constexpr, category, eVerbosity __VA_OPT__(, ) __VA_ARGS__)
 
 /**
     @brief Log message
     @param eVerbosity - message verbosity 
     @param ...        - user message and its format args. the format string should be without QXT
 **/
-#define QX_LOG(eVerbosity, ...) QX_LOG_C(QX_GET_FILE_CATEGORY(), eVerbosity, ##__VA_ARGS__)
+#define QX_LOG(eVerbosity, ...) QX_LOG_C(QX_GET_FILE_CATEGORY(), eVerbosity __VA_OPT__(, ) __VA_ARGS__)
 
 /**
     @brief Log with category and with non compile time category check
@@ -43,7 +43,7 @@
     @param eVerbosity - message verbosity
     @param ...        - user message and its format args. the format string should be without QXT
 **/
-#define QX_LOG_REF(category, eVerbosity, ...) QX_DETAILS_LOG_C(, category, eVerbosity, ##__VA_ARGS__)
+#define QX_LOG_REF(category, eVerbosity, ...) QX_DETAILS_LOG_C(, category, eVerbosity __VA_OPT__(, ) __VA_ARGS__)
 
 namespace qx
 {
