@@ -37,6 +37,7 @@ function(set_target_options _target)
             -Wno-unsafe-buffer-usage # clang-p2996 f17c8d6 crashes with an access violation on this analysis (assert/logger tests)
             -Wno-global-constructors # namespace scope objects with non-trivial constructors: gtest/benchmark registration and the engine's static registries
             -Wno-logical-op-parentheses # && binds tighter than || always, mixed operators without parentheses are unambiguous and readable
+            -Wno-switch-default # a forced 'default' in enum switches disables -Wswitch-enum reporting new enumerators, so it cannot be both safe and satisfied
 
             # clang-specific compat family has no MSVC counterpart
             -Wno-c++98-compat-pedantic
