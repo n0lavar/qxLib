@@ -127,7 +127,7 @@ TEST_F(assert_exit_tests_fixture, verify)
         "\\(false && \"No entry\"\\)\\] 42");
 }
 
-QX_PUSH_SUPPRESS_MSVC_WARNINGS(4189 4390 4702);
+QX_PUSH_SUPPRESS_ALL_WARNINGS();
 
 static void foo()
 {

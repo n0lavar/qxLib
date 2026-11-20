@@ -63,7 +63,7 @@ inline void terminal_color::write(FILE* pStream) const
 {
     auto fprintf_wrapper = []<class... args_t>(args_t&&... args)
     {
-        QX_PUSH_SUPPRESS_MSVC_WARNINGS(4774);
+        QX_PUSH_SUPPRESS_ALL_WARNINGS();
         if constexpr (std::is_same_v<char_t, char>)
             std::fprintf(std::forward<args_t>(args)...);
         else
