@@ -80,13 +80,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a6b22a06d00ce06f575913fec486bd955"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str)&#160;&#160;&#160;_QX_TO_WSTRING(str)</td></tr>
+<tr class="memitem:a6b22a06d00ce06f575913fec486bd955"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str)&#160;&#160;&#160;QX_DETAILS_TO_WSTRING(str)</td></tr>
 <tr class="memdesc:a6b22a06d00ce06f575913fec486bd955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert char* to wchar_t*.  <a href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">More...</a><br /></td></tr>
 <tr class="separator:a6b22a06d00ce06f575913fec486bd955"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4f688084b037e2e7a63a13eaf539a02"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">QX_STR_PREFIX</a>(value_t,  str)&#160;&#160;&#160;qx::details::choose_str_prefix&lt;value_t&gt;(str, <a class="el" href="string__utils_8h.html#a6b22a06d00ce06f575913fec486bd955">QX_TO_WSTRING</a>(str))</td></tr>
 <tr class="memdesc:ae4f688084b037e2e7a63a13eaf539a02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to string : L or none.  <a href="string__utils_8h.html#ae4f688084b037e2e7a63a13eaf539a02">More...</a><br /></td></tr>
 <tr class="separator:ae4f688084b037e2e7a63a13eaf539a02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57911e62bb82593665bf09e4ea834904"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(value_t,  ch)&#160;&#160;&#160;qx::details::choose_char_prefix&lt;value_t&gt;(ch, _QX_TO_WCHAR(ch))</td></tr>
+<tr class="memitem:a57911e62bb82593665bf09e4ea834904"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">QX_CHAR_PREFIX</a>(value_t,  ch)&#160;&#160;&#160;qx::details::choose_char_prefix&lt;value_t&gt;(ch, QX_DETAILS_TO_WCHAR(ch))</td></tr>
 <tr class="memdesc:a57911e62bb82593665bf09e4ea834904"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chose witch of prefixes add to char : L or none.  <a href="string__utils_8h.html#a57911e62bb82593665bf09e4ea834904">More...</a><br /></td></tr>
 <tr class="separator:a57911e62bb82593665bf09e4ea834904"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -124,7 +124,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>17.10.2020 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>(c) Nick Khrapov, 2021. All right reserved. </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -149,7 +149,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;qx::details::choose_char_prefix&lt;value_t&gt;(ch, _QX_TO_WCHAR(ch))</td>
+          <td></td><td>&#160;&#160;&#160;qx::details::choose_char_prefix&lt;value_t&gt;(ch, QX_DETAILS_TO_WCHAR(ch))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -217,7 +217,7 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">str</td><td>)</td>
-          <td>&#160;&#160;&#160;_QX_TO_WSTRING(str)</td>
+          <td>&#160;&#160;&#160;QX_DETAILS_TO_WSTRING(str)</td>
         </tr>
       </table>
 </div><div class="memdoc">

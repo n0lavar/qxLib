@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      integration.h</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @date      6.08.2022</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright (c) Nick Khrapov, 2022. All right reserved.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2022. All right reserved.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#pragma once</span></div>
@@ -101,7 +101,7 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">    @param   x0             - left border</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">    @param   x1             - right border</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">    @param   nIntervalsPer1 - number of intervals per dx = 1</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @tpara m function_2d_t  - function that takes double and returns double</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">    @tparam function_2d_t - function that takes double and returns double</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">    @return                 - approximate integral; 0 for zero extent;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">                              NaN for invalid bounds, zero density or sample count overflow</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">**/</span></div>
@@ -139,7 +139,7 @@ $(function() {
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    @param   fMaxSliceError - max error per one slice </span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    @param   nIntervalsPer1 - number of intervals per dx = 1 </span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    @param   nMaxRecursion  - max recursion depth </span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    @tpara m function_2d_t  - function that takes double and returns double</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    @tparam function_2d_t - function that takes double and returns double</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    @return                 - approximate integral; 0 for zero extent;</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">                              NaN for invalid bounds, zero density or sample count overflow</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">**/</span></div>
@@ -178,8 +178,8 @@ $(function() {
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">#include &lt;qx/math/integration.inl&gt;</span></div>
 <div class="ttc" id="aintegration_8h_html_a626e48c33cfbac802c4eb90b8bd90ee4"><div class="ttname"><a href="integration_8h.html#a626e48c33cfbac802c4eb90b8bd90ee4">qx::integrate_rectangle_rule</a></div><div class="ttdeci">double integrate_rectangle_rule(const function_2d_t &amp;func, double x0, double x1, size_t nIntervalsPer1=10) noexcept(noexcept(static_cast&lt; double &gt;(func(0.0))))</div><div class="ttdoc">Integrate using rectangle rule.</div><div class="ttdef"><b>Definition:</b> <a href="integration_8inl_source.html#l00036">integration.inl:36</a></div></div>
 <div class="ttc" id="arecursive__lambda_8h_html"><div class="ttname"><a href="recursive__lambda_8h.html">recursive_lambda.h</a></div></div>
-<div class="ttc" id="asuppress__warnings_8h_html_a1fceb568dd8fd733d4ea910b45f7f740"><div class="ttname"><a href="suppress__warnings_8h.html#a1fceb568dd8fd733d4ea910b45f7f740">QX_PUSH_SUPPRESS_ALL_WARNINGS</a></div><div class="ttdeci">#define QX_PUSH_SUPPRESS_ALL_WARNINGS()</div><div class="ttdoc">Disable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00112">suppress_warnings.h:112</a></div></div>
-<div class="ttc" id="asuppress__warnings_8h_html_a4bee1042b6a06f2bf93410cc56146ece"><div class="ttname"><a href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a></div><div class="ttdeci">#define QX_POP_SUPPRESS_WARNINGS()</div><div class="ttdoc">Enable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00119">suppress_warnings.h:119</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a1fceb568dd8fd733d4ea910b45f7f740"><div class="ttname"><a href="suppress__warnings_8h.html#a1fceb568dd8fd733d4ea910b45f7f740">QX_PUSH_SUPPRESS_ALL_WARNINGS</a></div><div class="ttdeci">#define QX_PUSH_SUPPRESS_ALL_WARNINGS()</div><div class="ttdoc">Disable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00113">suppress_warnings.h:113</a></div></div>
+<div class="ttc" id="asuppress__warnings_8h_html_a4bee1042b6a06f2bf93410cc56146ece"><div class="ttname"><a href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a></div><div class="ttdeci">#define QX_POP_SUPPRESS_WARNINGS()</div><div class="ttdoc">Enable all warnings.</div><div class="ttdef"><b>Definition:</b> <a href="suppress__warnings_8h_source.html#l00120">suppress_warnings.h:120</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

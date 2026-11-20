@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      shared_ref.h</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @date      25.05.2025</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright (c) Nick Khrapov, 2025. All right reserved.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2025. All right reserved.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#pragma once</span></div>
@@ -116,8 +116,8 @@ $(function() {
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    };</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class </span>_T, <span class="keyword">class</span>... _constructor_args_t&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1details_1_1smart__ptr__ref__adapter_3_01std_1_1shared__ptr_00_01_t_01_4.html">shared_ref&lt;_T&gt;</a> <a class="code" href="shared__ref_8h.html#a0c10063bd679b3a7364c785bba3d8eaf">qx::make_shared_ref</a>(_constructor_args_t&amp;&amp;... args);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">template</span>&lt;<span class="keyword">class </span>T_, <span class="keyword">class</span>... _constructor_args_t&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">friend</span> <a class="code" href="classqx_1_1details_1_1smart__ptr__ref__adapter_3_01std_1_1shared__ptr_00_01_t_01_4.html">shared_ref&lt;T_&gt;</a> <a class="code" href="shared__ref_8h.html#a0c10063bd679b3a7364c785bba3d8eaf">qx::make_shared_ref</a>(_constructor_args_t&amp;&amp;... args);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">using</span> <a class="code" href="classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html">super</a>                 = <a class="code" href="classqx_1_1details_1_1overload__functions__smart__ptr__ref__adapter.html">overload_functions_smart_ptr_ref_adapter&lt;std::shared_ptr, T&gt;</a>;</div>

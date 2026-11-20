@@ -80,8 +80,8 @@ Macros</h2></td></tr>
 <tr class="memitem:aafbad02364b98b20fd2de0a4afedc06d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#aafbad02364b98b20fd2de0a4afedc06d">QX_STRINGIFY</a>(name)&#160;&#160;&#160;#name</td></tr>
 <tr class="memdesc:aafbad02364b98b20fd2de0a4afedc06d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro can be used to turn any text in your code into a string, but only the exact text between the parentheses There are no variable dereferencing or macro substitutions or any other sort of thing done.  <a href="names_8h.html#aafbad02364b98b20fd2de0a4afedc06d">More...</a><br /></td></tr>
 <tr class="separator:aafbad02364b98b20fd2de0a4afedc06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f51bd935768d1845211352e225739ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(prefix)&#160;&#160;&#160;<a class="el" href="macros_2common_8h.html#a2f2065c32d8bf153c55964be64c7a3fb">QX_JOIN</a>(prefix, __LINE__)</td></tr>
-<tr class="memdesc:a8f51bd935768d1845211352e225739ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do magic! Creates a unique name using the line number.  <a href="names_8h.html#a8f51bd935768d1845211352e225739ed">More...</a><br /></td></tr>
+<tr class="memitem:a8f51bd935768d1845211352e225739ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(prefix)&#160;&#160;&#160;<a class="el" href="macros_2common_8h.html#a2f2065c32d8bf153c55964be64c7a3fb">QX_JOIN</a>(<a class="el" href="macros_2common_8h.html#a2f2065c32d8bf153c55964be64c7a3fb">QX_JOIN</a>(details_##prefix, _), __LINE__)</td></tr>
+<tr class="memdesc:a8f51bd935768d1845211352e225739ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do magic! Creates a unique details-prefixed name using the line number.  <a href="names_8h.html#a8f51bd935768d1845211352e225739ed">More...</a><br /></td></tr>
 <tr class="separator:a8f51bd935768d1845211352e225739ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab93acde05fa0a20d687f838a134a0d74"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a>(name)</td></tr>
 <tr class="memdesc:ab93acde05fa0a20d687f838a134a0d74"><td class="mdescLeft">&#160;</td><td class="mdescRight">A helper to avoid duplication when converting c libs constants to string literals.  <a href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">More...</a><br /></td></tr>
@@ -96,7 +96,7 @@ Macros</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>24.07.2025 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>(c) Nick Khrapov, 2025. All right reserved. </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2025. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -140,13 +140,13 @@ Macros</h2></td></tr>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;GLFW_UNKNOWN_ERROR&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="anames_8h_html_ab93acde05fa0a20d687f838a134a0d74"><div class="ttname"><a href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a></div><div class="ttdeci">#define QX_C_CONSTANT_CASE(name)</div><div class="ttdoc">A helper to avoid duplication when converting c libs constants to string literals.</div><div class="ttdef"><b>Definition:</b> <a href="names_8h_source.html#l00054">names.h:54</a></div></div>
+<div class="ttc" id="anames_8h_html_ab93acde05fa0a20d687f838a134a0d74"><div class="ttname"><a href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a></div><div class="ttdeci">#define QX_C_CONSTANT_CASE(name)</div><div class="ttdoc">A helper to avoid duplication when converting c libs constants to string literals.</div><div class="ttdef"><b>Definition:</b> <a href="names_8h_source.html#l00057">names.h:57</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00054">54</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00057">57</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
@@ -185,7 +185,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00071">71</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00074">74</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
@@ -200,20 +200,22 @@ Macros</h2></td></tr>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">prefix</td><td>)</td>
-          <td>&#160;&#160;&#160;<a class="el" href="macros_2common_8h.html#a2f2065c32d8bf153c55964be64c7a3fb">QX_JOIN</a>(prefix, __LINE__)</td>
+          <td>&#160;&#160;&#160;<a class="el" href="macros_2common_8h.html#a2f2065c32d8bf153c55964be64c7a3fb">QX_JOIN</a>(<a class="el" href="macros_2common_8h.html#a2f2065c32d8bf153c55964be64c7a3fb">QX_JOIN</a>(details_##prefix, _), __LINE__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Do magic! Creates a unique name using the line number. </p>
+<p>Do magic! Creates a unique details-prefixed name using the line number. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">prefix</td><td>- name prefix </td></tr>
+    <tr><td class="paramname">prefix</td><td>- name prefix in snake_case <div class="fragment"><div class="line"><a class="code" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(name) <span class="comment">// at line 166 -&gt; details_name_166</span></div>
+<div class="ttc" id="anames_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique details-prefixed name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="names_8h_source.html#l00030">names.h:30</a></div></div>
+</div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00027">27</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00030">30</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
@@ -252,7 +254,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00063">63</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00066">66</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>

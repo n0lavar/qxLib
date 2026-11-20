@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      components.inl</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @date      7.03.2021</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright (c) Nick Khrapov, 2021. All right reserved.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2021. All right reserved.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
@@ -164,9 +164,9 @@ $(function() {
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">auto</span>        pRawComponent = pComponent.get();</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    class_data&amp; classData     = iterate_class_data(</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        pRawComponent,</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        [ePriority, statusFlags, pRawComponent](class_data&amp; classData)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        [ePriority, statusFlags, pRawComponent](class_data&amp; iteratedClassData)</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        {</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            classData.priorityCache.emplace(<a class="code" href="classqx_1_1component__status__key.html">component_status_key</a>(ePriority, statusFlags), pRawComponent);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            iteratedClassData.priorityCache.emplace(<a class="code" href="classqx_1_1component__status__key.html">component_status_key</a>(ePriority, statusFlags), pRawComponent);</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        });</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    classData.components.push_back(std::move(pComponent));</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">return</span> pRawComponent;</div>
@@ -180,10 +180,10 @@ $(function() {
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    class_data&amp; classData = iterate_class_data(</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        pRawComponent,</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        [pRawComponent](class_data&amp; classData)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        [pRawComponent](class_data&amp; iteratedClassData)</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        {</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            std::erase_if(</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                classData.priorityCache,</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                iteratedClassData.priorityCache,</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                [pRawComponent](<span class="keyword">const</span> <span class="keyword">auto</span>&amp; pair)</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                {</div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    return pair.second == pRawComponent;</div>

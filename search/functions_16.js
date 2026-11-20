@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['xor_5f_1844',['xor_',['../classqx_1_1flags.html#a98f58dd898e11493db981a68ee123e85',1,'qx::flags']]]
+  ['width_1842',['width',['../classqx_1_1basic__rect.html#a298cb9e613419ea70bf467513ca07ce9',1,'qx::basic_rect']]],
+  ['write_1843',['write',['../classqx_1_1terminal__color.html#a8b451c1737e63bfe9a15d6e17b0d0737',1,'qx::terminal_color']]]
 ];

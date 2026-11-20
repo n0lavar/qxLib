@@ -79,78 +79,78 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:abc8b1c272a1edbba73d064e9c6304218"><td class="memItemLeft" align="right" valign="top"><a id="abc8b1c272a1edbba73d064e9c6304218"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#abc8b1c272a1edbba73d064e9c6304218">QX_NO_ENTRY</a>&#160;&#160;&#160;!&quot;No entry&quot;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#abc8b1c272a1edbba73d064e9c6304218">QX_NO_ENTRY</a>&#160;&#160;&#160;(false &amp;&amp; &quot;No entry&quot;)</td></tr>
 <tr class="memdesc:abc8b1c272a1edbba73d064e9c6304218"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this as a condition in any macro above to indicate that this part of your code must never be executed. <br /></td></tr>
 <tr class="separator:abc8b1c272a1edbba73d064e9c6304218"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37d987acaa5ea6d11804ff98d64ba761"><td class="memItemLeft" align="right" valign="top"><a id="a37d987acaa5ea6d11804ff98d64ba761"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a37d987acaa5ea6d11804ff98d64ba761">QX_NOT_IMPLEMENTED</a>&#160;&#160;&#160;!&quot;Not implemented&quot;</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a37d987acaa5ea6d11804ff98d64ba761">QX_NOT_IMPLEMENTED</a>&#160;&#160;&#160;(false &amp;&amp; &quot;Not implemented&quot;)</td></tr>
 <tr class="memdesc:a37d987acaa5ea6d11804ff98d64ba761"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this as a condition in any macro above to indicate that this part of your code is not ready yet. <br /></td></tr>
 <tr class="separator:a37d987acaa5ea6d11804ff98d64ba761"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1d72c893c0b55306759ab24275e32e6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a1d72c893c0b55306759ab24275e32e6c">QX_ASSERT_C</a>(condition,  category, ...)&#160;&#160;&#160;_QX_ASSERT_C(condition, category, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a1d72c893c0b55306759ab24275e32e6c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a1d72c893c0b55306759ab24275e32e6c">QX_ASSERT_C</a>(condition,  category, ...)&#160;&#160;&#160;QX_DETAILS_ASSERT_C(condition, category __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a1d72c893c0b55306759ab24275e32e6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true.  <a href="asserts_8h.html#a1d72c893c0b55306759ab24275e32e6c">More...</a><br /></td></tr>
 <tr class="separator:a1d72c893c0b55306759ab24275e32e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add53bee6a19170a3d73bc82e00d522e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#add53bee6a19170a3d73bc82e00d522e8">QX_ASSERT</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a1d72c893c0b55306759ab24275e32e6c">QX_ASSERT_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:add53bee6a19170a3d73bc82e00d522e8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#add53bee6a19170a3d73bc82e00d522e8">QX_ASSERT</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a1d72c893c0b55306759ab24275e32e6c">QX_ASSERT_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:add53bee6a19170a3d73bc82e00d522e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true.  <a href="asserts_8h.html#add53bee6a19170a3d73bc82e00d522e8">More...</a><br /></td></tr>
 <tr class="separator:add53bee6a19170a3d73bc82e00d522e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68487821e93846998a8642bf0dc5e7f0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a68487821e93846998a8642bf0dc5e7f0">QX_VERIFY_C</a>(condition,  category, ...)</td></tr>
 <tr class="memdesc:a68487821e93846998a8642bf0dc5e7f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true.  <a href="asserts_8h.html#a68487821e93846998a8642bf0dc5e7f0">More...</a><br /></td></tr>
 <tr class="separator:a68487821e93846998a8642bf0dc5e7f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad4004623912001ee3ef541f0e71066f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#aad4004623912001ee3ef541f0e71066f">QX_VERIFY</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a68487821e93846998a8642bf0dc5e7f0">QX_VERIFY_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:aad4004623912001ee3ef541f0e71066f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#aad4004623912001ee3ef541f0e71066f">QX_VERIFY</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a68487821e93846998a8642bf0dc5e7f0">QX_VERIFY_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:aad4004623912001ee3ef541f0e71066f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true.  <a href="asserts_8h.html#aad4004623912001ee3ef541f0e71066f">More...</a><br /></td></tr>
 <tr class="separator:aad4004623912001ee3ef541f0e71066f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f94bc453cbc2e97ecfbb23a47cd5c80"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a8f94bc453cbc2e97ecfbb23a47cd5c80">QX_EXPECT_C</a>(condition,  category, ...)</td></tr>
 <tr class="memdesc:a8f94bc453cbc2e97ecfbb23a47cd5c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true.  <a href="asserts_8h.html#a8f94bc453cbc2e97ecfbb23a47cd5c80">More...</a><br /></td></tr>
 <tr class="separator:a8f94bc453cbc2e97ecfbb23a47cd5c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72dff4b1cddb7b4567611c9ca21fe012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a8f94bc453cbc2e97ecfbb23a47cd5c80">QX_EXPECT_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a72dff4b1cddb7b4567611c9ca21fe012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">QX_EXPECT</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a8f94bc453cbc2e97ecfbb23a47cd5c80">QX_EXPECT_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a72dff4b1cddb7b4567611c9ca21fe012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true.  <a href="asserts_8h.html#a72dff4b1cddb7b4567611c9ca21fe012">More...</a><br /></td></tr>
 <tr class="separator:a72dff4b1cddb7b4567611c9ca21fe012"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a860bb12dd8d5a20c0670b6f02e159d42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a860bb12dd8d5a20c0670b6f02e159d42">QX_EXPECT_CONTINUE_C</a>(condition,  category, ...)&#160;&#160;&#160;_QX_EXPECT_ACTION(condition, category, continue, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a860bb12dd8d5a20c0670b6f02e159d42"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a860bb12dd8d5a20c0670b6f02e159d42">QX_EXPECT_CONTINUE_C</a>(condition,  category, ...)&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, continue __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a860bb12dd8d5a20c0670b6f02e159d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls continue; otherwise.  <a href="asserts_8h.html#a860bb12dd8d5a20c0670b6f02e159d42">More...</a><br /></td></tr>
 <tr class="separator:a860bb12dd8d5a20c0670b6f02e159d42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af77466a4f6526d719f8e004f94c8af49"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#af77466a4f6526d719f8e004f94c8af49">QX_EXPECT_CONTINUE</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a860bb12dd8d5a20c0670b6f02e159d42">QX_EXPECT_CONTINUE_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:af77466a4f6526d719f8e004f94c8af49"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#af77466a4f6526d719f8e004f94c8af49">QX_EXPECT_CONTINUE</a>(condition, ...)&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a860bb12dd8d5a20c0670b6f02e159d42">QX_EXPECT_CONTINUE_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:af77466a4f6526d719f8e004f94c8af49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls continue; otherwise.  <a href="asserts_8h.html#af77466a4f6526d719f8e004f94c8af49">More...</a><br /></td></tr>
 <tr class="separator:af77466a4f6526d719f8e004f94c8af49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac01df85a768958828ee6f39ac09f56e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#ac01df85a768958828ee6f39ac09f56e3">QX_EXPECT_BREAK_C</a>(condition,  category, ...)&#160;&#160;&#160;_QX_EXPECT_ACTION(condition, category, break, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:ac01df85a768958828ee6f39ac09f56e3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#ac01df85a768958828ee6f39ac09f56e3">QX_EXPECT_BREAK_C</a>(condition,  category, ...)&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, break __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:ac01df85a768958828ee6f39ac09f56e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls break; otherwise.  <a href="asserts_8h.html#ac01df85a768958828ee6f39ac09f56e3">More...</a><br /></td></tr>
 <tr class="separator:ac01df85a768958828ee6f39ac09f56e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bb3c3be031217b55c9b64a1a1d7f4ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a1bb3c3be031217b55c9b64a1a1d7f4ca">QX_EXPECT_BREAK</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#ac01df85a768958828ee6f39ac09f56e3">QX_EXPECT_BREAK_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a1bb3c3be031217b55c9b64a1a1d7f4ca"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a1bb3c3be031217b55c9b64a1a1d7f4ca">QX_EXPECT_BREAK</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#ac01df85a768958828ee6f39ac09f56e3">QX_EXPECT_BREAK_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a1bb3c3be031217b55c9b64a1a1d7f4ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls break; otherwise.  <a href="asserts_8h.html#a1bb3c3be031217b55c9b64a1a1d7f4ca">More...</a><br /></td></tr>
 <tr class="separator:a1bb3c3be031217b55c9b64a1a1d7f4ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f85672603c556a35a0df8093809c2d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a5f85672603c556a35a0df8093809c2d5">QX_EXPECT_RETURN_C</a>(condition,  category, ...)&#160;&#160;&#160;_QX_EXPECT_ACTION(condition, category, return, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a5f85672603c556a35a0df8093809c2d5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a5f85672603c556a35a0df8093809c2d5">QX_EXPECT_RETURN_C</a>(condition,  category, ...)&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, return __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a5f85672603c556a35a0df8093809c2d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls return; otherwise.  <a href="asserts_8h.html#a5f85672603c556a35a0df8093809c2d5">More...</a><br /></td></tr>
 <tr class="separator:a5f85672603c556a35a0df8093809c2d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65b5a4597f28172e66d51dd0b5934012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a65b5a4597f28172e66d51dd0b5934012">QX_EXPECT_RETURN</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a5f85672603c556a35a0df8093809c2d5">QX_EXPECT_RETURN_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a65b5a4597f28172e66d51dd0b5934012"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a65b5a4597f28172e66d51dd0b5934012">QX_EXPECT_RETURN</a>(condition, ...)&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a5f85672603c556a35a0df8093809c2d5">QX_EXPECT_RETURN_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a65b5a4597f28172e66d51dd0b5934012"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls return; otherwise.  <a href="asserts_8h.html#a65b5a4597f28172e66d51dd0b5934012">More...</a><br /></td></tr>
 <tr class="separator:a65b5a4597f28172e66d51dd0b5934012"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a250f98b3fbecec317105fcf07dc1b6ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a250f98b3fbecec317105fcf07dc1b6ac">QX_EXPECT_RETURN_CT</a>(condition,  category,  return_value, ...)&#160;&#160;&#160;    _QX_EXPECT_ACTION(condition, category, return return_value, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a250f98b3fbecec317105fcf07dc1b6ac"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a250f98b3fbecec317105fcf07dc1b6ac">QX_EXPECT_RETURN_CT</a>(condition,  category,  return_value, ...)&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, return return_value __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a250f98b3fbecec317105fcf07dc1b6ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls return return_value; otherwise.  <a href="asserts_8h.html#a250f98b3fbecec317105fcf07dc1b6ac">More...</a><br /></td></tr>
 <tr class="separator:a250f98b3fbecec317105fcf07dc1b6ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc095ab3e4dad1719b88cce862d80e77"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#abc095ab3e4dad1719b88cce862d80e77">QX_EXPECT_RETURN_T</a>(condition,  return_value, ...)&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a250f98b3fbecec317105fcf07dc1b6ac">QX_EXPECT_RETURN_CT</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), return_value, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:abc095ab3e4dad1719b88cce862d80e77"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#abc095ab3e4dad1719b88cce862d80e77">QX_EXPECT_RETURN_T</a>(condition,  return_value, ...)&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a250f98b3fbecec317105fcf07dc1b6ac">QX_EXPECT_RETURN_CT</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), return_value __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:abc095ab3e4dad1719b88cce862d80e77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls return return_value; otherwise.  <a href="asserts_8h.html#abc095ab3e4dad1719b88cce862d80e77">More...</a><br /></td></tr>
 <tr class="separator:abc095ab3e4dad1719b88cce862d80e77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a351699105a6b38454221c1137274bf16"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a351699105a6b38454221c1137274bf16">QX_EXPECT_CO_RETURN_C</a>(condition,  category, ...)&#160;&#160;&#160;_QX_EXPECT_ACTION(condition, category, co_return, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a351699105a6b38454221c1137274bf16"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a351699105a6b38454221c1137274bf16">QX_EXPECT_CO_RETURN_C</a>(condition,  category, ...)&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, co_return __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a351699105a6b38454221c1137274bf16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls co_return; otherwise.  <a href="asserts_8h.html#a351699105a6b38454221c1137274bf16">More...</a><br /></td></tr>
 <tr class="separator:a351699105a6b38454221c1137274bf16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77916557304c7d55fb5d0663dbb2cb33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a77916557304c7d55fb5d0663dbb2cb33">QX_EXPECT_CO_RETURN</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a351699105a6b38454221c1137274bf16">QX_EXPECT_CO_RETURN_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a77916557304c7d55fb5d0663dbb2cb33"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a77916557304c7d55fb5d0663dbb2cb33">QX_EXPECT_CO_RETURN</a>(condition, ...)&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a351699105a6b38454221c1137274bf16">QX_EXPECT_CO_RETURN_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a77916557304c7d55fb5d0663dbb2cb33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls co_return; otherwise.  <a href="asserts_8h.html#a77916557304c7d55fb5d0663dbb2cb33">More...</a><br /></td></tr>
 <tr class="separator:a77916557304c7d55fb5d0663dbb2cb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0e3fd1f093ae313ea2eb612f67c32bcb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a0e3fd1f093ae313ea2eb612f67c32bcb">QX_EXPECT_CO_RETURN_CT</a>(condition,  category,  return_value, ...)&#160;&#160;&#160;    _QX_EXPECT_ACTION(condition, category, co_return return_value, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a0e3fd1f093ae313ea2eb612f67c32bcb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a0e3fd1f093ae313ea2eb612f67c32bcb">QX_EXPECT_CO_RETURN_CT</a>(condition,  category,  return_value, ...)&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, co_return return_value __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a0e3fd1f093ae313ea2eb612f67c32bcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls co_return return_value; otherwise.  <a href="asserts_8h.html#a0e3fd1f093ae313ea2eb612f67c32bcb">More...</a><br /></td></tr>
 <tr class="separator:a0e3fd1f093ae313ea2eb612f67c32bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fdeb25ce30c21cc6e8e11822b997021"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a3fdeb25ce30c21cc6e8e11822b997021">QX_EXPECT_CO_RETURN_T</a>(condition,  return_value, ...)&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a0e3fd1f093ae313ea2eb612f67c32bcb">QX_EXPECT_CO_RETURN_CT</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), return_value, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a3fdeb25ce30c21cc6e8e11822b997021"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a3fdeb25ce30c21cc6e8e11822b997021">QX_EXPECT_CO_RETURN_T</a>(condition,  return_value, ...)&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a0e3fd1f093ae313ea2eb612f67c32bcb">QX_EXPECT_CO_RETURN_CT</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), return_value __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a3fdeb25ce30c21cc6e8e11822b997021"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true and calls co_return return_value; otherwise.  <a href="asserts_8h.html#a3fdeb25ce30c21cc6e8e11822b997021">More...</a><br /></td></tr>
 <tr class="separator:a3fdeb25ce30c21cc6e8e11822b997021"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a687aea5f18f2c8ad08114da4925aa00c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a687aea5f18f2c8ad08114da4925aa00c">QX_ENSURE_C</a>(condition,  category, ...)&#160;&#160;&#160;_QX_ENSURE_C(condition, category, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a687aea5f18f2c8ad08114da4925aa00c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a687aea5f18f2c8ad08114da4925aa00c">QX_ENSURE_C</a>(condition,  category, ...)&#160;&#160;&#160;QX_DETAILS_ENSURE_C(condition, category __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a687aea5f18f2c8ad08114da4925aa00c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true.  <a href="asserts_8h.html#a687aea5f18f2c8ad08114da4925aa00c">More...</a><br /></td></tr>
 <tr class="separator:a687aea5f18f2c8ad08114da4925aa00c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93099453c0ca6ec9e6819732f0779faf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a93099453c0ca6ec9e6819732f0779faf">QX_ENSURE</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a687aea5f18f2c8ad08114da4925aa00c">QX_ENSURE_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a93099453c0ca6ec9e6819732f0779faf"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="asserts_8h.html#a93099453c0ca6ec9e6819732f0779faf">QX_ENSURE</a>(condition, ...)&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a687aea5f18f2c8ad08114da4925aa00c">QX_ENSURE_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a93099453c0ca6ec9e6819732f0779faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies that the condition is true.  <a href="asserts_8h.html#a93099453c0ca6ec9e6819732f0779faf">More...</a><br /></td></tr>
 <tr class="separator:a93099453c0ca6ec9e6819732f0779faf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>27.12.2025 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>(c) Nick Khrapov, 2025. All right reserved.</dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2025. All right reserved.</dd></dl>
 <h1><a class="anchor" id="qx_assert_table"></a>
 Assert Types Comparison Table</h1>
 <table class="markdownTable">
@@ -189,7 +189,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a1d72c893c0b55306759ab24275e32e6c">QX_ASSERT_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a1d72c893c0b55306759ab24275e32e6c">QX_ASSERT_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -234,7 +234,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;_QX_ASSERT_C(condition, category, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;QX_DETAILS_ASSERT_C(condition, category __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -274,7 +274,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a687aea5f18f2c8ad08114da4925aa00c">QX_ENSURE_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a687aea5f18f2c8ad08114da4925aa00c">QX_ENSURE_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -288,7 +288,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00226">226</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00231">231</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -319,7 +319,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;_QX_ENSURE_C(condition, category, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;QX_DETAILS_ENSURE_C(condition, category __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -334,7 +334,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00218">218</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00223">223</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a8f94bc453cbc2e97ecfbb23a47cd5c80">QX_EXPECT_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a8f94bc453cbc2e97ecfbb23a47cd5c80">QX_EXPECT_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -374,7 +374,7 @@ Assert Types Comparison Table</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- condition </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00099">99</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00097">97</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -399,7 +399,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#ac01df85a768958828ee6f39ac09f56e3">QX_EXPECT_BREAK_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#ac01df85a768958828ee6f39ac09f56e3">QX_EXPECT_BREAK_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -413,7 +413,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00133">133</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00134">134</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -444,7 +444,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;_QX_EXPECT_ACTION(condition, category, break, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, break __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -494,13 +494,12 @@ Assert Types Comparison Table</h1>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    _QX_COMMON_ASSERT(                          \</div>
-<div class="line">        condition,                              \</div>
-<div class="line">        category,                               \</div>
-<div class="line">        qx::assert_type::expect,                \</div>
-<div class="line">        _QX_ASSERT_AFTER_DEBUG_BREAK_NON_FATAL, \</div>
-<div class="line">        <span class="keywordtype">bool</span>,                                   \</div>
-<div class="line">        ##__VA_ARGS__)</div>
+<b>Value:</b><div class="fragment"><div class="line">    QX_DETAILS_COMMON_ASSERT(                          \</div>
+<div class="line">        condition,                                     \</div>
+<div class="line">        category,                                      \</div>
+<div class="line">        qx::assert_type::expect,                       \</div>
+<div class="line">        QX_DETAILS_ASSERT_AFTER_DEBUG_BREAK_NON_FATAL, \</div>
+<div class="line">        <span class="keywordtype">bool</span> __VA_OPT__(, ) __VA_ARGS__)</div>
 </div><!-- fragment -->
 <p>Verifies that the condition is true. </p>
 <p>QX_EXPECT macros generate nonfatal failures and remain in shipping. See <a class="el" href="asserts_8h.html#qx_assert_table">Assert Types Comparison Table</a> for details. </p><dl class="params"><dt>Parameters</dt><dd>
@@ -513,7 +512,7 @@ Assert Types Comparison Table</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>- condition </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00083">83</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00082">82</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -538,7 +537,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a351699105a6b38454221c1137274bf16">QX_EXPECT_CO_RETURN_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a351699105a6b38454221c1137274bf16">QX_EXPECT_CO_RETURN_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -552,7 +551,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00188">188</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00192">192</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -583,7 +582,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;_QX_EXPECT_ACTION(condition, category, co_return, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, co_return __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -598,7 +597,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00180">180</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00183">183</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -635,7 +634,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    _QX_EXPECT_ACTION(condition, category, co_return return_value, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, co_return return_value __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -651,7 +650,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00198">198</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00203">203</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -682,7 +681,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a0e3fd1f093ae313ea2eb612f67c32bcb">QX_EXPECT_CO_RETURN_CT</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), return_value, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a0e3fd1f093ae313ea2eb612f67c32bcb">QX_EXPECT_CO_RETURN_CT</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), return_value __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -697,7 +696,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00208">208</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00213">213</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -722,7 +721,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a860bb12dd8d5a20c0670b6f02e159d42">QX_EXPECT_CONTINUE_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a860bb12dd8d5a20c0670b6f02e159d42">QX_EXPECT_CONTINUE_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -736,7 +735,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00116">116</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00115">115</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -767,7 +766,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;_QX_EXPECT_ACTION(condition, category, continue, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, continue __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -782,7 +781,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00108">108</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00106">106</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -807,7 +806,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a5f85672603c556a35a0df8093809c2d5">QX_EXPECT_RETURN_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a5f85672603c556a35a0df8093809c2d5">QX_EXPECT_RETURN_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -821,7 +820,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00150">150</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00152">152</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -852,7 +851,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;_QX_EXPECT_ACTION(condition, category, return, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, return __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -867,7 +866,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00142">142</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00143">143</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -904,7 +903,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    _QX_EXPECT_ACTION(condition, category, return return_value, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    QX_DETAILS_EXPECT_ACTION(condition, category, return return_value __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -920,7 +919,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00160">160</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00163">163</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -951,7 +950,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a250f98b3fbecec317105fcf07dc1b6ac">QX_EXPECT_RETURN_CT</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), return_value, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="asserts_8h.html#a250f98b3fbecec317105fcf07dc1b6ac">QX_EXPECT_RETURN_CT</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), return_value __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -966,7 +965,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00170">170</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00173">173</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -991,7 +990,7 @@ Assert Types Comparison Table</h1>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a68487821e93846998a8642bf0dc5e7f0">QX_VERIFY_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="asserts_8h.html#a68487821e93846998a8642bf0dc5e7f0">QX_VERIFY_C</a>(condition, <a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>() __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1005,7 +1004,7 @@ Assert Types Comparison Table</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00073">73</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="asserts_8h_source.html#l00072">72</a> of file <a class="el" href="asserts_8h_source.html">asserts.h</a>.</p>
 
 </div>
 </div>
@@ -1040,13 +1039,12 @@ Assert Types Comparison Table</h1>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    _QX_COMMON_ASSERT(                        \</div>
-<div class="line">        condition,                            \</div>
-<div class="line">        category,                             \</div>
-<div class="line">        qx::assert_type::verify,              \</div>
-<div class="line">        _QX_ASSERT_AFTER_DEBUG_BREAK_FATAL,   \</div>
-<div class="line">        <span class="keywordtype">void</span>,                                 \</div>
-<div class="line">        ##__VA_ARGS__)</div>
+<b>Value:</b><div class="fragment"><div class="line">    QX_DETAILS_COMMON_ASSERT(                      \</div>
+<div class="line">        condition,                                 \</div>
+<div class="line">        category,                                  \</div>
+<div class="line">        qx::assert_type::verify,                   \</div>
+<div class="line">        QX_DETAILS_ASSERT_AFTER_DEBUG_BREAK_FATAL, \</div>
+<div class="line">        <span class="keywordtype">void</span> __VA_OPT__(, ) __VA_ARGS__)</div>
 </div><!-- fragment -->
 <p>Verifies that the condition is true. </p>
 <p>QX_VERIFY macros generate fatal failures and remain in shipping. See <a class="el" href="asserts_8h.html#qx_assert_table">Assert Types Comparison Table</a> for details. </p><dl class="params"><dt>Parameters</dt><dd>

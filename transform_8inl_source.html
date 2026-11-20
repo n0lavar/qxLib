@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      transform.inl</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @date      1.10.2023</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright (c) Nick Khrapov, 2023. All right reserved.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2023. All right reserved.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
@@ -101,24 +101,25 @@ $(function() {
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">class </span>input_container_t,</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">class </span>transform_callable_t,</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">class</span>... result_container_rest_t&gt;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="transform_8h.html#a95c527c1eaddaebf948ba9f58235eb4c">   33</a></span>&#160;<span class="keyword">auto</span> <a class="code" href="transform_8h.html#a95c527c1eaddaebf948ba9f58235eb4c">transform_return</a>(input_container_t&amp;&amp; input, <span class="keyword">const</span> transform_callable_t&amp; transformCallable)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">using</span> result_type             = decltype(transformCallable(*input.begin()));</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">using</span> result_container_full_t = result_container_t&lt;result_type, result_container_rest_t...&gt;;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    result_container_full_t result;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">if</span> constexpr (details::has_reserve_func_c&lt;result_container_full_t&gt; &amp;&amp; details::has_size_func_c&lt;input_container_t&gt;)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        result.reserve(input.size());</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; inputElement : input)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        result.insert(result.end(), transformCallable(std::forward&lt;decltype(inputElement)&gt;(inputElement)));</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;}</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="transform_8h.html#aa8491756ac7e7ca096b6d798bae9f5e6">   33</a></span>&#160;<span class="keyword">auto</span> <a class="code" href="transform_8h.html#aa8491756ac7e7ca096b6d798bae9f5e6">transform_return</a>(input_container_t&amp;&amp; input, <span class="keyword">const</span> transform_callable_t&amp; transformCallable)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    -&gt; result_container_t&lt;decltype(transformCallable(*input.begin())), result_container_rest_t...&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">using</span> result_type             = decltype(transformCallable(*input.begin()));</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">using</span> result_container_full_t = result_container_t&lt;result_type, result_container_rest_t...&gt;;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    result_container_full_t result;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span> constexpr (details::has_reserve_func_c&lt;result_container_full_t&gt; &amp;&amp; details::has_size_func_c&lt;input_container_t&gt;)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        result.reserve(input.size());</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; inputElement : input)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        result.insert(result.end(), transformCallable(std::forward&lt;decltype(inputElement)&gt;(inputElement)));</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;}</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="acoalesce_8h_html_af141b284fe289dd9243ddad3f90ddb19"><div class="ttname"><a href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">qx::requires</a></div><div class="ttdeci">requires(same_variadic_args_v&lt; args_t... &gt;) const expr auto coalesce(args_t &amp;&amp;... args)</div><div class="ttdoc">Coalesce function, C# a ?? b analogue.</div><div class="ttdef"><b>Definition:</b> <a href="coalesce_8inl_source.html#l00057">coalesce.inl:57</a></div></div>
-<div class="ttc" id="atransform_8h_html_a95c527c1eaddaebf948ba9f58235eb4c"><div class="ttname"><a href="transform_8h.html#a95c527c1eaddaebf948ba9f58235eb4c">qx::transform_return</a></div><div class="ttdeci">auto transform_return(input_container_t &amp;&amp;input, const transform_callable_t &amp;transformCallable)</div><div class="ttdoc">std::transform equivalent that makes the code a bit shorter</div><div class="ttdef"><b>Definition:</b> <a href="transform_8inl_source.html#l00033">transform.inl:33</a></div></div>
+<div class="ttc" id="atransform_8h_html_aa8491756ac7e7ca096b6d798bae9f5e6"><div class="ttname"><a href="transform_8h.html#aa8491756ac7e7ca096b6d798bae9f5e6">qx::transform_return</a></div><div class="ttdeci">auto transform_return(input_container_t &amp;&amp;input, const transform_callable_t &amp;transformCallable) -&gt; result_container_t&lt; decltype(transformCallable(*input.begin())), result_container_rest_t... &gt;</div><div class="ttdoc">std::transform equivalent that makes the code a bit shorter</div><div class="ttdef"><b>Definition:</b> <a href="transform_8inl_source.html#l00033">transform.inl:33</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

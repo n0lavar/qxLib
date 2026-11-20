@@ -99,13 +99,13 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:aaf4a2f8b6afd8cd62dfe64fbfc18b984"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">QX_LOG_C</a>(category,  eVerbosity, ...)&#160;&#160;&#160;_QX_LOG_C(constexpr, category, eVerbosity, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:aaf4a2f8b6afd8cd62dfe64fbfc18b984"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">QX_LOG_C</a>(category,  eVerbosity, ...)&#160;&#160;&#160;QX_DETAILS_LOG_C(constexpr, category, eVerbosity __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:aaf4a2f8b6afd8cd62dfe64fbfc18b984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with category.  <a href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">More...</a><br /></td></tr>
 <tr class="separator:aaf4a2f8b6afd8cd62dfe64fbfc18b984"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79dd4ee569e1f68524cee4ed028f628a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">QX_LOG</a>(eVerbosity, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">QX_LOG_C</a>(<a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), eVerbosity, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a79dd4ee569e1f68524cee4ed028f628a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">QX_LOG</a>(eVerbosity, ...)&#160;&#160;&#160;<a class="el" href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">QX_LOG_C</a>(<a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), eVerbosity __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a79dd4ee569e1f68524cee4ed028f628a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log message.  <a href="logger_8h.html#a79dd4ee569e1f68524cee4ed028f628a">More...</a><br /></td></tr>
 <tr class="separator:a79dd4ee569e1f68524cee4ed028f628a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8595ab88dbc1ec4bdc0c327eb0fb703d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a8595ab88dbc1ec4bdc0c327eb0fb703d">QX_LOG_REF</a>(category,  eVerbosity, ...)&#160;&#160;&#160;_QX_LOG_C(, category, eVerbosity, ##__VA_ARGS__)</td></tr>
+<tr class="memitem:a8595ab88dbc1ec4bdc0c327eb0fb703d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="logger_8h.html#a8595ab88dbc1ec4bdc0c327eb0fb703d">QX_LOG_REF</a>(category,  eVerbosity, ...)&#160;&#160;&#160;QX_DETAILS_LOG_C(, category, eVerbosity __VA_OPT__(, ) __VA_ARGS__)</td></tr>
 <tr class="memdesc:a8595ab88dbc1ec4bdc0c327eb0fb703d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log with category and with non compile time category check.  <a href="logger_8h.html#a8595ab88dbc1ec4bdc0c327eb0fb703d">More...</a><br /></td></tr>
 <tr class="separator:a8595ab88dbc1ec4bdc0c327eb0fb703d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -118,7 +118,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>17.06.2019 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>(c) Nick Khrapov, 2021. All right reserved. </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2021. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="logger_8h_source.html">logger.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -143,7 +143,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">QX_LOG_C</a>(<a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), eVerbosity, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;<a class="el" href="logger_8h.html#aaf4a2f8b6afd8cd62dfe64fbfc18b984">QX_LOG_C</a>(<a class="el" href="category_8h.html#adca05f77ff871740e30468a4fc677ee1">QX_GET_FILE_CATEGORY</a>(), eVerbosity __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -188,7 +188,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;_QX_LOG_C(constexpr, category, eVerbosity, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;QX_DETAILS_LOG_C(constexpr, category, eVerbosity __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -234,7 +234,7 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;_QX_LOG_C(, category, eVerbosity, ##__VA_ARGS__)</td>
+          <td></td><td>&#160;&#160;&#160;QX_DETAILS_LOG_C(, category, eVerbosity __VA_OPT__(, ) __VA_ARGS__)</td>
         </tr>
       </table>
 </div><div class="memdoc">

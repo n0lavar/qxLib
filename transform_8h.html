@@ -78,20 +78,20 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a95c527c1eaddaebf948ba9f58235eb4c"><td class="memTemplParams" colspan="2">template&lt;template&lt; class... &gt; class result_container_t, class input_container_t , class transform_callable_t , class... result_container_rest_t&gt; </td></tr>
-<tr class="memitem:a95c527c1eaddaebf948ba9f58235eb4c"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="transform_8h.html#a95c527c1eaddaebf948ba9f58235eb4c">qx::transform_return</a> (input_container_t &amp;&amp;input, const transform_callable_t &amp;transformCallable)</td></tr>
-<tr class="memdesc:a95c527c1eaddaebf948ba9f58235eb4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::transform equivalent that makes the code a bit shorter  <a href="transform_8h.html#a95c527c1eaddaebf948ba9f58235eb4c">More...</a><br /></td></tr>
-<tr class="separator:a95c527c1eaddaebf948ba9f58235eb4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8491756ac7e7ca096b6d798bae9f5e6"><td class="memTemplParams" colspan="2">template&lt;template&lt; class... &gt; class result_container_t, class input_container_t , class transform_callable_t , class... result_container_rest_t&gt; </td></tr>
+<tr class="memitem:aa8491756ac7e7ca096b6d798bae9f5e6"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="transform_8h.html#aa8491756ac7e7ca096b6d798bae9f5e6">qx::transform_return</a> (input_container_t &amp;&amp;input, const transform_callable_t &amp;transformCallable) -&gt; result_container_t&lt; decltype(transformCallable(*input.begin())), result_container_rest_t... &gt;</td></tr>
+<tr class="memdesc:aa8491756ac7e7ca096b6d798bae9f5e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">std::transform equivalent that makes the code a bit shorter  <a href="transform_8h.html#aa8491756ac7e7ca096b6d798bae9f5e6">More...</a><br /></td></tr>
+<tr class="separator:aa8491756ac7e7ca096b6d798bae9f5e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>1.10.2023 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>(c) Nick Khrapov, 2023. All right reserved. </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2023. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="transform_8h_source.html">transform.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a95c527c1eaddaebf948ba9f58235eb4c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95c527c1eaddaebf948ba9f58235eb4c">&#9670;&nbsp;</a></span>transform_return()</h2>
+<a id="aa8491756ac7e7ca096b6d798bae9f5e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8491756ac7e7ca096b6d798bae9f5e6">&#9670;&nbsp;</a></span>transform_return()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -113,7 +113,7 @@ template&lt;template&lt; class... &gt; class result_container_t, class input_con
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> -&gt; result_container_t&lt;decltype(transformCallable(*input.begin())), result_container_rest_t...&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">

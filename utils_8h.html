@@ -84,10 +84,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a0708d6ca8dda3583a2d00c60c6d87141"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#a0708d6ca8dda3583a2d00c60c6d87141">qx::destruct</a> (iterator_t itStart, iterator_t itEnd)</td></tr>
 <tr class="memdesc:a0708d6ca8dda3583a2d00c60c6d87141"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call destructors.  <a href="utils_8h.html#a0708d6ca8dda3583a2d00c60c6d87141">More...</a><br /></td></tr>
 <tr class="separator:a0708d6ca8dda3583a2d00c60c6d87141"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d6faba90a6874d7629cf440bdd4092c"><td class="memTemplParams" colspan="2">template&lt;size_t N, class T &gt; </td></tr>
-<tr class="memitem:a9d6faba90a6874d7629cf440bdd4092c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">qx::make_array</a> (T init_val=T())</td></tr>
-<tr class="memdesc:a9d6faba90a6874d7629cf440bdd4092c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill array with value in constructor.  <a href="utils_8h.html#a9d6faba90a6874d7629cf440bdd4092c">More...</a><br /></td></tr>
-<tr class="separator:a9d6faba90a6874d7629cf440bdd4092c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae08beb9cf9349146966ced9c16f299e1"><td class="memTemplParams" colspan="2">template&lt;size_t N, class T &gt; </td></tr>
+<tr class="memitem:ae08beb9cf9349146966ced9c16f299e1"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::array&lt; T, N &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#ae08beb9cf9349146966ced9c16f299e1">qx::make_array</a> (T init_val=T())</td></tr>
+<tr class="memdesc:ae08beb9cf9349146966ced9c16f299e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fill array with value in constructor.  <a href="utils_8h.html#ae08beb9cf9349146966ced9c16f299e1">More...</a><br /></td></tr>
+<tr class="separator:ae08beb9cf9349146966ced9c16f299e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad87f567ad1eb4cd1c4a5187839530b48"><td class="memTemplParams" colspan="2">template&lt;class T , std::size_t LeftLength, std::size_t RightLength&gt; </td></tr>
 <tr class="memitem:ad87f567ad1eb4cd1c4a5187839530b48"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::array&lt; T, LeftLength+RightLength &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="utils_8h.html#ad87f567ad1eb4cd1c4a5187839530b48">qx::join_arrays</a> (std::array&lt; T, LeftLength &gt; rhs, std::array&lt; T, RightLength &gt; lhs)</td></tr>
 <tr class="memdesc:ad87f567ad1eb4cd1c4a5187839530b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Join arrays at compile-time.  <a href="utils_8h.html#ad87f567ad1eb4cd1c4a5187839530b48">More...</a><br /></td></tr>
@@ -108,7 +108,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>6.08.2022 </dd></dl>
-<dl class="section copyright"><dt>Copyright</dt><dd>(c) Nick Khrapov, 2022. All right reserved. </dd></dl>
+<dl class="section copyright"><dt>Copyright</dt><dd>© Nick Khrapov, 2022. All right reserved. </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="utils_8h_source.html">utils.h</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
@@ -270,8 +270,8 @@ template&lt;class T , std::size_t LeftLength, std::size_t RightLength&gt; </div>
 
 </div>
 </div>
-<a id="a9d6faba90a6874d7629cf440bdd4092c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d6faba90a6874d7629cf440bdd4092c">&#9670;&nbsp;</a></span>make_array()</h2>
+<a id="ae08beb9cf9349146966ced9c16f299e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae08beb9cf9349146966ced9c16f299e1">&#9670;&nbsp;</a></span>make_array()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -282,7 +282,7 @@ template&lt;size_t N, class T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto qx::make_array </td>
+          <td class="memname">constexpr std::array&lt; T, N &gt; qx::make_array </td>
           <td>(</td>
           <td class="paramtype">T&#160;</td>
           <td class="paramname"><em>init_val</em> = <code>T()</code></td><td>)</td>

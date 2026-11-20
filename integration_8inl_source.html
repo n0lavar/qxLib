@@ -74,7 +74,7 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">    @file      integration.inl</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    @author    Khrapov</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    @date      29.04.2023</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright (c) Nick Khrapov, 2023. All right reserved.</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    @copyright © Nick Khrapov, 2023. All right reserved.</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"></span> </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">**/</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
@@ -176,21 +176,21 @@ $(function() {
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keyword">auto</span> slice_area = <a class="code" href="recursive__lambda_8h.html#a73292882c1c12fa4c95b7d8eec980ec1">make_recursive_lambda</a>(</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        [nMaxRecursion](</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span>&amp;          slice_area,</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keyword">const</span> function_2d_t&amp; func,</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordtype">double</span>               x0,</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordtype">double</span>               x1,</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keyword">const</span> <span class="keyword">auto</span>&amp;          slice_area_,</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keyword">const</span> function_2d_t&amp; func_,</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordtype">double</span>               x0_,</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordtype">double</span>               x1_,</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordtype">double</span>               max_slice_error,</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="keywordtype">size_t</span>               recursionLevel)</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;        {</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> y0 = func(x0);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> y1 = func(x1);</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> xm = (x0 + x1) / 2;</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> ym = func(xm);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> y0 = func_(x0_);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> y1 = func_(x1_);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> xm = (x0_ + x1_) / 2;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> ym = func_(xm);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> fArea12  = (x1 - x0) * (y0 + y1) / 2.0;</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> fArea1m  = (xm - x0) * (y0 + ym) / 2.0;</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> fAream2  = (x1 - xm) * (ym + y1) / 2.0;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> fArea12  = (x1_ - x0_) * (y0 + y1) / 2.0;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> fArea1m  = (xm - x0_) * (y0 + ym) / 2.0;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> fAream2  = (x1_ - xm) * (ym + y1) / 2.0;</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> fArea1m2 = fArea1m + fAream2;</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> fError = (fArea1m2 - fArea12) / fArea12;</div>
@@ -202,8 +202,8 @@ $(function() {
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            }</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordflow">else</span></div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            {</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="keywordflow">return</span> slice_area(func, x0, xm, max_slice_error, recursionLevel)</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                       + slice_area(func, xm, x1, max_slice_error, recursionLevel);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="keywordflow">return</span> slice_area_(func_, x0_, xm, max_slice_error, recursionLevel)</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                       + slice_area_(func_, xm, x1_, max_slice_error, recursionLevel);</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            }</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        });</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
