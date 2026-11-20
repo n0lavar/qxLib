@@ -90,7 +90,7 @@ $(function() {
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="moving__average_8h.html#aafcd27954378738a4df732eb2c5704c4">   20</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;T&gt; <a class="code" href="moving__average_8h.html#aafcd27954378738a4df732eb2c5704c4">get_moving_average_linear_weights</a>(<span class="keywordtype">size_t</span> nEntries)</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;{</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::vector&lt;T&gt; weights(nEntries, 0.f);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::vector&lt;T&gt; weights(nEntries, T(0));</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">const</span> T fDenominator = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(nEntries * (nEntries + 1)) / T(2.f);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
@@ -103,7 +103,7 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
 <div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="moving__average_8h.html#aad98af413f8a5bec6733a1c0560a14c9">   33</a></span>&#160;<span class="keyword">inline</span> std::vector&lt;T&gt; <a class="code" href="moving__average_8h.html#aad98af413f8a5bec6733a1c0560a14c9">get_moving_average_exp_weights</a>(<span class="keywordtype">size_t</span> nEntries)</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;T&gt; weights(nEntries, 0.f);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    std::vector&lt;T&gt; weights(nEntries, T(0));</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">// the degree of weighting decrease, a constant smoothing</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">// factor between 0 and 1. A higher alpha discounts</span></div>

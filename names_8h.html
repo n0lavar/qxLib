@@ -71,7 +71,8 @@ $(function() {
 <div class="title">names.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="macros_2common_8h_source.html">qx/macros/common.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="string__setup_8h_source.html">qx/containers/string/string_setup.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="macros_2common_8h_source.html">qx/macros/common.h</a>&gt;</code><br />
 </div>
 <p><a href="names_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -92,6 +93,10 @@ Macros</h2></td></tr>
 <tr class="memitem:a5b8717c5812f35b4855d31744b8a2b88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#a5b8717c5812f35b4855d31744b8a2b88">QX_FULL_METHOD_NAME</a>(className,  methodName)&#160;&#160;&#160;    ((void)sizeof(&amp;className::methodName), <a class="el" href="names_8h.html#aafbad02364b98b20fd2de0a4afedc06d">QX_STRINGIFY</a>(className) &quot;::&quot; <a class="el" href="names_8h.html#aafbad02364b98b20fd2de0a4afedc06d">QX_STRINGIFY</a>(methodName))</td></tr>
 <tr class="memdesc:a5b8717c5812f35b4855d31744b8a2b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a full method name (className::methodName), while statically verifying that the method exists.  <a href="names_8h.html#a5b8717c5812f35b4855d31744b8a2b88">More...</a><br /></td></tr>
 <tr class="separator:a5b8717c5812f35b4855d31744b8a2b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae158b161fec70fada62391b9ffa7d502"><td class="memItemLeft" align="right" valign="top"><a id="ae158b161fec70fada62391b9ffa7d502"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="names_8h.html#ae158b161fec70fada62391b9ffa7d502">QX_SHORT_FILE</a>&#160;&#160;&#160;qx::details::last_slash(QXT(__FILE__))</td></tr>
+<tr class="memdesc:ae158b161fec70fada62391b9ffa7d502"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cuts full absolute path to the file name only ex: "C:\folder1\folder2\file.h" =&gt; "file.h". <br /></td></tr>
+<tr class="separator:ae158b161fec70fada62391b9ffa7d502"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -140,13 +145,13 @@ Macros</h2></td></tr>
 <div class="line"> </div>
 <div class="line">    <span class="keywordflow">return</span> <span class="stringliteral">&quot;GLFW_UNKNOWN_ERROR&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="anames_8h_html_ab93acde05fa0a20d687f838a134a0d74"><div class="ttname"><a href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a></div><div class="ttdeci">#define QX_C_CONSTANT_CASE(name)</div><div class="ttdoc">A helper to avoid duplication when converting c libs constants to string literals.</div><div class="ttdef"><b>Definition:</b> <a href="names_8h_source.html#l00057">names.h:57</a></div></div>
+<div class="ttc" id="anames_8h_html_ab93acde05fa0a20d687f838a134a0d74"><div class="ttname"><a href="names_8h.html#ab93acde05fa0a20d687f838a134a0d74">QX_C_CONSTANT_CASE</a></div><div class="ttdeci">#define QX_C_CONSTANT_CASE(name)</div><div class="ttdoc">A helper to avoid duplication when converting c libs constants to string literals.</div><div class="ttdef"><b>Definition:</b> <a href="names_8h_source.html#l00058">names.h:58</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00057">57</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00058">58</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
@@ -185,7 +190,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00074">74</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00075">75</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
@@ -209,13 +214,13 @@ Macros</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">prefix</td><td>- name prefix in snake_case <div class="fragment"><div class="line"><a class="code" href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a>(name) <span class="comment">// at line 166 -&gt; details_name_166</span></div>
-<div class="ttc" id="anames_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique details-prefixed name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="names_8h_source.html#l00030">names.h:30</a></div></div>
+<div class="ttc" id="anames_8h_html_a8f51bd935768d1845211352e225739ed"><div class="ttname"><a href="names_8h.html#a8f51bd935768d1845211352e225739ed">QX_LINE_NAME</a></div><div class="ttdeci">#define QX_LINE_NAME(prefix)</div><div class="ttdoc">Do magic! Creates a unique details-prefixed name using the line number.</div><div class="ttdef"><b>Definition:</b> <a href="names_8h_source.html#l00031">names.h:31</a></div></div>
 </div><!-- fragment --> </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00030">30</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00031">31</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
@@ -254,7 +259,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00066">66</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00067">67</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>
@@ -282,7 +287,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00020">20</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="names_8h_source.html#l00021">21</a> of file <a class="el" href="names_8h_source.html">names.h</a>.</p>
 
 </div>
 </div>

@@ -71,7 +71,7 @@ $(function() {
 <div class="title">suppress_warnings.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="config_8h_source.html">qx/macros/config.h</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="macros_2common_8h_source.html">qx/macros/common.h</a>&gt;</code><br />
 </div>
 <p><a href="suppress__warnings_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -81,19 +81,24 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a1fceb568dd8fd733d4ea910b45f7f740">QX_PUSH_SUPPRESS_ALL_WARNINGS</a>()&#160;&#160;&#160;QX_DETAILS_PUSH_SUPPRESS_ALL_WARNINGS()</td></tr>
 <tr class="memdesc:a1fceb568dd8fd733d4ea910b45f7f740"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable all warnings. <br /></td></tr>
 <tr class="separator:a1fceb568dd8fd733d4ea910b45f7f740"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bee1042b6a06f2bf93410cc56146ece"><td class="memItemLeft" align="right" valign="top"><a id="a4bee1042b6a06f2bf93410cc56146ece"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a4bee1042b6a06f2bf93410cc56146ece">QX_POP_SUPPRESS_WARNINGS</a>()&#160;&#160;&#160;QX_DETAILS_POP_SUPPRESS_WARNINGS()</td></tr>
-<tr class="memdesc:a4bee1042b6a06f2bf93410cc56146ece"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable all warnings. <br /></td></tr>
-<tr class="separator:a4bee1042b6a06f2bf93410cc56146ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a844f5aed2732165188f95e9d78c74048"><td class="memItemLeft" align="right" valign="top"><a id="a844f5aed2732165188f95e9d78c74048"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a844f5aed2732165188f95e9d78c74048">QX_POP_SUPPRESS_ALL_WARNINGS</a>()&#160;&#160;&#160;QX_DETAILS_POP_SUPPRESS_ALL_WARNINGS()</td></tr>
+<tr class="memdesc:a844f5aed2732165188f95e9d78c74048"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable all warnings after QX_PUSH_SUPPRESS_ALL_WARNINGS. <br /></td></tr>
+<tr class="separator:a844f5aed2732165188f95e9d78c74048"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0afef6a432ea9616a67bc536148b8a88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a0afef6a432ea9616a67bc536148b8a88">QX_PUSH_SUPPRESS_MSVC_WARNINGS</a>(warnings)&#160;&#160;&#160;QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings)</td></tr>
 <tr class="memdesc:a0afef6a432ea9616a67bc536148b8a88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable specified MSVC warnings.  <a href="suppress__warnings_8h.html#a0afef6a432ea9616a67bc536148b8a88">More...</a><br /></td></tr>
 <tr class="separator:a0afef6a432ea9616a67bc536148b8a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b3afadc80bbb3811cea95175a96bec1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a1b3afadc80bbb3811cea95175a96bec1">QX_DISABLE_MSVC_WARNINGS</a>(warnings)&#160;&#160;&#160;QX_DETAILS_DISABLE_MSVC_WARNINGS(warnings)</td></tr>
-<tr class="memdesc:a1b3afadc80bbb3811cea95175a96bec1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Force disable MSVC warnings, including all nested header includes.  <a href="suppress__warnings_8h.html#a1b3afadc80bbb3811cea95175a96bec1">More...</a><br /></td></tr>
-<tr class="separator:a1b3afadc80bbb3811cea95175a96bec1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0add8898e9b17bc1caa89e76bc667442"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a0add8898e9b17bc1caa89e76bc667442">QX_RESTORE_MSVC_WARNINGS</a>(warnings)&#160;&#160;&#160;QX_DETAILS_RESTORE_MSVC_WARNINGS(warnings)</td></tr>
-<tr class="memdesc:a0add8898e9b17bc1caa89e76bc667442"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable warnings after QX_DISABLE_MSVC_WARNINGS.  <a href="suppress__warnings_8h.html#a0add8898e9b17bc1caa89e76bc667442">More...</a><br /></td></tr>
-<tr class="separator:a0add8898e9b17bc1caa89e76bc667442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1deee53e2a6d251f74dbd0efd40bc420"><td class="memItemLeft" align="right" valign="top"><a id="a1deee53e2a6d251f74dbd0efd40bc420"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a1deee53e2a6d251f74dbd0efd40bc420">QX_POP_SUPPRESS_MSVC_WARNINGS</a>()&#160;&#160;&#160;QX_DETAILS_POP_SUPPRESS_MSVC_WARNINGS()</td></tr>
+<tr class="memdesc:a1deee53e2a6d251f74dbd0efd40bc420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restore warnings after QX_PUSH_SUPPRESS_MSVC_WARNINGS. <br /></td></tr>
+<tr class="separator:a1deee53e2a6d251f74dbd0efd40bc420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa13870b51bd7077f5241ae9ec11a3c65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#aa13870b51bd7077f5241ae9ec11a3c65">QX_PUSH_SUPPRESS_CLANG_WARNINGS</a>(warnings)&#160;&#160;&#160;QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings)</td></tr>
+<tr class="memdesc:aa13870b51bd7077f5241ae9ec11a3c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable a specific clang warning, empty on other compilers.  <a href="suppress__warnings_8h.html#aa13870b51bd7077f5241ae9ec11a3c65">More...</a><br /></td></tr>
+<tr class="separator:aa13870b51bd7077f5241ae9ec11a3c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65784569d2f5d09a57d03c62bdaad3a0"><td class="memItemLeft" align="right" valign="top"><a id="a65784569d2f5d09a57d03c62bdaad3a0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a65784569d2f5d09a57d03c62bdaad3a0">QX_POP_SUPPRESS_CLANG_WARNINGS</a>()&#160;&#160;&#160;QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS()</td></tr>
+<tr class="memdesc:a65784569d2f5d09a57d03c62bdaad3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable warnings after QX_PUSH_SUPPRESS_CLANG_WARNINGS, empty on other compilers. <br /></td></tr>
+<tr class="separator:a65784569d2f5d09a57d03c62bdaad3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="section author"><dt>Author</dt><dd>Khrapov </dd></dl>
@@ -102,32 +107,31 @@ Macros</h2></td></tr>
 
 <p class="definition">Definition in file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a1b3afadc80bbb3811cea95175a96bec1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b3afadc80bbb3811cea95175a96bec1">&#9670;&nbsp;</a></span>QX_DISABLE_MSVC_WARNINGS</h2>
+<a id="aa13870b51bd7077f5241ae9ec11a3c65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa13870b51bd7077f5241ae9ec11a3c65">&#9670;&nbsp;</a></span>QX_PUSH_SUPPRESS_CLANG_WARNINGS</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define QX_DISABLE_MSVC_WARNINGS</td>
+          <td class="memname">#define QX_PUSH_SUPPRESS_CLANG_WARNINGS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">warnings</td><td>)</td>
-          <td>&#160;&#160;&#160;QX_DETAILS_DISABLE_MSVC_WARNINGS(warnings)</td>
+          <td>&#160;&#160;&#160;QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Force disable MSVC warnings, including all nested header includes. </p>
-<dl class="section note"><dt>Note</dt><dd>Prefer using QX_PUSH_SUPPRESS_MSVC_WARNINGS and QX_POP_SUPPRESS_WARNINGS </dd></dl>
+<p>Disable a specific clang warning, empty on other compilers. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">warnings</td><td>- MSVC warnings numbers separated by space </td></tr>
+    <tr><td class="paramname">warnings</td><td>- clang warning name as a string, e.g. "-Wshadow" </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00134">134</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00147">147</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
 
 </div>
 </div>
@@ -155,35 +159,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00127">127</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
-
-</div>
-</div>
-<a id="a0add8898e9b17bc1caa89e76bc667442"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0add8898e9b17bc1caa89e76bc667442">&#9670;&nbsp;</a></span>QX_RESTORE_MSVC_WARNINGS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QX_RESTORE_MSVC_WARNINGS</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">warnings</td><td>)</td>
-          <td>&#160;&#160;&#160;QX_DETAILS_RESTORE_MSVC_WARNINGS(warnings)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Enable warnings after QX_DISABLE_MSVC_WARNINGS. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">warnings</td><td>- MSVC warnings numbers separated by space </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00140">140</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00134">134</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
 
 </div>
 </div>
