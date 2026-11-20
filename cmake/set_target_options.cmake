@@ -42,6 +42,7 @@ function(set_target_options _target)
             -Wno-covered-switch-default # defensive 'default' for out-of-range enum values read from files is intentional (GL converters)
             -Wno-unique-object-duplication # header-defined singletons/thread_local caches: the build is static-only, so no per-DLL copies can occur; a real DLL build needs an export layer, not per-site fixes
             -Wno-switch-enum # 'switch + defensive default' is the project convention (see -Wno-switch-default), so enumerating every enumerator is neither wanted nor feasible (partial key dispatch)
+            -Wno-missing-designated-field-initializers # omitting fields in designated initializers is deliberate 'empty = absent' style (empty formatter/payload/children), defaults are meaningful
 
             # clang-specific compat family has no MSVC counterpart
             -Wno-c++98-compat-pedantic
