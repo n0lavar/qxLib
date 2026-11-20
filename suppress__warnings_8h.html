@@ -93,11 +93,11 @@ Macros</h2></td></tr>
 <tr class="memdesc:a1deee53e2a6d251f74dbd0efd40bc420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restore warnings after QX_PUSH_SUPPRESS_MSVC_WARNINGS. <br /></td></tr>
 <tr class="separator:a1deee53e2a6d251f74dbd0efd40bc420"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa13870b51bd7077f5241ae9ec11a3c65"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#aa13870b51bd7077f5241ae9ec11a3c65">QX_PUSH_SUPPRESS_CLANG_WARNINGS</a>(warnings)&#160;&#160;&#160;QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings)</td></tr>
-<tr class="memdesc:aa13870b51bd7077f5241ae9ec11a3c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable a specific clang warning, empty on other compilers.  <a href="suppress__warnings_8h.html#aa13870b51bd7077f5241ae9ec11a3c65">More...</a><br /></td></tr>
+<tr class="memdesc:aa13870b51bd7077f5241ae9ec11a3c65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable a specific clang or GCC warning, empty on MSVC.  <a href="suppress__warnings_8h.html#aa13870b51bd7077f5241ae9ec11a3c65">More...</a><br /></td></tr>
 <tr class="separator:aa13870b51bd7077f5241ae9ec11a3c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a65784569d2f5d09a57d03c62bdaad3a0"><td class="memItemLeft" align="right" valign="top"><a id="a65784569d2f5d09a57d03c62bdaad3a0"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="suppress__warnings_8h.html#a65784569d2f5d09a57d03c62bdaad3a0">QX_POP_SUPPRESS_CLANG_WARNINGS</a>()&#160;&#160;&#160;QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS()</td></tr>
-<tr class="memdesc:a65784569d2f5d09a57d03c62bdaad3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable warnings after QX_PUSH_SUPPRESS_CLANG_WARNINGS, empty on other compilers. <br /></td></tr>
+<tr class="memdesc:a65784569d2f5d09a57d03c62bdaad3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable warnings after QX_PUSH_SUPPRESS_CLANG_WARNINGS, empty on MSVC. <br /></td></tr>
 <tr class="separator:a65784569d2f5d09a57d03c62bdaad3a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -123,15 +123,15 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Disable a specific clang warning, empty on other compilers. </p>
+<p>Disable a specific clang or GCC warning, empty on MSVC. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">warnings</td><td>- clang warning name as a string, e.g. "-Wshadow" </td></tr>
+    <tr><td class="paramname">warnings</td><td>- clang or GCC warning name as a string, e.g. "-Wshadow" </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00147">147</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00166">166</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
 
 </div>
 </div>
@@ -159,7 +159,7 @@ Macros</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00134">134</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="suppress__warnings_8h_source.html#l00153">153</a> of file <a class="el" href="suppress__warnings_8h_source.html">suppress_warnings.h</a>.</p>
 
 </div>
 </div>

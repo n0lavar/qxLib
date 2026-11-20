@@ -138,15 +138,16 @@ $(function() {
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">template</span>&lt;auto method_ptr_t&gt;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">requires</a> is_specialization_exist_v&lt;double_dispatch_class_method_ptr_traits&lt;method_ptr_t&gt;&gt;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">typename</span> double_dispatch_matrix&lt;method_ptr_t&gt;::function_type&amp; double_dispatch_matrix&lt;method_ptr_t&gt;::get_function(</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    class_id first,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    class_id second) noexcept</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;{</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keyword">const</span> class_id first_in_container  = std::min(first, second);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">const</span> class_id second_in_container = std::max(first, second);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordflow">return</span> m_MatrixFunctions[first_in_container][second_in_container];</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;}</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// by value, MSVC Release (VS 18) miscompiles the std::min/std::max keys and every lookup misses</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keyword">const</span> class_id&amp; first,</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keyword">const</span> class_id&amp; second) noexcept</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keyword">const</span> class_id first_in_container  = std::min(first, second);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">const</span> class_id second_in_container = std::max(first, second);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">return</span> m_MatrixFunctions[first_in_container][second_in_container];</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;} <span class="comment">// namespace qx</span></div>
 <div class="ttc" id="acoalesce_8h_html_af141b284fe289dd9243ddad3f90ddb19"><div class="ttname"><a href="coalesce_8h.html#af141b284fe289dd9243ddad3f90ddb19">qx::requires</a></div><div class="ttdeci">requires(same_variadic_args_v&lt; args_t... &gt;) const expr auto coalesce(args_t &amp;&amp;... args)</div><div class="ttdoc">Coalesce function, C# a ?? b analogue.</div><div class="ttdef"><b>Definition:</b> <a href="coalesce_8inl_source.html#l00057">coalesce.inl:57</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
