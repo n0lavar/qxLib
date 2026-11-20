@@ -8,6 +8,7 @@
 **/
 
 #include <common.h>
+#include <test_comparators.h>
 
 #include <qx/math/between.h>
 #include <qx/render/color.h>

@@ -11,6 +11,7 @@
 
 #include <qx/patterns/generic_span.h>
 
+#include <algorithm>
 #include <deque>
 #include <list>
 #include <string>

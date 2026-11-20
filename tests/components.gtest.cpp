@@ -149,6 +149,9 @@ struct SComponents
     CTestComponent23* pComponent23_3 = nullptr;
 };
 
+namespace
+{
+
 SComponents CreateComponents()
 {
     SComponents components;
@@ -174,6 +177,8 @@ SComponents CreateComponents()
 
     return components;
 }
+
+} // namespace
 
 TEST(components, remove)
 {

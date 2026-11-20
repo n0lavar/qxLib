@@ -13,6 +13,7 @@
 #include <qx/asserts/asserts.h>
 #include <qx/asserts/error_context.h>
 #include <qx/asserts/error_context_stream.h>
+#include <qx/containers/string/string.h>
 #include <qx/logger/cout_logger_stream.h>
 #include <qx/logger/debugger_logger_stream.h>
 #include <qx/logger/file_logger_stream_fopen.h>
@@ -65,11 +66,17 @@ static_assert(qx::sbo_poly_fittable_types_v<
 constexpr qx::string_view k_svLogsDirectory = QXT("./");
 constexpr qx::string_view k_svFilePrefix    = QXT("logger_output_test");
 constexpr qx::string_view k_svFileExtension = QXT(".log");
-const qx::string&         get_log_file_name()
+
+namespace
+{
+
+const qx::string& get_log_file_name()
 {
     static auto s_sLogFileName = qx::string(k_svLogsDirectory) + k_svFilePrefix + k_svFileExtension;
     return s_sLogFileName;
 }
+
+} // namespace
 
 QX_CALL_BEFORE_MAIN = []()
 {
@@ -472,8 +479,8 @@ inline void logger_output_test<traits_t>::check_line(
     std::match_results<qx::string::const_pointer> match;
     auto                                          regex = std::basic_regex(sPattern.data());
     EXPECT_TRUE(std::regex_search(std::basic_string(svLine).c_str(), match, regex))
-        << "regex: " << qx::to_cstring(sPattern) << std::endl
-        << "line:  " << qx::to_cstring(svLine) << std::endl;
+        << "regex: " << qx::to_cstring(sPattern).c_str() << std::endl
+        << "line:  " << qx::to_cstring(svLine).c_str() << std::endl;
 }
 
 TYPED_TEST_SUITE(logger_output_test, implementations_type);
@@ -634,6 +641,9 @@ TEST(logger_test, streams)
     EXPECT_EQ(std::distance(streams.begin(), streams.end()), 0);
 }
 
+namespace
+{
+
 void test_rotation(qx::log_file_policy eLogFilePolicy)
 {
     auto reset_logger = [eLogFilePolicy]()
@@ -730,6 +740,8 @@ void test_rotation(qx::log_file_policy eLogFilePolicy)
     QX_LOG(qx::verbosity::log, "4");
     check_log_files({ { { QXT("2") }, { QXT("3") }, { QXT("4") } } });
 }
+
+} // namespace
 
 TEST(logger_test, rotation_time_name)
 {

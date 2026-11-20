@@ -7,6 +7,7 @@
 
 **/
 #include <common.h>
+#include <test_comparators.h>
 
 #include <qx/containers/string/format.h>
 #include <qx/math/units/distance.h>

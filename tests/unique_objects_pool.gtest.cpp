@@ -13,6 +13,9 @@
     #include <qx/containers/unique_objects_pool.h>
     #include <string>
 
+namespace
+{
+
 void test_pool(bool bAutoShrink)
 {
     qx::unique_objects_pool<std::string> pool(bAutoShrink);
@@ -55,6 +58,8 @@ void test_pool(bool bAutoShrink)
     EXPECT_EQ(*str1Token, "str1");
     EXPECT_TRUE(str1Token);
 }
+
+} // namespace
 
 TEST(unique_objects_pool, main)
 {
