@@ -8,6 +8,7 @@
 **/
 #pragma once
 
+#include <qx/containers/string/string_setup.h>
 #include <qx/macros/common.h>
 
 /**
@@ -73,3 +74,28 @@
 **/
 #define QX_FULL_METHOD_NAME(className, methodName) \
     ((void)sizeof(&className::methodName), QX_STRINGIFY(className) "::" QX_STRINGIFY(methodName))
+
+namespace qx::details
+{
+
+constexpr const char_type* last_slash(const char_type* str)
+{
+    const char_type* pszLastSlash = str;
+    while (str && *str != QXT('\0'))
+    {
+        if (*str == QXT('\\') || *str == QXT('/'))
+            pszLastSlash = str;
+
+        ++str;
+    }
+    return pszLastSlash + 1;
+}
+
+} // namespace qx::details
+
+/**
+    @def   QX_SHORT_FILE
+    @brief Cuts full absolute path to the file name only
+           ex: "C:\folder1\folder2\file.h"  =>  "file.h"
+**/
+#define QX_SHORT_FILE qx::details::last_slash(QXT(__FILE__))

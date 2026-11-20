@@ -10,19 +10,6 @@
 namespace qx::details
 {
 
-constexpr const char_type* last_slash(const char_type* str)
-{
-    const char_type* pszLastSlash = str;
-    while (str && *str != QXT('\0'))
-    {
-        if (*str == QXT('\\') || *str == QXT('/'))
-            pszLastSlash = str;
-
-        ++str;
-    }
-    return pszLastSlash + 1;
-}
-
 template<class lambda_t>
 class call_before_main_invoker
 {

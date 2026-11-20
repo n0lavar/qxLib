@@ -81,7 +81,10 @@ TEST_F(assert_exit_tests_fixture, assert)
     EXPECT_EXIT({ QX_ASSERT_C(0, CatAssertsTests); }, ::testing::ExitedWithCode(0), "\\[0\\]");
     EXPECT_EXIT({ QX_ASSERT_C(0, CatAssertsTests, ""); }, ::testing::ExitedWithCode(0), "\\[0\\]");
     EXPECT_EXIT({ QX_ASSERT(QX_NO_ENTRY); }, ::testing::ExitedWithCode(0), "\\(false && \"No entry\"\\)");
-    EXPECT_EXIT({ QX_ASSERT(QX_NO_ENTRY, "{}", 42); }, ::testing::ExitedWithCode(0), "\\(false && \"No entry\"\\)\\] 42");
+    EXPECT_EXIT(
+        { QX_ASSERT(QX_NO_ENTRY, "{}", 42); },
+        ::testing::ExitedWithCode(0),
+        "\\(false && \"No entry\"\\)\\] 42");
     EXPECT_EXIT(
         { QX_ASSERT_C(QX_NO_ENTRY, CatAssertsTests); },
         ::testing::ExitedWithCode(0),
@@ -110,7 +113,10 @@ TEST_F(assert_exit_tests_fixture, verify)
     EXPECT_EXIT({ QX_VERIFY_C(0, CatAssertsTests); }, ::testing::ExitedWithCode(0), "\\[0\\]");
     EXPECT_EXIT({ QX_VERIFY_C(0, CatAssertsTests, ""); }, ::testing::ExitedWithCode(0), "\\[0\\]");
     EXPECT_EXIT({ QX_VERIFY(QX_NO_ENTRY); }, ::testing::ExitedWithCode(0), "\\(false && \"No entry\"\\)");
-    EXPECT_EXIT({ QX_VERIFY(QX_NO_ENTRY, "{}", 42); }, ::testing::ExitedWithCode(0), "\\(false && \"No entry\"\\)\\] 42");
+    EXPECT_EXIT(
+        { QX_VERIFY(QX_NO_ENTRY, "{}", 42); },
+        ::testing::ExitedWithCode(0),
+        "\\(false && \"No entry\"\\)\\] 42");
     EXPECT_EXIT(
         { QX_VERIFY_C(QX_NO_ENTRY, CatAssertsTests); },
         ::testing::ExitedWithCode(0),
@@ -128,34 +134,37 @@ static void foo()
 }
 
 #define TEST_QX_ASSERT_COMMON(macro_call) \
-    macro_call;                           \
-                                          \
-    if (false)                            \
-        macro_call;                       \
-                                          \
-    if (false)                            \
-        macro_call;                       \
-    else                                  \
-        foo();                            \
-                                          \
-    if (false)                            \
-        foo();                            \
-    else                                  \
-        macro_call;                       \
-                                          \
-    if (false)                            \
+    do                                    \
     {                                     \
         macro_call;                       \
-        foo();                            \
-    }                                     \
                                           \
-    if (false)                            \
-        foo();                            \
-    else                                  \
-    {                                     \
-        macro_call;                       \
-        foo();                            \
-    }
+        if (false)                        \
+            macro_call;                   \
+                                          \
+        if (false)                        \
+            macro_call;                   \
+        else                              \
+            foo();                        \
+                                          \
+        if (false)                        \
+            foo();                        \
+        else                              \
+            macro_call;                   \
+                                          \
+        if (false)                        \
+        {                                 \
+            macro_call;                   \
+            foo();                        \
+        }                                 \
+                                          \
+        if (false)                        \
+            foo();                        \
+        else                              \
+        {                                 \
+            macro_call;                   \
+            foo();                        \
+        }                                 \
+    } while (false)
 
 #define TEST_QX_ASSERT_COMMON_LOOP(macro_call) \
     do                                         \

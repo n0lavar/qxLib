@@ -8,8 +8,10 @@
 **/
 #pragma once
 
-#include <qx/containers/string/string_setup.h>
+#include <qx/macros/config.h>
 #include <qx/meta/qualifiers.h>
+
+#include <utility>
 
 #include <qx/macros/common.inl>
 
@@ -36,13 +38,6 @@
     @brief Same as __LINE__, but fixes some problems when using it in constexpr context
 **/
 #define QX_LINE int(QX_JOIN(__LINE__, U))
-
-/**
-    @def   QX_SHORT_FILE
-    @brief Cuts full absolute path to the file name only
-           ex: "C:\folder1\folder2\file.h"  =>  "file.h"
-**/
-#define QX_SHORT_FILE qx::details::last_slash(QXT(__FILE__))
 
 /**
     @def     QX_CONST_CAST_THIS
@@ -73,8 +68,7 @@
         };
     @endcode 
 **/
-#define QX_CALL_BEFORE_MAIN \
-    inline volatile const qx::details::call_before_main_invoker QX_LINE_NAME(call_before_main)
+#define QX_CALL_BEFORE_MAIN inline volatile const qx::details::call_before_main_invoker QX_LINE_NAME(call_before_main)
 
 /**
     @brief Start a block with compiling optimisations disabled.
