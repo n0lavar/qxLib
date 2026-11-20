@@ -314,21 +314,18 @@ $(function() {
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    underlying_type m_nEnumFlags = 0;</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;};</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;template&lt;enumeration_c enum_t&gt;</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<a class="code" href="classqx_1_1flags.html">flags</a>(enum_t eFlag) -&gt; <a class="code" href="classqx_1_1flags.html">flags</a>&lt;enum_t&gt;;</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;} <span class="comment">// namespace qx</span></div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;template&lt;qx::enumeration_c enum_t&gt;</div>
-<div class="line"><a name="l00252"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1flags_3_01enum__t_01_4_01_4.html">  252</a></span>&#160;struct std::hash&lt;qx::flags&lt;enum_t&gt;&gt;</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;{</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1flags.html">qx::flags&lt;enum_t&gt;</a>&amp; eFlags) <span class="keyword">const</span> noexcept</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    {</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        <span class="keywordflow">return</span> std::hash&lt;typename qx::flags&lt;enum_t&gt;::underlying_type&gt;()(eFlags.<a class="code" href="classqx_1_1flags.html#afe078e3579f482a55bdbd62a77c32bbf">to_integer</a>());</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    }</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;};</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="flags_8inl.html">qx/containers/flags.inl</a>&gt;</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;} <span class="comment">// namespace qx</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;template&lt;qx::enumeration_c enum_t&gt;</div>
+<div class="line"><a name="l00249"></a><span class="lineno"><a class="line" href="structstd_1_1hash_3_01qx_1_1flags_3_01enum__t_01_4_01_4.html">  249</a></span>&#160;struct std::hash&lt;qx::flags&lt;enum_t&gt;&gt;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;{</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keywordtype">size_t</span> operator()(<span class="keyword">const</span> <a class="code" href="classqx_1_1flags.html">qx::flags&lt;enum_t&gt;</a>&amp; eFlags) <span class="keyword">const</span> noexcept</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="keywordflow">return</span> std::hash&lt;typename qx::flags&lt;enum_t&gt;::underlying_type&gt;()(eFlags.<a class="code" href="classqx_1_1flags.html#afe078e3579f482a55bdbd62a77c32bbf">to_integer</a>());</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    }</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;};</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="flags_8inl.html">qx/containers/flags.inl</a>&gt;</span></div>
 <div class="ttc" id="aclassqx_1_1flags_html"><div class="ttname"><a href="classqx_1_1flags.html">qx::flags</a></div><div class="ttdoc">Wrapper for enumerations to be used as a list of flags.</div><div class="ttdef"><b>Definition:</b> <a href="flags_8h_source.html#l00063">flags.h:64</a></div></div>
 <div class="ttc" id="aclassqx_1_1flags_html_a4316b1604b9aa58eab2c3d08ff0efad0"><div class="ttname"><a href="classqx_1_1flags.html#a4316b1604b9aa58eab2c3d08ff0efad0">qx::flags::requires</a></div><div class="ttdeci">requires(sizeof...(args_t) &gt;=1 &amp;&amp;specific_variadic_args_v&lt; enum_t, args_t... &gt;) const expr void xor_(args_t... flags) noexcept</div><div class="ttdoc">Apply a bitwise XOR to a flags value.</div></div>
 <div class="ttc" id="aclassqx_1_1flags_html_a59d610ac2ba83690c4d1bee555023864"><div class="ttname"><a href="classqx_1_1flags.html#a59d610ac2ba83690c4d1bee555023864">qx::flags::contains_all</a></div><div class="ttdeci">constexpr bool contains_all(flags other) const noexcept</div><div class="ttdoc">Check if all the specified flags are present.</div></div>
