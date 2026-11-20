@@ -177,7 +177,7 @@ public:
         @param  originPos - coordinate system center pos
         @return           - true if pos is inside rect
     **/
-    constexpr bool contains(const vector_t& pos, const vector_t& originPos = vector_t(0.f)) const noexcept;
+    constexpr bool contains(const vector_t& pos, const vector_t& originPos = vector_t(0)) const noexcept;
 
     /**
         @brief  Is other rect inside this rect
@@ -185,7 +185,7 @@ public:
         @param  originPos - coordinate system center pos
         @return           - true if other rect is inside this rect
     **/
-    constexpr bool contains(const basic_rect& other, const vector_t& originPos = vector_t(0.f)) const noexcept;
+    constexpr bool contains(const basic_rect& other, const vector_t& originPos = vector_t(0)) const noexcept;
 
     /**
         @brief  Is this rect overlaps other rect
@@ -212,8 +212,8 @@ private:
     constexpr void check_and_assign_size(const vector_t& size) noexcept;
 
 private:
-    vector_t m_Size = vector_t(0.f);
-    vector_t m_Pos  = vector_t(0.f);
+    vector_t m_Size = vector_t(0);
+    vector_t m_Pos  = vector_t(0);
 };
 
 using rect  = basic_rect<glm::vec2>;

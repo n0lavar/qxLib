@@ -91,7 +91,7 @@ TYPED_TEST(TestMovingAverageClass, values)
 
     for (size_t i = 0; i < values.size(); ++i)
     {
-        const typename TypeParam::type fValue   = values[i];
+        const typename TypeParam::type fValue   = static_cast<typename TypeParam::type>(values[i]);
         const typename TypeParam::type fAverage = TestFixture::m_MovingAverage.update(fValue);
 
         EXPECT_TRUE(qx::epsilon_equal(fAverage, TestFixture::m_MovingAverage.get()));

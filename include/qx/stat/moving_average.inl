@@ -19,7 +19,7 @@ inline std::vector<T> get_moving_average_simple_weights(size_t nEntries)
 template<class T>
 inline std::vector<T> get_moving_average_linear_weights(size_t nEntries)
 {
-    std::vector<T> weights(nEntries, 0.f);
+    std::vector<T> weights(nEntries, T(0));
 
     const T fDenominator = static_cast<T>(nEntries * (nEntries + 1)) / T(2.f);
 
@@ -32,7 +32,7 @@ inline std::vector<T> get_moving_average_linear_weights(size_t nEntries)
 template<class T>
 inline std::vector<T> get_moving_average_exp_weights(size_t nEntries)
 {
-    std::vector<T> weights(nEntries, 0.f);
+    std::vector<T> weights(nEntries, T(0));
 
     // the degree of weighting decrease, a constant smoothing
     // factor between 0 and 1. A higher alpha discounts

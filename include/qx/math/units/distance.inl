@@ -35,7 +35,7 @@ template<class T>
 constexpr f64 to_meters(distance eFrom, T value) noexcept
 {
     const double fValue  = static_cast<double>(value);
-    double       fResult = 0.f;
+    double       fResult = 0.0;
     if (traits<distance>::is_si(eFrom))
     {
         fResult = fValue * pow(10, static_cast<int>(eFrom));
@@ -120,7 +120,7 @@ constexpr f64 to_meters(distance eFrom, T value) noexcept
 template<class T>
 constexpr T from_meters(f64 fMeters, distance eTo) noexcept
 {
-    double fResult = 0.f;
+    double fResult = 0.0;
     if (traits<distance>::is_si(eTo))
     {
         fResult = fMeters / pow(10, static_cast<int>(eTo));

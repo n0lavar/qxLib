@@ -105,7 +105,7 @@ constexpr i64 qx::units::details::to_bits(data eFrom, T value) noexcept
     double fBits;
     if (traits<data>::is_si(eFrom))
     {
-        fBits = 8.f * static_cast<double>(value) * pow(10, static_cast<int>(eFrom) - static_cast<int>(data::_first_si));
+        fBits = 8.0 * static_cast<double>(value) * pow(10, static_cast<int>(eFrom) - static_cast<int>(data::_first_si));
     }
     else
     {
@@ -132,7 +132,7 @@ constexpr T qx::units::details::from_bits(i64 bits, data eTo) noexcept
     if (traits<data>::is_si(eTo))
     {
         return static_cast<T>(
-            static_cast<double>(bits) / pow(10, static_cast<int>(eTo) - static_cast<int>(data::_first_si)) / 8.f);
+            static_cast<double>(bits) / pow(10, static_cast<int>(eTo) - static_cast<int>(data::_first_si)) / 8.0);
     }
     else
     {

@@ -29,21 +29,21 @@ void CheckRect(
 {
     using VectorType = typename rect_t::vector_type;
 
-    EXPECT_DOUBLE_EQ(rect.width(), fWidth);
-    EXPECT_DOUBLE_EQ(rect.height(), fHeight);
-    EXPECT_DOUBLE_EQ(rect.left(), fX1);
-    EXPECT_DOUBLE_EQ(rect.top(), fX2);
-    EXPECT_DOUBLE_EQ(rect.right(), fX1 + fWidth);
-    EXPECT_DOUBLE_EQ(rect.bottom(), fX2 + fHeight);
+    EXPECT_DOUBLE_EQ(static_cast<double>(rect.width()), static_cast<double>(fWidth));
+    EXPECT_DOUBLE_EQ(static_cast<double>(rect.height()), static_cast<double>(fHeight));
+    EXPECT_DOUBLE_EQ(static_cast<double>(rect.left()), static_cast<double>(fX1));
+    EXPECT_DOUBLE_EQ(static_cast<double>(rect.top()), static_cast<double>(fX2));
+    EXPECT_DOUBLE_EQ(static_cast<double>(rect.right()), static_cast<double>(fX1 + fWidth));
+    EXPECT_DOUBLE_EQ(static_cast<double>(rect.bottom()), static_cast<double>(fX2 + fHeight));
     EXPECT_EQ(rect.pos(), VectorType(fX1, fX2));
     EXPECT_EQ(rect.size(), VectorType(fWidth, fHeight));
-    EXPECT_DOUBLE_EQ(rect.area(), fWidth * fHeight);
+    EXPECT_DOUBLE_EQ(static_cast<double>(rect.area()), static_cast<double>(fWidth * fHeight));
     EXPECT_EQ(rect.min(), VectorType(fX1, fX2));
     EXPECT_EQ(rect.max(), VectorType(fX1 + fWidth, fX2 + fHeight));
     EXPECT_EQ(
         rect.center(),
         VectorType(fX1, fX2) + VectorType(fWidth, fHeight) / static_cast<typename rect_t::value_type>(2.0));
-    EXPECT_EQ(!rect.empty(), fWidth * fHeight > 0.0);
+    EXPECT_EQ(!rect.empty(), fWidth * fHeight > 0);
 }
 
 #define Rect       qx::basic_rect<TypeParam>
@@ -154,8 +154,8 @@ TYPED_TEST(TestRect, overlaps)
     EXPECT_FALSE(rect.overlaps(Rect(0.0, 0.0)));
     EXPECT_FALSE(rect.overlaps(Rect(10.0, 0.0)));
     EXPECT_FALSE(rect.overlaps(Rect(0.0, 10.0)));
-    EXPECT_FALSE(rect.overlaps(Rect(1.0, 0.5f)));
-    EXPECT_FALSE(rect.overlaps(Rect(0.5f, 1.0)));
+    EXPECT_FALSE(rect.overlaps(Rect(1.0, 0.5)));
+    EXPECT_FALSE(rect.overlaps(Rect(0.5, 1.0)));
 }
 
 TYPED_TEST(TestRect, overlap)

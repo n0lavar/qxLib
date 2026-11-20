@@ -32,9 +32,9 @@ inline void TestEasingFunctions<T>::TestFunc()
     EXPECT_TRUE(qx::epsilon_equal(Func(T(1.f)), T(1.f), qx::easing::eps<T>()));
 
     // check there are no divides on zero and other calc errors
-    constexpr T step(0.001f);
+    constexpr T step(static_cast<T>(0.001));
 
-    volatile T sum_to_avoid_optimizing_out(0.f);
+    volatile T sum_to_avoid_optimizing_out(static_cast<T>(0.0));
     for (T x = 0.0; qx::epsilon_less_equal(x, T(1.f)); x += step)
     {
         sum_to_avoid_optimizing_out = sum_to_avoid_optimizing_out + Func(x);
