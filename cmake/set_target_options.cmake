@@ -15,9 +15,9 @@ function(set_target_options _target)
             # exceptions support
             /EHsc
 
-            # enable all warnings
+            # enable all warnings and treat them as errors
             -Wall
-            # -Werror
+            -Werror
 
             -Wno-switch # 4061, 4062 - enumerator in switch of enum is not explicitly handled
             -Wno-unused-parameter # 4100 - unreferenced formal parameter
