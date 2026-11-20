@@ -65,7 +65,7 @@ protected:
 template<class traits>
 inline TestQxSort<traits>::TestQxSort()
 {
-    std::default_random_engine             generator(static_cast<unsigned>(time(0)));
+    std::default_random_engine             generator(static_cast<unsigned>(time(nullptr)));
     std::uniform_int_distribution<int64_t> fillDistribution(traits::min_element(), traits::max_element());
 
     for (size_t i = 0; i < m_Unsorted.size(); i++)
