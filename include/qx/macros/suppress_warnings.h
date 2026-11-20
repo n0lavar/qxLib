@@ -89,7 +89,8 @@
         _Pragma("GCC diagnostic ignored \"-Wunused-const-variable\"");                    \
         _Pragma("GCC diagnostic ignored \"-Wnested-anon-types\"");                        \
         _Pragma("GCC diagnostic ignored \"-Wms-bitfield-padding\"");                      \
-        _Pragma("GCC diagnostic ignored \"-Wdouble-promotion\"")
+        _Pragma("GCC diagnostic ignored \"-Wdouble-promotion\"");                         \
+        _Pragma("GCC diagnostic ignored \"-Wduplicate-enum\"")
     #define QX_DETAILS_POP_SUPPRESS_WARNINGS()               _Pragma("GCC diagnostic pop") QX_EMPTY_MACRO
     #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) _Pragma("GCC diagnostic push") QX_EMPTY_MACRO
     #define QX_DETAILS_DISABLE_MSVC_WARNINGS(warnings)
