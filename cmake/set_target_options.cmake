@@ -39,6 +39,7 @@ function(set_target_options _target)
             -Wno-exit-time-destructors # their destruction is deliberate too: ordered singletons_manager shutdown and per-module type registries
             -Wno-logical-op-parentheses # && binds tighter than || always, mixed operators without parentheses are unambiguous and readable
             -Wno-switch-default # a forced 'default' in enum switches disables -Wswitch-enum reporting new enumerators, so it cannot be both safe and satisfied
+            -Wno-covered-switch-default # defensive 'default' for out-of-range enum values read from files is intentional (GL converters)
 
             # clang-specific compat family has no MSVC counterpart
             -Wno-c++98-compat-pedantic
