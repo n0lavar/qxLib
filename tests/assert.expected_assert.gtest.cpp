@@ -12,7 +12,7 @@
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <gtest/gtest-spi.h>
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_ALL_WARNINGS();
 
 #include <cstdlib>
 #include <thread>

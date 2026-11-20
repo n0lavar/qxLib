@@ -271,9 +271,11 @@ struct format_traits<char, usings_char_traits_t>
         typename usings_char_traits_t::const_pointer pszFormat,
         args_t&&... args) noexcept
     {
-        QX_PUSH_SUPPRESS_ALL_WARNINGS();
+        QX_PUSH_SUPPRESS_MSVC_WARNINGS(4774);
+        QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wformat-nonliteral");
         return std::sscanf(pszString, pszFormat, std::forward<args_t>(args)...);
-        QX_POP_SUPPRESS_WARNINGS();
+        QX_POP_SUPPRESS_CLANG_WARNINGS();
+        QX_POP_SUPPRESS_MSVC_WARNINGS();
     }
 };
 
@@ -299,9 +301,9 @@ struct format_traits<wchar_t, usings_char_traits_t>
         typename usings_char_traits_t::const_pointer pszFormat,
         args_t&&... args) noexcept
     {
-        QX_PUSH_SUPPRESS_ALL_WARNINGS();
+        QX_PUSH_SUPPRESS_MSVC_WARNINGS(4774);
         return std::swscanf(pszString, pszFormat, std::forward<args_t>(args)...);
-        QX_POP_SUPPRESS_WARNINGS();
+        QX_POP_SUPPRESS_MSVC_WARNINGS();
     }
 };
 

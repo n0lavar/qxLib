@@ -59,7 +59,8 @@ public:
     **/
     base_logger_stream(const config& streamConfig) noexcept;
 
-    base_logger_stream(base_logger_stream&&) noexcept = default;
+    base_logger_stream(base_logger_stream&&) noexcept            = default;
+    base_logger_stream& operator=(base_logger_stream&&) noexcept = default;
 
     /**
         @brief   Set a message pattern that will be used for this stream

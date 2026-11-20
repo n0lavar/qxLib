@@ -75,9 +75,10 @@ using forbidden_char_types = tuple_utils::remove_t<details::all_char_types, std:
 QX_PUSH_SUPPRESS_ALL_WARNINGS();
     #define FMT_UNICODE     0
     #define FMT_HEADER_ONLY 1
+    #include "fmt/chrono.h"
     #include "fmt/format.h"
     #include "fmt/xchar.h"
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_ALL_WARNINGS();
     #define QX_FMT_NS fmt
     #define QX_DETAILS_FMT_DISABLE_RANGE_FORMATTING(T)                               \
         template<class char_t>                                                       \

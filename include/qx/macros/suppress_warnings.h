@@ -13,16 +13,17 @@
 #if QX_MSVC
 
     #define QX_DETAILS_PUSH_SUPPRESS_ALL_WARNINGS() __pragma(warning(push, 0))
-    #define QX_DETAILS_POP_SUPPRESS_WARNINGS()      __pragma(warning(pop))
+    #define QX_DETAILS_POP_SUPPRESS_ALL_WARNINGS()  __pragma(warning(pop))
     #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) \
         __pragma(warning(push)) __pragma(warning(disable : warnings))
-    #define QX_DETAILS_DISABLE_MSVC_WARNINGS(warnings) __pragma(warning(disable : warnings))
-    #define QX_DETAILS_RESTORE_MSVC_WARNINGS(warnings) __pragma(warning(default : warnings))
+    #define QX_DETAILS_POP_SUPPRESS_MSVC_WARNINGS() __pragma(warning(pop))
+    #define QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings)
+    #define QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS()
 
 #elif QX_CLANG
 
-    // clang-cl ignores __pragma(warning(push, 0)), so all warnings are disabled by name:
-    // "all" (the -Wall group) plus the warnings and groups that it does not cover
+    #define QX_DETAILS_PRAGMA(x)                _Pragma(#x)
+    #define QX_DETAILS_PRAGMA_WARNING(warnings) QX_DETAILS_PRAGMA(GCC diagnostic ignored warnings)
     #define QX_DETAILS_PUSH_SUPPRESS_ALL_WARNINGS()                                       \
         _Pragma("GCC diagnostic push");                                                   \
         _Pragma("GCC diagnostic ignored \"-Wall\"");                                      \
@@ -93,18 +94,21 @@
         _Pragma("GCC diagnostic ignored \"-Wduplicate-enum\"");                           \
         _Pragma("GCC diagnostic ignored \"-Wformat-nonliteral\"");                        \
         _Pragma("GCC diagnostic ignored \"-Wdangling-else\"")
-    #define QX_DETAILS_POP_SUPPRESS_WARNINGS()               _Pragma("GCC diagnostic pop") QX_EMPTY_MACRO
-    #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) _Pragma("GCC diagnostic push") QX_EMPTY_MACRO
-    #define QX_DETAILS_DISABLE_MSVC_WARNINGS(warnings)
-    #define QX_DETAILS_RESTORE_MSVC_WARNINGS(warnings)
+    #define QX_DETAILS_POP_SUPPRESS_ALL_WARNINGS()           _Pragma("GCC diagnostic pop") QX_EMPTY_MACRO
+    #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) QX_EMPTY_MACRO
+    #define QX_DETAILS_POP_SUPPRESS_MSVC_WARNINGS()          QX_EMPTY_MACRO
+    #define QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings) \
+        _Pragma("GCC diagnostic push") QX_DETAILS_PRAGMA_WARNING(warnings) QX_EMPTY_MACRO
+    #define QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS() _Pragma("GCC diagnostic pop") QX_EMPTY_MACRO
 
 #else
 
-    #define QX_DETAILS_PUSH_SUPPRESS_ALL_WARNINGS()
-    #define QX_DETAILS_POP_SUPPRESS_WARNINGS()
-    #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings)
-    #define QX_DETAILS_DISABLE_MSVC_WARNINGS(warnings)
-    #define QX_DETAILS_RESTORE_MSVC_WARNINGS(warnings)
+    #define QX_DETAILS_PUSH_SUPPRESS_ALL_WARNINGS()           QX_EMPTY_MACRO
+    #define QX_DETAILS_POP_SUPPRESS_ALL_WARNINGS()            QX_EMPTY_MACRO
+    #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings)  QX_EMPTY_MACRO
+    #define QX_DETAILS_POP_SUPPRESS_MSVC_WARNINGS()           QX_EMPTY_MACRO
+    #define QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings) QX_EMPTY_MACRO
+    #define QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS()          QX_EMPTY_MACRO
 
 #endif
 
@@ -116,11 +120,11 @@
 #define QX_PUSH_SUPPRESS_ALL_WARNINGS() QX_DETAILS_PUSH_SUPPRESS_ALL_WARNINGS()
 
 /**
-    @def   QX_POP_SUPPRESS_WARNINGS
-    @brief Enable all warnings
+    @def   QX_POP_SUPPRESS_ALL_WARNINGS
+    @brief Enable all warnings after QX_PUSH_SUPPRESS_ALL_WARNINGS
 **/
 
-#define QX_POP_SUPPRESS_WARNINGS() QX_DETAILS_POP_SUPPRESS_WARNINGS()
+#define QX_POP_SUPPRESS_ALL_WARNINGS() QX_DETAILS_POP_SUPPRESS_ALL_WARNINGS()
 
 /**
     @def   QX_PUSH_SUPPRESS_MSVC_WARNINGS
@@ -130,14 +134,20 @@
 #define QX_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings)
 
 /**
-    @brief Force disable MSVC warnings, including all nested header includes
-    @note  Prefer using QX_PUSH_SUPPRESS_MSVC_WARNINGS and QX_POP_SUPPRESS_WARNINGS
-    @param warnings - MSVC warnings numbers separated by space
+    @def   QX_POP_SUPPRESS_MSVC_WARNINGS
+    @brief Restore warnings after QX_PUSH_SUPPRESS_MSVC_WARNINGS
 **/
-#define QX_DISABLE_MSVC_WARNINGS(warnings) QX_DETAILS_DISABLE_MSVC_WARNINGS(warnings)
+#define QX_POP_SUPPRESS_MSVC_WARNINGS() QX_DETAILS_POP_SUPPRESS_MSVC_WARNINGS()
 
 /**
-    @brief Enable warnings after QX_DISABLE_MSVC_WARNINGS
-    @param warnings - MSVC warnings numbers separated by space
+    @def   QX_PUSH_SUPPRESS_CLANG_WARNINGS
+    @brief Disable a specific clang warning, empty on other compilers
+    @param warnings - clang warning name as a string, e.g. "-Wshadow"
 **/
-#define QX_RESTORE_MSVC_WARNINGS(warnings) QX_DETAILS_RESTORE_MSVC_WARNINGS(warnings)
+#define QX_PUSH_SUPPRESS_CLANG_WARNINGS(warnings) QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings)
+
+/**
+    @def   QX_POP_SUPPRESS_CLANG_WARNINGS
+    @brief Enable warnings after QX_PUSH_SUPPRESS_CLANG_WARNINGS, empty on other compilers
+**/
+#define QX_POP_SUPPRESS_CLANG_WARNINGS() QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS()

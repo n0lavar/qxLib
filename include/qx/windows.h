@@ -16,7 +16,7 @@
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS();
     #include <windows.h>
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_ALL_WARNINGS();
 
     #undef LoadBitmap
     #undef CreateFont

@@ -179,10 +179,10 @@ inline void utf8_to_string(string& out, cstring_view utf8)
 
     #else
 
-    QX_PUSH_SUPPRESS_ALL_WARNINGS();
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996); // std::wstring_convert/codecvt are deprecated since C++17
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
     out = converter.from_bytes(utf8.data(), utf8.data() + utf8.size());
-    QX_POP_SUPPRESS_WARNINGS();
+    QX_POP_SUPPRESS_MSVC_WARNINGS();
 
     #endif
 #else
@@ -215,10 +215,10 @@ inline void string_to_uft8(cstring& out, string_view svText)
     if (nLength != 0)
         WideCharToMultiByte(CP_UTF8, 0, svText.data(), nInputLength, out.data(), nLength, nullptr, nullptr);
     #else
-    QX_PUSH_SUPPRESS_ALL_WARNINGS();
+    QX_PUSH_SUPPRESS_MSVC_WARNINGS(4996); // std::wstring_convert/codecvt are deprecated since C++17
     std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
     out = converter.to_bytes(svText.data(), svText.data() + svText.size());
-    QX_POP_SUPPRESS_WARNINGS();
+    QX_POP_SUPPRESS_MSVC_WARNINGS();
     #endif
 #else
     #error Unsupported char type

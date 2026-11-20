@@ -13,7 +13,7 @@ namespace qx
 // trick to determine if an integer is between two integers (inclusive)
 // with only one comparison/branch
 // https://stackoverflow.com/a/17095534/8021662
-QX_DISABLE_MSVC_WARNINGS(4018 4388);
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(4018 4388);
 
 template<class T, class compare_t>
 constexpr bool between(T left, T value, T right, compare_t compare)
@@ -44,9 +44,9 @@ constexpr bool between(T left, T value, T right)
 {
     QX_PUSH_SUPPRESS_MSVC_WARNINGS(4388);
     return between(left, value, right, compare_t());
-    QX_POP_SUPPRESS_WARNINGS();
+    QX_POP_SUPPRESS_MSVC_WARNINGS();
 }
 
-QX_RESTORE_MSVC_WARNINGS(4018 4388);
+QX_POP_SUPPRESS_MSVC_WARNINGS();
 
 } // namespace qx

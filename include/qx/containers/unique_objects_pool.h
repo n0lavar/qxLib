@@ -17,7 +17,7 @@ QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/member.hpp>
 #include <boost/multi_index_container.hpp>
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_ALL_WARNINGS();
 
 #include <algorithm>
 #include <mutex>

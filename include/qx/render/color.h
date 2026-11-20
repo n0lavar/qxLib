@@ -22,7 +22,7 @@
 QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_ALL_WARNINGS();
 
 /// @see https://www.cssportal.com/html-colors/x11-colors.php
 // clang-format off

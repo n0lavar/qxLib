@@ -2261,4 +2261,4 @@ TYPED_TEST(test_qx_string, rfind)
     test(sStdStr.cbegin(), sStdStr.cend());
 }
 
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_MSVC_WARNINGS();

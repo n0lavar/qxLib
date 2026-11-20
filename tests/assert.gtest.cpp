@@ -127,7 +127,9 @@ TEST_F(assert_exit_tests_fixture, verify)
         "\\(false && \"No entry\"\\)\\] 42");
 }
 
-QX_PUSH_SUPPRESS_ALL_WARNINGS();
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(4390);
+QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wdangling-else");
+QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wreturn-type");
 
 static void foo()
 {
@@ -259,7 +261,9 @@ TEST(qx_assert, expect_compilation)
     };
 }
 
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_CLANG_WARNINGS();
+QX_POP_SUPPRESS_CLANG_WARNINGS();
+QX_POP_SUPPRESS_MSVC_WARNINGS();
 
 class assert_callback_tests_fixture : public ::testing::Test
 {

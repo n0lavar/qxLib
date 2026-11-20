@@ -61,7 +61,7 @@ TYPED_TEST(TestStringHashTyped, hashes_inequality)
         {
             return hash != hashes[0];
         });
-    QX_POP_SUPPRESS_WARNINGS();
+    QX_POP_SUPPRESS_MSVC_WARNINGS();
 
     EXPECT_TRUE(bAllDifferent);
 }
@@ -89,4 +89,4 @@ TEST(TestStringHash, operator_equal)
     }
 }
 
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_MSVC_WARNINGS();

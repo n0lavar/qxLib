@@ -14,16 +14,15 @@
 
 #include <array>
 #include <cmath>
-
-QX_PUSH_SUPPRESS_ALL_WARNINGS();
-#include <glm/geometric.hpp>
-#include <glm/vec3.hpp>
-QX_POP_SUPPRESS_WARNINGS();
-
 #include <numbers>
 #include <span>
 #include <unordered_map>
 #include <vector>
+
+QX_PUSH_SUPPRESS_ALL_WARNINGS();
+#include <glm/geometric.hpp>
+#include <glm/vec3.hpp>
+QX_POP_SUPPRESS_ALL_WARNINGS();
 
 namespace qx
 {
@@ -138,9 +137,9 @@ geometry create_icosphere(float fRadius, size_t nDivides, bool bFlatNormals = fa
 
 /**
     @brief  Create icosphere geometry for lines drawing
-    @param  fRadius  - icosphere radius 
-    @param  nDivides - num of divides of icosahedron (bigger is higher precision) 
-    @return          - icosphere geometry 
+    @param  fRadius  - icosphere radius
+    @param  nDivides - num of divides of icosahedron (bigger is higher precision)
+    @return          - icosphere geometry
 **/
 geometry create_icosphere_lines(float fRadius, size_t nDivides);
 

@@ -12,13 +12,13 @@
 
 #include "benchmark/benchmark.h"
 
-QX_DISABLE_MSVC_WARNINGS(4756);
+QX_PUSH_SUPPRESS_MSVC_WARNINGS(4756);
 #include <cstdio>
 #include <format>
 #include <random>
 #include <string>
 #include <utility>
-QX_RESTORE_MSVC_WARNINGS(4756);
+QX_POP_SUPPRESS_MSVC_WARNINGS();
 
 //V_EXCLUDE_PATH *.bench.cpp
 
@@ -65,7 +65,10 @@ struct std_sprintf
     template<class... args_t>
     static std::basic_string<char_t> format(args_t&&... args)
     {
-        QX_PUSH_SUPPRESS_ALL_WARNINGS();
+        QX_PUSH_SUPPRESS_MSVC_WARNINGS(4774);
+        QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wformat-nonliteral");
+        QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wformat-security");
+        QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wdouble-promotion");
 
         int size = 0;
         if constexpr (std::is_same_v<char_t, char>)
@@ -83,7 +86,10 @@ struct std_sprintf
         else
             std::swprintf(result.data(), size + 1, std::forward<args_t>(args)...);
 
-        QX_POP_SUPPRESS_WARNINGS();
+        QX_POP_SUPPRESS_CLANG_WARNINGS();
+        QX_POP_SUPPRESS_CLANG_WARNINGS();
+        QX_POP_SUPPRESS_CLANG_WARNINGS();
+        QX_POP_SUPPRESS_MSVC_WARNINGS();
         return result;
     }
 };

@@ -11,7 +11,7 @@
 
 QX_PUSH_SUPPRESS_ALL_WARNINGS();
 #include <gtest/gtest.h>
-QX_POP_SUPPRESS_WARNINGS();
+QX_POP_SUPPRESS_ALL_WARNINGS();
 
 int main(int argc, char** argv)
 {
