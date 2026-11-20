@@ -93,9 +93,9 @@ component_t* components<base_component_t>::add(
     auto        pRawComponent = pComponent.get();
     class_data& classData     = iterate_class_data(
         pRawComponent,
-        [ePriority, statusFlags, pRawComponent](class_data& classData)
+        [ePriority, statusFlags, pRawComponent](class_data& iteratedClassData)
         {
-            classData.priorityCache.emplace(component_status_key(ePriority, statusFlags), pRawComponent);
+            iteratedClassData.priorityCache.emplace(component_status_key(ePriority, statusFlags), pRawComponent);
         });
     classData.components.push_back(std::move(pComponent));
     return pRawComponent;
@@ -109,10 +109,10 @@ std::unique_ptr<base_component_t> components<base_component_t>::remove(const bas
 
     class_data& classData = iterate_class_data(
         pRawComponent,
-        [pRawComponent](class_data& classData)
+        [pRawComponent](class_data& iteratedClassData)
         {
             std::erase_if(
-                classData.priorityCache,
+                iteratedClassData.priorityCache,
                 [pRawComponent](const auto& pair)
                 {
                     return pair.second == pRawComponent;

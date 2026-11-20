@@ -56,9 +56,9 @@ bool double_dispatch_matrix<method_ptr_t>::check_matrix_completeness() const noe
                    nTotalElements += pair.second.size();
                    return std::ranges::all_of(
                        pair.second,
-                       [](const auto& pair)
+                       [](const auto& entry)
                        {
-                           return static_cast<bool>(pair.second);
+                           return static_cast<bool>(entry.second);
                        }); //!<
                })
            && nTotalElements == (m_MatrixFunctions.size() * m_MatrixFunctions.size() + m_MatrixFunctions.size()) / 2;

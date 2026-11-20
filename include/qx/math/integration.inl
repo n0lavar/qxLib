@@ -105,21 +105,21 @@ double integrate_adaptive_midpoint(
 
     auto slice_area = make_recursive_lambda(
         [nMaxRecursion](
-            const auto&          slice_area,
-            const function_2d_t& func,
-            double               x0,
-            double               x1,
+            const auto&          slice_area_,
+            const function_2d_t& func_,
+            double               x0_,
+            double               x1_,
             double               max_slice_error,
             size_t               recursionLevel)
         {
-            const double y0 = func(x0);
-            const double y1 = func(x1);
-            const double xm = (x0 + x1) / 2;
-            const double ym = func(xm);
+            const double y0 = func_(x0_);
+            const double y1 = func_(x1_);
+            const double xm = (x0_ + x1_) / 2;
+            const double ym = func_(xm);
 
-            const double fArea12  = (x1 - x0) * (y0 + y1) / 2.0;
-            const double fArea1m  = (xm - x0) * (y0 + ym) / 2.0;
-            const double fAream2  = (x1 - xm) * (ym + y1) / 2.0;
+            const double fArea12  = (x1_ - x0_) * (y0 + y1) / 2.0;
+            const double fArea1m  = (xm - x0_) * (y0 + ym) / 2.0;
+            const double fAream2  = (x1_ - xm) * (ym + y1) / 2.0;
             const double fArea1m2 = fArea1m + fAream2;
 
             const double fError = (fArea1m2 - fArea12) / fArea12;
@@ -131,8 +131,8 @@ double integrate_adaptive_midpoint(
             }
             else
             {
-                return slice_area(func, x0, xm, max_slice_error, recursionLevel)
-                       + slice_area(func, xm, x1, max_slice_error, recursionLevel);
+                return slice_area_(func_, x0_, xm, max_slice_error, recursionLevel)
+                       + slice_area_(func_, xm, x1_, max_slice_error, recursionLevel);
             }
         });
 

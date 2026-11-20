@@ -99,25 +99,25 @@ constexpr qx::unit<T, unit_t> qx::normalize_unit(T value, unit_t eInitialType) n
 template<qx::arithmetic_c T, qx::unit_enum_c unit_t, class char_t>
 std::optional<qx::unit<T, unit_t>> qx::unit_from_string(basic_string_view<char_t> svValue) noexcept
 {
-    auto remove_suffix = [](basic_string_view<char_t> svValue,
+    auto remove_suffix = [](basic_string_view<char_t> svString,
                             auto                      predicate) -> std::optional<basic_string_view<char_t>>
     {
-        size_t nToErase = predicate(svValue);
+        size_t nToErase = predicate(svString);
         if (nToErase == 0)
             return std::nullopt;
 
-        svValue.remove_suffix(nToErase);
-        return svValue;
+        svString.remove_suffix(nToErase);
+        return svString;
     };
 
-    auto trim_right = [&remove_suffix](basic_string_view<char_t> svValue)
+    auto trim_right = [&remove_suffix](basic_string_view<char_t> svString)
     {
         while (std::optional<basic_string_view<char_t>> svErased = remove_suffix(
-                   svValue,
-                   [](basic_string_view<char_t> svValue)
+                   svString,
+                   [](basic_string_view<char_t> svCandidate)
                    {
                        size_t nToErase = 0;
-                       while (string_traits::default_traits<char_t>::is_space(svValue[nToErase]))
+                       while (string_traits::default_traits<char_t>::is_space(svCandidate[nToErase]))
                        {
                            ++nToErase;
                        }
@@ -125,10 +125,10 @@ std::optional<qx::unit<T, unit_t>> qx::unit_from_string(basic_string_view<char_t
                        return nToErase;
                    }))
         {
-            svValue = *svErased;
+            svString = *svErased;
         }
 
-        return svValue;
+        return svString;
     };
 
     svValue = trim_right(svValue);
@@ -141,14 +141,14 @@ std::optional<qx::unit<T, unit_t>> qx::unit_from_string(basic_string_view<char_t
     {
         auto optValueCandidate = remove_suffix(
             svValue,
-            [&optUnitType, &itSuffix, &suffixes](basic_string_view<char_t> svValue) -> size_t
+            [&optUnitType, &itSuffix, &suffixes](basic_string_view<char_t> svString) -> size_t
             {
                 itSuffix = std::find_if(
                     itSuffix,
                     suffixes.end(),
-                    [svValue](const std::pair<unit_t, basic_string_view<char_t>>& suffix)
+                    [svString](const std::pair<unit_t, basic_string_view<char_t>>& suffix)
                     {
-                        return svValue.ends_with(suffix.second);
+                        return svString.ends_with(suffix.second);
                     });
 
                 if (itSuffix != suffixes.end())
