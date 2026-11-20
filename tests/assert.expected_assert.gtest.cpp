@@ -142,7 +142,10 @@ TEST(expected_assert_tests, reports_missing_and_excess_assertions)
         "Expected 1 matching assertions, got 2");
 }
 
-static void run_expected_fatal_assert(qx::assert_type eExpectedType)
+namespace
+{
+
+[[noreturn]] void run_expected_fatal_assert(qx::assert_type eExpectedType)
 {
     qx::asserts_manager::config config = qx::asserts_manager::get_instance().get_config();
     config.onAssertion                 = [](qx::string_view,
@@ -175,6 +178,8 @@ static void run_expected_fatal_assert(qx::assert_type eExpectedType)
     }
     std::exit(99);
 }
+
+} // namespace
 
 TEST(expected_assert_tests, matched_verify_calls_fatal_exit)
 {
