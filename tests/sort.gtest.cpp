@@ -52,10 +52,10 @@ protected:
     TestQxSort();
 
     /* called before every test */
-    void SetUp();
+    void SetUp() override;
 
     /* called after every test */
-    void TearDown();
+    void TearDown() override;
 
     std::array<int64_t, traits::array_size()> m_Unsorted {};
     std::array<int64_t, traits::array_size()> m_SortedStd {};
