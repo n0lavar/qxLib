@@ -49,8 +49,8 @@ base_delegate<derived_t, return_t, args_t...>::base_delegate(base_delegate&& oth
 }
 
 template<class derived_t, class return_t, class... args_t>
-typename base_delegate<derived_t, return_t, args_t...>::base_delegate& base_delegate<derived_t, return_t, args_t...>::
-    operator=(base_delegate&& other) noexcept
+base_delegate<derived_t, return_t, args_t...>& base_delegate<derived_t, return_t, args_t...>::operator=(
+    base_delegate&& other) noexcept
 {
     std::swap(m_optFunctions, other.m_optFunctions);
     std::swap(m_WeakSubscriptions, other.m_WeakSubscriptions);

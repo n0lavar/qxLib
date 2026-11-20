@@ -41,14 +41,14 @@ inline vector2d<T>::~vector2d()
 }
 
 template<class T>
-inline const typename vector2d<T>::vector2d& vector2d<T>::operator=(vector2d&& other) noexcept
+inline const vector2d<T>& vector2d<T>::operator=(vector2d&& other) noexcept
 {
     assign(std::move(other));
     return *this;
 }
 
 template<class T>
-inline const typename vector2d<T>::vector2d& vector2d<T>::operator=(const vector2d& other)
+inline const vector2d<T>& vector2d<T>::operator=(const vector2d& other)
 {
     assign(other);
     return *this;

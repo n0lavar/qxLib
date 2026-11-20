@@ -41,16 +41,14 @@ inline triangular_vector<T>::~triangular_vector()
 }
 
 template<class T>
-inline const typename triangular_vector<T>::triangular_vector& triangular_vector<T>::operator=(
-    triangular_vector&& other) noexcept
+inline const triangular_vector<T>& triangular_vector<T>::operator=(triangular_vector&& other) noexcept
 {
     assign(std::move(other));
     return *this;
 }
 
 template<class T>
-inline const typename triangular_vector<T>::triangular_vector& triangular_vector<T>::operator=(
-    const triangular_vector& other)
+inline const triangular_vector<T>& triangular_vector<T>::operator=(const triangular_vector& other)
 {
     assign(other);
     return *this;
