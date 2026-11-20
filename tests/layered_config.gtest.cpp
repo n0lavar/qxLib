@@ -93,6 +93,9 @@ static void set_env(qx::string_view svKey, qx::string_view svValue)
 }
 
 
+namespace
+{
+
 qx::layered_config_variable g_lcInt = qx::layered_config_variable_builder(k_svIntRuntimeName, k_nDefaultIntValue)
                                           .env(k_svIntEnvName)
                                           .command_line(k_svIntCommandLineFullName, k_svIntCommandLineShortName)
@@ -124,6 +127,8 @@ qx::layered_config_variable g_lcBool = qx::layered_config_variable_builder(k_svB
 
 char* g_Argv[3] = { const_cast<char*>(k_sExeName.c_str()), nullptr, nullptr };
 int   g_Argc    = 1;
+
+} // namespace
 
 struct set_command_line_space_trait
 {

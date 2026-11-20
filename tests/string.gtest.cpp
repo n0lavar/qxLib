@@ -486,7 +486,7 @@ TYPED_TEST(test_qx_string, erase)
 }
 
 template<class arg_t>
-auto insert = [](auto& str, auto pos, auto pszStr)
+auto insert(auto& str, auto pos, auto pszStr)
 {
     using TChar = std::remove_const_t<std::remove_pointer_t<decltype(pszStr)>>;
 
@@ -513,7 +513,7 @@ auto insert = [](auto& str, auto pos, auto pszStr)
         // other types
         return str.insert(pos, arg_t(pszStr));
     }
-};
+}
 
 TYPED_TEST(test_qx_string, insert)
 {

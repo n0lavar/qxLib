@@ -97,7 +97,7 @@ struct static_assert_between
     @param right - right value
 **/
 #define QX_STATIC_ASSERT_BETWEEN(left, value, right) \
-    qx::details::static_assert_between<(left), (value), (right)> QX_LINE_NAME(static_assert_between)
+    constexpr qx::details::static_assert_between<(left), (value), (right)> QX_LINE_NAME(static_assert_between)
 
 /**
     @brief This static assert will fail if block it placed in must not be instantiated

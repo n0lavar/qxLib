@@ -162,7 +162,13 @@ TEST(macros, QX_APPLY_COMMA)
     EXPECT_EQ(Sum(QX_APPLY_COMMA(Foo, 1, 2, 3)), 6);
 }
 
-int         g_nSum = 0;
+namespace
+{
+
+int g_nSum = 0;
+
+} // namespace
+
 static void Bar(int nNumber)
 {
     g_nSum += nNumber;
