@@ -35,6 +35,7 @@ function(set_target_options _target)
             -Wno-implicit-fallthrough # 5262 - implicit fall-through occurs here
             -Wno-unused-const-variable # 5264 - 'const' variable is not used
             -Wno-unsafe-buffer-usage # clang-p2996 f17c8d6 crashes with an access violation on this analysis (assert/logger tests)
+            -Wno-global-constructors # namespace scope objects with non-trivial constructors: gtest/benchmark registration and the engine's static registries
 
             # clang-specific compat family has no MSVC counterpart
             -Wno-c++98-compat-pedantic
