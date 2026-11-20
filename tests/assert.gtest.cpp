@@ -80,13 +80,16 @@ TEST_F(assert_exit_tests_fixture, assert)
     EXPECT_EXIT({ QX_ASSERT(0, ""); }, ::testing::ExitedWithCode(0), "\\[0\\]");
     EXPECT_EXIT({ QX_ASSERT_C(0, CatAssertsTests); }, ::testing::ExitedWithCode(0), "\\[0\\]");
     EXPECT_EXIT({ QX_ASSERT_C(0, CatAssertsTests, ""); }, ::testing::ExitedWithCode(0), "\\[0\\]");
-    EXPECT_EXIT({ QX_ASSERT(QX_NO_ENTRY); }, ::testing::ExitedWithCode(0), "\\[\\!\"No entry\"\\]");
-    EXPECT_EXIT({ QX_ASSERT(QX_NO_ENTRY, "{}", 42); }, ::testing::ExitedWithCode(0), "\\[\\!\"No entry\"\\] 42");
-    EXPECT_EXIT({ QX_ASSERT_C(QX_NO_ENTRY, CatAssertsTests); }, ::testing::ExitedWithCode(0), "\\[\\!\"No entry\"\\]");
+    EXPECT_EXIT({ QX_ASSERT(QX_NO_ENTRY); }, ::testing::ExitedWithCode(0), "\\(false && \"No entry\"\\)");
+    EXPECT_EXIT({ QX_ASSERT(QX_NO_ENTRY, "{}", 42); }, ::testing::ExitedWithCode(0), "\\(false && \"No entry\"\\)\\] 42");
+    EXPECT_EXIT(
+        { QX_ASSERT_C(QX_NO_ENTRY, CatAssertsTests); },
+        ::testing::ExitedWithCode(0),
+        "\\(false && \"No entry\"\\)");
     EXPECT_EXIT(
         { QX_ASSERT_C(QX_NO_ENTRY, CatAssertsTests, "{}", 42); },
         ::testing::ExitedWithCode(0),
-        "\\[\\!\"No entry\"\\] 42");
+        "\\(false && \"No entry\"\\)\\] 42");
 #else
     // must not crash, as it must expand to nothing
     QX_ASSERT(0);
@@ -106,13 +109,16 @@ TEST_F(assert_exit_tests_fixture, verify)
     EXPECT_EXIT({ QX_VERIFY(0, ""); }, ::testing::ExitedWithCode(0), "\\[0\\]");
     EXPECT_EXIT({ QX_VERIFY_C(0, CatAssertsTests); }, ::testing::ExitedWithCode(0), "\\[0\\]");
     EXPECT_EXIT({ QX_VERIFY_C(0, CatAssertsTests, ""); }, ::testing::ExitedWithCode(0), "\\[0\\]");
-    EXPECT_EXIT({ QX_VERIFY(QX_NO_ENTRY); }, ::testing::ExitedWithCode(0), "\\[\\!\"No entry\"\\]");
-    EXPECT_EXIT({ QX_VERIFY(QX_NO_ENTRY, "{}", 42); }, ::testing::ExitedWithCode(0), "\\[\\!\"No entry\"\\] 42");
-    EXPECT_EXIT({ QX_VERIFY_C(QX_NO_ENTRY, CatAssertsTests); }, ::testing::ExitedWithCode(0), "\\[\\!\"No entry\"\\]");
+    EXPECT_EXIT({ QX_VERIFY(QX_NO_ENTRY); }, ::testing::ExitedWithCode(0), "\\(false && \"No entry\"\\)");
+    EXPECT_EXIT({ QX_VERIFY(QX_NO_ENTRY, "{}", 42); }, ::testing::ExitedWithCode(0), "\\(false && \"No entry\"\\)\\] 42");
+    EXPECT_EXIT(
+        { QX_VERIFY_C(QX_NO_ENTRY, CatAssertsTests); },
+        ::testing::ExitedWithCode(0),
+        "\\(false && \"No entry\"\\)");
     EXPECT_EXIT(
         { QX_VERIFY_C(QX_NO_ENTRY, CatAssertsTests, "{}", 42); },
         ::testing::ExitedWithCode(0),
-        "\\[\\!\"No entry\"\\] 42");
+        "\\(false && \"No entry\"\\)\\] 42");
 }
 
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4189 4390 4702);
