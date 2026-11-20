@@ -90,8 +90,8 @@
         _Pragma("GCC diagnostic ignored \"-Wnested-anon-types\"");                        \
         _Pragma("GCC diagnostic ignored \"-Wms-bitfield-padding\"");                      \
         _Pragma("GCC diagnostic ignored \"-Wdouble-promotion\"")
-    #define QX_DETAILS_POP_SUPPRESS_WARNINGS() _Pragma("GCC diagnostic pop")
-    #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings)
+    #define QX_DETAILS_POP_SUPPRESS_WARNINGS()               _Pragma("GCC diagnostic pop")
+    #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) _Pragma("GCC diagnostic push")
     #define QX_DETAILS_DISABLE_MSVC_WARNINGS(warnings)
     #define QX_DETAILS_RESTORE_MSVC_WARNINGS(warnings)
 
