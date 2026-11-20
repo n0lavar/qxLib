@@ -33,11 +33,16 @@ struct STestStruct
     {
     }
 
+    // the payload round-trips through the guard bit-identically, so exact float equality is intended
+    QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wfloat-equal");
+
     bool operator==(const STestStruct& other) const
     {
         return nIntData == other.nIntData && fFloatData == other.fFloatData && bBoolData == other.bBoolData
                && nUnsignedData == other.nUnsignedData;
     }
+
+    QX_POP_SUPPRESS_CLANG_WARNINGS();
 };
 
 constexpr STestStruct TEST_DATA_0 { 0, 0.f, false, 0u };

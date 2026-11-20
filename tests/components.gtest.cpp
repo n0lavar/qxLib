@@ -6,8 +6,6 @@
     @copyright © Nick Khrapov, 2021. All right reserved.
 
 **/
-#define QX_CONF_USE_CHAR 1
-
 #include <common.h>
 
 #include <qx/containers/components.h>
