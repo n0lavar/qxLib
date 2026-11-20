@@ -261,7 +261,7 @@ constexpr auto type_strings<T, char_t>::get_template_parameters()
         add_token(nParam, nTokenStart, nTokenEnd);
     }
 
-    return tokens;
+    return std::array<string_view_type, get_num_template_parameters()>(tokens);
 }
 
 } // namespace qx

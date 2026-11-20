@@ -22,7 +22,7 @@ inline void destruct(iterator_t itStart, iterator_t itEnd)
 }
 
 template<size_t N, class T>
-constexpr auto make_array(T init_val)
+constexpr std::array<T, N> make_array(T init_val)
 {
     std::array<T, N> ret;
     ret.fill(init_val);

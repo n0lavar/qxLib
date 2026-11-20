@@ -260,9 +260,10 @@ public:                                                                         
     }                                                                                                        \
     virtual std::span<const qx::class_id> get_inheritance_sequence() const override                          \
     {                                                                                                        \
-        static constexpr auto s_Ids = []()                                                                   \
+        using ids_array_type        = std::array<qx::class_id, std::tuple_size_v<inheritance_tuple_type>>;   \
+        static constexpr auto s_Ids = []() -> ids_array_type                                                 \
         {                                                                                                    \
-            std::array<qx::class_id, std::tuple_size_v<inheritance_tuple_type>> ids_;                        \
+            ids_array_type ids_;                                                                             \
             qx::tuple_utils::iterate<inheritance_tuple_type>(                                                \
                 [&ids_]<class T, size_t I>()                                                                 \
                 {                                                                                            \

@@ -32,7 +32,7 @@ inline void destruct(iterator_t itStart, iterator_t itEnd);
     @return          - filled array
 **/
 template<size_t N, class T>
-constexpr auto make_array(T init_val = T());
+constexpr std::array<T, N> make_array(T init_val = T());
 
 /**
     @brief  Join arrays at compile-time

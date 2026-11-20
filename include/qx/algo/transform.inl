@@ -31,6 +31,7 @@ template<
     class transform_callable_t,
     class... result_container_rest_t>
 auto transform_return(input_container_t&& input, const transform_callable_t& transformCallable)
+    -> result_container_t<decltype(transformCallable(*input.begin())), result_container_rest_t...>
 {
     using result_type             = decltype(transformCallable(*input.begin()));
     using result_container_full_t = result_container_t<result_type, result_container_rest_t...>;
