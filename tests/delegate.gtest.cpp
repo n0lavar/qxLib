@@ -27,7 +27,7 @@ struct sum_pipe
     bool operator==(const sum_pipe&) const = default;
 
     size_t     nData = 0;
-    qx::string sData;
+    qx::string sData {};
 };
 
 struct not_a_pipe
@@ -35,7 +35,7 @@ struct not_a_pipe
     bool operator==(const not_a_pipe&) const = default;
 
     size_t     nData = 0;
-    qx::string sData;
+    qx::string sData {};
 };
 
 enum class callable_type

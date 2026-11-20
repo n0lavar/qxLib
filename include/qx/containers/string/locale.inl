@@ -20,10 +20,10 @@ inline auto& get_locale_state()
 #if QX_STRING_USE_CRT_LOCALE
         struct crt_locale_deleter
         {
-            void operator()(_locale_t locale) const noexcept
+            void operator()(_locale_t localeValue) const noexcept
             {
-                if (locale)
-                    _free_locale(locale);
+                if (localeValue)
+                    _free_locale(localeValue);
             }
         };
 
