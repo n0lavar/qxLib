@@ -21,9 +21,6 @@ private:
 };
 
 template<class lambda_t>
-call_before_main_invoker(lambda_t lambda) -> call_before_main_invoker<lambda_t>;
-
-template<class lambda_t>
 constexpr call_before_main_invoker<lambda_t>::call_before_main_invoker(lambda_t lambda) : m_Lambda(std::move(lambda))
 {
     m_Lambda();

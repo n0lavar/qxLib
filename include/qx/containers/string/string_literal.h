@@ -53,7 +53,4 @@ struct string_literal
     char_t value[N];
 };
 
-template<class char_t, size_t N>
-string_literal(const char_t (&str)[N]) -> string_literal<char_t, N>;
-
 } // namespace qx

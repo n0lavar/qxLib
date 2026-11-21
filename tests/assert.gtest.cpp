@@ -130,6 +130,7 @@ TEST_F(assert_exit_tests_fixture, verify)
 QX_PUSH_SUPPRESS_MSVC_WARNINGS(4390);
 QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wdangling-else");
 QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wreturn-type");
+QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wempty-body");
 
 static void foo()
 {
@@ -222,7 +223,7 @@ TEST(qx_assert, ensure_compilation)
     if (macro_call)                     \
         ;                               \
                                         \
-    const bool QX_LINE_NAME(result) = macro_call
+    [[maybe_unused]] const bool QX_LINE_NAME(result) = macro_call
 
 TEST(qx_assert, expect_compilation)
 {
@@ -252,7 +253,7 @@ TEST(qx_assert, expect_compilation)
     TEST_QX_ASSERT_COMMON(QX_EXPECT_RETURN_C(false, CatAssertsTests));
     TEST_QX_ASSERT_COMMON(QX_EXPECT_RETURN_C(false, CatAssertsTests, "msg {}", 41));
 
-    auto Check = []() -> int
+    [[maybe_unused]] auto Check = []() -> int
     {
         TEST_QX_ASSERT_COMMON(QX_EXPECT_RETURN_T(false, 1));
         TEST_QX_ASSERT_COMMON(QX_EXPECT_RETURN_T(false, 1, "msg {}", 41));
@@ -261,6 +262,7 @@ TEST(qx_assert, expect_compilation)
     };
 }
 
+QX_POP_SUPPRESS_CLANG_WARNINGS();
 QX_POP_SUPPRESS_CLANG_WARNINGS();
 QX_POP_SUPPRESS_CLANG_WARNINGS();
 QX_POP_SUPPRESS_MSVC_WARNINGS();

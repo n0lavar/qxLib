@@ -1352,11 +1352,11 @@ TYPED_TEST(test_qx_string, from)
     };
 
     test_from(
-        [](const auto& data)
+        [](const auto& data) -> StringTypeTn
         {
             StringTypeTn str;
             str.from(data);
-            return std::move(str);
+            return str;
         });
 
     test_from(
@@ -1576,6 +1576,7 @@ TYPED_TEST(test_qx_string, string_view)
     StringTypeTn                                                  qx_str = STR("qx_str");
     qx::basic_string_view<ValueType, std::char_traits<ValueType>> view1(qx_str);
     qx::basic_string_view<ValueType, std::char_traits<ValueType>> view2 = qx_str;
+    EXPECT_EQ(view1, view2);
 }
 
 TYPED_TEST(test_qx_string, small_string_optimization)

@@ -53,29 +53,15 @@ void TestColor(const qx::color& color, int r = -1, int g = -1, int b = -1, const
     EXPECT_EQ(vec3color[1], color.g());
     EXPECT_EQ(vec3color[2], color.b());
 
-    auto CheckName = [&color](const auto& name)
+    [[maybe_unused]] auto CheckName = [&color](const auto& name)
     {
-        if (name)
-        {
-            const auto optFromName = qx::color::from_string(name);
-            EXPECT_TRUE(optFromName) << name;
-            if (optFromName)
-                EXPECT_EQ(*optFromName, color) << name;
-        }
+        const auto optFromName = qx::color::from_string(name);
+        EXPECT_TRUE(optFromName) << name;
+        if (optFromName)
+            EXPECT_EQ(*optFromName, color) << name;
     };
 
-    (
-        [&]()
-        {
-            if (args)
-            {
-                const auto optFromName = qx::color::from_string(args);
-                EXPECT_TRUE(optFromName) << args;
-                if (optFromName)
-                    EXPECT_EQ(*optFromName, color) << args;
-            }
-        }(),
-        ...);
+    (CheckName(args), ...);
 
     // unsigned int hex = color.hex();
     // EXPECT_EQ(qx::color(hex), color);

@@ -48,9 +48,6 @@ public:
         // private constructor
         friend class link;
 
-        // friend templated lock_ptr class
-        friend class lock_ptr;
-
     public:
         QX_NONCOPYMOVABLE(lock_ptr);
 

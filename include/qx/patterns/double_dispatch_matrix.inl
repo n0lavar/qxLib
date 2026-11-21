@@ -67,8 +67,9 @@ bool double_dispatch_matrix<method_ptr_t>::check_matrix_completeness() const noe
 template<auto method_ptr_t>
     requires is_specialization_exist_v<double_dispatch_class_method_ptr_traits<method_ptr_t>>
 typename double_dispatch_matrix<method_ptr_t>::function_type& double_dispatch_matrix<method_ptr_t>::get_function(
-    class_id first,
-    class_id second) noexcept
+    // by value, MSVC Release (VS 18) miscompiles the std::min/std::max keys and every lookup misses
+    const class_id& first,
+    const class_id& second) noexcept
 {
     const class_id first_in_container  = std::min(first, second);
     const class_id second_in_container = std::max(first, second);

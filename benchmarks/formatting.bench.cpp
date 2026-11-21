@@ -141,14 +141,14 @@ inline void formatting_fixture<traits_t>::SetUp(const benchmark::State&)
 template<class traits_t>
 inline int formatting_fixture<traits_t>::random_int()
 {
-    std::uniform_int_distribution<int> dist(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
+    std::uniform_int_distribution dist(std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
     return dist(m_RandomEngine);
 }
 
 template<class traits_t>
 inline float formatting_fixture<traits_t>::random_float()
 {
-    std::uniform_real_distribution<float> dist(-100000.f, 100000.f);
+    std::uniform_real_distribution dist(-100000.f, 100000.f);
     return dist(m_RandomEngine);
 }
 
@@ -157,8 +157,8 @@ inline std::basic_string<typename formatting_fixture<traits_t>::char_type> forma
     size_t nMinLength,
     size_t nMaxLength)
 {
-    std::uniform_int_distribution<size_t> lengthDist(nMinLength, nMaxLength);
-    const size_t                          nLength = lengthDist(m_RandomEngine);
+    std::uniform_int_distribution lengthDist(nMinLength, nMaxLength);
+    const size_t                  nLength = lengthDist(m_RandomEngine);
 
     static const std::basic_string<char_type> s_sChars = QX_STR_PREFIX(
         char_type,

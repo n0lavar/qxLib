@@ -243,9 +243,6 @@ private:
     underlying_type m_nEnumFlags = 0;
 };
 
-template<enumeration_c enum_t>
-flags(enum_t eFlag) -> flags<enum_t>;
-
 } // namespace qx
 
 template<qx::enumeration_c enum_t>

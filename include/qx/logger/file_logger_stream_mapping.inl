@@ -127,7 +127,9 @@ inline file_logger_stream_mapping::~file_logger_stream_mapping() noexcept
     CloseHandle(m_hFile);
     m_hFile = INVALID_HANDLE_VALUE;
 #else
-    ::ftruncate(m_Fd, static_cast<off_t>(m_nSize));
+    if (::ftruncate(m_Fd, static_cast<off_t>(m_nSize)) != 0)
+        return;
+
     ::fsync(m_Fd);
     ::close(m_Fd);
     m_Fd = -1;

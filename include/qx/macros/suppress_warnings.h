@@ -20,12 +20,16 @@
     #define QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings)
     #define QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS()
 
-#elif QX_CLANG
+#elif QX_CLANG || QX_APPLE_CLANG || QX_GNU
 
+    // clang and GCC share the pragmas; each compiler silently skips the other's warning names
     #define QX_DETAILS_PRAGMA(x)                _Pragma(#x)
     #define QX_DETAILS_PRAGMA_WARNING(warnings) QX_DETAILS_PRAGMA(GCC diagnostic ignored warnings)
+    #define QX_DETAILS_PUSH_IGNORE_UNKNOWN_WARNINGS()                                  \
+        _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic ignored \"-Wpragmas\"") \
+            _Pragma("GCC diagnostic ignored \"-Wunknown-warning-option\"")
     #define QX_DETAILS_PUSH_SUPPRESS_ALL_WARNINGS()                                       \
-        _Pragma("GCC diagnostic push");                                                   \
+        QX_DETAILS_PUSH_IGNORE_UNKNOWN_WARNINGS();                                        \
         _Pragma("GCC diagnostic ignored \"-Wall\"");                                      \
         _Pragma("GCC diagnostic ignored \"-Wc++98-compat-pedantic\"");                    \
         _Pragma("GCC diagnostic ignored \"-Wc++11-extensions\"");                         \
@@ -80,6 +84,7 @@
         _Pragma("GCC diagnostic ignored \"-Wmissing-prototypes\"");                       \
         _Pragma("GCC diagnostic ignored \"-Wshorten-64-to-32\"");                         \
         _Pragma("GCC diagnostic ignored \"-Wcast-qual\"");                                \
+        _Pragma("GCC diagnostic ignored \"-Wcast-align\"");                               \
         _Pragma("GCC diagnostic ignored \"-Winvalid-offsetof\"");                         \
         _Pragma("GCC diagnostic ignored \"-Wunused-template\"");                          \
         _Pragma("GCC diagnostic ignored \"-Wmissing-designated-field-initializers\"");    \
@@ -93,12 +98,27 @@
         _Pragma("GCC diagnostic ignored \"-Wdouble-promotion\"");                         \
         _Pragma("GCC diagnostic ignored \"-Wduplicate-enum\"");                           \
         _Pragma("GCC diagnostic ignored \"-Wformat-nonliteral\"");                        \
-        _Pragma("GCC diagnostic ignored \"-Wdangling-else\"")
+        _Pragma("GCC diagnostic ignored \"-Wdangling-else\"");                            \
+        /* GCC names of the same warnings and GCC-only ones */                            \
+        _Pragma("GCC diagnostic ignored \"-Wpedantic\"");                                 \
+        _Pragma("GCC diagnostic ignored \"-Wshadow\"");                                   \
+        _Pragma("GCC diagnostic ignored \"-Wsign-conversion\"");                          \
+        _Pragma("GCC diagnostic ignored \"-Wsign-compare\"");                             \
+        _Pragma("GCC diagnostic ignored \"-Wparentheses\"");                              \
+        _Pragma("GCC diagnostic ignored \"-Wempty-body\"");                               \
+        _Pragma("GCC diagnostic ignored \"-Wformat-security\"");                          \
+        _Pragma("GCC diagnostic ignored \"-Wmissing-field-initializers\"");               \
+        _Pragma("GCC diagnostic ignored \"-Wmaybe-uninitialized\"");                      \
+        _Pragma("GCC diagnostic ignored \"-Wclass-memaccess\"");                          \
+        _Pragma("GCC diagnostic ignored \"-Wdeprecated-copy\"");                          \
+        _Pragma("GCC diagnostic ignored \"-Wcast-function-type\"");                       \
+        _Pragma("GCC diagnostic ignored \"-Wredundant-move\"");                           \
+        _Pragma("GCC diagnostic ignored \"-Wpessimizing-move\"")
     #define QX_DETAILS_POP_SUPPRESS_ALL_WARNINGS()           _Pragma("GCC diagnostic pop") QX_EMPTY_MACRO
     #define QX_DETAILS_PUSH_SUPPRESS_MSVC_WARNINGS(warnings) QX_EMPTY_MACRO
     #define QX_DETAILS_POP_SUPPRESS_MSVC_WARNINGS()          QX_EMPTY_MACRO
     #define QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings) \
-        _Pragma("GCC diagnostic push") QX_DETAILS_PRAGMA_WARNING(warnings) QX_EMPTY_MACRO
+        QX_DETAILS_PUSH_IGNORE_UNKNOWN_WARNINGS() QX_DETAILS_PRAGMA_WARNING(warnings) QX_EMPTY_MACRO
     #define QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS() _Pragma("GCC diagnostic pop") QX_EMPTY_MACRO
 
 #else
@@ -141,13 +161,13 @@
 
 /**
     @def   QX_PUSH_SUPPRESS_CLANG_WARNINGS
-    @brief Disable a specific clang warning, empty on other compilers
-    @param warnings - clang warning name as a string, e.g. "-Wshadow"
+    @brief Disable a specific clang or GCC warning, empty on MSVC
+    @param warnings - clang or GCC warning name as a string, e.g. "-Wshadow"
 **/
 #define QX_PUSH_SUPPRESS_CLANG_WARNINGS(warnings) QX_DETAILS_PUSH_SUPPRESS_CLANG_WARNINGS(warnings)
 
 /**
     @def   QX_POP_SUPPRESS_CLANG_WARNINGS
-    @brief Enable warnings after QX_PUSH_SUPPRESS_CLANG_WARNINGS, empty on other compilers
+    @brief Enable warnings after QX_PUSH_SUPPRESS_CLANG_WARNINGS, empty on MSVC
 **/
 #define QX_POP_SUPPRESS_CLANG_WARNINGS() QX_DETAILS_POP_SUPPRESS_CLANG_WARNINGS()

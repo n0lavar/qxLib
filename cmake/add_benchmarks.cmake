@@ -9,6 +9,11 @@ macro(set_benchmark_options _target)
             /bigobj
         )
     endif()
+
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        # header-only library: polymorphic classes cannot have an out-of-line key function (Itanium ABI only)
+        target_compile_options(${_target} PRIVATE -Wno-weak-vtables)
+    endif()
 endmacro()
 
 macro(add_benchmarks

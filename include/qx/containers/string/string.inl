@@ -205,6 +205,10 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
     return capacity();
 }
 
+// GCC -O2 checks the inlined SBO buffer branch even when resize has moved the data to the heap
+QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wstringop-overflow");
+QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Warray-bounds");
+
 template<class char_t, class traits_t>
 inline bool basic_string<char_t, traits_t>::resize(size_type nSymbols) noexcept
 {
@@ -215,6 +219,9 @@ inline bool basic_string<char_t, traits_t>::resize(size_type nSymbols) noexcept
 
     return bRet;
 }
+
+QX_POP_SUPPRESS_CLANG_WARNINGS();
+QX_POP_SUPPRESS_CLANG_WARNINGS();
 
 template<class char_t, class traits_t>
 inline void basic_string<char_t, traits_t>::shrink_to_fit() noexcept
@@ -464,6 +471,11 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
     return insert(nPos, &chSymbol, 1);
 }
 
+// GCC -O2 checks the inlined SBO buffer branch even when resize has moved the data to the heap
+QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wstringop-overflow");
+QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Warray-bounds");
+QX_PUSH_SUPPRESS_CLANG_WARNINGS("-Wstringop-overread");
+
 template<class char_t, class traits_t>
 inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, traits_t>::insert(
     size_type     nPos,
@@ -485,6 +497,10 @@ inline typename basic_string<char_t, traits_t>::size_type basic_string<char_t, t
 
     return npos;
 }
+
+QX_POP_SUPPRESS_CLANG_WARNINGS();
+QX_POP_SUPPRESS_CLANG_WARNINGS();
+QX_POP_SUPPRESS_CLANG_WARNINGS();
 
 template<class char_t, class traits_t>
 template<class fwd_it_t>

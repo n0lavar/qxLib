@@ -19,20 +19,23 @@
 
 #if QX_WIN
     #include <io.h>
-    #define QX_DUP    _dup
-    #define QX_DUP2   _dup2
-    #define QX_FILENO _fileno
-    #define QX_FDOPEN _fdopen
+    #define QX_DUP         _dup
+    #define QX_DUP2        _dup2
+    #define QX_FILENO      _fileno
+    #define QX_FDOPEN      _fdopen
+    #define QX_NULL_DEVICE "NUL"
 #else
     #include <unistd.h>
-    #define QX_DUP    dup
-    #define QX_DUP2   dup2
-    #define QX_FILENO fileno
-    #define QX_FDOPEN fdopen
+    #define QX_DUP         dup
+    #define QX_DUP2        dup2
+    #define QX_FILENO      fileno
+    #define QX_FDOPEN      fdopen
+    #define QX_NULL_DEVICE "/dev/null"
 #endif
 
 #include <cstdio>
 #include <random>
+#include <tuple>
 
 //V_EXCLUDE_PATH *.bench.cpp
 
@@ -210,8 +213,9 @@ inline void logger_stream_fixture<setup_function_t>::SetUp(::benchmark::State& s
     m_pOldStdout = QX_FDOPEN(QX_DUP(QX_FILENO(stdout)), "w");
     m_pOldStderr = QX_FDOPEN(QX_DUP(QX_FILENO(stderr)), "w");
 
-    freopen("NUL", "w", stdout);
-    freopen("NUL", "w", stderr);
+    // a failed redirect only leaves console output enabled
+    std::ignore = std::freopen(QX_NULL_DEVICE, "w", stdout);
+    std::ignore = std::freopen(QX_NULL_DEVICE, "w", stderr);
 }
 
 template<class setup_function_t>

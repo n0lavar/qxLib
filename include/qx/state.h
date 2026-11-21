@@ -73,12 +73,6 @@ private:
     T m_DefaultValue;
 };
 
-template<class T>
-state(const T& value) -> state<T>;
-
-template<class T>
-state(const T& value, const T& defaultValue) -> state<T>;
-
 } // namespace qx
 
 #include <qx/state.inl>

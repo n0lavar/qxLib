@@ -35,7 +35,7 @@ inline void TestEasingFunctions<T>::TestFunc()
     constexpr T step(static_cast<T>(0.001));
 
     volatile T sum_to_avoid_optimizing_out(static_cast<T>(0.0));
-    for (T x = 0.0; qx::epsilon_less_equal(x, T(1.f)); x += step)
+    for (T x = static_cast<T>(0.0); qx::epsilon_less_equal(x, T(1.f)); x += step)
     {
         sum_to_avoid_optimizing_out = sum_to_avoid_optimizing_out + Func(x);
     }

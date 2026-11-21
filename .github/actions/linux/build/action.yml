@@ -24,4 +24,4 @@ runs:
           -DBOOST_ROOT=${{ inputs.BOOST_ROOT }} \
           -DQX_GENERATE_TESTS=1 \
           -DGENERATE_BENCHMARKS=1
-        cmake --build . --config ${{ inputs.build_type }} -j $(nproc)
+        cmake --build . --config ${{ inputs.build_type }} -j $(nproc) -- -k

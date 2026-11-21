@@ -349,7 +349,7 @@ struct delegate_fixture_traits
     using get_get_result_type = get_get_result<return_t, args_t...>;
     using method_component_type =
         method_component<get_get_result_type, return_type, std::tuple<typename replace_void<args_t>::type...>>;
-    using execute_generator = execute_generator<return_t, args_t...>;
+    using execute_generator = ::execute_generator<return_t, args_t...>;
 };
 
 using implementations_type = ::testing::Types<

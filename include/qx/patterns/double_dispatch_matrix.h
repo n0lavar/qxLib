@@ -122,7 +122,7 @@ private:
         @param  second - second type (can be same as the first type)
         @return        - function
     **/
-    function_type& get_function(class_id first, class_id second) noexcept;
+    function_type& get_function(const class_id& first, const class_id& second) noexcept;
 
 private:
     std::unordered_map<class_id, std::unordered_map<class_id, function_type>> m_MatrixFunctions;

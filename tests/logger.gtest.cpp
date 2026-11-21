@@ -273,7 +273,8 @@ struct base_cout : base_traits
         std::array<char, 1024> buffer;
         while (true)
         {
-            const int n = QX_READ(s_nReadPipe, buffer.data(), static_cast<unsigned int>(buffer.size()));
+            const int n =
+                static_cast<int>(QX_READ(s_nReadPipe, buffer.data(), static_cast<unsigned int>(buffer.size())));
             if (n <= 0)
                 break;
 

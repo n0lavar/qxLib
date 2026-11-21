@@ -55,15 +55,6 @@ private:
     flags<delimiter_inclusion_flags> m_eDelimiterInclusionFlags = delimiter_inclusion_flags::none;
 };
 
-template<class char_t>
-string_view_view(basic_string_view<char_t> svFull, char_t chDelimiter) -> string_view_view<char_t>;
-
-template<class char_t>
-string_view_view(
-    basic_string_view<char_t>        svFull,
-    char_t                           chDelimiter,
-    flags<delimiter_inclusion_flags> eDelimiterInclusionFlags) -> string_view_view<char_t>;
-
 } // namespace qx
 
 #include <qx/containers/string/string_view_view.inl>

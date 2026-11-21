@@ -10,48 +10,40 @@ endfunction()
 
 function(set_target_options _target)
 
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND MSVC)
-        target_compile_options(${_target} PRIVATE
-            # exceptions support
-            /EHsc
+    if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 
-            # enable all warnings and treat them as errors
-            -Wall
+        # enable all warnings: MSVC-like clang-cl maps -Wall to -Weverything, plain clang needs it explicitly, GCC has no -Weverything
+        if(MSVC)
+            target_compile_options(${_target} PRIVATE
+                # exceptions support
+                /EHsc
+                -Wall
+            )
+        elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+            target_compile_options(${_target} PRIVATE -Weverything)
+        else()
+            target_compile_options(${_target} PRIVATE -Wall -Wextra)
+        endif()
+
+        target_compile_options(${_target} PRIVATE
+            # treat warnings as errors
             -Werror
 
             -Wno-switch # 4061, 4062 - enumerator in switch of enum is not explicitly handled
             -Wno-unused-parameter # 4100 - unreferenced formal parameter
             -Wno-unused-variable # 4101 - unreferenced local variable
             -Wno-overloaded-virtual # 4264, 4266 - no override available for virtual member function
-            -Wno-inconsistent-missing-override # 4265 - 'function' should have an 'override' specifier
             -Wno-padded # 4324, 4820 - structure was padded
             -Wno-sign-conversion # 4365 - signed/unsigned mismatch
             -Wno-sign-compare # 4365 - signed/unsigned mismatch
-            -Wno-microsoft-template-shadow # 4456 - 'identifier' is shadowed by a template parameter
             -Wno-unused-value # 4554 - expression result not used
             -Wno-unreachable-code # 4702 - unreachable code
             -Wno-deprecated-declarations # 4996 - deprecated declaration used
             -Wno-missing-braces # 5246 - initialization of a subobject should be wrapped in braces
             -Wno-implicit-fallthrough # 5262 - implicit fall-through occurs here
             -Wno-unused-const-variable # 5264 - 'const' variable is not used
-            -Wno-unsafe-buffer-usage # clang-p2996 f17c8d6 crashes with an access violation on this analysis (assert/logger tests)
-            -Wno-global-constructors # namespace scope objects with non-trivial constructors: gtest/benchmark registration and the engine's static registries
-            -Wno-exit-time-destructors # their destruction is deliberate too: ordered singletons_manager shutdown and per-module type registries
-            -Wno-logical-op-parentheses # && binds tighter than || always, mixed operators without parentheses are unambiguous and readable
             -Wno-switch-default # a forced 'default' in enum switches disables -Wswitch-enum reporting new enumerators, so it cannot be both safe and satisfied
-            -Wno-covered-switch-default # defensive 'default' for out-of-range enum values read from files is intentional (GL converters)
-            -Wno-unique-object-duplication # header-defined singletons/thread_local caches: the build is static-only, so no per-DLL copies can occur; a real DLL build needs an export layer, not per-site fixes
             -Wno-switch-enum # 'switch + defensive default' is the project convention (see -Wno-switch-default), so enumerating every enumerator is neither wanted nor feasible (partial key dispatch)
-            -Wno-missing-designated-field-initializers # omitting fields in designated initializers is deliberate 'empty = absent' style (empty formatter/payload/children), defaults are meaningful
-
-            # clang-specific compat family has no MSVC counterpart
-            -Wno-c++98-compat-pedantic
-            -Wno-c++20-extensions
-
-            # clang's comment parser does not understand the project's Doxygen usage: @struct on class templates, @tparam on concepts
-            -Wno-documentation
-            # Doxygen ALIASES commands (@complexity etc.) are valid for the docs, but clang knows nothing about them
-            -Wno-documentation-unknown-command
 
             $<$<CONFIG:Debug>:-D_DEBUG>
             $<$<OR:$<CONFIG:Release>,$<CONFIG:RelWithDebInfo>,$<CONFIG:MinSizeRel>>:-DNDEBUG>
@@ -61,26 +53,44 @@ function(set_target_options _target)
         set(NON_DEBUG_WARNINGS
             -Wno-unused-but-set-variable # 4189 - local variable is initialized but not referenced
             -Wno-unused-function # 4505 - unreferenced local function has been removed
-            -Wno-unused-lambda-capture # 5233 - explicit lambda capture is not used
         )
+
+        if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+            target_compile_options(${_target} PRIVATE
+                -Wno-unknown-warning-option # older clang versions (CI clang 20) do not know some of the warnings disabled here
+                -Wno-inconsistent-missing-override # 4265 - 'function' should have an 'override' specifier
+                -Wno-microsoft-template-shadow # 4456 - 'identifier' is shadowed by a template parameter
+                -Wno-unsafe-buffer-usage # clang-p2996 f17c8d6 crashes with an access violation on this analysis (assert/logger tests)
+                -Wno-global-constructors # namespace scope objects with non-trivial constructors: gtest/benchmark registration and the engine's static registries
+                -Wno-exit-time-destructors # their destruction is deliberate too: ordered singletons_manager shutdown and per-module type registries
+                -Wno-logical-op-parentheses # && binds tighter than || always, mixed operators without parentheses are unambiguous and readable
+                -Wno-covered-switch-default # defensive 'default' for out-of-range enum values read from files is intentional (GL converters)
+                -Wno-unique-object-duplication # header-defined singletons/thread_local caches: the build is static-only, so no per-DLL copies can occur; a real DLL build needs an export layer, not per-site fixes
+                -Wno-missing-designated-field-initializers # omitting fields in designated initializers is deliberate 'empty = absent' style (empty formatter/payload/children), defaults are meaningful
+                -Wno-ctad-maybe-unsupported # CTAD for std locks is the project style; libstdc++ does not mark them as CTAD-ready
+
+                # clang-specific compat family has no MSVC counterpart
+                -Wno-c++98-compat-pedantic
+                -Wno-c++20-compat
+                -Wno-c++20-extensions
+
+                # clang's comment parser does not understand the project's Doxygen usage: @struct on class templates, @tparam on concepts
+                -Wno-documentation
+                # Doxygen ALIASES commands (@complexity etc.) are valid for the docs, but clang knows nothing about them
+                -Wno-documentation-unknown-command
+            )
+
+            list(APPEND NON_DEBUG_WARNINGS
+                -Wno-unused-lambda-capture # 5233 - explicit lambda capture is not used
+            )
+        else()
+            target_compile_options(${_target} PRIVATE
+                -Wno-parentheses # GCC counterpart of clang's -Wno-logical-op-parentheses
+                -Wno-missing-field-initializers # GCC counterpart of clang's -Wno-missing-designated-field-initializers
+            )
+        endif()
+
         add_compile_options_for_configs(${_target} "Debug;RelWithDebInfo" "${NON_DEBUG_WARNINGS}")
-
-    elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:-D_DEBUG>
-        )
-
-    elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-
-        target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:-D_DEBUG>
-        )
-
-	elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL AppleClang)
-
-		target_compile_options(${_target} PRIVATE
-            $<$<CONFIG:Debug>:-D_DEBUG>
-        )
 
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
 
