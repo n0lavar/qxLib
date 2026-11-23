@@ -109,13 +109,9 @@ template<range_of_t_c<char_t> string_t>
 inline void basic_string<char_t, traits_t>::assign(const string_t& sAnother) noexcept
 {
     if constexpr (std::ranges::contiguous_range<string_t> && std::ranges::sized_range<string_t>)
-    {
-        assign(sAnother.data(), sAnother.size());
-    }
+        assign(std::ranges::data(sAnother), std::ranges::size(sAnother));
     else
-    {
         assign(sAnother.begin(), sAnother.end());
-    }
 }
 
 template<class char_t, class traits_t>
@@ -454,13 +450,9 @@ template<range_of_t_c<char_t> string_t>
 inline void basic_string<char_t, traits_t>::append(const string_t& sStr) noexcept
 {
     if constexpr (std::ranges::contiguous_range<string_t> && std::ranges::sized_range<string_t>)
-    {
-        append(sStr.data(), sStr.size());
-    }
+        append(std::ranges::data(sStr), std::ranges::size(sStr));
     else
-    {
         append(sStr.begin(), sStr.end());
-    }
 }
 
 template<class char_t, class traits_t>
@@ -2138,6 +2130,10 @@ template<class char_t, class traits_t>
 template<range_of_t_c<char_t> string_t>
 inline bool basic_string<char_t, traits_t>::operator==(const string_t& sStr) const noexcept
 {
+    if constexpr (std::ranges::sized_range<string_t>)
+        if (size() != std::ranges::size(sStr))
+            return false;
+
     return iter_strcmp(cbegin(), cend(), sStr.begin(), sStr.end()) == 0;
 }
 
