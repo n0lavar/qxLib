@@ -2,6 +2,8 @@
 
 - All classes, functions, methods, macros, and files must be properly documented (except for test entities).
 - Avoid pointless documentation like `@param color - color`. Describe what this this is for, edge cases (if any), contracts (if any), and so on.
+- Try to describe everything in `@brief`: keep it as short as possible, but precise enough to describe the whole entity.
+- `@details` is optional. Add it only if the information doesn't fit in `@brief` and is essential for the first understanding of the entity. Don't list the available methods in it.
 
 # Documentation style
 
