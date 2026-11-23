@@ -175,6 +175,7 @@ delegate_token_type base_delegate<derived_t, return_t, args_t...>::add_weak(
 template<class derived_t, class return_t, class... args_t>
 bool base_delegate<derived_t, return_t, args_t...>::remove(delegate_token_type token) noexcept
 {
+    clear_dead();
     m_WeakSubscriptions.erase(token);
     return remove_function(token);
 }
@@ -278,9 +279,8 @@ template<class derived_t, class return_t, class... args_t>
 template<class invoke_single_t, class invoke_multiple_t>
 return_t base_delegate<derived_t, return_t, args_t...>::execute_internal(
     const invoke_single_t&   invokeSingle,
-    const invoke_multiple_t& invokeMultiple) noexcept
+    const invoke_multiple_t& invokeMultiple) const noexcept
 {
-    clear_dead();
     if (!m_optFunctions)
     {
         if constexpr (std::is_void_v<return_t>)
@@ -289,85 +289,6 @@ return_t base_delegate<derived_t, return_t, args_t...>::execute_internal(
             return return_t {};
     }
 
-#if (QX_CLANG || QX_APPLE_CLANG) && QX_LIBCPP
-    // Work around recursive constraint evaluation in Bloomberg clang/libc++ when delegate arguments include
-    // std::expected: copying the map or comparing its iterators can trigger an invalid operator== lookup.
-
-    // modifying during iteration protection
-    thread_local variant_type tempFunctions;
-    if (std::holds_alternative<single_value_type>(*m_optFunctions))
-    {
-        tempFunctions.template emplace<single_value_type>(std::get<single_value_type>(*m_optFunctions));
-        return invokeSingle(std::get<single_value_type>(tempFunctions).second);
-    }
-    else
-    {
-        const container_type& source = std::get<container_type>(*m_optFunctions);
-        if (!std::holds_alternative<container_type>(tempFunctions))
-            tempFunctions.template emplace<container_type>();
-        container_type& container = std::get<container_type>(tempFunctions);
-        bool            sameKeys  = source.size() == container.size();
-        if (sameKeys)
-        {
-            auto sourceIt = source.begin();
-            auto targetIt = container.begin();
-            for (size_t i = 0; i < source.size(); ++i, ++sourceIt, ++targetIt)
-                if (!(sourceIt->first == targetIt->first))
-                {
-                    sameKeys = false;
-                    break;
-                }
-        }
-
-        auto sourceIt = source.begin();
-        if (sameKeys)
-        {
-            auto targetIt = container.begin();
-            for (size_t i = 0; i < source.size(); ++i, ++sourceIt, ++targetIt)
-                targetIt->second = sourceIt->second;
-        }
-        else
-        {
-            container.clear();
-            for (size_t i = 0; i < source.size(); ++i, ++sourceIt)
-                container.try_emplace(sourceIt->first, sourceIt->second);
-        }
-
-        invoker<return_t, function_type, invoke_single_t>   invokerSingle(invokeSingle);
-        invoker<return_t, function_type, invoke_multiple_t> invokerMultiple(invokeMultiple);
-        base_invoker<return_t, function_type>*              invoker = nullptr;
-        if (container.size() == 1)
-            invoker = &invokerSingle;
-        else
-            invoker = &invokerMultiple;
-        if constexpr (std::is_void_v<return_t>)
-        {
-            size_t index = 0;
-            for (auto it = container.begin(); index < container.size(); ++it, ++index)
-                invoker->invoke(it->second);
-
-            return;
-        }
-        else if constexpr (delegate_pipe_c<return_t>)
-        {
-            return_t result {};
-            size_t   index = 0;
-            for (auto it = container.begin(); index < container.size(); ++it, ++index)
-                result = result | invoker->invoke(it->second);
-
-            return result;
-        }
-        else
-        {
-            return_t result {};
-            size_t   index = 0;
-            for (auto it = container.begin(); index < container.size(); ++it, ++index)
-                result = invoker->invoke(it->second);
-
-            return result;
-        }
-    }
-#else
     // modifying during iteration protection
     thread_local variant_type tempFunctions;
     tempFunctions = *m_optFunctions;
@@ -413,7 +334,6 @@ return_t base_delegate<derived_t, return_t, args_t...>::execute_internal(
             return result;
         }
     }
-#endif
 }
 
 template<class derived_t, class return_t, class... args_t>
@@ -423,7 +343,7 @@ void base_delegate<derived_t, return_t, args_t...>::add_weak(
     std::weak_ptr<object_t>   pWeakObject,
     callable_t                callable) noexcept
 {
-    m_WeakSubscriptions.emplace(key, pWeakObject);
+    // after add_function(), which removes the dead subscriptions, so this one is removed with its function
     add_function(
         key,
         [pWeakObject, callable_ = std::move(callable)](args_t... args)
@@ -433,6 +353,7 @@ void base_delegate<derived_t, return_t, args_t...>::add_weak(
 
             return return_t();
         });
+    m_WeakSubscriptions.emplace(key, pWeakObject);
 }
 
 template<class derived_t, class return_t, class... args_t>
@@ -457,6 +378,8 @@ void base_delegate<derived_t, return_t, args_t...>::add_function(
     time_ordered_priority_key key,
     function_type             function) noexcept
 {
+    clear_dead();
+
     if (!m_optFunctions)
     {
         m_optFunctions = variant_type(single_value_type(key, std::move(function)));
@@ -479,7 +402,7 @@ void base_delegate<derived_t, return_t, args_t...>::add_function(
 
 template<class return_t, class... args_t>
     requires(sizeof...(args_t) > 0 && (!std::is_void_v<args_t> && ...))
-return_t delegate<return_t(args_t...)>::execute(args_t... args) noexcept
+return_t delegate<return_t(args_t...)>::execute(args_t... args) const noexcept
 {
     return this->execute_internal(
         [&args...](const typename super_type::function_type& function)
@@ -493,7 +416,7 @@ return_t delegate<return_t(args_t...)>::execute(args_t... args) noexcept
 }
 
 template<class return_t>
-return_t delegate<return_t(void)>::execute() noexcept
+return_t delegate<return_t(void)>::execute() const noexcept
 {
     return this->execute_internal(
         [](const typename super_type::function_type& function)

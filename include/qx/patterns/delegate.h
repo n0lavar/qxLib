@@ -226,7 +226,8 @@ public:
 
     /**
         @brief  Check whether exactly one callable is bound to this delegate.
-        @details Expired weak subscriptions remain counted until clear_dead() is called.
+        @details Expired weak subscriptions remain counted until the callables are added or removed
+                 or clear_dead() is called.
         @return - true if exactly one callable is bound
     **/
     bool is_singlecast() const noexcept;
@@ -247,7 +248,7 @@ protected:
         @return                   - void or piping result of all delegate callables 
     **/
     template<class invoke_single_t, class invoke_multiple_t>
-    return_t execute_internal(const invoke_single_t& invokeSingle, const invoke_multiple_t& invokeMultiple) noexcept;
+    return_t execute_internal(const invoke_single_t& invokeSingle, const invoke_multiple_t& invokeMultiple) const noexcept;
 
 private:
     /**
@@ -307,7 +308,7 @@ public:
         @param  args - arguments to pass to all the callbacks
         @return      - void or piping result of all delegate callables
     **/
-    return_t execute(args_t... args) noexcept;
+    return_t execute(args_t... args) const noexcept;
 };
 
 // @copydoc delegate
@@ -321,7 +322,7 @@ public:
         @brief  Execute all the callables the delegate has
         @return  - void or piping result of all delegate callables
     **/
-    return_t execute() noexcept;
+    return_t execute() const noexcept;
 };
 
 } // namespace qx
