@@ -60,16 +60,6 @@ constexpr std::array k_Second { 4, 5, 6, 7 };
 constexpr auto       k_Result = qx::join_arrays(k_First, k_Second);
 static_assert(k_Result == std::array<int, 8> { 0, 1, 2, 3, 4, 5, 6, 7 });
 
-TEST(containers_utils, create_container)
-{
-    constexpr std::array   array { 0, 1, 2, 3, 4 };
-    const std::vector<int> vector = qx::make_container<std::vector<int>>(array);
-
-    EXPECT_EQ(vector.size(), array.size());
-    for (size_t i = 0; i < array.size(); ++i)
-        EXPECT_EQ(vector[i], array[i]);
-}
-
 TEST(containers_utils, bytes_size)
 {
     const std::array<int, 1000> array { 0 };

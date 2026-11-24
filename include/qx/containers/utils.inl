@@ -48,17 +48,6 @@ constexpr std::array<T, N> span_to_array(std::span<T, N> span)
     return array;
 }
 
-template<class result_container_t, class container_t>
-result_container_t make_container(const container_t& from)
-{
-    result_container_t container;
-
-    for (const auto& item : from)
-        container.insert(container.end(), typename result_container_t::value_type(item));
-
-    return container;
-}
-
 template<class container_t>
 constexpr size_t bytes_size(const container_t& container)
 {

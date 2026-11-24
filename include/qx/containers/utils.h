@@ -59,17 +59,6 @@ template<std::size_t N, class T>
 constexpr std::array<T, N> span_to_array(std::span<T, N> span);
 
 /**
-    @brief  Create a container by constructing each element from the corresponding
-            element of the original container
-    @tparam result_container_t - target container type, must support value_type and push_back
-    @tparam container_t        - original container type, must support forward iteration
-    @param  from               - original container
-    @return                    - target container
-**/
-template<class result_container_t, class container_t>
-result_container_t make_container(const container_t& from);
-
-/**
     @brief  Get the size of memory allocated for container elements
     @tparam container_t - container type
     @param  container   - container const ref
