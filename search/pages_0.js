@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logger_1949',['logger',['../logger_readme.html',1,'']]]
+  ['logger_1947',['logger',['../logger_readme.html',1,'']]]
 ];
